@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const data = Object.fromEntries(formData.entries());
 
             try {
-                const response = await fetch('/api/sendMessage', {
+                const response = await fetch('https://avpdev.com/api/sendMessage', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
