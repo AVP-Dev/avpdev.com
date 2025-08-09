@@ -1,14 +1,16 @@
 {
-  "name": "avpdev-portfolio",
+  "name": "avpdev-api",
   "version": "1.0.0",
-  "description": "Backend function for portfolio contact form",
-  "main": "index.js",
+  "description": "API for portfolio contact form",
+  "main": "sendMessage.js",
   "scripts": {
+    "start": "node sendMessage.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "AVP-Dev",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.19.2",
     "node-fetch": "^2.7.0"
   }
 }
