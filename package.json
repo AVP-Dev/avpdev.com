@@ -1,10 +1,10 @@
 {
-  "name": "avpdev-api",
+  "name": "avpdev-portfolio-app",
   "version": "1.0.0",
-  "description": "API for portfolio contact form",
-  "main": "sendMessage.js",
+  "description": "Portfolio website and contact form API",
+  "main": "api/sendMessage.js",
   "scripts": {
-    "start": "node sendMessage.js",
+    "start": "node api/sendMessage.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "AVP-Dev",

@@ -1,4 +1,16 @@
+const express = require('express');
 const fetch = require('node-fetch');
+const path = require('path');
+const app = express();
+const port = 3000;
+
+// Middleware для парсинга JSON-тела запроса
+app.use(express.json());
+
+// Указываем Express, что нужно отдавать все файлы из корневой папки проекта
+// path.join(__dirname, '..') поднимается на один уровень вверх из папки /api
+const staticPath = path.join(__dirname, '..');
+app.use(express.static(staticPath));
 
 /**
  * Экранирует специальные HTML-символы.
@@ -17,11 +29,9 @@ function sanitizeHTML(str) {
     return str.replace(/[&<>"']/g, (tag) => tagsToReplace[tag] || tag);
 }
 
-module.exports = async (request, response) => {
-    if (request.method !== 'POST') {
-        return response.status(405).json({ message: 'Only POST requests are allowed' });
-    }
-
+// Эндпоинт для формы обратной связи
+app.post('/api/sendMessage', async (request, response) => {
+    // Вся твоя логика отправки в Telegram остается здесь без изменений
     try {
         const { BOT_TOKEN, CHAT_ID, TOPIC_ID = null } = process.env;
 
@@ -82,4 +92,17 @@ module.exports = async (request, response) => {
         console.error('Critical function error:', error);
         return response.status(500).json({ message: 'An internal server error occurred.' });
     }
-};
+});
+
+// "Магическая" строчка: если запрос не подошел ни к одному файлу или API,
+// отдаем index.html. Это нужно для корректной работы навигации.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(staticPath, 'index.html'));
+});
+
+
+// Запускаем сервер
+app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
+    console.log(`Serving static files from: ${staticPath}`);
+});
