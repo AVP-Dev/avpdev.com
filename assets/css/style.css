@@ -2,6 +2,7 @@
 :root {
     --accent-gradient: linear-gradient(90deg, #ff8c00, #ffc837);
     --accent-color-start: #ff8c00;
+    --accent-color-start-rgb: 255, 140, 0;
     --accent-color-end: #ffc837;
 }
 
@@ -196,13 +197,44 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .filter-btn { background-color: var(--filter-btn-bg); color: var(--text-secondary-color); border: none; padding: 0.75rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
 .filter-btn:hover { color: var(--text-color); }
 .filter-btn.active { background: var(--accent-gradient); color: #000; font-weight: bold; box-shadow: 0 0 15px var(--accent-color-start); }
-.portfolio-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; }
-.portfolio-card { background: var(--primary-color); border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); box-shadow: var(--card-shadow); width: 350px; flex-shrink: 0; }
-.portfolio-card.hidden { transform: scale(0.7); opacity: 0; width: 0; padding: 0; margin: -1.25rem; font-size: 0; border: 0; overflow: hidden; pointer-events: none; }
-.portfolio-card:hover { transform: translateY(-10px); }
-.portfolio-image { height: 250px; background-size: cover; background-position: center; flex-shrink: 0;}
+
+.portfolio-grid { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    align-items: stretch;
+    gap: 2.5rem; 
+}
+
+.portfolio-card { 
+    background: var(--primary-color); 
+    border-radius: 15px; 
+    overflow: hidden; 
+    display: flex; 
+    flex-direction: column; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: var(--card-shadow); 
+}
+
+.portfolio-card:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 16px 32px rgba(0,0,0,0.25), 0 0 30px rgba(var(--accent-color-start-rgb), 0.35);
+}
+
+.portfolio-image { 
+    height: 250px; 
+    background-size: cover; 
+    background-position: center; 
+    flex-shrink: 0;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.portfolio-card:hover .portfolio-image {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+}
+
 .portfolio-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-.portfolio-info h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.portfolio-info h3 { font-size: 1.2rem; margin-bottom: 0.5rem; line-height: 1.4; }
 .case-link { display: inline-block; margin-top: auto; padding-top: 1rem; color: var(--accent-color-start); text-decoration: none; font-weight: 500; }
 .case-link:hover { text-decoration: underline; }
 .show-more-container { text-align: center; margin-top: 4rem; }
@@ -405,6 +437,17 @@ textarea.form-control { min-height: 150px; resize: vertical; }
     box-shadow: 0 5px 15px rgba(247, 107, 28, 0.3);
 }
 
+/* --- Стили для страницы с политикой --- */
+.legal-container .contact-methods {
+    list-style: none;
+    padding-left: 0;
+}
+.legal-container .contact-methods li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+}
+
 /* --- Responsiveness --- */
 @media (max-width: 768px) {
     .section-title { font-size: 2.2rem; }
@@ -469,6 +512,9 @@ textarea.form-control { min-height: 150px; resize: vertical; }
         flex-direction: column;
         gap: 0.5rem;
     }
+    .footer-legal a {
+        white-space: nowrap;
+    }
     .legal-separator {
         display: none;
     }
@@ -482,7 +528,6 @@ textarea.form-control { min-height: 150px; resize: vertical; }
 }
 
 @media (max-width: 480px) {
-    /* FIX: Уменьшаем шрифт в hero-секции на самых маленьких экранах */
     .hero-text h1 {
         font-size: 2.5rem;
     }
@@ -496,7 +541,7 @@ textarea.form-control { min-height: 150px; resize: vertical; }
         grid-template-columns: minmax(0, 1fr);
     }
     .portfolio-grid {
-        gap: 1.5rem;
+        grid-template-columns: 1fr;
     }
     .portfolio-card {
         width: 100%;

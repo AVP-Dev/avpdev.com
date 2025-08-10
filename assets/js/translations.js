@@ -106,8 +106,10 @@ const translations = {
         privacy_policy_section6_p2: 'Рекомендуется периодически просматривать настоящую Политику конфиденциальности на предмет любых изменений. Изменения в настоящей Политике конфиденциальности вступают в силу с момента их публикации на этой странице.',
         privacy_policy_section7_h2: '7. Свяжитесь с нами',
         privacy_policy_section7_p: 'Если у вас есть какие-либо вопросы относительно настоящей Политики конфиденциальности, пожалуйста, свяжитесь с нами:',
-        privacy_policy_section7_li1: 'По электронной почте: <a href="mailto:contact@avpdev.com">contact@avpdev.com</a>',
-        privacy_policy_section7_li2: 'Через Telegram: <a href="https://t.me/avpdevcom" target="_blank" rel="noopener noreferrer">@avpdevcom</a>',
+        privacy_policy_section7_li1: 'Email: <a href="mailto:contact@avpdev.com">contact@avpdev.com</a>',
+        privacy_policy_section7_li2: 'Telegram: <a href="https://t.me/avpdevcom" target="_blank" rel="noopener noreferrer">@avpdevcom</a>',
+        privacy_policy_section7_li3: 'WhatsApp (RU): <a href="https://wa.me/79154065940" target="_blank" rel="noopener noreferrer">Написать</a>',
+        privacy_policy_section7_li4: 'WhatsApp (BY): <a href="https://wa.me/375291217371" target="_blank" rel="noopener noreferrer">Написать</a>',
         
         // Terms of Service
         terms_of_service_title: 'Условия использования | AVPdev.com',
@@ -134,8 +136,10 @@ const translations = {
         terms_of_service_section6_p2: 'Продолжая получать доступ к нашему Сервису или использовать его после даты вступления в силу пересмотренных Условий, вы подтверждаете свое согласие с ними. Если вы не согласны с новыми Условиями (полностью или частично), вы обязаны прекратить использование веб-сайта и Сервиса.',
         terms_of_service_section7_h2: '7. Свяжитесь с нами',
         terms_of_service_section7_p: 'Если у вас есть какие-либо вопросы относительно настоящих Условий, пожалуйста, свяжитесь с нами:',
-        terms_of_service_section7_li1: 'По электронной почте: <a href="mailto:contact@avpdev.com">contact@avpdev.com</a>',
-        terms_of_service_section7_li2: 'Через Telegram: <a href="https://t.me/avpdevcom" target="_blank" rel="noopener noreferrer">@avpdevcom</a>',
+        terms_of_service_section7_li1: 'Email: <a href="mailto:contact@avpdev.com">contact@avpdev.com</a>',
+        terms_of_service_section7_li2: 'Telegram: <a href="https://t.me/avpdevcom" target="_blank" rel="noopener noreferrer">@avpdevcom</a>',
+        terms_of_service_section7_li3: 'WhatsApp (RU): <a href="https://wa.me/79154065940" target="_blank" rel="noopener noreferrer">Написать</a>',
+        terms_of_service_section7_li4: 'WhatsApp (BY): <a href="https://wa.me/375291217371" target="_blank" rel="noopener noreferrer">Написать</a>',
 
         // Кейс: Мебель (Terra Forma)
         case_furniture_title_short: 'Кейс: B2C-платформа для мебельного бренда Terra Forma',
@@ -375,8 +379,10 @@ const translations = {
         privacy_policy_section6_p2: 'You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.',
         privacy_policy_section7_h2: '7. Contact Us',
         privacy_policy_section7_p: 'If you have any questions about this Privacy Policy, please contact us:',
-        privacy_policy_section7_li1: 'By email: <a href="mailto:contact@avpdev.com">contact@avpdev.com</a>',
-        privacy_policy_section7_li2: 'Via Telegram: <a href="https://t.me/avpdevcom" target="_blank" rel="noopener noreferrer">@avpdevcom</a>',
+        privacy_policy_section7_li1: 'Email: <a href="mailto:contact@avpdev.com">contact@avpdev.com</a>',
+        privacy_policy_section7_li2: 'Telegram: <a href="https://t.me/avpdevcom" target="_blank" rel="noopener noreferrer">@avpdevcom</a>',
+        privacy_policy_section7_li3: 'WhatsApp (RU): <a href="https://wa.me/79154065940" target="_blank" rel="noopener noreferrer">Message</a>',
+        privacy_policy_section7_li4: 'WhatsApp (BY): <a href="https://wa.me/375291217371" target="_blank" rel="noopener noreferrer">Message</a>',
         
         // Terms of Service
         terms_of_service_title: 'Terms of Service | AVPdev.com',
@@ -403,8 +409,10 @@ const translations = {
         terms_of_service_section6_p2: 'By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, in whole or in part, please stop using the website and the Service.',
         terms_of_service_section7_h2: '7. Contact Us',
         terms_of_service_section7_p: 'If you have any questions about these Terms, please contact us:',
-        terms_of_service_section7_li1: 'By email: <a href="mailto:contact@avpdev.com">contact@avpdev.com</a>',
-        terms_of_service_section7_li2: 'Via Telegram: <a href="https://t.me/avpdevcom" target="_blank" rel="noopener noreferrer">@avpdevcom</a>',
+        terms_of_service_section7_li1: 'Email: <a href="mailto:contact@avpdev.com">contact@avpdev.com</a>',
+        terms_of_service_section7_li2: 'Telegram: <a href="https://t.me/avpdevcom" target="_blank" rel="noopener noreferrer">@avpdevcom</a>',
+        terms_of_service_section7_li3: 'WhatsApp (RU): <a href="https://wa.me/79154065940" target="_blank" rel="noopener noreferrer">Message</a>',
+        terms_of_service_section7_li4: 'WhatsApp (BY): <a href="https://wa.me/375291217371" target="_blank" rel="noopener noreferrer">Message</a>',
         
         // Case: Furniture (Terra Forma)
         case_furniture_title_short: 'Case: B2C Platform for Terra Forma Furniture Brand',
