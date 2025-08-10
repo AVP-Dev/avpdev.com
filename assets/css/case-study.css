@@ -62,12 +62,16 @@
     margin: 0 auto 80px;
 }
 
-/* FIX: Центрируем все подзаголовки в основной части кейса */
 .project-content h2 {
     font-size: 2rem;
     margin-top: 3rem;
     margin-bottom: 1rem;
-    text-align: center; /* Добавлено это правило */
+    text-align: center;
+}
+
+/* FIX: Центрируем иконки технологий */
+.project-content .tech-stack .icons {
+    justify-content: center;
 }
 
 .project-content p, .project-content ul {
