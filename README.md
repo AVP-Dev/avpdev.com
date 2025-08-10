@@ -2,7 +2,7 @@
 
 Современный сайт-портфолио, созданный на нативном HTML, CSS и JavaScript, с бэкендом на Node.js для обработки контактной формы и отправки уведомлений в Telegram.
 
-[![portfolio-website](https.img.shields.io/badge/Live_Demo-AVPdev.com-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.avpdev.com/)
+[![portfolio-website](https://img.shields.io/badge/Live_Demo-AVPdev.com-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.avpdev.com/)
 [![Telegram](https://img.shields.io/badge/Telegram-@avpdevcom-0088cc?style=for-the-badge&logo=telegram)](https://t.me/avpdevcom)
 [![GitHub](https://img.shields.io/badge/GitHub-AVP--Dev-181717?style=for-the-badge&logo=github)](https://github.com/AVP-Dev)
 
