@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const pageTitle = document.getElementById('page-title');
 
     let currentLang = localStorage.getItem('language') || 'ru';
-    let currentTheme = localStorage.getItem('theme') || 'dark-theme';
+    let currentTheme = localStorage.getItem('theme') || 'light-theme';
     
     let currentFilteredProjects = [];
     let projectsCurrentlyDisplayed = 0;
