@@ -26,13 +26,14 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentFilteredProjects = [];
     let projectsCurrentlyDisplayed = 0;
 
-    // MODIFIED: Function to determine how many projects to load
+    // MODIFIED: Функция для определения количества загружаемых проектов
     const getProjectsPerLoad = () => {
-        // On screens where we have a 2-column grid or less (<= 800px), load 2 projects.
-        if (window.innerWidth <= 800) {
+        // На экранах, где не помещается 3 колонки (ширина окна < ~1140px),
+        // загружаем по 2 проекта, чтобы избежать "висячих" карточек.
+        if (window.innerWidth <= 1140) {
             return 2;
         }
-        // On wider screens, load 3 projects.
+        // На широких экранах загружаем по 3.
         return 3;
     };
 
@@ -101,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayProjects() {
-        const projectsPerLoad = getProjectsPerLoad(); // Get the dynamic value
+        const projectsPerLoad = getProjectsPerLoad(); // Получаем динамическое значение
         const projectsToDisplay = currentFilteredProjects.slice(projectsCurrentlyDisplayed, projectsCurrentlyDisplayed + projectsPerLoad);
         
         projectsToDisplay.forEach(project => {
