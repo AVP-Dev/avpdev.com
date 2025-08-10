@@ -340,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const scrollToTopBtn = document.querySelector('.scroll-to-top');
     if (scrollToTopBtn) {
         window.addEventListener('scroll', () => {
-            scrollToToTopBtn.classList.toggle('visible', window.scrollY > window.innerHeight);
+            scrollToTopBtn.classList.toggle('visible', window.scrollY > window.innerHeight);
         });
     }
     
