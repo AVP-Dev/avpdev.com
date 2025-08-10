@@ -136,8 +136,19 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--accent-color-start), 0 0 50px var(--accent-color-end); }
 
 /* --- Cards --- */
-.card { background: var(--primary-color); border: var(--glass-border); border-radius: 15px; padding: 2.5rem 2rem; text-align: left; transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s; box-shadow: var(--card-shadow);}
-.card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 0 20px var(--accent-color-start); }
+.card {
+    background: var(--primary-color);
+    border: var(--glass-border);
+    border-radius: 15px;
+    padding: 2.5rem 2rem;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+    box-shadow: var(--card-shadow);
+}
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 0 20px var(--accent-color-start);
+}
 .card-icon { font-size: 2.5rem; margin-bottom: 1rem; display: inline-block; color: var(--accent-color-start); }
 .card h3 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--text-color); }
 .card p { color: var(--text-secondary-color); }
@@ -200,11 +211,9 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 
 .portfolio-grid {
     display: grid;
-    /* Изменено для корректного центрирования. Колонки теперь не растягиваются. */
     grid-template-columns: repeat(auto-fit, 340px);
     align-items: stretch;
     gap: 2.5rem;
-    /* Это свойство теперь будет работать правильно */
     justify-content: center;
 }
 
@@ -214,13 +223,15 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
     box-shadow: var(--card-shadow);
+    border: var(--glass-border);
 }
 
 .portfolio-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 32px rgba(0,0,0,0.25), 0 0 30px rgba(var(--accent-color-start-rgb), 0.35);
+    /* Добавлены стили для эффекта увеличения, как у карточек услуг */
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 0 20px var(--accent-color-start);
 }
 
 .portfolio-image {
@@ -228,17 +239,28 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     background-size: cover;
     background-position: center;
     flex-shrink: 0;
-    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.portfolio-card:hover .portfolio-image {
-    transform: scale(1.03);
-    filter: brightness(1.05);
+.portfolio-info {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.portfolio-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-.portfolio-info h3 { font-size: 1.2rem; margin-bottom: 0.5rem; line-height: 1.4; }
-.case-link { display: inline-block; margin-top: auto; padding-top: 1rem; color: var(--accent-color-start); text-decoration: none; font-weight: 500; }
+.portfolio-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.case-link {
+    display: inline-block;
+    padding-top: 1rem;
+    color: var(--accent-color-start);
+    text-decoration: none;
+    font-weight: 500;
+}
 .case-link:hover { text-decoration: underline; }
 .show-more-container { text-align: center; margin-top: 4rem; }
 
@@ -247,6 +269,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-bottom: 1rem;
+    margin-top: auto;
 }
 .tag {
     background-color: var(--tag-bg);

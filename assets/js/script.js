@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
     let currentFilteredProjects = [];
     let projectsCurrentlyDisplayed = 0;
-    // --- ИЗМЕНЕНИЕ ЗДЕСЬ ---
     // Возвращаем показ 3 проектов за раз
     const projectsPerLoad = 3; 
 
@@ -78,7 +77,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const card = document.createElement('div');
         card.className = 'portfolio-card';
         card.dataset.category = project.category;
-        card.style.opacity = 0;
+        // Изменено: Убран inline-стиль transform, который конфликтовал с :hover
+        card.style.opacity = 0; 
         card.innerHTML = `
             <div class="portfolio-image" style="background-image: url('${project.img}');"></div>
             <div class="portfolio-info">
@@ -89,7 +89,6 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
         setTimeout(() => {
             card.style.opacity = 1;
-            card.style.transform = 'translateY(0)';
         }, 10);
         return card;
     }
@@ -341,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const scrollToTopBtn = document.querySelector('.scroll-to-top');
     if (scrollToTopBtn) {
         window.addEventListener('scroll', () => {
-            scrollToTopBtn.classList.toggle('visible', window.scrollY > window.innerHeight);
+            scrollToToTopBtn.classList.toggle('visible', window.scrollY > window.innerHeight);
         });
     }
     
