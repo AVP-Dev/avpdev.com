@@ -294,14 +294,41 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     setTimeout(() => document.body.style.opacity = 1, 50);
 
+    // --- ЛОГИКА МОБИЛЬНОГО МЕНЮ ---
     const burger = document.querySelector('.burger-menu');
-    const mobileNav = document.querySelector('.mobile-nav');
+    // FIX: Упрощенный и более надежный селектор для мобильного меню
+    const mobileNav = document.querySelector('.mobile-nav'); 
+    
     if (burger && mobileNav) {
-        burger.addEventListener('click', () => mobileNav.classList.toggle('open'));
+        const toggleMenu = () => {
+            const isOpen = mobileNav.classList.toggle('open');
+            burger.classList.toggle('active', isOpen);
+            // Блокируем/разблокируем прокрутку страницы
+            document.body.classList.toggle('modal-open', isOpen); 
+        };
+    
+        burger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+    
+        // Закрываем меню по клику на любую ссылку внутри него
         mobileNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => mobileNav.classList.remove('open'));
+            link.addEventListener('click', () => {
+                if (mobileNav.classList.contains('open')) {
+                    toggleMenu();
+                }
+            });
+        });
+        
+        // Закрываем меню по клику вне его области
+        document.addEventListener('click', (e) => {
+            if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !burger.contains(e.target)) {
+                toggleMenu();
+            }
         });
     }
+    // --- КОНЕЦ ЛОГИКИ МОБИЛЬНОГО МЕНЮ ---
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {

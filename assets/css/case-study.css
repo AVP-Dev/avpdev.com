@@ -1,13 +1,13 @@
-/* Стили, общие для всех страниц-кейсов */
+/* --- Стили, общие для всех страниц-кейсов --- */
 .case-study-header {
     padding-top: 150px;
-    padding-bottom: 80px;
+    padding-bottom: 60px;
     text-align: center;
 }
 
 .case-study-header h1 {
     font-size: 3.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .case-study-header p {
@@ -25,25 +25,42 @@
     box-shadow: 0 10px 40px rgba(0,0,0,0.15);
 }
 
+/* --- ОБНОВЛЕННЫЕ СТИЛИ для блока с деталями проекта --- */
 .project-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    display: flex;
+    justify-content: center;
     max-width: 900px;
-    margin: 40px auto 80px;
+    margin: 3rem auto 0;
     text-align: center;
+    /* Убрали фон и тень, чтобы сделать блок менее броским */
+    border: var(--glass-border);
+    border-radius: 15px;
+    padding: 1rem 0;
+}
+
+.detail-item {
+    flex: 1;
+    padding: 0.5rem 1.5rem;
+}
+
+/* Добавляем вертикальные разделители */
+.detail-item + .detail-item {
+    border-left: 1px solid var(--glass-border);
 }
 
 .detail-item h4 {
     color: var(--text-secondary-color);
     font-weight: 500;
     margin-bottom: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .detail-item p {
     font-size: 1.1rem;
     font-weight: 600;
 }
+/* --- КОНЕЦ ОБНОВЛЕННЫХ СТИЛЕЙ --- */
+
 
 .project-content {
     max-width: 800px;
@@ -78,7 +95,6 @@
     text-decoration: underline;
 }
 
-/* Стили для нового блока CTA */
 .case-cta-section {
     text-align: center;
     margin: 4rem 0;
@@ -86,7 +102,6 @@
     border-top: 1px solid var(--glass-border);
 }
 
-/* --- Улучшенные стили для галереи --- */
 .project-gallery { 
     margin-top: 4rem; 
 }
@@ -117,8 +132,8 @@
     width: 100%;
     height: auto;
     display: block;
-    aspect-ratio: 16 / 10; /* Задает фиксированное соотношение сторон */
-    object-fit: cover; /* Гарантирует, что изображение покроет область без искажений */
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
 }
 
 .gallery-item figcaption {
@@ -127,5 +142,38 @@
     color: var(--text-secondary-color);
     text-align: center;
     font-style: italic;
-    margin-top: auto; /* Прижимает подпись к низу, если есть свободное место */
+    margin-top: auto;
+}
+
+/* --- Адаптивные стили для мобильных устройств --- */
+@media (max-width: 768px) {
+    .case-study-header {
+        padding-top: 120px;
+        padding-bottom: 40px;
+    }
+
+    .case-study-header h1 {
+        font-size: 2.5rem; /* Уменьшаем заголовок на мобильных */
+    }
+
+    .project-details {
+        flex-direction: column; /* Ставим элементы в столбец */
+        gap: 0;
+        padding: 0;
+        margin-top: 2rem;
+    }
+
+    .detail-item {
+        padding: 1rem;
+    }
+
+    /* Убираем вертикальные разделители и добавляем горизонтальные */
+    .detail-item + .detail-item {
+        border-left: none;
+        border-top: 1px solid var(--glass-border);
+    }
+
+    .main-project-image {
+        margin-bottom: 40px;
+    }
 }
