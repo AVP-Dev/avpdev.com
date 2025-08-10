@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // --- База данных проектов с тегами технологий ---
     const allProjects = [
         { id: 1, category: 'apps',     img: 'assets/images/terra-forma-hero.webp',   titleKey: 'portfolio_card1_h3', link: 'project-furniture.html', tags: ['Next.js', 'Chakra UI', 'Prisma'] },
-        { id: 2, category: 'apps',     img: 'assets/images/project-travel.webp',     titleKey: 'portfolio_card2_h3', link: 'project-travel.html',    tags: ['Next.js', 'Chakra UI', 'Prisma'] },
-        { id: 3, category: 'sites',    img: 'assets/images/cars-hero-portfolio.webp', titleKey: 'case_cars_h1_portfolio', link: 'project-cars.html',      tags: ['JavaScript', 'Node.js'] },
-        { id: 4, category: 'sites',    img: 'assets/images/tow-truck-hero.webp',     titleKey: 'case_tow_h1',        link: 'project-tow-truck.html', tags: ['HTML', 'CSS', 'JS'] },
-        { id: 5, category: 'sites',    img: 'assets/images/project-3d-model.webp',   titleKey: 'case_3d_h1',         link: 'project-3d-modeling.html', tags: ['JavaScript', 'Node.js', 'Docker'] },
+        { id: 2, category: 'apps',     img: 'assets/images/project-travel.webp',     titleKey: 'portfolio_card2_h3', link: 'project-travel.html',    tags: ['Next.js', 'Chakra UI', 'Prisma', 'GSAP'] },
+        { id: 3, category: 'sites',    img: 'assets/images/cars-hero-portfolio.webp', titleKey: 'case_cars_h1_portfolio', link: 'project-cars.html',      tags: ['JavaScript', 'Node.js', 'PostgreSQL', 'Express'] },
+        { id: 4, category: 'sites',    img: 'assets/images/tow-truck-hero.webp',     titleKey: 'case_tow_h1',        link: 'project-tow-truck.html', tags: ['HTML', 'CSS', 'JS', 'Telegram API'] },
+        { id: 5, category: 'sites',    img: 'assets/images/project-3d-model.webp',   titleKey: 'case_3d_h1',         link: 'project-3d-modeling.html', tags: ['JavaScript', 'Three.js', 'HTML', 'CSS'] },
         { id: 8, category: 'sites',    img: 'assets/images/project-mekohaus-hero.webp', titleKey: 'case_mekohaus_h1',   link: 'project-mekohaus.html',  tags: ['HTML', 'CSS', 'PHP'] },
     ];
 
@@ -21,11 +21,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const pageTitle = document.getElementById('page-title');
 
     let currentLang = localStorage.getItem('language') || 'ru';
-    let currentTheme = localStorage.getItem('theme') || 'light-theme';
+    let currentTheme = localStorage.getItem('theme') || 'dark-theme';
     
     let currentFilteredProjects = [];
     let projectsCurrentlyDisplayed = 0;
-    const projectsPerLoad = 3;
+    // --- ИЗМЕНЕНИЕ ЗДЕСЬ ---
+    // Возвращаем показ 3 проектов за раз
+    const projectsPerLoad = 3; 
 
     // --- ИНИЦИАЛИЗАЦИЯ COOKIE БАННЕРА ---
     const cookieBanner = document.getElementById('cookie-banner');
@@ -71,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const title = (typeof translations !== 'undefined' && translations[currentLang] && translations[currentLang][project.titleKey]) ? translations[currentLang][project.titleKey] : 'Project Title';
         const linkText = (typeof translations !== 'undefined' && translations[currentLang] && translations[currentLang].portfolio_card_link) ? translations[currentLang].portfolio_card_link : 'View Case <i class="fas fa-arrow-right"></i>';
         
-        const tagsHTML = project.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        const tagsHTML = project.tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('');
 
         const card = document.createElement('div');
         card.className = 'portfolio-card';
@@ -296,14 +298,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // --- ЛОГИКА МОБИЛЬНОГО МЕНЮ ---
     const burger = document.querySelector('.burger-menu');
-    // FIX: Упрощенный и более надежный селектор для мобильного меню
     const mobileNav = document.querySelector('.mobile-nav'); 
     
     if (burger && mobileNav) {
         const toggleMenu = () => {
             const isOpen = mobileNav.classList.toggle('open');
             burger.classList.toggle('active', isOpen);
-            // Блокируем/разблокируем прокрутку страницы
             document.body.classList.toggle('modal-open', isOpen); 
         };
     
@@ -312,7 +312,6 @@ document.addEventListener("DOMContentLoaded", function() {
             toggleMenu();
         });
     
-        // Закрываем меню по клику на любую ссылку внутри него
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 if (mobileNav.classList.contains('open')) {
@@ -321,7 +320,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
         
-        // Закрываем меню по клику вне его области
         document.addEventListener('click', (e) => {
             if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !burger.contains(e.target)) {
                 toggleMenu();

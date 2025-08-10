@@ -100,20 +100,20 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 
 /* --- Mobile Navigation --- */
 .burger-menu { display: none; }
-.mobile-nav { 
-    display: none; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100vh; 
-    background-color: var(--bg-color); 
-    transform: translateX(100%); 
-    transition: transform 0.3s ease-in-out; 
-    z-index: 1000; 
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-color);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
 }
 .mobile-nav.open { transform: translateX(0); }
 .mobile-nav ul { list-style: none; padding: 0; margin: 0; text-align: center; }
@@ -188,7 +188,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     transition: transform 0.3s ease, color 0.3s ease;
 }
 .about-content .icons .tech-text:hover {
-    color: #F76B1C; 
+    color: #F76B1C;
     transform: scale(1.1);
 }
 
@@ -198,32 +198,35 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .filter-btn:hover { color: var(--text-color); }
 .filter-btn.active { background: var(--accent-gradient); color: #000; font-weight: bold; box-shadow: 0 0 15px var(--accent-color-start); }
 
-.portfolio-grid { 
+.portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    /* Изменено для корректного центрирования. Колонки теперь не растягиваются. */
+    grid-template-columns: repeat(auto-fit, 340px);
     align-items: stretch;
-    gap: 2.5rem; 
+    gap: 2.5rem;
+    /* Это свойство теперь будет работать правильно */
+    justify-content: center;
 }
 
-.portfolio-card { 
-    background: var(--primary-color); 
-    border-radius: 15px; 
-    overflow: hidden; 
-    display: flex; 
-    flex-direction: column; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    box-shadow: var(--card-shadow); 
+.portfolio-card {
+    background: var(--primary-color);
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--card-shadow);
 }
 
-.portfolio-card:hover { 
-    transform: translateY(-8px); 
+.portfolio-card:hover {
+    transform: translateY(-8px);
     box-shadow: 0 16px 32px rgba(0,0,0,0.25), 0 0 30px rgba(var(--accent-color-start-rgb), 0.35);
 }
 
-.portfolio-image { 
-    height: 250px; 
-    background-size: cover; 
-    background-position: center; 
+.portfolio-image {
+    height: 250px;
+    background-size: cover;
+    background-position: center;
     flex-shrink: 0;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -271,21 +274,21 @@ textarea.form-control { min-height: 150px; resize: vertical; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* --- Feedback Modals --- */
-.feedback-modal-overlay { 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
+.feedback-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: var(--modal-overlay-bg);
-    backdrop-filter: blur(10px); 
-    z-index: 3000; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    opacity: 0; 
-    visibility: hidden; 
-    transition: opacity 0.3s ease, visibility 0s ease 0.3s; 
+    backdrop-filter: blur(10px);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s ease 0.3s;
 }
 .feedback-modal-overlay.visible { opacity: 1; visibility: visible; transition-delay: 0s; }
 .feedback-modal-content { background: var(--primary-color); color: var(--text-color); padding: 2rem; border-radius: 20px; text-align: center; max-width: 400px; width: 90%; transform: scale(0.95); transition: transform 0.3s ease; box-shadow: var(--card-shadow); }
@@ -455,34 +458,34 @@ textarea.form-control { min-height: 150px; resize: vertical; }
     .about-content { flex-direction: column; text-align: center; }
     .about-text .section-title { text-align: center; }
     .tech-stack .icons { justify-content: center; }
-    
-    .controls, 
-    .nav-links { 
-        display: none; 
+
+    .controls,
+    .nav-links {
+        display: none;
     }
-    
-    .burger-menu { 
-        display: flex; 
-        flex-direction: column; 
-        justify-content: space-around; 
-        width: 2rem; 
-        height: 2rem; 
-        background: transparent; 
-        border: none; 
-        cursor: pointer; 
+
+    .burger-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 2rem;
+        height: 2rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
         z-index: 1002;
         position: relative;
     }
 
-    .burger-menu div { 
-        width: 2rem; 
-        height: 0.25rem; 
-        background: var(--text-color); 
-        border-radius: 10px; 
+    .burger-menu div {
+        width: 2rem;
+        height: 0.25rem;
+        background: var(--text-color);
+        border-radius: 10px;
         transition: all 0.3s ease-in-out;
         transform-origin: center;
     }
-    
+
     .burger-menu.active div:nth-child(1) {
         transform: translateY(10px) rotate(45deg);
     }
@@ -492,9 +495,9 @@ textarea.form-control { min-height: 150px; resize: vertical; }
     .burger-menu.active div:nth-child(3) {
         transform: translateY(-10px) rotate(-45deg);
     }
-    
-    .mobile-nav { 
-        display: flex; 
+
+    .mobile-nav {
+        display: flex;
     }
 
     .form-group-split { flex-direction: column; gap: 0; }
