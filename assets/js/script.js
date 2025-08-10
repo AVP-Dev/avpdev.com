@@ -25,8 +25,16 @@ document.addEventListener("DOMContentLoaded", function() {
     
     let currentFilteredProjects = [];
     let projectsCurrentlyDisplayed = 0;
-    // Возвращаем показ 3 проектов за раз
-    const projectsPerLoad = 3; 
+
+    // MODIFIED: Function to determine how many projects to load
+    const getProjectsPerLoad = () => {
+        // On screens where we have a 2-column grid or less (<= 800px), load 2 projects.
+        if (window.innerWidth <= 800) {
+            return 2;
+        }
+        // On wider screens, load 3 projects.
+        return 3;
+    };
 
     // --- ИНИЦИАЛИЗАЦИЯ COOKIE БАННЕРА ---
     const cookieBanner = document.getElementById('cookie-banner');
@@ -77,7 +85,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const card = document.createElement('div');
         card.className = 'portfolio-card';
         card.dataset.category = project.category;
-        // Изменено: Убран inline-стиль transform, который конфликтовал с :hover
         card.style.opacity = 0; 
         card.innerHTML = `
             <div class="portfolio-image" style="background-image: url('${project.img}');"></div>
@@ -94,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayProjects() {
+        const projectsPerLoad = getProjectsPerLoad(); // Get the dynamic value
         const projectsToDisplay = currentFilteredProjects.slice(projectsCurrentlyDisplayed, projectsCurrentlyDisplayed + projectsPerLoad);
         
         projectsToDisplay.forEach(project => {

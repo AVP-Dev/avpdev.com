@@ -152,7 +152,19 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .card-icon { font-size: 2.5rem; margin-bottom: 1rem; display: inline-block; color: var(--accent-color-start); }
 .card h3 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--text-color); }
 .card p { color: var(--text-secondary-color); }
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+
+/* MODIFIED: Use Flexbox for natural centering of the last item */
+.services-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+.services-grid .card {
+    flex-basis: 300px; /* Base width */
+    flex-grow: 1;      /* Allow cards to grow and fill space */
+    max-width: 380px;  /* But prevent them from becoming too wide */
+}
 
 /* --- About Me Section --- */
 #about { background-color: var(--primary-color); transition: background-color 0.3s; }
@@ -229,7 +241,6 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 }
 
 .portfolio-card:hover {
-    /* Добавлены стили для эффекта увеличения, как у карточек услуг */
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 0 20px var(--accent-color-start);
 }
@@ -553,6 +564,14 @@ textarea.form-control { min-height: 150px; resize: vertical; }
     }
 }
 
+/* NEW: Add a breakpoint for tablet-sized portfolio grid */
+@media (max-width: 800px) {
+    .portfolio-grid {
+        /* Force a 2-column layout */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 480px) {
     .hero-text h1 {
         font-size: 2.5rem;
@@ -563,10 +582,8 @@ textarea.form-control { min-height: 150px; resize: vertical; }
 }
 
 @media (max-width: 400px) {
-    .services-grid {
-        grid-template-columns: minmax(0, 1fr);
-    }
     .portfolio-grid {
+        /* This will now override the 2-column layout for small screens */
         grid-template-columns: 1fr;
     }
     .portfolio-card {
