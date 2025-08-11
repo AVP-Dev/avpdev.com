@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.avpdev.com/index.html</loc>
-    <lastmod>2025-08-09</lastmod>
+    <lastmod>2025-08-11</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
@@ -37,12 +37,12 @@
   </url>
   <url>
     <loc>https://www.avpdev.com/privacy-policy.html</loc>
-    <lastmod>2025-08-09</lastmod>
+    <lastmod>2025-08-11</lastmod>
     <priority>0.50</priority>
   </url>
   <url>
     <loc>https://www.avpdev.com/terms-of-service.html</loc>
-    <lastmod>2025-08-09</lastmod>
+    <lastmod>2025-08-11</lastmod>
     <priority>0.50</priority>
   </url>
 </urlset>
