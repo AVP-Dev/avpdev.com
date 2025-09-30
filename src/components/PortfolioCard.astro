@@ -1,0 +1,25 @@
+---
+// src/components/PortfolioCard.astro
+import type { Project } from '../data/projects';
+
+interface Props extends Project {}
+
+const { img, titleKey, link, tags, category } = Astro.props;
+
+// The text for the link will be replaced by the client script via a data-attribute
+const linkTextKey = 'portfolio_card_link';
+---
+<div class="portfolio-card" data-category={category}>
+    <div class="portfolio-image" style={`background-image: url('${img}');`}></div>
+    <div class="portfolio-info">
+        <h3 data-lang={titleKey}>Project Title</h3>
+        <div class="portfolio-tags">
+            {tags.slice(0, 3).map(tag => (
+                <span class="tag">{tag}</span>
+            ))}
+        </div>
+        <a href={link} class="case-link" data-lang={linkTextKey}>
+            Explore Project <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>

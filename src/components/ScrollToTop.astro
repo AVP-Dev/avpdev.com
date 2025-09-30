@@ -1,0 +1,17 @@
+---
+// src/components/ScrollToTop.astro
+---
+<a href="#" class="scroll-to-top" aria-label="Наверх">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</a>
+
+<script>
+    const scrollToTopBtn = document.querySelector('.scroll-to-top') as HTMLElement | null;
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            // Показываем кнопку после прокрутки на высоту одного экрана
+            const shouldBeVisible = window.scrollY > window.innerHeight;
+            scrollToTopBtn.classList.toggle('visible', shouldBeVisible);
+        }, { passive: true }); // Оптимизация производительности скролла
+    }
+</script>

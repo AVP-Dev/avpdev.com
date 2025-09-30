@@ -1,0 +1,128 @@
+---
+import { allProjects as PROJECTS_DATA } from '../../data/projects';
+import PortfolioCard from '../PortfolioCard.astro';
+
+const PROJECTS_PER_PAGE = 3;
+
+// Безопасная проверка и подготовка данных
+const allProjects = Array.isArray(PROJECTS_DATA) ? PROJECTS_DATA : [];
+const hasProjects = allProjects.length > 0;
+---
+
+<section id="portfolio" aria-labelledby="portfolio-title">
+  <div class="container">
+    <h2 id="portfolio-title" class="section-title fade-in" data-lang="portfolio_h2">
+      Избранные <span class="gradient-text">Проекты</span>
+    </h2>
+
+    {hasProjects ? (
+      <>
+        <div class="portfolio-filters fade-in" role="tablist" aria-label="Фильтры портфолио">
+          <button class="filter-btn active" data-filter="all" data-lang="filter_all" role="tab" aria-selected="true">Все</button>
+          <button class="filter-btn" data-filter="sites" data-lang="filter_sites" role="tab" aria-selected="false">Сайты</button>
+          <button class="filter-btn" data-filter="apps" data-lang="filter_apps" role="tab" aria-selected="false">Веб-приложения</button>
+        </div>
+
+        <div id="main-portfolio-grid" class="portfolio-grid" aria-live="polite">
+          {/* Рендерим все карточки сразу, но скрываем лишние */}
+          {allProjects.map((project, index) => (
+            <div class:list={["portfolio-card-wrapper", { 'is-hidden': index >= PROJECTS_PER_PAGE }]}>
+              <PortfolioCard {...project} />
+            </div>
+          ))}
+        </div>
+
+        <div class="show-more-container">
+          <button 
+            id="show-more-btn" 
+            class:list={["cta-button", { 'is-hidden': allProjects.length <= PROJECTS_PER_PAGE }]}
+            data-lang="show_more" 
+            type="button"
+          >
+            Показать еще
+          </button>
+        </div>
+      </>
+    ) : (
+      <p class="muted" id="portfolio-empty">
+        Проекты для отображения отсутствуют.
+      </p>
+    )}
+  </div>
+</section>
+
+<!-- Стили для управления видимостью -->
+<style>
+  .portfolio-card-wrapper.is-hidden {
+    display: none;
+  }
+  .show-more-container button.is-hidden {
+    display: none;
+  }
+</style>
+
+<!-- Полностью переписанный и упрощенный клиентский скрипт -->
+<script define:vars={{ PROJECTS_PER_PAGE }}>
+  function portfolioManager() {
+    const portfolio = document.getElementById('portfolio');
+    if (!portfolio || portfolio.dataset.jsActive) return;
+    portfolio.dataset.jsActive = 'true';
+
+    const filterContainer = portfolio.querySelector('.portfolio-filters');
+    const showMoreBtn = portfolio.querySelector('#show-more-btn');
+    const allCards = Array.from(portfolio.querySelectorAll('.portfolio-card-wrapper'));
+    
+    if (!filterContainer || !showMoreBtn || allCards.length === 0) return;
+
+    let currentFilter = 'all';
+    let visibleCount = PROJECTS_PER_PAGE;
+
+    const updateView = () => {
+      const matchingCards = allCards.filter(cardWrapper => {
+        const card = cardWrapper.querySelector('[data-category]');
+        const category = card ? card.dataset.category : 'all';
+        return currentFilter === 'all' || category === currentFilter;
+      });
+
+      allCards.forEach(card => card.classList.add('is-hidden'));
+
+      matchingCards.forEach((card, index) => {
+        if (index < visibleCount) {
+          card.classList.remove('is-hidden');
+        }
+      });
+
+      const currentlyVisible = matchingCards.filter(c => !c.classList.contains('is-hidden')).length;
+      
+      if (currentlyVisible >= matchingCards.length) {
+        showMoreBtn.classList.add('is-hidden');
+      } else {
+        showMoreBtn.classList.remove('is-hidden');
+      }
+    };
+
+    filterContainer.addEventListener('click', (e) => {
+      const target = e.target.closest('button');
+      if (!target || !target.dataset.filter) return;
+
+      filterContainer.querySelector('.active')?.classList.remove('active');
+      target.classList.add('active');
+      
+      currentFilter = target.dataset.filter;
+      visibleCount = PROJECTS_PER_PAGE; // Сбрасываем счетчик при смене фильтра
+      updateView();
+    });
+
+    showMoreBtn.addEventListener('click', () => {
+      visibleCount += PROJECTS_PER_PAGE;
+      updateView();
+    });
+
+    // Первоначальное обновление состояния кнопки
+    updateView();
+  }
+
+  // Запускаем скрипт при загрузке и при каждом переходе между страницами
+  document.addEventListener('astro:page-load', portfolioManager);
+</script>
+

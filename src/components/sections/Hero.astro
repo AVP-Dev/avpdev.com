@@ -1,0 +1,57 @@
+---
+// src/components/sections/Hero.astro
+---
+<section id="hero">
+    <div id="particles-js"></div>
+    <div class="container hero-container">
+        <div class="hero-content">
+            <div class="hero-text fade-in">
+                <h1 data-lang="hero_h1">Создаю <span class="gradient-text">эффективные сайты</span> и автоматизирую бизнес-процессы</h1>
+                <p data-lang="hero_p">От продающих лендингов до сложных систем автоматизации. Превращаю ваши идеи в работающие веб-решения.</p>
+                <a href="#contact" class="cta-button" data-lang="hero_cta">Обсудить проект</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Подключаем библиотеку и скрипт инициализации -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" is:inline></script>
+<script>
+    // Функция для инициализации particles.js
+    function loadParticles() {
+        // Проверяем, существует ли функция particlesJS и элемент
+        if (typeof particlesJS === 'undefined' || !document.getElementById('particles-js')) {
+            return;
+        }
+
+        // Небольшая задержка, чтобы убедиться, что CSS переменные применились
+        setTimeout(() => {
+            const bodyStyles = getComputedStyle(document.body);
+            const particleColor = bodyStyles.getPropertyValue('--particle-color').trim().replace(/"/g, '');
+            const particleLineColor = bodyStyles.getPropertyValue('--particle-line-color').trim().replace(/"/g, '');
+
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: particleColor },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: false },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: particleLineColor, opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: "none", out_mode: "out" }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+                    modes: { repulse: { distance: 150 }, push: { particles_nb: 4 } }
+                },
+                retina_detect: true
+            });
+        }, 100);
+    }
+
+    // Вызываем функцию при загрузке страницы
+    document.addEventListener('DOMContentLoaded', loadParticles);
+    // Также слушаем кастомное событие смены темы, чтобы перезапустить анимацию с новыми цветами
+    document.addEventListener('theme:changed', loadParticles);
+</script>
