@@ -8,6 +8,7 @@ node_modules/
 
 # Файлы сборки
 dist/
+.astro/
 
 # Логи и временные файлы
 npm-debug.log
@@ -17,4 +18,3 @@ npm-debug.log
 .git
 .idea
 .vscode
-
