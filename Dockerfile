@@ -25,6 +25,9 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+# ДОБАВЛЕНО: Устанавливаем curl для healthcheck
+RUN apk add --no-cache curl
+
 # Копируем только необходимые для запуска файлы из этапа сборки
 COPY --from=builder /app/dist ./
 # ДОБАВЛЕНО: Копируем установленные зависимости, необходимые для запуска сервера
@@ -38,4 +41,3 @@ EXPOSE 3000
 
 # Запускаем сервер с помощью команды, которая находится внутри `dist/server/entry.mjs`
 CMD ["node", "server/entry.mjs"]
-
