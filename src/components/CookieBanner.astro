@@ -1,0 +1,48 @@
+---
+// src/components/CookieBanner.astro
+---
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+    <p class="cookie-text" data-lang="cookie_text">Мы используем файлы cookie, чтобы улучшить ваш опыт. Продолжая посещать сайт, вы соглашаетесь с нашей <a href="/privacy-policy">Политикой конфиденциальности</a>.</p>
+    <button id="cookie-accept-btn" class="cookie-button" data-lang="cookie_accept">Принять</button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept-btn');
+
+    if (!cookieBanner || !acceptBtn) return;
+
+    const setCookie = (name: string, value: string, days: number) => {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax; Secure";
+    };
+
+    const getCookie = (name: string) => {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    };
+
+    if (!getCookie('cookie_consent')) {
+        setTimeout(() => {
+            cookieBanner.classList.add('show');
+        }, 1500); // Небольшая задержка для LCP
+    }
+
+    acceptBtn.addEventListener('click', () => {
+        setCookie('cookie_consent', 'true', 365);
+        cookieBanner.classList.remove('show');
+    });
+});
+</script>

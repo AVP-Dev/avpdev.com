@@ -1,0 +1,65 @@
+---
+// src/layouts/CaseStudyLayout.astro
+import BaseLayout from './BaseLayout.astro';
+
+export interface Props {
+    title: string;
+    description: string;
+    ogImage: string;
+    clientKey: string;
+    servicesKey: string;
+    year: string | number;
+    heroImage: string;
+    heroImageAlt: string;
+}
+
+const { 
+    title, 
+    description, 
+    ogImage,
+    clientKey,
+    servicesKey,
+    year,
+    heroImage,
+    heroImageAlt
+} = Astro.props;
+---
+<BaseLayout title={title} description={description} ogImage={ogImage}>
+    <section class="case-study-header">
+        <div class="container">
+            <!-- Заголовок и описание будут переданы из конкретной страницы кейса -->
+            <slot name="header" />
+            <div class="project-details">
+                <div class="detail-item">
+                    <h4 data-lang="case_client">Клиент</h4>
+                    <p data-lang={clientKey}></p>
+                </div>
+                <div class="detail-item">
+                    <h4 data-lang="case_services">Услуги</h4>
+                    <p data-lang={servicesKey}></p>
+                </div>
+                <div class="detail-item">
+                    <h4 data-lang="case_year">Год</h4>
+                    <p>{year}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <img src={heroImage} alt={heroImageAlt} class="main-project-image" loading="lazy">
+    </div>
+    
+    <div class="project-content-wrapper">
+        <div class="project-content">
+            <!-- Основной контент кейса -->
+            <slot name="content" />
+
+            <div class="case-cta-section">
+                 <a href="/#contact" class="cta-button" data-lang="case_cta_discuss">Обсудить ваш проект</a>
+            </div>
+            <a href="/#portfolio" class="back-to-main" data-lang="back_to_portfolio">← Назад ко всем проектам</a>
+        </div>
+    </div>
+</BaseLayout>
+

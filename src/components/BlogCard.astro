@@ -1,0 +1,50 @@
+---
+// src/components/BlogCard.astro
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+
+const formattedDate = new Date(post.data.pubDate).toLocaleDateString('ru-RU', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+<a 
+  href={`/blog/${post.slug}`} 
+  class="portfolio-card blog-card-link"
+  data-title={post.data.title.toLowerCase()}
+  data-description={post.data.description.toLowerCase()}
+  data-tags={post.data.tags.join(',').toLowerCase()}
+>
+    {post.data.heroImage ?
+(
+        <div class="portfolio-image blog-card-image">
+             <Image 
+                src={post.data.heroImage} 
+                alt={`Обложка статьи: ${post.data.title}`}
+                width={400} 
+                height={250} 
+                format="webp"
+                quality={80}
+                transition:name={`blog-hero-${post.slug}`}
+            />
+        </div>
+    ) : <div class="portfolio-image blog-card-image-placeholder"></div>}
+    <div class="portfolio-info">
+        <p class="blog-card-date">{formattedDate}</p>
+        <h3 class="blog-card-title">{post.data.title}</h3>
+        
+        <p class="blog-card-desc">{post.data.description}</p>
+        <div class="portfolio-tags">
+            {post.data.tags.slice(0, 3).map(tag => (
+                <span class="tag">{tag}</span>
+            ))}
+        </div>
+    </div>
+</a>

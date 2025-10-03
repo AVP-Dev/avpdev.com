@@ -1,0 +1,65 @@
+---
+// src/components/sections/About.astro
+import { Image } from 'astro:assets';
+import aboutPhoto from '../../assets/images/about-photo.webp';
+---
+<section id="about">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-image-wrapper fade-in">
+                <!-- ИСПОЛЬЗУЕМ ASTRO IMAGE ДЛЯ ОПТИМИЗАЦИИ -->
+                <Image 
+                    src={aboutPhoto} 
+                    alt="Фотография Алексея Пацкевича, full-stack разработчика" 
+                    widths={[300, 600]} 
+                    sizes="(max-width: 1024px) 300px, 600px"
+                    loading="lazy"
+                    decoding="async"
+                    quality={80}
+                    class="about-image"
+                />
+            </div>
+            <div class="about-text fade-in" style="transition-delay: 200ms;">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;" data-lang="about_h2">Обо мне</h2>
+                <h3 data-lang="about_h3">Full-Stack разработчик, превращаю идеи в бизнес-результат.</h3>
+                <p data-lang="about_p">Моя специализация — создание веб-решений, которые работают. От быстрых сайтов до сложных систем автоматизации, я фокусируюсь на чистом коде, производительности и реальной пользе для вашего бизнеса. Убежден, что технологии должны не просто существовать, а решать конкретные задачи и помогать росту.</p>
+                <div class="tech-stack">
+                    <h3 data-lang="about_tech">Ключевые технологии:</h3>
+                    <div class="icons">
+                        <i class="fab fa-js-square" title="JavaScript (ES6+)" aria-hidden="true"></i>
+                        <span class="tech-text" title="TypeScript">TS</span>
+                        <i class="fab fa-react" title="React / Next.js" aria-hidden="true"></i>
+                        <i class="fab fa-node-js" title="Node.js" aria-hidden="true"></i>
+                        <i class="fas fa-database" title="PostgreSQL" aria-hidden="true"></i>
+                        <i class="fab fa-docker" title="Docker" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ДОБАВЛЕНЫ СТИЛИ ДЛЯ ОПТИМИЗИРОВАННОГО ИЗОБРАЖЕНИЯ -->
+<style>
+.about-image-wrapper {
+    position: relative; 
+    overflow: hidden; 
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 2px solid var(--glass-border);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+.about-image-wrapper:hover {
+    transform: scale(1.05);
+}
+.about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%; 
+}
+</style>
+

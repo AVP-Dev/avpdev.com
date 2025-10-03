@@ -1,0 +1,42 @@
+---
+// src/components/FeaturedPostCard.astro
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+
+const formattedDate = new Date(post.data.pubDate).toLocaleDateString('ru-RU', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+<a href={`/blog/${post.slug}/`} class="featured-card">
+  {post.data.heroImage && (
+    <div class="featured-card-image">
+      <Image 
+        src={post.data.heroImage} 
+        alt={`Обложка статьи: ${post.data.title}`}
+        width={800} 
+        height={450} 
+        format="webp"
+        quality={85}
+        transition:name={`blog-hero-${post.slug}`}
+      />
+    </div>
+  )}
+  <div class="featured-card-info">
+    <p class="blog-card-date">{formattedDate}</p>
+    <h3 class="featured-card-title">{post.data.title}</h3>
+    <p class="blog-card-desc">{post.data.description}</p>
+    <div class="portfolio-tags">
+      {post.data.tags.map(tag => (
+        <span class="tag">{tag}</span>
+      ))}
+    </div>
+  </div>
+</a>

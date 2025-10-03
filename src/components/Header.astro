@@ -1,0 +1,56 @@
+---
+// src/components/Header.astro
+---
+<header>
+    <nav class="container">
+        <a href="/" class="logo">
+            <img src="/images/logo.svg" alt="AVPdev.com" class="logo-img">
+            <span class="logo-text">AVP<span class="gradient-text">dev.com</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="/#services" data-lang="nav_services">Услуги</a></li>
+            <li><a href="/#about" data-lang="nav_about">Обо мне</a></li>
+            <li><a href="/#portfolio" data-lang="nav_portfolio">Проекты</a></li>
+            <li><a href="/blog/" data-lang="nav_blog">Блог</a></li>
+            <li><a href="/brief/" data-lang="nav_brief">Бриф</a></li>
+            <li><a href="/#contact" data-lang="nav_contact">Контакт</a></li>
+        </ul>
+        <div class="controls">
+            <button class="control-btn theme-switcher" aria-label="Переключить тему">
+                <i class="fas fa-sun" aria-hidden="true"></i>
+            </button>
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang-set="en">EN</button>
+                <span class="lang-separator">|</span>
+                <button class="lang-btn active" data-lang-set="ru">RU</button>
+            </div>
+        </div>
+        <button class="burger-menu" aria-label="Открыть меню">
+            <div></div>
+            <div></div>
+            <div></div>
+        </button>
+    </nav>
+</header>
+
+<!-- Мобильное меню вынесено сюда же для инкапсуляции -->
+<div class="mobile-nav">
+    <ul>
+        <li><a href="/#services" data-lang="nav_services">Услуги</a></li>
+        <li><a href="/#about" data-lang="nav_about">Обо мне</a></li>
+        <li><a href="/#portfolio" data-lang="nav_portfolio">Проекты</a></li>
+        <li><a href="/blog/" data-lang="nav_blog">Блог</a></li>
+        <li><a href="/brief/" data-lang="nav_brief">Бриф</a></li>
+        <li><a href="/#contact" data-lang="nav_contact">Контакт</a></li>
+    </ul>
+    <div class="mobile-controls">
+        <button class="control-btn theme-switcher" aria-label="Переключить тему">
+            <i class="fas fa-sun" aria-hidden="true"></i>
+        </button>
+        <div class="lang-switcher">
+            <button class="lang-btn" data-lang-set="en">EN</button>
+            <span class="lang-separator">|</span>
+            <button class="lang-btn active" data-lang-set="ru">RU</button>
+        </div>
+    </div>
+</div>

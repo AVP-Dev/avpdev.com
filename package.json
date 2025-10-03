@@ -1,0 +1,23 @@
+{
+  "name": "avpdev-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro preview",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^8.3.2",
+    "astro": "^4.12.2",
+    "google-auth-library": "^9.11.0",
+    "google-spreadsheet": "^4.1.2",
+    "nodemailer": "^6.9.14",
+    "sharp": "^0.33.4"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.15"
+  }
+}

@@ -1,0 +1,212 @@
+/* Стили для страницы брифа */
+.brief-form {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    text-align: left;
+    background: var(--primary-color);
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    border: var(--glass-border);
+    box-shadow: var(--card-shadow);
+}
+
+.form-block {
+    border: none;
+    padding: 0;
+    margin: 0 0 2.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2.5rem;
+}
+
+.form-block:last-of-type {
+    border-bottom: none;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.form-block legend {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    color: var(--text-color);
+}
+
+.form-block .form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Скрытое поле "Другое" */
+.form-group.other-input {
+    margin-top: 1rem;
+}
+
+
+.form-block label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-secondary-color);
+}
+
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    row-gap: 0.8rem;
+}
+
+.radio-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* --- ИСПРАВЛЕННЫЕ СТИЛИ ДЛЯ RADIO И CHECKBOX --- */
+
+/* Контейнер label */
+.radio-group label,
+.checkbox-group label,
+.radio-group-vertical label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 1.5em; /* Гарантируем высоту для выравнивания */
+}
+
+/* Скрываем стандартный input */
+.radio-group input,
+.checkbox-group input,
+.radio-group-vertical input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Текст внутри label */
+.radio-group span,
+.checkbox-group span,
+.radio-group-vertical span {
+    color: var(--text-color);
+    font-weight: 400;
+    padding-left: 2em; 
+}
+
+/* Кастомный элемент (основа) - ::before */
+.radio-group span::before,
+.checkbox-group span::before,
+.radio-group-vertical span::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    /* Точное вертикальное центрирование с calc() */
+    top: calc(50% - 0.625em); 
+    height: 1.25em;
+    width: 1.25em;
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-color);
+    transition: border-color 0.2s, background-color 0.2s;
+    box-sizing: border-box;
+}
+
+/* Стиль для radio (круглый) */
+.radio-group span::before,
+.radio-group-vertical span::before {
+    border-radius: 50%;
+}
+
+/* Стиль для checkbox (квадратный) */
+.checkbox-group span::before {
+    border-radius: 4px;
+}
+
+/* Состояние при наведении */
+.radio-group label:hover span::before,
+.checkbox-group label:hover span::before,
+.radio-group-vertical label:hover span::before {
+    border-color: var(--accent-color-start);
+}
+
+/* Состояние при выборе (checked) */
+input:checked + span::before {
+    border-color: var(--accent-color-start);
+    background-color: var(--accent-color-start);
+}
+
+/* Внутренняя точка/галочка (основа) - ::after */
+.radio-group span::after,
+.checkbox-group span::after,
+.radio-group-vertical span::after {
+    content: '';
+    position: absolute;
+    transition: transform 0.15s ease-in-out;
+    transform: scale(0);
+    box-sizing: border-box;
+}
+
+/* Точка для radio - ИСПРАВЛЕНО ЦЕНТРИРОВАНИЕ */
+input[type="radio"] + span::after {
+    width: 0.6em;
+    height: 0.6em;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    /* Позиционируем от левого края + половина ширины круга - половина ширины точки */
+    left: calc(0.625em - 0.3em); 
+    /* Позиционируем от верха + половина высоты круга - половина высоты точки */
+    top: calc(50% - 0.3em);
+}
+
+/* Галочка для checkbox */
+input[type="checkbox"] + span::after {
+    width: 0.35em;
+    height: 0.7em;
+    border: solid var(--primary-color);
+    border-width: 0 3px 3px 0;
+    left: 0.45em;
+    top: calc(50% - 0.45em);
+    transform: rotate(45deg) scale(0);
+}
+
+/* Показываем точку/галочку при выборе */
+input:checked + span::after {
+    transform: rotate(0) scale(1);
+}
+
+input[type="checkbox"]:checked + span::after {
+    transform: rotate(45deg) scale(1);
+}
+
+/* --- КОНЕЦ ИСПРАВЛЕННЫХ СТИЛЕЙ --- */
+
+
+.thank-you-message {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.thank-you-message h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.thank-you-message p {
+    font-size: 1.2rem;
+    color: var(--text-secondary-color);
+    margin-bottom: 2rem;
+}
+
+.thank-you-message .feedback-modal-icon {
+    margin: 0 auto 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .brief-form {
+        padding: 1.5rem;
+    }
+    .form-block legend {
+        font-size: 1.3rem;
+    }
+}

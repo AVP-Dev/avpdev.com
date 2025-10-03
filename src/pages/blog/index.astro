@@ -1,0 +1,130 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import FeaturedPostCard from '../../components/FeaturedPostCard.astro';
+
+const allPosts = await getCollection('blog', ({ data }) => {
+  return data.draft !== true;
+});
+
+allPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf());
+
+const hasPosts = allPosts.length > 0;
+const latestPost = hasPosts ? allPosts[0] : null;
+const otherPosts = hasPosts ? allPosts.slice(1) : [];
+
+const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
+---
+<BaseLayout 
+  title="blog_page_title"
+  description="blog_page_desc"
+>
+  <section id="blog-list" class="blog-page">
+    <div class="container">
+      <div class="blog-header fade-in">
+        <h1 class="section-title" data-lang="blog_h1"></h1>
+        <p class="section-subtitle" data-lang="blog_p"></p>
+      </div>
+
+      {hasPosts && latestPost && (
+        <div class="featured-post-section fade-in">
+          <h2 data-lang="blog_latest_post"></h2>
+          <FeaturedPostCard post={latestPost} />
+        </div>
+      )}
+
+      {otherPosts.length > 0 && (
+        <div class="posts-list-section fade-in" style="transition-delay: 200ms;">
+          <h2 data-lang="blog_other_posts"></h2>
+          <div class="filters-container">
+            <div class="search-wrapper">
+              <i class="fas fa-search search-icon" aria-hidden="true"></i>
+              <input type="search" id="blog-search" data-lang-placeholder="blog_search_placeholder" placeholder="Поиск по статьям..." aria-label="Поиск по статьям">
+            </div>
+            <div class="tags-filter" id="tags-filter">
+              <button class="tag-filter-btn active" data-tag="all" data-lang="filter_all"></button>
+              {allTags.map(tag => (
+                <button class="tag-filter-btn" data-tag={tag}>{tag}</button>
+              ))}
+            </div>
+          </div>
+          <div id="posts-grid" class="portfolio-grid blog-grid">
+            {otherPosts.map(post => (
+              <BlogCard post={post} />
+            ))}
+          </div>
+        </div>
+      )}
+      
+      <p id="no-results-message" class="no-results-message" data-lang="blog_no_results" style="display: none;"></p>
+
+      {!hasPosts && (
+        <p class="no-results-message" data-lang="blog_no_posts_yet"></p>
+      )}
+
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const searchInput = document.getElementById('blog-search') as HTMLInputElement;
+    const tagsContainer = document.getElementById('tags-filter');
+    const postsGrid = document.getElementById('posts-grid');
+    if (!postsGrid) return; // Если нет сетки, ничего не делаем
+
+    const allCards = Array.from(postsGrid.children) as HTMLElement[];
+    const noResultsMessage = document.getElementById('no-results-message') as HTMLElement;
+
+    let currentTag = 'all';
+    let currentQuery = '';
+
+    function filterPosts() {
+      let visibleCount = 0;
+
+      allCards.forEach(cardWrapper => {
+        const card = cardWrapper.querySelector('a');
+        if (!card) return;
+
+        const title = card.dataset.title || '';
+        const description = card.dataset.description || '';
+        const tags = card.dataset.tags || '';
+
+        const matchesQuery = currentQuery === '' || title.includes(currentQuery) || description.includes(currentQuery);
+        const matchesTag = currentTag === 'all' || tags.includes(currentTag);
+        
+        const isVisible = matchesQuery && matchesTag;
+        
+        cardWrapper.style.display = isVisible ? '' : 'none';
+
+        if (isVisible) {
+          visibleCount++;
+        }
+      });
+
+      if (noResultsMessage) {
+        noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        currentQuery = searchInput.value.toLowerCase().trim();
+        filterPosts();
+      });
+    }
+
+    if (tagsContainer) {
+      tagsContainer.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target.matches('.tag-filter-btn')) {
+          tagsContainer.querySelector('.active')?.classList.remove('active');
+          target.classList.add('active');
+          currentTag = target.dataset.tag || 'all';
+          filterPosts();
+        }
+      });
+    }
+  });
+</script>

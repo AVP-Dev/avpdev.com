@@ -1,0 +1,93 @@
+---
+// src/pages/project/[slug].astro
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import { caseStudies } from '../../data/caseStudies';
+import type { CaseStudy } from '../../data/caseStudies';
+
+// Эта функция ОБЯЗАТЕЛЬНА для генерации страниц проектов.
+// Она читает все кейсы и говорит Astro, какие HTML-страницы нужно создать.
+export function getStaticPaths() {
+  return caseStudies.map((study) => {
+    return {
+      params: { slug: study.slug },
+      props: { study },
+    };
+  });
+}
+
+// Теперь мы получаем study из props, а не ищем его заново.
+const { study } = Astro.props;
+
+// ИЗМЕНЕНО: Если кейс не найден, перенаправляем на кастомную страницу 404.
+// Это более современный и надежный способ обработки.
+if (!study) {
+    return Astro.redirect('/404');
+}
+
+const {
+    titleKey, descriptionKey, ogImage, clientKey, servicesKey, year, heroImage, heroImageAlt,
+    header, content
+} = study;
+---
+<CaseStudyLayout
+    title={titleKey}
+    description={descriptionKey}
+    ogImage={ogImage}
+    clientKey={clientKey}
+    servicesKey={servicesKey}
+    year={year}
+    heroImage={heroImage}
+    heroImageAlt={heroImageAlt}
+>
+    <div slot="header">
+        <h1 class="gradient-text" data-lang={header.titleKey}></h1>
+        <p data-lang={header.descriptionKey}></p>
+    </div>
+
+    <div slot="content">
+        <h2 data-lang={content.task.titleKey}></h2>
+        <p data-lang={content.task.pKey}></p>
+
+        {/* Отображаем блок "Решение", если он есть */}
+        {content.solution && (
+            <>
+                <h2 data-lang={content.solution.titleKey}></h2>
+                <p data-lang={content.solution.pKey}></p>
+            </>
+        )}
+
+        {/* Отображаем блок "Ключевые особенности" */}
+        <h2 data-lang={content.keyFeatures.titleKey}></h2>
+        {/* Добавляем абзац-описание, если он есть */}
+        {content.keyFeatures.pKey && <p data-lang={content.keyFeatures.pKey}></p>}
+        <ul>
+            {content.keyFeatures.listKeys.map(key => <li data-lang={key}></li>)}
+        </ul>
+
+        <h2 data-lang="case_tech"></h2>
+        <div class="tech-stack" style="margin-top: 1rem; margin-bottom: 2rem;">
+            <div class="icons" style="gap: 2rem; font-size: 3rem;">
+                {content.techStack.map(tech => <i class:list={tech.icon} title={tech.title}></i>)}
+            </div>
+        </div>
+
+        <h2 data-lang={content.deployment.titleKey}></h2>
+        <p data-lang={content.deployment.pKey}></p>
+
+        {content.gallery && (
+            <div class="project-gallery">
+                <h2 data-lang={content.gallery.titleKey}></h2>
+                <div class="gallery-grid">
+                    {content.gallery.items.map(item => (
+                        <div class="gallery-item">
+                            <figure>
+                                <img src={item.img} alt={item.captionKey} loading="lazy" />
+                                <figcaption data-lang={item.captionKey}></figcaption>
+                            </figure>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )}
+    </div>
+</CaseStudyLayout>

@@ -1,0 +1,109 @@
+---
+// src/components/sections/Contact.astro
+---
+<section id="contact">
+    <div class="container">
+        <h2 class="section-title fade-in" data-lang="contact_h2">Есть задача? <span class="gradient-text">Давайте обсудим</span></h2>
+        <p class="section-subtitle fade-in" data-lang="contact_p">Я открыт для интересных проектов. Опишите вашу задачу, и я свяжусь с вами, чтобы предложить решение.</p>
+        
+        <form id="contact-form" class="contact-form fade-in" novalidate>
+            <div class="form-group">
+                <input type="text" name="name" data-lang-placeholder="form_name" placeholder="Ваше имя" required class="form-control">
+            </div>
+            
+            <div class="form-group-split">
+                <div class="form-group">
+                    <input type="email" name="email" data-lang-placeholder="form_email" placeholder="Ваш Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" data-lang-placeholder="form_phone" placeholder="Ваш номер телефона" class="form-control">
+                </div>
+            </div>
+            <p class="form-hint" data-lang="form_hint">Укажите Email или телефон для связи</p>
+
+            <div class="form-group">
+                <textarea name="message" data-lang-placeholder="form_message" placeholder="Опишите вашу задачу..." required class="form-control" rows="5"></textarea>
+            </div>
+            
+            <div class="form-submit-container">
+                <button id="submit-button" type="submit" class="cta-button" data-lang="form_button">Отправить</button>
+                <div id="form-spinner" class="spinner"></div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
+        if (!contactForm || contactForm.dataset.initialized) return;
+        contactForm.dataset.initialized = 'true';
+
+        contactForm.addEventListener("submit", async function(e) {
+            e.preventDefault();
+            
+            const form = e.target as HTMLFormElement;
+            const emailInput = form.querySelector<HTMLInputElement>('[name="email"]');
+            const phoneInput = form.querySelector<HTMLInputElement>('[name="phone"]');
+            const submitButton = form.querySelector<HTMLButtonElement>('#submit-button');
+            const spinner = form.querySelector<HTMLElement>('#form-spinner');
+            const formHint = form.querySelector<HTMLElement>('.form-hint');
+
+            if (!emailInput || !phoneInput || !submitButton || !spinner || !formHint) return;
+
+            // Валидация
+            let isValid = true;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            emailInput.classList.remove('error-field');
+            phoneInput.classList.remove('error-field');
+            formHint.classList.remove('error-hint');
+            formHint.setAttribute('data-lang', 'form_hint'); // Сброс текста подсказки
+
+            if (!emailInput.value.trim() && !phoneInput.value.trim()) {
+                emailInput.classList.add('error-field');
+                phoneInput.classList.add('error-field');
+                isValid = false;
+            }
+
+            if (emailInput.value.trim() && !emailRegex.test(emailInput.value.trim())) {
+                emailInput.classList.add('error-field');
+                const currentLang = localStorage.getItem('language') || 'ru';
+                const errorText = window.translations?.[currentLang]?.['form_error_email'] || 'Неверный формат Email';
+                formHint.textContent = errorText;
+                formHint.classList.add('error-hint');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+
+            submitButton.style.display = 'none';
+            spinner.style.display = 'block';
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                // ИСПРАВЛЕНО: Добавлен слеш в конец URL
+                const response = await fetch('/api/sendMessage/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+                if (response.ok) {
+                    document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'success-modal' } }));
+                    form.reset();
+                } else {
+                    throw new Error('Server response was not ok.');
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'error-modal' } }));
+            } finally {
+                submitButton.style.display = 'inline-block';
+                spinner.style.display = 'none';
+            }
+        });
+    });
+</script>
+

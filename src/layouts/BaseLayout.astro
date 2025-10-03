@@ -1,0 +1,120 @@
+---
+// src/layouts/BaseLayout.astro
+
+import { ViewTransitions } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+
+// Импортируем глобальные стили
+import '../styles/style.css';
+import '../styles/case-study.css';
+import '../styles/brief.css';
+import '../styles/blog.css';
+
+// Определяем props для передачи мета-данных на каждую страницу
+export interface Props {
+	title: string; 
+	description: string;
+    ogImage?: string;
+    isTranslationKey?: boolean;
+}
+
+const {
+    title,
+    description,
+    ogImage = '/og-image.webp',
+    isTranslationKey = true, 
+} = Astro.props;
+// Формируем канонический URL
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ ОКРУЖЕНИЯ ДЛЯ GOOGLE ANALYTICS
+const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
+---
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {isTranslationKey ?
+    (
+        <title data-lang={title}></title>
+    ) : (
+        <title>{title}</title>
+    )}
+    
+    {isTranslationKey ?
+    (
+        <meta name="description" content="" data-lang-content={description} />
+    ) : (
+        <meta name="description" content={description} />
+    )}
+
+    <meta name="keywords" content="full-stack разработчик, веб-разработка, создать сайт, заказать сайт, автоматизация, astro, react, typescript, next.js, node.js, docker">
+    <link rel="canonical" href={canonicalURL} />
+
+    {isTranslationKey ?
+    (
+        <meta property="og:title" content="" data-lang-content={title} />
+    ) : (
+        <meta property="og:title" content={title} />
+    )}
+    
+    {isTranslationKey ?
+    (
+        <meta property="og:description" content="" data-lang-content={description} />
+    ) : (
+        <meta property="og:description" content={description} />
+    )}
+
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AVPdev.com" />
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" xintegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ИСПРАВЛЕНО: Google Analytics подключается только если ID задан в .env -->
+    {GTAG_ID && (
+        <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}></script>
+            <script is:inline define:vars={{ GTAG_ID }}>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', GTAG_ID);
+            </script>
+        </>
+    )}
+    
+    <ViewTransitions />
+</head>
+<body class="light-theme">
+
+    <Header />
+
+    <main>
+        <slot />
+    </main>
+
+    <CookieBanner />
+    <Footer />
+    <ScrollToTop />
+
+    <script src="/js/translations.js" is:inline></script>
+    
+    <script src="../scripts/main.ts"></script>
+
+</body>
+</html>

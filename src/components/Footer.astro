@@ -1,0 +1,37 @@
+---
+// src/components/Footer.astro
+---
+<footer class="footer">
+    <div class="container footer-content">
+        <div class="footer-links">
+            <a href="https://github.com/AVP-Dev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+            <a href="https://t.me/avpdevcom" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram-plane" aria-hidden="true"></i></a>
+            <div class="footer-social-group">
+                <a href="https://wa.me/79154065940" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp (Россия)">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> RU
+                </a>
+            </div>
+            <div class="footer-social-group">
+                <a href="https://wa.me/375291217371" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp (Беларусь)">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> BY
+                </a>
+            </div>
+        </div>
+        <p class="footer-copyright" data-lang="footer_copyright">&copy; <span id="current-year"></span> AVPdev.com. Все права защищены.</p>
+        <div class="footer-legal">
+            <a href="/brief/" data-lang="nav_brief">Бриф на разработку</a>
+            <span class="legal-separator">|</span>
+            <a href="/privacy-policy/" data-lang="footer_privacy">Политика конфиденциальности</a>
+            <span class="legal-separator">|</span>
+            <a href="/terms-of-service/" data-lang="footer_terms">Условия использования</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+  // Скрипт для установки текущего года
+  const yearSpan = document.getElementById('current-year');
+  if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear().toString();
+  }
+</script>
