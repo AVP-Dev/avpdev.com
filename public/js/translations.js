@@ -133,8 +133,8 @@ window.translations = {
         case_cars_services_portfolio: 'Веб-разработка, Frontend, Backend',
         case_cars_task_p_portfolio: 'Компания "АвтоМир Импорт" сталкивалась с недоверием клиентов из-за непрозрачного ценообразования. Потенциальные покупатели не понимали, как формируется финальная стоимость автомобиля с учетом таможенных платежей, что создавало барьер для заказа и требовало долгих консультаций от менеджеров.',
         case_cars_solution_title: 'Решение, которое строит доверие',
-        case_cars_solution_p: 'Я разработал сайт, ключевым элементом которого стал многошаговый интерактивный калькулятор. Он позволяет пользователям в реальном времени самостоятельно рассчитать финальную стоимость автомобиля, включая все сборы и пошлины, делая процесс полностью прозрачным. Это не только повысило конверсию, но и значительно сократило время на консультации для менеджеров.',
-        case_cars_deployment_text: 'Сайт размещен на надежном виртуальном хостинге (shared hosting) с поддержкой Python. Фронтенд-часть и статические файлы отдаются веб-сервером Nginx для максимальной скорости, а бэкенд калькулятора работает как отдельный WSGI-сервис. Такое решение обеспечивает стабильную работу, простоту поддержки и оптимальное соотношение цены и производительности для проекта данного масштаба.',
+        case_cars_solution_p: 'Я разработал сайт, ключевым элементом которого стал многошаговый интерактивный калькулятор. Калькулятор реализован на чистом JavaScript для обеспечения мгновенной обратной связи без задержек, что позволяет пользователям в реальном времени самостоятельно рассчитать финальную стоимость автомобиля, включая все сборы и пошлины, делая процесс полностью прозрачным. Это не только повысило конверсию, но и значительно сократило время на консультации для менеджеров.',
+        case_cars_deployment_text: 'Сайт является полностью статическим (HTML, CSS, JavaScript), что обеспечивает максимальную скорость загрузки и надежность. Для развертывания используется платформа Netlify, которая автоматически собирает проект из Git-репозитория и распространяет его через глобальную сеть CDN. Такой подход гарантирует мгновенный доступ для пользователей по всему миру и не требует сложной серверной поддержки.',
         case_cars_features_p_portfolio: 'В рамках проекта были реализованы следующие ключевые возможности:',
         case_cars_solution_li1_portfolio: '<strong>Интерактивный калькулятор растаможки:</strong> Разработан многошаговый калькулятор, позволяющий пользователям в реальном времени рассчитать полную стоимость автомобиля с учетом всех сборов и пошлин.',
         case_cars_solution_li2_portfolio: '<strong>Подробное описание услуг:</strong> Созданы секции с детальным описанием комплексных услуг по подбору, доставке, таможенному оформлению и регистрации автомобилей.',
@@ -149,7 +149,7 @@ window.translations = {
         gallery_caption_cars_calculator: 'Калькулятор: Ключевой инструмент для снятия возражений по цене',
         gallery_caption_cars_testimonials: 'Отзывы: Подтверждение надежности от реальных клиентов',
         gallery_caption_cars_contact: 'Форма заявки: Простой способ начать сотрудничество',
-
+        
         // Кейс: Эвакуатор
         case_tow_title: 'Кейс: Лендинг для службы эвакуации',
         case_tow_h1: 'Сайт-визитка для службы эвакуации',
@@ -459,8 +459,8 @@ window.translations = {
         case_cars_services_portfolio: 'Web Development, Frontend, Backend',
         case_cars_task_p_portfolio: 'AutoMir Import faced client mistrust due to non-transparent pricing. Potential buyers did not understand how the final car price was formed, including customs duties, which created a barrier to ordering and required lengthy consultations from managers.',
         case_cars_solution_title: 'A Solution That Builds Trust',
-        case_cars_solution_p: 'I developed a website where the key element is a multi-step interactive calculator. It allows users to independently calculate the final cost of a car in real time, including all fees and duties, making the process completely transparent. This not only increased conversion but also significantly reduced consultation time for managers.',
-        case_cars_deployment_text: 'The website is hosted on a reliable shared hosting with Python support. The frontend and static files are served by an Nginx web server for maximum speed, while the calculator backend runs as a separate WSGI service. This solution ensures stable operation, ease of maintenance, and an optimal price-performance ratio for a project of this scale.',
+        case_cars_solution_p: 'I developed a website where the key element is a multi-step interactive calculator. The calculator is implemented in pure JavaScript to provide instant feedback without delays, allowing users to independently calculate the final cost of a car in real time, including all fees and duties, making the process completely transparent. This not only increased conversion but also significantly reduced consultation time for managers.',
+        case_cars_deployment_text: 'The site is completely static (HTML, CSS, JavaScript), which ensures maximum loading speed and reliability. The Netlify platform is used for deployment, which automatically builds the project from the Git repository and distributes it through a global CDN. This approach guarantees instant access for users worldwide and does not require complex server support.',
         case_cars_features_p_portfolio: 'The following key features were implemented as part of the project:',
         case_cars_solution_li1_portfolio: '<strong>Interactive Customs Calculator:</strong> Developed a multi-step calculator allowing users to instantly calculate the full cost of a car including all fees and duties.',
         case_cars_solution_li2_portfolio: '<strong>Detailed Service Descriptions:</strong> Created sections with detailed descriptions of comprehensive services for car selection, delivery, customs clearance, and registration.',

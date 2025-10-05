@@ -193,7 +193,6 @@ export const caseStudies: CaseStudy[] = [
 				{ icon: 'fab fa-html5', title: 'HTML5' },
 				{ icon: 'fab fa-css3-alt', title: 'CSS3' },
 				{ icon: 'fab fa-js-square', title: 'JavaScript' },
-				{ icon: 'fab fa-python', title: 'Python' },
 			],
 			deployment: {
 				titleKey: 'case_deployment_title',
