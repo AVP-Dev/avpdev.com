@@ -1,10 +1,12 @@
 ---
 // src/pages/blog/[slug].astro
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Cta from '../../components/Cta.astro';
 import type { CollectionEntry } from 'astro:content';
+
+// ИСПРАВЛЕНИЕ: Явно указываем Astro, что эти страницы нужно сгенерировать во время сборки.
+export const prerender = true;
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog', ({data}) => data.draft !== true);
@@ -36,14 +38,14 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('ru-RU', {
     <header class="blog-post-hero">
         {post.data.heroImage && (
             <div class="hero-image-container">
-                <Image 
-                    src={post.data.heroImage} 
+                <img 
+                    src={post.data.heroImage.src}
                     alt={`Обложка статьи: ${post.data.title}`} 
-                    width={1200} 
-                    height={600}
-                    format="webp"
-                    quality={85}
-                    transition:name={`blog-hero-${post.slug}`}
+                    width="1200"
+                    height="600"
+                    loading="eager"
+                    decoding="auto"
+                    style="object-fit: cover; width: 100%; height: 100%;"
                 />
             </div>
         )}
@@ -65,13 +67,11 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('ru-RU', {
             <Content />
         </div>
         
-        <!-- Добавляем CTA компонент после контента статьи -->
         <Cta />
     </div>
 
     <div class="blog-post-container">
         <div class="back-link-wrapper">
-            {/* ИСПРАВЛЕНО: Добавлен слеш в конец ссылки для соответствия настройке trailingSlash */}
             <a href="/blog/" class="back-to-main" data-lang="blog_back_to_all"></a>
         </div>
     </div>

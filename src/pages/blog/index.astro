@@ -1,4 +1,7 @@
 ---
+// ИСПРАВЛЕНИЕ: Явно указываем, что эта страница должна быть сгенерирована статически.
+export const prerender = true;
+
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogCard from '../../components/BlogCard.astro';

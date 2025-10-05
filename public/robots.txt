@@ -1,0 +1,6 @@
+# Разрешаем всем поисковым роботам индексировать весь сайт
+User-agent: *
+Allow: /
+
+# Указываем прямой путь к карте сайта
+Sitemap: https://avpdev.com/sitemap-index.xml

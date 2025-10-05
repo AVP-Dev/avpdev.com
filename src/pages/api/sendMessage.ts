@@ -1,7 +1,7 @@
 // src/pages/api/sendMessage.ts
 import type { APIRoute } from 'astro';
+import { z } from 'zod';
 
-// Простая функция для экранирования HTML-тегов
 function sanitizeHTML(str: string | undefined | null): string {
     if (!str) return '';
     return String(str)
@@ -12,58 +12,56 @@ function sanitizeHTML(str: string | undefined | null): string {
         .replace(/'/g, '&#39;');
 }
 
-export const POST: APIRoute = async ({ request }) => {
-    if (request.headers.get("Content-Type") !== "application/json") {
-        return new Response(JSON.stringify({ message: "Unsupported media type" }), { status: 415 });
-    }
+const contactSchema = z.object({
+    name: z.string().min(1),
+    email: z.string().email().optional().or(z.literal('')),
+    phone: z.string().optional(),
+    message: z.string().min(1),
+}).refine(data => data.email || data.phone, {
+    message: "Email or phone is required",
+});
 
+export const POST: APIRoute = async ({ request, redirect }) => {
     try {
         const data = await request.json();
+        const result = contactSchema.safeParse(data);
 
-        // Валидация на сервере
-        if (!data.name || (!data.email && !data.phone) || !data.message) {
-            return new Response(JSON.stringify({ message: 'Missing required fields' }), { status: 400 });
+        if (!result.success) {
+            // Возвращаем ошибку валидации
+            return new Response(JSON.stringify({ message: "Invalid input" }), { status: 400 });
         }
 
-        const name = sanitizeHTML(data.name);
-        const email = sanitizeHTML(data.email);
-        const phone = sanitizeHTML(data.phone);
-        const message = sanitizeHTML(data.message);
+        const { name, email, phone, message } = result.data;
 
-        let tgMessage = `<b>🔥 Новая заявка с сайта!</b>\n\n`;
-        tgMessage += `<b>Имя:</b> ${name}\n`;
-        if (email) tgMessage += `<b>Email:</b> ${email}\n`;
-        if (phone) tgMessage += `<b>Телефон:</b> ${phone}\n`;
-        tgMessage += `\n<b>Сообщение:</b>\n${message}`;
-
+        const tgMessage = `<b>🔥 Новая заявка с сайта!</b>\n\n<b>Имя:</b> ${sanitizeHTML(name)}\n<b>Email:</b> ${sanitizeHTML(email)}\n<b>Телефон:</b> ${sanitizeHTML(phone)}\n\n<b>Сообщение:</b>\n${sanitizeHTML(message)}`;
         const { BOT_TOKEN, CHAT_ID, TOPIC_ID } = import.meta.env;
 
         if (!BOT_TOKEN || !CHAT_ID) {
-            throw new Error("Telegram environment variables are not set.");
+            throw new Error("Переменные окружения Telegram не установлены.");
         }
-
-        const tgPayload = {
-            chat_id: CHAT_ID,
-            text: tgMessage,
-            parse_mode: 'HTML',
-            ...(TOPIC_ID && { message_thread_id: TOPIC_ID })
-        };
 
         const tgResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(tgPayload),
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: tgMessage,
+                parse_mode: 'HTML',
+                ...(TOPIC_ID && { message_thread_id: TOPIC_ID })
+            }),
         });
 
         if (!tgResponse.ok) {
-            console.error("Telegram API response error:", await tgResponse.text());
-            throw new Error('Failed to send message to Telegram.');
+            const errorBody = await tgResponse.json();
+            console.error("Ошибка API Telegram:", JSON.stringify(errorBody, null, 2));
+            throw new Error('Не удалось отправить сообщение в Telegram.');
         }
 
-        return new Response(JSON.stringify({ message: 'Message sent successfully!' }), { status: 200 });
+        return new Response(JSON.stringify({ message: "Success" }), { status: 200 });
 
     } catch (error) {
-        console.error('Error processing /api/sendMessage:', error);
-        return new Response(JSON.stringify({ message: 'Internal Server Error' }), { status: 500 });
+        console.error("Критическая ошибка в /api/sendMessage:", error);
+        return new Response(JSON.stringify({ message: "Server error" }), { status: 500 });
     }
 };
+

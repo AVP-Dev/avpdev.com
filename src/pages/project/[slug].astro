@@ -4,8 +4,10 @@ import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 import { caseStudies } from '../../data/caseStudies';
 import type { CaseStudy } from '../../data/caseStudies';
 
-// Эта функция ОБЯЗАТЕЛЬНА для генерации страниц проектов.
-// Она читает все кейсы и говорит Astro, какие HTML-страницы нужно создать.
+// ИСПРАВЛЕНИЕ: Явно указываем Astro, что эти страницы нужно сгенерировать во время сборки.
+// Это убирает предупреждения и гарантирует их работу в 'hybrid' режиме.
+export const prerender = true;
+
 export function getStaticPaths() {
   return caseStudies.map((study) => {
     return {
@@ -15,11 +17,8 @@ export function getStaticPaths() {
   });
 }
 
-// Теперь мы получаем study из props, а не ищем его заново.
 const { study } = Astro.props;
 
-// ИЗМЕНЕНО: Если кейс не найден, перенаправляем на кастомную страницу 404.
-// Это более современный и надежный способ обработки.
 if (!study) {
     return Astro.redirect('/404');
 }
@@ -48,7 +47,6 @@ const {
         <h2 data-lang={content.task.titleKey}></h2>
         <p data-lang={content.task.pKey}></p>
 
-        {/* Отображаем блок "Решение", если он есть */}
         {content.solution && (
             <>
                 <h2 data-lang={content.solution.titleKey}></h2>
@@ -56,9 +54,7 @@ const {
             </>
         )}
 
-        {/* Отображаем блок "Ключевые особенности" */}
         <h2 data-lang={content.keyFeatures.titleKey}></h2>
-        {/* Добавляем абзац-описание, если он есть */}
         {content.keyFeatures.pKey && <p data-lang={content.keyFeatures.pKey}></p>}
         <ul>
             {content.keyFeatures.listKeys.map(key => <li data-lang={key}></li>)}

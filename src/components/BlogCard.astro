@@ -1,6 +1,5 @@
 ---
 // src/components/BlogCard.astro
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -25,14 +24,14 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString('ru-RU', {
     {post.data.heroImage ?
 (
         <div class="portfolio-image blog-card-image">
-             <Image 
-                src={post.data.heroImage} 
+             <img 
+                src={post.data.heroImage.src}
                 alt={`Обложка статьи: ${post.data.title}`}
-                width={400} 
-                height={250} 
-                format="webp"
-                quality={80}
-                transition:name={`blog-hero-${post.slug}`}
+                width="400"
+                height="250"
+                loading="lazy"
+                decoding="async"
+                style="object-fit: cover; width: 100%; height: 100%;"
             />
         </div>
     ) : <div class="portfolio-image blog-card-image-placeholder"></div>}

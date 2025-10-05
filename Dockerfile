@@ -1,43 +1,51 @@
-# Этап 1: Установка зависимостей и сборка проекта
-# Используем образ Node.js, так как Astro - это JS-фреймворк
-FROM node:20-alpine AS builder
+# Dockerfile
 
-# Устанавливаем рабочую директорию внутри контейнера
+# --- Этап 1: Сборщик (Builder) ---
+# Используем последнюю стабильную LTS-версию Node.js на базе Alpine для минимального размера
+FROM node:22-alpine AS builder
+
+# Устанавливаем dumb-init для корректной обработки сигналов в контейнере
+RUN apk add --no-cache dumb-init
+
 WORKDIR /app
 
-# Копируем package.json и lock-файл для установки зависимостей
+# Копируем только package.json и package-lock.json для кэширования зависимостей
 COPY package*.json ./
 
-# Устанавливаем зависимости проекта
+# Устанавливаем зависимости
 RUN npm install
 
-# Копируем все остальные файлы проекта в рабочую директорию
+# Копируем все остальные файлы проекта
 COPY . .
 
-# Собираем проект. Astro с Node.js адаптером создаст папку /dist с сервером
+# ИСПРАВЛЕНИЕ: Принудительно генерируем все типы Astro перед сборкой.
+# Это решает проблему с ненайденными виртуальными модулями, такими как 'astro:actions'.
+RUN npx astro sync
+
+# Собираем производственную версию приложения
 RUN npm run build
 
-# ---
 
-# Этап 2: Финальный образ для запуска приложения
-# Используем тот же базовый образ для консистентности
-FROM node:20-alpine
+# --- Этап 2: Продакшн (Production) ---
+FROM node:22-alpine
+
+# Устанавливаем dumb-init
+RUN apk add --no-cache dumb-init
 
 WORKDIR /app
 
-# ДОБАВЛЕНО: Устанавливаем curl для healthcheck
-RUN apk add --no-cache curl
+# Создаем пользователя с ограниченными правами для безопасности
+RUN addgroup -S astro_group && adduser -S astro_user -G astro_group
+USER astro_user
 
-# Копируем только необходимые для запуска файлы из этапа сборки
+# Копируем только необходимые для запуска артефакты из сборщика
 COPY --from=builder /app/dist ./
-# ДОБАВЛЕНО: Копируем установленные зависимости, необходимые для запуска сервера
 COPY --from=builder /app/node_modules ./node_modules
 
-# Переменные окружения для сервера
-ENV PORT=3000
+# Устанавливаем переменные окружения для Node.js сервера
+# PORT будет взят из docker-compose.yml
 ENV HOST=0.0.0.0
 
-EXPOSE 3000
+# Запускаем приложение через dumb-init
+CMD ["dumb-init", "node", "./server/entry.mjs"]
 
-# Запускаем сервер с помощью команды, которая находится внутри `dist/server/entry.mjs`
-CMD ["node", "server/entry.mjs"]

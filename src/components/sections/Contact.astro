@@ -27,7 +27,7 @@
             
             <div class="form-submit-container">
                 <button id="submit-button" type="submit" class="cta-button" data-lang="form_button">Отправить</button>
-                <div id="form-spinner" class="spinner"></div>
+                <div id="form-spinner" class="spinner" style="display: none;"></div>
             </div>
         </form>
     </div>
@@ -35,7 +35,7 @@
 
 <script>
     document.addEventListener('astro:page-load', () => {
-        const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
+        const contactForm = document.getElementById('contact-form') as HTMLFormElement;
         if (!contactForm || contactForm.dataset.initialized) return;
         contactForm.dataset.initialized = 'true';
 
@@ -43,38 +43,19 @@
             e.preventDefault();
             
             const form = e.target as HTMLFormElement;
-            const emailInput = form.querySelector<HTMLInputElement>('[name="email"]');
-            const phoneInput = form.querySelector<HTMLInputElement>('[name="phone"]');
-            const submitButton = form.querySelector<HTMLButtonElement>('#submit-button');
-            const spinner = form.querySelector<HTMLElement>('#form-spinner');
-            const formHint = form.querySelector<HTMLElement>('.form-hint');
-
-            if (!emailInput || !phoneInput || !submitButton || !spinner || !formHint) return;
-
-            // Валидация
+            const submitButton = form.querySelector('#submit-button') as HTMLButtonElement;
+            const spinner = form.querySelector('#form-spinner') as HTMLElement;
+            
+            // Простая валидация на клиенте
             let isValid = true;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
-            emailInput.classList.remove('error-field');
-            phoneInput.classList.remove('error-field');
-            formHint.classList.remove('error-hint');
-            formHint.setAttribute('data-lang', 'form_hint'); // Сброс текста подсказки
-
-            if (!emailInput.value.trim() && !phoneInput.value.trim()) {
-                emailInput.classList.add('error-field');
-                phoneInput.classList.add('error-field');
-                isValid = false;
-            }
-
-            if (emailInput.value.trim() && !emailRegex.test(emailInput.value.trim())) {
-                emailInput.classList.add('error-field');
-                const currentLang = localStorage.getItem('language') || 'ru';
-                const errorText = window.translations?.[currentLang]?.['form_error_email'] || 'Неверный формат Email';
-                formHint.textContent = errorText;
-                formHint.classList.add('error-hint');
-                isValid = false;
-            }
-            
+            form.querySelectorAll('[required]').forEach(el => {
+                const input = el as HTMLInputElement | HTMLTextAreaElement;
+                input.classList.remove('error-field');
+                if (!input.value.trim()) {
+                    input.classList.add('error-field');
+                    isValid = false;
+                }
+            });
             if (!isValid) return;
 
             submitButton.style.display = 'none';
@@ -84,12 +65,12 @@
             const data = Object.fromEntries(formData.entries());
 
             try {
-                // ИСПРАВЛЕНО: Добавлен слеш в конец URL
                 const response = await fetch('/api/sendMessage/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
                 });
+
                 if (response.ok) {
                     document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'success-modal' } }));
                     form.reset();
@@ -100,7 +81,7 @@
                 console.error('Fetch error:', error);
                 document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'error-modal' } }));
             } finally {
-                submitButton.style.display = 'inline-block';
+                submitButton.style.display = 'block';
                 spinner.style.display = 'none';
             }
         });

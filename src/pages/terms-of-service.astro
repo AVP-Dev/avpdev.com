@@ -1,5 +1,9 @@
 ---
 // src/pages/terms-of-service.astro
+
+// ИСПРАВЛЕНИЕ: Явно указываем, что эта страница должна быть сгенерирована статически.
+export const prerender = true;
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout

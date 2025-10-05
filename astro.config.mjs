@@ -1,30 +1,20 @@
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import node from '@astrojs/node';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://avpdev.com',
-
-  // Эта настройка остается для `astro dev`
-  server: {
-    host: true,
-  },
-
-  // ИЗМЕНЕНО: Возвращаемся к 'hybrid' для оптимальной производительности.
-  // 'static' для большинства страниц и 'server' для API.
-  output: 'hybrid',
-  
-  // Адаптер все еще нужен для обработки API-эндпоинтов в режиме hybrid
+  // ИСПРАВЛЕНИЕ: Устанавливаем 'server', чтобы 'astro sync' прошел успешно.
+  // Статические страницы будут сгенерированы с помощью 'prerender = true'.
+  output: 'server',
   adapter: node({
     mode: 'standalone'
   }),
-  
-  // ИЗМЕНЕНО: Эта опция необходима для корректной маршрутизации при build.format: 'directory'
-  // Она гарантирует, что все URL будут иметь слеш в конце (например, /about/)
+  integrations: [sitemap()],
   trailingSlash: 'always',
-
   build: {
     format: 'directory'
   }
 });
+

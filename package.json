@@ -3,21 +3,23 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro preview",
+    "dev": "astro dev --host",
+    "start": "astro start",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "astro preview --host",
+    "astro": "astro",
+    "check": "astro check --watch"
   },
   "dependencies": {
-    "@astrojs/node": "^8.3.2",
-    "astro": "^4.12.2",
-    "google-auth-library": "^9.11.0",
-    "google-spreadsheet": "^4.1.2",
-    "nodemailer": "^6.9.14",
-    "sharp": "^0.33.4"
+    "@astrojs/check": "^0.9.1",
+    "@astrojs/node": "^9.4.4",
+    "@astrojs/sitemap": "^3.2.0",
+    "astro": "^5.14.1",
+    "sharp": "^0.33.4",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/nodemailer": "^6.4.15"
+    "typescript": "^5.5.3"
   }
 }
+

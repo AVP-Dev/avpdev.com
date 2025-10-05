@@ -178,7 +178,6 @@ nav { display: flex; justify-content: space-between; align-items: center; }
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
   transition: transform 0.3s ease;
-  background-image: url('../images/about-photo.webp');
   background-size: cover;
   background-position: center 60%;
   background-repeat: no-repeat;
@@ -610,3 +609,4 @@ textarea.form-control { min-height: 150px; resize: vertical; }
     margin-left: auto;
     margin-right: auto;
 }
+
