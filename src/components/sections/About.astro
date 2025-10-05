@@ -7,7 +7,6 @@ import aboutPhoto from '../../assets/images/about-photo.webp';
     <div class="container">
         <div class="about-content">
             <div class="about-image-wrapper fade-in">
-                <!-- ИСПОЛЬЗУЕМ ASTRO IMAGE ДЛЯ ОПТИМИЗАЦИИ -->
                 <Image 
                     src={aboutPhoto} 
                     alt="Фотография Алексея Пацкевича, full-stack разработчика" 
@@ -21,25 +20,57 @@ import aboutPhoto from '../../assets/images/about-photo.webp';
             </div>
             <div class="about-text fade-in" style="transition-delay: 200ms;">
                 <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;" data-lang="about_h2">Обо мне</h2>
-                <h3 data-lang="about_h3">Full-Stack разработчик, превращаю идеи в бизнес-результат.</h3>
-                <p data-lang="about_p">Моя специализация — создание веб-решений, которые работают. От быстрых сайтов до сложных систем автоматизации, я фокусируюсь на чистом коде, производительности и реальной пользе для вашего бизнеса. Убежден, что технологии должны не просто существовать, а решать конкретные задачи и помогать росту.</p>
-                <div class="tech-stack">
-                    <h3 data-lang="about_tech">Ключевые технологии:</h3>
-                    <div class="icons">
-                        <i class="fab fa-js-square" title="JavaScript (ES6+)" aria-hidden="true"></i>
-                        <span class="tech-text" title="TypeScript">TS</span>
-                        <i class="fab fa-react" title="React / Next.js" aria-hidden="true"></i>
-                        <i class="fab fa-node-js" title="Node.js" aria-hidden="true"></i>
-                        <i class="fas fa-database" title="PostgreSQL" aria-hidden="true"></i>
-                        <i class="fab fa-docker" title="Docker" aria-hidden="true"></i>
-                    </div>
+                <h3 data-lang="about_h3">Строю надежные решения, которые служат людям.</h3>
+                <p data-lang="about_p">Моя философия проста: технологии должны расширять возможности человечества. Каждый проект для меня — не просто задача, а реальный инструмент, который даёт силу и поддержку пользователям...</p>
+                
+                <div class="about-cta-container">
+                    <a href="#portfolio" class="cta-button secondary" data-lang="about_cta_portfolio">Мои проекты</a>
+                    <a href="#contact" class="cta-button" data-lang="about_cta_contact">Связаться со мной</a>
                 </div>
             </div>
+        </div>
+        
+        <div class="tech-stack-detailed fade-in" style="transition-delay: 400ms;">
+             <h3 class="tech-stack-title" data-lang="about_tech">Мой стек технологий</h3>
+             <div class="tech-categories">
+                 <div class="tech-category">
+                     <h4>🧠 Backend</h4>
+                     <div class="tech-items">
+                         <span><i class="fab fa-python" aria-hidden="true"></i> Python (Flask, Django)</span>
+                         <span><i class="fab fa-node-js" aria-hidden="true"></i> Node.js (Express, NestJS)</span>
+                         <span><i class="fab fa-php" aria-hidden="true"></i> PHP</span>
+                     </div>
+                 </div>
+                 <div class="tech-category">
+                     <h4>🎨 Frontend</h4>
+                     <div class="tech-items">
+                         <span><i class="fab fa-react" aria-hidden="true"></i> React (Next.js, Redux)</span>
+                         <span><i class="fas fa-rocket" aria-hidden="true"></i> Astro</span>
+                         <span><i class="fab fa-js-square" aria-hidden="true"></i> TypeScript</span>
+                         <span><i class="fab fa-html5" aria-hidden="true"></i> HTML5 / CSS3 (SASS)</span>
+                     </div>
+                 </div>
+                 <div class="tech-category">
+                     <h4>🗄️ Базы данных</h4>
+                     <div class="tech-items">
+                         <span><i class="fas fa-database" aria-hidden="true"></i> PostgreSQL / MySQL</span>
+                         <span><i class="fas fa-database" aria-hidden="true"></i> MongoDB</span>
+                         <span><i class="fas fa-database" aria-hidden="true"></i> Redis</span>
+                     </div>
+                 </div>
+                 <div class="tech-category">
+                     <h4>☁️ DevOps & Cloud</h4>
+                     <div class="tech-items">
+                         <span><i class="fab fa-docker" aria-hidden="true"></i> Docker / Kubernetes</span>
+                         <span><i class="fas fa-cogs" aria-hidden="true"></i> CI/CD (GitLab, Jenkins)</span>
+                         <span><i class="fab fa-aws" aria-hidden="true"></i> AWS</span>
+                     </div>
+                 </div>
+             </div>
         </div>
     </div>
 </section>
 
-<!-- ДОБАВЛЕНЫ СТИЛИ ДЛЯ ОПТИМИЗИРОВАННОГО ИЗОБРАЖЕНИЯ -->
 <style>
 .about-image-wrapper {
     position: relative; 
@@ -62,4 +93,3 @@ import aboutPhoto from '../../assets/images/about-photo.webp';
     object-position: center 60%; 
 }
 </style>
-

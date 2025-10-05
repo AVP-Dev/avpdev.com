@@ -20,9 +20,11 @@ window.translations = {
         services_card3_h3: 'Техническая поддержка и развитие проектов',
         services_card3_p: 'Обеспечиваю стабильную работу ваших веб-проектов, добавляю новый функционал и помогаю им расти вместе с вашим бизнесом.',
         about_h2: 'Обо мне',
-        about_h3: 'Full-Stack разработчик, превращаю идеи в бизнес-результат.',
-        about_p: 'Моя специализация — создание веб-решений, которые работают. От быстрых сайтов до сложных систем автоматизации, я фокусируюсь на чистом коде, производительности и реальной пользе для вашего бизнеса. Убежден, что технологии должны не просто существовать, а решать конкретные задачи и помогать росту.',
-        about_tech: 'Ключевые технологии:',
+        about_h3: 'Строю надежные решения, которые служат людям',
+        about_p: 'Моя философия проста: технологии должны расширять возможности человечества. Каждый проект для меня — не просто задача, а реальный инструмент, который даёт силу и поддержку пользователям. Я строю лучшее завтра не громкими рывками, а строка за строкой кода. Для меня важны детали — качество, устойчивость архитектуры и внимательность к мелочам. Именно так создаются надёжные продукты, которые приносят ценность каждый день.',
+        about_tech: 'Мой стек технологий',
+        about_cta_portfolio: 'Мои проекты',
+        about_cta_contact: 'Связаться со мной',
         portfolio_h2: 'Избранные <span class="gradient-text">Проекты</span>',
         portfolio_card_link: 'Изучить проект <i class="fas fa-arrow-right" aria-hidden="true"></i>',
         contact_h2: 'Есть задача? <span class="gradient-text">Давайте обсудим</span>',
@@ -113,7 +115,6 @@ window.translations = {
         case_travel_services: 'Full-Stack разработка, UI/UX, Интеграции, Деплой',
         case_travel_task_p: 'Турагентство Happy Tour обрабатывало заявки вручную через мессенджеры и телефон, что приводило к потере клиентов и ошибкам в учете. Отсутствие единой системы для управления турами и клиентской базой мешало масштабированию бизнеса и снижало эффективность менеджеров.',
         case_travel_solution_title: 'Комплексная платформа для роста',
-        // ИЗМЕНЕНО: Заменены кавычки-«елочки» на стандартные "
         case_travel_solution_p: 'Было решено создать единую веб-платформу на Next.js, объединяющую публичный сайт и внутреннюю систему управления. Для клиентов разработан интуитивный каталог с онлайн-подбором туров. Для менеджеров — защищенная админ-панель для управления всем контентом и заказами. Ключевым шагом стала интеграция с CRM Битрикс24 и API "Турвизор", что полностью автоматизировало поток заявок и данных.',
         case_travel_solution_li1: '<strong>Клиентская часть:</strong> Удобный каталог туров с фильтрацией, детальные страницы предложений с фотогалереями, система отзывов и рейтинга.',
         case_travel_solution_li2: '<strong>Административная панель:</strong> Безопасный вход с разделением ролей, полное управление (CRUD) турами и отзывами, дашборд со статистикой.',
@@ -133,8 +134,8 @@ window.translations = {
         case_cars_services_portfolio: 'Веб-разработка, Frontend, Backend',
         case_cars_task_p_portfolio: 'Компания "АвтоМир Импорт" сталкивалась с недоверием клиентов из-за непрозрачного ценообразования. Потенциальные покупатели не понимали, как формируется финальная стоимость автомобиля с учетом таможенных платежей, что создавало барьер для заказа и требовало долгих консультаций от менеджеров.',
         case_cars_solution_title: 'Решение, которое строит доверие',
-        case_cars_solution_p: 'Я разработал сайт, ключевым элементом которого стал многошаговый интерактивный калькулятор. Калькулятор реализован на чистом JavaScript для обеспечения мгновенной обратной связи без задержек, что позволяет пользователям в реальном времени самостоятельно рассчитать финальную стоимость автомобиля, включая все сборы и пошлины, делая процесс полностью прозрачным. Это не только повысило конверсию, но и значительно сократило время на консультации для менеджеров.',
-        case_cars_deployment_text: 'Сайт является полностью статическим (HTML, CSS, JavaScript), что обеспечивает максимальную скорость загрузки и надежность. Для развертывания используется платформа Netlify, которая автоматически собирает проект из Git-репозитория и распространяет его через глобальную сеть CDN. Такой подход гарантирует мгновенный доступ для пользователей по всему миру и не требует сложной серверной поддержки.',
+        case_cars_solution_p: 'Я разработал сайт, ключевым элементом которого стал многошаговый интерактивный калькулятор. Калькулятор реализован на чистом JavaScript для мгновенного отклика без задержек и позволяет пользователям в реальном времени самостоятельно рассчитать финальную стоимость автомобиля, включая все сборы и пошлины, делая процесс полностью прозрачным. Это не только повысило конверсию, но и значительно сократило время на консультации для менеджеров.',
+        case_cars_deployment_text: 'Сайт является полностью статическим (HTML, CSS, JavaScript), что обеспечивает максимальную скорость загрузки и надежность. Для развертывания используется платформа Netlify, которая автоматически собирает проект из Git-репозитория и распространяет его через глобальную CDN. Такой подход гарантирует мгновенный доступ для пользователей по всему миру и не требует сложной серверной поддержки.',
         case_cars_features_p_portfolio: 'В рамках проекта были реализованы следующие ключевые возможности:',
         case_cars_solution_li1_portfolio: '<strong>Интерактивный калькулятор растаможки:</strong> Разработан многошаговый калькулятор, позволяющий пользователям в реальном времени рассчитать полную стоимость автомобиля с учетом всех сборов и пошлин.',
         case_cars_solution_li2_portfolio: '<strong>Подробное описание услуг:</strong> Созданы секции с детальным описанием комплексных услуг по подбору, доставке, таможенному оформлению и регистрации автомобилей.',
@@ -149,7 +150,7 @@ window.translations = {
         gallery_caption_cars_calculator: 'Калькулятор: Ключевой инструмент для снятия возражений по цене',
         gallery_caption_cars_testimonials: 'Отзывы: Подтверждение надежности от реальных клиентов',
         gallery_caption_cars_contact: 'Форма заявки: Простой способ начать сотрудничество',
-        
+
         // Кейс: Эвакуатор
         case_tow_title: 'Кейс: Лендинг для службы эвакуации',
         case_tow_h1: 'Сайт-визитка для службы эвакуации',
@@ -347,9 +348,11 @@ window.translations = {
         services_card3_h3: 'Technical Support & Project Growth',
         services_card3_p: 'I ensure the stable operation of your web projects, add new functionality, and help them grow with your business.',
         about_h2: 'About Me',
-        about_h3: 'Full-Stack developer, turning ideas into business results.',
-        about_p: 'My specialization is creating web solutions that work. From fast websites to complex automation systems, I focus on clean code, performance, and real value for your business. I believe that technology should not just exist, but solve specific problems and drive growth.',
-        about_tech: 'Key Technologies:',
+        about_h3: 'Building reliable solutions that serve people',
+        about_p: 'My philosophy is simple: technology must empower humanity. For me, every project is not just a task, but a real tool that gives strength and support to its users. I build a better tomorrow not in great leaps, but line by line of code. Details matter to me—quality, architectural stability, and attention to the small things. This is how reliable products that deliver value every day are created.',
+        about_tech: 'My Tech Stack',
+        about_cta_portfolio: 'My Projects',
+        about_cta_contact: 'Contact Me',
         portfolio_h2: 'Featured <span class="gradient-text">Projects</span>',
         portfolio_card_link: 'Explore Project <i class="fas fa-arrow-right" aria-hidden="true"></i>',
         contact_h2: 'Have a task? <span class="gradient-text">Let\'s discuss</span>',
@@ -654,3 +657,4 @@ window.translations = {
         blog_cta_button: "Fill out the brief",
     }
 };
+
