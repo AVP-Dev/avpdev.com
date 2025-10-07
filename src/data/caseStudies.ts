@@ -31,6 +31,7 @@ export interface CaseStudy {
 		techStack: {
 			icon: string;
 			title: string;
+			color?: string; // Добавляем опциональное свойство цвета
 		}[];
 		deployment: {
 			titleKey: string;
@@ -80,11 +81,11 @@ export const caseStudies: CaseStudy[] = [
 				],
 			},
 			techStack: [
-				{ icon: 'fab fa-react', title: 'Next.js - React' },
-				{ icon: 'fab fa-node-js', title: 'Node.js' },
-				{ icon: 'fas fa-database', title: 'PostgreSQL' },
-				{ icon: 'fab fa-docker', title: 'Docker' },
-				{ icon: 'fas fa-bolt', title: 'Chakra UI' },
+				{ icon: 'fab fa-react', title: 'Next.js - React', color: '#61DAFB' },
+				{ icon: 'fab fa-node-js', title: 'Node.js', color: '#339933' },
+				{ icon: 'fas fa-database', title: 'PostgreSQL', color: '#336791' },
+				{ icon: 'fab fa-docker', title: 'Docker', color: '#2496ED' },
+				{ icon: 'fas fa-bolt', title: 'Chakra UI', color: '#319795' },
 			],
 			deployment: {
 				titleKey: 'case_deployment_title',
@@ -131,14 +132,14 @@ export const caseStudies: CaseStudy[] = [
 				],
 			},
 			techStack: [
-				{ icon: 'fab fa-react', title: 'Next.js - React' },
-				{ icon: 'fas fa-bolt', title: 'Chakra UI' },
-				{ icon: 'fas fa-database', title: 'Prisma ORM' },
-				{ icon: 'fas fa-shield-alt', title: 'NextAuth.js' },
-				{ icon: 'fas fa-sync-alt', title: 'SWR' },
-				{ icon: 'fab fa-docker', title: 'Docker' },
-				{ icon: 'fas fa-server', title: 'VPS' },
-				{ icon: 'fab fa-telegram-plane', title: 'Telegram and Bitrix24 Integration' },
+				{ icon: 'fab fa-react', title: 'Next.js - React', color: '#61DAFB' },
+				{ icon: 'fas fa-bolt', title: 'Chakra UI', color: '#319795' },
+				{ icon: 'fas fa-database', title: 'Prisma ORM', color: '#2D3748' },
+				{ icon: 'fas fa-shield-alt', title: 'NextAuth.js', color: '#333333' },
+				{ icon: 'fas fa-sync-alt', title: 'SWR', color: '#333333' },
+				{ icon: 'fab fa-docker', title: 'Docker', color: '#2496ED' },
+				{ icon: 'fas fa-server', title: 'VPS', color: '#888888' },
+				{ icon: 'fab fa-telegram-plane', title: 'Telegram and Bitrix24 Integration', color: '#26A5E4' },
 			],
 			deployment: {
 				titleKey: 'case_deployment_title',
@@ -190,9 +191,9 @@ export const caseStudies: CaseStudy[] = [
 				],
 			},
 			techStack: [
-				{ icon: 'fab fa-html5', title: 'HTML5' },
-				{ icon: 'fab fa-css3-alt', title: 'CSS3' },
-				{ icon: 'fab fa-js-square', title: 'JavaScript' },
+				{ icon: 'fab fa-html5', title: 'HTML5', color: '#E34F26' },
+				{ icon: 'fab fa-css3-alt', title: 'CSS3', color: '#1572B6' },
+				{ icon: 'fab fa-js-square', title: 'JavaScript', color: '#F7DF1E' },
 			],
 			deployment: {
 				titleKey: 'case_deployment_title',
@@ -240,9 +241,9 @@ export const caseStudies: CaseStudy[] = [
 				],
 			},
 			techStack: [
-				{ icon: 'fab fa-html5', title: 'HTML5' },
-				{ icon: 'fab fa-css3-alt', title: 'CSS3' },
-				{ icon: 'fab fa-js-square', title: 'JavaScript' },
+				{ icon: 'fab fa-html5', title: 'HTML5', color: '#E34F26' },
+				{ icon: 'fab fa-css3-alt', title: 'CSS3', color: '#1572B6' },
+				{ icon: 'fab fa-js-square', title: 'JavaScript', color: '#F7DF1E' },
 			],
 			deployment: {
 				titleKey: 'case_deployment_title',
@@ -290,13 +291,13 @@ export const caseStudies: CaseStudy[] = [
 				],
 			},
 			techStack: [
-				{ icon: 'fab fa-html5', title: 'HTML5' },
-				{ icon: 'fab fa-css3-alt', title: 'CSS3' },
-				{ icon: 'fab fa-js-square', title: 'Vanilla JavaScript' },
-				{ icon: 'fab fa-node-js', title: 'Node.js - Express.js' },
-				{ icon: 'fab fa-docker', title: 'Docker' },
-				{ icon: 'fas fa-server', title: 'Coolify and VPS' },
-				{ icon: 'fab fa-telegram-plane', title: 'Telegram Bot API' },
+				{ icon: 'fab fa-html5', title: 'HTML5', color: '#E34F26' },
+				{ icon: 'fab fa-css3-alt', title: 'CSS3', color: '#1572B6' },
+				{ icon: 'fab fa-js-square', title: 'Vanilla JavaScript', color: '#F7DF1E' },
+				{ icon: 'fab fa-node-js', title: 'Node.js - Express.js', color: '#339933' },
+				{ icon: 'fab fa-docker', title: 'Docker', color: '#2496ED' },
+				{ icon: 'fas fa-server', title: 'Coolify and VPS', color: '#888888' },
+				{ icon: 'fab fa-telegram-plane', title: 'Telegram Bot API', color: '#26A5E4' },
 			],
 			deployment: {
 				titleKey: 'case_deployment_title',
@@ -343,11 +344,11 @@ export const caseStudies: CaseStudy[] = [
 				],
 			},
 			techStack: [
-				{ icon: 'fab fa-html5', title: 'HTML5' },
-				{ icon: 'fab fa-css3-alt', title: 'CSS3' },
-				{ icon: 'fab fa-js-square', title: 'Vanilla JavaScript' },
-				{ icon: 'fab fa-php', title: 'PHP' },
-				{ icon: 'fab fa-telegram-plane', title: 'Telegram Bot API' },
+				{ icon: 'fab fa-html5', title: 'HTML5', color: '#E34F26' },
+				{ icon: 'fab fa-css3-alt', title: 'CSS3', color: '#1572B6' },
+				{ icon: 'fab fa-js-square', title: 'Vanilla JavaScript', color: '#F7DF1E' },
+				{ icon: 'fab fa-php', title: 'PHP', color: '#777BB4' },
+				{ icon: 'fab fa-telegram-plane', title: 'Telegram Bot API', color: '#26A5E4' },
 			],
 			deployment: {
 				titleKey: 'case_deployment_title',

@@ -62,8 +62,8 @@ const {
 
         <h2 data-lang="case_tech"></h2>
         <div class="tech-stack" style="margin-top: 1rem; margin-bottom: 2rem;">
-            <div class="icons" style="gap: 2rem; font-size: 3rem;">
-                {content.techStack.map(tech => <i class:list={tech.icon} title={tech.title}></i>)}
+            <div class="icons" style="gap: 2rem; font-size: 3rem; justify-content: center;">
+                {content.techStack.map(tech => <i class:list={tech.icon} title={tech.title} style={tech.color ? `color: ${tech.color}`: ''}></i>)}
             </div>
         </div>
 
@@ -87,3 +87,4 @@ const {
         )}
     </div>
 </CaseStudyLayout>
+
