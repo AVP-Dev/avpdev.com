@@ -1,9 +1,15 @@
 ---
 // src/components/CookieBanner.astro
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const cookieText = t('cookie_text').replace('/privacy-policy', `/${lang}/privacy-policy/`);
 ---
 <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
-    <p class="cookie-text" data-lang="cookie_text">Мы используем файлы cookie, чтобы улучшить ваш опыт. Продолжая посещать сайт, вы соглашаетесь с нашей <a href="/privacy-policy">Политикой конфиденциальности</a>.</p>
-    <button id="cookie-accept-btn" class="cookie-button" data-lang="cookie_accept">Принять</button>
+    <p class="cookie-text" set:html={cookieText}></p>
+    <button id="cookie-accept-btn" class="cookie-button">{t('cookie_accept')}</button>
 </div>
 
 <script>

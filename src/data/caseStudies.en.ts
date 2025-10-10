@@ -1,54 +1,57 @@
-// src/data/caseStudies.ts
+// src/data/caseStudies.en.ts
+import type { ui } from '../i18n/ui';
+
+type TranslationKey = keyof typeof ui['en'];
 
 export interface CaseStudy {
 	slug: string;
-	titleKey: string;
-	descriptionKey: string;
+	titleKey: TranslationKey;
+	descriptionKey: TranslationKey;
 	ogImage: string;
-	clientKey: string;
-	servicesKey: string;
+	clientKey: TranslationKey;
+	servicesKey: TranslationKey;
 	year: number;
 	heroImage: string;
 	heroImageAlt: string;
 	header: {
-		titleKey: string;
-		descriptionKey: string;
+		titleKey: TranslationKey;
+		descriptionKey: TranslationKey;
 	};
 	content: {
 		task: {
-			titleKey: string;
-			pKey: string;
+			titleKey: TranslationKey;
+			pKey: TranslationKey;
 		};
 		solution?: {
-			titleKey: string;
-			pKey: string;
+			titleKey: TranslationKey;
+			pKey: TranslationKey;
 		};
 		keyFeatures: {
-			titleKey: string;
-			pKey?: string;
-			listKeys: string[];
+			titleKey: TranslationKey;
+			pKey?: TranslationKey;
+			listKeys: TranslationKey[];
 		};
 		techStack: {
 			icon: string;
 			title: string;
-			color?: string; // Добавляем опциональное свойство цвета
+			color?: string;
 		}[];
 		deployment: {
-			titleKey: string;
-			pKey: string;
+			titleKey: TranslationKey;
+			pKey: TranslationKey;
 		};
 		gallery?: {
-			titleKey: string;
+			titleKey: TranslationKey;
 			items: {
 				img: string;
-				captionKey: string;
+				captionKey: TranslationKey;
 			}[];
 		};
 	};
 }
 
 export const caseStudies: CaseStudy[] = [
-	// 1. Проект: Мебель (Terra Forma)
+	// 1. Project: Furniture (Terra Forma)
 	{
 		slug: 'project-furniture',
 		titleKey: 'case_furniture_title_short',
@@ -58,7 +61,7 @@ export const caseStudies: CaseStudy[] = [
 		servicesKey: 'case_furniture_services_short',
 		year: 2025,
 		heroImage: '/images/terra-forma-hero.webp',
-		heroImageAlt: 'Главный экран сайта Terra Forma',
+		heroImageAlt: 'Hero image for the Terra Forma website',
 		header: {
 			titleKey: 'case_furniture_h1_short',
 			descriptionKey: 'case_furniture_desc_short',
@@ -104,7 +107,7 @@ export const caseStudies: CaseStudy[] = [
 			},
 		},
 	},
-	// 2. Проект: Туризм (Happy Tour)
+	// 2. Project: Travel (Happy Tour)
 	{
 		slug: 'project-travel',
 		titleKey: 'case_travel_title',
@@ -114,7 +117,7 @@ export const caseStudies: CaseStudy[] = [
 		servicesKey: 'case_travel_services',
 		year: 2025,
 		heroImage: '/images/project-travel.webp',
-		heroImageAlt: 'Главное изображение проекта Happy Tour',
+		heroImageAlt: 'Hero image for the Happy Tour project',
 		header: { titleKey: 'case_travel_h1', descriptionKey: 'case_travel_desc' },
 		content: {
 			task: { titleKey: 'case_task', pKey: 'case_travel_task_p' },
@@ -158,7 +161,7 @@ export const caseStudies: CaseStudy[] = [
 			},
 		},
 	},
-	// 3. Проект: Авто (АвтоМир Импорт)
+	// 3. Project: Cars (AutoMir Import)
 	{
 		slug: 'project-cars',
 		titleKey: 'case_cars_title_portfolio',
@@ -168,7 +171,7 @@ export const caseStudies: CaseStudy[] = [
 		servicesKey: 'case_cars_services_portfolio',
 		year: 2024,
 		heroImage: '/images/cars-hero-portfolio.webp',
-		heroImageAlt: 'Главный экран сайта АвтоМир Импорт',
+		heroImageAlt: 'Hero image for the AutoMir Import website',
 		header: {
 			titleKey: 'case_cars_h1_portfolio',
 			descriptionKey: 'case_cars_desc_portfolio',
@@ -213,7 +216,7 @@ export const caseStudies: CaseStudy[] = [
 			},
 		},
 	},
-	// 4. Проект: Эвакуатор
+	// 4. Project: Tow Truck
 	{
 		slug: 'project-tow-truck',
 		titleKey: 'case_tow_title',
@@ -223,7 +226,7 @@ export const caseStudies: CaseStudy[] = [
 		servicesKey: 'case_tow_services',
 		year: 2023,
 		heroImage: '/images/tow-truck-hero.webp',
-		heroImageAlt: 'Главный экран сайта службы эвакуации',
+		heroImageAlt: 'Hero image for the towing service website',
 		header: { titleKey: 'case_tow_h1', descriptionKey: 'case_tow_desc' },
 		content: {
 			task: { titleKey: 'case_task', pKey: 'case_tow_task_p' },
@@ -263,7 +266,7 @@ export const caseStudies: CaseStudy[] = [
 			},
 		},
 	},
-	// 5. Проект: 3D-моделирование
+	// 5. Project: 3D Modeling
 	{
 		slug: 'project-3d-modeling',
 		titleKey: 'case_3d_title',
@@ -273,7 +276,7 @@ export const caseStudies: CaseStudy[] = [
 		servicesKey: 'case_3d_services',
 		year: 2024,
 		heroImage: '/images/project-3d-model.webp',
-		heroImageAlt: 'Изображение проекта по 3D-моделированию',
+		heroImageAlt: 'Image of the 3D modeling project',
 		header: { titleKey: 'case_3d_h1', descriptionKey: 'case_3d_desc' },
 		content: {
 			task: { titleKey: 'case_task', pKey: 'case_3d_task_p' },
@@ -316,7 +319,7 @@ export const caseStudies: CaseStudy[] = [
 			},
 		},
 	},
-	// 6. Проект: Mekohaus
+	// 6. Project: Mekohaus
 	{
 		slug: 'project-mekohaus',
 		titleKey: 'case_mekohaus_title',
@@ -326,7 +329,7 @@ export const caseStudies: CaseStudy[] = [
 		servicesKey: 'case_mekohaus_services',
 		year: 2025,
 		heroImage: '/images/project-mekohaus-hero.webp',
-		heroImageAlt: 'Главный экран сайта Mekohaus',
+		heroImageAlt: 'Hero image for the Mekohaus website',
 		header: {
 			titleKey: 'case_mekohaus_h1',
 			descriptionKey: 'case_mekohaus_desc',
@@ -366,4 +369,3 @@ export const caseStudies: CaseStudy[] = [
 		},
 	},
 ];
-

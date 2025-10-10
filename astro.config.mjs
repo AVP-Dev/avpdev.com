@@ -15,6 +15,13 @@ export default defineConfig({
   trailingSlash: 'always',
   build: {
     format: 'directory'
-  }
+  },
+  i18n: {
+    defaultLocale: 'ru',
+    locales: ['ru', 'en'],
+    routing: {
+      prefixDefaultLocale: true,
+    },
+  },
 });
 

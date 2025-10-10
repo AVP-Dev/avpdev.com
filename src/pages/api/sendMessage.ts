@@ -21,7 +21,7 @@ const contactSchema = z.object({
     message: "Email or phone is required",
 });
 
-export const POST: APIRoute = async ({ request, redirect }) => {
+export const POST: APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
         const result = contactSchema.safeParse(data);

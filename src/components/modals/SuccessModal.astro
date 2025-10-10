@@ -1,13 +1,17 @@
 ---
 // src/components/modals/SuccessModal.astro
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <div id="success-modal" class="feedback-modal-overlay">
     <div class="feedback-modal-content">
         <div class="feedback-modal-icon success">
             <i class="fas fa-check" aria-hidden="true"></i>
         </div>
-        <h3 data-lang="success_modal_title">Отлично!</h3>
-        <p data-lang="success_modal_text">Ваша заявка успешно отправлена. Я свяжусь с вами в ближайшее время!</p>
-        <button class="cta-button close-modal-btn" data-lang="success_modal_button">Закрыть</button>
+        <h3>{t('success_modal_title')}</h3>
+        <p>{t('success_modal_text')}</p>
+        <button class="cta-button close-modal-btn">{t('success_modal_button')}</button>
     </div>
 </div>

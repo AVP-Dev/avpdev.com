@@ -1,14 +1,18 @@
 ---
 // src/components/sections/Hero.astro
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <section id="hero">
     <div id="particles-js"></div>
     <div class="container hero-container">
         <div class="hero-content">
             <div class="hero-text fade-in">
-                <h1 data-lang="hero_h1">Создаю <span class="gradient-text">эффективные сайты</span> и автоматизирую бизнес-процессы</h1>
-                <p data-lang="hero_p">От продающих лендингов до сложных систем автоматизации. Превращаю ваши идеи в работающие веб-решения.</p>
-                <a href="#contact" class="cta-button" data-lang="hero_cta">Обсудить проект</a>
+                <h1 set:html={t('hero_h1')}></h1>
+                <p>{t('hero_p')}</p>
+                <a href={`/${lang}/#contact`} class="cta-button">{t('hero_cta')}</a>
             </div>
         </div>
     </div>
@@ -17,6 +21,7 @@
 <!-- Подключаем библиотеку и скрипт инициализации -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" is:inline></script>
 <script>
+    declare var particlesJS: any;
     // Функция для инициализации particles.js
     function loadParticles() {
         // Проверяем, существует ли функция particlesJS и элемент

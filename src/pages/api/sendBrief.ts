@@ -11,7 +11,7 @@ function sanitizeHTML(str: string | undefined | null): string {
         .replace(/'/g, '&#39;');
 }
 
-export const POST: APIRoute = async ({ request, redirect }) => {
+export const POST: APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
 

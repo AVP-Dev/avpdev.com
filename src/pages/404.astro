@@ -1,14 +1,40 @@
 ---
 // src/pages/404.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
-<BaseLayout title="404: Страница не найдена" description="Запрошенная страница не существует.">
-  <section style="text-align: center; padding: 120px 0;">
-    <div class="container">
-      <h1 class="section-title" style="font-size: 5rem; margin-bottom: 1rem;">404</h1>
-      <h2 class="section-subtitle" style="font-size: 1.5rem; margin-bottom: 2rem;">Страница не найдена</h2>
-      <p style="margin-bottom: 2.5rem;">К сожалению, мы не смогли найти страницу, которую вы ищете.</p>
-      <a href="/" class="cta-button">Вернуться на главную</a>
-    </div>
-  </section>
+<BaseLayout
+    title="404_title"
+    description="404_desc"
+>
+    <main class="error-page-content">
+        <div class="container error-container">
+            <h1>404</h1>
+            <p>{t('404_desc')}</p>
+            <a href={`/${lang}/`} class="cta-button">{t('back_to_home')}</a>
+        </div>
+    </main>
 </BaseLayout>
+
+<style>
+.error-page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+}
+.error-container h1 {
+    font-size: 6rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--accent-color-start);
+}
+.error-container p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+</style>

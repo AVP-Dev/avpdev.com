@@ -1,24 +1,28 @@
 ---
 // src/components/sections/Services.astro
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <section id="services">
     <div class="container">
-        <h2 class="section-title fade-in" data-lang="services_h2">Мои <span class="gradient-text">Услуги</span></h2>
+        <h2 class="section-title fade-in" set:html={t('services_h2')}></h2>
         <div class="services-grid">
             <div class="card fade-in" style="transition-delay: 100ms;">
                 <i class="fas fa-laptop-code card-icon" aria-hidden="true"></i>
-                <h3 data-lang="services_card1_h3">Сайты и веб-приложения для бизнеса</h3>
-                <p data-lang="services_card1_p">Создаю современные, адаптивные сайты и лендинги, которые решают задачи вашего бизнеса. Полный цикл: от дизайна до развертывания.</p>
+                <h3>{t('services_card1_h3')}</h3>
+                <p>{t('services_card1_p')}</p>
             </div>
             <div class="card fade-in" style="transition-delay: 200ms;">
                 <i class="fas fa-cogs card-icon" aria-hidden="true"></i>
-                <h3 data-lang="services_card2_h3">Автоматизация рутины и интеграции с API</h3>
-                <p data-lang="services_card2_p">Разрабатываю веб-сервисы и скрипты для автоматизации рутинных задач, интеграции со сторонними API и оптимизации бизнес-процессов.</p>
+                <h3>{t('services_card2_h3')}</h3>
+                <p>{t('services_card2_p')}</p>
             </div>
             <div class="card fade-in" style="transition-delay: 300ms;">
                 <i class="fas fa-rocket card-icon" aria-hidden="true"></i>
-                <h3 data-lang="services_card3_h3">Техническая поддержка и развитие проектов</h3>
-                <p data-lang="services_card3_p">Обеспечиваю стабильную работу ваших веб-проектов, добавляю новый функционал и помогаю им расти вместе с вашим бизнесом.</p>
+                <h3>{t('services_card3_h3')}</h3>
+                <p>{t('services_card3_p')}</p>
             </div>
         </div>
     </div>

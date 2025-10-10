@@ -1,27 +1,29 @@
 ---
-// src/pages/blog/index.astro
+// src/pages/en/blog/index.astro
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import FeaturedPostCard from '../../../components/FeaturedPostCard.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
-// Явно указываем, что эта страница должна быть сгенерирована статически.
 export const prerender = true;
 
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogCard from '../../components/BlogCard.astro';
-import FeaturedPostCard from '../../components/FeaturedPostCard.astro';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-// Получаем все посты, исключая черновики
-const allPosts = await getCollection('blog', ({ data }) => {
-  return data.draft !== true;
+// Get all posts for the current language, excluding drafts
+const allPosts = await getCollection('blog', ({ id, data }) => {
+  return id.startsWith(lang + '/') && data.draft !== true;
 });
 
-// Сортируем посты по дате от новых к старым
+// Sort posts by date from newest to oldest
 allPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf());
 
 const hasPosts = allPosts.length > 0;
 const latestPost = hasPosts ? allPosts[0] : null;
 const otherPosts = hasPosts ? allPosts.slice(1) : [];
 
-// Собираем все уникальные теги для кнопок-фильтров 
+// Collect all unique tags for filter buttons
 const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
 ---
 <BaseLayout
@@ -31,39 +33,39 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
   <section id="blog-list" class="blog-page">
     <div class="container">
       <div class="blog-header fade-in">
-        <h1 class="section-title" data-lang="blog_h1"></h1>
-        <p class="section-subtitle" data-lang="blog_p"></p>
+        <h1 class="section-title" set:html={t('blog_h1')}></h1>
+        <p class="section-subtitle">{t('blog_p')}</p>
       </div>
-      
-      <!-- Отображаем последний пост отдельно -->
+
+      <!-- Display the latest post separately -->
       {hasPosts && latestPost && (
         <div class="featured-post-section fade-in">
-          <h2 data-lang="blog_latest_post"></h2>
+          <h2>{t('blog_latest_post')}</h2>
           <FeaturedPostCard post={latestPost} />
         </div>
       )}
 
-      <!-- Отображаем остальные посты и фильтры -->
+      <!-- Display other posts and filters -->
       {(otherPosts.length > 0 || allTags.length > 0) && (
         <div class="posts-list-section fade-in" style="transition-delay: 200ms;">
-          
-          {otherPosts.length > 0 && <h2 data-lang="blog_other_posts"></h2>}
-          
+
+          {otherPosts.length > 0 && <h2>{t('blog_other_posts')}</h2>}
+
           <div class="filters-container">
             <div class="search-wrapper">
               <i class="fas fa-search search-icon" aria-hidden="true"></i>
-              <input type="search" id="blog-search" data-lang-placeholder="blog_search_placeholder" placeholder="Поиск по статьям..." aria-label="Поиск по статьям">
+              <input type="search" id="blog-search" placeholder={t('blog_search_placeholder')} aria-label="Search articles">
             </div>
             {allTags.length > 0 && (
               <div class="tags-filter" id="tags-filter">
-                <button class="tag-filter-btn active" data-tag="all" data-lang="filter_all"></button>
+                <button class="tag-filter-btn active" data-tag="all">{t('filter_all')}</button>
                 {allTags.map(tag => (
                   <button class="tag-filter-btn" data-tag={tag.toLowerCase()}>{tag}</button>
                 ))}
               </div>
             )}
           </div>
-          
+
           {otherPosts.length > 0 && (
             <div id="posts-grid" class="portfolio-grid blog-grid">
               {otherPosts.map(post => (
@@ -73,11 +75,11 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
           )}
         </div>
       )}
-      
-      <p id="no-results-message" class="no-results-message" data-lang="blog_no_results" style="display: none;"></p>
+
+      <p id="no-results-message" class="no-results-message" style="display: none;">{t('blog_no_results')}</p>
 
       {!hasPosts && (
-        <p class="no-results-message" data-lang="blog_no_posts_yet"></p>
+        <p class="no-results-message">{t('blog_no_posts_yet')}</p>
       )}
 
     </div>
@@ -86,19 +88,16 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    const searchInput = document.getElementById('blog-search');
+    const searchInput = document.getElementById('blog-search') as HTMLInputElement | null;
     const tagsContainer = document.getElementById('tags-filter');
     const postsGrid = document.getElementById('posts-grid');
     const noResultsMessage = document.getElementById('no-results-message');
 
-    // Если одного из ключевых элементов нет, скрипт не должен работать
     if (!postsGrid || !searchInput || !tagsContainer || !noResultsMessage) {
       return;
     }
 
-    // УЛУЧШЕНИЕ: Используем querySelectorAll для более надежного выбора карточек.
-    // Это делает код нечувствительным к будущим изменениям верстки (например, к появлению div-оберток).
-    const allCards = Array.from(postsGrid.querySelectorAll('.blog-card-link'));
+    const allCards = Array.from(postsGrid.querySelectorAll<HTMLElement>('.blog-card-link'));
 
     let currentTag = 'all';
     let currentQuery = '';
@@ -115,8 +114,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
         const matchesTag = currentTag === 'all' || (tags && tags.split(',').includes(currentTag));
 
         const isVisible = matchesQuery && matchesTag;
-        
-        // Показываем или скрываем саму карточку (элемент <a>)
+
         card.style.display = isVisible ? '' : 'none';
 
         if (isVisible) {
@@ -124,7 +122,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
         }
       });
 
-      noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+      if (noResultsMessage) {
+        noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
     }
 
     searchInput.addEventListener('input', (e) => {

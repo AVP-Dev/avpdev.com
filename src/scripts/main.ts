@@ -1,16 +1,5 @@
 // src/scripts/main.ts
 
-// Extend the global Window interface for TypeScript
-declare global {
-    interface Window {
-        translations: {
-            [lang: string]: {
-                [key: string]: string;
-            };
-        };
-    }
-}
-
 // --- НОВАЯ ФУНКЦИЯ ДЛЯ УПРАВЛЕНИЯ ПОРТФОЛИО ---
 function portfolioManager() {
     const portfolio = document.getElementById('portfolio');
@@ -47,7 +36,7 @@ function portfolioManager() {
                 visibleInFilter++;
             }
         });
-        
+
         if (visibleInFilter >= matchingCards.length) {
             showMoreBtn.classList.add('is-hidden');
         } else {
@@ -61,7 +50,7 @@ function portfolioManager() {
 
         filterContainer.querySelector('.active')?.classList.remove('active');
         target.classList.add('active');
-      
+
         currentFilter = target.dataset.filter;
         visibleCount = PROJECTS_PER_PAGE;
         updateView();
@@ -77,58 +66,11 @@ function portfolioManager() {
 
 // --- ГЛАВНАЯ ФУНКЦИЯ ИНИЦИАЛИЗАЦИИ ---
 function initializePage() {
-    let currentLang = localStorage.getItem('language') || 'ru';
     let currentTheme = localStorage.getItem('theme') || 'light-theme';
 
     const themeSwitchers = document.querySelectorAll('.theme-switcher');
-    const langSwitchers = document.querySelectorAll('.lang-switcher');
     const burger = document.querySelector('.burger-menu');
     const mobileNav = document.querySelector('.mobile-nav');
-
-    function switchLanguage(lang: string) {
-        if (typeof window.translations === 'undefined') {
-            console.warn('Translations object not found.');
-            return;
-        }
-
-        currentLang = lang;
-        document.documentElement.lang = lang;
-        localStorage.setItem('language', lang);
-
-        langSwitchers.forEach(switcher => {
-            switcher.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', (btn as HTMLElement).dataset.langSet === lang);
-            });
-        });
-
-        document.querySelectorAll<HTMLElement>('[data-lang]').forEach(el => {
-            const key = el.dataset.lang;
-            if (key && window.translations[lang]?.[key]) {
-                el.innerHTML = window.translations[lang][key];
-            }
-        });
-
-        document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-lang-placeholder]').forEach(el => {
-            const key = el.dataset.langPlaceholder;
-            if (key && window.translations[lang]?.[key]) {
-                el.placeholder = window.translations[lang][key];
-            }
-        });
-        
-        document.querySelectorAll<HTMLElement>('[data-lang-content]').forEach(el => {
-            const key = el.dataset.langContent;
-            if (key && window.translations[lang]?.[key]) {
-                const translation = window.translations[lang][key];
-                if (el.tagName === 'META') {
-                    el.setAttribute('content', translation);
-                } else {
-                    el.textContent = translation;
-                }
-            }
-        });
-
-        document.dispatchEvent(new CustomEvent('language:switched', { detail: { lang } }));
-    }
 
     function switchTheme(theme: string) {
         currentTheme = theme;
@@ -138,7 +80,7 @@ function initializePage() {
         themeSwitchers.forEach(switcher => {
             switcher.innerHTML = theme === 'dark-theme' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
-        
+
         document.dispatchEvent(new CustomEvent('theme:changed'));
     }
 
@@ -159,7 +101,7 @@ function initializePage() {
 
     function setupModals() {
         const modals = document.querySelectorAll('.feedback-modal-overlay');
-        
+
         const openModal = (modalId: string) => {
             const modal = document.getElementById(modalId);
             if (!modal) return;
@@ -199,16 +141,11 @@ function initializePage() {
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     themeSwitchers.forEach(switcher => switcher.addEventListener('click', () => switchTheme(document.body.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme')));
-    langSwitchers.forEach(switcher => switcher.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        if (target.classList.contains('lang-btn')) switchLanguage(target.dataset.langSet || 'ru');
-    }));
 
     // Primary initialization on page load
     switchTheme(currentTheme);
-    switchLanguage(currentLang);
     setupModals();
-    
+
     // ВЫЗЫВАЕМ СКРИПТ ПОРТФОЛИО ЗДЕСЬ
     portfolioManager();
 }
