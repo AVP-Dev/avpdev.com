@@ -1,10 +1,30 @@
 ---
-import { allProjects as PROJECTS_DATA } from '../../data/projects';
+import { caseStudies as ruCaseStudies } from '../../data/caseStudies.ru';
+import { caseStudies as enCaseStudies } from '../../data/caseStudies.en';
+import type { Project } from '../../data/projects';
 import PortfolioCard from '../PortfolioCard.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url) as 'ru' | 'en';
 const t = useTranslations(lang);
+
+const caseStudies = lang === 'ru' ? ruCaseStudies : enCaseStudies;
+
+const getCategory = (slug: string): 'apps' | 'sites' => {
+	if (['project-furniture', 'project-travel'].includes(slug)) {
+		return 'apps';
+	}
+	return 'sites';
+};
+
+const PROJECTS_DATA: Project[] = caseStudies.map((study, index) => ({
+	id: index + 1,
+	category: getCategory(study.slug),
+	img: study.heroImage,
+	titleKey: study.titleKey,
+	link: `/${lang}/project/${study.slug}/`,
+	tags: study.content.techStack.map(tech => tech.title),
+}));
 
 const PROJECTS_PER_PAGE = 3;
 // Безопасная проверка и подготовка данных
@@ -19,7 +39,7 @@ const hasProjects = allProjects.length > 0;
     {hasProjects ?
     (
       <>
-        <div class="portfolio-filters fade-in" role="tablist" aria-label="Фильтры портфолио">
+        <div class="portfolio-filters fade-in" role="tablist" aria-label={t('portfolio_aria_label')}>
           <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">{t('filter_all')}</button>
           <button class="filter-btn" data-filter="sites" role="tab" aria-selected="false">{t('filter_sites')}</button>
           <button class="filter-btn" data-filter="apps" role="tab" aria-selected="false">{t('filter_apps')}</button>

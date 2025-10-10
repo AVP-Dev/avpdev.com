@@ -1,0 +1,91 @@
+---
+// src/pages/ru/project/[slug].astro
+import CaseStudyLayout from '../../../layouts/CaseStudyLayout.astro';
+import { caseStudies as ruCaseStudies } from '../../../data/caseStudies.ru.ts';
+import { useTranslations } from '../../../i18n/utils';
+import type { CaseStudy } from '../../../data/caseStudies.ru.ts';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return ruCaseStudies.map((study : CaseStudy) => {
+    return {
+      params: { slug: study.slug },
+      props: { study },
+    };
+  });
+}
+
+const lang = 'ru';
+const t = useTranslations(lang);
+const { study } = Astro.props;
+
+
+if (!study) {
+    return Astro.redirect(`/${lang}/404`);
+}
+
+const {
+    titleKey, descriptionKey, ogImage, clientKey, servicesKey, year, heroImage, heroImageAlt,
+    header, content
+} = study;
+---
+<CaseStudyLayout
+    title={t(titleKey)}
+    description={t(descriptionKey)}
+    ogImage={ogImage}
+    clientKey={clientKey}
+    servicesKey={servicesKey}
+    year={year}
+    heroImage={heroImage}
+    heroImageAlt={heroImageAlt}
+>
+    <div slot="header">
+        <h1 class="gradient-text" set:html={t(header.titleKey)}></h1>
+        <p set:html={t(header.descriptionKey)}></p>
+    </div>
+
+    <div slot="content">
+        <h2 set:html={t(content.task.titleKey)}></h2>
+        <p set:html={t(content.task.pKey)}></p>
+
+        {content.solution && (
+            <>
+                <h2 set:html={t(content.solution.titleKey)}></h2>
+                <p set:html={t(content.solution.pKey)}></p>
+            </>
+        )}
+
+        <h2 set:html={t(content.keyFeatures.titleKey)}></h2>
+        {content.keyFeatures.pKey && <p set:html={t(content.keyFeatures.pKey)}></p>}
+        <ul>
+            {content.keyFeatures.listKeys.map(key => <li set:html={t(key)}></li>)}
+        </ul>
+
+        <h2 set:html={t('case_tech')}></h2>
+        <div class="tech-stack" style="margin-top: 1rem; margin-bottom: 2rem;">
+            <div class="icons" style="gap: 2rem; font-size: 3rem; justify-content: center;">
+                {content.techStack.map(tech => <i class:list={tech.icon} title={tech.title} style={tech.color ? `color: ${tech.color}`: ''}></i>)}
+            </div>
+        </div>
+
+        <h2 set:html={t(content.deployment.titleKey)}></h2>
+        <p set:html={t(content.deployment.pKey)}></p>
+
+        {content.gallery && (
+            <div class="project-gallery">
+                <h2 set:html={t(content.gallery.titleKey)}></h2>
+                <div class="gallery-grid">
+                    {content.gallery.items.map(item => (
+                        <div class="gallery-item">
+                            <figure>
+                                <img src={item.img} alt={t(item.captionKey)} loading="lazy" />
+                                <figcaption set:html={t(item.captionKey)}></figcaption>
+                            </figure>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )}
+    </div>
+</CaseStudyLayout>

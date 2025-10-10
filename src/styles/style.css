@@ -387,6 +387,12 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .form-hint.error-hint { color: #dc3545; }
 .form-control { width: 100%; padding: 1rem; font-size: 1rem; color: var(--text-color); background-color: var(--bg-color); border: 1px solid var(--glass-border); border-radius: 8px; font-family: 'Inter', sans-serif; transition: border-color 0.3s, background-color 0.3s, color 0.3s; }
 .form-control:focus { outline: none; border-color: var(--accent-color-start); }
+
+/* FIX: Set a distinct background for form inputs in the light theme */
+.light-theme .form-control {
+    background-color: var(--filter-btn-bg);
+}
+
 .form-control.error-field { border-color: #dc3545 !important; }
 textarea.form-control { min-height: 150px; resize: vertical; }
 .form-submit-container { text-align: center; }

@@ -1,21 +1,23 @@
 ---
 // src/components/BlogCard.astro
 import type { CollectionEntry } from 'astro:content';
+import { getLangFromUrl } from '../i18n/utils';
 
 interface Props {
   post: CollectionEntry<'blog'>;
 }
 
 const { post } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 
-const formattedDate = new Date(post.data.pubDate).toLocaleDateString('ru-RU', {
+const formattedDate = new Date(post.data.pubDate).toLocaleDateString(lang, {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
 });
 ---
-<a 
-  href={`/blog/${post.slug}`} 
+<a
+  href={`/${lang}/blog/${post.slug.split('/')[1]}`}
   class="portfolio-card blog-card-link"
   data-title={post.data.title.toLowerCase()}
   data-description={post.data.description.toLowerCase()}

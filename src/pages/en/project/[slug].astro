@@ -1,33 +1,24 @@
 ---
-// src/pages/project/[slug].astro
-import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
-import { caseStudies as ruCaseStudies } from '../../data/caseStudies.ru.ts';
-import { caseStudies as enCaseStudies } from '../../data/caseStudies.en.ts';
-import { useTranslations } from '../../i18n/utils';
+// src/pages/en/project/[slug].astro
+import CaseStudyLayout from '../../../layouts/CaseStudyLayout.astro';
+import { caseStudies as enCaseStudies } from '../../../data/caseStudies.en.ts';
+import { useTranslations } from '../../../i18n/utils';
+import type { CaseStudy } from '../../../data/caseStudies.en.ts';
 
 export const prerender = true;
 
-const allCaseStudies = {
-  ru: ruCaseStudies,
-  en: enCaseStudies,
-};
-
 export function getStaticPaths() {
-  const allSlugs = new Set<string>();
-  ruCaseStudies.forEach(s => allSlugs.add(s.slug));
-  enCaseStudies.forEach(s => allSlugs.add(s.slug));
-
-  return Array.from(allSlugs).map((slug) => {
+  return enCaseStudies.map((study : CaseStudy) => {
     return {
-      params: { slug },
+      params: { slug: study.slug },
+      props: { study },
     };
   });
 }
 
-const { slug } = Astro.params;
-const lang = Astro.currentLocale as keyof typeof allCaseStudies;
+const lang = 'en';
 const t = useTranslations(lang);
-const study = allCaseStudies[lang]?.find(s => s.slug === slug);
+const { study } = Astro.props;
 
 
 if (!study) {
