@@ -1,0 +1,28 @@
+---
+// src/components/LanguageSwitcher.astro
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const locales = ['ru', 'en'];
+
+// Construct the path for the other language.
+// It removes the current language prefix and adds the new one.
+// e.g., /ru/blog/post -> /en/blog/post
+const pathWithoutLang = Astro.url.pathname.slice(lang.length + 1);
+---
+<div class="lang-switcher">
+    {locales.map((locale, index) => {
+        const isActive = locale === lang;
+        const url = `/${locale}${pathWithoutLang}`;
+        return (
+            <>
+                {isActive ? (
+                    <button class="lang-btn active">{locale.toUpperCase()}</button>
+                ) : (
+                    <a href={url} class="lang-btn">{locale.toUpperCase()}</a>
+                )}
+                {index < locales.length - 1 && <span class="lang-separator">|</span>}
+            </>
+        )
+    })}
+</div>

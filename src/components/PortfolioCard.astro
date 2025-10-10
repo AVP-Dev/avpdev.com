@@ -1,7 +1,7 @@
 ---
 // src/components/PortfolioCard.astro
-import type { Project } from '../data/projects';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Project, TranslationKey } from '../env.d.ts';
 
 interface Props extends Project {}
 
@@ -14,7 +14,7 @@ const linkTextKey = 'portfolio_card_link';
 <div class="portfolio-card" data-category={category}>
     <div class="portfolio-image" style={`background-image: url('${img}');`}></div>
     <div class="portfolio-info">
-        <h3 set:html={t(titleKey)} />
+        <h3 set:html={t(titleKey as TranslationKey)} />
         <div class="portfolio-tags">
             {tags && tags.slice(0, 3).map(tag => (
                 <span class="tag">{tag}</span>

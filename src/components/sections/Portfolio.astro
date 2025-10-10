@@ -1,11 +1,11 @@
 ---
-import type { CaseStudy } from '../../data/caseStudies.en';
-import type { Project } from '../../data/projects';
+import type { CollectionEntry } from 'astro:content';
+import type { Project, TranslationKey } from '../../env.d.ts';
 import PortfolioCard from '../PortfolioCard.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 interface Props {
-	projects: CaseStudy[];
+	projects: CollectionEntry<'projects'>[];
 }
 
 const { projects } = Astro.props;
@@ -13,19 +13,20 @@ const lang = getLangFromUrl(Astro.url) as 'ru' | 'en';
 const t = useTranslations(lang);
 
 const getCategory = (slug: string): 'apps' | 'sites' => {
-	if (['project-furniture', 'project-travel'].includes(slug)) {
+	const cleanSlug = slug.replace(/^(ru|en)\//, '');
+	if (['project-furniture', 'project-travel'].includes(cleanSlug)) {
 		return 'apps';
 	}
 	return 'sites';
 };
 
-const PROJECTS_DATA: Project[] = projects.map((study, index) => ({
+const PROJECTS_DATA: Project[] = projects.map((project, index) => ({
 	id: index + 1,
-	category: getCategory(study.slug),
-	img: study.heroImage,
-	titleKey: study.header.titleKey,
-	link: `/${lang}/project/${study.slug}/`,
-	tags: study.content.techStack.map(tech => tech.title),
+	category: getCategory(project.slug),
+	img: project.data.heroImage.src,
+	titleKey: project.data.header.titleKey as TranslationKey,
+	link: `/${lang}/project/${project.slug.replace(/^(ru|en)\//, '')}/`,
+	tags: project.data.content.techStack.map(tech => tech.title),
 }));
 
 const PROJECTS_PER_PAGE = 3;
