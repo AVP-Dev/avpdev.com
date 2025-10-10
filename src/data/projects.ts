@@ -1,10 +1,13 @@
 // src/data/projects.ts
+import type { ui } from '../i18n/ui';
+
+type TranslationKey = keyof typeof ui['en'];
 
 export interface Project {
     id: number;
     category: 'apps' | 'sites';
     img: string;
-    titleKey: string;
+    titleKey: TranslationKey;
     link: string;
     tags: string[];
 }

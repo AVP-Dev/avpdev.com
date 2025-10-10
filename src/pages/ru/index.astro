@@ -12,6 +12,7 @@ import Portfolio from '../../components/sections/Portfolio.astro';
 import Contact from '../../components/sections/Contact.astro';
 import SuccessModal from '../../components/modals/SuccessModal.astro';
 import ErrorModal from '../../components/modals/ErrorModal.astro';
+import { caseStudies } from '../../data/caseStudies.ru';
 
 const pageTitleKey = "page_title";
 const pageDescKey = "hero_p";
@@ -20,7 +21,7 @@ const pageDescKey = "hero_p";
   <Hero />
   <Services />
   <About />
-  <Portfolio />
+  <Portfolio projects={caseStudies} />
   <Contact />
 
   <SuccessModal />

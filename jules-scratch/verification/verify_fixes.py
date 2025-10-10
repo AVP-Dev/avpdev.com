@@ -1,66 +1,91 @@
+import re
 from playwright.sync_api import sync_playwright, Page, expect
 
-def run(playwright):
-    browser = playwright.chromium.launch(headless=True)
-    context = browser.new_context(locale="en-US")
-    page = context.new_page()
+def verify_all_fixes(page: Page):
+    """
+    This script verifies all the visual fixes:
+    1. Translation gaps on the blog and brief pages.
+    2. Portfolio component rendering on the homepage.
+    3. Form input visibility on the brief page (light theme).
+    """
+    base_url = "http://localhost:4321"
 
-    # 1. Verify Blog Post Routing
-    print("Verifying blog post routing...")
-    page.goto("http://localhost:4321/en/blog/")
-    # Click the first blog card that is not the featured one
-    other_posts_heading = page.get_by_role("heading", name="Все статьи")
-    if other_posts_heading.is_visible():
-        first_blog_card = page.locator('.blog-card-link').first
-        post_href = first_blog_card.get_attribute('href')
-        first_blog_card.click()
-        page.wait_for_load_state()
-        expect(page).to_have_url(f"http://localhost:4321{post_href}")
-        page.screenshot(path="jules-scratch/verification/01_blog_post_page.png")
-        print("Blog post routing verified.")
+    # --- Verification 1: Blog Page Translations ---
+    print("Verifying blog page translations...")
+    page.goto(f"{base_url}/en/blog/")
 
-    # 2. Verify Project Translation and Routing
-    print("Verifying project translation and routing...")
-    page.goto("http://localhost:4321/en/")
-    # Check for English text in the portfolio section
-    expect(page.get_by_role("heading", name="Featured Projects")).to_be_visible()
+    # Check for the translated main header
+    blog_h1 = page.locator("h1.section-title")
+    expect(blog_h1).to_contain_text("Tech Journal")
 
-    # Click the first project
-    first_project_link = page.locator('.portfolio-card-wrapper .case-link').first
-    project_href = first_project_link.get_attribute('href')
-    first_project_link.click()
-    page.wait_for_load_state()
-    expect(page).to_have_url(f"http://localhost:4321{project_href}")
+    # Check for the translated sub-header
+    blog_p = page.locator("p.section-subtitle")
+    expect(blog_p).to_contain_text("Practical articles, case studies, and notes")
 
-    # Switch to Russian
-    lang_switcher = page.locator('.lang-switcher .lang-btn:not(.active)').first
-    lang_switcher.click()
-    page.wait_for_load_state()
+    # Check for the translated "All Articles" sub-header
+    other_posts_h2 = page.locator("h2", has_text="All Articles")
+    expect(other_posts_h2).to_be_visible()
 
-    # Check that the URL has switched to Russian
-    ru_project_href = project_href.replace('/en/', '/ru/')
-    expect(page).to_have_url(f"http://localhost:4321{ru_project_href}")
-    page.screenshot(path="jules-scratch/verification/02_project_page_ru.png")
-    print("Project translation and routing verified.")
+    page.screenshot(path="jules-scratch/verification/01_blog_page.png")
+    print("Blog page screenshot captured.")
 
-    # 3. Verify Form Input Visibility in Light Theme
-    print("Verifying form input visibility...")
-    page.goto("http://localhost:4321/en/brief/")
+    # --- Verification 2: Portfolio Component on Homepage ---
+    print("Verifying portfolio component on homepage...")
+    page.goto(f"{base_url}/en/")
 
-    # Switch to light theme by directly applying the class via script
-    page.evaluate("document.body.classList.remove('dark-theme')")
-    page.evaluate("document.body.classList.add('light-theme')")
-    page.wait_for_timeout(500) # Wait for theme to apply
+    # Check that the portfolio section is present
+    portfolio_section = page.locator("#portfolio")
+    expect(portfolio_section).to_be_visible()
 
-    # Check form inputs
-    form_input = page.locator('.form-control').first
-    expect(form_input).to_be_visible()
+    # Scroll the portfolio section into view
+    portfolio_section.scroll_into_view_if_needed()
 
-    page.screenshot(path="jules-scratch/verification/03_form_light_theme.png")
-    print("Form input visibility verified.")
+    # Check that portfolio cards are being rendered
+    first_card = portfolio_section.locator(".portfolio-card").first
+    expect(first_card).to_be_visible()
 
-    # Close browser
-    browser.close()
+    # Check for a project title (verifies data flow and rendering)
+    expect(first_card.locator("h3")).to_contain_text("Terra Forma: A B2C Platform for Direct Sales in the USA")
 
-with sync_playwright() as playwright:
-    run(playwright)
+    # Check for technology tags
+    expect(first_card.locator(".tag").first).to_be_visible()
+
+    portfolio_section.screenshot(path="jules-scratch/verification/02_homepage_portfolio.png")
+    print("Homepage portfolio screenshot captured.")
+
+    # --- Verification 3: Form Input Visibility on Brief Page (Light Theme) ---
+    print("Verifying form input visibility on brief page...")
+    page.goto(f"{base_url}/en/brief/")
+
+    # Ensure it's the light theme for this check
+    page.evaluate("document.documentElement.className = 'light-theme'")
+
+    # Check that the main header is translated
+    brief_h1 = page.locator("h1.section-title")
+    expect(brief_h1).to_contain_text("Brief for Website Development")
+
+    # Wait for the page to be fully loaded and scroll the form into view
+    page.wait_for_load_state("networkidle")
+    form = page.locator(".brief-form")
+    form.scroll_into_view_if_needed()
+
+    # Take a screenshot of the form
+    expect(form).to_be_visible()
+    form.screenshot(path="jules-scratch/verification/03_brief_page_form.png")
+    print("Brief page form screenshot captured.")
+
+
+def main():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        try:
+            verify_all_fixes(page)
+            print("All verification steps completed successfully.")
+        except Exception as e:
+            print(f"An error occurred during verification: {e}")
+        finally:
+            browser.close()
+
+if __name__ == "__main__":
+    main()

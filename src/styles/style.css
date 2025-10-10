@@ -390,7 +390,8 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 
 /* FIX: Set a distinct background for form inputs in the light theme */
 .light-theme .form-control {
-    background-color: var(--filter-btn-bg);
+    background-color: #f1f3f5; /* A light grey color */
+    border-color: #ced4da;     /* A slightly darker border */
 }
 
 .form-control.error-field { border-color: #dc3545 !important; }
