@@ -9,6 +9,11 @@ interface Project {
 	category: 'apps' | 'sites';
 	img: string;
 	titleKey: TranslationKey;
-	link: string;
+	link:string;
+	techStack: {
+		icon: string;
+		title: string;
+		color?: string;
+	}[];
 	tags: string[];
 }

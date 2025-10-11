@@ -26,7 +26,8 @@ const PROJECTS_DATA: Project[] = projects.map((project, index) => ({
 	img: project.data.heroImage.src,
 	titleKey: project.data.header.titleKey as TranslationKey,
 	link: `/${lang}/project/${project.slug.replace(/^(ru|en)\//, '')}/`,
-	tags: project.data.content.techStack.map(tech => tech.title),
+	techStack: project.data.content.techStack, // Pass the full techStack array
+	tags: project.data.content.techStack.map(tech => tech.title), // Keep this for filtering logic
 }));
 
 const PROJECTS_PER_PAGE = 3;

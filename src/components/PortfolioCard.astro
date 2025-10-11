@@ -5,7 +5,7 @@ import type { Project, TranslationKey } from '../env.d.ts';
 
 interface Props extends Project {}
 
-const { img, titleKey, link, tags, category } = Astro.props;
+const { img, titleKey, link, techStack, category } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -15,9 +15,12 @@ const linkTextKey = 'portfolio_card_link';
     <div class="portfolio-image" style={`background-image: url('${img}');`}></div>
     <div class="portfolio-info">
         <h3 set:html={t(titleKey as TranslationKey)} />
-        <div class="portfolio-tags">
-            {tags && tags.slice(0, 3).map(tag => (
-                <span class="tag">{tag}</span>
+        <div class="portfolio-tags" style="margin-top: auto;">
+            {techStack && techStack.slice(0, 3).map(tech => (
+                <span class="tag">
+                    <i class:list={[tech.icon, 'fa-fw']} style={{ color: tech.color }}></i>
+                    {tech.title}
+                </span>
             ))}
         </div>
         <a href={link} class="case-link" set:html={t(linkTextKey)} />
