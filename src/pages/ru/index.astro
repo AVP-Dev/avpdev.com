@@ -1,0 +1,31 @@
+---
+// src/pages/ru/index.astro
+
+// ИСПРАВЛЕНИЕ: Явно указываем, что эта страница должна быть сгенерирована статически.
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Services from '../../components/sections/Services.astro';
+import About from '../../components/sections/About.astro';
+import Portfolio from '../../components/sections/Portfolio.astro';
+import Contact from '../../components/sections/Contact.astro';
+import SuccessModal from '../../components/modals/SuccessModal.astro';
+import ErrorModal from '../../components/modals/ErrorModal.astro';
+import { getCollection } from 'astro:content';
+
+const pageTitleKey = "page_title";
+const pageDescKey = "hero_p";
+
+const projects = await getCollection('projects', ({ id }) => id.startsWith('ru/'));
+---
+<BaseLayout title={pageTitleKey} description={pageDescKey}>
+  <Hero />
+  <Services />
+  <About />
+  <Portfolio projects={projects} />
+  <Contact />
+
+  <SuccessModal />
+  <ErrorModal />
+</BaseLayout>

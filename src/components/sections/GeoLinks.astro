@@ -1,0 +1,20 @@
+---
+// src/components/sections/GeoLinks.astro
+import { locations } from '../../data/locations';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const keyCities = ['minsk', 'moscow', 'saint-petersburg', 'gomel', 'warsaw', 'berlin'];
+const linksToShow = locations.filter(loc => keyCities.includes(loc.slug));
+---
+<div class="geo-links-container">
+  <h3>{t('geoLinks.title')}</h3>
+  <ul class="geo-links-list">
+    {linksToShow.map(loc => {
+      const url = lang === 'ru' && loc.name_ru ? `/ru/uslugi/${loc.slug}/` : `/en/services/${loc.slug}/`;
+      const name = lang === 'ru' && loc.name_ru ? loc.name_ru.replace(/е$/, 'е') : loc.name_en; // Простое форматирование для примера
+      return <li><a href={url}>{name}</a></li>;
+    })}
+  </ul>
+</div>

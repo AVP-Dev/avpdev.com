@@ -387,6 +387,13 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .form-hint.error-hint { color: #dc3545; }
 .form-control { width: 100%; padding: 1rem; font-size: 1rem; color: var(--text-color); background-color: var(--bg-color); border: 1px solid var(--glass-border); border-radius: 8px; font-family: 'Inter', sans-serif; transition: border-color 0.3s, background-color 0.3s, color 0.3s; }
 .form-control:focus { outline: none; border-color: var(--accent-color-start); }
+
+/* FIX: Set a distinct background for form inputs in the light theme */
+.light-theme .form-control {
+    background-color: #f1f3f5; /* A light grey color */
+    border-color: #ced4da;     /* A slightly darker border */
+}
+
 .form-control.error-field { border-color: #dc3545 !important; }
 textarea.form-control { min-height: 150px; resize: vertical; }
 .form-submit-container { text-align: center; }
@@ -667,11 +674,105 @@ textarea.form-control { min-height: 150px; resize: vertical; }
         margin-left: auto;
         margin-right: auto;
     }
+
+/* --- Стили для гео-таргетированных страниц --- */
+.geo-page-content {
+    padding-top: 120px;
+    padding-bottom: 80px;
+}
+.geo-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 3rem;
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    border: var(--glass-border);
+    box-shadow: var(--card-shadow);
+}
+.geo-page-content .geo-container .prose h1 {
+    font-size: 2.5rem !important;
+    text-align: center !important;
+    margin-bottom: 1.5rem !important;
+    line-height: 1.3 !important;
+}
+.geo-page-content .geo-container .prose p {
+    font-size: 1.1rem !important;
+    text-align: center !important;
+    color: var(--text-secondary-color) !important;
+    max-width: 700px !important;
+    margin: 0 auto 3rem auto !important;
+}
+/* Стили для CTA внутри geo-страницы */
+.geo-page-content .geo-container .cta-section {
+    margin-top: 3rem !important;
+    padding: 2rem !important;
+    border: none !important;
+    background-color: var(--bg-color) !important; /* Слегка другой фон для контраста */
+}
+
+/* --- Geo Links Section --- */
+.geo-links-container {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 60px;
+}
+.geo-links-container h3 {
+    font-size: 1.2rem;
+    color: var(--text-secondary-color);
+    margin-bottom: 1.5rem;
+}
+.geo-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+}
+.geo-links-list a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+.geo-links-list a:hover {
+    color: var(--accent-color-start);
+    text-decoration: underline;
+}
     .tech-category h4 {
         text-align: center;
         display: block;
     }
 }
+
+/* --- Стили для юридических страниц --- */
+.legal-page-content {
+    padding-top: 120px;
+    padding-bottom: 80px;
+}
+.legal-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 3rem;
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    border: var(--glass-border);
+    box-shadow: var(--card-shadow);
+}
+.legal-container h1 { font-size: 2.2rem; line-height: 1.3; margin-bottom: 0.75rem; text-align: center; }
+.legal-container .last-updated {
+    text-align: center;
+    color: var(--text-secondary-color);
+    margin-bottom: 2.5rem;
+    display: block;
+}
+.prose h3 { font-size: 1.6rem; margin-top: 2.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+.prose p, .prose ul { line-height: 1.8; color: var(--text-secondary-color); margin-bottom: 1rem; }
+.prose ul { padding-left: 20px; }
+.prose a { color: var(--accent-color-start); }
+.prose strong { color: var(--text-color); }
 
 @media (max-width: 480px) {
     .hero-text h1 {

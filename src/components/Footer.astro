@@ -1,5 +1,9 @@
 ---
 // src/components/Footer.astro
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <footer class="footer">
     <div class="container footer-content">
@@ -17,23 +21,15 @@
                 </a>
             </div>
         </div>
-        <p class="footer-copyright" data-lang="footer_copyright">&copy; <span id="current-year"></span> AVPdev.com. Все права защищены.</p>
+        <p class="footer-copyright" set:html={t('footer_copyright')}></p>
         <div class="footer-legal">
-            <a href="/blog/" data-lang="nav_blog">Блог</a>
+            <a href={`/${lang}/blog/`}>{t('nav_blog')}</a>
             <span class="legal-separator">|</span>
-            <a href="/brief/" data-lang="nav_brief">Бриф на разработку</a>
+            <a href={`/${lang}/brief/`}>{t('nav_brief')}</a>
             <span class="legal-separator">|</span>
-            <a href="/privacy-policy/" data-lang="footer_privacy">Политика конфиденциальности</a>
+            <a href={`/${lang}/privacy-policy`}>{t('footer_privacy')}</a>
             <span class="legal-separator">|</span>
-            <a href="/terms-of-service/" data-lang="footer_terms">Условия использования</a>
+            <a href={`/${lang}/terms-of-service`}>{t('footer_terms')}</a>
         </div>
     </div>
 </footer>
-
-<script>
-  // Скрипт для установки текущего года
-  const yearSpan = document.getElementById('current-year');
-  if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear().toString();
-  }
-</script>

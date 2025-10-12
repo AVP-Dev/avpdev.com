@@ -2,15 +2,20 @@
 // src/components/sections/About.astro
 import { Image } from 'astro:assets';
 import aboutPhoto from '../../assets/images/about-photo.webp';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const homePath = `/${lang}/`;
 ---
 <section id="about">
     <div class="container">
         <div class="about-content">
             <div class="about-image-wrapper fade-in">
-                <Image 
-                    src={aboutPhoto} 
-                    alt="Фотография Алексея Пацкевича, full-stack разработчика" 
-                    widths={[300, 600]} 
+                <Image
+                    src={aboutPhoto}
+                    alt="Фотография Алексея Пацкевича, full-stack разработчика"
+                    widths={[300, 600]}
                     sizes="(max-width: 1024px) 300px, 600px"
                     loading="lazy"
                     decoding="async"
@@ -19,19 +24,19 @@ import aboutPhoto from '../../assets/images/about-photo.webp';
                 />
             </div>
             <div class="about-text fade-in" style="transition-delay: 200ms;">
-                <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;" data-lang="about_h2">Обо мне</h2>
-                <h3 data-lang="about_h3">Строю надежные решения, которые служат людям.</h3>
-                <p data-lang="about_p">Моя философия проста: технологии должны расширять возможности человечества. Каждый проект для меня — не просто задача, а реальный инструмент, который даёт силу и поддержку пользователям...</p>
-                
+                <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;">{t('about_h2')}</h2>
+                <h3>{t('about_h3')}</h3>
+                <p>{t('about_p')}</p>
+
                 <div class="about-cta-container">
-                    <a href="#portfolio" class="cta-button secondary" data-lang="about_cta_portfolio">Мои проекты</a>
-                    <a href="#contact" class="cta-button" data-lang="about_cta_contact">Связаться со мной</a>
+                    <a href={`${homePath}#portfolio`} class="cta-button secondary">{t('about_cta_portfolio')}</a>
+                    <a href={`${homePath}#contact`} class="cta-button">{t('about_cta_contact')}</a>
                 </div>
             </div>
         </div>
-        
+
         <div class="tech-stack-detailed fade-in" style="transition-delay: 400ms;">
-             <h3 class="tech-stack-title" data-lang="about_tech">Мой стек технологий</h3>
+             <h3 class="tech-stack-title">{t('about_tech')}</h3>
              <div class="tech-categories">
                  <div class="tech-category">
                      <h4>🧠 Backend</h4>
@@ -51,7 +56,7 @@ import aboutPhoto from '../../assets/images/about-photo.webp';
                      </div>
                  </div>
                  <div class="tech-category">
-                     <h4>🗄️ Базы данных</h4>
+                     <h4>🗄️ Databases</h4>
                      <div class="tech-items">
                          <span><i class="fas fa-database" aria-hidden="true" style="color: #336791;"></i> PostgreSQL / MySQL</span>
                          <span><i class="fas fa-database" aria-hidden="true" style="color: #47A248;"></i> MongoDB</span>
@@ -73,8 +78,8 @@ import aboutPhoto from '../../assets/images/about-photo.webp';
 
 <style>
 .about-image-wrapper {
-    position: relative; 
-    overflow: hidden; 
+    position: relative;
+    overflow: hidden;
     width: 300px;
     height: 300px;
     border-radius: 50%;
@@ -90,7 +95,6 @@ import aboutPhoto from '../../assets/images/about-photo.webp';
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 60%; 
+    object-position: center 60%;
 }
 </style>
-

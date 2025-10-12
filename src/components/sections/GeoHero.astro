@@ -1,0 +1,58 @@
+---
+// src/components/sections/GeoHero.astro
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+interface Props {
+  h1: string;
+  p: string;
+}
+
+const { h1, p } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section class="geo-hero">
+    <div class="container hero-container">
+        <div class="hero-content">
+            <div class="hero-text fade-in">
+                <h1 set:html={h1} />
+                <p set:html={p}></p>
+                <a href={`/${lang}/brief/`} class="cta-button">{t('blog_cta_button')}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .geo-hero {
+        padding-top: 150px;
+        padding-bottom: 100px;
+        text-align: center;
+        background-color: var(--primary-color);
+    }
+    .geo-hero .hero-text h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+    }
+    .geo-hero .hero-text p {
+        font-size: 1.2rem;
+        color: var(--text-secondary-color);
+        margin-bottom: 2.5rem;
+        max-width: 750px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media (max-width: 768px) {
+        .geo-hero {
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+        .geo-hero .hero-text h1 {
+            font-size: 2.5rem;
+        }
+    }
+</style>

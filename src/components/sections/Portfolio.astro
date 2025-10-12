@@ -1,6 +1,34 @@
 ---
-import { allProjects as PROJECTS_DATA } from '../../data/projects';
+import type { CollectionEntry } from 'astro:content';
+import type { Project, TranslationKey } from '../../env.d.ts';
 import PortfolioCard from '../PortfolioCard.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+interface Props {
+	projects: CollectionEntry<'projects'>[];
+}
+
+const { projects } = Astro.props;
+const lang = getLangFromUrl(Astro.url) as 'ru' | 'en';
+const t = useTranslations(lang);
+
+const getCategory = (slug: string): 'apps' | 'sites' => {
+	const cleanSlug = slug.replace(/^(ru|en)\//, '');
+	if (['project-furniture', 'project-travel'].includes(cleanSlug)) {
+		return 'apps';
+	}
+	return 'sites';
+};
+
+const PROJECTS_DATA: Project[] = projects.map((project, index) => ({
+	id: index + 1,
+	category: getCategory(project.slug),
+	img: project.data.heroImage.src,
+	titleKey: project.data.header.titleKey as TranslationKey,
+	link: `/${lang}/project/${project.slug.replace(/^(ru|en)\//, '')}/`,
+	techStack: project.data.content.techStack, // Pass the full techStack array
+	tags: project.data.content.techStack.map(tech => tech.title), // Keep this for filtering logic
+}));
 
 const PROJECTS_PER_PAGE = 3;
 // Безопасная проверка и подготовка данных
@@ -10,17 +38,15 @@ const hasProjects = allProjects.length > 0;
 
 <section id="portfolio" aria-labelledby="portfolio-title">
   <div class="container">
-    <h2 id="portfolio-title" class="section-title fade-in" data-lang="portfolio_h2">
-      Избранные <span class="gradient-text">Проекты</span>
-    </h2>
+    <h2 id="portfolio-title" class="section-title fade-in" set:html={t('portfolio_h2')}></h2>
 
     {hasProjects ?
     (
       <>
-        <div class="portfolio-filters fade-in" role="tablist" aria-label="Фильтры портфолио">
-          <button class="filter-btn active" data-filter="all" data-lang="filter_all" role="tab" aria-selected="true">Все</button>
-          <button class="filter-btn" data-filter="sites" data-lang="filter_sites" role="tab" aria-selected="false">Сайты</button>
-          <button class="filter-btn" data-filter="apps" data-lang="filter_apps" role="tab" aria-selected="false">Веб-приложения</button>
+        <div class="portfolio-filters fade-in" role="tablist" aria-label={t('portfolio_aria_label')}>
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">{t('filter_all')}</button>
+          <button class="filter-btn" data-filter="sites" role="tab" aria-selected="false">{t('filter_sites')}</button>
+          <button class="filter-btn" data-filter="apps" role="tab" aria-selected="false">{t('filter_apps')}</button>
         </div>
 
         <div id="main-portfolio-grid" class="portfolio-grid" aria-live="polite">
@@ -33,13 +59,12 @@ const hasProjects = allProjects.length > 0;
         </div>
 
         <div class="show-more-container">
-          <button 
-            id="show-more-btn" 
+          <button
+            id="show-more-btn"
             class:list={["cta-button", { 'is-hidden': allProjects.length <= PROJECTS_PER_PAGE }]}
-            data-lang="show_more" 
             type="button"
           >
-            Показать еще
+            {t('show_more')}
           </button>
         </div>
       </>
@@ -64,4 +89,3 @@ const hasProjects = allProjects.length > 0;
 <script>
   // Этот скрипт больше не нужен здесь, так как `main.ts` управляет всем.
 </script>
-

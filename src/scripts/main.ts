@@ -1,134 +1,11 @@
 // src/scripts/main.ts
-
-// Extend the global Window interface for TypeScript
-declare global {
-    interface Window {
-        translations: {
-            [lang: string]: {
-                [key: string]: string;
-            };
-        };
-    }
-}
-
-// --- НОВАЯ ФУНКЦИЯ ДЛЯ УПРАВЛЕНИЯ ПОРТФОЛИО ---
-function portfolioManager() {
-    const portfolio = document.getElementById('portfolio');
-    if (!portfolio || portfolio.dataset.jsActive === 'true') {
-        return;
-    }
-    portfolio.dataset.jsActive = 'true';
-
-    const filterContainer = portfolio.querySelector('.portfolio-filters');
-    const showMoreBtn = portfolio.querySelector<HTMLButtonElement>('#show-more-btn');
-    const allCards = Array.from(portfolio.querySelectorAll<HTMLElement>('.portfolio-card-wrapper'));
-    const PROJECTS_PER_PAGE = 3;
-
-    if (!filterContainer || !showMoreBtn || allCards.length === 0) {
-        return;
-    }
-
-    let currentFilter = 'all';
-    let visibleCount = PROJECTS_PER_PAGE;
-
-    const updateView = () => {
-        const matchingCards = allCards.filter(cardWrapper => {
-            const card = cardWrapper.querySelector<HTMLElement>('[data-category]');
-            const category = card ? card.dataset.category : 'all';
-            return currentFilter === 'all' || category === currentFilter;
-        });
-
-        allCards.forEach(card => card.classList.add('is-hidden'));
-
-        let visibleInFilter = 0;
-        matchingCards.forEach((card, index) => {
-            if (index < visibleCount) {
-                card.classList.remove('is-hidden');
-                visibleInFilter++;
-            }
-        });
-        
-        if (visibleInFilter >= matchingCards.length) {
-            showMoreBtn.classList.add('is-hidden');
-        } else {
-            showMoreBtn.classList.remove('is-hidden');
-        }
-    };
-
-    filterContainer.addEventListener('click', (e) => {
-        const target = (e.target as HTMLElement).closest('button');
-        if (!target || !target.dataset.filter) return;
-
-        filterContainer.querySelector('.active')?.classList.remove('active');
-        target.classList.add('active');
-      
-        currentFilter = target.dataset.filter;
-        visibleCount = PROJECTS_PER_PAGE;
-        updateView();
-    });
-
-    showMoreBtn.addEventListener('click', () => {
-        visibleCount += PROJECTS_PER_PAGE;
-        updateView();
-    });
-
-    updateView();
-}
+import { initPortfolio } from './portfolio';
 
 // --- ГЛАВНАЯ ФУНКЦИЯ ИНИЦИАЛИЗАЦИИ ---
 function initializePage() {
-    let currentLang = localStorage.getItem('language') || 'ru';
+    // --- THEME SWITCHER ---
     let currentTheme = localStorage.getItem('theme') || 'light-theme';
-
     const themeSwitchers = document.querySelectorAll('.theme-switcher');
-    const langSwitchers = document.querySelectorAll('.lang-switcher');
-    const burger = document.querySelector('.burger-menu');
-    const mobileNav = document.querySelector('.mobile-nav');
-
-    function switchLanguage(lang: string) {
-        if (typeof window.translations === 'undefined') {
-            console.warn('Translations object not found.');
-            return;
-        }
-
-        currentLang = lang;
-        document.documentElement.lang = lang;
-        localStorage.setItem('language', lang);
-
-        langSwitchers.forEach(switcher => {
-            switcher.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', (btn as HTMLElement).dataset.langSet === lang);
-            });
-        });
-
-        document.querySelectorAll<HTMLElement>('[data-lang]').forEach(el => {
-            const key = el.dataset.lang;
-            if (key && window.translations[lang]?.[key]) {
-                el.innerHTML = window.translations[lang][key];
-            }
-        });
-
-        document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-lang-placeholder]').forEach(el => {
-            const key = el.dataset.langPlaceholder;
-            if (key && window.translations[lang]?.[key]) {
-                el.placeholder = window.translations[lang][key];
-            }
-        });
-        
-        document.querySelectorAll<HTMLElement>('[data-lang-content]').forEach(el => {
-            const key = el.dataset.langContent;
-            if (key && window.translations[lang]?.[key]) {
-                const translation = window.translations[lang][key];
-                if (el.tagName === 'META') {
-                    el.setAttribute('content', translation);
-                } else {
-                    el.textContent = translation;
-                }
-            }
-        });
-
-        document.dispatchEvent(new CustomEvent('language:switched', { detail: { lang } }));
-    }
 
     function switchTheme(theme: string) {
         currentTheme = theme;
@@ -138,10 +15,16 @@ function initializePage() {
         themeSwitchers.forEach(switcher => {
             switcher.innerHTML = theme === 'dark-theme' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
-        
+
         document.dispatchEvent(new CustomEvent('theme:changed'));
     }
 
+    themeSwitchers.forEach(switcher => switcher.addEventListener('click', () => switchTheme(document.body.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme')));
+    switchTheme(currentTheme);
+
+    // --- MOBILE MENU ---
+    const burger = document.querySelector('.burger-menu');
+    const mobileNav = document.querySelector('.mobile-nav');
     if (burger && mobileNav) {
         const toggleMenu = () => {
             const isOpen = mobileNav.classList.toggle('open');
@@ -157,9 +40,10 @@ function initializePage() {
         });
     }
 
+    // --- MODALS ---
     function setupModals() {
         const modals = document.querySelectorAll('.feedback-modal-overlay');
-        
+
         const openModal = (modalId: string) => {
             const modal = document.getElementById(modalId);
             if (!modal) return;
@@ -187,7 +71,9 @@ function initializePage() {
             });
         });
     }
+    setupModals();
 
+    // --- FADE IN ANIMATION ---
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -198,19 +84,113 @@ function initializePage() {
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    themeSwitchers.forEach(switcher => switcher.addEventListener('click', () => switchTheme(document.body.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme')));
-    langSwitchers.forEach(switcher => switcher.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        if (target.classList.contains('lang-btn')) switchLanguage(target.dataset.langSet || 'ru');
-    }));
+    // --- PORTFOLIO ---
+    initPortfolio();
 
-    // Primary initialization on page load
-    switchTheme(currentTheme);
-    switchLanguage(currentLang);
-    setupModals();
-    
-    // ВЫЗЫВАЕМ СКРИПТ ПОРТФОЛИО ЗДЕСЬ
-    portfolioManager();
+    // --- COOKIE BANNER ---
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept-btn');
+
+    if (cookieBanner && acceptBtn) {
+        const setCookie = (name: string, value: string, days: number) => {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax; Secure";
+        };
+
+        const getCookie = (name: string) => {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        };
+
+        if (!getCookie('cookie_consent')) {
+            setTimeout(() => {
+                cookieBanner.classList.add('show');
+            }, 1500);
+        }
+
+        acceptBtn.addEventListener('click', () => {
+            setCookie('cookie_consent', 'true', 365);
+            cookieBanner.classList.remove('show');
+        });
+    }
+
+    // --- SCROLL TO TOP ---
+    const scrollToTopBtn = document.querySelector('.scroll-to-top') as HTMLElement | null;
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            const shouldBeVisible = window.scrollY > window.innerHeight;
+            scrollToTopBtn.classList.toggle('visible', shouldBeVisible);
+        }, { passive: true });
+    }
+
+    // --- CONTACT FORM ---
+    const contactForm = document.getElementById('contact-form') as HTMLFormElement;
+    if (contactForm && !contactForm.dataset.initialized) {
+        contactForm.dataset.initialized = 'true';
+
+        contactForm.addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const form = e.target as HTMLFormElement;
+            const submitButton = form.querySelector('#submit-button') as HTMLButtonElement;
+            const spinner = form.querySelector('#form-spinner') as HTMLElement;
+
+            let isValid = true;
+            form.querySelectorAll('[required]').forEach(el => {
+                const input = el as HTMLInputElement | HTMLTextAreaElement;
+                input.classList.remove('error-field');
+                if (!input.value.trim()) {
+                    input.classList.add('error-field');
+                    isValid = false;
+                }
+            });
+            if (!isValid) return;
+
+            if(submitButton) submitButton.style.display = 'none';
+            if(spinner) spinner.style.display = 'block';
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/api/sendMessage/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'success-modal' } }));
+                    form.reset();
+                } else {
+                    throw new Error('Server response was not ok.');
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'error-modal' } }));
+            } finally {
+                if(submitButton) submitButton.style.display = 'block';
+                if(spinner) spinner.style.display = 'none';
+            }
+        });
+    }
+
+    // --- FOOTER YEAR ---
+    const yearSpan = document.getElementById('current-year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear().toString();
+    }
 }
 
 // Главный обработчик, который запускает всю логику

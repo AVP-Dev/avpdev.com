@@ -1,21 +1,24 @@
 ---
 // src/layouts/CaseStudyLayout.astro
 import BaseLayout from './BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 
 export interface Props {
-    title: string;
-    description: string;
+    title: any;
+    description: any;
     ogImage: string;
-    clientKey: string;
-    servicesKey: string;
+    clientKey: any;
+    servicesKey: any;
     year: string | number;
-    heroImage: string;
+    heroImage: ImageMetadata;
     heroImageAlt: string;
 }
 
-const { 
-    title, 
-    description, 
+const {
+    title,
+    description,
     ogImage,
     clientKey,
     servicesKey,
@@ -23,23 +26,27 @@ const {
     heroImage,
     heroImageAlt
 } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const homePath = `/${lang}/`;
 ---
-<BaseLayout title={title} description={description} ogImage={ogImage}>
+<BaseLayout title={t(title)} description={t(description)} ogImage={ogImage}>
     <section class="case-study-header">
         <div class="container">
             <!-- Заголовок и описание будут переданы из конкретной страницы кейса -->
             <slot name="header" />
             <div class="project-details">
                 <div class="detail-item">
-                    <h4 data-lang="case_client">Клиент</h4>
-                    <p data-lang={clientKey}></p>
+                    <h4>{t('case_client')}</h4>
+                    <p>{t(clientKey)}</p>
                 </div>
                 <div class="detail-item">
-                    <h4 data-lang="case_services">Услуги</h4>
-                    <p data-lang={servicesKey}></p>
+                    <h4>{t('case_services')}</h4>
+                    <p>{t(servicesKey)}</p>
                 </div>
                 <div class="detail-item">
-                    <h4 data-lang="case_year">Год</h4>
+                    <h4>{t('case_year')}</h4>
                     <p>{year}</p>
                 </div>
             </div>
@@ -47,19 +54,18 @@ const {
     </section>
 
     <div class="container">
-        <img src={heroImage} alt={heroImageAlt} class="main-project-image" loading="lazy">
+        <Image src={heroImage} alt={heroImageAlt} class="main-project-image" loading="lazy" />
     </div>
-    
+
     <div class="project-content-wrapper">
         <div class="project-content">
             <!-- Основной контент кейса -->
             <slot name="content" />
 
             <div class="case-cta-section">
-                 <a href="/#contact" class="cta-button" data-lang="case_cta_discuss">Обсудить ваш проект</a>
+                 <a href={`${homePath}#contact`} class="cta-button">{t('case_cta_discuss')}</a>
             </div>
-            <a href="/#portfolio" class="back-to-main" data-lang="back_to_portfolio">← Назад ко всем проектам</a>
+            <a href={`${homePath}#portfolio`} class="back-to-main">{t('back_to_portfolio')}</a>
         </div>
     </div>
 </BaseLayout>
-

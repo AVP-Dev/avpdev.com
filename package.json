@@ -8,12 +8,13 @@
     "build": "astro build",
     "preview": "astro preview --host",
     "astro": "astro",
-    "check": "astro check --watch"
+    "check": "astro check",
+    "sync": "astro sync"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.1",
     "@astrojs/node": "^9.4.4",
-    "@astrojs/sitemap": "^3.2.0",
+    "@astrojs/sitemap": "^3.6.0",
     "astro": "^5.14.1",
     "sharp": "^0.33.4",
     "zod": "^3.23.8"
@@ -22,4 +23,3 @@
     "typescript": "^5.5.3"
   }
 }
-

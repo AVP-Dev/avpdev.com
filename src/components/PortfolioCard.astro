@@ -1,25 +1,28 @@
 ---
 // src/components/PortfolioCard.astro
-import type { Project } from '../data/projects';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Project, TranslationKey } from '../env.d.ts';
 
 interface Props extends Project {}
 
-const { img, titleKey, link, tags, category } = Astro.props;
+const { img, titleKey, link, techStack, category } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-// The text for the link will be replaced by the client script via a data-attribute
 const linkTextKey = 'portfolio_card_link';
 ---
 <div class="portfolio-card" data-category={category}>
     <div class="portfolio-image" style={`background-image: url('${img}');`}></div>
     <div class="portfolio-info">
-        <h3 data-lang={titleKey}>Project Title</h3>
-        <div class="portfolio-tags">
-            {tags.slice(0, 3).map(tag => (
-                <span class="tag">{tag}</span>
+        <h3 set:html={t(titleKey as TranslationKey)} />
+        <div class="portfolio-tags" style="margin-top: auto;">
+            {techStack && techStack.slice(0, 3).map(tech => (
+                <span class="tag">
+                    <i class:list={[tech.icon, 'fa-fw']} style={{ color: tech.color }}></i>
+                    {tech.title}
+                </span>
             ))}
         </div>
-        <a href={link} class="case-link" data-lang={linkTextKey}>
-            Explore Project <i class="fas fa-arrow-right" aria-hidden="true"></i>
-        </a>
+        <a href={link} class="case-link" set:html={t(linkTextKey)} />
     </div>
 </div>

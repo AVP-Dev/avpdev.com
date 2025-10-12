@@ -1,23 +1,25 @@
 ---
 // src/components/FeaturedPostCard.astro
 import type { CollectionEntry } from 'astro:content';
+import { getLangFromUrl } from '../i18n/utils';
 
 interface Props {
   post: CollectionEntry<'blog'>;
 }
 
 const { post } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 
-const formattedDate = new Date(post.data.pubDate).toLocaleDateString('ru-RU', {
+const formattedDate = new Date(post.data.pubDate).toLocaleDateString(lang, {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
 });
 ---
-<a href={`/blog/${post.slug}/`} class="featured-card">
+<a href={`/${lang}/blog/${post.slug.split('/')[1]}/`} class="featured-card">
   {post.data.heroImage && (
     <div class="featured-card-image">
-      <img 
+      <img
         src={post.data.heroImage.src}
         alt={`Обложка статьи: ${post.data.title}`}
         width="800"

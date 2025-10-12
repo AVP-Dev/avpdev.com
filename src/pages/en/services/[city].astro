@@ -1,0 +1,50 @@
+---
+// src/pages/en/services/[city].astro
+import GeoPageLayout from '../../../layouts/GeoPageLayout.astro';
+import { locations } from '../../../data/locations';
+import { geoContent } from '../../../data/geo-content';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    return locations.map(loc => ({
+        params: { city: loc.slug },
+    }));
+}
+
+const { city } = Astro.params;
+const cityData = locations.find(loc => loc.slug === city);
+const content = city && geoContent[city]?.en;
+
+if (!cityData || !content) {
+    return Astro.redirect('/en/404/');
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Web Development",
+  "provider": {
+    "@type": "Organization",
+    "name": "AVPdev.com",
+    "url": Astro.site?.toString()
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": cityData.name_en
+  },
+  "name": content.title,
+  "description": content.description,
+  "url": Astro.url.href
+};
+---
+<GeoPageLayout
+    title={content.title}
+    description={content.description}
+    h1={content.h1}
+    p={content.p}
+>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+</GeoPageLayout>

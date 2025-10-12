@@ -1,0 +1,26 @@
+---
+// src/layouts/LegalLayout.astro
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+interface Props {
+  entry: CollectionEntry<'legal'>;
+}
+
+const { entry } = Astro.props;
+const { title, description, lastUpdated } = entry.data;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<BaseLayout title={title} description={description} isTranslationKey={false}>
+  <section class="legal-page-content">
+    <div class="legal-container">
+        <h1>{title}</h1>
+        {lastUpdated && <p class="last-updated">{t('terms_last_updated_label')} {lastUpdated}</p>}
+        <article class="prose">
+            <slot /> <!-- Здесь будет рендериться контент из MD-файла -->
+        </article>
+    </div>
+  </section>
+</BaseLayout>

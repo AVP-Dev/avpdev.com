@@ -1,0 +1,36 @@
+---
+// src/layouts/GeoPageLayout.astro
+import BaseLayout from './BaseLayout.astro';
+import Cta from '../components/Cta.astro';
+import GeoHero from '../components/sections/GeoHero.astro';
+import Services from '../components/sections/Services.astro';
+import Portfolio from '../components/sections/Portfolio.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  p: string;
+}
+
+const { title, description, h1, p } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+// Получаем проекты для секции портфолио в зависимости от языка
+const projects = await getCollection('projects', ({ id }) => id.startsWith(lang + '/'));
+---
+<BaseLayout title={title} description={description} isTranslationKey={false}>
+  <Fragment slot="head">
+    <slot name="head" />
+  </Fragment>
+
+  <GeoHero h1={h1} p={p} />
+  <Services />
+  <Portfolio projects={projects} />
+
+  <div class="container">
+    <Cta />
+  </div>
+</BaseLayout>
