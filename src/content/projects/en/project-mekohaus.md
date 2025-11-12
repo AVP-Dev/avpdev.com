@@ -40,7 +40,7 @@ content:
       color: '#26A5E4'
   deployment:
     titleKey: 'case_deployment_title'
-    pKey: 'case_deployment_text'
+    pKey: 'case_mekohaus_deployment_text'
   gallery:
     titleKey: 'project_fragments_title'
     items:

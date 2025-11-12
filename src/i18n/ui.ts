@@ -228,6 +228,7 @@ export const ui = {
         gallery_caption_mekohaus_catalog: 'Секция каталога с категориями мебели',
         gallery_caption_mekohaus_about: 'Секция "О компании" с преимуществами для партнеров',
         gallery_caption_mekohaus_form: 'Форма для получения консультации и оптового прайс-листа',
+        case_mekohaus_deployment_text: 'Проект развернут на стандартном виртуальном хостинге. Это классическое и надежное решение, которое обеспечивает стабильную работу сайта при оптимальных затратах. Бэкенд на PHP и frontend-часть размещены в рамках одного хостинг-аккаунта, что упрощает поддержку и администрирование.',
 
         // Geo Links
         'geoLinks.title': 'Мы работаем в городах:',
@@ -449,21 +450,22 @@ export const ui = {
         gallery_caption_3d_faq: 'FAQ: Answers to common questions to address objections',
         gallery_caption_3d_contact_form: 'Order Form: The main lead generation tool',
 
-        // Кейс: Mekohaus
-        case_mekohaus_title: 'Кейс: B2B-портал для мебельной фабрики Mekohaus | AVPdev Портфолио',
-        case_mekohaus_h1: 'B2B-портал для мебельной фабрики Mekohaus',
-        case_mekohaus_desc: 'Разработка многоязычного B2B-портала для оптовых продаж мебели с динамическим каталогом, формой заказа и интеграцией с Telegram.',
-        case_mekohaus_client: 'Мебельная фабрика "Mekohaus"',
-        case_mekohaus_services: 'Full-Stack разработка, UI/UX',
-        case_mekohaus_task_p: 'Создать многоязычный B2B-портал для оптовых продаж мебели. Ключевые цели: предоставить партнерам и дилерам удобный интерактивный каталог продукции, автоматизировать процесс получения оптовых заявок и обеспечить стабильную работу сайта под высокой нагрузкой.',
-        case_mekohaus_solution_li1: '<strong>Динамический каталог:</strong> Разработан интерактивный каталог с категориями и подкатегориями, подгружающий данные о товарах из JS-файлов, что упрощает управление ассортиментом.',
-        case_mekohaus_solution_li2: '<strong>Многоязычность:</strong> Реализована полная поддержка русского и английского языков с возможностью переключения "на лету" без перезагрузки страницы.',
-        case_mekohaus_solution_li3: '<strong>Интерактивные модальные окна:</strong> Создана система модальных окон для просмотра подкатегорий и детальной информации о товаре, включая галерею изображений.',
-        case_mekohaus_solution_li4: '<strong>Backend на PHP:</strong> Разработан серверный обработчик форм на PHP для безопасного приема и валидации заявок от оптовых покупателей.',
-        case_mekohaus_solution_li5: '<strong>Интеграция с Telegram:</strong> Настроена отправка мгновенных уведомлений о новых заявках в Telegram-чат менеджеров для оперативной обработки заказов.',
-        gallery_caption_mekohaus_hero: 'Главный экран сайта с видеофоном и ключевым предложением',
-        gallery_caption_mekohaus_catalog: 'Секция каталога с категориями мебели',
-        gallery_caption_mekohaus_about: 'Секция "О компании" с преимуществами для партнеров',
-        gallery_caption_mekohaus_form: 'Форма для получения консультации и оптового прайс-листа',
+        // Case: Mekohaus
+        case_mekohaus_title: 'Case: B2B Portal for Mekohaus Furniture Factory | AVPdev Portfolio',
+        case_mekohaus_h1: 'B2B Portal for Mekohaus Furniture Factory',
+        case_mekohaus_desc: 'Development of a multilingual B2B portal for wholesale furniture sales with a dynamic catalog, order form, and Telegram integration.',
+        case_mekohaus_client: 'Mekohaus Furniture Factory',
+        case_mekohaus_services: 'Full-Stack Development, UI/UX',
+        case_mekohaus_task_p: 'To create a multilingual B2B portal for wholesale furniture sales. Key goals: provide partners and dealers with a convenient interactive product catalog, automate the process of receiving wholesale inquiries, and ensure stable site performance under high load.',
+        case_mekohaus_solution_li1: '<strong>Dynamic Catalog:</strong> Developed an interactive catalog with categories and subcategories, loading product data from JS files, which simplifies inventory management.',
+        case_mekohaus_solution_li2: '<strong>Multilingual Support:</strong> Implemented full support for Russian and English languages with the ability to switch "on the fly" without reloading the page.',
+        case_mekohaus_solution_li3: '<strong>Interactive Modals:</strong> Created a modal window system for viewing subcategories and detailed product information, including an image gallery.',
+        case_mekohaus_solution_li4: '<strong>PHP Backend:</strong> Developed a server-side form handler in PHP for securely receiving and validating inquiries from wholesale buyers.',
+        case_mekohaus_solution_li5: '<strong>Telegram Integration:</strong> Configured instant notifications of new inquiries to the managers\' Telegram chat for prompt order processing.',
+        gallery_caption_mekohaus_hero: 'Hero screen of the site with a video background and key offer',
+        gallery_caption_mekohaus_catalog: 'Catalog section with furniture categories',
+        gallery_caption_mekohaus_about: '"About Us" section with benefits for partners',
+        gallery_caption_mekohaus_form: 'Form for consultation and wholesale price list request',
+        case_mekohaus_deployment_text: 'The project is deployed on standard shared web hosting. This is a classic and reliable solution that ensures stable site operation at an optimal cost. The PHP backend and the frontend are hosted within a single hosting account, which simplifies support and administration.',
     }
 } as const;
