@@ -1,4 +1,3 @@
----
 // src/components/PortfolioCard.astro
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { Project, TranslationKey } from '../env.d.ts';
@@ -14,7 +13,9 @@ const linkTextKey = 'portfolio_card_link';
 <div class="portfolio-card" data-category={category}>
     <div class="portfolio-image" style={`background-image: url('${img}');`}></div>
     <div class="portfolio-info">
-        <h3 set:html={t(titleKey as TranslationKey)} />
+        {/* ИСПРАВЛЕНО: Заменен самозакрывающийся тег на парный */}
+        <h3 set:html={t(titleKey as TranslationKey)}></h3>
+        
         <div class="portfolio-tags" style="margin-top: auto;">
             {techStack && techStack.slice(0, 3).map(tech => (
                 <span class="tag">
@@ -23,6 +24,8 @@ const linkTextKey = 'portfolio_card_link';
                 </span>
             ))}
         </div>
-        <a href={link} class="case-link" set:html={t(linkTextKey)} />
+        
+        {/* ИСПРАВЛЕНО: Заменен самозакрывающийся тег на парный */}
+        <a href={link} class="case-link" set:html={t(linkTextKey)}></a>
     </div>
 </div>
