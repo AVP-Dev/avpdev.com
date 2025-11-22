@@ -1,58 +1,48 @@
-# Этап 1: Сборка приложения (Builder)
-# Используем актуальную LTS-версию Node.js на базе Alpine для легковесности
-FROM node:22-alpine AS builder
+# Используем стабильную LTS версию Node.js на базе Debian (slim)
+# Это решает проблему с падением компилятора Astro (panic: html parser)
+FROM node:20-slim AS builder
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и package-lock.json для кэширования зависимостей
 COPY package*.json ./
 
-# Устанавливаем зависимости, включая devDependencies для сборки
+# Устанавливаем зависимости
 RUN npm install
 
-# Копируем все остальные файлы проекта
 COPY . .
 
-# Генерируем типы Astro для корректной сборки
+# Генерируем типы
 RUN npx astro sync
 
-# Собираем производственную версию приложения
+# Собираем проект
 RUN npm run build
 
-
-# Этап 2: Производственный образ (Production)
-FROM node:22-alpine AS production
+# --- Stage 2: Production ---
+FROM node:20-slim AS production
 
 WORKDIR /app
 
-# Создаем специального пользователя и группу для повышения безопасности
-RUN addgroup -S astro_group && adduser -S astro_user -G astro_group
+# Устанавливаем dumb-init и curl для healthcheck (в Debian используется apt-get)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends dumb-init curl && \
+    rm -rf /var/lib/apt/lists/*
 
-# Устанавливаем dumb-init для корректного управления процессами и curl для healthcheck
-RUN apk add --no-cache dumb-init curl
+# Создаем пользователя
+RUN groupadd -r astro_group && useradd -r -g astro_group -d /app astro_user
 
-# Копируем собранное приложение из этапа 'builder'
+# Копируем артефакты сборки
 COPY --from=builder /app/dist ./dist
-
-# Копируем только необходимые для запуска производственные зависимости
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 
-# Устанавливаем права на файлы для созданного пользователя
-RUN chown -R astro_user:astro_group .
+# Настраиваем права
+RUN chown -R astro_user:astro_group /app
 
-# Переключаемся на непривилегированного пользователя
 USER astro_user
 
-# Открываем порт, на котором будет работать приложение
 EXPOSE 4321
 
-# Добавляем проверку состояния (Healthcheck)
-# Проверяем, что сервер отвечает на запросы
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD curl -f http://localhost:4321 || exit 1
 
-# Устанавливаем команду для запуска приложения через dumb-init
-# Это обеспечивает корректную обработку сигналов (например, при остановке контейнера)
 CMD ["dumb-init", "node", "./dist/server/entry.mjs"]
