@@ -42,9 +42,7 @@ const schema = {
     description={content.description}
     h1={content.h1}
     p={content.p}
+    schema={schema}
 >
-  <Fragment slot="head">
-    <!-- ИСПРАВЛЕНО: Заменен самозакрывающийся тег на <script>...</script> -->
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)}></script>
-  </Fragment>
+  {/* Schema passed via prop, head slot removed */}
 </GeoPageLayout>

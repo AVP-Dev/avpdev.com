@@ -60,11 +60,9 @@ const projectSchema = {
     year={year}
     heroImage={heroImage}
     heroImageAlt={heroImageAlt}
+    schema={projectSchema}
 >
-    <Fragment slot="head">
-        <!-- ИСПРАВЛЕНО: Заменен самозакрывающийся тег на <script>...</script> -->
-        <script is:inline type="application/ld+json" set:html={JSON.stringify(projectSchema)}></script>
-    </Fragment>
+    {/* Schema passed via prop, head slot removed */}
 
     <div slot="header">
         <h1 class="gradient-text" set:html={t(header.titleKey as TranslationKey)}></h1>

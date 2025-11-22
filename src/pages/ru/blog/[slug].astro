@@ -56,11 +56,9 @@ const schema = {
   description={post.data.description}
   isTranslationKey={false}
   ogImage={post.data.heroImage ? post.data.heroImage.src : '/og-image.webp'}
+  schema={schema}
 >
-  <Fragment slot="head">
-    <!-- ИСПРАВЛЕНО: Заменен самозакрывающийся тег на <script>...</script> -->
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)}></script>
-  </Fragment>
+  {/* Схема теперь передается через prop 'schema', slot 'head' удален */}
 
   <article class="blog-post-article">
     <header class="blog-post-hero">

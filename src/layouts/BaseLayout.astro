@@ -19,6 +19,7 @@ export interface Props {
 	description: string;
     ogImage?: string;
     isTranslationKey?: boolean;
+    schema?: object; // Добавляем проп для JSON-LD схемы
 }
 
 const {
@@ -26,6 +27,7 @@ const {
     description,
     ogImage = '/og-image.webp',
     isTranslationKey = true,
+    schema, // Деструктурируем schema
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -41,12 +43,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
 
 // --- ГЕНЕРАЦИЯ SCHEMA.ORG (JSON-LD) ---
-
-// 1. Хлебные крошки (Breadcrumbs)
+// ... (код генерации breadcrumbs и personSchema оставляем без изменений) ...
 const pathSegments = Astro.url.pathname.split('/').filter(segment => segment && segment !== lang);
 const siteUrl = Astro.site?.href || 'https://avpdev.com';
 
-// Базовая крошка - Главная
 const breadcrumbItems = [
   {
     "@type": "ListItem",
@@ -56,21 +56,13 @@ const breadcrumbItems = [
   }
 ];
 
-// Генерируем остальные крошки
 pathSegments.forEach((segment, index) => {
   const url = `${siteUrl}/${lang}/${pathSegments.slice(0, index + 1).join('/')}/`;
-  
-  // Простая эвристика для имен
   let name = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
-  
-  // Если это последний элемент, используем заголовок страницы (более читаемо)
   if (index === pathSegments.length - 1) {
-      // Ограничиваем длину заголовка для крошек
       name = finalTitle.length > 30 ? finalTitle.substring(0, 30) + '...' : finalTitle;
-      // Убираем HTML теги
       name = name.replace(/<[^>]*>?/gm, '');
   }
-
   breadcrumbItems.push({
     "@type": "ListItem",
     "position": index + 2,
@@ -85,7 +77,6 @@ const breadcrumbSchema = {
   "itemListElement": breadcrumbItems
 };
 
-// 2. Основная сущность (Person & ProfessionalService)
 const personSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -157,11 +148,15 @@ const personSchema = {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     {/* --- ВНЕДРЕНИЕ SCHEMA.ORG (JSON-LD) --- */}
-    {/* ИСПРАВЛЕНО: Используем закрывающий тег </script> вместо самозакрывающегося */}
     <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
 
-    <!-- СЮДА ДОБАВЛЕН СЛОТ ДЛЯ HEAD -->
+    {/* Рендерим переданную схему, если она есть */}
+    {schema && (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+    )}
+
+    {/* Оставляем слот для других целей, если нужно, но схему передаем через проп */}
     <slot name="head" />
 
     <!-- Google Analytics подключается только если ID задан в .env -->
