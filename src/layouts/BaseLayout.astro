@@ -1,4 +1,3 @@
----
 // src/layouts/BaseLayout.astro
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
@@ -40,6 +39,49 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ ОКРУЖЕНИЯ ДЛЯ GOOGLE ANALYTICS
 const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
+
+// --- Breadcrumbs Schema Generation ---
+const pathSegments = Astro.url.pathname.split('/').filter(segment => segment && segment !== lang);
+const siteUrl = Astro.site?.href || 'https://avpdev.com';
+
+// Базовая крошка - Главная
+const breadcrumbItems = [
+  {
+    "@type": "ListItem",
+    "position": 1,
+    "name": lang === 'ru' ? "Главная" : "Home",
+    "item": `${siteUrl}/${lang}/`
+  }
+];
+
+// Генерируем остальные крошки
+pathSegments.forEach((segment, index) => {
+  const url = `${siteUrl}/${lang}/${pathSegments.slice(0, index + 1).join('/')}/`;
+  
+  // Простая эвристика для имен (можно усложнить, используя словарь переводов)
+  let name = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+  
+  // Если это последний элемент, используем заголовок страницы (более читаемо)
+  if (index === pathSegments.length - 1) {
+      // Ограничиваем длину заголовка для крошек, если он слишком длинный
+      name = finalTitle.length > 30 ? finalTitle.substring(0, 30) + '...' : finalTitle;
+      // Убираем HTML теги, если они попали из finalTitle (например span)
+      name = name.replace(/<[^>]*>?/gm, '');
+  }
+
+  breadcrumbItems.push({
+    "@type": "ListItem",
+    "position": index + 2,
+    "name": name,
+    "item": url
+  });
+});
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbItems
+};
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -68,8 +110,54 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
 
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" xintegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    {/* --- SCHEMA.ORG: Breadcrumbs --- */}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+    {/* --- SCHEMA.ORG: Person & ProfessionalService --- */}
+    <script is:inline type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://avpdev.com/#alexey",
+            "name": "Alexey Patskevich",
+            "url": "https://avpdev.com",
+            "image": "https://avpdev.com/assets/images/about-photo.webp",
+            "jobTitle": "Full-Stack Developer",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "AVPdev",
+              "url": "https://avpdev.com"
+            },
+            "sameAs": [
+              "https://github.com/AVP-Dev",
+              "https://t.me/avpdevcom"
+            ]
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://avpdev.com/#service",
+            "name": "AVPdev - Web Development & Automation",
+            "url": "https://avpdev.com",
+            "image": "https://avpdev.com/apple-touch-icon.png",
+            "description": "Professional Full-Stack development, business automation, and IT consulting.",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "BY",
+              "addressLocality": "Minsk" 
+            },
+            "founder": {
+              "@id": "https://avpdev.com/#alexey"
+            }
+          }
+        ]
+      })}
+    </script>
 
     <!-- ИСПРАВЛЕНО: Google Analytics подключается только если ID задан в .env -->
     {GTAG_ID && (
