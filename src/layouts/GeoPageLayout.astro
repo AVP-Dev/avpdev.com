@@ -12,7 +12,7 @@ interface Props {
   description: string;
   h1: string;
   p: string;
-  schema?: object; // Добавляем поддержку schema
+  schema?: object;
 }
 
 const { title, description, h1, p, schema } = Astro.props;
@@ -22,10 +22,6 @@ const lang = getLangFromUrl(Astro.url);
 const projects = await getCollection('projects', ({ id }) => id.startsWith(lang + '/'));
 ---
 <BaseLayout title={title} description={description} isTranslationKey={false} schema={schema}>
-  <Fragment slot="head">
-    <slot name="head" />
-  </Fragment>
-
   <GeoHero h1={h1} p={p} />
   <Services />
   <Portfolio projects={projects} />

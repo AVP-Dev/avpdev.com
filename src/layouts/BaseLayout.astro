@@ -120,7 +120,6 @@ const personSchema = {
 };
 
 // 3. Объединяем все схемы в один граф для рендеринга одним скриптом
-// Это предотвращает ошибку парсера Astro "originalIM was set twice"
 const fullSchemaGraph = [
     ...personSchema['@graph'], // Разворачиваем граф персоны
     breadcrumbSchema,          // Добавляем крошки
@@ -134,6 +133,10 @@ const finalJsonLd = {
     "@context": "https://schema.org",
     "@graph": fullSchemaGraph
 };
+
+// КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Санитизация JSON для предотвращения ошибок парсера Astro/Vite.
+// Заменяем все '<' на unicode последовательность, чтобы не сломать HTML-теги.
+const jsonLdString = JSON.stringify(finalJsonLd).replace(/</g, '\\u003c');
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -165,9 +168,6 @@ const finalJsonLd = {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" xintegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    {/* --- ВНЕДРЕНИЕ SCHEMA.ORG (JSON-LD) ОДНИМ БЛОКОМ --- */}
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(finalJsonLd)}></script>
-
     <slot name="head" />
 
     <!-- Google Analytics подключается только если ID задан в .env -->
@@ -198,6 +198,9 @@ const finalJsonLd = {
     <ScrollToTop />
 
     <script src="../scripts/main.ts"></script>
+
+    {/* КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Переносим JSON-LD в конец body для избежания panic: parser error */}
+    <script is:inline type="application/ld+json" set:html={jsonLdString}></script>
 
 </body>
 </html>
