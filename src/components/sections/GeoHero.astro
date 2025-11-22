@@ -15,7 +15,7 @@ const t = useTranslations(lang);
     <div class="container hero-container">
         <div class="hero-content">
             <div class="hero-text fade-in">
-                {/* ИСПРАВЛЕНО: Заменен самозакрывающийся тег на парный */}
+                {/* ИСПРАВЛЕНО: Используем парный тег вместо самозакрывающегося */}
                 <h1 set:html={h1}></h1>
                 <p set:html={p}></p>
                 <a href={`/${lang}/brief/`} class="cta-button">{t('blog_cta_button')}</a>

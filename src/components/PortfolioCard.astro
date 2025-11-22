@@ -13,7 +13,7 @@ const linkTextKey = 'portfolio_card_link';
 <div class="portfolio-card" data-category={category}>
     <div class="portfolio-image" style={`background-image: url('${img}');`}></div>
     <div class="portfolio-info">
-        {/* ИСПРАВЛЕНО: Заменен самозакрывающийся тег на парный */}
+        {/* ИСПРАВЛЕНО: Парный тег h3 */}
         <h3 set:html={t(titleKey as TranslationKey)}></h3>
         
         <div class="portfolio-tags" style="margin-top: auto;">
@@ -25,7 +25,7 @@ const linkTextKey = 'portfolio_card_link';
             ))}
         </div>
         
-        {/* ИСПРАВЛЕНО: Заменен самозакрывающийся тег на парный */}
+        {/* ИСПРАВЛЕНО: Парный тег a */}
         <a href={link} class="case-link" set:html={t(linkTextKey)}></a>
     </div>
 </div>
