@@ -43,7 +43,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
 
 // --- ГЕНЕРАЦИЯ SCHEMA.ORG (JSON-LD) ---
-// ... (код генерации breadcrumbs и personSchema оставляем без изменений) ...
+
+// 1. Хлебные крошки (Breadcrumbs)
 const pathSegments = Astro.url.pathname.split('/').filter(segment => segment && segment !== lang);
 const siteUrl = Astro.site?.href || 'https://avpdev.com';
 
@@ -77,6 +78,7 @@ const breadcrumbSchema = {
   "itemListElement": breadcrumbItems
 };
 
+// 2. Основная сущность (Person & ProfessionalService)
 const personSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -116,6 +118,22 @@ const personSchema = {
     }
   ]
 };
+
+// 3. Объединяем все схемы в один граф для рендеринга одним скриптом
+// Это предотвращает ошибку парсера Astro "originalIM was set twice"
+const fullSchemaGraph = [
+    ...personSchema['@graph'], // Разворачиваем граф персоны
+    breadcrumbSchema,          // Добавляем крошки
+];
+
+if (schema) {
+    fullSchemaGraph.push(schema); // Добавляем специфичную схему страницы, если есть
+}
+
+const finalJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": fullSchemaGraph
+};
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -147,16 +165,9 @@ const personSchema = {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" xintegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    {/* --- ВНЕДРЕНИЕ SCHEMA.ORG (JSON-LD) --- */}
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
+    {/* --- ВНЕДРЕНИЕ SCHEMA.ORG (JSON-LD) ОДНИМ БЛОКОМ --- */}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(finalJsonLd)}></script>
 
-    {/* Рендерим переданную схему, если она есть */}
-    {schema && (
-        <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)}></script>
-    )}
-
-    {/* Оставляем слот для других целей, если нужно, но схему передаем через проп */}
     <slot name="head" />
 
     <!-- Google Analytics подключается только если ID задан в .env -->
