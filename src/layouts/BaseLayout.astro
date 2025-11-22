@@ -40,7 +40,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ ОКРУЖЕНИЯ ДЛЯ GOOGLE ANALYTICS
 const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
 
-// --- Breadcrumbs Schema Generation ---
+// --- ГЕНЕРАЦИЯ SCHEMA.ORG (JSON-LD) ---
+
+// 1. Хлебные крошки (Breadcrumbs)
 const pathSegments = Astro.url.pathname.split('/').filter(segment => segment && segment !== lang);
 const siteUrl = Astro.site?.href || 'https://avpdev.com';
 
@@ -58,14 +60,14 @@ const breadcrumbItems = [
 pathSegments.forEach((segment, index) => {
   const url = `${siteUrl}/${lang}/${pathSegments.slice(0, index + 1).join('/')}/`;
   
-  // Простая эвристика для имен (можно усложнить, используя словарь переводов)
+  // Простая эвристика для имен
   let name = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
   
   // Если это последний элемент, используем заголовок страницы (более читаемо)
   if (index === pathSegments.length - 1) {
-      // Ограничиваем длину заголовка для крошек, если он слишком длинный
+      // Ограничиваем длину заголовка для крошек
       name = finalTitle.length > 30 ? finalTitle.substring(0, 30) + '...' : finalTitle;
-      // Убираем HTML теги, если они попали из finalTitle (например span)
+      // Убираем HTML теги
       name = name.replace(/<[^>]*>?/gm, '');
   }
 
@@ -81,6 +83,47 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": breadcrumbItems
+};
+
+// 2. Основная сущность (Person & ProfessionalService)
+const personSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://avpdev.com/#alexey",
+      "name": "Alexey Patskevich",
+      "url": "https://avpdev.com",
+      "image": "https://avpdev.com/assets/images/about-photo.webp",
+      "jobTitle": "Full-Stack Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "AVPdev",
+        "url": "https://avpdev.com"
+      },
+      "sameAs": [
+        "https://github.com/AVP-Dev",
+        "https://t.me/avpdevcom"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://avpdev.com/#service",
+      "name": "AVPdev - Web Development & Automation",
+      "url": "https://avpdev.com",
+      "image": "https://avpdev.com/apple-touch-icon.png",
+      "description": "Professional Full-Stack development, business automation, and IT consulting.",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BY",
+        "addressLocality": "Minsk" 
+      },
+      "founder": {
+        "@id": "https://avpdev.com/#alexey"
+      }
+    }
+  ]
 };
 ---
 <!DOCTYPE html>
@@ -113,51 +156,10 @@ const breadcrumbSchema = {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" xintegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    {/* --- SCHEMA.ORG: Breadcrumbs --- */}
+    {/* --- ВНЕДРЕНИЕ SCHEMA.ORG (JSON-LD) --- */}
+    {/* Используем set:html для безопасной вставки, чтобы избежать ошибки парсера */}
     <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-
-    {/* --- SCHEMA.ORG: Person & ProfessionalService --- */}
-    <script is:inline type="application/ld+json">
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Person",
-            "@id": "https://avpdev.com/#alexey",
-            "name": "Alexey Patskevich",
-            "url": "https://avpdev.com",
-            "image": "https://avpdev.com/assets/images/about-photo.webp",
-            "jobTitle": "Full-Stack Developer",
-            "worksFor": {
-              "@type": "Organization",
-              "name": "AVPdev",
-              "url": "https://avpdev.com"
-            },
-            "sameAs": [
-              "https://github.com/AVP-Dev",
-              "https://t.me/avpdevcom"
-            ]
-          },
-          {
-            "@type": "ProfessionalService",
-            "@id": "https://avpdev.com/#service",
-            "name": "AVPdev - Web Development & Automation",
-            "url": "https://avpdev.com",
-            "image": "https://avpdev.com/apple-touch-icon.png",
-            "description": "Professional Full-Stack development, business automation, and IT consulting.",
-            "priceRange": "$$",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "BY",
-              "addressLocality": "Minsk" 
-            },
-            "founder": {
-              "@id": "https://avpdev.com/#alexey"
-            }
-          }
-        ]
-      })}
-    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
     <!-- ИСПРАВЛЕНО: Google Analytics подключается только если ID задан в .env -->
     {GTAG_ID && (
