@@ -1,4 +1,3 @@
----
 // src/pages/en/services/[city].astro
 import GeoPageLayout from '../../../layouts/GeoPageLayout.astro';
 import { locations } from '../../../data/locations';
@@ -45,6 +44,7 @@ const schema = {
     p={content.p}
 >
   <Fragment slot="head">
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <!-- ИСПРАВЛЕНО: Заменен самозакрывающийся тег на <script>...</script> -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)}></script>
   </Fragment>
 </GeoPageLayout>

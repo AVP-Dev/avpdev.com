@@ -58,7 +58,8 @@ const schema = {
   ogImage={post.data.heroImage ? post.data.heroImage.src : '/og-image.webp'}
 >
   <Fragment slot="head">
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <!-- ИСПРАВЛЕНО: Заменен самозакрывающийся тег на <script>...</script> -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)}></script>
   </Fragment>
 
   <article class="blog-post-article">

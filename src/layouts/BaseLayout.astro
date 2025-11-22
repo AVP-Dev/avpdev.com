@@ -157,11 +157,11 @@ const personSchema = {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     {/* --- ВНЕДРЕНИЕ SCHEMA.ORG (JSON-LD) --- */}
-    {/* Используем set:html для безопасной вставки, чтобы избежать ошибки парсера */}
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    {/* ИСПРАВЛЕНО: Используем закрывающий тег </script> вместо самозакрывающегося, чтобы избежать ошибки парсера Astro */}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
 
-    <!-- ИСПРАВЛЕНО: Google Analytics подключается только если ID задан в .env -->
+    <!-- Google Analytics подключается только если ID задан в .env -->
     {GTAG_ID && (
         <>
             <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}></script>

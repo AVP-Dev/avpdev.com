@@ -62,7 +62,8 @@ const projectSchema = {
     heroImageAlt={heroImageAlt}
 >
     <Fragment slot="head">
-        <script is:inline type="application/ld+json" set:html={JSON.stringify(projectSchema)} />
+        <!-- ИСПРАВЛЕНО: Заменен самозакрывающийся тег на <script>...</script> -->
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(projectSchema)}></script>
     </Fragment>
 
     <div slot="header">
