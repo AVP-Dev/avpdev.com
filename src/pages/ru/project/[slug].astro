@@ -1,3 +1,4 @@
+---
 // src/pages/ru/project/[slug].astro
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
@@ -30,26 +31,6 @@ const {
     titleKey, descriptionKey, ogImage, clientKey, servicesKey, year, heroImage, heroImageAlt,
     header, content
 } = project.data;
-
-const projectSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": t(header.titleKey as TranslationKey),
-  "description": t(header.descriptionKey as TranslationKey),
-  "applicationCategory": "WebApplication",
-  "operatingSystem": "Any",
-  "author": {
-    "@type": "Person",
-    "name": "Alexey Patskevich",
-    "url": "https://avpdev.com"
-  },
-  "image": ogImage ? new URL(ogImage, Astro.site).href : undefined,
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  }
-};
 ---
 <CaseStudyLayout
     title={titleKey as TranslationKey}
@@ -60,10 +41,7 @@ const projectSchema = {
     year={year}
     heroImage={heroImage}
     heroImageAlt={heroImageAlt}
-    schema={projectSchema}
 >
-    {/* Schema passed via prop, head slot removed */}
-
     <div slot="header">
         <h1 class="gradient-text" set:html={t(header.titleKey as TranslationKey)}></h1>
         <p set:html={t(header.descriptionKey as TranslationKey)}></p>

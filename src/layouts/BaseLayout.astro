@@ -1,3 +1,4 @@
+---
 // src/layouts/BaseLayout.astro
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
@@ -19,7 +20,6 @@ export interface Props {
 	description: string;
     ogImage?: string;
     isTranslationKey?: boolean;
-    schema?: object; // Добавляем проп для JSON-LD схемы
 }
 
 const {
@@ -27,7 +27,6 @@ const {
     description,
     ogImage = '/og-image.webp',
     isTranslationKey = true,
-    schema, // Деструктурируем schema
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -41,102 +40,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ ОКРУЖЕНИЯ ДЛЯ GOOGLE ANALYTICS
 const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
-
-// --- ГЕНЕРАЦИЯ SCHEMA.ORG (JSON-LD) ---
-
-// 1. Хлебные крошки (Breadcrumbs)
-const pathSegments = Astro.url.pathname.split('/').filter(segment => segment && segment !== lang);
-const siteUrl = Astro.site?.href || 'https://avpdev.com';
-
-const breadcrumbItems = [
-  {
-    "@type": "ListItem",
-    "position": 1,
-    "name": lang === 'ru' ? "Главная" : "Home",
-    "item": `${siteUrl}/${lang}/`
-  }
-];
-
-pathSegments.forEach((segment, index) => {
-  const url = `${siteUrl}/${lang}/${pathSegments.slice(0, index + 1).join('/')}/`;
-  let name = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
-  if (index === pathSegments.length - 1) {
-      name = finalTitle.length > 30 ? finalTitle.substring(0, 30) + '...' : finalTitle;
-      name = name.replace(/<[^>]*>?/gm, '');
-  }
-  breadcrumbItems.push({
-    "@type": "ListItem",
-    "position": index + 2,
-    "name": name,
-    "item": url
-  });
-});
-
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": breadcrumbItems
-};
-
-// 2. Основная сущность (Person & ProfessionalService)
-const personSchema = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://avpdev.com/#alexey",
-      "name": "Alexey Patskevich",
-      "url": "https://avpdev.com",
-      "image": "https://avpdev.com/assets/images/about-photo.webp",
-      "jobTitle": "Full-Stack Developer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "AVPdev",
-        "url": "https://avpdev.com"
-      },
-      "sameAs": [
-        "https://github.com/AVP-Dev",
-        "https://t.me/avpdevcom"
-      ]
-    },
-    {
-      "@type": "ProfessionalService",
-      "@id": "https://avpdev.com/#service",
-      "name": "AVPdev - Web Development & Automation",
-      "url": "https://avpdev.com",
-      "image": "https://avpdev.com/apple-touch-icon.png",
-      "description": "Professional Full-Stack development, business automation, and IT consulting.",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "BY",
-        "addressLocality": "Minsk" 
-      },
-      "founder": {
-        "@id": "https://avpdev.com/#alexey"
-      }
-    }
-  ]
-};
-
-// 3. Объединяем все схемы в один граф для рендеринга одним скриптом
-const fullSchemaGraph = [
-    ...personSchema['@graph'], // Разворачиваем граф персоны
-    breadcrumbSchema,          // Добавляем крошки
-];
-
-if (schema) {
-    fullSchemaGraph.push(schema); // Добавляем специфичную схему страницы, если есть
-}
-
-const finalJsonLd = {
-    "@context": "https://schema.org",
-    "@graph": fullSchemaGraph
-};
-
-// КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Санитизация JSON для предотвращения ошибок парсера Astro/Vite.
-// Заменяем все '<' на unicode последовательность, чтобы не сломать HTML-теги.
-const jsonLdString = JSON.stringify(finalJsonLd).replace(/</g, '\\u003c');
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -165,12 +68,10 @@ const jsonLdString = JSON.stringify(finalJsonLd).replace(/</g, '\\u003c');
 
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" xintegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <slot name="head" />
-
-    <!-- Google Analytics подключается только если ID задан в .env -->
+    <!-- ИСПРАВЛЕНО: Google Analytics подключается только если ID задан в .env -->
     {GTAG_ID && (
         <>
             <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}></script>
@@ -198,9 +99,6 @@ const jsonLdString = JSON.stringify(finalJsonLd).replace(/</g, '\\u003c');
     <ScrollToTop />
 
     <script src="../scripts/main.ts"></script>
-
-    {/* КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Переносим JSON-LD в конец body для избежания panic: parser error */}
-    <script is:inline type="application/ld+json" set:html={jsonLdString}></script>
 
 </body>
 </html>

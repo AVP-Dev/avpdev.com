@@ -1,3 +1,4 @@
+---
 // src/layouts/CaseStudyLayout.astro
 import BaseLayout from './BaseLayout.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
@@ -13,7 +14,6 @@ export interface Props {
     year: string | number;
     heroImage: ImageMetadata;
     heroImageAlt: string;
-    schema?: object; // Добавляем поддержку schema
 }
 
 const {
@@ -24,15 +24,14 @@ const {
     servicesKey,
     year,
     heroImage,
-    heroImageAlt,
-    schema
+    heroImageAlt
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const homePath = `/${lang}/`;
 ---
-<BaseLayout title={t(title)} description={t(description)} ogImage={ogImage} schema={schema}>
+<BaseLayout title={t(title)} description={t(description)} ogImage={ogImage}>
     <section class="case-study-header">
         <div class="container">
             <!-- Заголовок и описание будут переданы из конкретной страницы кейса -->

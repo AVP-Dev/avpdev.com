@@ -1,3 +1,4 @@
+---
 // src/pages/ru/blog/[slug].astro
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
@@ -32,34 +33,13 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString(lang, {
 });
 
 const backLink = `/${lang}/blog/`;
-
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": post.data.title,
-  "description": post.data.description,
-  "datePublished": post.data.pubDate.toISOString(),
-  "author": {
-    "@type": "Person",
-    "name": "Alexey Patskevich",
-    "url": "https://avpdev.com"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": Astro.url.href
-  },
-  "image": post.data.heroImage ? new URL(post.data.heroImage.src, Astro.site).href : undefined
-};
 ---
 <BaseLayout
   title={post.data.title}
   description={post.data.description}
   isTranslationKey={false}
   ogImage={post.data.heroImage ? post.data.heroImage.src : '/og-image.webp'}
-  schema={schema}
 >
-  {/* Схема теперь передается через prop 'schema', slot 'head' удален */}
-
   <article class="blog-post-article">
     <header class="blog-post-hero">
         {post.data.heroImage && (
