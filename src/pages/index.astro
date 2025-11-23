@@ -1,6 +1,8 @@
 ---
 // src/pages/index.astro
-// Просто редирект на русскую версию, если Astro не сделает этого сам
-export const prerender = true;
-return Astro.redirect('/ru/');
+// Отключаем пререндеринг, чтобы редирект происходил на уровне сервера (мгновенно),
+// а не через HTML-страницу с надписью "Redirecting..."
+export const prerender = false;
+
+return Astro.redirect('/ru/', 301);
 ---
