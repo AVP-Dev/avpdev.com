@@ -86,8 +86,7 @@ section { padding: 120px 0; position: relative; }
     border-color: #ced4da;
 }
 
-/* === КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ ДЛЯ ОШИБОК === */
-/* Используем селектор с body для повышения приоритета над темой */
+/* Error Field Styles */
 body .form-control.error-field {
     border-color: #dc3545 !important;
     background-color: rgba(220, 53, 69, 0.05) !important;
@@ -399,9 +398,35 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 .form-hint.error-hint { color: #dc3545; }
 
 textarea.form-control { min-height: 150px; resize: vertical; }
-.form-submit-container { text-align: center; }
-.spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; animation: spin 1s ease-in-out infinite; margin: -35px auto 0; position: relative; }
-@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- Button Container Fix --- */
+.form-submit-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.5rem;
+    position: relative;
+}
+
+.form-submit-container .cta-button {
+    margin: 0;
+}
+
+.spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
 /* --- Feedback Modals --- */
 .feedback-modal-overlay {

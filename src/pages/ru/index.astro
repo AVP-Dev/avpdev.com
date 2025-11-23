@@ -1,5 +1,46 @@
 ---
 // src/pages/ru/index.astro
 export const prerender = true;
-return Astro.redirect('/', 301);
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Services from '../../components/sections/Services.astro';
+import About from '../../components/sections/About.astro';
+import Portfolio from '../../components/sections/Portfolio.astro';
+import Contact from '../../components/sections/Contact.astro';
+import SuccessModal from '../../components/modals/SuccessModal.astro';
+import ErrorModal from '../../components/modals/ErrorModal.astro';
+import { getCollection } from 'astro:content';
+// Импортируем изображение для Schema
+import aboutPhoto from '../../assets/images/about-photo.webp';
+
+const pageTitleKey = "page_title";
+const pageDescKey = "hero_p";
+
+const projects = await getCollection('projects', ({ id }) => id.startsWith('ru/'));
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Alexey Patskevich",
+  "jobTitle": "Full-Stack Developer",
+  "url": Astro.site,
+  // Используем .src для получения хешированного пути
+  "image": new URL(aboutPhoto.src, Astro.site).href,
+  "sameAs": [
+    "https://github.com/AVP-Dev",
+    "https://t.me/avpdevcom",
+    "https://wa.me/375291217371"
+  ],
+  "description": "Full-Stack разработчик. Создаю эффективные сайты и автоматизирую бизнес-процессы."
+};
 ---
+<BaseLayout title={pageTitleKey} description={pageDescKey} schema={schema}>
+  <Hero />
+  <Services />
+  <About />
+  <Portfolio projects={projects} />
+  <Contact />
+
+  <SuccessModal />
+  <ErrorModal />
+</BaseLayout>

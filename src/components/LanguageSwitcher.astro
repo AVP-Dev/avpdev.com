@@ -5,48 +5,27 @@ import { getLangFromUrl } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const locales = ['ru', 'en'];
 
-// Вычисляем путь без текущего языка
-// Если lang = 'ru' (теперь это корень или /ru/), логика может чуть отличаться,
-// но базовый принцип: если мы на /en/about, pathWithoutLang = /about
-// Если мы на /about (ru), pathWithoutLang = /about
-
+// Логика получения пути для другого языка
+// Если мы на /ru/about, то pathWithoutLang будет /about
 let pathWithoutLang = Astro.url.pathname;
-if (lang === 'en') {
-    pathWithoutLang = pathWithoutLang.replace(/^\/en\//, '/');
-} else if (lang === 'ru' && pathWithoutLang.startsWith('/ru/')) {
-    // На случай, если кто-то зашел по старой ссылке /ru/
-    pathWithoutLang = pathWithoutLang.replace(/^\/ru\//, '/');
+if (pathWithoutLang.startsWith(`/${lang}/`)) {
+    pathWithoutLang = pathWithoutLang.replace(`/${lang}/`, '/');
+} else if (pathWithoutLang === `/${lang}` || pathWithoutLang === `/${lang}/`) {
+    pathWithoutLang = '/';
 }
-// Если мы на главной, pathWithoutLang будет просто '/'
 ---
-
 <div class="lang-switcher">
     {locales.map((locale, index) => {
         const isActive = locale === lang;
+        // Просто формируем ссылку /ru/... или /en/...
+        const url = `/${locale}${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
         
-        // Формируем URL
-        let url;
-        if (locale === 'ru') {
-            // Для русского языка URL — это просто путь (например, / или /about)
-            url = pathWithoutLang === '/' ? '/' : pathWithoutLang;
-        } else {
-            // Для английского добавляем префикс /en
-            url = `/en${pathWithoutLang === '/' ? '/' : pathWithoutLang}`;
-        }
-
         return (
             <>
                 {isActive ? (
                     <button class="lang-btn active">{locale.toUpperCase()}</button>
                 ) : (
-                    <a 
-                        href={url} 
-                        class="lang-btn" 
-                        data-lang={locale}
-                        onclick={`document.cookie = "preferred_lang=${locale}; path=/; max-age=31536000";`}
-                    >
-                        {locale.toUpperCase()}
-                    </a>
+                    <a href={url} class="lang-btn">{locale.toUpperCase()}</a>
                 )}
                 {index < locales.length - 1 && <span class="lang-separator">|</span>}
             </>
