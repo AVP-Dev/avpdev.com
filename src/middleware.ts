@@ -1,22 +1,33 @@
+// src/middleware.ts
 import { defineMiddleware } from 'astro:middleware';
 
 export const onRequest = defineMiddleware((context, next) => {
   const { pathname } = context.url;
-  // Игнорируем все пути, которые уже содержат языковой префикс или являются ассетами
-  if (pathname.startsWith('/ru') || pathname.startsWith('/en') || pathname.includes('.')) {
+
+  // 1. Если это не корень сайта, ничего не делаем (Astro сам разберется с /en/..., /api/ и т.д.)
+  if (pathname !== '/' && pathname !== '') {
     return next();
   }
 
-  // Проверяем язык браузера
+  // 2. Проверяем куки (если пользователь уже выбирал язык ранее)
+  const savedLang = context.cookies.get('preferred_lang')?.value;
+
+  if (savedLang === 'en') {
+    return context.redirect('/en/');
+  }
+  if (savedLang === 'ru') {
+    return next(); // Остаемся на главной (она теперь русская)
+  }
+
+  // 3. Если куки нет, проверяем заголовок браузера Accept-Language
   const langHeader = context.request.headers.get('accept-language');
   const preferredLang = langHeader?.split(',')[0].split('-')[0].toLowerCase();
 
-  // Если основной язык не русский, редиректим на /en/
-  if (preferredLang && preferredLang !== 'ru') {
+  // Если браузер явно просит английский — делаем редирект
+  if (preferredLang === 'en') {
     return context.redirect('/en/');
   }
 
-  // Для всех остальных случаев (включая русский язык или отсутствие заголовка)
-  // оставляем поведение по умолчанию (редирект на /ru/ из `src/pages/index.astro`)
+  // Во всех остальных случаях отдаем русскую версию (по умолчанию)
   return next();
 });

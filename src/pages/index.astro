@@ -1,4 +1,6 @@
 ---
+// src/pages/index.astro
+// Это теперь ГЛАВНАЯ страница (русская версия по умолчанию)
 export const prerender = true;
 
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -16,6 +18,7 @@ import aboutPhoto from '../assets/images/about-photo.webp';
 const pageTitleKey = "page_title";
 const pageDescKey = "hero_p";
 
+// Загружаем русские проекты
 const projects = await getCollection('projects', ({ id }) => id.startsWith('ru/'));
 
 const schema = {
@@ -24,7 +27,6 @@ const schema = {
   "name": "Alexey Patskevich",
   "jobTitle": "Full-Stack Developer",
   "url": Astro.site,
-  // Используем .src для получения хешированного пути
   "image": new URL(aboutPhoto.src, Astro.site).href,
   "sameAs": [
     "https://github.com/AVP-Dev",

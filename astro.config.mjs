@@ -1,3 +1,4 @@
+// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
@@ -8,21 +9,16 @@ const site = 'https://avpdev.com';
 // Генерируем URL для гео-страниц
 const geoPages = locations.flatMap(loc => {
   const urls = [];
-  // Добавляем русскую версию, если она существует
+  // Для русского языка оставляем явные пути для гео-страниц, если нужно
   if (loc.name_ru) {
     urls.push(`/ru/uslugi/${loc.slug}/`);
   }
-  // Добавляем английскую версию
   urls.push(`/en/services/${loc.slug}/`);
   return urls;
 });
 
-
-// https://astro.build/config
 export default defineConfig({
   site: site,
-  // ИСПРАВЛЕНИЕ: Устанавливаем 'server', чтобы 'astro sync' прошел успешно.
-  // Статические страницы будут сгенерированы с помощью 'prerender = true'.
   output: 'server',
   adapter: node({
     mode: 'standalone'
@@ -40,8 +36,9 @@ export default defineConfig({
     defaultLocale: 'ru',
     locales: ['ru', 'en'],
     routing: {
-      prefixDefaultLocale: true,
+      // ВАЖНО: Отключаем префикс для дефолтного языка.
+      // Теперь русский язык будет открываться на корневом домене /.
+      prefixDefaultLocale: false,
     },
   },
 });
-
