@@ -252,19 +252,20 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     gap: 3rem;
 }
 
-/* --- TECH STACK UPDATES (CENTERED WRAPPER, LEFT ALIGNED ITEMS) --- */
+/* --- TECH STACK FIXES --- */
+/* Убираем центрирование самого контейнера, чтобы избежать "пляски" блоков разной ширины */
 .tech-category {
     display: flex;
-    justify-content: center; /* Centers the content wrapper in the grid cell */
-    /* Removes old text-align: center */
+    /* justify-content: center; <-- БЫЛО */
+    justify-content: flex-start; /* СТАЛО: прижимаем к началу ячейки грида */
 }
 
-/* Wrapper for Header + List to keep them aligned */
+/* Обертка: растягиваем на всю ширину ячейки */
 .tech-content-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Aligns title and list to the left relative to each other */
-    width: fit-content; /* Shrinks wrapper to content so it can be centered by parent */
+    align-items: flex-start; /* Выравниваем заголовок и список по левому краю */
+    width: 100%; /* СТАЛО: занимаем всю доступную ширину */
 }
 
 .tech-category h4 {
@@ -275,7 +276,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     padding-bottom: 0.75rem;
     border-bottom: 2px solid var(--accent-color-start);
     display: block;
-    width: fit-content; /* Border only spans text width */
+    width: fit-content;
     text-align: left;
 }
 
@@ -817,7 +818,10 @@ textarea.form-control { min-height: 150px; resize: vertical; }
         margin-left: auto;
         margin-right: auto;
     }
-    /* Removed previous override for h4 text-align to allow new wrapper style to work */
+    .tech-category h4 {
+        text-align: center;
+        display: block;
+    }
 }
 
 @media (max-width: 480px) {
