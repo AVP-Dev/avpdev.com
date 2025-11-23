@@ -11,14 +11,26 @@ function cleanInput(str: string | undefined | null): string {
     });
 }
 
+// Используем .superRefine для кастомной логики ошибки
 const contactSchema = z.object({
     name: z.string().min(1),
     email: z.string().email().optional().or(z.literal('')),
     phone: z.string().optional(),
     message: z.string().min(1),
-}).refine(data => data.email || data.phone, {
-    message: "Email or phone is required",
-    path: ["email"] // attach error to email field
+}).superRefine((data, ctx) => {
+    // Если и email, и телефон пустые — добавляем ошибку к обоим полям
+    if (!data.email && !data.phone) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Required",
+            path: ["email"]
+        });
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Required",
+            path: ["phone"]
+        });
+    }
 });
 
 export const POST: APIRoute = async ({ request }) => {

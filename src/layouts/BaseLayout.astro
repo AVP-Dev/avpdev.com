@@ -1,5 +1,4 @@
 ---
-// src/layouts/BaseLayout.astro
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -7,6 +6,14 @@ import CookieBanner from '../components/CookieBanner.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { ui } from '../i18n/ui';
+
+// --- ШРИФТЫ (Self-hosted) ---
+// Это решает проблемы с GDPR и ускоряет загрузку
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
 
 import '../styles/style.css';
 import '../styles/case-study.css';
@@ -37,21 +44,6 @@ const finalDescription = isTranslationKey ? t(description as keyof typeof ui['ru
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
-
-// --- ЛОГИКА HREFLANG ---
-let path = Astro.url.pathname;
-// Получаем "чистый" путь без языкового префикса
-let purePath = path;
-if (path.startsWith('/en/')) {
-    purePath = path.replace(/^\/en/, '') || '/';
-} else if (path.startsWith('/ru/')) {
-    purePath = path.replace(/^\/ru/, '') || '/';
-}
-
-// Генерируем ссылки для языков
-// RU теперь на корне, EN на /en/
-const ruUrl = new URL(purePath, Astro.site).href; 
-const enUrl = new URL(`/en${purePath === '/' ? '/' : purePath}`, Astro.site).href;
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -63,10 +55,6 @@ const enUrl = new URL(`/en${purePath === '/' ? '/' : purePath}`, Astro.site).hre
     <meta name="description" content={finalDescription} />
     
     <link rel="canonical" href={canonicalURL} />
-
-    <link rel="alternate" hreflang="ru" href={ruUrl} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="x-default" href={ruUrl} />
 
     <meta property="og:title" content={finalTitle} />
     <meta property="og:description" content={finalDescription} />
@@ -80,18 +68,18 @@ const enUrl = new URL(`/en${purePath === '/' ? '/' : purePath}`, Astro.site).hre
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+    
+    {/* Вставка Schema.org */}
     {schema && (
         <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     )}
 
     {GTAG_ID && (
         <>
-            <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}></script>
-            <script is:inline define:vars={{ GTAG_ID }}>
+            {/* Google Tag Manager - PARTYTOWN */}
+            <script type="text/partytown" async src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}></script>
+            <script type="text/partytown" define:vars={{ GTAG_ID }}>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());

@@ -1,11 +1,11 @@
 import { defineConfig } from 'astro/config';
 import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
+import partytown from '@astrojs/partytown'; // Импортируем Partytown
 import { locations } from './src/data/locations.ts';
 
 const site = 'https://avpdev.com';
 
-// Генерируем URL для гео-страниц
 const geoPages = locations.flatMap(loc => {
   const urls = [];
   if (loc.name_ru) {
@@ -21,11 +21,19 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone'
   }),
-  integrations: [sitemap({
-    customPages: [
-      ...geoPages.map(page => new URL(page, site).href)
-    ]
-  })],
+  integrations: [
+    sitemap({
+      customPages: [
+        ...geoPages.map(page => new URL(page, site).href)
+      ]
+    }),
+    partytown({
+      // Конфигурация Partytown для GTAG
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
+  ],
   trailingSlash: 'always',
   build: {
     format: 'directory'
@@ -34,7 +42,6 @@ export default defineConfig({
     defaultLocale: 'ru',
     locales: ['ru', 'en'],
     routing: {
-      // REVERT: Включаем префикс обратно, чтобы Astro сам редиректил с / на /ru/
       prefixDefaultLocale: true,
     },
   },

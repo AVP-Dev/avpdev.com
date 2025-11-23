@@ -144,11 +144,12 @@ function initializePage() {
             const submitButton = form.querySelector('#submit-button') as HTMLButtonElement;
             const spinner = form.querySelector('#form-spinner') as HTMLElement;
 
-            // Reset errors
+            // Сброс ошибок перед новой проверкой
             form.querySelectorAll('.error-field').forEach(el => el.classList.remove('error-field'));
 
             let isValid = true;
-            // Basic client-side check
+            
+            // 1. Проверка стандартных обязательных полей (Имя, Сообщение)
             form.querySelectorAll('[required]').forEach(el => {
                 const input = el as HTMLInputElement | HTMLTextAreaElement;
                 if (!input.value.trim()) {
@@ -156,6 +157,20 @@ function initializePage() {
                     isValid = false;
                 }
             });
+
+            // 2. Проверка: Email ИЛИ Телефон
+            const emailInput = form.querySelector('input[name="email"]') as HTMLInputElement;
+            const phoneInput = form.querySelector('input[name="phone"]') as HTMLInputElement;
+
+            if (emailInput && phoneInput) {
+                // Если оба поля пустые — подсвечиваем оба как ошибочные
+                if (!emailInput.value.trim() && !phoneInput.value.trim()) {
+                    emailInput.classList.add('error-field');
+                    phoneInput.classList.add('error-field');
+                    isValid = false;
+                }
+            }
+
             if (!isValid) return;
 
             if(submitButton) submitButton.style.display = 'none';
@@ -177,7 +192,7 @@ function initializePage() {
                 } else {
                     const errorData = await response.json();
                     if (response.status === 400 && errorData.errors) {
-                        // Server-side validation errors
+                        // Отображение ошибок валидации с сервера
                         for (const [field, messages] of Object.entries(errorData.errors)) {
                             const input = form.querySelector(`[name="${field}"]`);
                             if (input) input.classList.add('error-field');
