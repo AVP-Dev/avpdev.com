@@ -14,6 +14,7 @@ export interface Props {
     year: string | number;
     heroImage: ImageMetadata;
     heroImageAlt: string;
+    schema?: Record<string, any>;
 }
 
 const {
@@ -24,14 +25,15 @@ const {
     servicesKey,
     year,
     heroImage,
-    heroImageAlt
+    heroImageAlt,
+    schema
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const homePath = `/${lang}/`;
 ---
-<BaseLayout title={t(title)} description={t(description)} ogImage={ogImage}>
+<BaseLayout title={t(title)} description={t(description)} ogImage={ogImage} schema={schema}>
     <section class="case-study-header">
         <div class="container">
             <!-- Заголовок и описание будут переданы из конкретной страницы кейса -->

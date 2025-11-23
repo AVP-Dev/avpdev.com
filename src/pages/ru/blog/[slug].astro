@@ -33,12 +33,56 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString(lang, {
 });
 
 const backLink = `/${lang}/blog/`;
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Главная",
+            "item": new URL(`/${lang}/`, Astro.site).href
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Блог",
+            "item": new URL(`/${lang}/blog/`, Astro.site).href
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": post.data.title,
+            "item": new URL(Astro.url.pathname, Astro.site).href
+        }
+    ]
+};
+
+const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.data.title,
+    "description": post.data.description,
+    "author": {
+        "@type": "Person",
+        "name": "Алексей Пацкевич",
+        "url": Astro.site ? Astro.site.toString() : ""
+    },
+    "datePublished": post.data.pubDate.toISOString(),
+    "image": post.data.heroImage ? new URL(post.data.heroImage.src, Astro.site).href : "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": new URL(Astro.url.pathname, Astro.site).href
+    }
+};
 ---
 <BaseLayout
   title={post.data.title}
   description={post.data.description}
   isTranslationKey={false}
   ogImage={post.data.heroImage ? post.data.heroImage.src : '/og-image.webp'}
+  schema={[breadcrumbSchema, articleSchema]}
 >
   <article class="blog-post-article">
     <header class="blog-post-hero">
@@ -46,7 +90,7 @@ const backLink = `/${lang}/blog/`;
             <div class="hero-image-container">
                 <img
                     src={post.data.heroImage.src}
-                    alt={`Обложка статьи: ${post.data.title}`}
+                    alt={`Cover for article: ${post.data.title}`}
                     width="1200"
                     height="600"
                     loading="eager"

@@ -2,8 +2,8 @@ import { defineMiddleware } from 'astro:middleware';
 
 export const onRequest = defineMiddleware((context, next) => {
   const { pathname } = context.url;
-  // Игнорируем все пути, которые уже содержат языковой префикс или являются ассетами
-  if (pathname.startsWith('/ru') || pathname.startsWith('/en') || pathname.includes('.')) {
+  // Игнорируем все пути, которые уже содержат языковой префикс, являются ассетами или API
+  if (pathname.startsWith('/ru') || pathname.startsWith('/en') || pathname.includes('.') || pathname.startsWith('/api/')) {
     return next();
   }
 
@@ -16,7 +16,6 @@ export const onRequest = defineMiddleware((context, next) => {
     return context.redirect('/en/');
   }
 
-  // Для всех остальных случаев (включая русский язык или отсутствие заголовка)
-  // оставляем поведение по умолчанию (редирект на /ru/ из `src/pages/index.astro`)
+  // Для всех остальных случаев оставляем поведение по умолчанию
   return next();
 });

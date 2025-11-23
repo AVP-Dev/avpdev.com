@@ -62,7 +62,7 @@
     gap: 0.8rem;
 }
 
-/* --- ИСПРАВЛЕННЫЕ СТИЛИ ДЛЯ RADIO И CHECKBOX --- */
+/* --- СТИЛИ ДЛЯ RADIO И CHECKBOX --- */
 
 /* Контейнер label */
 .radio-group label,
@@ -178,9 +178,6 @@ input:checked + span::after {
 input[type="checkbox"]:checked + span::after {
     transform: rotate(45deg) scale(1);
 }
-
-/* --- КОНЕЦ ИСПРАВЛЕННЫХ СТИЛЕЙ --- */
-
 
 .thank-you-message {
     padding: 4rem 2rem;

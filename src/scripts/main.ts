@@ -1,7 +1,5 @@
-// src/scripts/main.ts
 import { initPortfolio } from './portfolio';
 
-// --- ГЛАВНАЯ ФУНКЦИЯ ИНИЦИАЛИЗАЦИИ ---
 function initializePage() {
     // --- THEME SWITCHER ---
     let currentTheme = localStorage.getItem('theme') || 'light-theme';
@@ -56,11 +54,11 @@ function initializePage() {
             modal.classList.remove('visible');
         };
 
-        document.addEventListener('modal:open', ((e: CustomEvent) => {
+        document.addEventListener('modal:open', (e) => {
             if (e.detail && e.detail.modalId) {
                 openModal(e.detail.modalId);
             }
-        }) as EventListener);
+        });
 
         modals.forEach(modal => {
             modal.addEventListener('click', (e) => {
@@ -146,10 +144,13 @@ function initializePage() {
             const submitButton = form.querySelector('#submit-button') as HTMLButtonElement;
             const spinner = form.querySelector('#form-spinner') as HTMLElement;
 
+            // Reset errors
+            form.querySelectorAll('.error-field').forEach(el => el.classList.remove('error-field'));
+
             let isValid = true;
+            // Basic client-side check
             form.querySelectorAll('[required]').forEach(el => {
                 const input = el as HTMLInputElement | HTMLTextAreaElement;
-                input.classList.remove('error-field');
                 if (!input.value.trim()) {
                     input.classList.add('error-field');
                     isValid = false;
@@ -174,7 +175,16 @@ function initializePage() {
                     document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'success-modal' } }));
                     form.reset();
                 } else {
-                    throw new Error('Server response was not ok.');
+                    const errorData = await response.json();
+                    if (response.status === 400 && errorData.errors) {
+                        // Server-side validation errors
+                        for (const [field, messages] of Object.entries(errorData.errors)) {
+                            const input = form.querySelector(`[name="${field}"]`);
+                            if (input) input.classList.add('error-field');
+                        }
+                    } else {
+                        throw new Error('Server response was not ok.');
+                    }
                 }
             } catch (error) {
                 console.error('Fetch error:', error);
@@ -193,5 +203,4 @@ function initializePage() {
     }
 }
 
-// Главный обработчик, который запускает всю логику
 document.addEventListener("astro:page-load", initializePage);

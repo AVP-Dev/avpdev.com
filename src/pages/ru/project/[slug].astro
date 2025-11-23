@@ -31,6 +31,49 @@ const {
     titleKey, descriptionKey, ogImage, clientKey, servicesKey, year, heroImage, heroImageAlt,
     header, content
 } = project.data;
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Главная",
+            "item": new URL(`/${lang}/`, Astro.site).href
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Портфолио",
+            "item": new URL(`/${lang}/#portfolio`, Astro.site).href
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": t(titleKey as TranslationKey),
+            "item": new URL(Astro.url.pathname, Astro.site).href
+        }
+    ]
+};
+
+const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "headline": t(titleKey as TranslationKey),
+    "description": t(descriptionKey as TranslationKey),
+    "author": {
+        "@type": "Person",
+        "name": "Алексей Пацкевич",
+        "url": Astro.site ? Astro.site.toString() : ""
+    },
+    "dateCreated": year.toString(),
+    "image": heroImage ? new URL(heroImage.src, Astro.site).href : "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": new URL(Astro.url.pathname, Astro.site).href
+    }
+};
 ---
 <CaseStudyLayout
     title={titleKey as TranslationKey}
@@ -41,6 +84,7 @@ const {
     year={year}
     heroImage={heroImage}
     heroImageAlt={heroImageAlt}
+    schema={[breadcrumbSchema, projectSchema]}
 >
     <div slot="header">
         <h1 class="gradient-text" set:html={t(header.titleKey as TranslationKey)}></h1>

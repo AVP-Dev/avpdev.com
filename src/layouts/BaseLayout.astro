@@ -1,5 +1,4 @@
 ---
-// src/layouts/BaseLayout.astro
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -8,18 +7,17 @@ import ScrollToTop from '../components/ScrollToTop.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { ui } from '../i18n/ui';
 
-// Импортируем глобальные стили
 import '../styles/style.css';
 import '../styles/case-study.css';
 import '../styles/brief.css';
 import '../styles/blog.css';
 
-// Определяем props для передачи мета-данных на каждую страницу
 export interface Props {
 	title: string;
 	description: string;
     ogImage?: string;
     isTranslationKey?: boolean;
+    schema?: Record<string, any>;
 }
 
 const {
@@ -27,6 +25,7 @@ const {
     description,
     ogImage = '/og-image.webp',
     isTranslationKey = true,
+    schema,
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -35,10 +34,7 @@ const t = useTranslations(lang);
 const finalTitle = isTranslationKey ? t(title as keyof typeof ui['ru']) : title;
 const finalDescription = isTranslationKey ? t(description as keyof typeof ui['ru']) : description;
 
-// Формируем канонический URL
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-// ИСПОЛЬЗУЕМ ПЕРЕМЕННУЮ ОКРУЖЕНИЯ ДЛЯ GOOGLE ANALYTICS
 const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
 ---
 <!DOCTYPE html>
@@ -49,13 +45,11 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
 
     <title>{finalTitle}</title>
     <meta name="description" content={finalDescription} />
-
-    <meta name="keywords" content="full-stack разработчик, веб-разработка, создать сайт, заказать сайт, автоматизация, astro, react, typescript, next.js, node.js, docker">
+    
     <link rel="canonical" href={canonicalURL} />
 
     <meta property="og:title" content={finalTitle} />
     <meta property="og:description" content={finalDescription} />
-
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:type" content="website" />
@@ -66,12 +60,15 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
 
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" xintegrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- ИСПРАВЛЕНО: Google Analytics подключается только если ID задан в .env -->
+    {/* Вставка Schema.org */}
+    {schema && (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    )}
+
     {GTAG_ID && (
         <>
             <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}></script>
@@ -87,18 +84,13 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
     <ClientRouter />
 </head>
 <body class="light-theme">
-
     <Header />
-
     <main>
         <slot />
     </main>
-
     <CookieBanner />
     <Footer />
     <ScrollToTop />
-
     <script src="../scripts/main.ts"></script>
-
 </body>
 </html>
