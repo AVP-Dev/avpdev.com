@@ -3,7 +3,7 @@
 [![Astro v5](https://img.shields.io/badge/Astro-v5-FF5D01?logo=astro)](https://astro.build)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-24.x-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Это персональный сайт-портфолио и технический блог, разработанный на фреймворке **Astro 5**. Проект служит архитектурным эталоном для создания современных, производительных и безопасных веб-приложений. Вся экосистема полностью контейнеризирована с помощью **Docker** и **Docker Compose**, что гарантирует абсолютную воспроизводимость, безопасность и стабильность окружения на любом этапе — от локальной разработки до production.
@@ -31,7 +31,7 @@
 ## 🛠️ Стек технологий
 
 -   **Фреймворк**: Astro 5
--   **Среда выполнения**: Node.js 22 LTS
+-   **Среда выполнения**: Node.js 24 LTS
 -   **Язык**: TypeScript
 -   **Контейнеризация**: Docker, Docker Compose
 -   **Адаптер SSR**: `@astrojs/node`

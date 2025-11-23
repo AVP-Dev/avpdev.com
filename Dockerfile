@@ -1,6 +1,6 @@
 # Этап 1: Сборка приложения (Builder)
-# Используем актуальную LTS-версию Node.js на базе Alpine для легковесности
-FROM node:22-alpine AS builder
+# Используем актуальную LTS-версию Node.js (v24) на базе Alpine для легковесности
+FROM node:24-alpine AS builder
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
@@ -22,7 +22,7 @@ RUN npm run build
 
 
 # Этап 2: Производственный образ (Production)
-FROM node:22-alpine AS production
+FROM node:24-alpine AS production
 
 WORKDIR /app
 
@@ -41,7 +41,6 @@ COPY --from=builder /app/node_modules ./node_modules
 
 # Устанавливаем права на файлы для созданного пользователя
 RUN chown -R astro_user:astro_group .
-
 # Переключаемся на непривилегированного пользователя
 USER astro_user
 
