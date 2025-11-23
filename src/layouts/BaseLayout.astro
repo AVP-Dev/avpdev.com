@@ -20,6 +20,7 @@ export interface Props {
 	description: string;
     ogImage?: string;
     isTranslationKey?: boolean;
+    schema?: Record<string, any>;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
     description,
     ogImage = '/og-image.webp',
     isTranslationKey = true,
+    schema
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -50,7 +52,6 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
     <title>{finalTitle}</title>
     <meta name="description" content={finalDescription} />
 
-    <meta name="keywords" content="full-stack разработчик, веб-разработка, создать сайт, заказать сайт, автоматизация, astro, react, typescript, next.js, node.js, docker">
     <link rel="canonical" href={canonicalURL} />
 
     <meta property="og:title" content={finalTitle} />
@@ -82,6 +83,10 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
               gtag('config', GTAG_ID);
             </script>
         </>
+    )}
+
+    {schema && (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     )}
 
     <ClientRouter />

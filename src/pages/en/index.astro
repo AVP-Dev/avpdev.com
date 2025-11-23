@@ -16,8 +16,21 @@ const pageTitleKey = "page_title";
 const pageDescKey = "hero_p";
 
 const projects = await getCollection('projects', ({ id }) => id.startsWith('en/'));
+
+const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Alexey Patskevich",
+    "jobTitle": "Full-Stack Developer",
+    "url": Astro.site ? Astro.site.toString() : "",
+    "image": new URL("/assets/images/about-photo.webp", Astro.site).href,
+    "sameAs": [
+        "https://github.com/AVP-dev",
+        "https://t.me/avp_dev"
+    ]
+};
 ---
-<BaseLayout title={pageTitleKey} description={pageDescKey}>
+<BaseLayout title={pageTitleKey} description={pageDescKey} schema={personSchema}>
   <Hero />
   <Services />
   <About />

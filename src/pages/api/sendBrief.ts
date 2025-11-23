@@ -1,6 +1,7 @@
 // src/pages/api/sendBrief.ts
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
+import sanitizeHtml from 'sanitize-html';
 
 // ИСПРАВЛЕННАЯ Zod-схема для валидации данных брифа
 const briefSchema = z.object({
@@ -46,14 +47,12 @@ const briefSchema = z.object({
 });
 
 
-function sanitizeHTML(str: string | undefined | null): string {
+function cleanInput(str: string | undefined | null): string {
     if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+    return sanitizeHtml(String(str), {
+        allowedTags: [],
+        allowedAttributes: {}
+    });
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -76,11 +75,11 @@ export const POST: APIRoute = async ({ request }) => {
         const sanitizedData = Object.fromEntries(
             Object.entries(validatedData).map(([key, value]) => {
                 if (typeof value === 'string') {
-                    return [key, sanitizeHTML(value)];
+                    return [key, cleanInput(value)];
                 }
                 // Для массивов строк (например, 'features')
                 if (Array.isArray(value) && value.every(item => typeof item === 'string')) {
-                    return [key, value.map(item => sanitizeHTML(item))];
+                    return [key, value.map(item => cleanInput(item))];
                 }
                 return [key, value];
             })

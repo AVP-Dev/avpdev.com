@@ -17,3 +17,14 @@ interface Project {
 	}[];
 	tags: string[];
 }
+
+interface CustomEventMap {
+    'modal:open': CustomEvent<{ modalId: string }>;
+    'theme:changed': CustomEvent;
+}
+declare global {
+    interface Document {
+        addEventListener<K extends keyof CustomEventMap>(type: K, listener: (this: Document, ev: CustomEventMap[K]) => void): void;
+        dispatchEvent<K extends keyof CustomEventMap>(ev: CustomEventMap[K]): boolean;
+    }
+}

@@ -56,11 +56,11 @@ function initializePage() {
             modal.classList.remove('visible');
         };
 
-        document.addEventListener('modal:open', ((e: CustomEvent) => {
+        document.addEventListener('modal:open', (e) => {
             if (e.detail && e.detail.modalId) {
                 openModal(e.detail.modalId);
             }
-        }) as EventListener);
+        });
 
         modals.forEach(modal => {
             modal.addEventListener('click', (e) => {
@@ -146,10 +146,12 @@ function initializePage() {
             const submitButton = form.querySelector('#submit-button') as HTMLButtonElement;
             const spinner = form.querySelector('#form-spinner') as HTMLElement;
 
+            // Reset error fields
+            form.querySelectorAll('.error-field').forEach(el => el.classList.remove('error-field'));
+
             let isValid = true;
             form.querySelectorAll('[required]').forEach(el => {
                 const input = el as HTMLInputElement | HTMLTextAreaElement;
-                input.classList.remove('error-field');
                 if (!input.value.trim()) {
                     input.classList.add('error-field');
                     isValid = false;
@@ -174,7 +176,24 @@ function initializePage() {
                     document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'success-modal' } }));
                     form.reset();
                 } else {
-                    throw new Error('Server response was not ok.');
+                    if (response.status === 400) {
+                        const resData = await response.json();
+                        if (resData.errors) {
+                            Object.keys(resData.errors).forEach(key => {
+                                const input = form.querySelector(`[name="${key}"]`);
+                                if (input) {
+                                    input.classList.add('error-field');
+                                }
+                            });
+
+                            const firstError = form.querySelector('.error-field');
+                            if (firstError) {
+                                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        }
+                    } else {
+                        throw new Error('Server response was not ok.');
+                    }
                 }
             } catch (error) {
                 console.error('Fetch error:', error);

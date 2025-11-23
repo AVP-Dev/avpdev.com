@@ -1,15 +1,14 @@
 // src/pages/api/sendMessage.ts
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
+import sanitizeHtml from 'sanitize-html';
 
-function sanitizeHTML(str: string | undefined | null): string {
+function cleanInput(str: string | undefined | null): string {
     if (!str) return '';
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+    return sanitizeHtml(String(str), {
+        allowedTags: [],
+        allowedAttributes: {}
+    });
 }
 
 const contactSchema = z.object({
@@ -19,6 +18,7 @@ const contactSchema = z.object({
     message: z.string().min(1),
 }).refine(data => data.email || data.phone, {
     message: "Email or phone is required",
+    path: ["email"] // attach error to email field
 });
 
 export const POST: APIRoute = async ({ request }) => {
@@ -28,12 +28,15 @@ export const POST: APIRoute = async ({ request }) => {
 
         if (!result.success) {
             // Возвращаем ошибку валидации
-            return new Response(JSON.stringify({ message: "Invalid input" }), { status: 400 });
+            return new Response(JSON.stringify({
+                message: "Validation Error",
+                errors: result.error.flatten().fieldErrors
+            }), { status: 400 });
         }
 
         const { name, email, phone, message } = result.data;
 
-        const tgMessage = `<b>🔥 Новая заявка с сайта!</b>\n\n<b>Имя:</b> ${sanitizeHTML(name)}\n<b>Email:</b> ${sanitizeHTML(email)}\n<b>Телефон:</b> ${sanitizeHTML(phone)}\n\n<b>Сообщение:</b>\n${sanitizeHTML(message)}`;
+        const tgMessage = `<b>🔥 Новая заявка с сайта!</b>\n\n<b>Имя:</b> ${cleanInput(name)}\n<b>Email:</b> ${cleanInput(email)}\n<b>Телефон:</b> ${cleanInput(phone)}\n\n<b>Сообщение:</b>\n${cleanInput(message)}`;
         const { BOT_TOKEN, CHAT_ID, TOPIC_ID } = import.meta.env;
 
         if (!BOT_TOKEN || !CHAT_ID) {
@@ -64,4 +67,3 @@ export const POST: APIRoute = async ({ request }) => {
         return new Response(JSON.stringify({ message: "Server error" }), { status: 500 });
     }
 };
-

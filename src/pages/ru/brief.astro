@@ -170,7 +170,7 @@ const t = useTranslations(lang);
                     </div>
                 </fieldset>
 
-                 <fieldset class="form-block fade-in" style="transition-delay: 800ms;">
+                 <fieldset class="form-block fade-in" style="transition-delay: 900ms;">
                     <legend>9. Дополнительная информация</legend>
                     <div class="form-group">
                         <label for="additional_info">Здесь вы можете указать любую другую важную информацию, которая поможет лучше понять вашу задачу.</label>
@@ -226,9 +226,11 @@ document.addEventListener('astro:page-load', () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // Сброс ошибок
+        form.querySelectorAll('.error-field').forEach(el => el.classList.remove('error-field'));
+
         let isValid = true;
         form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]').forEach(field => {
-            field.classList.remove('error-field');
             if (!field.value.trim()) {
                 field.classList.add('error-field');
                 isValid = false;
@@ -268,7 +270,24 @@ document.addEventListener('astro:page-load', () => {
                 document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'success-modal' } }));
                 form.reset();
             } else {
-                throw new Error('Server response was not ok.');
+                if (response.status === 400) {
+                    const resData = await response.json();
+                    if (resData.errors) {
+                        Object.keys(resData.errors).forEach(key => {
+                            const input = form.querySelector(`[name="${key}"]`);
+                            if (input) {
+                                input.classList.add('error-field');
+                            }
+                        });
+
+                        const firstError = form.querySelector('.error-field');
+                        if (firstError) {
+                            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                } else {
+                    throw new Error('Server response was not ok.');
+                }
             }
         } catch (error) {
             console.error('Ошибка отправки брифа:', error);
