@@ -18,20 +18,37 @@ const pageTitleKey = "page_title";
 const pageDescKey = "hero_p";
 
 const projects = await getCollection('projects', ({ id }) => id.startsWith('ru/'));
+
+// ИСПОЛЬЗУЕМ @graph ДЛЯ ОБЪЕДИНЕНИЯ НЕСКОЛЬКИХ СУЩНОСТЕЙ
 const schema = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Alexey Patskevich",
-  "jobTitle": "Full-Stack Developer",
-  "url": Astro.site,
-  // Используем .src для получения хешированного пути
-  "image": new URL(aboutPhoto.src, Astro.site).href,
-  "sameAs": [
-    "https://github.com/AVP-Dev",
-    "https://t.me/avpdevcom",
-    "https://wa.me/375291217371"
-  ],
-  "description": "Full-Stack разработчик. Создаю эффективные сайты и автоматизирую бизнес-процессы."
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": new URL("/#website", Astro.site).href,
+      "url": Astro.site,
+      "name": "AVPdev - Full-Stack Разработка",
+      "description": "Профессиональная разработка сайтов и автоматизация бизнеса.",
+      "inLanguage": "ru-RU",
+      "publisher": {
+        "@id": new URL("/#person", Astro.site).href
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": new URL("/#person", Astro.site).href,
+      "name": "Алексей Пацкевич",
+      "jobTitle": "Full-Stack Developer",
+      "url": Astro.site,
+      "image": new URL(aboutPhoto.src, Astro.site).href,
+      "sameAs": [
+        "https://github.com/AVP-Dev",
+        "https://t.me/avpdevcom",
+        "https://wa.me/375291217371"
+      ],
+      "description": "Full-Stack разработчик. Создаю эффективные сайты и автоматизирую бизнес-процессы."
+    }
+  ]
 };
 ---
 <BaseLayout title={pageTitleKey} description={pageDescKey} schema={schema}>
