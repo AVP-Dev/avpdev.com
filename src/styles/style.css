@@ -253,19 +253,18 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 }
 
 /* --- TECH STACK FIXES --- */
-/* Убираем центрирование самого контейнера, чтобы избежать "пляски" блоков разной ширины */
+/* Центрируем сами блоки внутри ячеек сетки */
 .tech-category {
     display: flex;
-    /* justify-content: center; <-- БЫЛО */
-    justify-content: flex-start; /* СТАЛО: прижимаем к началу ячейки грида */
+    justify-content: center; /* СТАЛО: Блок всегда по центру доступного пространства */
 }
 
-/* Обертка: растягиваем на всю ширину ячейки */
+/* Обертка контента: сжимается до размера содержимого */
 .tech-content-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Выравниваем заголовок и список по левому краю */
-    width: 100%; /* СТАЛО: занимаем всю доступную ширину */
+    align-items: flex-start; /* СТАЛО: Внутри блока заголовок и список выровнены по левому краю друг к другу */
+    width: fit-content; /* СТАЛО: Ширина блока равна ширине самого длинного элемента */
 }
 
 .tech-category h4 {
@@ -276,7 +275,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
     padding-bottom: 0.75rem;
     border-bottom: 2px solid var(--accent-color-start);
     display: block;
-    width: fit-content;
+    width: fit-content; /* Подчеркивание только под текстом */
     text-align: left;
 }
 
