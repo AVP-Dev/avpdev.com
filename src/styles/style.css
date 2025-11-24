@@ -817,9 +817,17 @@ textarea.form-control { min-height: 150px; resize: vertical; }
         margin-left: auto;
         margin-right: auto;
     }
+    .tech-content-wrapper {
+        align-items: center; 
+        width: 100%; 
+    }
     .tech-category h4 {
-        text-align: center;
+        text-align: center; 
         display: block;
+    }
+    .tech-items {
+        align-items: flex-start; 
+        width: 100%; 
     }
 }
 
