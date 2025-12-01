@@ -3,7 +3,7 @@ title: "Why Your Website Loses Customers on Mobile: Speed as a Survival Factor"
 description: "Your React website looks great on a laptop but freezes on a smartphone? Outdated banners and 2023 promotions killing sales? We break down why this happens and how to fix it while preserving your development investments."
 pubDate: 2025-12-02
 heroImage: "../../../assets/images/blog/mobile-speed-sales-killer.webp"
-tags: ["seo", "mobile-first", "react", "optimization", "astro", "sales"]
+tags: ["seo", "mobile-first", "react", "optimization", "astro", "nextjs", "sales"]
 draft: false
 ---
 
@@ -47,14 +47,16 @@ When owners of large projects hear the words "optimization" or "rewrite," they i
 
 And you are absolutely right. You don't need to throw away a site that has years of work invested in it. You need to change the way it is delivered to the client.
 
-I use the **"Islands Architecture"** approach based on the Astro framework. This allows us to carry out deep modernization with little bloodshed:
+I use the **"Islands Architecture"** approach. Typically, I implement this using the **Astro** framework, but similar principles (like Server Components) are available in other modern solutions like **Next.js**. We will choose the tool that best fits your infrastructure.
+
+This allows us to carry out deep modernization with little bloodshed:
 
 ### 1. We Keep Your Business Logic (React)
 Your complex calculators, user accounts, cart, booking systems, and filters are a **valuable asset**. We do not write them from scratch. We take your existing, debugged React code and carefully integrate it into the new system. It works exactly as before, but now it only loads when the user actually needs it.
 
-### 2. Optimizing "Heavy" Content (Astro)
+### 2. Optimizing "Heavy" Content
 Product catalogs, the homepage, blog articles, delivery terms—this is what 90% of your visitors see. Currently, these pages are assembled on the client's phone, draining their battery and time.
-We move this work to the server. The user receives a lightweight, ready-made HTML page **instantly**.
+We move this work to the server (SSR). The user receives a lightweight, ready-made HTML page **instantly**.
 
 ### 3. Automating Relevance
 We configure logic so that the site automatically hides expired promotions and bumps fresh news to the top. No more "zombie banners".
