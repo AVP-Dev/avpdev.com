@@ -88,6 +88,35 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
         </>
     )}
 
+    {/* SEO: Hreflang Tags */}
+    {() => {
+        // 1. Получаем текущий путь
+        const currentPath = Astro.url.pathname;
+        
+        // 2. Убираем текущую локаль из пути, чтобы получить "чистый" slug
+        // Регулярка удаляет /ru/ или /en/ в начале, а также /ru или /en если это корень
+        const pathWithoutLocale = currentPath
+            .replace(/^\/(ru|en)\//, '/')
+            .replace(/^\/(ru|en)$/, '/');
+        
+        // 3. Определяем базовый домен (fallback, если Astro.site не задан)
+        const siteBase = Astro.site ? Astro.site.toString() : 'https://avpdev.com';
+
+        // 4. Формируем URL для каждой версии
+        // Важно: pathWithoutLocale может быть просто '/', поэтому обрабатываем аккуратно
+        const ruUrl = new URL(`ru${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`, siteBase).href;
+        const enUrl = new URL(`en${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`, siteBase).href;
+
+        return (
+            <>
+                <link rel="alternate" hreflang="ru" href={ruUrl} />
+                <link rel="alternate" hreflang="en" href={enUrl} />
+                {/* x-default указывает на русскую версию как основную */}
+                <link rel="alternate" hreflang="x-default" href={ruUrl} />
+            </>
+        );
+    }}
+
     <ClientRouter />
 </head>
 <body class="light-theme">
