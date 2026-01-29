@@ -42,7 +42,7 @@ const t = useTranslations(lang);
 const finalTitle = isTranslationKey ? t(title as keyof typeof ui['ru']) : title;
 const finalDescription = isTranslationKey ? t(description as keyof typeof ui['ru']) : description;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, Astro.site);
 const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
 ---
 <!DOCTYPE html>
@@ -91,21 +91,28 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
     {/* SEO: Hreflang Tags */}
     {() => {
         // 1. Получаем текущий путь
-        const currentPath = Astro.url.pathname;
+        let currentPath = Astro.url.pathname;
+        if (!currentPath.endsWith('/')) {
+            currentPath += '/';
+        }
         
         // 2. Убираем текущую локаль из пути, чтобы получить "чистый" slug
-        // Регулярка удаляет /ru/ или /en/ в начале, а также /ru или /en если это корень
+        // Регулярка удаляет /ru/ или /en/ в начале
         const pathWithoutLocale = currentPath
-            .replace(/^\/(ru|en)\//, '/')
-            .replace(/^\/(ru|en)$/, '/');
+            .replace(/^\/(ru|en)\//, '/');
         
         // 3. Определяем базовый домен (fallback, если Astro.site не задан)
         const siteBase = Astro.site ? Astro.site.toString() : 'https://avpdev.com';
 
         // 4. Формируем URL для каждой версии
-        // Важно: pathWithoutLocale может быть просто '/', поэтому обрабатываем аккуратно
-        const ruUrl = new URL(`ru${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`, siteBase).href;
-        const enUrl = new URL(`en${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`, siteBase).href;
+        // pathWithoutLocale всегда начинается с / и заканчивается /
+        // Например: /about/ или /
+        
+        // Удаляем начальный слэш для объединения с базовым путем
+        const cleanSlug = pathWithoutLocale.replace(/^\//, '');
+
+        const ruUrl = new URL(`ru/${cleanSlug}`, siteBase).href;
+        const enUrl = new URL(`en/${cleanSlug}`, siteBase).href;
 
         return (
             <>

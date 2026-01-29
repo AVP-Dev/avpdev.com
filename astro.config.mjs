@@ -23,9 +23,11 @@ export default defineConfig({
   }),
   integrations: [
     sitemap({
-      customPages: [
-        ...geoPages.map(page => new URL(page, site).href)
-      ]
+      // Geo-страницы и legal-страницы являются статическими (prerender=true)
+      // и будут автоматически добавлены в sitemap.
+      // customPages здесь не нужен, если только нет чисто динамических SSR маршрутов,
+      // которые нужно добавить вручную.
+      // Оставляем пустым или убираем customPages, если он был только для geoPages.
     }),
     partytown({
       // Конфигурация Partytown для GTAG
