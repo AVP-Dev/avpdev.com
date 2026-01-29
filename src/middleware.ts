@@ -4,34 +4,32 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const url = new URL(context.request.url);
   const path = url.pathname;
 
-  // 1. Critical Fix: Root and Index redirection to Main Locale
-  // Handles requests to root, /index, /index.html and /index/
-  // Redirects immediately to /ru/ to avoid 404/loops
-  if (path === '/' || path === '/index' || path === '/index.html' || path === '/index/') {
+  // 1. Приоритетные редиректы для главной и старых путей
+  // Это предотвращает цепочки редиректов типа index.html -> /index/ -> /ru/
+  if (path === '/index.html' || path === '/index/' || path === '/index' || path === '/') {
     return context.redirect('/ru/', 301);
   }
 
-  // 2. Remove .html extension for other pages
-  // e.g. /about.html -> /about/
+  // 2. Убираем .html для остальных страниц
   if (path.endsWith('.html')) {
     const cleanPath = path.slice(0, -5);
     return context.redirect(`${cleanPath}/`, 301);
   }
 
-  // 3. Trailing Slash Handling
-  // Removed manual enforcement. We rely on astro.config.mjs [trailingSlash: 'always']
-  // to handle successful pages.
-
-  // 4. Continue Request Processing
+  // 3. Сначала получаем ответ от Astro, чтобы понять, существует ли страница
   const response = await next();
 
-  // 5. Add Security Headers (for all responses, including 404s)
+  // 4. ГЛАВНОЕ ИСПРАВЛЕНИЕ: Если страницы нет (404), отдаем её как есть
+  // Не нужно добавлять слеши к 404 странице
+  if (response.status === 404) {
+    return response;
+  }
+
+  // 5. Заголовки безопасности
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-XSS-Protection', '1; mode=block');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-
-  // Дополнительно можно добавить Permissions-Policy (отключаем неиспользуемые API браузера)
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
 
   return response;
