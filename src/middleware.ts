@@ -12,21 +12,21 @@ export const onRequest = defineMiddleware(async (context, next) => {
   }
 
   // 2. Remove .html extension for other pages
-  // e.g. /about.html -> /about/
+  // Only for legacy support, specific pages
   if (path.endsWith('.html')) {
     const cleanPath = path.slice(0, -5);
     return context.redirect(`${cleanPath}/`, 301);
   }
 
-  // 3. Enforce Trailing Slash (Standardization)
-  // Exclude files with extensions (images, css, js, etc.)
-  // We check if the last segment contains a dot to identify files
-  const isFile = path.split('/').pop()?.includes('.');
-  if (!path.endsWith('/') && !isFile) {
-    return context.redirect(`${path}/`, 301);
-  }
+  // 3. Removed manual Trailing Slash enforcement to prevent 301 on 404 pages.
+  // Astro 'trailingSlash: always' config handles valid pages automatically.
 
   const response = await next();
+
+  // If 404, return immediately without further processing to ensure 404 code is sent
+  if (response.status === 404) {
+    return response;
+  }
 
   // --- Security Headers (Пункт 1) ---
   // Защита от MIME-сниффинга, кликджекинга и XSS
