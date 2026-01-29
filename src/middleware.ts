@@ -4,21 +4,26 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const url = new URL(context.request.url);
   const path = url.pathname;
 
-  // 1. Redirect .html to clean URL (with trailing slash)
+  // 1. Critical Fix: Index redirection to Main Locale
+  // Handles requests to root, /index, /index.html and /index/
+  // Redirects immediately to /ru/ to avoid 404/loops
+  if (path === '/' || path === '/index' || path === '/index.html' || path === '/index/') {
+    return context.redirect('/ru/', 301);
+  }
+
+  // 2. Remove .html extension for other pages
+  // e.g. /about.html -> /about/
   if (path.endsWith('.html')) {
     const cleanPath = path.slice(0, -5);
     return context.redirect(`${cleanPath}/`, 301);
   }
 
-  // 2. Enforce Trailing Slash (except for files with extensions)
-  // If path doesn't end with slash and doesn't have an extension (like .css, .js, .png)
-  if (!path.endsWith('/') && !path.split('/').pop()?.includes('.')) {
+  // 3. Enforce Trailing Slash (Standardization)
+  // Exclude files with extensions (images, css, js, etc.)
+  // We check if the last segment contains a dot to identify files
+  const isFile = path.split('/').pop()?.includes('.');
+  if (!path.endsWith('/') && !isFile) {
     return context.redirect(`${path}/`, 301);
-  }
-
-  // 3. Root Redirect Optimization
-  if (path === '/') {
-    return context.redirect('/ru/', 301);
   }
 
   const response = await next();
