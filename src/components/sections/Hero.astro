@@ -1,62 +1,97 @@
 ---
 // src/components/sections/Hero.astro
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
+
 <section id="hero">
     <div id="particles-js"></div>
     <div class="container hero-container">
         <div class="hero-content">
             <div class="hero-text fade-in">
-                <h1 set:html={t('hero_h1')}></h1>
-                <p>{t('hero_p')}</p>
-                <a href={`/${lang}/#contact`} class="cta-button">{t('hero_cta')}</a>
+                <h1 set:html={t("hero_h1")} />
+                <p>{t("hero_p")}</p>
+                <a href={`/${lang}/#contact`} class="cta-button"
+                    >{t("hero_cta")}</a
+                >
             </div>
         </div>
     </div>
 </section>
 
 <!-- Подключаем библиотеку и скрипт инициализации -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" is:inline></script>
+<script
+    src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"
+    is:inline></script>
 <script>
     declare var particlesJS: any;
     // Функция для инициализации particles.js
     function loadParticles() {
         // Проверяем, существует ли функция particlesJS и элемент
-        if (typeof particlesJS === 'undefined' || !document.getElementById('particles-js')) {
+        if (
+            typeof particlesJS === "undefined" ||
+            !document.getElementById("particles-js")
+        ) {
             return;
         }
 
         // Небольшая задержка, чтобы убедиться, что CSS переменные применились
         setTimeout(() => {
             const bodyStyles = getComputedStyle(document.body);
-            const particleColor = bodyStyles.getPropertyValue('--particle-color').trim().replace(/"/g, '');
-            const particleLineColor = bodyStyles.getPropertyValue('--particle-line-color').trim().replace(/"/g, '');
+            const particleColor = bodyStyles
+                .getPropertyValue("--particle-color")
+                .trim()
+                .replace(/"/g, "");
+            const particleLineColor = bodyStyles
+                .getPropertyValue("--particle-line-color")
+                .trim()
+                .replace(/"/g, "");
 
-            particlesJS('particles-js', {
+            particlesJS("particles-js", {
                 particles: {
-                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    number: {
+                        value: 80,
+                        density: { enable: true, value_area: 800 },
+                    },
                     color: { value: particleColor },
                     shape: { type: "circle" },
                     opacity: { value: 0.5, random: false },
                     size: { value: 3, random: true },
-                    line_linked: { enable: true, distance: 150, color: particleLineColor, opacity: 0.4, width: 1 },
-                    move: { enable: true, speed: 2, direction: "none", out_mode: "out" }
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: particleLineColor,
+                        opacity: 0.4,
+                        width: 1,
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        out_mode: "out",
+                    },
                 },
                 interactivity: {
                     detect_on: "canvas",
-                    events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
-                    modes: { repulse: { distance: 150 }, push: { particles_nb: 4 } }
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true,
+                    },
+                    modes: {
+                        repulse: { distance: 150 },
+                        push: { particles_nb: 4 },
+                    },
                 },
-                retina_detect: true
+                retina_detect: true,
             });
         }, 100);
     }
 
     // Вызываем функцию при загрузке страницы
-    document.addEventListener('DOMContentLoaded', loadParticles);
+    document.addEventListener("DOMContentLoaded", loadParticles);
     // Также слушаем кастомное событие смены темы, чтобы перезапустить анимацию с новыми цветами
-    document.addEventListener('theme:changed', loadParticles);
+    document.addEventListener("theme:changed", loadParticles);
 </script>

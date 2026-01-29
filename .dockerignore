@@ -9,6 +9,7 @@ npm-debug.log
 .git
 .idea
 .vscode
+.agent
 
 # Исключаем файлы конфигурации Docker
 Dockerfile

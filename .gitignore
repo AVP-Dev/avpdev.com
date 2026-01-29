@@ -18,6 +18,7 @@ npm-debug.log
 .git
 .idea
 .vscode
+.agent
 
 # Системные файлы операционных систем
 .DS_Store
