@@ -1,7 +1,7 @@
 ---
 title: "Under the Hood of a Custom CRM: Why I Choose NestJS and Python"
 description: "A technical breakdown of modern CRM architecture: when to use NestJS, why implement Python, and how to ensure data security at the core level."
-pubDate: 2025-12-30
+pubDate: 2026-01-29
 heroImage: "../../../assets/images/blog/crm-tech-stack.webp"
 tags: ["NestJS", "Python", "Architecture", "Security"]
 draft: false

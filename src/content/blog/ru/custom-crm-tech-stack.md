@@ -1,7 +1,7 @@
 ---
 title: "Под капотом персональной CRM: Почему я выбираю NestJS и Python"
 description: "Технический разбор архитектуры современной CRM: когда нужен NestJS, зачем внедрять Python и как обеспечить безопасность данных на уровне ядра."
-pubDate: 2025-12-30
+pubDate: 2026-01-29
 heroImage: "../../../assets/images/blog/crm-tech-stack.webp"
 tags: ["NestJS", "Python", "Архитектура", "Security"]
 draft: false
