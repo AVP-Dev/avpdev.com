@@ -2,22 +2,20 @@
 // src/pages/ru/index.astro
 export const prerender = true;
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/sections/Hero.astro';
-import Services from '../../components/sections/Services.astro';
-import About from '../../components/sections/About.astro';
-import Portfolio from '../../components/sections/Portfolio.astro';
-import Contact from '../../components/sections/Contact.astro';
-import SuccessModal from '../../components/modals/SuccessModal.astro';
-import ErrorModal from '../../components/modals/ErrorModal.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/sections/Hero.astro";
+import Services from "../../components/sections/Services.astro";
+import About from "../../components/sections/About.astro";
+import Portfolio from "../../components/sections/Portfolio.astro";
+import Contact from "../../components/sections/Contact.astro";
+import SuccessModal from "../../components/modals/SuccessModal.astro";
+import ErrorModal from "../../components/modals/ErrorModal.astro";
+import { getCollection } from "astro:content";
 // Импортируем изображение для Schema
-import aboutPhoto from '../../assets/images/about-photo.webp';
+import aboutPhoto from "../../assets/images/about-photo.webp";
 
 const pageTitleKey = "page_title";
 const pageDescKey = "hero_p";
-
-const projects = await getCollection('projects', ({ id }) => id.startsWith('ru/'));
 
 // ИСПОЛЬЗУЕМ @graph ДЛЯ ОБЪЕДИНЕНИЯ НЕСКОЛЬКИХ СУЩНОСТЕЙ
 const schema = {
@@ -26,36 +24,39 @@ const schema = {
     {
       "@type": "WebSite",
       "@id": new URL("/#website", Astro.site).href,
-      "url": Astro.site,
-      "name": "AVPdev - Full-Stack Разработка",
-      "description": "Профессиональная разработка сайтов и автоматизация бизнеса.",
-      "inLanguage": "ru-RU",
-      "publisher": {
-        "@id": new URL("/#person", Astro.site).href
-      }
+      url: Astro.site,
+      name: "AVPdev - Full-Stack Разработка",
+      description:
+        "Профессиональная разработка сайтов и автоматизация бизнеса.",
+      inLanguage: "ru-RU",
+      publisher: {
+        "@id": new URL("/#person", Astro.site).href,
+      },
     },
     {
       "@type": "Person",
       "@id": new URL("/#person", Astro.site).href,
-      "name": "Алексей Пацкевич",
-      "jobTitle": "Full-Stack Developer",
-      "url": Astro.site,
-      "image": new URL(aboutPhoto.src, Astro.site).href,
-      "sameAs": [
+      name: "Алексей Пацкевич",
+      jobTitle: "Full-Stack Developer",
+      url: Astro.site,
+      image: new URL(aboutPhoto.src, Astro.site).href,
+      sameAs: [
         "https://github.com/AVP-Dev",
         "https://t.me/avpdevcom",
-        "https://wa.me/375291217371"
+        "https://wa.me/375291217371",
       ],
-      "description": "Full-Stack разработчик. Создаю эффективные сайты и автоматизирую бизнес-процессы."
-    }
-  ]
+      description:
+        "Full-Stack разработчик. Создаю эффективные сайты и автоматизирую бизнес-процессы.",
+    },
+  ],
 };
 ---
+
 <BaseLayout title={pageTitleKey} description={pageDescKey} schema={schema}>
   <Hero />
   <Services />
   <About />
-  <Portfolio projects={projects} />
+  <Portfolio />
   <Contact />
 
   <SuccessModal />

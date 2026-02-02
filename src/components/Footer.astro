@@ -1,35 +1,60 @@
 ---
 // src/components/Footer.astro
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
+
 <footer class="footer">
     <div class="container footer-content">
         <div class="footer-links">
-            <a href="https://github.com/AVP-Dev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-            <a href="https://t.me/avpdevcom" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram-plane" aria-hidden="true"></i></a>
+            <a
+                href="https://github.com/AVP-Dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                ><i class="fab fa-github" aria-hidden="true"></i></a
+            >
+            <a
+                href="https://t.me/avpdevcom"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Telegram"
+                ><i class="fab fa-telegram-plane" aria-hidden="true"></i></a
+            >
             <div class="footer-social-group">
-                <a href="https://wa.me/79154065940" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp (Россия)">
+                <a
+                    href="https://wa.me/79154065940"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp (Россия)"
+                >
                     <i class="fab fa-whatsapp" aria-hidden="true"></i> RU
                 </a>
             </div>
             <div class="footer-social-group">
-                <a href="https://wa.me/375291217371" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp (Беларусь)">
+                <a
+                    href="https://wa.me/375291217371"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp (Беларусь)"
+                >
                     <i class="fab fa-whatsapp" aria-hidden="true"></i> BY
                 </a>
             </div>
         </div>
-        <p class="footer-copyright" set:html={t('footer_copyright')}></p>
+        <p class="footer-copyright" set:html={t("footer_copyright")} />
         <div class="footer-legal">
-            <a href={`/${lang}/blog/`}>{t('nav_blog')}</a>
+            <a href={`/${lang}/projects/`}>{t("catalog_title")}</a>
             <span class="legal-separator">|</span>
-            <a href={`/${lang}/brief/`}>{t('nav_brief')}</a>
+            <a href={`/${lang}/blog/`}>{t("nav_blog")}</a>
             <span class="legal-separator">|</span>
-            <a href={`/${lang}/privacy-policy`}>{t('footer_privacy')}</a>
+            <a href={`/${lang}/brief/`}>{t("nav_brief")}</a>
             <span class="legal-separator">|</span>
-            <a href={`/${lang}/terms-of-service`}>{t('footer_terms')}</a>
+            <a href={`/${lang}/privacy-policy`}>{t("footer_privacy")}</a>
+            <span class="legal-separator">|</span>
+            <a href={`/${lang}/terms-of-service`}>{t("footer_terms")}</a>
         </div>
     </div>
 </footer>

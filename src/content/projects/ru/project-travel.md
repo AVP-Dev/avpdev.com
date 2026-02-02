@@ -1,11 +1,15 @@
 ---
 titleKey: 'case_travel_title'
 descriptionKey: 'case_travel_desc'
-ogImage: '/images/project-travel.webp'
+ogImage: '/images/projects/travel/hero.webp'
 clientKey: 'case_travel_client'
 servicesKey: 'case_travel_services'
 year: 2025
-heroImage: '~/assets/images/project-travel.webp'
+featured: true
+category: 'app'
+stack: ['Next.js', 'React', 'Prisma', 'NextAuth', 'Docker']
+publishDate: 2025-01-20
+heroImage: '~/assets/images/projects/travel/hero.webp'
 heroImageAlt: 'Главное изображение проекта Happy Tour'
 header:
   titleKey: 'case_travel_h1'
@@ -55,16 +59,16 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '~/assets/images/project-travel.webp'
+      - img: '~/assets/images/projects/travel/hero.webp'
         captionKey: 'gallery_caption_travel_hero'
-      - img: '~/assets/images/travel-gallery-hot-tours.webp'
+      - img: '~/assets/images/projects/travel/hot-tours.webp'
         captionKey: 'gallery_caption_travel_hot_tours'
-      - img: '~/assets/images/travel-gallery-search.webp'
+      - img: '~/assets/images/projects/travel/search.webp'
         captionKey: 'gallery_caption_travel_search'
-      - img: '~/assets/images/travel-gallery-reviews.webp'
+      - img: '~/assets/images/projects/travel/reviews.webp'
         captionKey: 'gallery_caption_travel_reviews'
-      - img: '~/assets/images/travel-gallery-faq.webp'
+      - img: '~/assets/images/projects/travel/faq.webp'
         captionKey: 'gallery_caption_travel_faq'
-      - img: '~/assets/images/travel-gallery-contacts.webp'
+      - img: '~/assets/images/projects/travel/contacts.webp'
         captionKey: 'gallery_caption_travel_contacts'
 ---

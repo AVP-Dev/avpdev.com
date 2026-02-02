@@ -1,11 +1,15 @@
 ---
 titleKey: 'case_mekohaus_title'
 descriptionKey: 'case_mekohaus_desc'
-ogImage: '/images/project-mekohaus-hero.webp'
+ogImage: '/images/projects/mekohaus/hero.webp'
 clientKey: 'case_mekohaus_client'
 servicesKey: 'case_mekohaus_services'
 year: 2025
-heroImage: '~/assets/images/project-mekohaus-hero.webp'
+featured: false
+category: 'web-site'
+stack: ['HTML', 'CSS', 'JavaScript', 'PHP']
+publishDate: 2025-01-10
+heroImage: '~/assets/images/projects/mekohaus/hero.webp'
 heroImageAlt: 'Главный экран сайта Mekohaus'
 header:
   titleKey: 'case_mekohaus_h1'
@@ -44,12 +48,12 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '~/assets/images/project-mekohaus-hero.webp'
+      - img: '~/assets/images/projects/mekohaus/hero.webp'
         captionKey: 'gallery_caption_mekohaus_hero'
-      - img: '~/assets/images/mekohaus-gallery-catalog.webp'
+      - img: '~/assets/images/projects/mekohaus/catalog.webp'
         captionKey: 'gallery_caption_mekohaus_catalog'
-      - img: '~/assets/images/mekohaus-gallery-about.webp'
+      - img: '~/assets/images/projects/mekohaus/about.webp'
         captionKey: 'gallery_caption_mekohaus_about'
-      - img: '~/assets/images/mekohaus-gallery-form.webp'
+      - img: '~/assets/images/projects/mekohaus/form.webp'
         captionKey: 'gallery_caption_mekohaus_form'
 ---

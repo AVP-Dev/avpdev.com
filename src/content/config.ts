@@ -2,17 +2,17 @@
 import { defineCollection, z } from 'astro:content';
 
 const blogCollection = defineCollection({
-  type: 'content',
-  // Используем `image()` из `schema` helper для обработки изображений
-  schema: ({ image }) => z.object({
-    title: z.string(),
-    description: z.string(),
-    pubDate: z.date(),
-    // heroImage теперь будет обрабатываться Astro, а не просто строкой
-    heroImage: image().optional(),
-    tags: z.array(z.string()),
-    draft: z.boolean().optional(),
-  }),
+	type: 'content',
+	// Используем `image()` из `schema` helper для обработки изображений
+	schema: ({ image }) => z.object({
+		title: z.string(),
+		description: z.string(),
+		pubDate: z.date(),
+		// heroImage теперь будет обрабатываться Astro, а не просто строкой
+		heroImage: image().optional(),
+		tags: z.array(z.string()),
+		draft: z.boolean().optional(),
+	}),
 });
 
 const projectsCollection = defineCollection({
@@ -25,6 +25,10 @@ const projectsCollection = defineCollection({
 			clientKey: z.string(),
 			servicesKey: z.string(),
 			year: z.number(),
+			featured: z.boolean().default(false),
+			category: z.enum(['web-site', 'app', 'crm-erp', 'tg-mini-app']),
+			stack: z.array(z.string()),
+			publishDate: z.date(),
 			heroImage: image(),
 			heroImageAlt: z.string(),
 			header: z.object({

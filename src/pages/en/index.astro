@@ -2,20 +2,18 @@
 // src/pages/en/index.astro
 export const prerender = true;
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/sections/Hero.astro';
-import Services from '../../components/sections/Services.astro';
-import About from '../../components/sections/About.astro';
-import Portfolio from '../../components/sections/Portfolio.astro';
-import Contact from '../../components/sections/Contact.astro';
-import SuccessModal from '../../components/modals/SuccessModal.astro';
-import ErrorModal from '../../components/modals/ErrorModal.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/sections/Hero.astro";
+import Services from "../../components/sections/Services.astro";
+import About from "../../components/sections/About.astro";
+import Portfolio from "../../components/sections/Portfolio.astro";
+import Contact from "../../components/sections/Contact.astro";
+import SuccessModal from "../../components/modals/SuccessModal.astro";
+import ErrorModal from "../../components/modals/ErrorModal.astro";
+import { getCollection } from "astro:content";
 
 const pageTitleKey = "page_title";
 const pageDescKey = "hero_p";
-
-const projects = await getCollection('projects', ({ id }) => id.startsWith('en/'));
 
 // ОБНОВЛЕННАЯ SCHEMA.ORG (English version)
 const schema = {
@@ -24,36 +22,38 @@ const schema = {
     {
       "@type": "WebSite",
       "@id": new URL("/#website", Astro.site).href,
-      "url": Astro.site,
-      "name": "AVPdev - Full-Stack Development",
-      "description": "Professional website development and business automation.",
-      "inLanguage": "en-US",
-      "publisher": {
-        "@id": new URL("/#person", Astro.site).href
-      }
+      url: Astro.site,
+      name: "AVPdev - Full-Stack Development",
+      description: "Professional website development and business automation.",
+      inLanguage: "en-US",
+      publisher: {
+        "@id": new URL("/#person", Astro.site).href,
+      },
     },
     {
       "@type": "Person",
       "@id": new URL("/#person", Astro.site).href,
-      "name": "Alexey Patskevich",
-      "jobTitle": "Full-Stack Developer",
-      "url": Astro.site,
-      "image": new URL("/assets/images/about-photo.webp", Astro.site).href,
-      "sameAs": [
+      name: "Alexey Patskevich",
+      jobTitle: "Full-Stack Developer",
+      url: Astro.site,
+      image: new URL("/assets/images/about-photo.webp", Astro.site).href,
+      sameAs: [
         "https://github.com/AVP-Dev",
         "https://t.me/avpdevcom",
-        "https://wa.me/375291217371"
+        "https://wa.me/375291217371",
       ],
-      "description": "Full-Stack Developer. I build effective websites and automate business processes."
-    }
-  ]
+      description:
+        "Full-Stack Developer. I build effective websites and automate business processes.",
+    },
+  ],
 };
 ---
+
 <BaseLayout title={pageTitleKey} description={pageDescKey} schema={schema}>
   <Hero />
   <Services />
   <About />
-  <Portfolio projects={projects} />
+  <Portfolio />
   <Contact />
 
   <SuccessModal />

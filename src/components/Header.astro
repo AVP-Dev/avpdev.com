@@ -1,30 +1,42 @@
 ---
 // src/components/Header.astro
-import { Image } from 'astro:assets';
-import logo from '../assets/images/logo.svg';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import LanguageSwitcher from './LanguageSwitcher.astro';
+import { Image } from "astro:assets";
+import logo from "../assets/images/logo.svg";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const homePath = `/${lang}/`;
 ---
+
 <header>
     <nav class="container">
         <a href={homePath} class="logo">
-            <Image src={logo} alt="AVPdev.com Logo" class="logo-img" width="40" height="40" />
-            <span class="logo-text">AVP<span class="gradient-text">dev.com</span></span>
+            <Image
+                src={logo}
+                alt="AVPdev.com Logo"
+                class="logo-img"
+                width="40"
+                height="40"
+            />
+            <span class="logo-text"
+                >AVP<span class="gradient-text">dev.com</span></span
+            >
         </a>
         <ul class="nav-links">
-            <li><a href={`${homePath}#services`}>{t('nav_services')}</a></li>
-            <li><a href={`${homePath}#about`}>{t('nav_about')}</a></li>
-            <li><a href={`${homePath}#portfolio`}>{t('nav_portfolio')}</a></li>
-            <li><a href={`/${lang}/blog/`}>{t('nav_blog')}</a></li>
-            <li><a href={`/${lang}/brief/`}>{t('nav_brief')}</a></li>
-            <li><a href={`${homePath}#contact`}>{t('nav_contact')}</a></li>
+            <li><a href={`${homePath}#services`}>{t("nav_services")}</a></li>
+            <li><a href={`${homePath}#about`}>{t("nav_about")}</a></li>
+            <li><a href={`/${lang}/projects/`}>{t("catalog_title")}</a></li>
+            <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
+            <li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
+            <li><a href={`${homePath}#contact`}>{t("nav_contact")}</a></li>
         </ul>
         <div class="controls">
-            <button class="control-btn theme-switcher" aria-label="Переключить тему">
+            <button
+                class="control-btn theme-switcher"
+                aria-label="Переключить тему"
+            >
                 <i class="fas fa-sun" aria-hidden="true"></i>
             </button>
             <LanguageSwitcher />
@@ -40,15 +52,18 @@ const homePath = `/${lang}/`;
 <!-- Мобильное меню вынесено сюда же для инкапсуляции -->
 <div class="mobile-nav">
     <ul>
-        <li><a href={`${homePath}#services`}>{t('nav_services')}</a></li>
-        <li><a href={`${homePath}#about`}>{t('nav_about')}</a></li>
-        <li><a href={`${homePath}#portfolio`}>{t('nav_portfolio')}</a></li>
-        <li><a href={`/${lang}/blog/`}>{t('nav_blog')}</a></li>
-        <li><a href={`/${lang}/brief/`}>{t('nav_brief')}</a></li>
-        <li><a href={`${homePath}#contact`}>{t('nav_contact')}</a></li>
+        <li><a href={`${homePath}#services`}>{t("nav_services")}</a></li>
+        <li><a href={`${homePath}#about`}>{t("nav_about")}</a></li>
+        <li><a href={`/${lang}/projects/`}>{t("catalog_title")}</a></li>
+        <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
+        <li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
+        <li><a href={`${homePath}#contact`}>{t("nav_contact")}</a></li>
     </ul>
     <div class="mobile-controls">
-        <button class="control-btn theme-switcher" aria-label="Переключить тему">
+        <button
+            class="control-btn theme-switcher"
+            aria-label="Переключить тему"
+        >
             <i class="fas fa-sun" aria-hidden="true"></i>
         </button>
         <LanguageSwitcher />

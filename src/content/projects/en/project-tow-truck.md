@@ -1,11 +1,15 @@
 ---
 titleKey: 'case_tow_title'
 descriptionKey: 'case_tow_meta_desc'
-ogImage: '/images/tow-truck-hero.webp'
+ogImage: '/images/projects/tow-truck/hero.webp'
 clientKey: 'case_tow_client'
 servicesKey: 'case_tow_services'
 year: 2023
-heroImage: '~/assets/images/tow-truck-hero.webp'
+featured: true
+category: 'web-site'
+stack: ['HTML', 'CSS', 'JavaScript']
+publishDate: 2023-09-01
+heroImage: '~/assets/images/projects/tow-truck/hero.webp'
 heroImageAlt: 'Hero image for the towing service website'
 header:
   titleKey: 'case_tow_h1'
@@ -40,18 +44,18 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '~/assets/images/tow-truck-hero.webp'
+      - img: '~/assets/images/projects/tow-truck/hero.webp'
         captionKey: 'gallery_caption_tow_hero'
-      - img: '~/assets/images/tow-truck-services.webp'
+      - img: '~/assets/images/projects/tow-truck/services.webp'
         captionKey: 'gallery_caption_tow_services'
-      - img: '~/assets/images/tow-truck-about.webp'
+      - img: '~/assets/images/projects/tow-truck/about.webp'
         captionKey: 'gallery_caption_tow_about'
-      - img: '~/assets/images/tow-truck-equipment.webp'
+      - img: '~/assets/images/projects/tow-truck/equipment.webp'
         captionKey: 'gallery_caption_tow_equipment'
-      - img: '~/assets/images/tow-truck-map.webp'
+      - img: '~/assets/images/projects/tow-truck/map.webp'
         captionKey: 'gallery_caption_tow_map'
-      - img: '~/assets/images/tow-truck-testimonials.webp'
+      - img: '~/assets/images/projects/tow-truck/testimonials.webp'
         captionKey: 'gallery_caption_tow_testimonials'
-      - img: '~/assets/images/tow-truck-contacts-form.webp'
+      - img: '~/assets/images/projects/tow-truck/contacts-form.webp'
         captionKey: 'gallery_caption_tow_contacts_form'
 ---

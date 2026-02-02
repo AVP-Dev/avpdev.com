@@ -1,91 +1,78 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import type { Project, TranslationKey } from '../../env.d.ts';
-import PortfolioCard from '../PortfolioCard.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getCollection } from "astro:content";
+import type { Project, TranslationKey } from "../../env.d.ts";
+import PortfolioCard from "../PortfolioCard.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
-interface Props {
-	projects: CollectionEntry<'projects'>[];
-}
-
-const { projects } = Astro.props;
-const lang = getLangFromUrl(Astro.url) as 'ru' | 'en';
+const lang = getLangFromUrl(Astro.url) as "ru" | "en";
 const t = useTranslations(lang);
 
-const getCategory = (slug: string): 'apps' | 'sites' => {
-	const cleanSlug = slug.replace(/^(ru|en)\//, '');
-	if (['project-furniture', 'project-travel'].includes(cleanSlug)) {
-		return 'apps';
-	}
-	return 'sites';
+// 1. Load collection for current language
+const projectsCollection = await getCollection("projects", ({ id, data }) => {
+  // Filter for current language AND featured projects
+  return id.startsWith(`${lang}/`) && data.featured === true;
+});
+
+// 2. Sort by publishDate (descending)
+const sortedProjects = projectsCollection.sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+
+// 3. Take top 6
+const featuredProjects = sortedProjects.slice(0, 6);
+
+const categoryMap: Record<string, "sites" | "apps"> = {
+  "web-site": "sites",
+  app: "apps",
+  "crm-erp": "apps",
+  "tg-mini-app": "apps",
 };
 
-const PROJECTS_DATA: Project[] = projects.map((project, index) => ({
-	id: index + 1,
-	category: getCategory(project.slug),
-	img: project.data.heroImage.src,
-	titleKey: project.data.header.titleKey as TranslationKey,
-	link: `/${lang}/project/${project.slug.replace(/^(ru|en)\//, '')}/`,
-	techStack: project.data.content.techStack, // Pass the full techStack array
-	tags: project.data.content.techStack.map(tech => tech.title), // Keep this for filtering logic
+const PROJECTS_DATA: Project[] = featuredProjects.map((project, index) => ({
+  id: index + 1,
+  category: categoryMap[project.data.category] || "sites",
+  img: project.data.heroImage.src,
+  titleKey: project.data.header.titleKey as TranslationKey,
+  link: `/${lang}/project/${project.slug.replace(/^(ru|en)\//, "")}/`,
+  techStack: project.data.content.techStack,
+  tags: project.data.stack,
 }));
-
-const PROJECTS_PER_PAGE = 3;
-// Безопасная проверка и подготовка данных
-const allProjects = Array.isArray(PROJECTS_DATA) ? PROJECTS_DATA : [];
-const hasProjects = allProjects.length > 0;
 ---
 
 <section id="portfolio" aria-labelledby="portfolio-title">
   <div class="container">
-    <h2 id="portfolio-title" class="section-title fade-in" set:html={t('portfolio_h2')}></h2>
+    <h2
+      id="portfolio-title"
+      class="section-title fade-in"
+      set:html={t("portfolio_h2")}
+    />
 
-    {hasProjects ?
-    (
-      <>
-        <div class="portfolio-filters fade-in" role="tablist" aria-label={t('portfolio_aria_label')}>
-          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">{t('filter_all')}</button>
-          <button class="filter-btn" data-filter="sites" role="tab" aria-selected="false">{t('filter_sites')}</button>
-          <button class="filter-btn" data-filter="apps" role="tab" aria-selected="false">{t('filter_apps')}</button>
-        </div>
-
-        <div id="main-portfolio-grid" class="portfolio-grid" aria-live="polite">
-          {/* Рендерим все карточки сразу, но скрываем лишние */}
-          {allProjects.map((project, index) => (
-            <div class:list={["portfolio-card-wrapper", { 'is-hidden': index >= PROJECTS_PER_PAGE }]}>
-              <PortfolioCard {...project} />
-            </div>
-          ))}
-        </div>
-
-        <div class="show-more-container">
-          <button
-            id="show-more-btn"
-            class:list={["cta-button", { 'is-hidden': allProjects.length <= PROJECTS_PER_PAGE }]}
-            type="button"
+    {
+      PROJECTS_DATA.length > 0 ? (
+        <>
+          <div
+            id="main-portfolio-grid"
+            class="portfolio-grid"
+            aria-live="polite"
           >
-            {t('show_more')}
-          </button>
-        </div>
-      </>
-    ) : (
-      <p class="muted" id="portfolio-empty">
-        Проекты для отображения отсутствуют.
-      </p>
-    )}
+            {PROJECTS_DATA.map((project) => (
+              <div class="portfolio-card-wrapper">
+                <PortfolioCard {...project} />
+              </div>
+            ))}
+          </div>
+
+          <div class="show-more-container mt-12 text-center">
+            <a href={`/${lang}/projects/`} class="cta-button">
+              {t("portfolio_btn_all")}
+            </a>
+          </div>
+        </>
+      ) : (
+        <p class="muted" id="portfolio-empty">
+          Проекты скоро появятся.
+        </p>
+      )
+    }
   </div>
 </section>
-
-<style>
-  .portfolio-card-wrapper.is-hidden {
-    display: none;
-  }
-  .show-more-container button.is-hidden {
-    display: none;
-  }
-</style>
-
-<!-- ИЗМЕНЕНО: Удаляем импорт, так как вся логика теперь в main.ts -->
-<script>
-  // Этот скрипт больше не нужен здесь, так как `main.ts` управляет всем.
-</script>

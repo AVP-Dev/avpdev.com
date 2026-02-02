@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import PortfolioCard from "../../../components/PortfolioCard.astro";
+import { useTranslations } from "../../../i18n/utils";
+import type { Project, TranslationKey } from "../../../env.d.ts";
+
+export const prerender = false; // Enable SSR for search params
+
+const { lang } = Astro.params;
+
+if (lang !== "ru" && lang !== "en") {
+    return Astro.redirect("/404");
+}
+
+const t = useTranslations(lang as "ru" | "en");
+const url = Astro.url;
+
+// Get filters from URL
+const categoryFilter = url.searchParams.get("category");
+const stackFilter = url.searchParams.get("stack"); // Comma separated? Or single? User said "Get params".
+
+// Fetch all projects for language
+const allProjects = await getCollection("projects", ({ id }) =>
+    id.startsWith(`${lang}/`),
+);
+
+// Filter Logic
+const filteredProjects = allProjects.filter((project) => {
+    let match = true;
+
+    if (categoryFilter) {
+        if (project.data.category !== categoryFilter) {
+            match = false;
+        }
+    }
+
+    if (stackFilter && match) {
+        // Allow partial match or exact? User said "stack: z.array(z.string())".
+        // Simple logic: if stackFilter is in the project's stack array.
+        // Case insensitive?
+        const normalizedStack = project.data.stack.map((s) => s.toLowerCase());
+        if (!normalizedStack.includes(stackFilter.toLowerCase())) {
+            match = false;
+        }
+    }
+
+    return match;
+});
+
+// Sort by date (newest first)
+filteredProjects.sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+
+const categoryMap: Record<string, "sites" | "apps"> = {
+    "web-site": "sites",
+    app: "apps",
+    "crm-erp": "apps",
+    "tg-mini-app": "apps",
+};
+
+const PROJECTS_DATA: Project[] = filteredProjects.map((project, index) => ({
+    id: index + 1,
+    category: categoryMap[project.data.category] || "sites",
+    img: project.data.heroImage.src,
+    titleKey: project.data.header.titleKey as TranslationKey,
+    link: `/${lang}/project/${project.slug.replace(/^(ru|en)\//, "")}/`,
+    techStack: project.data.content.techStack,
+    tags: project.data.stack,
+}));
+
+// Setup Metadata
+const pageTitle = `${t("catalog_title")} | AVPdev.com`;
+const pageDesc = t("catalog_subtitle");
+
+// Filters Data for UI
+const categories = [
+    { value: "web-site", label: t("filter_sites") },
+    { value: "app", label: t("filter_apps") },
+    { value: "crm-erp", label: t("filter_crm_erp") },
+    { value: "tg-mini-app", label: t("filter_tg_mini_app") },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} schema={{}}>
+    <section>
+        <div class="container">
+            <div class="archive-header fade-in visible">
+                <h1 class="section-title">
+                    <span set:html={t("catalog_title_h1")} />
+                </h1>
+                <p class="section-subtitle" style="margin-bottom: 2rem;">
+                    {t("catalog_subtitle")}
+                </p>
+            </div>
+
+            <!-- Filters header -->
+            <div class="portfolio-filters fade-in visible">
+                <a
+                    href={url.pathname}
+                    class:list={["filter-btn", { active: !categoryFilter }]}
+                    style="text-decoration: none;"
+                >
+                    {t("filter_all")}
+                </a>
+                {
+                    categories.map((cat) => (
+                        <a
+                            href={`?category=${cat.value}`}
+                            class:list={[
+                                "filter-btn",
+                                { active: categoryFilter === cat.value },
+                            ]}
+                            style="text-decoration: none;"
+                        >
+                            {cat.label}
+                        </a>
+                    ))
+                }
+            </div>
+
+            {
+                PROJECTS_DATA.length > 0 ? (
+                    <div class="portfolio-grid fade-in visible">
+                        {PROJECTS_DATA.map((project) => (
+                            <div class="portfolio-card-wrapper">
+                                <PortfolioCard {...project} />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 0;">
+                        <i
+                            class="fas fa-search"
+                            style="font-size: 4rem; color: var(--text-secondary-color); margin-bottom: 2rem; opacity: 0.5;"
+                        />
+                        <p class="text-2xl text-secondary mb-8">
+                            {lang === "ru"
+                                ? "Проекты не найдены."
+                                : "No projects found."}
+                        </p>
+                        <a
+                            href={url.pathname}
+                            class="cta-button"
+                            style="margin-top: 2rem; text-decoration: none;"
+                        >
+                            {lang === "ru"
+                                ? "Сбросить фильтры"
+                                : "Reset filters"}
+                        </a>
+                    </div>
+                )
+            }
+        </div>
+    </section>
+</BaseLayout>
