@@ -182,7 +182,6 @@ const t = useTranslations(lang);
 
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
-            data.consent = "true"; // Explicitly set consent
 
             try {
                 const response = await fetch("/api/sendMessage", {

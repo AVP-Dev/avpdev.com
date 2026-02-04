@@ -681,10 +681,12 @@ const t = useTranslations(lang);
             spinner.style.display = "block";
 
             const formData = new FormData(form);
-            const data: { [key: string]: any } = {};
+            // Handle multiple values for checkboxes (features, support)
+            const data: Record<string, any> = {};
 
-            for (let [key, value] of formData.entries()) {
+            for (const [key, value] of formData.entries()) {
                 if (data[key]) {
+                    // If key already exists, convert to array
                     if (!Array.isArray(data[key])) {
                         data[key] = [data[key]];
                     }
@@ -694,15 +696,8 @@ const t = useTranslations(lang);
                 }
             }
 
-            // Ensure consent is sent as boolean string "true" for API consistency if needed,
-            // though Zod might expect strict boolean or string.
-            // HTML checkbox sends "on" if checked, or nothing if not.
-            // We'll manually force it or rely on formData 'consent' being present.
-            // Let's explicitly set it to avoid ambiguity.
-            data.consent = "true";
-
             try {
-                const response = await fetch("/api/sendBrief/", {
+                const response = await fetch("/api/sendBrief", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),

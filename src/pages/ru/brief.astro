@@ -695,10 +695,12 @@ const t = useTranslations(lang);
             spinner.style.display = "block";
 
             const formData = new FormData(form);
-            const data: { [key: string]: any } = {};
+            // Handle multiple values for checkboxes (features, support)
+            const data: Record<string, any> = {};
 
-            for (let [key, value] of formData.entries()) {
+            for (const [key, value] of formData.entries()) {
                 if (data[key]) {
+                    // If key already exists, convert to array
                     if (!Array.isArray(data[key])) {
                         data[key] = [data[key]];
                     }
@@ -708,11 +710,8 @@ const t = useTranslations(lang);
                 }
             }
 
-            // Явно добавляем consent=true
-            data.consent = "true";
-
             try {
-                const response = await fetch("/api/sendBrief/", {
+                const response = await fetch("/api/sendBrief", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),

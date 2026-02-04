@@ -1,7 +1,7 @@
 // src/pages/api/sendMessage.ts
 import type { APIRoute } from 'astro';
-import { z } from 'zod';
 import sanitizeHtml from 'sanitize-html';
+import { ContactFormSchema } from '../../lib/schemas';
 
 function cleanInput(str: string | undefined | null): string {
     if (!str) return '';
@@ -11,45 +11,24 @@ function cleanInput(str: string | undefined | null): string {
     });
 }
 
-// Используем .superRefine для кастомной логики ошибки
-const contactSchema = z.object({
-    name: z.string().min(1),
-    email: z.string().email().optional().or(z.literal('')),
-    phone: z.string().optional(),
-    message: z.string().min(1),
-    consent: z.union([z.literal("true"), z.literal(true)], {
-        errorMap: () => ({ message: "Agreement is required" })
-    }),
-}).superRefine((data, ctx) => {
-    // Если и email, и телефон пустые — добавляем ошибку к обоим полям
-    if (!data.email && !data.phone) {
-        ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Required",
-            path: ["email"]
-        });
-        ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Required",
-            path: ["phone"]
-        });
-    }
-});
-
 export const POST: APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
-        const result = contactSchema.safeParse(data);
+        const result = ContactFormSchema.safeParse(data);
 
         if (!result.success) {
-            // Возвращаем ошибку валидации
+            // Return standardized error response
             return new Response(JSON.stringify({
+                success: false,
                 message: "Validation Error",
-                errors: result.error.flatten().fieldErrors
+                errors: result.error.issues
             }), { status: 400 });
         }
 
-        const { name, email, phone, message } = result.data;
+        const { name, email, phone, message, consent } = result.data;
+
+        // Log that consent was given
+        console.log(`Contact form submission - Consent: ${consent}`);
 
         const tgMessage = `<b>🔥 Новая заявка с сайта!</b>\n\n<b>Имя:</b> ${cleanInput(name)}\n<b>Email:</b> ${cleanInput(email)}\n<b>Телефон:</b> ${cleanInput(phone)}\n\n<b>Сообщение:</b>\n${cleanInput(message)}`;
         const { BOT_TOKEN, CHAT_ID, TOPIC_ID } = import.meta.env;
@@ -75,10 +54,16 @@ export const POST: APIRoute = async ({ request }) => {
             throw new Error('Не удалось отправить сообщение в Telegram.');
         }
 
-        return new Response(JSON.stringify({ message: "Success" }), { status: 200 });
+        return new Response(JSON.stringify({
+            success: true,
+            message: "Success"
+        }), { status: 200 });
 
     } catch (error) {
         console.error("Критическая ошибка в /api/sendMessage:", error);
-        return new Response(JSON.stringify({ message: "Server error" }), { status: 500 });
+        return new Response(JSON.stringify({
+            success: false,
+            message: "Server error"
+        }), { status: 500 });
     }
 };
