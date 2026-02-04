@@ -5,45 +5,50 @@ import sanitizeHtml from 'sanitize-html';
 
 // ИСПРАВЛЕННАЯ Zod-схема для валидации данных брифа
 const briefSchema = z.object({
-  // --- Контактные данные ---
-  company_name: z.string().min(1, { message: 'Название компании обязательно' }),
-  contacts: z.string().min(1, { message: 'Контактные данные обязательны' }),
-  preferred_contact: z.enum(['Telegram', 'WhatsApp', 'Email', 'Звонок', 'Phone Call']),
+    // --- Контактные данные ---
+    company_name: z.string().min(1, { message: 'Название компании обязательно' }),
+    contacts: z.string().min(1, { message: 'Контактные данные обязательны' }),
+    preferred_contact: z.enum(['Telegram', 'WhatsApp', 'Email', 'Звонок', 'Phone Call']),
 
-  // --- О компании и проекте ---
-  business_sphere: z.string().min(1, { message: 'Описание сферы деятельности обязательно' }),
-  current_site: z.string().url({ message: 'Неверный URL текущего сайта' }).optional().or(z.literal('')),
-  competitors: z.string().optional(),
+    // --- О компании и проекте ---
+    business_sphere: z.string().min(1, { message: 'Описание сферы деятельности обязательно' }),
+    current_site: z.string().url({ message: 'Неверный URL текущего сайта' }).optional().or(z.literal('')),
+    competitors: z.string().optional(),
 
-  // --- Цели и задачи ---
-  project_goal: z.string(), 
-  success_metrics: z.string().optional(),
+    // --- Цели и задачи ---
+    project_goal: z.string(),
+    success_metrics: z.string().optional(),
 
-  // --- Целевая аудитория ---
-  target_audience: z.string().optional(),
-  user_action: z.string().optional(),
+    // --- Целевая аудитория ---
+    target_audience: z.string().optional(),
+    user_action: z.string().optional(),
 
-  // --- Тип и функционал ---
-  site_type: z.string(), 
-  features: z.union([z.array(z.string()), z.string()]).optional(), 
-  features_other: z.string().optional(),
+    // --- Тип и функционал ---
+    site_type: z.string(),
+    features: z.union([z.array(z.string()), z.string()]).optional(),
+    features_other: z.string().optional(),
 
-  // --- Дизайн и контент ---
-  brand_identity: z.string().optional(),
-  design_examples: z.string().optional(), 
-  content_provider: z.string().optional(), 
+    // --- Дизайн и контент ---
+    brand_identity: z.string().optional(),
+    design_examples: z.string().optional(),
+    content_provider: z.string().optional(),
 
-  // --- Технические вопросы ---
-  hosting_domain: z.string().optional(),
-  integrations: z.string().optional(),
+    // --- Технические вопросы ---
+    hosting_domain: z.string().optional(),
+    integrations: z.string().optional(),
 
-  // --- Бюджет и сроки ---
-  budget: z.string().optional(),
-  deadline: z.string().optional(),
+    // --- Бюджет и сроки ---
+    budget: z.string().optional(),
+    deadline: z.string().optional(),
 
-  // --- Дополнительно ---
-  additional_info: z.string().optional(),
-  support: z.union([z.array(z.string()), z.string()]).optional(),
+    // --- Дополнительно ---
+    additional_info: z.string().optional(),
+    support: z.union([z.array(z.string()), z.string()]).optional(),
+
+    // --- Юридическое согласие ---
+    consent: z.union([z.literal("true"), z.literal(true)], {
+        errorMap: () => ({ message: "Необходимо согласие на обработку данных" })
+    }),
 });
 
 

@@ -17,6 +17,9 @@ const contactSchema = z.object({
     email: z.string().email().optional().or(z.literal('')),
     phone: z.string().optional(),
     message: z.string().min(1),
+    consent: z.union([z.literal("true"), z.literal(true)], {
+        errorMap: () => ({ message: "Agreement is required" })
+    }),
 }).superRefine((data, ctx) => {
     // Если и email, и телефон пустые — добавляем ошибку к обоим полям
     if (!data.email && !data.phone) {

@@ -1,37 +1,119 @@
 ---
 // src/components/sections/Contact.astro
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
+
 <section id="contact">
     <div class="container">
-        <h2 class="section-title fade-in" set:html={t('contact_h2')}></h2>
-        <p class="section-subtitle fade-in">{t('contact_p')}</p>
+        <h2 class="section-title fade-in" set:html={t("contact_h2")} />
+        <p class="section-subtitle fade-in">{t("contact_p")}</p>
 
         <form id="contact-form" class="contact-form fade-in" novalidate>
             <div class="form-group">
-                <input type="text" name="name" placeholder={t('form_name')} required class="form-control">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder={t("form_name")}
+                    required
+                    class="form-control"
+                />
             </div>
 
             <div class="form-group-split">
                 <div class="form-group">
-                    <input type="email" name="email" placeholder={t('form_email')} class="form-control">
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder={t("form_email")}
+                        class="form-control"
+                    />
                 </div>
                 <div class="form-group">
-                    <input type="tel" name="phone" placeholder={t('form_phone')} class="form-control">
+                    <input
+                        type="tel"
+                        name="phone"
+                        placeholder={t("form_phone")}
+                        class="form-control"
+                    />
                 </div>
             </div>
-            <p class="form-hint">{t('form_hint')}</p>
+            <p class="form-hint">{t("form_hint")}</p>
 
             <div class="form-group">
-                <textarea name="message" placeholder={t('form_message')} required class="form-control" rows="5"></textarea>
+                <textarea
+                    name="message"
+                    placeholder={t("form_message")}
+                    required
+                    class="form-control"
+                    rows="5"></textarea>
+            </div>
+
+            <div
+                class="form-group-checkbox"
+                style="display: flex; flex-direction: row; align-items: start; gap: 0.75rem; margin-bottom: 1.5rem;"
+            >
+                <input
+                    type="checkbox"
+                    id="legal-consent"
+                    name="consent"
+                    class="accent-primary w-5 h-5 mt-1"
+                    required
+                />
+                <label
+                    for="legal-consent"
+                    class="text-sm text-muted-foreground leading-snug"
+                >
+                    {
+                        lang === "ru" ? (
+                            <>
+                                Я принимаю условия{" "}
+                                <a
+                                    href="/ru/legal/public-offer"
+                                    class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                                >
+                                    Публичной оферты
+                                </a>{" "}
+                                и даю согласие на обработку{" "}
+                                <a
+                                    href="/ru/legal/privacy-policy"
+                                    class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                                >
+                                    персональных данных
+                                </a>
+                                .
+                            </>
+                        ) : (
+                            <>
+                                I accept the{" "}
+                                <a
+                                    href="/en/legal/public-offer"
+                                    class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                                >
+                                    Public Offer
+                                </a>{" "}
+                                and agree to the processing of{" "}
+                                <a
+                                    href="/en/legal/privacy-policy"
+                                    class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                                >
+                                    personal data
+                                </a>
+                                .
+                            </>
+                        )
+                    }
+                </label>
             </div>
 
             <div class="form-submit-container">
-                <button id="submit-button" type="submit" class="cta-button">{t('form_button')}</button>
-                <div id="form-spinner" class="spinner" style="display: none;"></div>
+                <button id="submit-button" type="submit" class="cta-button"
+                    >{t("form_button")}</button
+                >
+                <div id="form-spinner" class="spinner" style="display: none;">
+                </div>
             </div>
         </form>
     </div>

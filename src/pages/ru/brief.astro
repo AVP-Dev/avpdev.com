@@ -1,199 +1,611 @@
 ---
 // src/pages/ru/brief.astro
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SuccessModal from '../../components/modals/SuccessModal.astro';
-import ErrorModal from '../../components/modals/ErrorModal.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SuccessModal from "../../components/modals/SuccessModal.astro";
+import ErrorModal from "../../components/modals/ErrorModal.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 export const prerender = true;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
+
 <BaseLayout title="brief_page_title" description="brief_page_desc">
     <section id="brief-form-section" class="case-study-header">
         <div class="container">
-            <h1 class="section-title">{t('brief_title')}</h1>
-            <p>{t('brief_subtitle')}</p>
+            <h1 class="section-title">{t("brief_title")}</h1>
+            <p>{t("brief_subtitle")}</p>
 
             <form id="brief-form" class="brief-form" novalidate>
-                 <!-- ... все поля вашей формы остаются без изменений ... -->
+                <!-- ... все поля вашей формы остаются без изменений ... -->
                 <fieldset class="form-block fade-in">
                     <legend>1. Контактные данные</legend>
                     <div class="form-group">
-                        <label for="company_name">Имя / Название компании *</label>
-                        <input type="text" id="company_name" name="company_name" class="form-control" required>
+                        <label for="company_name"
+                            >Имя / Название компании *</label
+                        >
+                        <input
+                            type="text"
+                            id="company_name"
+                            name="company_name"
+                            class="form-control"
+                            required
+                        />
                     </div>
                     <div class="form-group">
-                        <label for="contacts">Контакты (Телефон, Telegram, Email) *</label>
-                        <input type="text" id="contacts" name="contacts" class="form-control" required>
+                        <label for="contacts"
+                            >Контакты (Телефон, Telegram, Email) *</label
+                        >
+                        <input
+                            type="text"
+                            id="contacts"
+                            name="contacts"
+                            class="form-control"
+                            required
+                        />
                     </div>
                     <div class="form-group">
                         <label>Предпочтительный способ связи *</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="preferred_contact" value="Telegram" checked><span>Telegram</span></label>
-                            <label><input type="radio" name="preferred_contact" value="WhatsApp"><span>WhatsApp</span></label>
-                            <label><input type="radio" name="preferred_contact" value="Email"><span>Email</span></label>
-                            <label><input type="radio" name="preferred_contact" value="Звонок"><span>Звонок</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="Telegram"
+                                    checked
+                                /><span>Telegram</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="WhatsApp"
+                                /><span>WhatsApp</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="Email"
+                                /><span>Email</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="Звонок"
+                                /><span>Звонок</span></label
+                            >
                         </div>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 100ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 100ms;"
+                >
                     <legend>2. О компании и проекте</legend>
                     <div class="form-group">
-                        <label for="business_sphere">Кратко опишите, чем занимается ваша компания, какие товары или услуги предлагает? *</label>
-                        <textarea id="business_sphere" name="business_sphere" class="form-control" rows="3" required></textarea>
+                        <label for="business_sphere"
+                            >Кратко опишите, чем занимается ваша компания, какие
+                            товары или услуги предлагает? *</label
+                        >
+                        <textarea
+                            id="business_sphere"
+                            name="business_sphere"
+                            class="form-control"
+                            rows="3"
+                            required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="current_site">Адрес текущего сайта (если есть)</label>
-                        <input type="url" id="current_site" name="current_site" class="form-control" placeholder="https://">
+                        <label for="current_site"
+                            >Адрес текущего сайта (если есть)</label
+                        >
+                        <input
+                            type="url"
+                            id="current_site"
+                            name="current_site"
+                            class="form-control"
+                            placeholder="https://"
+                        />
                     </div>
                     <div class="form-group">
-                        <label for="competitors">Укажите 2–3 основных конкурентов</label>
-                        <textarea id="competitors" name="competitors" class="form-control" rows="2" placeholder="Ссылки на сайты конкурентов"></textarea>
+                        <label for="competitors"
+                            >Укажите 2–3 основных конкурентов</label
+                        >
+                        <textarea
+                            id="competitors"
+                            name="competitors"
+                            class="form-control"
+                            rows="2"
+                            placeholder="Ссылки на сайты конкурентов"
+                        ></textarea>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 200ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 200ms;"
+                >
                     <legend>3. Цели и задачи сайта</legend>
                     <div class="form-group">
                         <label>Какова главная цель создания сайта? *</label>
-                         <div class="radio-group-vertical">
-                            <label><input type="radio" name="project_goal" value="Продажа товаров или услуг онлайн" checked><span>Продажа товаров или услуг онлайн</span></label>
-                            <label><input type="radio" name="project_goal" value="Привлечение клиентов (лидогенерация)"><span>Привлечение клиентов (лидогенерация)</span></label>
-                            <label><input type="radio" name="project_goal" value="Имиджевое представительство компании"><span>Имиджевое представительство компании</span></label>
-                             <label><input type="radio" name="project_goal" value="Информационный портал или блог"><span>Информационный портал или блог</span></label>
-                             <label><input type="radio" name="project_goal" value="Автоматизация внутренних процессов"><span>Автоматизация внутренних процессов</span></label>
+                        <div class="radio-group-vertical">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Продажа товаров или услуг онлайн"
+                                    checked
+                                /><span>Продажа товаров или услуг онлайн</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Привлечение клиентов (лидогенерация)"
+                                /><span
+                                    >Привлечение клиентов (лидогенерация)</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Имиджевое представительство компании"
+                                /><span
+                                    >Имиджевое представительство компании</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Информационный портал или блог"
+                                /><span>Информационный портал или блог</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Автоматизация внутренних процессов"
+                                /><span>Автоматизация внутренних процессов</span
+                                ></label
+                            >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="success_metrics">Как вы будете оценивать успешность сайта? (например, N заявок в месяц, рост продаж на X%)</label>
-                        <textarea id="success_metrics" name="success_metrics" class="form-control" rows="2"></textarea>
+                        <label for="success_metrics"
+                            >Как вы будете оценивать успешность сайта?
+                            (например, N заявок в месяц, рост продаж на X%)</label
+                        >
+                        <textarea
+                            id="success_metrics"
+                            name="success_metrics"
+                            class="form-control"
+                            rows="2"></textarea>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 300ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 300ms;"
+                >
                     <legend>4. Целевая аудитория</legend>
-                     <div class="form-group">
-                        <label for="target_audience">Опишите вашего типичного клиента (возраст, интересы, чем занимается)</label>
-                        <textarea id="target_audience" name="target_audience" class="form-control" rows="3"></textarea>
+                    <div class="form-group">
+                        <label for="target_audience"
+                            >Опишите вашего типичного клиента (возраст,
+                            интересы, чем занимается)</label
+                        >
+                        <textarea
+                            id="target_audience"
+                            name="target_audience"
+                            class="form-control"
+                            rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="user_action">Какое ключевое действие должен совершить посетитель на сайте?</label>
-                        <input type="text" id="user_action" name="user_action" class="form-control" placeholder="Например: позвонить, оставить заявку, купить товар">
+                        <label for="user_action"
+                            >Какое ключевое действие должен совершить посетитель
+                            на сайте?</label
+                        >
+                        <input
+                            type="text"
+                            id="user_action"
+                            name="user_action"
+                            class="form-control"
+                            placeholder="Например: позвонить, оставить заявку, купить товар"
+                        />
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 400ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 400ms;"
+                >
                     <legend>5. Тип и функционал сайта</legend>
                     <div class="form-group">
                         <label>Какой тип сайта вам нужен? *</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="site_type" value="Лендинг" checked><span>Лендинг</span></label>
-                            <label><input type="radio" name="site_type" value="Корпоративный сайт"><span>Корпоративный сайт</span></label>
-                            <label><input type="radio" name="site_type" value="Интернет-магазин"><span>Интернет-магазин</span></label>
-                            <label><input type="radio" name="site_type" value="Веб-приложение"><span>Веб-приложение</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="Лендинг"
+                                    checked
+                                /><span>Лендинг</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="Корпоративный сайт"
+                                /><span>Корпоративный сайт</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="Интернет-магазин"
+                                /><span>Интернет-магазин</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="Веб-приложение"
+                                /><span>Веб-приложение</span></label
+                            >
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Какой функционал необходим?</label>
                         <div class="checkbox-group">
-                            <label><input type="checkbox" name="features" value="Каталог товаров/услуг"><span>Каталог товаров/услуг</span></label>
-                            <label><input type="checkbox" name="features" value="Блог/Новости"><span>Блог/Новости</span></label>
-                             <label><input type="checkbox" name="features" value="Личный кабинет"><span>Личный кабинет</span></label>
-                            <label><input type="checkbox" name="features" value="Онлайн-оплата"><span>Онлайн-оплата</span></label>
-                            <label><input type="checkbox" name="features" value="Калькулятор стоимости"><span>Калькулятор стоимости</span></label>
-                             <label><input type="checkbox" name="features" value="Многоязычность"><span>Многоязычность</span></label>
-                             <label><input type="checkbox" name="features" value="other"><span>Другое</span></label>
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Каталог товаров/услуг"
+                                /><span>Каталог товаров/услуг</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Блог/Новости"
+                                /><span>Блог/Новости</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Личный кабинет"
+                                /><span>Личный кабинет</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Онлайн-оплата"
+                                /><span>Онлайн-оплата</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Калькулятор стоимости"
+                                /><span>Калькулятор стоимости</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Многоязычность"
+                                /><span>Многоязычность</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="other"
+                                /><span>Другое</span></label
+                            >
                         </div>
-                        <div class="form-group other-input" style="display: none;">
-                            <input type="text" name="features_other" class="form-control" placeholder="Укажите другой функционал">
+                        <div
+                            class="form-group other-input"
+                            style="display: none;"
+                        >
+                            <input
+                                type="text"
+                                name="features_other"
+                                class="form-control"
+                                placeholder="Укажите другой функционал"
+                            />
                         </div>
                     </div>
                 </fieldset>
 
-                 <fieldset class="form-block fade-in" style="transition-delay: 500ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 500ms;"
+                >
                     <legend>6. Дизайн и контент</legend>
-                     <div class="form-group">
-                        <label>Есть ли у вас фирменный стиль, логотип, брендбук?</label>
+                    <div class="form-group">
+                        <label
+                            >Есть ли у вас фирменный стиль, логотип, брендбук?</label
+                        >
                         <div class="radio-group">
-                            <label><input type="radio" name="brand_identity" value="Да, все есть" checked><span>Да, все есть</span></label>
-                            <label><input type="radio" name="brand_identity" value="Есть только логотип"><span>Есть только логотип</span></label>
-                            <label><input type="radio" name="brand_identity" value="Нет, нужна разработка"><span>Нет, нужна разработка</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="brand_identity"
+                                    value="Да, все есть"
+                                    checked
+                                /><span>Да, все есть</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="brand_identity"
+                                    value="Есть только логотип"
+                                /><span>Есть только логотип</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="brand_identity"
+                                    value="Нет, нужна разработка"
+                                /><span>Нет, нужна разработка</span></label
+                            >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="design_examples">Приведите примеры 2–3 сайтов, которые вам нравятся по дизайну</label>
-                        <textarea id="design_examples" name="design_examples" class="form-control" rows="2" placeholder="Ссылки на сайты"></textarea>
+                        <label for="design_examples"
+                            >Приведите примеры 2–3 сайтов, которые вам нравятся
+                            по дизайну</label
+                        >
+                        <textarea
+                            id="design_examples"
+                            name="design_examples"
+                            class="form-control"
+                            rows="2"
+                            placeholder="Ссылки на сайты"></textarea>
                     </div>
-                     <div class="form-group">
-                        <label>Кто будет готовить контент (тексты, фото, видео)?</label>
+                    <div class="form-group">
+                        <label
+                            >Кто будет готовить контент (тексты, фото, видео)?</label
+                        >
                         <div class="radio-group">
-                            <label><input type="radio" name="content_provider" value="У нас есть готовый контент" checked><span>У нас есть готовый контент</span></label>
-                            <label><input type="radio" name="content_provider" value="Контент подготовим мы"><span>Контент подготовим мы</span></label>
-                            <label><input type="radio" name="content_provider" value="Нужна помощь в подготовке"><span>Нужна помощь в подготовке</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="content_provider"
+                                    value="У нас есть готовый контент"
+                                    checked
+                                /><span>У нас есть готовый контент</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="content_provider"
+                                    value="Контент подготовим мы"
+                                /><span>Контент подготовим мы</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="content_provider"
+                                    value="Нужна помощь в подготовке"
+                                /><span>Нужна помощь в подготовке</span></label
+                            >
                         </div>
                     </div>
                 </fieldset>
 
-                 <fieldset class="form-block fade-in" style="transition-delay: 600ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 600ms;"
+                >
                     <legend>7. Технические вопросы</legend>
-                     <div class="form-group">
+                    <div class="form-group">
                         <label>Есть ли у вас домен и хостинг?</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="hosting_domain" value="Да, есть" checked><span>Да, есть</span></label>
-                            <label><input type="radio" name="hosting_domain" value="Нет, нужна помощь"><span>Нет, нужна помощь</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="hosting_domain"
+                                    value="Да, есть"
+                                    checked
+                                /><span>Да, есть</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="hosting_domain"
+                                    value="Нет, нужна помощь"
+                                /><span>Нет, нужна помощь</span></label
+                            >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="integrations">Нужны ли интеграции со сторонними сервисами (CRM, 1С, сервисы доставки, аналитика)?</label>
-                        <textarea id="integrations" name="integrations" class="form-control" rows="2" placeholder="Например: Битрикс24, Google Analytics"></textarea>
+                        <label for="integrations"
+                            >Нужны ли интеграции со сторонними сервисами (CRM,
+                            1С, сервисы доставки, аналитика)?</label
+                        >
+                        <textarea
+                            id="integrations"
+                            name="integrations"
+                            class="form-control"
+                            rows="2"
+                            placeholder="Например: Битрикс24, Google Analytics"
+                        ></textarea>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 700ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 700ms;"
+                >
                     <legend>8. Бюджет и сроки</legend>
                     <div class="form-group">
                         <label>Ориентировочный бюджет на разработку?</label>
                         <div class="radio-group-vertical">
-                            <label><input type="radio" name="budget" value="До $500" checked><span>До $500</span></label>
-                            <label><input type="radio" name="budget" value="$500 - $1500"><span>$500 - $1500</span></label>
-                            <label><input type="radio" name="budget" value="$1500 - $3000"><span>$1500 - $3000</span></label>
-                            <label><input type="radio" name="budget" value="Более $3000"><span>Более $3000</span></label>
-                             <label><input type="radio" name="budget" value="Обсуждается индивидуально"><span>Обсуждается индивидуально</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="До $500"
+                                    checked
+                                /><span>До $500</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="$500 - $1500"
+                                /><span>$500 - $1500</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="$1500 - $3000"
+                                /><span>$1500 - $3000</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="Более $3000"
+                                /><span>Более $3000</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="Обсуждается индивидуально"
+                                /><span>Обсуждается индивидуально</span></label
+                            >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="deadline">Желаемые сроки запуска проекта?</label>
-                        <input type="text" id="deadline" name="deadline" class="form-control">
+                        <label for="deadline"
+                            >Желаемые сроки запуска проекта?</label
+                        >
+                        <input
+                            type="text"
+                            id="deadline"
+                            name="deadline"
+                            class="form-control"
+                        />
                     </div>
                 </fieldset>
 
-                 <fieldset class="form-block fade-in" style="transition-delay: 900ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 900ms;"
+                >
                     <legend>9. Дополнительная информация</legend>
                     <div class="form-group">
-                        <label for="additional_info">Здесь вы можете указать любую другую важную информацию, которая поможет лучше понять вашу задачу.</label>
-                        <textarea id="additional_info" name="additional_info" class="form-control" rows="4"></textarea>
+                        <label for="additional_info"
+                            >Здесь вы можете указать любую другую важную
+                            информацию, которая поможет лучше понять вашу
+                            задачу.</label
+                        >
+                        <textarea
+                            id="additional_info"
+                            name="additional_info"
+                            class="form-control"
+                            rows="4"></textarea>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 900ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 900ms;"
+                >
                     <legend>10. Поддержка и развитие</legend>
                     <div class="form-group">
-                        <label>Нужна ли вам поддержка, обслуживание или дальнейшее развитие сайта после запуска?</label>
+                        <label
+                            >Нужна ли вам поддержка, обслуживание или дальнейшее
+                            развитие сайта после запуска?</label
+                        >
                         <div class="checkbox-group">
-                            <label><input type="checkbox" name="support" value="Техническая поддержка"><span>Да, нужна техническая поддержка</span></label>
-                            <label><input type="checkbox" name="support" value="Дальнейшее развитие"><span>Да, планируется дальнейшее развитие</span></label>
-                            <label><input type="checkbox" name="support" value="На данном этапе не требуется"><span>Нет, на данном этапе не требуется</span></label>
-                            <label><input type="checkbox" name="support" value="Затрудняюсь ответить"><span>Затрудняюсь ответить</span></label>
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Техническая поддержка"
+                                /><span>Да, нужна техническая поддержка</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Дальнейшее развитие"
+                                /><span
+                                    >Да, планируется дальнейшее развитие</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="На данном этапе не требуется"
+                                /><span>Нет, на данном этапе не требуется</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Затрудняюсь ответить"
+                                /><span>Затрудняюсь ответить</span></label
+                            >
                         </div>
                     </div>
                 </fieldset>
 
+                <div
+                    class="form-group-checkbox"
+                    style="display: flex; flex-direction: row; align-items: start; gap: 0.75rem; margin-bottom: 2rem; margin-top: 1rem;"
+                >
+                    <input
+                        type="checkbox"
+                        id="legal-consent"
+                        name="consent"
+                        class="accent-primary w-5 h-5 mt-1"
+                        required
+                    />
+                    <label
+                        for="legal-consent"
+                        class="text-sm text-muted-foreground leading-snug"
+                    >
+                        Я принимаю условия <a
+                            href="/ru/legal/public-offer"
+                            class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                            >Публичной оферты</a
+                        > и даю согласие на обработку <a
+                            href="/ru/legal/privacy-policy"
+                            class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                            >персональных данных</a
+                        >.
+                    </label>
+                </div>
+
                 <div class="form-submit-container">
-                    <button id="submit-button" type="submit" class="cta-button">{t('form_button')}</button>
-                    <div id="form-spinner" class="spinner" style="display: none;"></div>
+                    <button id="submit-button" type="submit" class="cta-button"
+                        >{t("form_button")}</button
+                    >
+                    <div
+                        id="form-spinner"
+                        class="spinner"
+                        style="display: none;"
+                    >
+                    </div>
                 </div>
             </form>
         </div>
@@ -204,98 +616,140 @@ const t = useTranslations(lang);
 </BaseLayout>
 
 <script>
-document.addEventListener('astro:page-load', () => {
-    const form = document.getElementById('brief-form') as HTMLFormElement;
-    if (!form) return;
+    document.addEventListener("astro:page-load", () => {
+        const form = document.getElementById("brief-form") as HTMLFormElement;
+        if (!form) return;
 
-    // --- Логика для показа/скрытия поля "Другое" ---
-    const otherCheckboxes = form.querySelectorAll<HTMLInputElement>('input[type="checkbox"][value="other"]');
-    otherCheckboxes.forEach(checkbox => {
-        const otherInputDiv = checkbox.closest('.checkbox-group')?.nextElementSibling as HTMLElement | null;
-        if (otherInputDiv && otherInputDiv.classList.contains('other-input')) {
-            checkbox.addEventListener('change', () => {
-                otherInputDiv.style.display = checkbox.checked ? 'block' : 'none';
-            });
-        }
-    });
-
-    // --- Логика отправки формы ---
-    const submitButton = document.getElementById('submit-button') as HTMLButtonElement;
-    const spinner = document.getElementById('form-spinner') as HTMLElement;
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Сброс ошибок
-        form.querySelectorAll('.error-field').forEach(el => el.classList.remove('error-field'));
-
-        let isValid = true;
-        form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]').forEach(field => {
-            if (!field.value.trim()) {
-                field.classList.add('error-field');
-                isValid = false;
+        // --- Логика для показа/скрытия поля "Другое" ---
+        const otherCheckboxes = form.querySelectorAll<HTMLInputElement>(
+            'input[type="checkbox"][value="other"]',
+        );
+        otherCheckboxes.forEach((checkbox) => {
+            const otherInputDiv = checkbox.closest(".checkbox-group")
+                ?.nextElementSibling as HTMLElement | null;
+            if (
+                otherInputDiv &&
+                otherInputDiv.classList.contains("other-input")
+            ) {
+                checkbox.addEventListener("change", () => {
+                    otherInputDiv.style.display = checkbox.checked
+                        ? "block"
+                        : "none";
+                });
             }
         });
 
-        if (!isValid) {
-            (form.querySelector('.error-field') as HTMLElement)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return;
-        }
+        // --- Логика отправки формы ---
+        const submitButton = document.getElementById(
+            "submit-button",
+        ) as HTMLButtonElement;
+        const spinner = document.getElementById("form-spinner") as HTMLElement;
+        const consentCheckbox = document.getElementById(
+            "legal-consent",
+        ) as HTMLInputElement;
 
-        submitButton.style.display = 'none';
-        spinner.style.display = 'block';
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-        const formData = new FormData(form);
-        const data: { [key: string]: any } = {};
+            // Сброс ошибок
+            form.querySelectorAll(".error-field").forEach((el) =>
+                el.classList.remove("error-field"),
+            );
 
-        for (let [key, value] of formData.entries()) {
-            if (data[key]) {
-                if (!Array.isArray(data[key])) {
-                    data[key] = [data[key]];
+            let isValid = true;
+            form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+                "[required]",
+            ).forEach((field) => {
+                if (!field.value.trim() && field.type !== "checkbox") {
+                    field.classList.add("error-field");
+                    isValid = false;
                 }
-                data[key].push(value);
-            } else {
-                data[key] = value;
-            }
-        }
-
-        try {
-            const response = await fetch('/api/sendBrief/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
             });
 
-            if (response.ok) {
-                document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'success-modal' } }));
-                form.reset();
-            } else {
-                if (response.status === 400) {
-                    const resData = await response.json();
-                    if (resData.errors) {
-                        Object.keys(resData.errors).forEach(key => {
-                            const input = form.querySelector(`[name="${key}"]`);
-                            if (input) {
-                                input.classList.add('error-field');
-                            }
-                        });
+            if (!consentCheckbox.checked) {
+                consentCheckbox.classList.add("error-field");
+                isValid = false;
+            }
 
-                        const firstError = form.querySelector('.error-field');
-                        if (firstError) {
-                            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
+            if (!isValid) {
+                (
+                    form.querySelector(".error-field") as HTMLElement
+                )?.scrollIntoView({ behavior: "smooth", block: "center" });
+                return;
+            }
+
+            submitButton.style.display = "none";
+            spinner.style.display = "block";
+
+            const formData = new FormData(form);
+            const data: { [key: string]: any } = {};
+
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (!Array.isArray(data[key])) {
+                        data[key] = [data[key]];
                     }
+                    data[key].push(value);
                 } else {
-                    throw new Error('Server response was not ok.');
+                    data[key] = value;
                 }
             }
-        } catch (error) {
-            console.error('Ошибка отправки брифа:', error);
-            document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'error-modal' } }));
-        } finally {
-            submitButton.style.display = 'block';
-            spinner.style.display = 'none';
-        }
+
+            // Явно добавляем consent=true
+            data.consent = "true";
+
+            try {
+                const response = await fetch("/api/sendBrief/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    document.dispatchEvent(
+                        new CustomEvent("modal:open", {
+                            detail: { modalId: "success-modal" },
+                        }),
+                    );
+                    form.reset();
+                } else {
+                    if (response.status === 400) {
+                        const resData = await response.json();
+                        if (resData.errors) {
+                            Object.keys(resData.errors).forEach((key) => {
+                                const input = form.querySelector(
+                                    `[name="${key}"]`,
+                                );
+                                if (input) {
+                                    input.classList.add("error-field");
+                                }
+                            });
+
+                            const firstError =
+                                form.querySelector(".error-field");
+                            if (firstError) {
+                                firstError.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "center",
+                                });
+                            }
+                        }
+                    } else {
+                        throw new Error("Server response was not ok.");
+                    }
+                }
+            } catch (error) {
+                console.error("Ошибка отправки брифа:", error);
+                document.dispatchEvent(
+                    new CustomEvent("modal:open", {
+                        detail: { modalId: "error-modal" },
+                    }),
+                );
+            } finally {
+                submitButton.style.display = "block";
+                spinner.style.display = "none";
+            }
+        });
     });
-});
 </script>
+```

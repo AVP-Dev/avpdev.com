@@ -1,198 +1,597 @@
 ---
 // src/pages/en/brief.astro
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SuccessModal from '../../components/modals/SuccessModal.astro';
-import ErrorModal from '../../components/modals/ErrorModal.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SuccessModal from "../../components/modals/SuccessModal.astro";
+import ErrorModal from "../../components/modals/ErrorModal.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 export const prerender = true;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
+
 <BaseLayout title="brief_page_title" description="brief_page_desc">
     <section id="brief-form-section" class="case-study-header">
         <div class="container">
-            <h1 class="section-title">{t('brief_title')}</h1>
-            <p>{t('brief_subtitle')}</p>
+            <h1 class="section-title">{t("brief_title")}</h1>
+            <p>{t("brief_subtitle")}</p>
 
             <form id="brief-form" class="brief-form" novalidate>
                 <fieldset class="form-block fade-in">
                     <legend>1. Contact Details</legend>
                     <div class="form-group">
                         <label for="company_name">Name / Company Name *</label>
-                        <input type="text" id="company_name" name="company_name" class="form-control" required>
+                        <input
+                            type="text"
+                            id="company_name"
+                            name="company_name"
+                            class="form-control"
+                            required
+                        />
                     </div>
                     <div class="form-group">
-                        <label for="contacts">Contacts (Phone, Telegram, Email) *</label>
-                        <input type="text" id="contacts" name="contacts" class="form-control" required>
+                        <label for="contacts"
+                            >Contacts (Phone, Telegram, Email) *</label
+                        >
+                        <input
+                            type="text"
+                            id="contacts"
+                            name="contacts"
+                            class="form-control"
+                            required
+                        />
                     </div>
                     <div class="form-group">
                         <label>Preferred Contact Method *</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="preferred_contact" value="Telegram" checked><span>Telegram</span></label>
-                            <label><input type="radio" name="preferred_contact" value="WhatsApp"><span>WhatsApp</span></label>
-                            <label><input type="radio" name="preferred_contact" value="Email"><span>Email</span></label>
-                            <label><input type="radio" name="preferred_contact" value="Phone Call"><span>Phone Call</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="Telegram"
+                                    checked
+                                /><span>Telegram</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="WhatsApp"
+                                /><span>WhatsApp</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="Email"
+                                /><span>Email</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="Phone Call"
+                                /><span>Phone Call</span></label
+                            >
                         </div>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 100ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 100ms;"
+                >
                     <legend>2. About Company & Project</legend>
                     <div class="form-group">
-                        <label for="business_sphere">Briefly describe what your company does, what goods or services it offers? *</label>
-                        <textarea id="business_sphere" name="business_sphere" class="form-control" rows="3" required></textarea>
+                        <label for="business_sphere"
+                            >Briefly describe what your company does, what goods
+                            or services it offers? *</label
+                        >
+                        <textarea
+                            id="business_sphere"
+                            name="business_sphere"
+                            class="form-control"
+                            rows="3"
+                            required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="current_site">Current website URL (if any)</label>
-                        <input type="url" id="current_site" name="current_site" class="form-control" placeholder="https://">
+                        <label for="current_site"
+                            >Current website URL (if any)</label
+                        >
+                        <input
+                            type="url"
+                            id="current_site"
+                            name="current_site"
+                            class="form-control"
+                            placeholder="https://"
+                        />
                     </div>
                     <div class="form-group">
-                        <label for="competitors">List 2–3 main competitors</label>
-                        <textarea id="competitors" name="competitors" class="form-control" rows="2" placeholder="Competitor website links"></textarea>
+                        <label for="competitors"
+                            >List 2–3 main competitors</label
+                        >
+                        <textarea
+                            id="competitors"
+                            name="competitors"
+                            class="form-control"
+                            rows="2"
+                            placeholder="Competitor website links"></textarea>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 200ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 200ms;"
+                >
                     <legend>3. Goals & Objectives</legend>
                     <div class="form-group">
                         <label>What is the main goal of the website? *</label>
-                         <div class="radio-group-vertical">
-                            <label><input type="radio" name="project_goal" value="Selling goods or services online" checked><span>Selling goods or services online</span></label>
-                            <label><input type="radio" name="project_goal" value="Lead generation"><span>Lead generation</span></label>
-                            <label><input type="radio" name="project_goal" value="Corporate presence"><span>Corporate presence</span></label>
-                             <label><input type="radio" name="project_goal" value="Information portal or blog"><span>Information portal or blog</span></label>
-                             <label><input type="radio" name="project_goal" value="Internal process automation"><span>Internal process automation</span></label>
+                        <div class="radio-group-vertical">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Selling goods or services online"
+                                    checked
+                                /><span>Selling goods or services online</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Lead generation"
+                                /><span>Lead generation</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Corporate presence"
+                                /><span>Corporate presence</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Information portal or blog"
+                                /><span>Information portal or blog</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Internal process automation"
+                                /><span>Internal process automation</span
+                                ></label
+                            >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="success_metrics">How will you measure success? (e.g., N leads per month, X% sales growth)</label>
-                        <textarea id="success_metrics" name="success_metrics" class="form-control" rows="2"></textarea>
+                        <label for="success_metrics"
+                            >How will you measure success? (e.g., N leads per
+                            month, X% sales growth)</label
+                        >
+                        <textarea
+                            id="success_metrics"
+                            name="success_metrics"
+                            class="form-control"
+                            rows="2"></textarea>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 300ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 300ms;"
+                >
                     <legend>4. Target Audience</legend>
-                     <div class="form-group">
-                        <label for="target_audience">Describe your typical customer (age, interests, occupation)</label>
-                        <textarea id="target_audience" name="target_audience" class="form-control" rows="3"></textarea>
+                    <div class="form-group">
+                        <label for="target_audience"
+                            >Describe your typical customer (age, interests,
+                            occupation)</label
+                        >
+                        <textarea
+                            id="target_audience"
+                            name="target_audience"
+                            class="form-control"
+                            rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="user_action">What key action should the visitor take on the site?</label>
-                        <input type="text" id="user_action" name="user_action" class="form-control" placeholder="E.g.: call, fill a form, buy a product">
+                        <label for="user_action"
+                            >What key action should the visitor take on the
+                            site?</label
+                        >
+                        <input
+                            type="text"
+                            id="user_action"
+                            name="user_action"
+                            class="form-control"
+                            placeholder="E.g.: call, fill a form, buy a product"
+                        />
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 400ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 400ms;"
+                >
                     <legend>5. Site Type & Functionality</legend>
                     <div class="form-group">
                         <label>What type of website do you need? *</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="site_type" value="Landing Page" checked><span>Landing Page</span></label>
-                            <label><input type="radio" name="site_type" value="Corporate Site"><span>Corporate Site</span></label>
-                            <label><input type="radio" name="site_type" value="E-commerce"><span>E-commerce</span></label>
-                            <label><input type="radio" name="site_type" value="Web Application"><span>Web Application</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="Landing Page"
+                                    checked
+                                /><span>Landing Page</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="Corporate Site"
+                                /><span>Corporate Site</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="E-commerce"
+                                /><span>E-commerce</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="Web Application"
+                                /><span>Web Application</span></label
+                            >
                         </div>
                     </div>
                     <div class="form-group">
                         <label>What functionality is required?</label>
                         <div class="checkbox-group">
-                            <label><input type="checkbox" name="features" value="Product/Service Catalog"><span>Product/Service Catalog</span></label>
-                            <label><input type="checkbox" name="features" value="Blog/News"><span>Blog/News</span></label>
-                             <label><input type="checkbox" name="features" value="User Account"><span>User Account</span></label>
-                            <label><input type="checkbox" name="features" value="Online Payment"><span>Online Payment</span></label>
-                            <label><input type="checkbox" name="features" value="Cost Calculator"><span>Cost Calculator</span></label>
-                             <label><input type="checkbox" name="features" value="Multilingual"><span>Multilingual</span></label>
-                             <label><input type="checkbox" name="features" value="other"><span>Other</span></label>
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Product/Service Catalog"
+                                /><span>Product/Service Catalog</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Blog/News"
+                                /><span>Blog/News</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="User Account"
+                                /><span>User Account</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Online Payment"
+                                /><span>Online Payment</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Cost Calculator"
+                                /><span>Cost Calculator</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Multilingual"
+                                /><span>Multilingual</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="other"
+                                /><span>Other</span></label
+                            >
                         </div>
-                        <div class="form-group other-input" style="display: none;">
-                            <input type="text" name="features_other" class="form-control" placeholder="Specify other functionality">
+                        <div
+                            class="form-group other-input"
+                            style="display: none;"
+                        >
+                            <input
+                                type="text"
+                                name="features_other"
+                                class="form-control"
+                                placeholder="Specify other functionality"
+                            />
                         </div>
                     </div>
                 </fieldset>
 
-                 <fieldset class="form-block fade-in" style="transition-delay: 500ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 500ms;"
+                >
                     <legend>6. Design & Content</legend>
-                     <div class="form-group">
-                        <label>Do you have brand identity, logo, brandbook?</label>
+                    <div class="form-group">
+                        <label
+                            >Do you have brand identity, logo, brandbook?</label
+                        >
                         <div class="radio-group">
-                            <label><input type="radio" name="brand_identity" value="Yes, have everything" checked><span>Yes, have everything</span></label>
-                            <label><input type="radio" name="brand_identity" value="Only logo"><span>Only logo</span></label>
-                            <label><input type="radio" name="brand_identity" value="No, need development"><span>No, need development</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="brand_identity"
+                                    value="Yes, have everything"
+                                    checked
+                                /><span>Yes, have everything</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="brand_identity"
+                                    value="Only logo"
+                                /><span>Only logo</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="brand_identity"
+                                    value="No, need development"
+                                /><span>No, need development</span></label
+                            >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="design_examples">Provide examples of 2–3 websites you like</label>
-                        <textarea id="design_examples" name="design_examples" class="form-control" rows="2" placeholder="Links to websites"></textarea>
+                        <label for="design_examples"
+                            >Provide examples of 2–3 websites you like</label
+                        >
+                        <textarea
+                            id="design_examples"
+                            name="design_examples"
+                            class="form-control"
+                            rows="2"
+                            placeholder="Links to websites"></textarea>
                     </div>
-                     <div class="form-group">
-                        <label>Who will prepare content (texts, photos, videos)?</label>
+                    <div class="form-group">
+                        <label
+                            >Who will prepare content (texts, photos, videos)?</label
+                        >
                         <div class="radio-group">
-                            <label><input type="radio" name="content_provider" value="We have ready content" checked><span>We have ready content</span></label>
-                            <label><input type="radio" name="content_provider" value="We will prepare content"><span>We will prepare content</span></label>
-                            <label><input type="radio" name="content_provider" value="Need help with content"><span>Need help with content</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="content_provider"
+                                    value="We have ready content"
+                                    checked
+                                /><span>We have ready content</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="content_provider"
+                                    value="We will prepare content"
+                                /><span>We will prepare content</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="content_provider"
+                                    value="Need help with content"
+                                /><span>Need help with content</span></label
+                            >
                         </div>
                     </div>
                 </fieldset>
 
-                 <fieldset class="form-block fade-in" style="transition-delay: 600ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 600ms;"
+                >
                     <legend>7. Technical Questions</legend>
-                     <div class="form-group">
+                    <div class="form-group">
                         <label>Do you have a domain and hosting?</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="hosting_domain" value="Yes, have" checked><span>Yes, have</span></label>
-                            <label><input type="radio" name="hosting_domain" value="No, need help"><span>No, need help</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="hosting_domain"
+                                    value="Yes, have"
+                                    checked
+                                /><span>Yes, have</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="hosting_domain"
+                                    value="No, need help"
+                                /><span>No, need help</span></label
+                            >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="integrations">Do you need integrations with third-party services (CRM, delivery, analytics)?</label>
-                        <textarea id="integrations" name="integrations" class="form-control" rows="2" placeholder="E.g.: Salesforce, Google Analytics"></textarea>
+                        <label for="integrations"
+                            >Do you need integrations with third-party services
+                            (CRM, delivery, analytics)?</label
+                        >
+                        <textarea
+                            id="integrations"
+                            name="integrations"
+                            class="form-control"
+                            rows="2"
+                            placeholder="E.g.: Salesforce, Google Analytics"
+                        ></textarea>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 700ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 700ms;"
+                >
                     <legend>8. Budget & Deadline</legend>
                     <div class="form-group">
                         <label>Estimated budget for development?</label>
                         <div class="radio-group-vertical">
-                            <label><input type="radio" name="budget" value="Up to $500" checked><span>Up to $500</span></label>
-                            <label><input type="radio" name="budget" value="$500 - $1500"><span>$500 - $1500</span></label>
-                            <label><input type="radio" name="budget" value="$1500 - $3000"><span>$1500 - $3000</span></label>
-                            <label><input type="radio" name="budget" value="Over $3000"><span>Over $3000</span></label>
-                             <label><input type="radio" name="budget" value="To be discussed"><span>To be discussed</span></label>
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="Up to $500"
+                                    checked
+                                /><span>Up to $500</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="$500 - $1500"
+                                /><span>$500 - $1500</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="$1500 - $3000"
+                                /><span>$1500 - $3000</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="Over $3000"
+                                /><span>Over $3000</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="To be discussed"
+                                /><span>To be discussed</span></label
+                            >
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="deadline">Desired launch deadline?</label>
-                        <input type="text" id="deadline" name="deadline" class="form-control">
+                        <input
+                            type="text"
+                            id="deadline"
+                            name="deadline"
+                            class="form-control"
+                        />
                     </div>
                 </fieldset>
 
-                 <fieldset class="form-block fade-in" style="transition-delay: 900ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 900ms;"
+                >
                     <legend>9. Additional Information</legend>
                     <div class="form-group">
-                        <label for="additional_info">Here you can specify any other important info to help understand your task.</label>
-                        <textarea id="additional_info" name="additional_info" class="form-control" rows="4"></textarea>
+                        <label for="additional_info"
+                            >Here you can specify any other important info to
+                            help understand your task.</label
+                        >
+                        <textarea
+                            id="additional_info"
+                            name="additional_info"
+                            class="form-control"
+                            rows="4"></textarea>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-block fade-in" style="transition-delay: 900ms;">
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 900ms;"
+                >
                     <legend>10. Support & Development</legend>
                     <div class="form-group">
-                        <label>Do you need support, maintenance or further development after launch?</label>
+                        <label
+                            >Do you need support, maintenance or further
+                            development after launch?</label
+                        >
                         <div class="checkbox-group">
-                            <label><input type="checkbox" name="support" value="Technical support"><span>Yes, need technical support</span></label>
-                            <label><input type="checkbox" name="support" value="Further development"><span>Yes, planning further development</span></label>
-                            <label><input type="checkbox" name="support" value="Not required at this stage"><span>No, not required at this stage</span></label>
-                            <label><input type="checkbox" name="support" value="Hard to answer"><span>Hard to answer</span></label>
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Technical support"
+                                /><span>Yes, need technical support</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Further development"
+                                /><span>Yes, planning further development</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Not required at this stage"
+                                /><span>No, not required at this stage</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Hard to answer"
+                                /><span>Hard to answer</span></label
+                            >
                         </div>
                     </div>
                 </fieldset>
 
+                <div
+                    class="form-group-checkbox"
+                    style="display: flex; flex-direction: row; align-items: start; gap: 0.75rem; margin-bottom: 2rem; margin-top: 1rem;"
+                >
+                    <input
+                        type="checkbox"
+                        id="legal-consent"
+                        name="consent"
+                        class="accent-primary w-5 h-5 mt-1"
+                        required
+                    />
+                    <label
+                        for="legal-consent"
+                        class="text-sm text-muted-foreground leading-snug"
+                    >
+                        I accept the <a
+                            href="/en/legal/public-offer"
+                            class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                            >Public Offer</a
+                        > and agree to the processing of <a
+                            href="/en/legal/privacy-policy"
+                            class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                            >personal data</a
+                        >.
+                    </label>
+                </div>
+
                 <div class="form-submit-container">
-                    <button id="submit-button" type="submit" class="cta-button">{t('form_button')}</button>
-                    <div id="form-spinner" class="spinner" style="display: none;"></div>
+                    <button id="submit-button" type="submit" class="cta-button"
+                        >{t("form_button")}</button
+                    >
+                    <div
+                        id="form-spinner"
+                        class="spinner"
+                        style="display: none;"
+                    >
+                    </div>
                 </div>
             </form>
         </div>
@@ -203,98 +602,143 @@ const t = useTranslations(lang);
 </BaseLayout>
 
 <script>
-document.addEventListener('astro:page-load', () => {
-    const form = document.getElementById('brief-form') as HTMLFormElement;
-    if (!form) return;
+    document.addEventListener("astro:page-load", () => {
+        const form = document.getElementById("brief-form") as HTMLFormElement;
+        if (!form) return;
 
-    // --- Logic for showing/hiding "Other" field ---
-    const otherCheckboxes = form.querySelectorAll<HTMLInputElement>('input[type="checkbox"][value="other"]');
-    otherCheckboxes.forEach(checkbox => {
-        const otherInputDiv = checkbox.closest('.checkbox-group')?.nextElementSibling as HTMLElement | null;
-        if (otherInputDiv && otherInputDiv.classList.contains('other-input')) {
-            checkbox.addEventListener('change', () => {
-                otherInputDiv.style.display = checkbox.checked ? 'block' : 'none';
-            });
-        }
-    });
-
-    // --- Form submission logic ---
-    const submitButton = document.getElementById('submit-button') as HTMLButtonElement;
-    const spinner = document.getElementById('form-spinner') as HTMLElement;
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Reset error fields
-        form.querySelectorAll('.error-field').forEach(el => el.classList.remove('error-field'));
-
-        let isValid = true;
-        form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]').forEach(field => {
-            if (!field.value.trim()) {
-                field.classList.add('error-field');
-                isValid = false;
+        // --- Logic for showing/hiding "Other" field ---
+        const otherCheckboxes = form.querySelectorAll<HTMLInputElement>(
+            'input[type="checkbox"][value="other"]',
+        );
+        otherCheckboxes.forEach((checkbox) => {
+            const otherInputDiv = checkbox.closest(".checkbox-group")
+                ?.nextElementSibling as HTMLElement | null;
+            if (
+                otherInputDiv &&
+                otherInputDiv.classList.contains("other-input")
+            ) {
+                checkbox.addEventListener("change", () => {
+                    otherInputDiv.style.display = checkbox.checked
+                        ? "block"
+                        : "none";
+                });
             }
         });
 
-        if (!isValid) {
-            (form.querySelector('.error-field') as HTMLElement)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return;
-        }
+        // --- Form submission logic ---
+        const submitButton = document.getElementById(
+            "submit-button",
+        ) as HTMLButtonElement;
+        const spinner = document.getElementById("form-spinner") as HTMLElement;
+        const consentCheckbox = document.getElementById(
+            "legal-consent",
+        ) as HTMLInputElement;
 
-        submitButton.style.display = 'none';
-        spinner.style.display = 'block';
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-        const formData = new FormData(form);
-        const data: { [key: string]: any } = {};
+            // Reset error fields
+            form.querySelectorAll(".error-field").forEach((el) =>
+                el.classList.remove("error-field"),
+            );
 
-        for (let [key, value] of formData.entries()) {
-            if (data[key]) {
-                if (!Array.isArray(data[key])) {
-                    data[key] = [data[key]];
+            let isValid = true;
+            form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+                "[required]",
+            ).forEach((field) => {
+                if (!field.value.trim() && field.type !== "checkbox") {
+                    field.classList.add("error-field");
+                    isValid = false;
                 }
-                data[key].push(value);
-            } else {
-                data[key] = value;
-            }
-        }
-
-        try {
-            const response = await fetch('/api/sendBrief/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
             });
 
-            if (response.ok) {
-                document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'success-modal' } }));
-                form.reset();
-            } else {
-                if (response.status === 400) {
-                    const resData = await response.json();
-                    if (resData.errors) {
-                        Object.keys(resData.errors).forEach(key => {
-                            const input = form.querySelector(`[name="${key}"]`);
-                            if (input) {
-                                input.classList.add('error-field');
-                            }
-                        });
+            if (!consentCheckbox.checked) {
+                consentCheckbox.classList.add("error-field");
+                isValid = false;
+            }
 
-                        const firstError = form.querySelector('.error-field');
-                        if (firstError) {
-                            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
+            if (!isValid) {
+                (
+                    form.querySelector(".error-field") as HTMLElement
+                )?.scrollIntoView({ behavior: "smooth", block: "center" });
+                return;
+            }
+
+            submitButton.style.display = "none";
+            spinner.style.display = "block";
+
+            const formData = new FormData(form);
+            const data: { [key: string]: any } = {};
+
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (!Array.isArray(data[key])) {
+                        data[key] = [data[key]];
                     }
+                    data[key].push(value);
                 } else {
-                    throw new Error('Server response was not ok.');
+                    data[key] = value;
                 }
             }
-        } catch (error) {
-            console.error('Brief sending error:', error);
-            document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'error-modal' } }));
-        } finally {
-            submitButton.style.display = 'block';
-            spinner.style.display = 'none';
-        }
+
+            // Ensure consent is sent as boolean string "true" for API consistency if needed,
+            // though Zod might expect strict boolean or string.
+            // HTML checkbox sends "on" if checked, or nothing if not.
+            // We'll manually force it or rely on formData 'consent' being present.
+            // Let's explicitly set it to avoid ambiguity.
+            data.consent = "true";
+
+            try {
+                const response = await fetch("/api/sendBrief/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    document.dispatchEvent(
+                        new CustomEvent("modal:open", {
+                            detail: { modalId: "success-modal" },
+                        }),
+                    );
+                    form.reset();
+                } else {
+                    if (response.status === 400) {
+                        const resData = await response.json();
+                        if (resData.errors) {
+                            Object.keys(resData.errors).forEach((key) => {
+                                const input = form.querySelector(
+                                    `[name="${key}"]`,
+                                );
+                                if (input) {
+                                    input.classList.add("error-field");
+                                }
+                            });
+
+                            const firstError =
+                                form.querySelector(".error-field");
+                            if (firstError) {
+                                firstError.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "center",
+                                });
+                            }
+                        }
+                    } else {
+                        throw new Error("Server response was not ok.");
+                    }
+                }
+            } catch (error) {
+                console.error("Brief sending error:", error);
+                document.dispatchEvent(
+                    new CustomEvent("modal:open", {
+                        detail: { modalId: "error-modal" },
+                    }),
+                );
+            } finally {
+                submitButton.style.display = "block";
+                spinner.style.display = "none";
+            }
+        });
     });
-});
 </script>
