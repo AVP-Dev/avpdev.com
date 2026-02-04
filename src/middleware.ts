@@ -18,15 +18,21 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const path = url.pathname;
 
   // 0. Strict Canonical Redirection (Force HTTPS & Non-WWW)
-  // This must run BEFORE any other logic to avoid duplicate content on different protocols/subdomains.
+  // DISABLED for local network access troubleshooting
+  /*
   const protocol = context.request.headers.get('x-forwarded-proto') || url.protocol.replace(':', '');
   const host = context.request.headers.get('host') || url.host;
 
-  if (protocol === 'http' || host.startsWith('www.')) {
+  if (
+    !host.includes('localhost') &&
+    !host.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/) &&
+    (protocol === 'http' || host.startsWith('www.'))
+  ) {
     const cleanHost = host.startsWith('www.') ? host.slice(4) : host;
     const newUrl = `https://${cleanHost}${path}${url.search}`;
     return context.redirect(newUrl, 301);
   }
+  */
 
   // 1. Exact Match Redirects
   if (redirectMap[path]) {

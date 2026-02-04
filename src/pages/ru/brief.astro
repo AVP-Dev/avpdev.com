@@ -570,19 +570,18 @@ const t = useTranslations(lang);
                 </fieldset>
 
                 <div
-                    class="form-group-checkbox"
-                    style="display: flex; flex-direction: row; align-items: start; gap: 0.75rem; margin-bottom: 2rem; margin-top: 1rem;"
+                    class="form-group-checkbox flex items-start gap-3 mb-6 mt-4"
                 >
                     <input
                         type="checkbox"
                         id="legal-consent"
                         name="consent"
-                        class="accent-primary w-5 h-5 mt-1"
+                        class="mt-1 w-5 h-5 min-w-[1.25rem] rounded border-gray-300 text-primary focus:ring-primary cursor-pointer accent-primary"
                         required
                     />
                     <label
                         for="legal-consent"
-                        class="text-sm text-muted-foreground leading-snug"
+                        class="text-sm text-muted-foreground leading-snug cursor-pointer select-none"
                     >
                         Я принимаю условия <a
                             href="/ru/legal/public-offer"
@@ -595,6 +594,14 @@ const t = useTranslations(lang);
                         >.
                     </label>
                 </div>
+
+                <p
+                    id="consent-error"
+                    class="hidden text-red-600 text-xs font-medium mt-1 animate-pulse"
+                >
+                    Пожалуйста, подтвердите согласие с условиями перед
+                    отправкой.
+                </p>
 
                 <div class="form-submit-container">
                     <button id="submit-button" type="submit" class="cta-button"
@@ -648,6 +655,10 @@ const t = useTranslations(lang);
             "legal-consent",
         ) as HTMLInputElement;
 
+        const consentError = document.getElementById(
+            "consent-error",
+        ) as HTMLElement;
+
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
@@ -655,6 +666,7 @@ const t = useTranslations(lang);
             form.querySelectorAll(".error-field").forEach((el) =>
                 el.classList.remove("error-field"),
             );
+            if (consentError) consentError.classList.add("hidden");
 
             let isValid = true;
             form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
@@ -668,6 +680,7 @@ const t = useTranslations(lang);
 
             if (!consentCheckbox.checked) {
                 consentCheckbox.classList.add("error-field");
+                if (consentError) consentError.classList.remove("hidden");
                 isValid = false;
             }
 
