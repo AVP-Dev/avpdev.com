@@ -5,10 +5,11 @@ FROM oven/bun:1.2-alpine AS builder
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и bun.lockb для кэширования зависимостей
-COPY package.json bun.lockb* ./
+# Копируем package.json и bun.lock для кэширования зависимостей
+# В Bun 1.2+ используется bun.lock по умолчанию
+COPY package.json bun.lock ./
 
-# Устанавливаем зависимости, включая devDependencies для сборки
+# Устанавливаем зависимости
 RUN bun install --frozen-lockfile
 
 # Копируем все остальные файлы проекта
