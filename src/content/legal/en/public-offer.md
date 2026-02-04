@@ -1,7 +1,7 @@
 ---
 title: "Public Agreement (Offer)"
 description: "Official proposal for software development services."
-pubDate: "2026-02-04"
+lastUpdated: "February 4, 2026"
 ---
 
 **Publication Date:** February 4, 2026
@@ -10,7 +10,7 @@ This text is a public proposal (Offer) by **Patskevich Alexey Vladimirovich**, a
 
 Publication of this Agreement on the Contractor's official website at [https://avpdev.com](https://avpdev.com) constitutes a public offer in accordance with Art. 407 of the Civil Code of the Republic of Belarus.
 
-## 1. SUBJECT OF THE AGREEMENT
+### 1. SUBJECT OF THE AGREEMENT
 
 1.1. The Contractor undertakes to provide the Customer with services in the field of information technology (web development, programming, technical support, interface design), and the Customer undertakes to accept and pay for these services.
 
@@ -18,7 +18,7 @@ Publication of this Agreement on the Contractor's official website at [https://a
 
 1.3. **Additional Work.** Any changes to the layouts (design) or functionality after their approval (agreement in correspondence), as well as work going beyond the scope of initial agreements, are recognized as additional services and are subject to separate payment by the Customer.
 
-## 2. CONCLUSION OF THE AGREEMENT
+### 2. CONCLUSION OF THE AGREEMENT
 
 2.1. This Agreement is a public contract (Art. 396 of the Civil Code of the Republic of Belarus), according to which the Contractor assumes the obligation to provide Services to anyone who applies to him under the agreed conditions.
 
@@ -27,7 +27,7 @@ Publication of this Agreement on the Contractor's official website at [https://a
 * Sending initial data (accesses, materials) to the Contractor to start work after agreeing on the cost;
 * Actual consumption of Services.
 
-## 3. RIGHTS AND OBLIGATIONS
+### 3. RIGHTS AND OBLIGATIONS
 
 3.1. **The Contractor undertakes:**
 * To provide Services with quality, on time, and in accordance with the agreed requirements;
@@ -38,7 +38,7 @@ Publication of this Agreement on the Contractor's official website at [https://a
 * To pay for and accept the Services in a timely manner;
 * Not to use the results of the work until they are fully paid for, unless otherwise agreed by the Parties.
 
-## 4. PRICE, PAYMENT AND ACCEPTANCE
+### 4. PRICE, PAYMENT AND ACCEPTANCE
 
 4.1. The cost of Services is determined individually and is not subject to VAT (the Contractor applies the Tax on Professional Income).
 
@@ -48,13 +48,13 @@ Publication of this Agreement on the Contractor's official website at [https://a
 
 4.4. The receipt generated in the "Tax on Professional Income" application is transferred to the Customer electronically (via e-mail or messenger) after receiving payment.
 
-## 5. INTELLECTUAL PROPERTY
+### 5. INTELLECTUAL PROPERTY
 
 5.1. Exclusive rights to the results of intellectual activity (software code, design) created under the Agreement are transferred to the Customer **only at the moment of 100% (one hundred percent) payment** of the cost of Services.
 
 5.2. Until full payment is made, the Contractor retains ownership of the created results and has the right to restrict access to them in case of violation of payment terms.
 
-## 6. LIABILITY AND TERMINATION
+### 6. LIABILITY AND TERMINATION
 
 6.1. For non-fulfillment of obligations, the Parties are liable in accordance with the legislation of the Republic of Belarus.
 
@@ -64,7 +64,7 @@ Publication of this Agreement on the Contractor's official website at [https://a
 
 6.4. The Contractor is not responsible for failures in the operation of third-party services (hosting, APIs, payment systems) not owned by the Contractor.
 
-## 7. FINAL PROVISIONS
+### 7. FINAL PROVISIONS
 
 7.1. **Legal Force of Correspondence.** The Parties recognize the legal force of correspondence in messengers (Telegram, Viber, WhatsApp) and by e-mail. Messages sent from authorized accounts of the Parties are considered properly executed documents and have evidentiary force in resolving disputes.
 
@@ -72,7 +72,7 @@ Publication of this Agreement on the Contractor's official website at [https://a
 
 7.3. Governing Law — the law of the Republic of Belarus. Place of dispute resolution — the court at the location of the Contractor.
 
-## 8. CONTRACTOR DETAILS
+### 8. CONTRACTOR DETAILS
 
 **Patskevich Alexey Vladimirovich**
 *Individual — payer of Tax on Professional Income*

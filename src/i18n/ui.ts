@@ -66,6 +66,7 @@ export const ui = {
         footer_copyright: '&copy; <span id="current-year"></span> AVPdev.com. Все права защищены.',
         footer_privacy: 'Политика конфиденциальности',
         footer_terms: 'Условия использования',
+        footer_public_offer: 'Публичная оферта',
         blog_page_title: "Тех. Журнал | Статьи и кейсы от AVPdev",
         blog_page_desc: "Статьи о веб-разработке, технологиях, автоматизации и лучших практиках для вашего бизнеса.",
         blog_h1: "Тех. <span class=\"gradient-text\">Журнал</span>",
@@ -178,6 +179,7 @@ export const ui = {
         footer_copyright: '&copy; <span id="current-year"></span> AVPdev.com. All rights reserved.',
         footer_privacy: 'Privacy Policy',
         footer_terms: 'Terms of Service',
+        footer_public_offer: 'Public Offer',
 
         blog_page_title: "Tech Journal | Articles and Case Studies from AVPdev",
         blog_page_desc: "Articles about web development, technologies, automation, and best practices for your business.",
