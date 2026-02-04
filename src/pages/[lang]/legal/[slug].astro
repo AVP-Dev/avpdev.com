@@ -1,14 +1,14 @@
 ---
-// src/pages/[lang]/[slug].astro
-import { getCollection } from 'astro:content';
-import LegalLayout from '../../layouts/LegalLayout.astro';
+// src/pages/[lang]/legal/[slug].astro
+import { getCollection } from "astro:content";
+import LegalLayout from "../../../layouts/LegalLayout.astro";
 
 export async function getStaticPaths() {
-  const legalEntries = await getCollection('legal');
-  return legalEntries.map(entry => {
-    const [lang, ...slugParts] = entry.slug.split('/');
+  const legalEntries = await getCollection("legal");
+  return legalEntries.map((entry) => {
+    const [lang, ...slugParts] = entry.slug.split("/");
     return {
-      params: { lang, slug: slugParts.join('/') },
+      params: { lang, slug: slugParts.join("/") },
       props: { entry },
     };
   });
@@ -17,9 +17,10 @@ export async function getStaticPaths() {
 export const prerender = true;
 
 const { entry } = Astro.props;
-console.log('Dynamic page entry.data:', entry.data);
+console.log("Dynamic page entry.data:", entry.data);
 const { Content } = await entry.render();
 ---
+
 <LegalLayout entry={entry}>
   <Content />
 </LegalLayout>
