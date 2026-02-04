@@ -6,7 +6,7 @@ lastUpdated: "February 4, 2026"
 
 **Publication Date:** February 4, 2026
 
-This text is a public proposal (Offer) by **Patskevich Alexey Vladimirovich**, an individual applying the Tax on Professional Income (UNP MA6914161), hereinafter referred to as the "Contractor", addressed to an indefinite circle of persons (individuals and legal entities), hereinafter referred to as the "Customer", to conclude a contract for the provision of services (hereinafter referred to as the "Agreement") on the conditions set forth below.
+This text is a public proposal (Offer) by **Patskevich Aliaksei Uladzimirovich**, an individual applying the Tax on Professional Income (UNP MA6914161), hereinafter referred to as the "Contractor", addressed to an indefinite circle of persons (individuals and legal entities), hereinafter referred to as the "Customer", to conclude a contract for the provision of services (hereinafter referred to as the "Agreement") on the conditions set forth below.
 
 Publication of this Agreement on the Contractor's official website at [https://avpdev.com](https://avpdev.com) constitutes a public offer in accordance with Art. 407 of the Civil Code of the Republic of Belarus.
 

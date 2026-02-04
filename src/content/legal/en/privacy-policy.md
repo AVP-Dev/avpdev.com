@@ -3,7 +3,7 @@ title: "Privacy Policy | AVPdev.com"
 description: "Privacy Policy and personal data processing for the AVPdev.com website."
 lastUpdated: "September 18, 2025"
 ---
-This Privacy Policy for personal data (hereinafter - the Policy) applies to all information that the self-employed individual Patskevich Alexey Vladimirovich, UNP MA6914161 (hereinafter - the Administration), can obtain about the User while using the AVPdev.com website and its subdomains (hereinafter - the Site).
+This Privacy Policy for personal data (hereinafter - the Policy) applies to all information that the self-employed individual **Patskevich Aliaksei Uladzimirovich**, UNP MA6914161 (hereinafter - the Administration), can obtain about the User while using the AVPdev.com website and its subdomains (hereinafter - the Site).
 
 Using the Site means the User's unconditional consent to this Policy and the terms of processing their personal data specified therein. If the User disagrees with these terms, they must refrain from using the Site.
 

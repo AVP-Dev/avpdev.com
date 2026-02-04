@@ -3,7 +3,7 @@ title: "Terms of Service | AVPdev.com"
 description: "Terms of Service for the AVPdev.com website."
 lastUpdated: "September 18, 2025"
 ---
-These Terms of Service (hereinafter - the Terms) are a public offer and govern the relationship between the self-employed individual Patskevich Alexey Vladimirovich, UNP MA6914161 (hereinafter - the Administration), and any individual using the AVPdev.com website and its subdomains (hereinafter - the User).
+These Terms of Service (hereinafter - the Terms) are a public offer and govern the relationship between the self-employed individual **Patskevich Aliaksei Uladzimirovich**, UNP MA6914161 (hereinafter - the Administration), and any individual using the AVPdev.com website and its subdomains (hereinafter - the User).
 
 By starting to use the Site, the User confirms that they have fully read the terms of these Terms and accept them unconditionally.
 
