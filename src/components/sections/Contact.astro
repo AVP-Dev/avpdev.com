@@ -55,13 +55,8 @@ const t = useTranslations(lang);
                 class="form-group-checkbox"
                 style="display: flex; flex-direction: row; align-items: start; gap: 0.75rem; margin-bottom: 1.5rem;"
             >
-                <input
-                    type="checkbox"
-                    id="legal-consent"
-                    name="consent"
-                    class="accent-primary w-5 h-5 mt-1"
-                    required
-                />
+                type="checkbox" id="legal-consent" name="consent"
+                class="accent-primary w-5 h-5" required />
                 <label
                     for="legal-consent"
                     class="text-sm text-muted-foreground leading-snug"
@@ -107,6 +102,17 @@ const t = useTranslations(lang);
                     }
                 </label>
             </div>
+            <div
+                id="consent-error"
+                class="error-message"
+                style="display: none; color: #dc3545; font-size: 0.875rem; margin-top: -1rem; margin-bottom: 1.5rem;"
+            >
+                {
+                    lang === "ru"
+                        ? "Пожалуйста, подтвердите согласие."
+                        : "Please accept the terms."
+                }
+            </div>
 
             <div class="form-submit-container">
                 <button id="submit-button" type="submit" class="cta-button"
@@ -118,3 +124,92 @@ const t = useTranslations(lang);
         </form>
     </div>
 </section>
+
+<script>
+    import { navigate } from "astro:transitions/client";
+
+    document.addEventListener("astro:page-load", () => {
+        const form = document.getElementById("contact-form") as HTMLFormElement;
+        const submitButton = document.getElementById(
+            "submit-button",
+        ) as HTMLButtonElement;
+        const spinner = document.getElementById("form-spinner") as HTMLElement;
+        const consentCheckbox = document.getElementById(
+            "legal-consent",
+        ) as HTMLInputElement;
+        const consentError = document.getElementById(
+            "consent-error",
+        ) as HTMLElement;
+
+        if (!form) return;
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Reset errors
+            form.querySelectorAll(".error-field").forEach((el) =>
+                el.classList.remove("error-field"),
+            );
+            if (consentError) consentError.style.display = "none";
+
+            let isValid = true;
+
+            // Validate text inputs
+            form.querySelectorAll(
+                "input[required], textarea[required]",
+            ).forEach((field) => {
+                const input = field as HTMLInputElement | HTMLTextAreaElement;
+                if (!input.value.trim()) {
+                    input.classList.add("error-field");
+                    isValid = false;
+                }
+            });
+
+            // Validate consent
+            if (!consentCheckbox.checked) {
+                consentCheckbox.classList.add("error-field");
+                if (consentError) consentError.style.display = "block";
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Show loading state
+            if (submitButton) submitButton.style.display = "none";
+            if (spinner) spinner.style.display = "block";
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            data.consent = "true"; // Explicitly set consent
+
+            try {
+                const response = await fetch("/api/sendMessage", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    document.dispatchEvent(
+                        new CustomEvent("modal:open", {
+                            detail: { modalId: "success-modal" },
+                        }),
+                    );
+                    form.reset();
+                } else {
+                    throw new Error("Submission failed");
+                }
+            } catch (error) {
+                console.error(error);
+                document.dispatchEvent(
+                    new CustomEvent("modal:open", {
+                        detail: { modalId: "error-modal" },
+                    }),
+                );
+            } finally {
+                if (submitButton) submitButton.style.display = "block";
+                if (spinner) spinner.style.display = "none";
+            }
+        });
+    });
+</script>

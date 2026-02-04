@@ -162,6 +162,7 @@ section {
 }
 
 /* Error Field Styles */
+.error-field,
 body .form-control.error-field {
     border-color: #dc3545 !important;
     background-color: rgba(220, 53, 69, 0.05) !important;
