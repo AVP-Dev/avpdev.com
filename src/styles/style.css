@@ -631,14 +631,19 @@ nav {
     color: var(--text-secondary-color);
 }
 
-.tech-items i {
+.tech-items i,
+.tech-items svg {
     font-size: 1.2rem;
     width: 20px;
-    text-align: center;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: transform 0.3s ease;
 }
 
-.tech-items span:hover i {
+.tech-items span:hover i,
+.tech-items span:hover svg {
     transform: scale(1.2);
 }
 

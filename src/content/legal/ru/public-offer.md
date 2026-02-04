@@ -79,6 +79,6 @@ lastUpdated: "4 февраля 2026 г."
 * **УНП:** MA6914161
 * **Сайт:** [avpdev.com](https://avpdev.com)
 * **Email:** [contact@avpdev.com](mailto:contact@avpdev.com)
-* **Telegram:** [@avpdevcom](https://t.me/avpdevcom)
+* **Telegram:** [@AVP_Dev](https://t.me/AVP_Dev)
 
 *Полные банковские реквизиты и почтовый адрес предоставляются Заказчику в Счете на оплату (Инвойсе).*

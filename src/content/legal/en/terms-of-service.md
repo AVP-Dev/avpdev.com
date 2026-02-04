@@ -66,6 +66,6 @@ By starting to use the Site, the User confirms that they have fully read the ter
 7.3. For all questions related to these Terms, the User can contact the Administration:
 
 - **Email:** [contact@avpdev.com](mailto:contact@avpdev.com)
-- **Telegram:** [@avpdevcom](https://t.me/avpdevcom)
+- **Telegram:** [@AVP_Dev](https://t.me/AVP_Dev)
 - **WhatsApp (RU):** [Message](https://wa.me/79154065940)
 - **WhatsApp (BY):** [Message](https://wa.me/375291217371)

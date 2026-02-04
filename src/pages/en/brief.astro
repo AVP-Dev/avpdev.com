@@ -681,23 +681,33 @@ const t = useTranslations(lang);
             spinner.style.display = "block";
 
             const formData = new FormData(form);
-            // Handle multiple values for checkboxes (features, support)
-            const data: Record<string, any> = {};
 
+            // Collect arrays for multiple-choice checkboxes
+            const features = formData.getAll("features");
+            const support = formData.getAll("support");
+
+            // Build data object from FormData, excluding arrays we'll add manually
+            const data: Record<string, any> = {};
             for (const [key, value] of formData.entries()) {
-                if (data[key]) {
-                    // If key already exists, convert to array
-                    if (!Array.isArray(data[key])) {
-                        data[key] = [data[key]];
+                if (key !== "features" && key !== "support") {
+                    // Only take the first value for non-array fields
+                    if (!data[key]) {
+                        data[key] = value;
                     }
-                    data[key].push(value);
-                } else {
-                    data[key] = value;
                 }
             }
 
+            // Add arrays explicitly
+            if (features.length > 0) data.features = features;
+            if (support.length > 0) data.support = support;
+
+            // CRITICAL: Convert checkbox from "on"/undefined to boolean
+            data.consent = formData.get("consent") === "on";
+
+            console.log("📤 Sending brief data:", data);
+
             try {
-                const response = await fetch("/api/sendBrief", {
+                const response = await fetch("/api/sendBrief/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),

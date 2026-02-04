@@ -1,28 +1,28 @@
 # Этап 1: Сборка приложения (Builder)
-# Используем актуальную LTS-версию Node.js (v24) на базе Alpine для легковесности
-FROM node:24-alpine AS builder
+# Используем Bun 1.2+ на базе Alpine для легковесности
+FROM oven/bun:1.2-alpine AS builder
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и package-lock.json для кэширования зависимостей
-COPY package*.json ./
+# Копируем package.json и bun.lockb для кэширования зависимостей
+COPY package.json bun.lockb* ./
 
 # Устанавливаем зависимости, включая devDependencies для сборки
-RUN npm install
+RUN bun install --frozen-lockfile
 
 # Копируем все остальные файлы проекта
 COPY . .
 
 # Генерируем типы Astro для корректной сборки
-RUN npx astro sync
+RUN bunx astro sync
 
 # Собираем производственную версию приложения
-RUN npm run build
+RUN bun run build
 
 
 # Этап 2: Производственный образ (Production)
-FROM node:24-alpine AS production
+FROM oven/bun:1.2-alpine AS production
 
 WORKDIR /app
 

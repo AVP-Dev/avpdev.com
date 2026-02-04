@@ -14,9 +14,12 @@ function cleanInput(str: string | undefined | null): string {
 export const POST: APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
+        console.log('📨 Contact form received:', JSON.stringify(data, null, 2));
+
         const result = ContactFormSchema.safeParse(data);
 
         if (!result.success) {
+            console.error('❌ Validation failed:', result.error.issues);
             // Return standardized error response
             return new Response(JSON.stringify({
                 success: false,

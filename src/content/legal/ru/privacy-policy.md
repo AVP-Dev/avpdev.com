@@ -77,6 +77,6 @@ lastUpdated: "18 сентября 2025 г."
 7.2. Если у вас есть вопросы, пожалуйста, свяжитесь с нами:
 
 - **Email:** [contact@avpdev.com](mailto:contact@avpdev.com)
-- **Telegram:** [@avpdevcom](https://t.me/avpdevcom)
+- **Telegram:** [@AVP_Dev](https://t.me/AVP_Dev)
 - **WhatsApp (RU):** [Написать](https://wa.me/79154065940)
 - **WhatsApp (BY):** [Написать](https://wa.me/375291217371)

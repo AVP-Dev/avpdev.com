@@ -14,11 +14,13 @@ function cleanInput(str: string | undefined | null): string {
 export const POST: APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
+        console.log('📨 Brief form received:', JSON.stringify(data, null, 2));
 
         // Валидация с помощью Zod
         const validationResult = BriefFormSchema.safeParse(data);
 
         if (!validationResult.success) {
+            console.error('❌ Validation failed:', validationResult.error.issues);
             return new Response(JSON.stringify({
                 success: false,
                 message: "Ошибка валидации",

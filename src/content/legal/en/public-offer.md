@@ -81,6 +81,6 @@ Publication of this Agreement on the Contractor's official website at [https://a
 * **UNP (Tax ID):** MA6914161
 * **Website:** [avpdev.com](https://avpdev.com)
 * **Email:** [contact@avpdev.com](mailto:contact@avpdev.com)
-* **Telegram:** [@avpdevcom](https://t.me/avpdevcom)
+* **Telegram:** [@AVP_Dev](https://t.me/AVP_Dev)
 
 *Full bank details and postal address are provided to the Customer in the Invoice.*

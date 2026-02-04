@@ -181,10 +181,18 @@ const t = useTranslations(lang);
             if (spinner) spinner.style.display = "block";
 
             const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+            // Use 'any' type to allow boolean conversion
+            const data: Record<string, any> = Object.fromEntries(
+                formData.entries(),
+            );
+
+            // CRITICAL: Convert checkbox from "on"/undefined to boolean
+            data.consent = formData.get("consent") === "on";
+
+            console.log("📤 Sending contact form data:", data);
 
             try {
-                const response = await fetch("/api/sendMessage", {
+                const response = await fetch("/api/sendMessage/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data),
