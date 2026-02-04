@@ -1,7 +1,7 @@
 ---
 // src/components/Footer.astro
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import CreatorSignature from "./ui/CreatorSignature.astro";
+import { CreatorSignature } from "./ui/CreatorSignature";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

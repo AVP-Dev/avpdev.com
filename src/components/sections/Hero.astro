@@ -86,11 +86,11 @@ const t = useTranslations(lang);
     }
 
     function loadParticles() {
-        // Use requestIdleCallback to ensure hero text is rendered first
-        if ("requestIdleCallback" in window) {
-            window.requestIdleCallback(() => initParticles());
+        // Strictly defer until full window load to ensure LCP is hit first
+        if (document.readyState === "complete") {
+            initParticles();
         } else {
-            setTimeout(initParticles, 1);
+            window.addEventListener("load", () => initParticles());
         }
     }
 

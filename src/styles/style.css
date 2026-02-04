@@ -4,6 +4,19 @@
     --accent-color-start: #ff8c00;
     --accent-color-start-rgb: 255, 140, 0;
     --accent-color-end: #ffc837;
+    --font-header: 'Onest', system-ui, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* --- Typo --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+    font-family: var(--font-header);
 }
 
 /* --- DARK Theme Color Scheme --- */
@@ -57,7 +70,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.7;
