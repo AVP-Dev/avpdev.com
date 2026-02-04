@@ -1,6 +1,7 @@
 ---
 // src/components/Footer.astro
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import CreatorSignature from "./ui/CreatorSignature.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -60,5 +61,6 @@ const t = useTranslations(lang);
                 >{t("footer_public_offer")}</a
             >
         </div>
+        <CreatorSignature />
     </div>
 </footer>

@@ -20,21 +20,14 @@ function initializePage() {
     themeSwitchers.forEach(switcher => switcher.addEventListener('click', () => switchTheme(document.body.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme')));
     switchTheme(currentTheme);
 
-    // --- MOBILE MENU ---
-    const burger = document.querySelector('.burger-menu');
+    // --- MOBILE MENU (Minimal JS) ---
+    const menuToggle = document.getElementById('menu-toggle') as HTMLInputElement;
     const mobileNav = document.querySelector('.mobile-nav');
-    if (burger && mobileNav) {
-        const toggleMenu = () => {
-            const isOpen = mobileNav.classList.toggle('open');
-            burger.classList.toggle('active', isOpen);
-            document.body.classList.toggle('modal-open', isOpen);
-        };
-        burger.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
-        mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { if (mobileNav.classList.contains('open')) toggleMenu(); }));
-        document.addEventListener('click', (e) => {
-            if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target as Node) && !burger.contains(e.target as Node)) {
-                toggleMenu();
-            }
+    if (menuToggle && mobileNav) {
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.checked = false;
+            });
         });
     }
 

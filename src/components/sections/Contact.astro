@@ -1,9 +1,20 @@
 ---
 // src/components/sections/Contact.astro
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { ContactForm } from "../forms/ContactForm";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+// Get all translations as a record for React
+const allTranslations = {
+    form_name: t("form_name"),
+    form_email: t("form_email"),
+    form_phone: t("form_phone"),
+    form_message: t("form_message"),
+    form_hint: t("form_hint"),
+    form_button: t("form_button"),
+};
 ---
 
 <section id="contact">
@@ -11,214 +22,6 @@ const t = useTranslations(lang);
         <h2 class="section-title fade-in" set:html={t("contact_h2")} />
         <p class="section-subtitle fade-in">{t("contact_p")}</p>
 
-        <form id="contact-form" class="contact-form fade-in" novalidate>
-            <div class="form-group">
-                <input
-                    type="text"
-                    name="name"
-                    placeholder={t("form_name")}
-                    required
-                    class="form-control"
-                />
-            </div>
-
-            <div class="form-group-split">
-                <div class="form-group">
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder={t("form_email")}
-                        class="form-control"
-                    />
-                </div>
-                <div class="form-group">
-                    <input
-                        type="tel"
-                        name="phone"
-                        placeholder={t("form_phone")}
-                        class="form-control"
-                    />
-                </div>
-            </div>
-            <p class="form-hint">{t("form_hint")}</p>
-
-            <div class="form-group">
-                <textarea
-                    name="message"
-                    placeholder={t("form_message")}
-                    required
-                    class="form-control"
-                    rows="5"></textarea>
-            </div>
-
-            <div class="form-group-checkbox flex items-start gap-3 mb-6">
-                <input
-                    type="checkbox"
-                    id="legal-consent"
-                    name="consent"
-                    class="mt-1 w-5 h-5 min-w-[1.25rem] rounded border-gray-300 text-primary focus:ring-primary cursor-pointer accent-primary"
-                    required
-                />
-                <label
-                    for="legal-consent"
-                    class="text-sm text-muted-foreground leading-snug cursor-pointer select-none"
-                >
-                    {
-                        lang === "ru" ? (
-                            <>
-                                Я принимаю условия{" "}
-                                <a
-                                    href="/ru/legal/public-offer"
-                                    class="underline decoration-primary/50 hover:decoration-primary transition-colors"
-                                >
-                                    Публичной оферты
-                                </a>{" "}
-                                и даю согласие на обработку{" "}
-                                <a
-                                    href="/ru/legal/privacy-policy"
-                                    class="underline decoration-primary/50 hover:decoration-primary transition-colors"
-                                >
-                                    персональных данных
-                                </a>
-                                .
-                            </>
-                        ) : (
-                            <>
-                                I accept the{" "}
-                                <a
-                                    href="/en/legal/public-offer"
-                                    class="underline decoration-primary/50 hover:decoration-primary transition-colors"
-                                >
-                                    Public Offer
-                                </a>{" "}
-                                and agree to the processing of{" "}
-                                <a
-                                    href="/en/legal/privacy-policy"
-                                    class="underline decoration-primary/50 hover:decoration-primary transition-colors"
-                                >
-                                    personal data
-                                </a>
-                                .
-                            </>
-                        )
-                    }
-                </label>
-            </div>
-
-            <p
-                id="consent-error"
-                class="hidden text-red-600 text-xs font-medium mt-1 animate-pulse"
-            >
-                {
-                    lang === "ru"
-                        ? "Пожалуйста, подтвердите согласие с условиями перед отправкой."
-                        : "Please confirm your agreement with the terms before submitting."
-                }
-            </p>
-
-            <div class="form-submit-container">
-                <button id="submit-button" type="submit" class="cta-button"
-                    >{t("form_button")}</button
-                >
-                <div id="form-spinner" class="spinner" style="display: none;">
-                </div>
-            </div>
-        </form>
+        <ContactForm client:visible t={allTranslations} lang={lang} />
     </div>
 </section>
-
-<script>
-    import { navigate } from "astro:transitions/client";
-
-    document.addEventListener("astro:page-load", () => {
-        const form = document.getElementById("contact-form") as HTMLFormElement;
-        const submitButton = document.getElementById(
-            "submit-button",
-        ) as HTMLButtonElement;
-        const spinner = document.getElementById("form-spinner") as HTMLElement;
-        const consentCheckbox = document.getElementById(
-            "legal-consent",
-        ) as HTMLInputElement;
-        const consentError = document.getElementById(
-            "consent-error",
-        ) as HTMLElement;
-
-        if (!form) return;
-
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            // Reset errors
-            form.querySelectorAll(".error-field").forEach((el) =>
-                el.classList.remove("error-field"),
-            );
-            if (consentError) consentError.classList.add("hidden");
-
-            let isValid = true;
-
-            // Validate text inputs
-            form.querySelectorAll(
-                "input[required], textarea[required]",
-            ).forEach((field) => {
-                const input = field as HTMLInputElement | HTMLTextAreaElement;
-                if (!input.value.trim()) {
-                    input.classList.add("error-field");
-                    isValid = false;
-                }
-            });
-
-            // Validate consent
-            if (!consentCheckbox.checked) {
-                consentCheckbox.classList.add("error-field");
-                if (consentError) consentError.classList.remove("hidden");
-                isValid = false;
-            }
-
-            if (!isValid) return;
-
-            // Show loading state
-            if (submitButton) submitButton.style.display = "none";
-            if (spinner) spinner.style.display = "block";
-
-            const formData = new FormData(form);
-            // Use 'any' type to allow boolean conversion
-            const data: Record<string, any> = Object.fromEntries(
-                formData.entries(),
-            );
-
-            // CRITICAL: Convert checkbox from "on"/undefined to boolean
-            data.consent = formData.get("consent") === "on";
-
-            console.log("📤 Sending contact form data:", data);
-
-            try {
-                const response = await fetch("/api/sendMessage/", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data),
-                });
-
-                if (response.ok) {
-                    document.dispatchEvent(
-                        new CustomEvent("modal:open", {
-                            detail: { modalId: "success-modal" },
-                        }),
-                    );
-                    form.reset();
-                } else {
-                    throw new Error("Submission failed");
-                }
-            } catch (error) {
-                console.error(error);
-                document.dispatchEvent(
-                    new CustomEvent("modal:open", {
-                        detail: { modalId: "error-modal" },
-                    }),
-                );
-            } finally {
-                if (submitButton) submitButton.style.display = "block";
-                if (spinner) spinner.style.display = "none";
-            }
-        });
-    });
-</script>

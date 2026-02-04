@@ -67,7 +67,8 @@ body {
     word-wrap: break-word;
 }
 
-body.modal-open {
+body.modal-open,
+body:has(.menu-toggle-checkbox:checked) {
     overflow: hidden !important;
 }
 
@@ -114,9 +115,8 @@ section {
 .gradient-text {
     background: var(--accent-gradient);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
+    color: transparent;
 }
 
 .section-subtitle {
@@ -168,6 +168,10 @@ body .form-control.error-field {
     background-color: rgba(220, 53, 69, 0.05) !important;
     box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.15);
     animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+.is-hidden {
+    display: none !important;
 }
 
 @keyframes shake {
@@ -237,9 +241,8 @@ nav {
 .logo span {
     background: var(--accent-gradient);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
+    color: transparent;
 }
 
 .nav-links {
@@ -334,6 +337,10 @@ nav {
 }
 
 /* --- Mobile Navigation --- */
+.menu-toggle-checkbox {
+    display: none;
+}
+
 .burger-menu {
     display: none;
 }
@@ -708,6 +715,10 @@ nav {
     align-items: stretch;
     gap: 2.5rem;
     justify-content: center;
+}
+
+.portfolio-card-wrapper {
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .portfolio-card {
@@ -1316,20 +1327,24 @@ textarea.form-control {
         transform-origin: center;
     }
 
-    .burger-menu.active div:nth-child(1) {
+    .menu-toggle-checkbox:checked~nav .burger-menu div:nth-child(1) {
         transform: translateY(10px) rotate(45deg);
     }
 
-    .burger-menu.active div:nth-child(2) {
+    .menu-toggle-checkbox:checked~nav .burger-menu div:nth-child(2) {
         opacity: 0;
     }
 
-    .burger-menu.active div:nth-child(3) {
+    .menu-toggle-checkbox:checked~nav .burger-menu div:nth-child(3) {
         transform: translateY(-10px) rotate(-45deg);
     }
 
     .mobile-nav {
         display: flex;
+    }
+
+    .menu-toggle-checkbox:checked~.mobile-nav {
+        transform: translateX(0);
     }
 
     .form-group-split {

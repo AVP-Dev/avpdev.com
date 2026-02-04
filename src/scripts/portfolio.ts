@@ -16,31 +16,47 @@ export function initPortfolio() {
         return;
     }
 
+    // Cache categories to avoid repeated DOM queries
+    const cardData = allCards.map(wrapper => {
+        const card = wrapper.querySelector<HTMLElement>('[data-category]');
+        return {
+            wrapper,
+            category: card ? card.dataset.category : 'all'
+        };
+    });
+
     let currentFilter = 'all';
     let visibleCount = PROJECTS_PER_PAGE;
 
     const updateView = () => {
-        const matchingCards = allCards.filter(cardWrapper => {
-            const card = cardWrapper.querySelector<HTMLElement>('[data-category]');
-            const category = card ? card.dataset.category : 'all';
-            return currentFilter === 'all' || category === currentFilter;
-        });
+        const matchingCards = cardData.filter(item =>
+            currentFilter === 'all' || item.category === currentFilter
+        );
 
-        allCards.forEach(card => card.classList.add('is-hidden'));
+        requestAnimationFrame(() => {
+            cardData.forEach(item => {
+                item.wrapper.classList.add('is-hidden');
+                item.wrapper.style.opacity = '0';
+            });
 
-        let visibleInFilter = 0;
-        matchingCards.forEach((card, index) => {
-            if (index < visibleCount) {
-                card.classList.remove('is-hidden');
-                visibleInFilter++;
+            let visibleInFilter = 0;
+            matchingCards.forEach((item, index) => {
+                if (index < visibleCount) {
+                    item.wrapper.classList.remove('is-hidden');
+                    // Small timeout to trigger opacity transition if we add CSS for it
+                    setTimeout(() => {
+                        item.wrapper.style.opacity = '1';
+                    }, 50);
+                    visibleInFilter++;
+                }
+            });
+
+            if (visibleInFilter >= matchingCards.length) {
+                showMoreBtn.classList.add('is-hidden');
+            } else {
+                showMoreBtn.classList.remove('is-hidden');
             }
         });
-
-        if (visibleInFilter >= matchingCards.length) {
-            showMoreBtn.classList.add('is-hidden');
-        } else {
-            showMoreBtn.classList.remove('is-hidden');
-        }
     };
 
     filterContainer.addEventListener('click', (e) => {
