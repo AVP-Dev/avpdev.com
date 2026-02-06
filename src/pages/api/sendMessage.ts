@@ -5,7 +5,7 @@ import { ContactFormSchema } from '../../lib/schemas';
 
 function cleanInput(str: string | undefined | null): string {
     if (!str) return '';
-    return sanitizeHtml(String(str), {
+    return sanitizeHtml(String(str).trim(), {
         allowedTags: [],
         allowedAttributes: {}
     });
@@ -14,30 +14,36 @@ function cleanInput(str: string | undefined | null): string {
 export const POST: APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
-        console.log('📨 Contact form received:', JSON.stringify(data, null, 2));
-
         const result = ContactFormSchema.safeParse(data);
 
         if (!result.success) {
             console.error('❌ Validation failed:', result.error.issues);
-            // Return standardized error response
             return new Response(JSON.stringify({
                 success: false,
                 message: "Validation Error",
-                errors: result.error.issues
+                errors: result.error.flatten().fieldErrors
             }), { status: 400 });
         }
 
-        const { name, email, phone, message, consent } = result.data;
+        const { name, email, phone, message } = result.data;
 
-        // Log that consent was given
-        console.log(`Contact form submission - Consent: ${consent}`);
+        // Prepare TG message
+        const contactInfo = [
+            email ? `<b>Email:</b> ${cleanInput(email)}` : null,
+            phone ? `<b>Телефон:</b> ${cleanInput(phone)}` : null
+        ].filter(Boolean).join('\n');
 
-        const tgMessage = `<b>🔥 Новая заявка с сайта!</b>\n\n<b>Имя:</b> ${cleanInput(name)}\n<b>Email:</b> ${cleanInput(email)}\n<b>Телефон:</b> ${cleanInput(phone)}\n\n<b>Сообщение:</b>\n${cleanInput(message)}`;
+        const tgMessage = [
+            `<b>🔥 Новая заявка с сайта!</b>`,
+            `<b>Имя:</b> ${cleanInput(name)}`,
+            contactInfo,
+            `\n<b>Сообщение:</b>\n${cleanInput(message)}`
+        ].join('\n');
+
         const { BOT_TOKEN, CHAT_ID, TOPIC_ID } = import.meta.env;
 
         if (!BOT_TOKEN || !CHAT_ID) {
-            throw new Error("Переменные окружения Telegram не установлены.");
+            throw new Error("Server configuration error: Telegram credentials missing.");
         }
 
         const tgResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -53,20 +59,20 @@ export const POST: APIRoute = async ({ request }) => {
 
         if (!tgResponse.ok) {
             const errorBody = await tgResponse.json();
-            console.error("Ошибка API Telegram:", JSON.stringify(errorBody, null, 2));
-            throw new Error('Не удалось отправить сообщение в Telegram.');
+            console.error("Telegram API Error:", errorBody);
+            throw new Error('Failed to send message to Telegram.');
         }
 
         return new Response(JSON.stringify({
             success: true,
-            message: "Success"
+            message: "Message sent successfully"
         }), { status: 200 });
 
-    } catch (error) {
-        console.error("Критическая ошибка в /api/sendMessage:", error);
+    } catch (error: any) {
+        console.error("Critical error in /api/sendMessage:", error);
         return new Response(JSON.stringify({
             success: false,
-            message: "Server error"
+            message: error.message || "Internal Server Error"
         }), { status: 500 });
     }
 };

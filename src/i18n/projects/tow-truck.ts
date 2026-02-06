@@ -47,4 +47,4 @@ export const towTruckTranslations = {
         gallery_caption_tow_testimonials: 'Testimonials: Confirmation of service quality from real clients',
         gallery_caption_tow_contacts_form: 'Order Form: An alternative contact method for non-urgent cases',
     }
-};
+ } as const;

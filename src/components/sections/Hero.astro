@@ -6,20 +6,69 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section id="hero">
+<section id="hero" class="hero-section">
     <div id="particles-js"></div>
     <div class="container hero-container">
         <div class="hero-content">
             <div class="hero-text fade-in">
                 <h1 set:html={t("hero_h1")} />
                 <p>{t("hero_p")}</p>
-                <a href={`/${lang}/#contact`} class="cta-button"
-                    >{t("hero_cta")}</a
-                >
+                <div class="cta-group">
+                    <a href={`/${lang}/#contact`} class="cta-button">
+                        {t("hero_cta")}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .hero-section {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        /* Safe area aware padding top: 80px (header) + fluid top spacing */
+        padding-top: clamp(100px, 15vh, 180px);
+        padding-bottom: clamp(60px, 8vh, 100px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-container {
+        width: 100%;
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-text p {
+        font-size: clamp(1.1rem, 2vw, 1.35rem);
+        margin-bottom: 2.5rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta-group {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section {
+            padding-top: clamp(120px, 20vh, 160px);
+        }
+    }
+</style>
 
 <!-- Подключаем скрипт инициализации -->
 <script>

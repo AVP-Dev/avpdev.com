@@ -80,7 +80,7 @@ const linkTextKey = "portfolio_card_link";
 
     .portfolio-image-wrapper {
         position: relative;
-        height: 220px;
+        aspect-ratio: 16 / 10;
         overflow: hidden;
     }
 
@@ -132,7 +132,8 @@ const linkTextKey = "portfolio_card_link";
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        gap: 1rem;
+        justify-content: space-between;
+        gap: 1.25rem;
     }
 
     .portfolio-info h3 {

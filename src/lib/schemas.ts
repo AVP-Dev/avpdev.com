@@ -6,26 +6,24 @@ import { z } from 'zod';
  * Validates contact form submissions with either email OR phone required
  */
 export const ContactFormSchema = z.object({
-    name: z.string().min(1, { message: 'Name is required' }),
-    email: z.string().email({ message: 'Invalid email address' }).optional().or(z.literal('')),
-    phone: z.string().optional(),
-    message: z.string().min(1, { message: 'Message is required' }),
-    consent: z.coerce.boolean({
-        errorMap: () => ({ message: 'Agreement is required' })
-    }).refine((val) => val === true, {
-        message: 'Agreement is required'
+    name: z.string().trim().min(2, { message: 'Name must be at least 2 characters' }).max(100),
+    email: z.string().trim().email({ message: 'Invalid email address' }).optional().or(z.literal('')),
+    phone: z.string().trim().min(5, { message: 'Phone is too short' }).max(20).optional().or(z.literal('')),
+    message: z.string().trim().min(10, { message: 'Message must be at least 10 characters' }).max(2000),
+    consent: z.coerce.boolean().refine((val) => val === true, {
+        message: 'You must agree to personal data processing'
     }),
 }).superRefine((data, ctx) => {
     // If both email and phone are empty, add errors to both fields
     if (!data.email && !data.phone) {
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: 'Required',
+            message: 'Email or Phone is required',
             path: ['email']
         });
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: 'Required',
+            message: 'Email or Phone is required',
             path: ['phone']
         });
     }
@@ -37,50 +35,48 @@ export const ContactFormSchema = z.object({
  */
 export const BriefFormSchema = z.object({
     // --- Contact Data ---
-    company_name: z.string().min(1, { message: 'Company name is required' }),
-    contacts: z.string().min(1, { message: 'Contact information is required' }),
-    preferred_contact: z.enum(['Telegram', 'WhatsApp', 'Email', 'Звонок', 'Phone Call']),
+    company_name: z.string().trim().min(1, { message: 'Company name is required' }),
+    contacts: z.string().trim().min(1, { message: 'Contact information is required' }),
+    preferred_contact: z.enum(['Telegram', 'WhatsApp', 'Email', 'Call']),
 
     // --- About Company and Project ---
-    business_sphere: z.string().min(1, { message: 'Business description is required' }),
-    current_site: z.string().url({ message: 'Invalid URL' }).optional().or(z.literal('')),
-    competitors: z.string().optional(),
+    business_sphere: z.string().trim().min(1, { message: 'Business description is required' }),
+    current_site: z.string().trim().url({ message: 'Invalid URL' }).optional().or(z.literal('')),
+    competitors: z.string().trim().optional(),
 
     // --- Goals and Objectives ---
-    project_goal: z.string(),
-    success_metrics: z.string().optional(),
+    project_goal: z.string().trim().min(10, { message: 'Please describe your project goal' }),
+    success_metrics: z.string().trim().optional(),
 
     // --- Target Audience ---
-    target_audience: z.string().optional(),
-    user_action: z.string().optional(),
+    target_audience: z.string().trim().optional(),
+    user_action: z.string().trim().optional(),
 
     // --- Type and Functionality ---
-    site_type: z.string(),
+    site_type: z.string().trim().min(1, { message: 'Please select project type' }),
     features: z.union([z.array(z.string()), z.string()]).optional(),
-    features_other: z.string().optional(),
+    features_other: z.string().trim().optional(),
 
     // --- Design and Content ---
-    brand_identity: z.string().optional(),
-    design_examples: z.string().optional(),
-    content_provider: z.string().optional(),
+    brand_identity: z.string().trim().optional(),
+    design_examples: z.string().trim().optional(),
+    content_provider: z.string().trim().optional(),
 
     // --- Technical Questions ---
-    hosting_domain: z.string().optional(),
-    integrations: z.string().optional(),
+    hosting_domain: z.string().trim().optional(),
+    integrations: z.string().trim().optional(),
 
     // --- Budget and Timeline ---
-    budget: z.string().optional(),
-    deadline: z.string().optional(),
+    budget: z.string().trim().optional(),
+    deadline: z.string().trim().optional(),
 
     // --- Additional Info ---
-    additional_info: z.string().optional(),
+    additional_info: z.string().trim().optional(),
     support: z.union([z.array(z.string()), z.string()]).optional(),
 
     // --- Legal Consent ---
-    consent: z.coerce.boolean({
-        errorMap: () => ({ message: 'Data processing consent is required' })
-    }).refine((val) => val === true, {
-        message: 'Data processing consent is required'
+    consent: z.coerce.boolean().refine((val) => val === true, {
+        message: 'You must agree to personal data processing'
     }),
 });
 

@@ -51,4 +51,4 @@ export const printing3dTranslations = {
         gallery_caption_3d_faq: 'FAQ: Answers to common questions to address objections',
         gallery_caption_3d_contact_form: 'Order Form: The main lead generation tool',
     }
-};
+ } as const;

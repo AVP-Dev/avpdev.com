@@ -37,4 +37,4 @@ export const mekohausTranslations = {
         gallery_caption_mekohaus_form: 'Form for consultation and wholesale price list request',
         case_mekohaus_deployment_text: 'The project is deployed on standard shared web hosting. This is a classic and reliable solution that ensures stable site operation at an optimal cost. The PHP backend and the frontend are hosted within a single hosting account, which simplifies support and administration.',
     }
-};
+ } as const;

@@ -39,4 +39,4 @@ export const sentralixTranslations = {
         gallery_caption_sentralix_faq: 'Interactive Islands: FAQ section with instant response powered by React 19',
         gallery_caption_sentralix_contact: 'Conversion Point: Seamless lead capture form with real-time data validation',
     }
-};
+ } as const;

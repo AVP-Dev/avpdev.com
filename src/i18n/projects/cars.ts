@@ -49,4 +49,4 @@ export const carsTranslations = {
         gallery_caption_cars_testimonials: 'Testimonials: Confirmation of reliability from real clients',
         gallery_caption_cars_contact: 'Inquiry Form: A simple and clear next step',
     }
-};
+ } as const;

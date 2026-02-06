@@ -73,6 +73,30 @@ const t = useTranslations(lang);
             </div>
         </div>
 
+        {/* Geo Links Section for SEO */}
+        <div class="footer-geo-section">
+            <h4 class="footer-title">{t("geoLinks.title")}</h4>
+            <div class="geo-links-row">
+                {
+                    [
+                        { slug: "belarus", ru: "Беларусь", en: "Belarus" },
+                        { slug: "russia", ru: "Россия", en: "Russia" },
+                        {
+                            slug: "kazakhstan",
+                            ru: "Казахстан",
+                            en: "Kazakhstan",
+                        },
+                        { slug: "europe", ru: "Европа", en: "Europe" },
+                        { slug: "usa", ru: "США", en: "USA" },
+                    ].map((loc) => (
+                        <span class="geo-tag">
+                            {lang === "ru" ? loc.ru : loc.en}
+                        </span>
+                    ))
+                }
+            </div>
+        </div>
+
         <div class="footer-bottom">
             <div class="footer-bottom-content">
                 <p class="copyright" set:html={t("footer_copyright")} />
@@ -208,6 +232,38 @@ const t = useTranslations(lang);
 
     .footer-signature {
         flex-shrink: 0;
+    }
+
+    /* --- Geo Links Styling --- */
+    .footer-geo-section {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border-color);
+        text-align: center;
+    }
+
+    .footer-geo-section .footer-title {
+        text-align: center;
+        width: 100%;
+    }
+
+    .geo-links-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+        justify-content: center;
+    }
+
+    .geo-tag {
+        font-size: 0.85rem;
+        color: var(--text-secondary-color);
+        opacity: 0.6;
+        cursor: default;
+        transition: opacity 0.3s ease;
+    }
+
+    .geo-tag:hover {
+        opacity: 1;
     }
 
     .footer-signature :global(.w-full) {

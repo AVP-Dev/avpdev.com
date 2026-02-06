@@ -17,9 +17,9 @@ const t = useTranslations(lang as "en" | "ru");
 
 <BaseLayout title="brief_page_title" description="brief_page_desc">
     <section id="brief-form-section" class="case-study-header">
-        <div class="container">
-            <h1 class="section-title">{t("brief_title")}</h1>
-            <p>{t("brief_subtitle")}</p>
+        <div class="container container-narrow">
+            <h1 class="section-title" set:html={t("brief_title")} />
+            <p class="section-subtitle">{t("brief_subtitle")}</p>
 
             <form id="brief-form" class="brief-form" novalidate>
                 <fieldset class="form-block fade-in">
@@ -76,7 +76,7 @@ const t = useTranslations(lang as "en" | "ru");
                                 ><input
                                     type="radio"
                                     name="preferred_contact"
-                                    value="Phone Call"
+                                    value="Call"
                                 /><span
                                     >{
                                         lang === "ru" ? "Звонок" : "Phone Call"
@@ -548,72 +548,54 @@ const t = useTranslations(lang as "en" | "ru");
                     </div>
                 </fieldset>
 
-                <div
-                    class="form-group-checkbox flex items-start gap-3 mb-6 mt-4"
-                >
-                    <input
-                        type="checkbox"
-                        id="legal-consent"
-                        name="consent"
-                        class="mt-1 w-5 h-5 min-w-[1.25rem] rounded border-gray-300 text-primary focus:ring-primary cursor-pointer accent-primary"
-                        required
-                    />
-                    <label
-                        for="legal-consent"
-                        class="text-sm text-muted-foreground leading-snug cursor-pointer select-none"
-                    >
-                        {
-                            lang === "ru" ? (
-                                <>
-                                    Я принимаю{" "}
-                                    <a
-                                        href={`/${lang}/legal/public-offer`}
-                                        class="underline decoration-primary/50 hover:decoration-primary transition-colors"
-                                    >
-                                        Публичную оферту
-                                    </a>{" "}
-                                    и согласен на обработку{" "}
-                                    <a
-                                        href={`/${lang}/legal/privacy-policy`}
-                                        class="underline decoration-primary/50 hover:decoration-primary transition-colors"
-                                    >
-                                        персональных данных
-                                    </a>
-                                    .
-                                </>
-                            ) : (
-                                <>
-                                    I accept the{" "}
-                                    <a
-                                        href={`/${lang}/legal/public-offer`}
-                                        class="underline decoration-primary/50 hover:decoration-primary transition-colors"
-                                    >
-                                        Public Offer
-                                    </a>{" "}
-                                    and agree to the processing of{" "}
-                                    <a
-                                        href={`/${lang}/legal/privacy-policy`}
-                                        class="underline decoration-primary/50 hover:decoration-primary transition-colors"
-                                    >
-                                        personal data
-                                    </a>
-                                    .
-                                </>
-                            )
-                        }
-                    </label>
-                </div>
+                <div class="form-footer centered">
+                    <div class="checkbox-wrapper">
+                        <input
+                            type="checkbox"
+                            id="legal-consent"
+                            name="consent"
+                            class="custom-checkbox"
+                            required
+                        />
+                        <label for="legal-consent" class="checkbox-label">
+                            {
+                                lang === "ru" ? (
+                                    <>
+                                        Я принимаю условия{" "}
+                                        <a href="/ru/legal/public-offer">
+                                            Публичной оферты
+                                        </a>{" "}
+                                        и даю согласие на обработку{" "}
+                                        <a href="/ru/legal/privacy-policy">
+                                            персональных данных
+                                        </a>
+                                        .
+                                    </>
+                                ) : (
+                                    <>
+                                        I accept the{" "}
+                                        <a href="/en/legal/public-offer">
+                                            Public Offer
+                                        </a>{" "}
+                                        and agree to the processing of{" "}
+                                        <a href="/en/legal/privacy-policy">
+                                            personal data
+                                        </a>
+                                        .
+                                    </>
+                                )
+                            }
+                        </label>
+                    </div>
 
-                <p
-                    id="consent-error"
-                    class="hidden text-red-600 text-xs font-medium mt-1 animate-pulse"
-                >
-                    {
-                        lang === "ru"
-                            ? "Пожалуйста, подтвердите согласие с условиями перед отправкой."
-                            : "Please confirm your agreement with the terms before submitting."
-                    }
-                </p>
+                    <p id="consent-error" class="error-text hidden">
+                        {
+                            lang === "ru"
+                                ? "Вы должны согласиться на обработку персональных данных."
+                                : "You must agree to personal data processing."
+                        }
+                    </p>
+                </div>
 
                 <div class="form-submit-container">
                     <button id="submit-button" type="submit" class="cta-button"

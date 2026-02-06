@@ -83,9 +83,11 @@ const homePath = `/${lang}/`;
                     >{t("case_cta_discuss")}</a
                 >
             </div>
-            <a href={`${homePath}#portfolio`} class="back-to-main"
-                >{t("back_to_portfolio")}</a
-            >
+            <div style="display: flex; justify-content: center; width: 100%;">
+                <a href={`/${lang}/projects/`} class="back-to-main"
+                    ><span>{t("back_to_portfolio")}</span></a
+                >
+            </div>
         </div>
     </div>
 </BaseLayout>

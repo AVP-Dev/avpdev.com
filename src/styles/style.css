@@ -100,21 +100,96 @@ section {
 
 /* --- Forms (Global Inputs) --- */
 .form-control {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary-color);
+}
+
+.form-control {
     width: 100%;
-    padding: 1rem 1.25rem;
-    font-size: 1rem;
-    color: var(--text-color);
-    background-color: var(--primary-color);
+    padding: 12px 16px;
+    background: var(--bg-color);
     border: 1px solid var(--border-color);
     border-radius: 12px;
+    color: var(--text-color);
     font-family: var(--font-body);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
 .form-control:focus {
     outline: none;
     border-color: var(--accent-color-start);
-    box-shadow: 0 0 0 4px rgba(var(--accent-color-start-rgb), 0.15);
+    box-shadow: 0 0 0 4px rgba(var(--accent-color-start-rgb), 0.1);
+}
+
+.error-field {
+    border-color: #ef4444 !important;
+}
+
+/* --- Shared Checkbox & Form Footer Styles --- */
+.checkbox-wrapper {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.custom-checkbox:checked {
+    background: var(--accent-color-start);
+    border-color: var(--accent-color-start);
+}
+
+.custom-checkbox:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.checkbox-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary-color);
+    line-height: 1.5;
+}
+
+.checkbox-label a {
+    color: var(--text-color);
+    text-decoration: underline;
+    text-decoration-color: rgba(var(--accent-color-start-rgb), 0.3);
+}
+
+.checkbox-label a:hover {
+    color: var(--accent-color-start);
+}
+
+.error-text {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
 }
 
 .light-theme .form-control {
@@ -284,8 +359,8 @@ nav {
     align-items: center;
     background: var(--primary-color);
     border-radius: 9999px;
-    padding: 0.3rem 0.5rem;
-    border: var(--glass-border);
+    padding: 3px;
+    border: 1px solid var(--glass-border);
     transition: background-color 0.3s, border-color 0.3s;
 }
 
@@ -359,23 +434,27 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    /* Change from space-between to allow natural scroll */
     position: fixed;
     top: 0;
     right: 0;
-    width: 80%;
-    max-width: 350px;
+    width: 85%;
+    max-width: 400px;
     height: 100vh;
+    height: 100dvh;
     background-color: var(--glass-bg);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     transform: translateX(100%);
     opacity: 1;
     visibility: visible;
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     z-index: 2000;
-    padding: 100px 30px 60px;
+    padding: 100px 30px calc(40px + env(safe-area-inset-bottom));
     box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    /* Enable scroll if content is too tall */
 }
 
 .mobile-nav.open {
@@ -399,13 +478,17 @@ nav {
 }
 
 .dark-theme .mobile-nav {
-    background-color: rgba(17, 17, 26, 0.85);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(17, 17, 26, 0.8);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .light-theme .mobile-nav {
-    background-color: rgba(255, 255, 255, 0.85);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .mobile-nav.open {
@@ -420,7 +503,7 @@ nav {
 }
 
 .mobile-nav li {
-    margin: 1.5rem 0;
+    margin: 0.75rem 0;
     transform: translateY(20px);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -457,11 +540,13 @@ nav {
 
 .mobile-nav a {
     color: var(--text-color);
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 6vw, 1.6rem);
     text-decoration: none;
     font-family: var(--font-heading);
     font-weight: 700;
     transition: color 0.3s ease;
+    display: block;
+    padding: 0.4rem 0;
 }
 
 .mobile-nav a:hover {
@@ -474,6 +559,7 @@ nav {
     align-items: center;
     gap: 1.5rem;
     width: 100%;
+    margin-top: auto;
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) 0.4s;

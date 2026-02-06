@@ -41,4 +41,4 @@ export const travelTranslations = {
         gallery_caption_travel_faq: 'User Help: A section with answers to frequently asked questions',
         gallery_caption_travel_contacts: 'Contact Form: A convenient way to get a consultation',
     }
-};
+ } as const;

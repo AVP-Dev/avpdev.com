@@ -5,6 +5,7 @@ import { towTruckTranslations } from './projects/tow-truck';
 import { printing3dTranslations } from './projects/3d-printing';
 import { mekohausTranslations } from './projects/mekohaus';
 import { sentralixTranslations } from './projects/sentralix';
+import { urbanSpotTranslations } from './projects/urban-spot';
 
 export const ui = {
     ru: {
@@ -43,10 +44,10 @@ export const ui = {
         form_hint: 'Укажите удобный способ связи',
         form_message: 'Опишите вашу задачу...',
         form_button: 'Отправить',
-        success_modal_title: 'Отлично!',
+        success_modal_title: '<span class="gradient-text">Отлично!</span>',
         success_modal_text: 'Ваша заявка успешно отправлена. Я свяжусь с вами в ближайшее время!',
         success_modal_button: 'Закрыть',
-        error_modal_title: 'Что-то пошло не так...',
+        error_modal_title: '<span class="gradient-text">Что-то пошло не так...</span>',
         error_modal_text: 'Не удалось отправить сообщение. Пожалуйста, попробуйте еще раз или свяжитесь со мной напрямую в Telegram.',
         error_modal_button: 'Закрыть',
         form_error_email: 'Неверный формат Email',
@@ -84,7 +85,7 @@ export const ui = {
         blog_cta_button: "Заполнить бриф",
         brief_page_title: "Бриф на разработку сайта | AVPdev.com",
         brief_page_desc: "Заполните бриф, чтобы получить точный расчет стоимости и сроков разработки вашего проекта.",
-        brief_title: "Бриф на разработку сайта",
+        brief_title: "Бриф на <span class=\"gradient-text\">разработку сайта</span>",
         brief_subtitle: "Заполните 10 коротких блоков — это поможет рассчитать стоимость и сроки под вашу задачу. Заполнение займёт 5–7 минут.",
         "404_title": "404: Страница не найдена",
         "404_desc": "Запрошенная страница не существует.",
@@ -188,7 +189,7 @@ export const ui = {
         case_deployment_text: 'Для обеспечения максимальной производительности и гибкости проект размещен на выделенном виртуальном сервере (VPS). Процесс развертывания полностью автоматизирован с помощью self-hosted платформы <strong>Coolify</strong>, реализующей CI/CD пайплайн. При каждом push в Git-репозиторий, Coolify автоматически собирает приложение в изолированном Docker-контейнере и бесшовно обновляет его на сервере без простоя. Этот подход обеспечивает стабильность, безопасность и быструю доставку нового функционала.',
 
         // Geo Links
-        'geoLinks.title': 'Мы работаем в городах:',
+        'geoLinks.title': 'География проектов:',
 
         // Project Translations
         ...carsTranslations.ru,
@@ -198,10 +199,11 @@ export const ui = {
         ...printing3dTranslations.ru,
         ...mekohausTranslations.ru,
         ...sentralixTranslations.ru,
+        ...urbanSpotTranslations.ru,
     },
     en: {
         // Geo Links
-        'geoLinks.title': 'We work in cities:',
+        'geoLinks.title': 'Project Geography:',
 
         // Main page and common
         page_title: 'AVPdev | Full-Stack Developer | Website Development & Business Automation',
@@ -238,10 +240,10 @@ export const ui = {
         form_hint: 'Enter your preferred contact method',
         form_message: 'Describe your task...',
         form_button: 'Send',
-        success_modal_title: 'Great!',
+        success_modal_title: '<span class="gradient-text">Great!</span>',
         success_modal_text: 'Your message has been sent successfully. I will contact you shortly!',
         success_modal_button: 'Close',
-        error_modal_title: 'Something went wrong...',
+        error_modal_title: '<span class="gradient-text">Something went wrong...</span>',
         error_modal_text: 'Could not send the message. Please try again or contact me directly on Telegram.',
         error_modal_button: 'Close',
         form_error_email: 'Invalid Email format',
@@ -280,7 +282,7 @@ export const ui = {
         blog_cta_button: "Fill out the brief",
         brief_page_title: "Brief for Website Development | AVPdev.com",
         brief_page_desc: "Fill out the brief to get an accurate cost and timeline estimate for your project.",
-        brief_title: "Brief for Website Development",
+        brief_title: "Brief for <span class=\"gradient-text\">Website Development</span>",
         brief_subtitle: "Fill out 10 short sections—this will help calculate the cost and timeline for your task. It will take 5-7 minutes.",
         "404_title": "404: Page Not Found",
         "404_desc": "The requested page does not exist.",
@@ -391,5 +393,6 @@ export const ui = {
         ...printing3dTranslations.en,
         ...mekohausTranslations.en,
         ...sentralixTranslations.en,
+        ...urbanSpotTranslations.en,
     }
 } as const;

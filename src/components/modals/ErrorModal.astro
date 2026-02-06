@@ -1,17 +1,20 @@
 ---
 // src/components/modals/ErrorModal.astro
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
+
 <div id="error-modal" class="feedback-modal-overlay">
     <div class="feedback-modal-content">
         <div class="feedback-modal-icon error">
             <i class="fas fa-times" aria-hidden="true"></i>
         </div>
-        <h3>{t('error_modal_title')}</h3>
-        <p>{t('error_modal_text')}</p>
-        <button class="cta-button close-modal-btn">{t('error_modal_button')}</button>
+        <h3 set:html={t("error_modal_title")} />
+        <p>{t("error_modal_text")}</p>
+        <button class="cta-button close-modal-btn"
+            >{t("error_modal_button")}</button
+        >
     </div>
 </div>

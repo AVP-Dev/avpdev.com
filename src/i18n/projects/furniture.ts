@@ -47,4 +47,4 @@ export const furnitureTranslations = {
         gallery_caption_workshop: 'Services: Presentation of custom manufacturing',
         gallery_caption_contact: 'Lead Generation: A form for contact and starting a dialogue',
     }
-};
+ } as const;
