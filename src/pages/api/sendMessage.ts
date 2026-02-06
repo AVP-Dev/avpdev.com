@@ -25,18 +25,12 @@ export const POST: APIRoute = async ({ request }) => {
             }), { status: 400 });
         }
 
-        const { name, email, phone, message } = result.data;
-
-        // Prepare TG message
-        const contactInfo = [
-            email ? `<b>Email:</b> ${cleanInput(email)}` : null,
-            phone ? `<b>Телефон:</b> ${cleanInput(phone)}` : null
-        ].filter(Boolean).join('\n');
+        const { name, contact, message } = result.data;
 
         const tgMessage = [
             `<b>🔥 Новая заявка с сайта!</b>`,
             `<b>Имя:</b> ${cleanInput(name)}`,
-            contactInfo,
+            `<b>Контакты:</b> ${cleanInput(contact)}`,
             `\n<b>Сообщение:</b>\n${cleanInput(message)}`
         ].join('\n');
 

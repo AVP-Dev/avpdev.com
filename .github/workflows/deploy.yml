@@ -1,0 +1,15 @@
+name: Deploy to Coolify
+
+on:
+  push:
+    branches:
+      - main # Срабатывает при пуше в основную ветку
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Coolify Webhook
+        run: |
+          # Вставьте ваш Webhook URL из настроек Coolify в GitHub Secrets как COOLIFY_WEBHOOK
+          curl -X GET "${{ secrets.COOLIFY_WEBHOOK }}"

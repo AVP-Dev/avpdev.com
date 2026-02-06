@@ -7,26 +7,11 @@ import { z } from 'zod';
  */
 export const ContactFormSchema = z.object({
     name: z.string().trim().min(2, { message: 'Name must be at least 2 characters' }).max(100),
-    email: z.string().trim().email({ message: 'Invalid email address' }).optional().or(z.literal('')),
-    phone: z.string().trim().min(5, { message: 'Phone is too short' }).max(20).optional().or(z.literal('')),
+    contact: z.string().trim().min(3, { message: 'Contact information is required' }).max(100),
     message: z.string().trim().min(10, { message: 'Message must be at least 10 characters' }).max(2000),
     consent: z.coerce.boolean().refine((val) => val === true, {
         message: 'You must agree to personal data processing'
     }),
-}).superRefine((data, ctx) => {
-    // If both email and phone are empty, add errors to both fields
-    if (!data.email && !data.phone) {
-        ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'Email or Phone is required',
-            path: ['email']
-        });
-        ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'Email or Phone is required',
-            path: ['phone']
-        });
-    }
 });
 
 /**
