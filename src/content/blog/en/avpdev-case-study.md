@@ -1,70 +1,63 @@
 ---
-title: "Case Study: How avpdev.com is Built — A Unified Organism of Code and Content"
-description: "A behind-the-scenes tour of avpdev.com. An overview of the tech stack (Astro, Docker, CI/CD) and the principles behind its development, performance, and reliability."
+title: "Case Study: How avpdev.com was Built — Architecture, SEO & Speed"
+description: "A deep dive into the tech stack: Astro.js, Docker, CI/CD. Learn how we achieved 100/100 PageSpeed and automated the sales funnel with Telegram API."
 pubDate: 2025-10-12
 heroImage: "../../../assets/images/blog/avpdev-case-study.webp"
-tags: ["case-study", "astro", "docker", "devops", "architecture"]
-draft: false
+tags: ["case study", "site architecture", "Astro", "Docker", "high performance"]
 ---
 
-The best way to demonstrate my approach to work is to show it on my own example. My website is not just a business card. It's a living project that embodies the same principles I apply to my clients' products: performance, reliability, and attention to detail.
+The best way to demonstrate my approach to work is to show it through my own example. My website is not just a business card. It's a living project embodying the principles I apply to my clients' products: performance, reliability, and conversion.
 
-Let me give you a "behind-the-scenes" tour and explain why it’s built this way.
+Let’s look "under the hood" and break down why avpdev.com works the way it does.
 
-## Objective: To Create a System, Not Just a Website
+---
 
-My task wasn't just to build a few pages, but to create a scalable platform that solves several key objectives:
+### In this case study:
+- [Astro.js: Why We Chose Static Rendering](#astro)
+- [DevOps: Docker and CI/CD Automation](#devops)
+- [Lead Gen: Contact Forms and Telegram API](#leads)
+- [Local SEO and Geo-Targeting](#seo)
 
-*   **Demonstrating expertise:** The site must clearly showcase my technical skills and development approach.
-*   **Attracting clients:** It needs to be SEO-optimized, fast, and convert visitors into customers through user-friendly contact forms.
-*   **Convenient content management:** The process of adding new portfolio projects and blog posts should be as simple and fast as possible.
-*   **Stability and security:** The site must be securely protected and operate without failures.
+---
 
-## Solution: Choosing the Right Tools
+## 1. The Foundation — Astro.js and TypeScript {#astro}
 
-To achieve these goals, I chose a modern and high-performance technology stack where every component has its place.
+The site is built on the Astro framework. Why not standard React? Astro is a speed champion. It generates clean HTML and only injects JavaScript where interactivity is required.
 
-### 1. The Foundation — Astro.js
+* **The Result:** 100/100 on Google PageSpeed. This is critical for [retaining mobile clients](/en/blog/mobile-speed-sales-killer).
+* **Markdown-Based Content:** Articles and projects are stored in files. This allows for faster updates than any traditional CMS.
 
-The site is built on the Astro framework. Why Astro? It's a champion of loading speed. It generates static HTML wherever possible and only adds JavaScript for interactive components. As a result, users get content instantly, which is crucial for retaining attention and for search engines.
+## 2. DevOps: Docker and CI/CD {#devops}
 
-**Hybrid Rendering:** The homepage, blog, and portfolio are all pre-built static pages. The contact forms, however, work via server-side API endpoints. This offers the best of both worlds: the speed of static sites and the power of a server.
+To ensure the site runs 24/7 without a hitch, we packaged it into a Docker container.
 
-**Content Collections:** All blog articles and portfolio projects are stored as simple Markdown files. This allows adding new content as easily as writing a text document, without needing to touch the code or use a complex CMS.
+* **Isolation:** My local dev environment is identical to the production server. The "it worked on my machine" problem is eliminated.
+* **Automation:** With every code push to GitHub, the system automatically rebuilds the image and updates the site. This is the professional standard for [business website development](/en/blog/5-principles-of-development).
 
-### 2. Internationalization (i18n)
+## 3. Lead Generation and Notifications {#leads}
 
-The site was designed for an international audience from the ground up, supporting both Russian and English. The URL structure (`/ru/...`, `/en/...`) and translation system make it easy to add new languages in the future.
+A website should sell, not just exist.
+* **Interactive Brief:** Complex forms (like our [development brief](/en/brief)) help qualify leads before the first call.
+* **Telegram Bot API:** Every submission is instantly pushed to my Telegram. Fast response times are key to high conversion rates.
 
-### 3. Geo-targeting for Local SEO
+## 4. Geo-Targeting and Local SEO {#seo}
 
-You may have noticed that the site has pages targeting specific cities (Minsk, Moscow, Berlin, etc.). This is intentional. These pages (`/en/services/[city]`) are designed to improve search engine visibility for local queries, helping to attract clients from different regions.
+You may have noticed pages for different cities (Minsk, Moscow, Berlin). This is part of our local SEO strategy.
+We created a dynamic routing system that helps find clients exactly where they are searching for development services.
 
-### 4. DevOps and Containerization with Docker
+> **Expert Insight:** We use i18n (internationalization) not just for translation, but as a strategic tool for global market entry, tailoring messages for different regions.
 
-To ensure the site runs stably and is easy to deploy, the entire project is packaged into a Docker container.
+---
 
-**Isolation and Reproducibility:** It doesn’t matter where the site is run—on my laptop or a cloud server—the environment will always be identical. This eliminates problems like "but it worked on my machine."
+## The Verdict
 
-**Security and Optimization:** A multi-stage build is used. The first stage installs all the tools needed to build the project, while the final, lightweight image contains only the finished application. This reduces the size and enhances security.
+avpdev.com is a manifesto of my philosophy:
+1. **Speed** — beating the competition.
+2. **Transparency** — for both search engines and users.
+3. **Automation** — freeing up time for creativity.
 
-**CI/CD — Automated Deployment:** The site update process is fully automated. When I add a new article or make code changes and push them to the Git repository, the system automatically rebuilds the project and deploys the updates to the server.
+---
+**Want a similar system for your project?**
+Check out our [other works](/en/projects) or [message me](https://t.me/AVP_Dev) to discuss the architecture of your future site.
 
-### 5. Integrations and API
-
-The site is not just a collection of pages but a communication tool.
-
-**Contact and Brief Forms:** All forms (`/contact`, `/brief`) send data to a server-side API endpoint.
-
-**Telegram Notifications:** After a form is submitted, the server-side logic instantly formats a message and sends it to me via Telegram. This allows me to respond to new inquiries within minutes.
-
-## Result: The Website as a Reflection of a Philosophy
-
-Ultimately, avpdev.com is more than just a portfolio. It is a working demonstration of my approach:
-
-*   **Performance-first:** Fast loading times thanks to Astro.
-*   **Reliable Architecture:** A well-thought-out structure ready for growth.
-*   **Automation:** CI/CD and integrations save time and prevent errors.
-*   **Attention to Detail:** From responsive design and theme switching to clean, typed TypeScript code.
-
-This project proves that a modern website is not a collection of plugins but a single, carefully engineered organism where every element serves a common purpose. This is the exact approach I apply to my clients' projects.
+*Read also: [Custom Development vs Template](/en/blog/template-vs-custom)*

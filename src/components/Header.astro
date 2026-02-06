@@ -11,12 +11,6 @@ const homePath = `/${lang}/`;
 ---
 
 <header>
-    <input
-        type="checkbox"
-        id="menu-toggle"
-        class="menu-toggle-checkbox"
-        aria-hidden="true"
-    />
     <nav class="container">
         <a href={homePath} class="logo">
             <Image
@@ -25,6 +19,8 @@ const homePath = `/${lang}/`;
                 class="logo-img"
                 width="40"
                 height="40"
+                loading="eager"
+                fetchpriority="high"
             />
             <span class="logo-text"
                 >AVP<span class="gradient-text">dev.com</span></span
@@ -33,7 +29,7 @@ const homePath = `/${lang}/`;
         <ul class="nav-links">
             <li><a href={`${homePath}#services`}>{t("nav_services")}</a></li>
             <li><a href={`${homePath}#about`}>{t("nav_about")}</a></li>
-            <li><a href={`/${lang}/projects/`}>{t("catalog_title")}</a></li>
+            <li><a href={`${homePath}#portfolio`}>{t("nav_portfolio")}</a></li>
             <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
             <li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
             <li><a href={`${homePath}#contact`}>{t("nav_contact")}</a></li>
@@ -47,31 +43,32 @@ const homePath = `/${lang}/`;
             </button>
             <LanguageSwitcher />
         </div>
-        <label for="menu-toggle" class="burger-menu" aria-label="Открыть меню">
+        <button class="burger-menu" aria-label="Открыть меню">
             <div></div>
             <div></div>
             <div></div>
-        </label>
+        </button>
     </nav>
-
-    <!-- Мобильное меню перенесено внутрь header для CSS-хака с checkbox -->
-    <div class="mobile-nav">
-        <ul>
-            <li><a href={`${homePath}#services`}>{t("nav_services")}</a></li>
-            <li><a href={`${homePath}#about`}>{t("nav_about")}</a></li>
-            <li><a href={`/${lang}/projects/`}>{t("catalog_title")}</a></li>
-            <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
-            <li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
-            <li><a href={`${homePath}#contact`}>{t("nav_contact")}</a></li>
-        </ul>
-        <div class="mobile-controls">
-            <button
-                class="control-btn theme-switcher"
-                aria-label="Переключить тему"
-            >
-                <i class="fas fa-sun" aria-hidden="true"></i>
-            </button>
-            <LanguageSwitcher />
-        </div>
-    </div>
 </header>
+
+<!-- Мобильное меню вынесено сюда же для инкапсуляции -->
+<div class="mobile-nav-overlay"></div>
+<div class="mobile-nav">
+    <ul>
+        <li><a href={`${homePath}#services`}>{t("nav_services")}</a></li>
+        <li><a href={`${homePath}#about`}>{t("nav_about")}</a></li>
+        <li><a href={`${homePath}#portfolio`}>{t("nav_portfolio")}</a></li>
+        <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
+        <li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
+        <li><a href={`${homePath}#contact`}>{t("nav_contact")}</a></li>
+    </ul>
+    <div class="mobile-controls">
+        <button
+            class="control-btn theme-switcher"
+            aria-label="Переключить тему"
+        >
+            <i class="fas fa-sun" aria-hidden="true"></i>
+        </button>
+        <LanguageSwitcher />
+    </div>
+</div>

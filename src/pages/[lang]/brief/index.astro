@@ -1,0 +1,788 @@
+---
+// src/pages/[lang]/brief/index.astro
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import SuccessModal from "../../../components/modals/SuccessModal.astro";
+import ErrorModal from "../../../components/modals/ErrorModal.astro";
+import { useTranslations } from "../../../i18n/utils";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "en" } }, { params: { lang: "ru" } }];
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as "en" | "ru");
+---
+
+<BaseLayout title="brief_page_title" description="brief_page_desc">
+    <section id="brief-form-section" class="case-study-header">
+        <div class="container">
+            <h1 class="section-title">{t("brief_title")}</h1>
+            <p>{t("brief_subtitle")}</p>
+
+            <form id="brief-form" class="brief-form" novalidate>
+                <fieldset class="form-block fade-in">
+                    <legend>{t("brief_step_1")}</legend>
+                    <div class="form-group">
+                        <label for="company_name"
+                            >{t("brief_company_name")}</label
+                        >
+                        <input
+                            type="text"
+                            id="company_name"
+                            name="company_name"
+                            class="form-control"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="contacts">{t("brief_contacts")}</label>
+                        <input
+                            type="text"
+                            id="contacts"
+                            name="contacts"
+                            class="form-control"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>{t("brief_contact_method")}</label>
+                        <div class="radio-group">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="Telegram"
+                                    checked
+                                /><span>Telegram</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="WhatsApp"
+                                    checked
+                                /><span>WhatsApp</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="Email"
+                                /><span>Email</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="preferred_contact"
+                                    value="Phone Call"
+                                /><span
+                                    >{
+                                        lang === "ru" ? "Звонок" : "Phone Call"
+                                    }</span
+                                ></label
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 100ms;"
+                >
+                    <legend>{t("brief_step_2")}</legend>
+                    <div class="form-group">
+                        <label for="business_sphere"
+                            >{t("brief_business_sphere")}</label
+                        >
+                        <textarea
+                            id="business_sphere"
+                            name="business_sphere"
+                            class="form-control"
+                            rows="3"
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="current_site"
+                            >{t("brief_current_site")}</label
+                        >
+                        <input
+                            type="url"
+                            id="current_site"
+                            name="current_site"
+                            class="form-control"
+                            placeholder="https://"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="competitors">{t("brief_competitors")}</label
+                        >
+                        <textarea
+                            id="competitors"
+                            name="competitors"
+                            class="form-control"
+                            rows="2"
+                            placeholder={t("brief_competitors_placeholder")}
+                        ></textarea>
+                    </div>
+                </fieldset>
+
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 200ms;"
+                >
+                    <legend>{t("brief_step_3")}</legend>
+                    <div class="form-group">
+                        <label>{t("brief_goals_title")}</label>
+                        <div class="radio-group-vertical">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Selling goods or services online"
+                                    checked
+                                /><span>{t("brief_goal_1")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Lead generation"
+                                /><span>{t("brief_goal_2")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Corporate presence"
+                                /><span>{t("brief_goal_3")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Information portal or blog"
+                                /><span>{t("brief_goal_4")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="project_goal"
+                                    value="Internal process automation"
+                                /><span>{t("brief_goal_5")}</span></label
+                            >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="success_metrics"
+                            >{t("brief_success_metrics")}</label
+                        >
+                        <textarea
+                            id="success_metrics"
+                            name="success_metrics"
+                            class="form-control"
+                            rows="2"></textarea>
+                    </div>
+                </fieldset>
+
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 300ms;"
+                >
+                    <legend>{t("brief_step_4")}</legend>
+                    <div class="form-group">
+                        <label for="target_audience"
+                            >{t("brief_target_audience")}</label
+                        >
+                        <textarea
+                            id="target_audience"
+                            name="target_audience"
+                            class="form-control"
+                            rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_action">{t("brief_user_action")}</label
+                        >
+                        <input
+                            type="text"
+                            id="user_action"
+                            name="user_action"
+                            class="form-control"
+                            placeholder={t("brief_user_action_placeholder")}
+                        />
+                    </div>
+                </fieldset>
+
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 400ms;"
+                >
+                    <legend>{t("brief_step_5")}</legend>
+                    <div class="form-group">
+                        <label>{t("brief_site_type")}</label>
+                        <div class="radio-group">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="Landing Page"
+                                    checked
+                                /><span>{t("brief_site_type_1")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="Corporate Site"
+                                /><span>{t("brief_site_type_2")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="E-commerce"
+                                /><span>{t("brief_site_type_3")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="site_type"
+                                    value="Web Application"
+                                /><span>{t("brief_site_type_4")}</span></label
+                            >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{t("brief_functionality")}</label>
+                        <div class="checkbox-group">
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Product/Service Catalog"
+                                /><span>{t("brief_feat_1")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Blog/News"
+                                /><span>{t("brief_feat_2")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="User Account"
+                                /><span>{t("brief_feat_3")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Online Payment"
+                                /><span>{t("brief_feat_4")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Cost Calculator"
+                                /><span>{t("brief_feat_5")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Multilingual"
+                                /><span>{t("brief_feat_6")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="other"
+                                /><span>{t("brief_feat_other")}</span></label
+                            >
+                        </div>
+                        <div
+                            class="form-group other-input"
+                            style="display: none;"
+                        >
+                            <input
+                                type="text"
+                                name="features_other"
+                                class="form-control"
+                                placeholder={t("brief_feat_other_placeholder")}
+                            />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 500ms;"
+                >
+                    <legend>{t("brief_step_6")}</legend>
+                    <div class="form-group">
+                        <label>{t("brief_identity")}</label>
+                        <div class="radio-group">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="brand_identity"
+                                    value="Yes, have everything"
+                                    checked
+                                /><span>{t("brief_identity_1")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="brand_identity"
+                                    value="Only logo"
+                                /><span>{t("brief_identity_2")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="brand_identity"
+                                    value="No, need development"
+                                /><span>{t("brief_identity_3")}</span></label
+                            >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="design_examples"
+                            >{t("brief_design_examples")}</label
+                        >
+                        <textarea
+                            id="design_examples"
+                            name="design_examples"
+                            class="form-control"
+                            rows="2"
+                            placeholder={t("brief_design_placeholder")}
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>{t("brief_content")}</label>
+                        <div class="radio-group">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="content_provider"
+                                    value="We have ready content"
+                                    checked
+                                /><span>{t("brief_content_1")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="content_provider"
+                                    value="We will prepare content"
+                                /><span>{t("brief_content_2")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="content_provider"
+                                    value="Need help with content"
+                                /><span>{t("brief_content_3")}</span></label
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 600ms;"
+                >
+                    <legend>{t("brief_step_7")}</legend>
+                    <div class="form-group">
+                        <label>{t("brief_domain_hosting")}</label>
+                        <div class="radio-group">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="hosting_domain"
+                                    value="Yes, have"
+                                    checked
+                                /><span>{t("brief_domain_hosting_1")}</span
+                                ></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="hosting_domain"
+                                    value="No, need help"
+                                /><span>{t("brief_domain_hosting_2")}</span
+                                ></label
+                            >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="integrations"
+                            >{t("brief_integrations")}</label
+                        >
+                        <textarea
+                            id="integrations"
+                            name="integrations"
+                            class="form-control"
+                            rows="2"
+                            placeholder={t("brief_integrations_placeholder")}
+                        ></textarea>
+                    </div>
+                </fieldset>
+
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 700ms;"
+                >
+                    <legend>{t("brief_step_8")}</legend>
+                    <div class="form-group">
+                        <label>{t("brief_budget")}</label>
+                        <div class="radio-group-vertical">
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="Up to $500"
+                                    checked
+                                /><span>{t("brief_budget_1")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="$500 - $1500"
+                                /><span>{t("brief_budget_2")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="$1500 - $3000"
+                                /><span>{t("brief_budget_3")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="Over $3000"
+                                /><span>{t("brief_budget_4")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="To be discussed"
+                                /><span>{t("brief_budget_5")}</span></label
+                            >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="deadline">{t("brief_deadline")}</label>
+                        <input
+                            type="text"
+                            id="deadline"
+                            name="deadline"
+                            class="form-control"
+                        />
+                    </div>
+                </fieldset>
+
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 900ms;"
+                >
+                    <legend>{t("brief_step_9")}</legend>
+                    <div class="form-group">
+                        <label for="additional_info"
+                            >{t("brief_additional_info")}</label
+                        >
+                        <textarea
+                            id="additional_info"
+                            name="additional_info"
+                            class="form-control"
+                            rows="4"></textarea>
+                    </div>
+                </fieldset>
+
+                <fieldset
+                    class="form-block fade-in"
+                    style="transition-delay: 900ms;"
+                >
+                    <legend>{t("brief_step_10")}</legend>
+                    <div class="form-group">
+                        <label>{t("brief_support_title")}</label>
+                        <div class="checkbox-group">
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Technical support"
+                                /><span>{t("brief_support_1")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Further development"
+                                /><span>{t("brief_support_2")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Not required at this stage"
+                                /><span>{t("brief_support_3")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="support"
+                                    value="Hard to answer"
+                                /><span>{t("brief_support_4")}</span></label
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div
+                    class="form-group-checkbox flex items-start gap-3 mb-6 mt-4"
+                >
+                    <input
+                        type="checkbox"
+                        id="legal-consent"
+                        name="consent"
+                        class="mt-1 w-5 h-5 min-w-[1.25rem] rounded border-gray-300 text-primary focus:ring-primary cursor-pointer accent-primary"
+                        required
+                    />
+                    <label
+                        for="legal-consent"
+                        class="text-sm text-muted-foreground leading-snug cursor-pointer select-none"
+                    >
+                        {
+                            lang === "ru" ? (
+                                <>
+                                    Я принимаю{" "}
+                                    <a
+                                        href={`/${lang}/legal/public-offer`}
+                                        class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                                    >
+                                        Публичную оферту
+                                    </a>{" "}
+                                    и согласен на обработку{" "}
+                                    <a
+                                        href={`/${lang}/legal/privacy-policy`}
+                                        class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                                    >
+                                        персональных данных
+                                    </a>
+                                    .
+                                </>
+                            ) : (
+                                <>
+                                    I accept the{" "}
+                                    <a
+                                        href={`/${lang}/legal/public-offer`}
+                                        class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                                    >
+                                        Public Offer
+                                    </a>{" "}
+                                    and agree to the processing of{" "}
+                                    <a
+                                        href={`/${lang}/legal/privacy-policy`}
+                                        class="underline decoration-primary/50 hover:decoration-primary transition-colors"
+                                    >
+                                        personal data
+                                    </a>
+                                    .
+                                </>
+                            )
+                        }
+                    </label>
+                </div>
+
+                <p
+                    id="consent-error"
+                    class="hidden text-red-600 text-xs font-medium mt-1 animate-pulse"
+                >
+                    {
+                        lang === "ru"
+                            ? "Пожалуйста, подтвердите согласие с условиями перед отправкой."
+                            : "Please confirm your agreement with the terms before submitting."
+                    }
+                </p>
+
+                <div class="form-submit-container">
+                    <button id="submit-button" type="submit" class="cta-button"
+                        >{t("form_button")}</button
+                    >
+                    <div
+                        id="form-spinner"
+                        class="spinner"
+                        style="display: none;"
+                    >
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <SuccessModal />
+    <ErrorModal />
+</BaseLayout>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const form = document.getElementById("brief-form") as HTMLFormElement;
+        if (!form) return;
+
+        // --- Logic for showing/hiding "Other" field ---
+        const otherCheckboxes = form.querySelectorAll<HTMLInputElement>(
+            'input[type="checkbox"][value="other"]',
+        );
+        otherCheckboxes.forEach((checkbox) => {
+            const otherInputDiv = checkbox.closest(".checkbox-group")
+                ?.nextElementSibling as HTMLElement | null;
+            if (
+                otherInputDiv &&
+                otherInputDiv.classList.contains("other-input")
+            ) {
+                checkbox.addEventListener("change", () => {
+                    otherInputDiv.style.display = checkbox.checked
+                        ? "block"
+                        : "none";
+                });
+            }
+        });
+
+        // --- Form submission logic ---
+        const submitButton = document.getElementById(
+            "submit-button",
+        ) as HTMLButtonElement;
+        const spinner = document.getElementById("form-spinner") as HTMLElement;
+        const consentCheckbox = document.getElementById(
+            "legal-consent",
+        ) as HTMLInputElement;
+
+        const consentError = document.getElementById(
+            "consent-error",
+        ) as HTMLElement;
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Reset error fields
+            form.querySelectorAll(".error-field").forEach((el) =>
+                el.classList.remove("error-field"),
+            );
+            if (consentError) consentError.classList.add("hidden");
+
+            let isValid = true;
+            form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+                "[required]",
+            ).forEach((field) => {
+                if (!field.value.trim() && field.type !== "checkbox") {
+                    field.classList.add("error-field");
+                    isValid = false;
+                }
+            });
+
+            if (!consentCheckbox.checked) {
+                consentCheckbox.classList.add("error-field");
+                if (consentError) consentError.classList.remove("hidden");
+                isValid = false;
+            }
+
+            if (!isValid) {
+                (
+                    form.querySelector(".error-field") as HTMLElement
+                )?.scrollIntoView({ behavior: "smooth", block: "center" });
+                return;
+            }
+
+            submitButton.style.display = "none";
+            spinner.style.display = "block";
+
+            const formData = new FormData(form);
+
+            // Collect arrays for multiple-choice checkboxes
+            const features = formData.getAll("features");
+            const support = formData.getAll("support");
+
+            // Build data object from FormData, excluding arrays we'll add manually
+            const data: Record<string, any> = {};
+            for (const [key, value] of formData.entries()) {
+                if (key !== "features" && key !== "support") {
+                    // Only take the first value for non-array fields
+                    if (!data[key]) {
+                        data[key] = value;
+                    }
+                }
+            }
+
+            // Add arrays explicitly
+            if (features.length > 0) data.features = features;
+            if (support.length > 0) data.support = support;
+
+            // CRITICAL: Convert checkbox from "on"/undefined to boolean
+            data.consent = formData.get("consent") === "on";
+
+            console.log("📤 Sending brief data:", data);
+
+            try {
+                const response = await fetch("/api/sendBrief/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    document.dispatchEvent(
+                        new CustomEvent("modal:open", {
+                            detail: { modalId: "success-modal" },
+                        }),
+                    );
+                    form.reset();
+                } else {
+                    if (response.status === 400) {
+                        const resData = await response.json();
+                        if (resData.errors) {
+                            Object.keys(resData.errors).forEach((key) => {
+                                const input = form.querySelector(
+                                    `[name="${key}"]`,
+                                );
+                                if (input) {
+                                    input.classList.add("error-field");
+                                }
+                            });
+
+                            const firstError =
+                                form.querySelector(".error-field");
+                            if (firstError) {
+                                firstError.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "center",
+                                });
+                            }
+                        }
+                    } else {
+                        throw new Error("Server response was not ok.");
+                    }
+                }
+            } catch (error) {
+                console.error("Brief sending error:", error);
+                document.dispatchEvent(
+                    new CustomEvent("modal:open", {
+                        detail: { modalId: "error-modal" },
+                    }),
+                );
+            } finally {
+                submitButton.style.display = "block";
+                spinner.style.display = "none";
+            }
+        });
+    });
+</script>

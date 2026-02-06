@@ -1,27 +1,348 @@
 ---
 // src/components/sections/Contact.astro
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import { ContactForm } from "../forms/ContactForm";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-// Get all translations as a record for React
-const allTranslations = {
-    form_name: t("form_name"),
-    form_email: t("form_email"),
-    form_phone: t("form_phone"),
-    form_message: t("form_message"),
-    form_hint: t("form_hint"),
-    form_button: t("form_button"),
-};
 ---
 
 <section id="contact">
-    <div class="container">
-        <h2 class="section-title fade-in" set:html={t("contact_h2")} />
-        <p class="section-subtitle fade-in">{t("contact_p")}</p>
+    <div class="container container-narrow">
+        <div class="section-center">
+            <h2 class="section-title fade-in" set:html={t("contact_h2")} />
+            <p class="section-subtitle fade-in">{t("contact_p")}</p>
+        </div>
 
-        <ContactForm client:visible t={allTranslations} lang={lang} />
+        <form id="contact-form" class="contact-form fade-in" novalidate>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">{t("form_name")}</label>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="John Doe"
+                        required
+                        class="form-control"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">{t("form_email")}</label>
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Email / Telegram / Phone"
+                        class="form-control"
+                        required
+                    />
+                    <span class="form-hint-text">{t("form_hint")}</span>
+                </div>
+
+                <div class="form-group full-width">
+                    <label class="form-label">{t("form_message")}</label>
+                    <textarea
+                        name="message"
+                        placeholder={t("form_message")}
+                        required
+                        class="form-control"
+                        rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <div class="checkbox-wrapper">
+                    <input
+                        type="checkbox"
+                        id="legal-consent"
+                        name="consent"
+                        class="custom-checkbox"
+                        required
+                    />
+                    <label for="legal-consent" class="checkbox-label">
+                        {
+                            lang === "ru" ? (
+                                <>
+                                    Я принимаю условия{" "}
+                                    <a href="/ru/legal/public-offer">
+                                        Публичной оферты
+                                    </a>{" "}
+                                    и даю согласие на обработку{" "}
+                                    <a href="/ru/legal/privacy-policy">
+                                        персональных данных
+                                    </a>
+                                    .
+                                </>
+                            ) : (
+                                <>
+                                    I accept the{" "}
+                                    <a href="/en/legal/public-offer">
+                                        Public Offer
+                                    </a>{" "}
+                                    and agree to the processing of{" "}
+                                    <a href="/en/legal/privacy-policy">
+                                        personal data
+                                    </a>
+                                    .
+                                </>
+                            )
+                        }
+                    </label>
+                </div>
+
+                <div class="submit-area">
+                    <button id="submit-button" type="submit" class="cta-button">
+                        <span style="margin-right: 12px;"
+                            >{t("form_button")}</span
+                        >
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <div
+                        id="form-spinner"
+                        class="spinner"
+                        style="display: none;"
+                    >
+                    </div>
+                </div>
+
+                <p id="consent-error" class="error-text hidden">
+                    {
+                        lang === "ru"
+                            ? "Пожалуйста, подтвердите согласие."
+                            : "Please confirm your agreement."
+                    }
+                </p>
+            </div>
+        </form>
     </div>
 </section>
+
+<style>
+    .container-narrow {
+        max-width: 800px;
+    }
+
+    .section-center {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: var(--tag-bg);
+        color: var(--tag-text);
+        border-radius: 6px;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .contact-form {
+        background: var(--primary-color);
+        padding: 3rem;
+        border-radius: 24px;
+        border: 1px solid var(--border-color);
+        box-shadow: var(--card-shadow);
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .full-width {
+        grid-column: span 2;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-secondary-color);
+    }
+
+    .checkbox-wrapper {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .custom-checkbox {
+        width: 20px;
+        height: 20px;
+        appearance: none;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .custom-checkbox:checked {
+        background: var(--accent-color-start);
+        border-color: var(--accent-color-start);
+    }
+
+    .custom-checkbox:checked::after {
+        content: "✓";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: black;
+        font-size: 12px;
+        font-weight: 900;
+    }
+
+    .checkbox-label {
+        font-size: 0.85rem;
+        color: var(--text-secondary-color);
+        line-height: 1.5;
+    }
+
+    .checkbox-label a {
+        color: var(--text-color);
+        text-decoration: underline;
+        text-decoration-color: rgba(var(--accent-color-start-rgb), 0.3);
+    }
+
+    .checkbox-label a:hover {
+        color: var(--accent-color-start);
+    }
+
+    .submit-area {
+        display: flex;
+        justify-content: center;
+    }
+
+    .error-text {
+        color: #ef4444;
+        font-size: 0.8rem;
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .form-hint-text {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--text-secondary-color);
+        margin-top: 0.5rem;
+        font-family: var(--font-mono);
+        opacity: 0.7;
+    }
+
+    @media (max-width: 640px) {
+        .contact-form {
+            padding: 1.5rem;
+        }
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+        .full-width {
+            grid-column: span 1;
+        }
+    }
+</style>
+
+<script>
+    import { navigate } from "astro:transitions/client";
+
+    document.addEventListener("astro:page-load", () => {
+        const form = document.getElementById("contact-form") as HTMLFormElement;
+        const submitButton = document.getElementById(
+            "submit-button",
+        ) as HTMLButtonElement;
+        const spinner = document.getElementById("form-spinner") as HTMLElement;
+        const consentCheckbox = document.getElementById(
+            "legal-consent",
+        ) as HTMLInputElement;
+        const consentError = document.getElementById(
+            "consent-error",
+        ) as HTMLElement;
+
+        if (!form) return;
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Reset errors
+            form.querySelectorAll(".error-field").forEach((el) =>
+                el.classList.remove("error-field"),
+            );
+            if (consentError) consentError.classList.add("hidden");
+
+            let isValid = true;
+
+            // Validate text inputs
+            form.querySelectorAll(
+                "input[required], textarea[required]",
+            ).forEach((field) => {
+                const input = field as HTMLInputElement | HTMLTextAreaElement;
+                if (!input.value.trim()) {
+                    input.classList.add("error-field");
+                    isValid = false;
+                }
+            });
+
+            // Validate consent
+            if (!consentCheckbox.checked) {
+                consentCheckbox.classList.add("error-field");
+                if (consentError) consentError.classList.remove("hidden");
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Show loading state
+            if (submitButton) submitButton.style.display = "none";
+            if (spinner) spinner.style.display = "block";
+
+            const formData = new FormData(form);
+            // Use 'any' type to allow boolean conversion
+            const data: Record<string, any> = Object.fromEntries(
+                formData.entries(),
+            );
+
+            // CRITICAL: Convert checkbox from "on"/undefined to boolean
+            data.consent = formData.get("consent") === "on";
+
+            console.log("📤 Sending contact form data:", data);
+
+            try {
+                const response = await fetch("/api/sendMessage/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    document.dispatchEvent(
+                        new CustomEvent("modal:open", {
+                            detail: { modalId: "success-modal" },
+                        }),
+                    );
+                    form.reset();
+                } else {
+                    throw new Error("Submission failed");
+                }
+            } catch (error) {
+                console.error(error);
+                document.dispatchEvent(
+                    new CustomEvent("modal:open", {
+                        detail: { modalId: "error-modal" },
+                    }),
+                );
+            } finally {
+                if (submitButton) submitButton.style.display = "block";
+                if (spinner) spinner.style.display = "none";
+            }
+        });
+    });
+</script>

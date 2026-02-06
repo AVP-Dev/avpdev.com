@@ -1,16 +1,14 @@
 # Этап 1: Сборка приложения (Builder)
-# Используем стандартный образ Bun на базе Debian (bookworm-slim)
-# Это обеспечит лучшую совместимость с нативными модулями типа Sharp и ускорит сборку
-FROM oven/bun:1.2 AS builder
+# Используем Bun 1.2+ на базе Alpine для легковесности
+FROM oven/bun:1.2-alpine AS builder
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и bun.lock для кэширования зависимостей
-# В Bun 1.2+ используется bun.lock по умолчанию
-COPY package.json bun.lock ./
+# Копируем package.json и bun.lockb для кэширования зависимостей
+COPY package.json bun.lockb* ./
 
-# Устанавливаем зависимости
+# Устанавливаем зависимости, включая devDependencies для сборки
 RUN bun install --frozen-lockfile
 
 # Копируем все остальные файлы проекта
@@ -20,22 +18,19 @@ COPY . .
 RUN bunx astro sync
 
 # Собираем производственную версию приложения
-# Отключаем телеметрию для ускорения
-ENV ASTRO_TELEMETRY_DISABLED=1
 RUN bun run build
 
 
 # Этап 2: Производственный образ (Production)
-FROM oven/bun:1.2-slim AS production
+FROM oven/bun:1.2-alpine AS production
 
 WORKDIR /app
 
 # Создаем специального пользователя и группу для повышения безопасности
-RUN groupadd -r astro_group && useradd -r -g astro_group astro_user
+RUN addgroup -S astro_group && adduser -S astro_user -G astro_group
 
 # Устанавливаем dumb-init для корректного управления процессами и curl для healthcheck
-RUN apt-get update && apt-get install -y --no-install-recommends dumb-init curl && \
-  rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache dumb-init curl
 
 # Копируем собранное приложение из этапа 'builder'
 COPY --from=builder /app/dist ./dist

@@ -9,7 +9,7 @@ featured: true
 category: 'web-site'
 stack: ['HTML', 'CSS', 'JavaScript', 'Node.js']
 publishDate: 2024-02-15
-heroImage: '~/assets/images/projects/3d-printing/hero.webp'
+heroImage: '../../../assets/images/projects/3d-printing/hero.webp'
 heroImageAlt: 'Изображение проекта по 3D-моделированию'
 header:
   titleKey: 'case_3d_h1'
@@ -57,16 +57,16 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '~/assets/images/projects/3d-printing/hero.webp'
+      - img: '../../../assets/images/projects/3d-printing/hero.webp'
         captionKey: 'gallery_caption_3d_hero'
-      - img: '~/assets/images/projects/3d-printing/about-us.webp'
+      - img: '../../../assets/images/projects/3d-printing/about-us.webp'
         captionKey: 'gallery_caption_3d_about_us'
-      - img: '~/assets/images/projects/3d-printing/services-section.webp'
+      - img: '../../../assets/images/projects/3d-printing/services-section.webp'
         captionKey: 'gallery_caption_3d_services_section'
-      - img: '~/assets/images/projects/3d-printing/our-works.webp'
+      - img: '../../../assets/images/projects/3d-printing/our-works.webp'
         captionKey: 'gallery_caption_3d_our_works'
-      - img: '~/assets/images/projects/3d-printing/faq.webp'
+      - img: '../../../assets/images/projects/3d-printing/faq.webp'
         captionKey: 'gallery_caption_3d_faq'
-      - img: '~/assets/images/projects/3d-printing/contact-form.webp'
+      - img: '../../../assets/images/projects/3d-printing/contact-form.webp'
         captionKey: 'gallery_caption_3d_contact_form'
 ---

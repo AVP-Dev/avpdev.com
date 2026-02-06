@@ -1,24 +1,24 @@
 ---
 // src/pages/ru/project/[slug].astro
-import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
-import CaseStudyLayout from '../../../layouts/CaseStudyLayout.astro';
-import { useTranslations } from '../../../i18n/utils';
-import type { TranslationKey } from '../../../env.d.ts';
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import CaseStudyLayout from "../../../layouts/CaseStudyLayout.astro";
+import { useTranslations } from "../../../i18n/utils";
+import type { TranslationKey } from "../../../env.d.ts";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const allProjects = await getCollection('projects', ({ id }) => {
-    return id.startsWith('ru/');
-  });
-  return allProjects.map((project) => ({
-    params: { slug: project.slug.replace(/^ru\//, '') },
-    props: { project },
-  }));
+    const allProjects = await getCollection("projects", ({ id }) => {
+        return id.startsWith("ru/");
+    });
+    return allProjects.map((project) => ({
+        params: { slug: project.slug.replace(/^ru\//, "") },
+        props: { project },
+    }));
 }
 
-const lang = 'ru';
+const lang = "ru";
 const t = useTranslations(lang);
 const { project } = Astro.props;
 const { Content } = await project.render();
@@ -28,53 +28,62 @@ if (!project) {
 }
 
 const {
-    titleKey, descriptionKey, ogImage, clientKey, servicesKey, year, heroImage, heroImageAlt,
-    header, content
+    titleKey,
+    descriptionKey,
+    ogImage,
+    clientKey,
+    servicesKey,
+    year,
+    heroImage,
+    heroImageAlt,
+    header,
+    content,
 } = project.data;
 
 const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
         {
             "@type": "ListItem",
-            "position": 1,
-            "name": "Главная",
-            "item": new URL(`/${lang}/`, Astro.site).href
+            position: 1,
+            name: "Главная",
+            item: new URL(`/${lang}/`, Astro.site).href,
         },
         {
             "@type": "ListItem",
-            "position": 2,
-            "name": "Портфолио",
-            "item": new URL(`/${lang}/#portfolio`, Astro.site).href
+            position: 2,
+            name: t("catalog_title"),
+            item: new URL(`/${lang}/projects/`, Astro.site).href,
         },
         {
             "@type": "ListItem",
-            "position": 3,
-            "name": t(titleKey as TranslationKey),
-            "item": new URL(Astro.url.pathname, Astro.site).href
-        }
-    ]
+            position: 3,
+            name: t(titleKey as TranslationKey),
+            item: new URL(Astro.url.pathname, Astro.site).href,
+        },
+    ],
 };
 
 const projectSchema = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    "headline": t(titleKey as TranslationKey),
-    "description": t(descriptionKey as TranslationKey),
-    "author": {
+    headline: t(titleKey as TranslationKey),
+    description: t(descriptionKey as TranslationKey),
+    author: {
         "@type": "Person",
-        "name": "Алексей Пацкевич",
-        "url": Astro.site ? Astro.site.toString() : ""
+        name: "Алексей Пацкевич",
+        url: Astro.site ? Astro.site.toString() : "",
     },
-    "dateCreated": year.toString(),
-    "image": heroImage ? new URL(heroImage.src, Astro.site).href : "",
-    "mainEntityOfPage": {
+    dateCreated: year.toString(),
+    image: heroImage ? new URL(heroImage.src, Astro.site).href : "",
+    mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": new URL(Astro.url.pathname, Astro.site).href
-    }
+        "@id": new URL(Astro.url.pathname, Astro.site).href,
+    },
 };
 ---
+
 <CaseStudyLayout
     title={titleKey as TranslationKey}
     description={descriptionKey as TranslationKey}
@@ -87,52 +96,94 @@ const projectSchema = {
     schema={[breadcrumbSchema, projectSchema]}
 >
     <div slot="header">
-        <h1 class="gradient-text" set:html={t(header.titleKey as TranslationKey)}></h1>
-        <p set:html={t(header.descriptionKey as TranslationKey)}></p>
+        <h1
+            class="gradient-text"
+            set:html={t(header.titleKey as TranslationKey)}
+        />
+        <p set:html={t(header.descriptionKey as TranslationKey)} />
     </div>
 
     <div slot="content">
         <Content />
-        <h2 set:html={t(content.task.titleKey as TranslationKey)}></h2>
-        <p set:html={t(content.task.pKey as TranslationKey)}></p>
+        <h2 set:html={t(content.task.titleKey as TranslationKey)} />
+        <p set:html={t(content.task.pKey as TranslationKey)} />
 
-        {content.solution && (
-            <>
-                <h2 set:html={t(content.solution.titleKey as TranslationKey)}></h2>
-                <p set:html={t(content.solution.pKey as TranslationKey)}></p>
-            </>
-        )}
+        {
+            content.solution && (
+                <>
+                    <h2
+                        set:html={t(
+                            content.solution.titleKey as TranslationKey,
+                        )}
+                    />
+                    <p set:html={t(content.solution.pKey as TranslationKey)} />
+                </>
+            )
+        }
 
-        <h2 set:html={t(content.keyFeatures.titleKey as TranslationKey)}></h2>
-        {content.keyFeatures.pKey && <p set:html={t(content.keyFeatures.pKey as TranslationKey)}></p>}
+        <h2 set:html={t(content.keyFeatures.titleKey as TranslationKey)} />
+        {
+            content.keyFeatures.pKey && (
+                <p set:html={t(content.keyFeatures.pKey as TranslationKey)} />
+            )
+        }
         <ul>
-            {content.keyFeatures.listKeys.map(key => <li set:html={t(key as TranslationKey)}></li>)}
+            {
+                content.keyFeatures.listKeys.map((key) => (
+                    <li set:html={t(key as TranslationKey)} />
+                ))
+            }
         </ul>
 
-        <h2 set:html={t('case_tech')}></h2>
+        <h2 set:html={t("case_tech")} />
         <div class="tech-stack" style="margin-top: 1rem; margin-bottom: 2rem;">
-            <div class="icons" style="gap: 2rem; font-size: 3rem; justify-content: center;">
-                {content.techStack.map(tech => <i class:list={tech.icon} title={tech.title} style={tech.color ? `color: ${tech.color}`: ''}></i>)}
+            <div
+                class="icons"
+                style="gap: 2rem; font-size: 3rem; justify-content: center;"
+            >
+                {
+                    content.techStack.map((tech) => (
+                        <i
+                            class:list={tech.icon}
+                            title={tech.title}
+                            style={tech.color ? `color: ${tech.color}` : ""}
+                        />
+                    ))
+                }
             </div>
         </div>
 
-        <h2 set:html={t(content.deployment.titleKey as TranslationKey)}></h2>
-        <p set:html={t(content.deployment.pKey as TranslationKey)}></p>
+        <h2 set:html={t(content.deployment.titleKey as TranslationKey)} />
+        <p set:html={t(content.deployment.pKey as TranslationKey)} />
 
-        {content.gallery && (
-            <div class="project-gallery">
-                <h2 set:html={t(content.gallery.titleKey as TranslationKey)}></h2>
-                <div class="gallery-grid">
-                    {content.gallery.items.map(item => (
-                        <div class="gallery-item">
-                            <figure>
-                                <Image src={item.img} alt={t(item.captionKey as TranslationKey)} loading="lazy" />
-                                <figcaption set:html={t(item.captionKey as TranslationKey)}></figcaption>
-                            </figure>
-                        </div>
-                    ))}
+        {
+            content.gallery && (
+                <div class="project-gallery">
+                    <h2
+                        set:html={t(content.gallery.titleKey as TranslationKey)}
+                    />
+                    <div class="gallery-grid">
+                        {content.gallery.items.map((item) => (
+                            <div class="gallery-item">
+                                <figure>
+                                    <Image
+                                        src={item.img}
+                                        alt={t(
+                                            item.captionKey as TranslationKey,
+                                        )}
+                                        loading="lazy"
+                                    />
+                                    <figcaption
+                                        set:html={t(
+                                            item.captionKey as TranslationKey,
+                                        )}
+                                    />
+                                </figure>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
-        )}
+            )
+        }
     </div>
 </CaseStudyLayout>

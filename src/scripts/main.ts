@@ -2,31 +2,61 @@ import { initPortfolio } from './portfolio';
 
 function initializePage() {
     // --- THEME SWITCHER ---
-    let currentTheme = localStorage.getItem('theme') || 'light-theme';
+    let currentTheme = localStorage.getItem('theme') || 'dark-theme';
     const themeSwitchers = document.querySelectorAll('.theme-switcher');
 
-    function switchTheme(theme: string) {
-        currentTheme = theme;
-        document.body.className = theme;
-        localStorage.setItem('theme', theme);
+    function applyThemeClasses(theme: string) {
+        if (theme === 'dark-theme') {
+            document.documentElement.classList.add('dark-theme');
+            document.documentElement.classList.remove('light-theme');
+        } else {
+            document.documentElement.classList.add('light-theme');
+            document.documentElement.classList.remove('dark-theme');
+        }
 
         themeSwitchers.forEach(switcher => {
             switcher.innerHTML = theme === 'dark-theme' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
-
-        document.dispatchEvent(new CustomEvent('theme:changed'));
     }
 
-    themeSwitchers.forEach(switcher => switcher.addEventListener('click', () => switchTheme(document.body.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme')));
-    switchTheme(currentTheme);
+    function toggleTheme() {
+        const newTheme = document.documentElement.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme';
 
-    // --- MOBILE MENU (Minimal JS) ---
-    const menuToggle = document.getElementById('menu-toggle') as HTMLInputElement;
+        // Add class to enable transition only during manual switch
+        document.body.classList.add('theme-transitioning');
+
+        localStorage.setItem('theme', newTheme);
+        applyThemeClasses(newTheme);
+        document.dispatchEvent(new CustomEvent('theme:changed', { detail: { theme: newTheme } }));
+
+        // Remove class after transition completes
+        setTimeout(() => {
+            document.body.classList.remove('theme-transitioning');
+        }, 400);
+    }
+
+    themeSwitchers.forEach(switcher => switcher.addEventListener('click', toggleTheme));
+    applyThemeClasses(currentTheme);
+
+    // --- MOBILE MENU ---
+    const burger = document.querySelector('.burger-menu');
     const mobileNav = document.querySelector('.mobile-nav');
-    if (menuToggle && mobileNav) {
+    const mobileOverlay = document.querySelector('.mobile-nav-overlay');
+
+    if (burger && mobileNav && mobileOverlay) {
+        const toggleMenu = () => {
+            const isOpen = mobileNav.classList.toggle('open');
+            burger.classList.toggle('open', isOpen);
+            mobileOverlay.classList.toggle('visible', isOpen);
+            document.body.classList.toggle('modal-open', isOpen);
+        };
+
+        burger.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
+        mobileOverlay.addEventListener('click', toggleMenu);
+
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                menuToggle.checked = false;
+                if (mobileNav.classList.contains('open')) toggleMenu();
             });
         });
     }
@@ -122,6 +152,14 @@ function initializePage() {
         window.addEventListener('scroll', () => {
             const shouldBeVisible = window.scrollY > window.innerHeight;
             scrollToTopBtn.classList.toggle('visible', shouldBeVisible);
+        }, { passive: true });
+    }
+
+    // --- HEADER SCROLL ---
+    const header = document.querySelector('header');
+    if (header) {
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 20);
         }, { passive: true });
     }
 

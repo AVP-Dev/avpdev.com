@@ -9,7 +9,7 @@ featured: true
 category: 'web-site'
 stack: ['Astro', 'React', 'Tailwind', 'Docker']
 publishDate: 2026-02-01
-heroImage: '~/assets/images/projects/sentralix/hero.webp'
+heroImage: '../../../assets/images/projects/sentralix/hero.webp'
 heroImageAlt: 'Sentralix Platform Main Screen'
 header:
   titleKey: 'case_sentralix_h1'
@@ -48,14 +48,14 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '~/assets/images/projects/sentralix/hero.webp'
+      - img: '../../../assets/images/projects/sentralix/hero.webp'
         captionKey: 'gallery_caption_sentralix_hero'
-      - img: '~/assets/images/projects/sentralix/about.webp'
+      - img: '../../../assets/images/projects/sentralix/about.webp'
         captionKey: 'gallery_caption_sentralix_about'
-      - img: '~/assets/images/projects/sentralix/features.webp'
+      - img: '../../../assets/images/projects/sentralix/features.webp'
         captionKey: 'gallery_caption_sentralix_features'
-      - img: '~/assets/images/projects/sentralix/faq.webp'
+      - img: '../../../assets/images/projects/sentralix/faq.webp'
         captionKey: 'gallery_caption_sentralix_faq'
-      - img: '~/assets/images/projects/sentralix/contact.webp'
+      - img: '../../../assets/images/projects/sentralix/contact.webp'
         captionKey: 'gallery_caption_sentralix_contact'
 ---

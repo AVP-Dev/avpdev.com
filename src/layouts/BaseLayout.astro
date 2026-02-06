@@ -7,8 +7,10 @@ import ScrollToTop from '../components/ScrollToTop.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { ui } from '../i18n/ui';
 
-// --- ШРИФТЫ (Optimized Google Fonts) ---
-// We use Google Fonts for granular subsetting (Cyrillic + Latin) and display: swap
+// --- ШРИФТЫ (Self-hosted) ---
+import '@fontsource-variable/sora';
+import '@fontsource-variable/plus-jakarta-sans';
+import '@fontsource/jetbrains-mono';
 
 import '../styles/style.css';
 import '../styles/case-study.css';
@@ -34,8 +36,8 @@ const {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const finalTitle = isTranslationKey ? t(title as keyof typeof ui['ru']) : title;
-const finalDescription = isTranslationKey ? t(description as keyof typeof ui['ru']) : description;
+const finalTitle = isTranslationKey ? t(title as any) : title;
+const finalDescription = isTranslationKey ? t(description as any) : description;
 
 const canonicalURL = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, Astro.site);
 const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
@@ -45,10 +47,6 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Onest:wght@400;700&display=swap&subset=cyrillic,latin" rel="stylesheet">
 
     <title>{finalTitle}</title>
     <meta name="description" content={finalDescription} />
@@ -67,9 +65,7 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
 
-    {/* FontAwesome deferred for performance */}
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" /></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     {/* Вставка Schema.org */}
     {schema && (
@@ -125,9 +121,137 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
         );
     }}
 
+    <script is:inline>
+        function applyTheme() {
+            const theme = (() => {
+                if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+                    return localStorage.getItem('theme');
+                }
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark-theme';
+                }
+                return 'light-theme';
+            })();
+            
+            if (theme === 'dark-theme') {
+                document.documentElement.classList.add('dark-theme');
+                document.documentElement.classList.remove('light-theme');
+                document.documentElement.style.colorScheme = 'dark';
+            } else {
+                document.documentElement.classList.add('light-theme');
+                document.documentElement.classList.remove('dark-theme');
+                document.documentElement.style.colorScheme = 'light';
+            }
+            window.localStorage.setItem('theme', theme);
+        }
+
+        applyTheme();
+        document.addEventListener('astro:after-swap', applyTheme);
+    </script>
+
     <ClientRouter />
+
+    <style is:inline>
+        /* --- Critical CSS for FOUC prevention --- */
+        :root {
+            --accent-gradient: linear-gradient(135deg, #FF5C00 0%, #FFB800 100%);
+            --accent-color-start: #FF5C00;
+            --accent-color-start-rgb: 255, 92, 0;
+            --accent-color-end: #FFB800;
+            --font-heading: 'Sora Variable', sans-serif;
+            --font-body: 'Plus Jakarta Sans Variable', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* Default background to avoid white flash */
+        html {
+            background-color: #050505;
+            color-scheme: dark; /* Default */
+        }
+
+        .light-theme {
+            color-scheme: light;
+            --bg-color: #FAFAFA;
+            --bg-color-rgb: 250, 250, 250;
+            --primary-color: #FFFFFF;
+            --primary-color-rgb: 255, 255, 255;
+            --text-color: #18181B;
+            --text-secondary-color: #52525B;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.05);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            --particle-color: "#222222";
+            --particle-line-color: "#333333";
+            --tag-bg: rgba(0, 0, 0, 0.05);
+            --tag-text: #3F3F46;
+        }
+
+        .dark-theme {
+            color-scheme: dark;
+            --bg-color: #030305;
+            --bg-color-rgb: 3, 3, 5;
+            --primary-color: #11111A;
+            --primary-color-rgb: 17, 17, 26;
+            --text-color: #FFFFFF;
+            --text-secondary-color: #94949E;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(17, 17, 26, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --card-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+            --particle-color: "#ffffff";
+            --particle-line-color: "#ffffff";
+            --tag-bg: rgba(255, 255, 255, 0.08);
+            --tag-text: #E4E4E7;
+        }
+
+        html.light-theme { background-color: #FAFAFA; }
+        html.dark-theme { background-color: #030305; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            position: relative;
+        }
+
+        /* Standardized transition for theme switch button only */
+        .theme-transitioning body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .dark-theme body::before {
+            background-image: 
+                radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.02) 1px, transparent 0);
+        }
+        .light-theme body::before {
+            background-image: 
+                radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.02) 1px, transparent 0);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+    </style>
 </head>
-<body class="light-theme">
+<body>
     <Header />
     <main>
         <slot />

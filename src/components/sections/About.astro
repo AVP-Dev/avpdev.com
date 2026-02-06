@@ -18,175 +18,91 @@ const homePath = `/${lang}/`;
                     alt="Фотография Алексея Пацкевича, full-stack разработчика"
                     widths={[300, 600]}
                     sizes="(max-width: 1024px) 300px, 600px"
-                    loading="eager"
-                    fetchpriority="high"
+                    loading="lazy"
                     decoding="async"
                     quality={80}
                     class="about-image"
                 />
+                <div class="image-gradient-border"></div>
             </div>
-            <div class="about-text fade-in" style="transition-delay: 200ms;">
-                <h2
-                    class="section-title"
-                    style="text-align: center; margin-bottom: 1rem;"
-                >
-                    {t("about_h2")}
-                </h2>
+            <div class="about-text fade-in">
+                <h2>{t("about_h2")}</h2>
                 <h3>{t("about_h3")}</h3>
                 <p>{t("about_p")}</p>
 
                 <div class="about-cta-container">
+                    <a href={`${homePath}#portfolio`} class="cta-button">
+                        {t("about_cta_portfolio")}
+                    </a>
                     <a
-                        href={`${homePath}#portfolio`}
+                        href={`${homePath}#contact`}
                         class="cta-button secondary"
-                        >{t("about_cta_portfolio")}</a
                     >
-                    <a href={`${homePath}#contact`} class="cta-button"
-                        >{t("about_cta_contact")}</a
-                    >
+                        {t("about_cta_contact")}
+                    </a>
                 </div>
             </div>
         </div>
 
-        <div
-            class="tech-stack-detailed fade-in"
-            style="transition-delay: 400ms;"
-        >
+        <div class="tech-stack-detailed fade-in">
             <h3 class="tech-stack-title">{t("about_tech")}</h3>
             <div class="tech-categories">
-                <div class="tech-category">
-                    <div class="tech-content-wrapper">
-                        <h4>🧠 Backend</h4>
-                        <div class="tech-items">
-                            <span
-                                ><i
-                                    class="fab fa-python"
-                                    aria-hidden="true"
-                                    style="color: #3776AB;"></i> Python (Flask, Django)</span
-                            >
-                            <span
-                                ><i
-                                    class="fab fa-node-js"
-                                    aria-hidden="true"
-                                    style="color: #339933;"></i> Node.js (Express,
-                                NestJS)</span
-                            >
-                            <span
-                                ><svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 128 128"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    style="display: inline-block; vertical-align: middle; margin-right: 8px;"
-                                >
-                                    <path
-                                        d="M123.6 77.2C123.6 97.4 97.5 113.8 64 113.8C30.5 113.8 4.4 97.4 4.4 77.2C4.4 56.9 30.5 40.5 64 40.5C97.5 40.5 123.6 56.9 123.6 77.2Z"
-                                        fill="#fbf0df"></path>
-                                    <path
-                                        d="M64 118.8C31.5 118.8 5.4 100.2 5.4 77.2C5.4 54.2 31.5 35.5 64 35.5C96.5 35.5 122.6 54.2 122.6 77.2C122.6 100.2 96.5 118.8 64 118.8ZM64 45.5C36.5 45.5 13.4 59.7 13.4 77.2C13.4 94.7 36.5 108.8 64 108.8C91.5 108.8 114.6 94.7 114.6 77.2C114.6 59.7 91.5 45.5 64 45.5Z"
-                                        fill="#14151a"></path>
-                                    <path
-                                        d="M64 59C61.8 59 60 57.2 60 55V43C60 40.8 61.8 39 64 39C66.2 39 68 40.8 68 43V55C68 57.2 66.2 59 64 59Z"
-                                        fill="#14151a"></path>
-                                    <path
-                                        d="M42 63.5C39.8 63.5 38 61.7 38 59.5V47.5C38 45.3 39.8 43.5 42 43.5C44.2 43.5 46 45.3 46 47.5V59.5C46 61.7 44.2 63.5 42 63.5Z"
-                                        fill="#14151a"></path>
-                                    <path
-                                        d="M86 63.5C83.8 63.5 82 61.7 82 59.5V47.5C82 45.3 83.8 43.5 86 43.5C88.2 43.5 90 45.3 90 47.5V59.5C90 61.7 88.2 63.5 86 63.5Z"
-                                        fill="#14151a"></path>
-                                    <path
-                                        d="M64 93C56.3 93 50 86.7 50 79C50 77.9 50.9 77 52 77C53.1 77 54 77.9 54 79C54 84.5 58.5 89 64 89C69.5 89 74 84.5 74 79C74 77.9 74.9 77 76 77C77.1 77 78 77.9 78 79C78 86.7 71.7 93 64 93Z"
-                                        fill="#14151a"></path>
-                                </svg> Bun</span
-                            >
-                            <span
-                                ><i
-                                    class="fab fa-php"
-                                    aria-hidden="true"
-                                    style="color: #777BB4;"></i> PHP</span
-                            >
-                        </div>
+                <div class="tech-category-card">
+                    <h4>
+                        <i
+                            class="fas fa-server"
+                            aria-hidden="true"
+                            style="color: var(--accent-color-start); margin-right: 12px;"
+                        ></i>Backend
+                    </h4>
+                    <div class="tech-list">
+                        <span>Python (Flask, Django)</span>
+                        <span>Node.js (Express, NestJS)</span>
+                        <span>Bun</span>
+                        <span>PHP</span>
                     </div>
                 </div>
-                <div class="tech-category">
-                    <div class="tech-content-wrapper">
-                        <h4>🎨 Frontend</h4>
-                        <div class="tech-items">
-                            <span
-                                ><i
-                                    class="fab fa-react"
-                                    aria-hidden="true"
-                                    style="color: #61DAFB;"></i> React (Next.js, Redux)</span
-                            >
-                            <span
-                                ><i
-                                    class="fas fa-rocket"
-                                    aria-hidden="true"
-                                    style="color: #FF5D01;"></i> Astro</span
-                            >
-                            <span
-                                ><i
-                                    class="fab fa-js-square"
-                                    aria-hidden="true"
-                                    style="color: #F7DF1E;"></i> TypeScript</span
-                            >
-                            <span
-                                ><i
-                                    class="fab fa-html5"
-                                    aria-hidden="true"
-                                    style="color: #E34F26;"></i> HTML5 / CSS3 (SASS)</span
-                            >
-                        </div>
+                <div class="tech-category-card">
+                    <h4>
+                        <i
+                            class="fas fa-laptop-code"
+                            aria-hidden="true"
+                            style="color: var(--accent-color-start); margin-right: 12px;"
+                        ></i>Frontend
+                    </h4>
+                    <div class="tech-list">
+                        <span>React (Next.js, Astro)</span>
+                        <span>TypeScript</span>
+                        <span>Tailwind CSS</span>
+                        <span>SASS / CSS3</span>
                     </div>
                 </div>
-                <div class="tech-category">
-                    <div class="tech-content-wrapper">
-                        <h4>🗄️ Databases</h4>
-                        <div class="tech-items">
-                            <span
-                                ><i
-                                    class="fas fa-database"
-                                    aria-hidden="true"
-                                    style="color: #336791;"></i> PostgreSQL / MySQL</span
-                            >
-                            <span
-                                ><i
-                                    class="fas fa-database"
-                                    aria-hidden="true"
-                                    style="color: #47A248;"></i> MongoDB</span
-                            >
-                            <span
-                                ><i
-                                    class="fas fa-database"
-                                    aria-hidden="true"
-                                    style="color: #D82C20;"></i> Redis</span
-                            >
-                        </div>
+                <div class="tech-category-card">
+                    <h4>
+                        <i
+                            class="fas fa-database"
+                            aria-hidden="true"
+                            style="color: var(--accent-color-start); margin-right: 12px;"
+                        ></i>Databases
+                    </h4>
+                    <div class="tech-list">
+                        <span>PostgreSQL / MySQL</span>
+                        <span>MongoDB / Redis</span>
+                        <span>Drizzle / Prisma</span>
                     </div>
                 </div>
-                <div class="tech-category">
-                    <div class="tech-content-wrapper">
-                        <h4>☁️ DevOps & Cloud</h4>
-                        <div class="tech-items">
-                            <span
-                                ><i
-                                    class="fab fa-docker"
-                                    aria-hidden="true"
-                                    style="color: #2496ED;"></i> Docker / Kubernetes</span
-                            >
-                            <span
-                                ><i
-                                    class="fas fa-cogs"
-                                    aria-hidden="true"
-                                    style="color: #6c757d;"></i> CI/CD (GitLab, Jenkins)</span
-                            >
-                            <span
-                                ><i
-                                    class="fab fa-aws"
-                                    aria-hidden="true"
-                                    style="color: #FF9900;"></i> AWS</span
-                            >
-                        </div>
+                <div class="tech-category-card">
+                    <h4>
+                        <i
+                            class="fas fa-cloud"
+                            aria-hidden="true"
+                            style="color: var(--accent-color-start); margin-right: 12px;"
+                        ></i>DevOps
+                    </h4>
+                    <div class="tech-list">
+                        <span>Docker / Kubernetes</span>
+                        <span>GitLab CI/CD</span>
+                        <span>AWS / Nginx</span>
                     </div>
                 </div>
             </div>
@@ -195,24 +111,168 @@ const homePath = `/${lang}/`;
 </section>
 
 <style>
+    .about-content {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 5rem;
+        align-items: center;
+        margin-bottom: 80px;
+    }
+
     .about-image-wrapper {
         position: relative;
+        width: 320px;
+        height: 420px;
+        border-radius: 24px;
         overflow: hidden;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        border: 2px solid var(--glass-border);
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-        flex-shrink: 0;
-        transition: transform 0.3s ease;
     }
-    .about-image-wrapper:hover {
-        transform: scale(1.05);
-    }
+
     .about-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center 60%;
+        object-position: center 20%;
+    }
+
+    .image-gradient-border {
+        position: absolute;
+        inset: 0;
+        border: 2px solid transparent;
+        border-radius: 24px;
+        background: linear-gradient(
+                135deg,
+                var(--accent-color-start),
+                transparent
+            )
+            border-box;
+        -webkit-mask:
+            linear-gradient(#fff 0 0) padding-box,
+            linear-gradient(#fff 0 0);
+        mask:
+            linear-gradient(#fff 0 0) padding-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: destination-out;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: var(--tag-bg);
+        color: var(--tag-text);
+        border-radius: 6px;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .about-text h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+
+    .about-text h3 {
+        font-size: 1.25rem;
+        color: var(--accent-color-start);
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+
+    .about-text p {
+        font-size: 1.1rem;
+        color: var(--text-secondary-color);
+        max-width: 650px;
+        margin-bottom: 2.5rem;
+    }
+
+    .about-cta-container {
+        display: flex;
+        gap: 1.25rem;
+    }
+
+    .tech-stack-detailed {
+        border-top: 1px solid var(--border-color);
+        padding-top: 60px;
+    }
+
+    .tech-stack-title {
+        font-size: 1.75rem;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .tech-categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 2rem;
+    }
+
+    .tech-category-card {
+        background: var(--primary-color);
+        padding: 2.5rem 2rem;
+        border-radius: 24px;
+        border: 1px solid var(--glass-border);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--card-shadow);
+    }
+
+    .dark-theme .tech-category-card {
+        box-shadow:
+            var(--card-shadow),
+            inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+
+    .tech-category-card:hover {
+        border-color: rgba(var(--accent-color-start-rgb), 0.4);
+        transform: translateY(-8px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .tech-category-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+    }
+
+    .tech-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .tech-list span {
+        font-family: var(--font-mono);
+        color: var(--text-secondary-color);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .tech-list span::before {
+        content: "→";
+        color: var(--accent-color-start);
+        font-family: var(--font-body);
+    }
+
+    @media (max-width: 992px) {
+        .about-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+            justify-items: center;
+        }
+        .about-text h2 {
+            text-align: center;
+        }
+        .about-text p {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .about-cta-container {
+            justify-content: center;
+        }
     }
 </style>

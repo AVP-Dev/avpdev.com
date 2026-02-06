@@ -21,50 +21,62 @@ const t = useTranslations(lang);
     </div>
 </section>
 
-<!-- Подключаем библиотеку и скрипт инициализации -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer
-></script>
+<!-- Подключаем скрипт инициализации -->
 <script>
     declare var particlesJS: any;
 
-    function initParticles() {
-        if (
-            typeof particlesJS === "undefined" ||
-            !document.getElementById("particles-js")
-        ) {
-            return;
+    async function initParticles() {
+        const particlesContainer = document.getElementById("particles-js");
+        if (!particlesContainer) return;
+
+        // Загружаем саму библиотеку динамически, если она еще не загружена
+        if (typeof particlesJS === "undefined") {
+            const script = document.createElement("script");
+            script.src =
+                "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
+            script.async = true;
+            script.onload = () => loadParticlesConfig();
+            document.head.appendChild(script);
+        } else {
+            loadParticlesConfig();
         }
+    }
+
+    function loadParticlesConfig() {
+        if (typeof particlesJS === "undefined") return;
 
         const bodyStyles = getComputedStyle(document.body);
-        const particleColor = bodyStyles
-            .getPropertyValue("--particle-color")
-            .trim()
-            .replace(/"/g, "");
-        const particleLineColor = bodyStyles
-            .getPropertyValue("--particle-line-color")
-            .trim()
-            .replace(/"/g, "");
+        const particleColor =
+            bodyStyles
+                .getPropertyValue("--particle-color")
+                .trim()
+                .replace(/"/g, "") || "#888888";
+        const particleLineColor =
+            bodyStyles
+                .getPropertyValue("--particle-line-color")
+                .trim()
+                .replace(/"/g, "") || "#888888";
 
         particlesJS("particles-js", {
             particles: {
                 number: {
-                    value: 80,
+                    value: 40, // Уменьшено для мобил
                     density: { enable: true, value_area: 800 },
                 },
                 color: { value: particleColor },
                 shape: { type: "circle" },
-                opacity: { value: 0.5, random: false },
+                opacity: { value: 0.3, random: false },
                 size: { value: 3, random: true },
                 line_linked: {
                     enable: true,
                     distance: 150,
                     color: particleLineColor,
-                    opacity: 0.4,
+                    opacity: 0.2,
                     width: 1,
                 },
                 move: {
                     enable: true,
-                    speed: 2,
+                    speed: 1,
                     direction: "none",
                     out_mode: "out",
                 },
@@ -72,30 +84,17 @@ const t = useTranslations(lang);
             interactivity: {
                 detect_on: "canvas",
                 events: {
-                    onhover: { enable: true, mode: "repulse" },
-                    onclick: { enable: true, mode: "push" },
+                    onhover: { enable: false }, // Отключено для производительности на мобилках
+                    onclick: { enable: false },
                     resize: true,
-                },
-                modes: {
-                    repulse: { distance: 150 },
-                    push: { particles_nb: 4 },
                 },
             },
             retina_detect: true,
         });
     }
 
-    function loadParticles() {
-        // Strictly defer until full window load to ensure LCP is hit first
-        if (document.readyState === "complete") {
-            initParticles();
-        } else {
-            window.addEventListener("load", () => initParticles());
-        }
-    }
-
-    // Вызываем функцию при загрузке страницы
-    document.addEventListener("astro:page-load", loadParticles);
-    // Также слушаем кастомное событие смены темы, чтобы перезапустить анимацию с новыми цветами
-    document.addEventListener("theme:changed", initParticles);
+    // Инициализация при загрузке страницы (astro:page-load поддерживает ClientRouter)
+    document.addEventListener("astro:page-load", initParticles);
+    // Также слушаем кастомное событие смены темы
+    document.addEventListener("theme:changed", loadParticlesConfig);
 </script>

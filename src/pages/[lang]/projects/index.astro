@@ -63,7 +63,7 @@ const categoryMap: Record<string, "sites" | "apps"> = {
 const PROJECTS_DATA: Project[] = filteredProjects.map((project, index) => ({
     id: index + 1,
     category: categoryMap[project.data.category] || "sites",
-    img: project.data.heroImage.src,
+    img: project.data.heroImage,
     titleKey: project.data.header.titleKey as TranslationKey,
     link: `/${lang}/project/${project.slug.replace(/^(ru|en)\//, "")}/`,
     techStack: project.data.content.techStack,
@@ -74,6 +74,38 @@ const PROJECTS_DATA: Project[] = filteredProjects.map((project, index) => ({
 const pageTitle = `${t("catalog_title")} | AVPdev.com`;
 const pageDesc = t("catalog_subtitle");
 
+// Schema.org
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        {
+            "@type": "ListItem",
+            position: 1,
+            name: lang === "ru" ? "Главная" : "Home",
+            item: new URL(`/${lang}/`, Astro.site).href,
+        },
+        {
+            "@type": "ListItem",
+            position: 2,
+            name: t("catalog_title"),
+            item: new URL(Astro.url.pathname, Astro.site).href,
+        },
+    ],
+};
+
+const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    numberOfItems: PROJECTS_DATA.length,
+    itemListElement: PROJECTS_DATA.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: new URL(project.link, Astro.site).href,
+        name: t(project.titleKey),
+    })),
+};
+
 // Filters Data for UI
 const categories = [
     { value: "web-site", label: t("filter_sites") },
@@ -83,16 +115,36 @@ const categories = [
 ];
 ---
 
-<BaseLayout title={pageTitle} description={pageDesc} schema={{}}>
-    <section>
+<BaseLayout
+    title={pageTitle}
+    description={pageDesc}
+    isTranslationKey={false}
+    schema={[breadcrumbSchema, itemListSchema]}
+>
+    <section class="portfolio-archive">
         <div class="container">
             <div class="archive-header fade-in visible">
+                <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+                    <a href={`/${lang}/`}
+                        >{lang === "ru" ? "Главная" : "Home"}</a
+                    >
+                    <span class="separator">/</span>
+                    <span class="current">{t("catalog_title")}</span>
+                </nav>
+
                 <h1 class="section-title">
                     <span set:html={t("catalog_title_h1")} />
                 </h1>
-                <p class="section-subtitle" style="margin-bottom: 2rem;">
-                    {t("catalog_subtitle")}
-                </p>
+
+                <div class="seo-intro">
+                    <p class="section-subtitle">
+                        {
+                            lang === "ru"
+                                ? "Исследуйте мои работы в области веб-разработки и автоматизации. Здесь собраны кейсы от простых лендингов до сложных ERP-систем и Telegram Mini Apps, реализованных с фокусом на результат и производительность."
+                                : "Explore my work in web development and automation. Here you will find cases ranging from simple landing pages to complex ERP systems and Telegram Mini Apps, all implemented with a focus on results and performance."
+                        }
+                    </p>
+                </div>
             </div>
 
             <!-- Filters header -->
@@ -155,3 +207,96 @@ const categories = [
         </div>
     </section>
 </BaseLayout>
+
+<style>
+    .portfolio-archive {
+        padding-top: 4rem;
+        padding-bottom: 8rem;
+    }
+
+    .breadcrumb-nav {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary-color);
+    }
+
+    .breadcrumb-nav a {
+        color: var(--text-secondary-color);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .breadcrumb-nav a:hover {
+        color: var(--accent-color-start);
+    }
+
+    .breadcrumb-nav .separator {
+        color: var(--border-color);
+    }
+
+    .breadcrumb-nav .current {
+        color: var(--text-color);
+        font-weight: 500;
+    }
+
+    .archive-header {
+        max-width: 800px;
+        margin-bottom: 4rem;
+    }
+
+    .seo-intro {
+        margin-top: 1.5rem;
+        line-height: 1.7;
+        font-size: 1.1rem;
+        color: var(--text-secondary-color);
+    }
+
+    .portfolio-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .filter-btn {
+        padding: 0.6rem 1.2rem;
+        border-radius: 99px;
+        background: var(--tag-bg);
+        color: var(--tag-text);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: 1px solid var(--glass-border);
+    }
+
+    .filter-btn:hover {
+        background: var(--glass-border);
+        color: var(--text-color);
+    }
+
+    .filter-btn.active {
+        background: var(--accent-gradient);
+        color: white;
+        border-color: transparent;
+    }
+
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .portfolio-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .archive-header {
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+    }
+</style>

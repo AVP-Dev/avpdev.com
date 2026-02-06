@@ -1,15 +1,16 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 import type { ui } from './i18n/ui';
+import type { ImageMetadata } from 'astro';
 
 type TranslationKey = keyof typeof ui['ru'];
 
 interface Project {
 	id: number;
 	category: 'apps' | 'sites';
-	img: string;
+	img: ImageMetadata;
 	titleKey: TranslationKey;
-	link:string;
+	link: string;
 	techStack: {
 		icon: string;
 		title: string;
@@ -19,12 +20,12 @@ interface Project {
 }
 
 interface CustomEventMap {
-    'modal:open': CustomEvent<{ modalId: string }>;
-    'theme:changed': CustomEvent;
+	'modal:open': CustomEvent<{ modalId: string }>;
+	'theme:changed': CustomEvent;
 }
 declare global {
-    interface Document {
-        addEventListener<K extends keyof CustomEventMap>(type: K, listener: (this: Document, ev: CustomEventMap[K]) => void): void;
-        dispatchEvent<K extends keyof CustomEventMap>(ev: CustomEventMap[K]): boolean;
-    }
+	interface Document {
+		addEventListener<K extends keyof CustomEventMap>(type: K, listener: (this: Document, ev: CustomEventMap[K]) => void): void;
+		dispatchEvent<K extends keyof CustomEventMap>(ev: CustomEventMap[K]): boolean;
+	}
 }

@@ -31,7 +31,7 @@ const categoryMap: Record<string, "sites" | "apps"> = {
 const PROJECTS_DATA: Project[] = featuredProjects.map((project, index) => ({
   id: index + 1,
   category: categoryMap[project.data.category] || "sites",
-  img: project.data.heroImage.src,
+  img: project.data.heroImage,
   titleKey: project.data.header.titleKey as TranslationKey,
   link: `/${lang}/project/${project.slug.replace(/^(ru|en)\//, "")}/`,
   techStack: project.data.content.techStack,
@@ -41,33 +41,32 @@ const PROJECTS_DATA: Project[] = featuredProjects.map((project, index) => ({
 
 <section id="portfolio" aria-labelledby="portfolio-title">
   <div class="container">
-    <h2
-      id="portfolio-title"
-      class="section-title fade-in"
-      set:html={t("portfolio_h2")}
-    />
+    <div class="section-header">
+      <h2
+        id="portfolio-title"
+        class="section-title"
+        set:html={t("portfolio_h2")}
+      />
+      <div class="section-actions fade-in">
+        <a href={`/${lang}/projects/`} class="cta-button secondary">
+          {t("portfolio_btn_all")}
+        </a>
+      </div>
+    </div>
 
     {
       PROJECTS_DATA.length > 0 ? (
-        <>
-          <div
-            id="main-portfolio-grid"
-            class="portfolio-grid"
-            aria-live="polite"
-          >
-            {PROJECTS_DATA.map((project) => (
-              <div class="portfolio-card-wrapper">
-                <PortfolioCard {...project} />
-              </div>
-            ))}
-          </div>
-
-          <div class="show-more-container mt-12 text-center">
-            <a href={`/${lang}/projects/`} class="cta-button">
-              {t("portfolio_btn_all")}
-            </a>
-          </div>
-        </>
+        <div
+          id="main-portfolio-grid"
+          class="portfolio-grid fade-in"
+          aria-live="polite"
+        >
+          {PROJECTS_DATA.map((project) => (
+            <div class="portfolio-card-wrapper">
+              <PortfolioCard {...project} />
+            </div>
+          ))}
+        </div>
       ) : (
         <p class="muted" id="portfolio-empty">
           Проекты скоро появятся.
@@ -76,3 +75,35 @@ const PROJECTS_DATA: Project[] = featuredProjects.map((project, index) => ({
     }
   </div>
 </section>
+
+<style>
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 4rem;
+    gap: 1.5rem;
+  }
+
+  .section-header .section-title {
+    margin-bottom: 0;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .section-header {
+      margin-bottom: 2.5rem;
+      gap: 1.25rem;
+    }
+
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

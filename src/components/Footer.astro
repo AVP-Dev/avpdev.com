@@ -1,5 +1,5 @@
 ---
-// src/components/Footer.astro
+// src/components/Footer.astro refactoring
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { CreatorSignature } from "./ui/CreatorSignature";
 
@@ -7,60 +7,270 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<footer class="footer">
-    <div class="container footer-content">
-        <div class="footer-links">
-            <a
-                href="https://github.com/AVP-Dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                ><i class="fab fa-github" aria-hidden="true"></i></a
-            >
-            <a
-                href="https://t.me/AVP_Dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Telegram"
-                ><i class="fab fa-telegram-plane" aria-hidden="true"></i></a
-            >
-            <div class="footer-social-group">
-                <a
-                    href="https://wa.me/79154065940"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="WhatsApp (Россия)"
-                >
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i> RU
+<footer class="footer-root">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Column 1: Brand & Social -->
+            <div class="footer-col brand-col">
+                <a href={`/${lang}/`} class="footer-logo">
+                    AVP<span>dev.com</span>
                 </a>
+                <p class="footer-tagline">
+                    {t("footer_tagline")}
+                </p>
+                <div class="social-links">
+                    <a
+                        href="https://github.com/AVP-Dev"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="GitHub"
+                    >
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a
+                        href="https://t.me/AVP_Dev"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="Telegram"
+                    >
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                    <a
+                        href="https://wa.me/375291217371"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="WhatsApp"
+                    >
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
-            <div class="footer-social-group">
-                <a
-                    href="https://wa.me/375291217371"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="WhatsApp (Беларусь)"
-                >
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i> BY
-                </a>
+
+            <!-- Column 2: Navigation -->
+            <div class="footer-col nav-col">
+                <h4 class="footer-title">{t("catalog_title")}</h4>
+                <nav class="footer-nav">
+                    <a href={`/${lang}/projects/`}>{t("catalog_title")}</a>
+                    <a href={`/${lang}/blog/`}>{t("nav_blog")}</a>
+                    <a href={`/${lang}/brief/`}>{t("nav_brief")}</a>
+                </nav>
+            </div>
+
+            <!-- Column 3: Legal -->
+            <div class="footer-col legal-col">
+                <h4 class="footer-title">{t("footer_legal")}</h4>
+                <nav class="footer-nav secondary">
+                    <a href={`/${lang}/legal/privacy-policy`}
+                        >{t("footer_privacy")}</a
+                    >
+                    <a href={`/${lang}/legal/terms-of-service`}
+                        >{t("footer_terms")}</a
+                    >
+                    <a href={`/${lang}/legal/public-offer`}
+                        >{t("footer_public_offer")}</a
+                    >
+                </nav>
             </div>
         </div>
-        <p class="footer-copyright" set:html={t("footer_copyright")} />
-        <div class="footer-legal">
-            <a href={`/${lang}/projects/`}>{t("catalog_title")}</a>
-            <span class="legal-separator">|</span>
-            <a href={`/${lang}/blog/`}>{t("nav_blog")}</a>
-            <span class="legal-separator">|</span>
-            <a href={`/${lang}/brief/`}>{t("nav_brief")}</a>
-            <span class="legal-separator">|</span>
-            <a href={`/${lang}/legal/privacy-policy`}>{t("footer_privacy")}</a>
-            <span class="legal-separator">|</span>
-            <a href={`/${lang}/legal/terms-of-service`}>{t("footer_terms")}</a>
-            <span class="legal-separator">|</span>
-            <a href={`/${lang}/legal/public-offer`}
-                >{t("footer_public_offer")}</a
-            >
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p class="copyright" set:html={t("footer_copyright")} />
+                <div class="footer-signature">
+                    <CreatorSignature client:visible />
+                </div>
+            </div>
         </div>
-        <CreatorSignature />
     </div>
 </footer>
+
+<style>
+    .footer-root {
+        background: var(--bg-color); /* Match global dark background */
+        color: var(--text-color);
+        padding-top: 60px;
+        border-top: 1px solid var(--border-color);
+        position: relative;
+    }
+
+    /* Prevent any blue links in footer or signature */
+    .footer-root :global(a) {
+        color: inherit !important;
+        text-decoration-color: currentColor;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 4rem;
+        margin-bottom: 40px;
+    }
+
+    .footer-col {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-logo {
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        font-weight: 800;
+        text-decoration: none;
+        color: var(--text-color);
+        margin-bottom: 1.5rem;
+        display: inline-block;
+    }
+
+    .footer-logo span {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+
+    .footer-tagline {
+        color: var(--text-secondary-color);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        max-width: 320px;
+        margin-bottom: 2rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1.25rem;
+    }
+
+    .social-links a {
+        color: var(--text-color);
+        font-size: 1.25rem;
+        transition: all 0.3s ease;
+        opacity: 0.6;
+    }
+
+    .social-links a:hover {
+        opacity: 1;
+        color: var(--accent-color-start);
+        transform: translateY(-3px);
+    }
+
+    .footer-title {
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+        text-align: left;
+    }
+
+    .footer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+
+    .footer-nav a {
+        color: var(--text-secondary-color);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+    .footer-nav a:hover {
+        color: var(--text-color);
+        transform: translateX(5px);
+    }
+
+    .footer-bottom {
+        padding: 30px 0;
+        border-top: 1px solid var(--border-color);
+        margin-top: 40px;
+    }
+
+    .footer-bottom-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .copyright {
+        font-size: 0.85rem;
+        color: var(--text-secondary-color);
+        opacity: 0.6;
+        margin: 0;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    .footer-signature {
+        flex-shrink: 0;
+    }
+
+    .footer-signature :global(.w-full) {
+        padding: 0 !important;
+        text-align: right !important;
+    }
+
+    @media (max-width: 992px) {
+        .footer-bottom-content {
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .copyright {
+            text-align: center;
+            white-space: normal;
+        }
+
+        .footer-signature :global(.w-full) {
+            text-align: center !important;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .brand-col {
+            grid-column: span 2;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .footer-root {
+            padding-top: 60px;
+        }
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            text-align: center;
+        }
+        .footer-col {
+            align-items: center;
+        }
+        .footer-nav {
+            align-items: center;
+        }
+        .footer-title {
+            text-align: center;
+        }
+        .brand-col {
+            grid-column: span 1;
+        }
+        .footer-tagline {
+            max-width: 100%;
+        }
+        .social-links {
+            justify-content: center;
+        }
+        .footer-nav a:hover {
+            transform: translateY(-2px);
+        }
+    }
+</style>

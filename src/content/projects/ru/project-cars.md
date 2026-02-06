@@ -9,7 +9,7 @@ featured: true
 category: 'web-site'
 stack: ['HTML', 'CSS', 'JavaScript']
 publishDate: 2024-05-15
-heroImage: '~/assets/images/projects/cars/hero.webp'
+heroImage: '../../../assets/images/projects/cars/hero.webp'
 heroImageAlt: 'Главный экран сайта АвтоМир Импорт'
 header:
   titleKey: 'case_cars_h1_portfolio'
@@ -46,18 +46,18 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '~/assets/images/projects/cars/hero.webp'
+      - img: '../../../assets/images/projects/cars/hero.webp'
         captionKey: 'gallery_caption_cars_hero'
-      - img: '~/assets/images/projects/cars/about.webp'
+      - img: '../../../assets/images/projects/cars/about.webp'
         captionKey: 'gallery_caption_cars_about'
-      - img: '~/assets/images/projects/cars/services.webp'
+      - img: '../../../assets/images/projects/cars/services.webp'
         captionKey: 'gallery_caption_cars_services'
-      - img: '~/assets/images/projects/cars/inspiration.webp'
+      - img: '../../../assets/images/projects/cars/inspiration.webp'
         captionKey: 'gallery_caption_cars_inspiration'
-      - img: '~/assets/images/projects/cars/calculator.webp'
+      - img: '../../../assets/images/projects/cars/calculator.webp'
         captionKey: 'gallery_caption_cars_calculator'
-      - img: '~/assets/images/projects/cars/testimonials.webp'
+      - img: '../../../assets/images/projects/cars/testimonials.webp'
         captionKey: 'gallery_caption_cars_testimonials'
-      - img: '~/assets/images/projects/cars/contact.webp'
+      - img: '../../../assets/images/projects/cars/contact.webp'
         captionKey: 'gallery_caption_cars_contact'
 ---

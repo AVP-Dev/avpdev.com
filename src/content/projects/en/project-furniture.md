@@ -9,7 +9,7 @@ featured: true
 category: 'app'
 stack: ['Next.js', 'React', 'PostgreSQL', 'Docker']
 publishDate: 2025-03-10
-heroImage: '~/assets/images/projects/furniture/hero.webp'
+heroImage: '../../../assets/images/projects/furniture/hero.webp'
 heroImageAlt: 'Hero image for the Terra Forma website'
 header:
   titleKey: 'case_furniture_h1_short'
@@ -52,16 +52,16 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '~/assets/images/projects/furniture/hero.webp'
+      - img: '../../../assets/images/projects/furniture/hero.webp'
         captionKey: 'gallery_caption_furniture_hero'
-      - img: '~/assets/images/projects/furniture/collection.webp'
+      - img: '../../../assets/images/projects/furniture/collection.webp'
         captionKey: 'gallery_caption_collection'
-      - img: '~/assets/images/projects/furniture/philosophy.webp'
+      - img: '../../../assets/images/projects/furniture/philosophy.webp'
         captionKey: 'gallery_caption_philosophy'
-      - img: '~/assets/images/projects/furniture/journal.webp'
+      - img: '../../../assets/images/projects/furniture/journal.webp'
         captionKey: 'gallery_caption_journal'
-      - img: '~/assets/images/projects/furniture/workshop.webp'
+      - img: '../../../assets/images/projects/furniture/workshop.webp'
         captionKey: 'gallery_caption_workshop'
-      - img: '~/assets/images/projects/furniture/contact.webp'
+      - img: '../../../assets/images/projects/furniture/contact.webp'
         captionKey: 'gallery_caption_contact'
 ---

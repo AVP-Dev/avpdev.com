@@ -9,7 +9,7 @@ featured: false
 category: 'web-site'
 stack: ['HTML', 'CSS', 'JavaScript', 'PHP']
 publishDate: 2025-01-10
-heroImage: '~/assets/images/projects/mekohaus/hero.webp'
+heroImage: '../../../assets/images/projects/mekohaus/hero.webp'
 heroImageAlt: 'Главный экран сайта Mekohaus'
 header:
   titleKey: 'case_mekohaus_h1'
@@ -48,12 +48,12 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '~/assets/images/projects/mekohaus/hero.webp'
+      - img: '../../../assets/images/projects/mekohaus/hero.webp'
         captionKey: 'gallery_caption_mekohaus_hero'
-      - img: '~/assets/images/projects/mekohaus/catalog.webp'
+      - img: '../../../assets/images/projects/mekohaus/catalog.webp'
         captionKey: 'gallery_caption_mekohaus_catalog'
-      - img: '~/assets/images/projects/mekohaus/about.webp'
+      - img: '../../../assets/images/projects/mekohaus/about.webp'
         captionKey: 'gallery_caption_mekohaus_about'
-      - img: '~/assets/images/projects/mekohaus/form.webp'
+      - img: '../../../assets/images/projects/mekohaus/form.webp'
         captionKey: 'gallery_caption_mekohaus_form'
 ---
