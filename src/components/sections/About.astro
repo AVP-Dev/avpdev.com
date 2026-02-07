@@ -16,10 +16,13 @@ const homePath = `/${lang}/`;
                 <Image
                     src={aboutPhoto}
                     alt="Фотография Алексея Пацкевича, full-stack разработчика"
+                    width={600}
+                    height={800}
                     widths={[300, 600]}
                     sizes="(max-width: 1024px) 300px, 600px"
-                    loading="lazy"
-                    decoding="async"
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="sync"
                     quality={80}
                     class="about-image"
                 />
@@ -215,7 +218,8 @@ const homePath = `/${lang}/`;
         padding: 2.5rem 2rem;
         border-radius: 24px;
         border: 1px solid var(--glass-border);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
         box-shadow: var(--card-shadow);
     }
 

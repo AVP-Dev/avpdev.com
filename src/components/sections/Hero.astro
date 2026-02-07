@@ -71,28 +71,15 @@ const t = useTranslations(lang);
 </style>
 
 <!-- Подключаем скрипт инициализации -->
+<!-- Подключаем скрипт инициализации -->
+<script is:inline src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
 <script>
-    declare var particlesJS: any;
-
-    async function initParticles() {
-        const particlesContainer = document.getElementById("particles-js");
-        if (!particlesContainer) return;
-
-        // Загружаем саму библиотеку динамически, если она еще не загружена
-        if (typeof particlesJS === "undefined") {
-            const script = document.createElement("script");
-            script.src =
-                "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
-            script.async = true;
-            script.onload = () => loadParticlesConfig();
-            document.head.appendChild(script);
-        } else {
-            loadParticlesConfig();
-        }
-    }
-
     function loadParticlesConfig() {
-        if (typeof particlesJS === "undefined") return;
+        if (typeof particlesJS === "undefined") {
+            // Если библиотека еще не загружена (хоть и должна быть из-за defer), попробуем чуть позже
+            setTimeout(loadParticlesConfig, 100);
+            return;
+        }
 
         const bodyStyles = getComputedStyle(document.body);
         const particleColor =
@@ -109,7 +96,7 @@ const t = useTranslations(lang);
         particlesJS("particles-js", {
             particles: {
                 number: {
-                    value: 40, // Уменьшено для мобил
+                    value: 30, // Еще меньше для мобил
                     density: { enable: true, value_area: 800 },
                 },
                 color: { value: particleColor },
@@ -125,7 +112,7 @@ const t = useTranslations(lang);
                 },
                 move: {
                     enable: true,
-                    speed: 1,
+                    speed: 1, // Медленнее
                     direction: "none",
                     out_mode: "out",
                 },
@@ -133,17 +120,17 @@ const t = useTranslations(lang);
             interactivity: {
                 detect_on: "canvas",
                 events: {
-                    onhover: { enable: false }, // Отключено для производительности на мобилках
+                    onhover: { enable: false },
                     onclick: { enable: false },
                     resize: true,
                 },
             },
-            retina_detect: true,
+            retina_detect: false, // Отключаем для перфоманса
         });
     }
 
     // Инициализация при загрузке страницы (astro:page-load поддерживает ClientRouter)
-    document.addEventListener("astro:page-load", initParticles);
+    document.addEventListener("astro:page-load", loadParticlesConfig);
     // Также слушаем кастомное событие смены темы
     document.addEventListener("theme:changed", loadParticlesConfig);
 </script>
