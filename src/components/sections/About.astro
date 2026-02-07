@@ -20,9 +20,8 @@ const homePath = `/${lang}/`;
                     height={800}
                     widths={[300, 600]}
                     sizes="(max-width: 1024px) 300px, 600px"
-                    loading="eager"
-                    fetchpriority="high"
-                    decoding="sync"
+                    loading="lazy"
+                    decoding="async"
                     quality={80}
                     class="about-image"
                 />

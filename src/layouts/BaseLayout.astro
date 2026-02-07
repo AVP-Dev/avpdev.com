@@ -65,7 +65,10 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </noscript>
     
     {/* Вставка Schema.org */}
     {schema && (
@@ -161,6 +164,35 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
             --font-heading: 'Sora Variable', sans-serif;
             --font-body: 'Plus Jakarta Sans Variable', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* Critical CSS for LCP (Logo) */
+        header {
+            position: fixed;
+            top: 1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1005;
+            display: block;
+        }
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-img {
+            height: 32px;
+            width: auto;
+            aspect-ratio: 40/40;
+        }
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            line-height: 1;
         }
 
         /* Default background to avoid white flash */
