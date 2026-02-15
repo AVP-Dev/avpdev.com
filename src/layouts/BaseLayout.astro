@@ -48,6 +48,25 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <script is:inline>
+        // WARN: Silence deprecated API warnings from Partytown
+        // Runs immediately to catch Partytown's scan
+        (function() {
+            try {
+                var targets = ['sharedStorage', 'AttributionReporting', 'attributionReporting'];
+                targets.forEach(function(t) {
+                   if (t in window) {
+                       delete window[t]; // Try delete first
+                       // If checking 't in window' still returns true (e.g. prototype), shadow it.
+                       if (t in window) {
+                             Object.defineProperty(window, t, { value: undefined, writable: true, configurable: true, enumerable: false });
+                       }
+                   }
+                });
+            } catch(e) {}
+        })();
+    </script>
+
     <title>{finalTitle}</title>
     <meta name="description" content={finalDescription} />
     
@@ -75,21 +94,7 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
         <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     )}
 
-    <script is:inline>
-        // WARN: Silence deprecated API warnings from Partytown
-        // Partytown proxies all window properties. Accessing deprecated APIs triggers warnings.
-        // We explicitly remove them from the main thread so Partytown ignores them.
-        (function() {
-            try {
-                var props = ['sharedStorage', 'AttributionReporting', 'attributionReporting'];
-                props.forEach(function(p) {
-                    if (p in window) delete window[p];
-                });
-            } catch (e) {
-                console.debug('Sanitization failed', e);
-            }
-        })();
-    </script>
+
 
     {GTAG_ID && (
         <>
