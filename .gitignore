@@ -5,14 +5,24 @@
 
 # Зависимости
 node_modules/
+.pnp
+.pnp.js
 
 # Файлы сборки
 dist/
 .astro/
+build/
+coverage/
 
 # Логи и временные файлы
-npm-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 *.log
+.DS_Store
+Thumbs.db
 
 # Системные папки IDE и Git
 .git
@@ -20,5 +30,9 @@ npm-debug.log
 .vscode
 .agent
 
-# Системные файлы операционных систем
-.DS_Store
+# Generated files
+public/~partytown
+
+# Testing
+playwright-report
+test-results

@@ -75,6 +75,22 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
         <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     )}
 
+    <script is:inline>
+        // WARN: Silence deprecated API warnings from Partytown
+        // Partytown proxies all window properties. Accessing deprecated APIs triggers warnings.
+        // We explicitly remove them from the main thread so Partytown ignores them.
+        (function() {
+            try {
+                var props = ['sharedStorage', 'AttributionReporting', 'attributionReporting'];
+                props.forEach(function(p) {
+                    if (p in window) delete window[p];
+                });
+            } catch (e) {
+                console.debug('Sanitization failed', e);
+            }
+        })();
+    </script>
+
     {GTAG_ID && (
         <>
             {/* Google Tag Manager - PARTYTOWN */}
