@@ -5,6 +5,7 @@ import partytown from '@astrojs/partytown';
 import react from '@astrojs/react';
 import remarkHeadingId from 'remark-heading-id';
 import { locations } from './src/data/locations.ts';
+import partytownSanitizer from './src/integrations/partytownSanitizer.ts';
 
 const site = 'https://avpdev.com';
 
@@ -41,6 +42,7 @@ export default defineConfig({
     }),
 
     // 4. Оптимизация скриптов (Google Tag Manager и др.)
+    partytownSanitizer(),
     partytown({
       config: {
         forward: ["dataLayer.push"],
