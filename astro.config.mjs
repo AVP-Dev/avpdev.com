@@ -42,12 +42,15 @@ export default defineConfig({
     }),
 
     // 4. Оптимизация скриптов (Google Tag Manager и др.)
-    partytownSanitizer(),
     partytown({
       config: {
         forward: ["dataLayer.push"],
       },
     }),
+
+    // 4.1. Патч Partytown: удаление deprecated API (SharedStorage, AttributionReporting)
+    // ВАЖНО: должен идти ПОСЛЕ partytown(), чтобы патчить уже скопированные файлы
+    partytownSanitizer(),
 
     // 5. Поддержка React компонентов
     react()
