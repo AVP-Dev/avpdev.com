@@ -3,9 +3,8 @@ FROM oven/bun:1.2-alpine AS builder
 
 WORKDIR /app
 
-# Копируем файлы зависимостей и скрипты
+# Копируем файлы зависимостей
 COPY package.json bun.lockb* ./
-COPY scripts ./scripts
 
 # Устанавливаем зависимости
 RUN bun install --frozen-lockfile
