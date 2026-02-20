@@ -71,6 +71,7 @@ export const ui = {
         footer_terms: 'Условия использования',
         footer_public_offer: 'Публичная оферта',
         footer_legal: 'Юридическая инфо',
+        nav_locations: 'География услуг',
         blog_page_title: "Тех. Журнал | Статьи от AVPdev",
         blog_page_desc: "Статьи о веб-разработке, технологиях, автоматизации и лучших практиках для вашего бизнеса.",
         blog_h1: "Тех. <span class=\"gradient-text\">Журнал</span>",
@@ -268,6 +269,7 @@ export const ui = {
         footer_terms: 'Terms of Service',
         footer_public_offer: 'Public Offer',
         footer_legal: 'Legal Info',
+        nav_locations: 'Geography',
 
         blog_page_title: "Tech Journal | Articles from AVPdev",
         blog_page_desc: "Articles about web development, technologies, automation, and best practices for your business.",

@@ -16,5 +16,10 @@ const linksToShow = locations.filter(loc => keyCities.includes(loc.slug));
       const name = lang === 'ru' && loc.name_ru ? loc.name_ru.replace(/е$/, 'е') : loc.name_en; // Простое форматирование для примера
       return <li><a href={url}>{name}</a></li>;
     })}
+    <li class="view-all-locations">
+      <a href={`/${lang}/locations/`} class="text-accent-color-start font-medium">
+        {lang === 'ru' ? 'Все города →' : 'View all cities →'}
+      </a>
+    </li>
   </ul>
 </div>

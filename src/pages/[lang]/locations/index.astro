@@ -1,0 +1,542 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { locations } from '../../../data/locations';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    return [
+        { params: { lang: 'ru' } },
+        { params: { lang: 'en' } },
+    ];
+}
+
+const { lang } = Astro.params;
+const currentLang = lang || 'ru';
+const t = useTranslations(currentLang as 'ru' | 'en');
+
+// Названия стран
+const countryNames: Record<string, {ru: string, en: string}> = {
+    'RU': { ru: 'Россия', en: 'Russia' },
+    'BY': { ru: 'Беларусь', en: 'Belarus' },
+    'KZ': { ru: 'Казахстан', en: 'Kazakhstan' },
+    'PL': { ru: 'Польша', en: 'Poland' },
+    'CZ': { ru: 'Чехия', en: 'Czech Republic' },
+    'DE': { ru: 'Германия', en: 'Germany' },
+    'LT': { ru: 'Литва', en: 'Lithuania' },
+    'LV': { ru: 'Латвия', en: 'Latvia' },
+    'EE': { ru: 'Эстония', en: 'Estonia' },
+    'NL': { ru: 'Нидерланды', en: 'Netherlands' },
+    'GB': { ru: 'Великобритания', en: 'United Kingdom' },
+    'FR': { ru: 'Франция', en: 'France' },
+    'ES': { ru: 'Испания', en: 'Spain' },
+    'IT': { ru: 'Италия', en: 'Italy' },
+    'AE': { ru: 'ОАЭ', en: 'United Arab Emirates' },
+    'SG': { ru: 'Сингапур', en: 'Singapore' },
+    'JP': { ru: 'Япония', en: 'Japan' },
+    'US': { ru: 'США', en: 'United States' },
+    'CA': { ru: 'Канада', en: 'Canada' },
+    'AU': { ru: 'Австралия', en: 'Australia' }
+};
+
+// Привязка стран к регионам 
+const regionsMap: Record<string, string> = {
+    'RU': 'cis', 'BY': 'cis', 'KZ': 'cis',
+    'PL': 'europe', 'CZ': 'europe', 'DE': 'europe', 'LT': 'europe', 'LV': 'europe', 'EE': 'europe', 'NL': 'europe', 'GB': 'europe', 'FR': 'europe', 'ES': 'europe', 'IT': 'europe',
+    'AE': 'asia', 'SG': 'asia', 'JP': 'asia',
+    'US': 'americas', 'CA': 'americas', 'AU': 'americas'
+};
+
+const filterTabs = [
+    { id: 'all', ru: 'Все регионы', en: 'All Regions' },
+    { id: 'cis', ru: 'СНГ', en: 'CIS' },
+    { id: 'europe', ru: 'Европа', en: 'Europe' },
+    { id: 'asia', ru: 'Азия и Восток', en: 'Asia & Middle East' },
+    { id: 'americas', ru: 'Америка и Океания', en: 'Americas & Oceania' }
+];
+
+// Фильтруем города по языку (теперь показываем все везде)
+const availableLocations = locations;
+
+// Группировка по странам
+const groupedLocations = availableLocations.reduce((acc, loc) => {
+    if (!acc[loc.country]) {
+        acc[loc.country] = [];
+    }
+    acc[loc.country].push(loc);
+    return acc;
+}, {} as Record<string, typeof locations>);
+
+// Сортировка стран
+const sortedCountries = Object.keys(groupedLocations).sort((a, b) => {
+    const nameA = countryNames[a]?.[currentLang as 'ru' | 'en'] || a;
+    const nameB = countryNames[b]?.[currentLang as 'ru' | 'en'] || b;
+    return nameA.localeCompare(nameB);
+});
+
+const pageTitle = currentLang === 'ru' ? 'География услуг AVPdev | Города и Страны' : 'Service Geography AVPdev | Cities & Countries';
+const pageDescription = currentLang === 'ru' ? 'Полный список стран и городов, где мы оказываем услуги по веб-разработке и автоматизации.' : 'Full list of countries and region hubs where we provide web development and automation services.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+    <main class="locations-page">
+        <section class="locations-hero relative">
+            <div class="glow-bg top-glow"></div>
+            <div class="container text-center relative z-10 mx-auto px-4 pt-32 pb-16">
+                <h1 class="font-extrabold mb-6 tracking-tight section-title text-5xl lg:text-6xl">
+                    {currentLang === 'ru' ? 'Наша ' : 'Our '}<span class="gradient-text">{currentLang === 'ru' ? 'География' : 'Geography'}</span>
+                </h1>
+                <p class="section-subtitle">
+                    {currentLang === 'ru' ? 
+                        'Мы создаем надежные веб-решения для бизнеса по всему миру. Выберите свой регион и город, чтобы подробнее ознакомиться с нашими услугами.' : 
+                        'We build reliable web solutions for businesses worldwide. Select your region and city to learn more about our services.'}
+                </p>
+                
+                <!-- Filter Tabs -->
+                <div class="tabs-container">
+                    <div class="tabs-scroll" role="tablist">
+                        {filterTabs.map((tab, idx) => {
+                            // Only show tabs that have countries visible in the current language
+                            if(tab.id !== 'all') {
+                                const hasVisibleCountriesInTab = sortedCountries.some(c => regionsMap[c] === tab.id);
+                                if(!hasVisibleCountriesInTab) return null;
+                            }
+                            return (
+                                <button 
+                                    class={`tab-btn ${idx === 0 ? 'active' : ''}`} 
+                                    data-filter={tab.id}
+                                    role="tab"
+                                    aria-selected={idx === 0 ? "true" : "false"}
+                                >
+                                    {currentLang === 'ru' ? tab.ru : tab.en}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="locations-grid container mx-auto px-4 pb-32 relative z-10">
+            <div class="grid layout-grid" id="countries-grid">
+                {sortedCountries.map(countryCode => {
+                    const countryName = countryNames[countryCode]?.[currentLang as 'ru' | 'en'] || countryCode;
+                    const region = regionsMap[countryCode] || 'other';
+                    const cities = groupedLocations[countryCode];
+                    
+                    // Sorting cities alphabetically within the country
+                    cities.sort((a, b) => {
+                        const nameA = (currentLang === 'ru' ? a.name_ru : a.name_en) || a.slug;
+                        const nameB = (currentLang === 'ru' ? b.name_ru : b.name_en) || b.slug;
+                        return nameA.localeCompare(nameB);
+                    });
+
+                    const VISIBLE_LIMIT = 8;
+                    const visibleCities = cities.slice(0, VISIBLE_LIMIT);
+                    const hiddenCities = cities.slice(VISIBLE_LIMIT);
+                    const hasHidden = hiddenCities.length > 0;
+                    
+                    const textShow = currentLang === 'ru' ? `Показать все (${cities.length})` : `Show all (${cities.length})`;
+                    const textHide = currentLang === 'ru' ? 'Скрыть' : 'Show less';
+
+                    return (
+                        <article class="country-card card fade-in" data-region={region}>
+                            <h2 class="country-title flex items-center gap-3 border-border-color">
+                                <span class="country-icon text-accent-color-start text-2xl">
+                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                </span>
+                                {countryName}
+                            </h2>
+                            <ul class="cities-list mt-6 grid grid-cols-2 gap-3" aria-label={`Cities in ${countryName}`}>
+                                {visibleCities.map(loc => {
+                                    const cityName = (currentLang === 'ru' ? loc.name_ru : loc.name_en) || loc.name_en || loc.name_ru || loc.slug;
+                                    const url = currentLang === 'ru' ? `/ru/uslugi/${loc.slug}/` : `/en/services/${loc.slug}/`;
+                                    return (
+                                        <li>
+                                            <a href={url} class="city-pill group">
+                                                <span class="city-name">{cityName?.replace(/е$/, 'е')}</span>
+                                                <i class="fas fa-arrow-right city-arrow" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                    );
+                                })}
+                                {hasHidden && hiddenCities.map(loc => {
+                                    const cityName = (currentLang === 'ru' ? loc.name_ru : loc.name_en) || loc.name_en || loc.name_ru || loc.slug;
+                                    const url = currentLang === 'ru' ? `/ru/uslugi/${loc.slug}/` : `/en/services/${loc.slug}/`;
+                                    return (
+                                        <li class="hidden-city-item" style="display: none;">
+                                            <a href={url} class="city-pill group">
+                                                <span class="city-name">{cityName?.replace(/е$/, 'е')}</span>
+                                                <i class="fas fa-arrow-right city-arrow" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                            {hasHidden && (
+                                <button 
+                                    class="toggle-cities-btn mt-5 flex items-center gap-2 self-start w-full justify-center md:w-auto"
+                                    data-text-show={textShow}
+                                    data-text-hide={textHide}
+                                    aria-expanded="false"
+                                >
+                                    <span>{textShow}</span>
+                                    <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                                </button>
+                            )}
+                        </article>
+                    );
+                })}
+            </div>
+            
+            <div id="no-results" class="hidden text-center py-16">
+                <p class="text-xl text-text-secondary">{currentLang === 'ru' ? 'Нет доступных локаций в этом регионе.' : 'No available locations in this region.'}</p>
+            </div>
+        </section>
+    </main>
+</BaseLayout>
+
+<script>
+    // Tab Filtering Logic
+    function initFilters() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const cards = document.querySelectorAll('.country-card');
+        const noResults = document.getElementById('no-results');
+
+        if (!tabs.length || !cards.length) return;
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active state
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+
+                // Filter logic
+                const filterValue = tab.getAttribute('data-filter');
+                let count = 0;
+
+                cards.forEach(card => {
+                    const el = card as HTMLElement;
+                    if (filterValue === 'all' || el.dataset.region === filterValue) {
+                        el.style.display = 'flex'; // Country cards use flex flex-col!
+                        // Force a reflow to restart animations
+                        void el.offsetWidth;
+                        el.classList.add('fade-in');
+                        setTimeout(() => el.classList.add('visible'), 50);
+                        count++;
+                    } else {
+                        el.style.display = 'none';
+                        el.classList.remove('visible');
+                    }
+                });
+
+                if (noResults) {
+                    noResults.style.display = count === 0 ? 'block' : 'none';
+                }
+            });
+        });
+
+        // Show More Logic
+        const toggleBtns = document.querySelectorAll('.toggle-cities-btn');
+        toggleBtns.forEach(btn => {
+            // Remove old listeners if any by cloning (to prevent double fire on Astro swaps)
+            const newBtn = btn.cloneNode(true) as HTMLElement;
+            btn.parentNode?.replaceChild(newBtn, btn);
+
+            newBtn.addEventListener('click', () => {
+                const card = newBtn.closest('.country-card');
+                if (!card) return;
+                
+                const hiddenItems = card.querySelectorAll<HTMLElement>('.hidden-city-item');
+                const isExpanded = newBtn.getAttribute('aria-expanded') === 'true';
+                const textSpan = newBtn.querySelector('span');
+                const icon = newBtn.querySelector('i');
+
+                if (isExpanded) {
+                    hiddenItems.forEach(item => { item.style.display = 'none'; });
+                    newBtn.setAttribute('aria-expanded', 'false');
+                    if (textSpan) textSpan.textContent = newBtn.getAttribute('data-text-show');
+                    if (icon) icon.style.transform = 'rotate(0deg)';
+                } else {
+                    hiddenItems.forEach(item => { 
+                        item.style.display = ''; 
+                        item.style.animation = 'fadeInOpacity 0.3s ease-in-out';
+                    });
+                    newBtn.setAttribute('aria-expanded', 'true');
+                    if (textSpan) textSpan.textContent = newBtn.getAttribute('data-text-hide');
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Initial animation
+        setTimeout(() => {
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, index * 50);
+            });
+        }, 100);
+    }
+
+    // Run on first load and on astro page swaps
+    document.addEventListener('DOMContentLoaded', initFilters);
+    document.addEventListener('astro:page-load', initFilters);
+</script>
+
+<style>
+    .locations-page {
+        background-color: var(--bg-color);
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    .glow-bg {
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(circle, var(--accent-color-start) 0%, transparent 70%);
+        opacity: 0.15;
+        filter: blur(100px);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .top-glow {
+        top: -300px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* Tabs Styling */
+    .tabs-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 3rem;
+        position: relative;
+    }
+
+    /* Edge shadows for scroll feedback on mobile */
+    .tabs-container::before, 
+    .tabs-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 30px;
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    @media (max-width: 768px) {
+        .tabs-container::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-color), transparent);
+            opacity: 1;
+        }
+        .tabs-container::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-color), transparent);
+            opacity: 1;
+        }
+    }
+
+    .tabs-scroll {
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        border-radius: 999px;
+        overflow-x: auto;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tabs-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-secondary-color);
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.7rem 1.25rem;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        white-space: nowrap;
+        scroll-snap-align: center;
+    }
+
+    .tab-btn:hover {
+        color: var(--text-color);
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+        background: var(--accent-gradient);
+        color: var(--card-bg, #0d0d0d); /* Always dark text over bright gradient */
+        font-weight: 700;
+        box-shadow: 0 4px 15px rgba(var(--accent-color-start-rgb), 0.3);
+    }
+    
+    .light-theme .tab-btn.active {
+        color: #fff;
+    }
+
+    /* Grid Layout */
+    .layout-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+
+    /* Card Overrides */
+    .country-card {
+        padding: 2rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .country-title {
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0;
+        padding-bottom: 1.25rem;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-color);
+    }
+
+    /* City Pills */
+    .cities-list {
+        list-style: none;
+        padding: 0;
+        flex-grow: 1;
+        align-content: flex-start;
+    }
+
+    .city-pill {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+        padding: 0.6rem 0.8rem;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid transparent;
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .city-name {
+        color: var(--text-secondary-color);
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .city-arrow {
+        color: var(--accent-color-start);
+        font-size: 0.85rem;
+        opacity: 0;
+        transform: translateX(-5px);
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .city-pill:hover,
+    .city-pill:focus-visible {
+        background: rgba(var(--accent-color-start-rgb), 0.08);
+        border-color: rgba(var(--accent-color-start-rgb), 0.3);
+        outline: none;
+    }
+
+    .city-pill:hover .city-name,
+    .city-pill:focus-visible .city-name {
+        color: var(--text-color);
+    }
+
+    .city-pill:hover .city-arrow,
+    .city-pill:focus-visible .city-arrow {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Animations */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        will-change: opacity, transform;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Show More Toggle Button */
+    .toggle-cities-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid transparent;
+        color: var(--text-secondary-color);
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.7rem 1.25rem;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .toggle-cities-btn i {
+        color: var(--accent-color-start);
+        font-size: 0.85rem;
+        opacity: 0.8;
+    }
+
+    .toggle-cities-btn:hover,
+    .toggle-cities-btn:focus-visible {
+        background: rgba(var(--accent-color-start-rgb), 0.08);
+        border-color: rgba(var(--accent-color-start-rgb), 0.3);
+        color: var(--text-color);
+        outline: none;
+    }
+
+    .toggle-cities-btn:hover i,
+    .toggle-cities-btn:focus-visible i {
+        opacity: 1;
+    }
+
+    @media (max-width: 640px) {
+        .layout-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .cities-list {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+
+        .tabs-scroll {
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            padding: 0.5rem 1rem;
+            width: 100vw;
+            margin-left: -1rem; /* Break out of container */
+        }
+    }
+</style>

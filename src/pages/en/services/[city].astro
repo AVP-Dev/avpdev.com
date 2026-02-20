@@ -17,6 +17,9 @@ const cityData = locations.find(loc => loc.slug === city);
 const content = city && geoContent[city]?.en;
 
 if (!cityData || !content) {
+    if (city && geoContent[city]?.ru) {
+        return Astro.redirect(`/ru/uslugi/${city}/`);
+    }
     return Astro.redirect('/en/404/');
 }
 
