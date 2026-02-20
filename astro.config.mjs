@@ -5,17 +5,20 @@ import partytown from '@astrojs/partytown';
 import react from '@astrojs/react';
 import remarkHeadingId from 'remark-heading-id';
 import { locations } from './src/data/locations.ts';
+import { geoContent } from './src/data/geo-content.ts';
 import partytownSanitizer from './src/integrations/partytownSanitizer.ts';
 
 const site = 'https://avpdev.com';
 
-// Генерируем массив полных URL для sitemap
+// Генерируем массив полных URL для sitemap (только те, у которых есть SEO-контент, чтобы избежать 301 редиректов в sitemap)
 const geoPages = locations.flatMap(loc => {
   const urls = [];
-  if (loc.name_ru) {
+  if (geoContent[loc.slug]?.ru) {
     urls.push(`${site}/ru/uslugi/${loc.slug}/`);
   }
-  urls.push(`${site}/en/services/${loc.slug}/`);
+  if (geoContent[loc.slug]?.en) {
+    urls.push(`${site}/en/services/${loc.slug}/`);
+  }
   return urls;
 });
 
