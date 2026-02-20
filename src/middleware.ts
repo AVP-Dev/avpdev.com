@@ -75,10 +75,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return context.redirect(newPath, 301);
   }
 
-  // 3. Root Redirect (Strictly /ru/)
-  if (path === '/') {
-    return context.redirect('/ru/', 301);
-  }
+  // Note: Root Redirect (/) is now handled by src/pages/index.astro using SSR
 
   // 4. Remove .html extension
   if (path.endsWith('.html')) {
