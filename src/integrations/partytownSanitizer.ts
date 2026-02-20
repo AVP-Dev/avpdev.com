@@ -48,11 +48,12 @@ export default function partytownSanitizer(): AstroIntegration {
 }
 
 // Pattern that matches the deprecated API checks inside isValidMemberName()
-// In minified code: ||"SharedStorage"===e||"AttributionReporting"===e
-// In debug code:    || memberName === "SharedStorage" || memberName === "AttributionReporting"
+// We need to match aggressively inside both JS and HTML (sandbox) files.
 const DEPRECATED_API_PATTERNS = [
   /\|\|"SharedStorage"===\w\|\|"AttributionReporting"===\w/g,
   /\|\|\s*memberName\s*===\s*"SharedStorage"\s*\|\|\s*memberName\s*===\s*"AttributionReporting"/g,
+  /\|\|"SharedStorage"===.*?\|\|"AttributionReporting"===.*?/g,
+  /"SharedStorage"|'SharedStorage'|"AttributionReporting"|'AttributionReporting'/g // Aggressive fallback: just strip the strings
 ];
 
 function patchFile(filePath: string): void {
@@ -64,7 +65,8 @@ function patchFile(filePath: string): void {
     pattern.lastIndex = 0;
     if (pattern.test(content)) {
       pattern.lastIndex = 0;
-      content = content.replace(pattern, '');
+      // Replace with harmless strings to not break syntax
+      content = content.replace(pattern, '"_patched_"');
       patched = true;
     }
   }
@@ -83,7 +85,7 @@ function patchDirectory(dir: string): void {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       patchDirectory(fullPath);
-    } else if (entry.name.endsWith('.js')) {
+    } else if (entry.name.endsWith('.js') || entry.name.endsWith('.html')) {
       patchFile(fullPath);
     }
   }
