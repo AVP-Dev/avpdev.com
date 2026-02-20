@@ -1,127 +1,52 @@
-# AVPdev.com: Production-Ready Astro 5 Portfolio & Blog
+# AVP-Dev Portfolio Core
+
+[🇷🇺 Russian Version](./README.ru.md) | [⚙️ Technical Specs](./docs/TECHNICAL.md)
+
+---
+
+> [!NOTE]
+> **Vision:** This repository is not just a personal website—it is a reference architecture for modern frontend development. It demonstrates the ideal balance between bleeding-edge performance, advanced SEO, and absolute security.
 
 [![Astro v5](https://img.shields.io/badge/Astro-v5-FF5D01?logo=astro)](https://astro.build)
+[![Bun](https://img.shields.io/badge/Bun-1.x-black?logo=bun)](https://bun.sh/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Node.js](https://img.shields.io/badge/Node.js-24.x-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Это персональный сайт-портфолио и технический блог, разработанный на фреймворке **Astro 5**. Проект служит архитектурным эталоном для создания современных, производительных и безопасных веб-приложений. Вся экосистема полностью контейнеризирована с помощью **Docker** и **Docker Compose**, что гарантирует абсолютную воспроизводимость, безопасность и стабильность окружения на любом этапе — от локальной разработки до production.
+AVP-Dev Portfolio Core is a production-ready portfolio and technical blog built on **Astro 5**. It serves as an architectural blueprint for creating modern, performant, and secure web applications. 
 
-## 🏛️ Архитектурная философия
+## 🚀 Key Features
 
-Этот проект — практическая реализация трех ключевых принципов:
+- **Docker-First Ecosystem**: Fully containerized environment ensuring 100% reproducibility from local development to production.
+- **Security by Design**: Security is a foundational layer. Multi-stage Docker builds, non-root execution, server-side DOM sanitization, and strict environment variable management.
+- **Hybrid Rendering (SSR + SSG)**: Operates in `output: 'server'` mode for dynamic forms and Telegram API integrations, while pre-rendering (`prerender = true`) most pages for maximum performance and SEO.
+- **Headless Content Management**: No external CMS needed. Articles, projects, and legal documents are managed directly via Astro Content Collections with full TypeScript validation natively.
+- **CI/CD Auto-Deployment**: Seamlessly integrated with **Coolify** and GitHub Actions for zero-downtime deployment.
 
-1.  **Docker-First**: Окружение — это часть приложения. Любая разработка, тестирование и развертывание происходят исключительно в Docker-контейнерах. Это исключает фразу "у меня на машине все работало" и гарантирует идентичность сред.
-2.  **Безопасность по умолчанию (Security by Design)**: Безопасность — не запоздалая мысль, а фундаментальный слой архитектуры. Мы используем многоступенчатые Docker-сборки, запускаем процессы от непривилегированного пользователя, санируем вводы на стороне сервера и управляем секретами через переменные окружения.
-3.  **Производительность и SEO как основа**: Сайт спроектирован для максимальной производительности и видимости в поисковых системах. Мы используем гибридный рендеринг Astro, генерируем гео-таргетированные страницы и внедряем структурированные данные для достижения наилучших показателей Core Web Vitals и SEO.
+## 🏆 Architectural Roadmap
 
-## 🚀 Ключевые особенности
+While the foundation is solid, continuous evolution is key:
+- Global CDN distribution optimization mapping
+- Advanced Edge rendering for hyper-localized content delivery
+- Automated visual regression testing suite integration
 
--   **Современный стек**: Построен на последней версии **Astro 5** с использованием Vite, что обеспечивает молниеносную разработку и сборку.
--   **Полная контейнеризация**: Готовое к запуску окружение на базе **Docker** и **Docker Compose**. `Dockerfile` оптимизирован для безопасности и минимального размера образа за счет multi-stage builds и запуска от non-root пользователя.
--   **Гибридный рендеринг**: Проект работает в режиме `output: 'server'` для поддержки серверных API, при этом большинство страниц (главная, блог, проекты, юридические документы) предварительно генерируются в статику (`prerender = true`) для максимальной производительности.
--   **Динамическое Гео-Таргетирование**: Автоматическая генерация SEO-оптимизированных страниц услуг для разных городов (`/uslugi/[city]`) с поддержкой мультиязычности и генерацией кастомных страниц в `sitemap.xml`.
--   **Безопасные API-эндпоинты**: Серверные API-роуты для обработки форм обратной связи и брифов, с валидацией данных через Zod и обязательной HTML-санитизацией вводов для предотвращения XSS-атак.
--   **Интеграция с Telegram**: Все заявки с сайта мгновенно и безопасно отправляются в Telegram-чат через серверные API для оперативной обработки.
--   **Продвинутая Интернационализация (i18n)**: Полная поддержка русского и английского языков с автоматическим префиксным роутингом и удобной системой управления переводами.
--   **Техническое SEO**: Автоматическая генерация `sitemap.xml`, кастомный `robots.txt`, внедрение JSON-LD Schema.org на гео-страницах и семантическая разметка для максимальной видимомости в поисковых системах.
--   **Управление контентом**: Статьи блога, проекты и юридические документы управляются через Astro Content Collections (Markdown) с типизацией контента.
+## 📄 License & Usage
 
-## 🛠️ Стек технологий
+Distributed under the MIT License. This repository is fully open-source as an educational showcase and template for the community.
 
--   **Фреймворк**: Astro 5
--   **Среда выполнения**: Node.js 24 LTS
--   **Язык**: TypeScript
--   **Контейнеризация**: Docker, Docker Compose
--   **Адаптер SSR**: `@astrojs/node`
--   **CI/CD**: Оптимизированный многоступенчатый (multi-stage) `Dockerfile` с `HEALTHCHECK` для мониторинга состояния приложения.
+---
 
-## ⚙️ Конфигурация окружения
-
-Для корректной работы интеграции с Telegram необходимо настроить переменные окружения.
-
-1.  Создайте файл `.env` в корне проекта (копированием из `.env.example`, если он есть).
-2.  Заполните `.env` вашими данными. Эти переменные будут безопасно переданы в контейнер через директиву `env_file` в `docker-compose.yml`.
-
-    ```env
-    # .env
-
-    # Токен вашего Telegram-бота, полученный от @BotFather
-    BOT_TOKEN="ВАШ_ТЕЛЕГРАМ_БОТ_ТОКЕН"
-
-    # ID вашего чата или канала для получения уведомлений
-    CHAT_ID="ВАШ_ТЕЛЕГРАМ_ЧАТ_ID"
-
-    # (Опционально) ID топика (ветки) в группе для отправки сообщений
-    TOPIC_ID="ID_ТОПИКА_В_ГРУППЕ"
-    ```
-
-## 🐳 Docker-First Workflow (Основной путь)
-
-Этот метод является каноническим для разработки и развертывания. Он гарантирует, что проект запускается в изолированном, безопасном и воспроизводимом окружении.
-
-### Требования
-
--   [Docker](https://www.docker.com/get-started)
--   [Docker Compose](https://docs.docker.com/compose/install/)
-
-### Инструкция по запуску
-
-1.  **Клонируйте репозиторий**:
-    ```bash
-    git clone [https://github.com/AVP-Dev/avpdev.com.git](https://github.com/AVP-Dev/avpdev.com.git)
-    cd avpdev.com
-    ```
-2.  **Настройте переменные окружения**: Создайте и заполните файл `.env`, как описано выше.
-
-3.  **Соберите и запустите контейнер**:
-    Эта команда соберет Docker-образ, установит зависимости и запустит сервис в фоновом режиме.
-    ```bash
-    docker compose up --build -d
-    ```
-4.  **Готово!** Сайт будет доступен по адресу: `http://localhost:3000`.
-
-### Полезные команды Docker
-
--   **Просмотр логов сервиса в реальном времени**:
-    ```bash
-    docker compose logs -f
-    ```
--   **Остановка и удаление контейнеров** (с очисткой анонимных томов):
-    ```bash
-    docker compose down -v
-    ```
--   **Пересборка образа и перезапуск сервиса**:
-    ```bash
-    docker compose up --build -d
-    ```
--   **Доступ к командной строке внутри контейнера** (для отладки):
-    ```bash
-    docker compose exec astro-app sh
-    ```
-
-## 🔄 CI/CD Auto-Deployment (Coolify)
-
-Проект настроен для автоматического развертывания через GitHub Actions и Coolify.
-
-1.  В настройках проекта в Coolify скопируйте **Deploy Webhook URL**.
-2.  В репозитории GitHub перейдите в **Settings > Secrets and variables > Actions**.
-3.  Создайте новый секрет `COOLIFY_WEBHOOK` и вставьте туда URL.
-
-Теперь при каждом пуше в ветку `main` GitHub будет автоматически уведомлять Coolify о необходимости пересборки и деплоя.
-
-## 📜 Доступные скрипты
-
-Эти скрипты в основном используются внутри `Dockerfile` для процесса сборки, но могут быть полезны для локальной отладки без Docker (не рекомендуется для основной работы).
-
-| Скрипт               | Описание                                                     |
-| :------------------- | :----------------------------------------------------------- |
-| `npm run dev`        | Запускает сервер для разработки с горячей перезагрузкой.      |
-| `npm run build`      | Собирает проект для production.                              |
-| `npm run preview`    | Запускает локальный сервер для предпросмотра собранной версии. |
-| `npm run astro sync` | Генерирует типы TypeScript для Content Collections и `astro:content`.    |
-
-## 📄 Лицензия
-
-Проект распространяется под лицензией MIT. Подробности см. в файле [LICENSE](LICENSE).
+<br />
+<p align="center">
+  <b><a href="https://avpdev.com/en/">Alexios Odos</a></b>
+  &nbsp;|&nbsp;
+  <b><a href="https://avpdev.com/ru/">Aliaksei Patskevich</a></b>
+  <br />
+  <sub>
+    Senior Full-stack Engineer
+    <br />
+    <a href="https://github.com/AVP-Dev">GitHub</a> &bull; <a href="https://t.me/AVP_Dev">Telegram</a>
+  </sub>
+</p>
