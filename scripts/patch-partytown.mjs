@@ -1,14 +1,12 @@
 /**
  * Partytown Deprecated API Patcher
  * 
- * Patches TWO code paths in Partytown's minified production code:
+ * Patches THREE code paths in Partytown's minified production code that
+ * enumerate window properties and trigger Chrome deprecation warnings:
  * 
- * 1. isValidMemberName() — the filter that decides which window properties
- *    to scan. We add SharedStorage/AttributionReporting to the exclusion list.
- * 
- * 2. readMainInterfaces() — uses Object.getOwnPropertyNames(mainWindow)
- *    which triggers Chrome deprecation warnings just by enumerating window
- *    properties. We wrap it with a .filter() to skip deprecated API names.
+ * 1. isValidMemberName() — the filter for property scanning loops.
+ * 2. readMainInterfaces() — Object.getOwnPropertyNames(mainWindow)
+ * 3. Window property copy loop — Object.getOwnPropertyNames(e).map(t=>{t in p||(p[t]=e[t])})
  *
  * Runs as a postinstall hook via package.json.
  */
@@ -20,7 +18,6 @@ const PARTYTOWN_LIB_PATHS = [
     'node_modules/@builder.io/partytown/lib',
 ];
 
-// Deprecated API names to exclude from Partytown's window scanning 
 const DEPRECATED_APIS = [
     'SharedStorage',
     'AttributionReporting',
@@ -28,24 +25,7 @@ const DEPRECATED_APIS = [
     'attributionReporting',
 ];
 
-// --- Patch 1: isValidMemberName exclusion list ---
-const PATCH1_FIND = 'i(e,"toJSON")||i(e,"constructor")||i(e,"toString")||i(e,"_"))';
-const PATCH1_REPLACE = PATCH1_FIND.replace(
-    '||i(e,"_"))',
-    `||i(e,"_")||${DEPRECATED_APIS.map(n => `e==="${n}"`).join('||')})`
-);
-
-// --- Patch 2: Object.getOwnPropertyNames(mainWindow).map(  →  .filter().map( ---
-// In minified code: Object.getOwnPropertyNames(x).map(
-// The variable name for mainWindow varies, so we use a regex
-const PATCH2_REGEX = /Object\.getOwnPropertyNames\((\w+)\)\.map\(\((\w+)=>\(\((\w+),(\w+),(\w+),(\w+)\)=>\{if\((\w+)=(\w+)\.match\(\/\^\(HTML\|SVG\)/;
-const PATCH2_REPLACEMENT = (match, mainWinVar, eVar) => {
-    const filterList = JSON.stringify(DEPRECATED_APIS);
-    return match.replace(
-        `Object.getOwnPropertyNames(${mainWinVar}).map(`,
-        `Object.getOwnPropertyNames(${mainWinVar}).filter(n=>!${filterList}.includes(n)).map(`
-    );
-};
+const FILTER_EXPR = `.filter(n=>!${JSON.stringify(DEPRECATED_APIS)}.includes(n))`;
 
 let patchedCount = 0;
 
@@ -69,36 +49,44 @@ function patchDir(dir) {
 function patchFile(filePath) {
     let content = fs.readFileSync(filePath, 'utf-8');
     let changed = false;
+    const basename = path.basename(filePath);
 
-    // Patch 1: isValidMemberName
-    if (content.includes(PATCH1_FIND)) {
-        content = content.replace(PATCH1_FIND, PATCH1_REPLACE);
-        console.log(`[partytown-patch] ✓ Patch 1 (isValidMemberName): ${path.basename(filePath)}`);
+    // Skip already-patched files
+    if (content.includes(FILTER_EXPR)) {
+        return;
+    }
+
+    // --- PATCH 1: isValidMemberName exclusion list ---
+    const P1_FIND = 'i(e,"toJSON")||i(e,"constructor")||i(e,"toString")||i(e,"_"))';
+    const P1_REPLACE = P1_FIND.replace(
+        '||i(e,"_"))',
+        `||i(e,"_")||${DEPRECATED_APIS.map(n => `e==="${n}"`).join('||')})`
+    );
+    if (content.includes(P1_FIND)) {
+        content = content.replaceAll(P1_FIND, P1_REPLACE);
+        console.log(`  ✓ Patch 1 (isValidMemberName): ${basename}`);
         changed = true;
     }
 
-    // Patch 2: getOwnPropertyNames(mainWindow).map → .filter().map  
-    if (PATCH2_REGEX.test(content)) {
-        content = content.replace(PATCH2_REGEX, PATCH2_REPLACEMENT);
-        console.log(`[partytown-patch] ✓ Patch 2 (getOwnPropertyNames): ${path.basename(filePath)}`);
+    // --- PATCH 2: readMainInterfaces — getOwnPropertyNames(x).map for HTML/SVG elements ---
+    // Pattern: Object.getOwnPropertyNames(VAR).map((VAR=>((VAR,VAR,VAR,VAR)=>{if(VAR=VAR.match(/^(HTML|SVG)
+    const p2regex = /(Object\.getOwnPropertyNames\(\w+\))\.map\(\(\w+=>\(\(\w+,\w+,\w+,\w+\)=>\{if\(\w+=\w+\.match\(\/\^\(HTML\|SVG\)/;
+    if (p2regex.test(content)) {
+        content = content.replace(p2regex, (match, gopn) => {
+            return match.replace(gopn + '.map(', gopn + FILTER_EXPR + '.map(');
+        });
+        console.log(`  ✓ Patch 2 (readMainInterfaces): ${basename}`);
         changed = true;
     }
 
-    // Patch 2b: simpler approach — just filter any getOwnPropertyNames that feeds to HTML/SVG element matching
-    // Find the pattern: getOwnPropertyNames(VAR).map((VAR=>((VAR,VAR,VAR,VAR)=>{if(VAR=VAR.match(/^(HTML|SVG)
-    const simpleRegex = /(Object\.getOwnPropertyNames\(\w+\))\.map\(\(\w+=>\(\(\w+,\w+,\w+,\w+\)=>\{if\(\w+=\w+\.match\(\/\^\(HTML\|SVG\)/;
-    if (!changed || simpleRegex.test(content)) {
-        const filterExpr = `.filter(n=>!${JSON.stringify(DEPRECATED_APIS)}.includes(n))`;
-        if (!content.includes(filterExpr)) {
-            content = content.replace(
-                simpleRegex,
-                (match, getOwnPart) => match.replace(getOwnPart + '.map(', getOwnPart + filterExpr + '.map(')
-            );
-            if (simpleRegex.test(content) === false && content.includes(filterExpr)) {
-                console.log(`[partytown-patch] ✓ Patch 2 (getOwnPropertyNames filter): ${path.basename(filePath)}`);
-                changed = true;
-            }
-        }
+    // --- PATCH 3: Window property copy loop ---
+    // Pattern: Object.getOwnPropertyNames(e).map((t=>{t in p||(p[t]=e[t])}))
+    const P3_FIND = 'Object.getOwnPropertyNames(e).map((t=>{t in p||(p[t]=e[t])}))';
+    const P3_REPLACE = `Object.getOwnPropertyNames(e)${FILTER_EXPR}.map((t=>{t in p||(p[t]=e[t])}))`;
+    if (content.includes(P3_FIND)) {
+        content = content.replaceAll(P3_FIND, P3_REPLACE);
+        console.log(`  ✓ Patch 3 (window property copy): ${basename}`);
+        changed = true;
     }
 
     if (changed) {
@@ -107,8 +95,7 @@ function patchFile(filePath) {
     }
 }
 
-if (patchedCount > 0) {
-    console.log(`[partytown-patch] Done! Patched ${patchedCount} file(s).`);
-} else {
-    console.log('[partytown-patch] No files needed patching (already patched or pattern not found).');
-}
+console.log(patchedCount > 0
+    ? `[partytown-patch] Done! Patched ${patchedCount} file(s).`
+    : '[partytown-patch] No files needed patching.'
+);
