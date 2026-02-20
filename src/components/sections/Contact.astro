@@ -16,22 +16,26 @@ const t = useTranslations(lang);
         <form id="contact-form" class="contact-form fade-in" novalidate>
             <div class="form-grid">
                 <div class="form-group">
-                    <label class="form-label">{t("form_name")}</label>
+                    <label class="form-label" for="contact-name">{t("form_name")}</label>
                     <input
+                        id="contact-name"
                         type="text"
                         name="name"
                         placeholder="John Doe"
                         required
+                        autocomplete="name"
                         class="form-control"
                     />
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">{t("form_email")}</label>
+                    <label class="form-label" for="contact-email">{t("form_email")}</label>
                     <input
-                        type="text"
+                        id="contact-email"
+                        type="email"
                         name="contact"
                         placeholder="Email / Telegram / Phone"
+                        autocomplete="email"
                         class="form-control"
                         required
                     />
@@ -39,8 +43,9 @@ const t = useTranslations(lang);
                 </div>
 
                 <div class="form-group full-width">
-                    <label class="form-label">{t("form_message")}</label>
+                    <label class="form-label" for="contact-message">{t("form_message")}</label>
                     <textarea
+                        id="contact-message"
                         name="message"
                         placeholder={t("form_message")}
                         required

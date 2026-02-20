@@ -283,6 +283,8 @@ nav {
 .logo-img {
     height: 32px;
     width: auto;
+    /* Lighthouse suggests keeping explicit sizes. Let's make sure it handles responsiveness */
+    aspect-ratio: 40/40;
 }
 
 .logo-text {
