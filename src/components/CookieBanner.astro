@@ -5,7 +5,7 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const cookieText = t('cookie_text').replace('/privacy-policy', `/${lang}/privacy-policy/`);
+const cookieText = t('cookie_text').replace('/privacy-policy', `/${lang}/legal/privacy-policy/`);
 ---
 <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
     <p class="cookie-text" set:html={cookieText}></p>

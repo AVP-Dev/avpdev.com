@@ -37,17 +37,28 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // 0. Strict Canonical Redirection (Force HTTPS & Non-WWW)
   // ENABLED to fix non-WWW and HTTPS canonical errors in GSC
-  const protocol = context.request.headers.get('x-forwarded-proto') || url.protocol.replace(':', '');
-  const host = context.request.headers.get('host') || url.host;
+  let protocol = url.protocol.replace(':', '');
+  let host = url.host;
 
-  if (
-    !host.includes('localhost') &&
-    !host.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/) &&
-    (protocol === 'http' || host.startsWith('www.'))
-  ) {
-    const cleanHost = host.startsWith('www.') ? host.slice(4) : host;
-    const newUrl = `https://${cleanHost}${path}${url.search}`;
-    return context.redirect(newUrl, 301);
+  // By skipping headers access on localhost and during development, we avoid the Astro warning:
+  // "Astro.request.headers is not available on prerendered pages".
+  const isDev = import.meta.env.DEV;
+  if (!isDev && !host.includes('localhost') && !host.includes('127.0.0.1')) {
+    try {
+      protocol = context.request.headers.get('x-forwarded-proto') || protocol;
+      host = context.request.headers.get('host') || host;
+    } catch (e) {
+      // Ignore
+    }
+
+    if (
+      !host.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/) &&
+      (protocol === 'http' || host.startsWith('www.'))
+    ) {
+      const cleanHost = host.startsWith('www.') ? host.slice(4) : host;
+      const newUrl = `https://${cleanHost}${path}${url.search}`;
+      return context.redirect(newUrl, 301);
+    }
   }
 
   // 1. Exact Match Redirects
@@ -64,7 +75,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return context.redirect(newPath, 301);
   }
 
-  // 3. Root Redirect
+  // 3. Root Redirect (Strictly /ru/)
   if (path === '/') {
     return context.redirect('/ru/', 301);
   }
