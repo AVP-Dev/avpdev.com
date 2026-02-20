@@ -10,7 +10,6 @@ export const printing3dTranslations = {
         case_3d_task_p: 'Студии AV3D требовался современный и функциональный сайт для демонстрации своих возможностей в 3D-печати и моделировании. Основная задача — создать удобный канал для приема заказов и наглядно показать качество работ потенциальным клиентам.',
         case_3d_solution_title: 'Интерактивная платформа для заказов',
         case_3d_solution_p: 'Я разработал адаптивный лендинг, который отлично смотрится на всех устройствах. Центральным элементом стала интерактивная форма заказа с валидацией и защитой от спама, уведомления от которой приходят напрямую в Telegram. Это позволило клиенту мгновенно получать и обрабатывать заявки. Визуальная часть была усилена галереей работ с возможностью детального просмотра.',
-        case_3d_features_p: 'Проект AV3D включает следующие ключевые возможности:',
         case_3d_solution_li1: '<strong>Полностью адаптивный дизайн:</strong> Обеспечивает отличный пользовательский опыт на всех устройствах (мобильные, планшеты, десктопы).',
         case_3d_solution_li2: '<strong>Интерактивный интерфейс:</strong> Включает переключатель светлой/темной темы с сохранением выбора, форму заказа с валидацией, интегрированной reCAPTCHA v3 и уведомлениями в Telegram.',
         case_3d_solution_li3: '<strong>Портфолио работ:</strong> Галерея с примерами 3D-печати и моделирования, оснащенная лайтбоксом для детального просмотра изображений.',
@@ -36,7 +35,6 @@ export const printing3dTranslations = {
         case_3d_task_p: 'The AV3D studio required a modern and functional website to demonstrate its capabilities in 3D printing and modeling. The main task was to create a convenient channel for receiving orders and to clearly show the quality of work to potential clients.',
         case_3d_solution_title: 'An Interactive Platform for Orders',
         case_3d_solution_p: 'I developed a responsive landing page that looks great on all devices. The central element was an interactive order form with validation and spam protection, with notifications sent directly to Telegram. This allowed the client to instantly receive and process applications. The visual part was enhanced by a portfolio gallery with a detailed view option.',
-        case_3d_features_p: 'The AV3D project includes the following key features:',
         case_3d_solution_li1: '<strong>Fully Responsive Design:</strong> Ensures an excellent user experience on all devices (mobile, tablets, desktops).',
         case_3d_solution_li2: '<strong>Interactive Interface:</strong> Includes a light/dark theme switcher with saved preference, an order form with validation, integrated reCAPTCHA v3, and Telegram notifications.',
         case_3d_solution_li3: '<strong>Work Portfolio:</strong> A gallery with examples of 3D printing and modeling, equipped with a lightbox for detailed image viewing.',
@@ -51,4 +49,4 @@ export const printing3dTranslations = {
         gallery_caption_3d_faq: 'FAQ: Answers to common questions to address objections',
         gallery_caption_3d_contact_form: 'Order Form: The main lead generation tool',
     }
- } as const;
+} as const;

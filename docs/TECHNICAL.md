@@ -18,7 +18,7 @@ graph TD
     
     subgraph "Server-Side Infrastructure"
       C -->|Pre-rendered Pages| D["Astro SSG Engine"]
-      C -->|Dynamic API Routes| E["Astro Node.js SSR"]
+      C -->|Dynamic API Routes| E["Astro Bun SSR"]
       E -->|Data Validation| F["Zod Schema Validator"]
       F -->|Sanitization| G["HTML Sanitizer"]
     end
@@ -32,9 +32,9 @@ graph TD
 
 ## 🔐 Security Architecture
 
-1. **XSS Protection**: All user inputs in forms are automatically sanitized via server-side logic (`sanitize-html`) running on the Astro Node.js backend to prevent script injection.
+1. **XSS Protection**: All user inputs in forms are automatically sanitized via server-side logic (`sanitize-html`) running on the Astro Bun backend to prevent script injection.
 2. **Environment Masking**: Internal keys (`BOT_TOKEN`, `CHAT_ID`) are rigorously masked. The client is completely unaware of these values.
-3. **Container Isolation**: The multi-stage Dockerfile utilizes Node.js 24 Alpine, enforcing a root-less execution protocol at runtime for operational security.
+3. **Container Isolation**: The multi-stage Dockerfile utilizes Bun Alpine, enforcing a root-less execution protocol at runtime for operational security.
 
 ## 🚀 CLI Commands
 

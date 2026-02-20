@@ -7,6 +7,7 @@ export const mekohausTranslations = {
         case_mekohaus_client: 'Мебельная фабрика "Mekohaus"',
         case_mekohaus_services: 'Full-Stack разработка, UI/UX',
         case_mekohaus_task_p: 'Создать многоязычный B2B-портал для оптовых продаж мебели. Ключевые цели: предоставить партнерам и дилерам удобный интерактивный каталог продукции, автоматизировать процесс получения оптовых заявок и обеспечить стабильную работу сайта под высокой нагрузкой.',
+        case_mekohaus_solution_p: 'Я разработал полноценный B2B-портал с кастомной админ-панелью на PHP. Это решение позволило не только удобно управлять каталогом товаров, но и автоматизировать обработку заявок через интеграцию с Telegram-ботом. Важно отметить, что параллельно ведется разработка проекта mekohaus.by, ориентированного на внутренний рынок по модели B2C, который будет представлен отдельным кейсом.',
         case_mekohaus_solution_li1: '<strong>Динамический каталог:</strong> Разработан интерактивный каталог с категориями и подкатегориями, подгружающий данные о товарах из JS-файлов, что упрощает управление ассортиментом.',
         case_mekohaus_solution_li2: '<strong>Многоязычность:</strong> Реализована полная поддержка русского и английского языков с возможностью переключения "на лету" без перезагрузки страницы.',
         case_mekohaus_solution_li3: '<strong>Интерактивные модальные окна:</strong> Создана система модальных окон для просмотра подкатегорий и детальной информации о товаре, включая галерею изображений.',
@@ -26,6 +27,7 @@ export const mekohausTranslations = {
         case_mekohaus_client: 'Mekohaus Furniture Factory',
         case_mekohaus_services: 'Full-Stack Development, UI/UX',
         case_mekohaus_task_p: 'To create a multilingual B2B portal for wholesale furniture sales. Key goals: provide partners and dealers with a convenient interactive product catalog, automate the process of receiving wholesale inquiries, and ensure stable site performance under high load.',
+        case_mekohaus_solution_p: 'I developed a fully-featured B2B portal with a custom PHP admin panel. This solution allowed not only for convenient product catalog management but also automated inquiry processing through Telegram bot integration. It is also worth noting that the mekohaus.by project, targeting the domestic B2C market, is currently under development and will be presented in a separate case study.',
         case_mekohaus_solution_li1: '<strong>Dynamic Catalog:</strong> Developed an interactive catalog with categories and subcategories, loading product data from JS files, which simplifies inventory management.',
         case_mekohaus_solution_li2: '<strong>Multilingual Support:</strong> Implemented full support for Russian and English languages with the ability to switch "on the fly" without reloading the page.',
         case_mekohaus_solution_li3: '<strong>Interactive Modals:</strong> Created a modal window system for viewing subcategories and detailed product information, including an image gallery.',
@@ -37,4 +39,4 @@ export const mekohausTranslations = {
         gallery_caption_mekohaus_form: 'Form for consultation and wholesale price list request',
         case_mekohaus_deployment_text: 'The project is deployed on standard shared web hosting. This is a classic and reliable solution that ensures stable site operation at an optimal cost. The PHP backend and the frontend are hosted within a single hosting account, which simplifies support and administration.',
     }
- } as const;
+} as const;

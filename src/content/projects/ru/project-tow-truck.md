@@ -23,7 +23,6 @@ content:
     pKey: 'case_tow_solution_p'
   keyFeatures:
     titleKey: 'case_key_features'
-    pKey: 'case_tow_features_p'
     listKeys:
       - 'case_tow_solution_li1'
       - 'case_tow_solution_li2'
