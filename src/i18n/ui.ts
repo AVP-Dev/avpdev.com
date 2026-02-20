@@ -10,7 +10,7 @@ import { urbanSpotTranslations } from './projects/urban-spot';
 export const ui = {
     ru: {
         // Главная страница и общие
-        page_title: 'AVPdev | Full-Stack Разработка | Создание сайтов и автоматизация бизнеса',
+        page_title: 'AVPdev | Full-Stack Разработка и Автоматизация Бизнеса',
         nav_services: 'Стек',
         nav_about: 'О нас',
         nav_portfolio: 'Кейсы',
@@ -207,7 +207,7 @@ export const ui = {
         'geoLinks.title': 'Project Geography:',
 
         // Main page and common
-        page_title: 'AVPdev | Full-Stack Development | Website Development & Business Automation',
+        page_title: 'AVPdev | Full-Stack Development & Business Automation',
         nav_services: 'Stack',
         nav_about: 'About',
         nav_portfolio: 'Cases',
