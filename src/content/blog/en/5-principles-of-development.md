@@ -33,7 +33,7 @@ Imagine hiring builders and throwing a pile of money at them, saying "Make it lo
 
 No one applies wallpaper to a bare foundation. You need walls and a floor plan first. In web development, this is the prototype.
 
-**What we do:** We create a "skeleton"—an interactive black-and-white site map. You can "walk through" it to ensure the logic flows. We often use this for [designing complex systems](/en/project/sentralix).
+**What we do:** We create a "skeleton"—an interactive black-and-white site map. You can "walk through" it to ensure the logic flows. We often use this architectural blueprinting for all complex systems.
 
 **Why it matters:** Editing a blueprint is 10x faster than rewriting code. You ensure usability before the designer even starts their work.
 
@@ -49,7 +49,7 @@ The biggest fear of any client is to pay a deposit and disappear for 3 months. T
 
 I build a solid frame: foundation, walls, and roof. But to make a house livable, you need furniture. In web, that's your content: texts, photos, and meanings.
 
-> **Key Takeaway:** No one can tell your product's story better than you. My job is to suggest what content "sells," and yours is to fill the frame with expertise. See how quality content drives results in our [car import case study](/en/project/cars).
+> **Key Takeaway:** No one can tell your product's story better than you. My job is to suggest what content "sells," and yours is to fill the frame with expertise. Quality content is the cornerstone of any successful project.
 
 ## 5. Launch is Just the Beginning {#launch}
 

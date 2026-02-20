@@ -58,6 +58,6 @@ avpdev.com is a manifesto of my philosophy:
 
 ---
 **Want a similar system for your project?**
-Check out our [other works](/en/projects) or [message me](https://t.me/AVP_Dev) to discuss the architecture of your future site.
+[Message me](https://t.me/AVP_Dev) to discuss the architecture of your future site.
 
 *Read also: [Custom Development vs Template](/en/blog/template-vs-custom)*

@@ -52,6 +52,6 @@ Sometimes you just need to loosen your grip. Stop checking the map every minute 
 
 ---
 **Want to give your project an adventurous yet reliable character?**
-Check out my [portfolio](/en/projects) or [message me](https://t.me/AVP_Dev)—let's build something unique together.
+[Message me](https://t.me/AVP_Dev)—let's build something unique together.
 
 *Read also: [7 Website Elements That Turn Chaos into Sales](/en/blog/7-website-elements-that-convert)*
