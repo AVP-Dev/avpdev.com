@@ -81,6 +81,14 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
 
     {GTAG_ID && (
         <>
+            {/* Удаляем deprecated API до того, как Partytown их обнаружит */}
+            <script is:inline>
+                try { delete window.SharedStorage; } catch(e) {}
+                try { delete window.AttributionReporting; } catch(e) {}
+                try { delete document.attributionReporting; } catch(e) {}
+                try { delete document.sharedStorage; } catch(e) {}
+                try { delete navigator.attributionReporting; } catch(e) {}
+            </script>
             {/* Google Tag Manager - PARTYTOWN */}
             <script type="text/partytown" async src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`}></script>
             <script type="text/partytown" define:vars={{ GTAG_ID }}>
