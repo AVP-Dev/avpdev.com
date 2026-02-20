@@ -6,7 +6,6 @@ import react from '@astrojs/react';
 import remarkHeadingId from 'remark-heading-id';
 import { locations } from './src/data/locations.ts';
 import { geoContent } from './src/data/geo-content.ts';
-import partytownSanitizer from './src/integrations/partytownSanitizer.ts';
 
 const site = 'https://avpdev.com';
 
@@ -51,10 +50,6 @@ export default defineConfig({
       },
     }),
 
-    // 4.1. Патч Partytown: удаление deprecated API (SharedStorage, AttributionReporting)
-    // ВАЖНО: должен идти ПОСЛЕ partytown(), чтобы патчить уже скопированные файлы
-    partytownSanitizer(),
-
     // 5. Поддержка React компонентов
     react()
   ],
@@ -62,7 +57,8 @@ export default defineConfig({
   // 6. Настройки путей и сервера
   trailingSlash: 'always',
   build: {
-    format: 'directory'
+    format: 'directory',
+    inlineStylesheets: 'always'
   },
   server: {
     host: '0.0.0.0',

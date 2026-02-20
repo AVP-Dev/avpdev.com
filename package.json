@@ -12,7 +12,8 @@
     "preview": "astro preview --host",
     "astro": "astro",
     "check": "astro check",
-    "sync": "astro sync"
+    "sync": "astro sync",
+    "postinstall": "node scripts/patch-partytown.js"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
