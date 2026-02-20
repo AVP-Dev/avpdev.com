@@ -7,7 +7,7 @@ servicesKey: 'case_cars_services_portfolio'
 year: 2024
 featured: true
 category: 'web-site'
-stack: ['HTML', 'CSS', 'JavaScript']
+stack: ['Astro', 'TypeScript', 'Tailwind']
 publishDate: 2024-05-15
 heroImage: '../../../assets/images/projects/cars/hero.webp'
 heroImageAlt: 'Главный экран сайта АвтоМир Импорт'
@@ -31,15 +31,15 @@ content:
       - 'case_cars_solution_li5_portfolio'
       - 'case_cars_solution_li6_portfolio'
   techStack:
-    - icon: 'fab fa-html5'
-      title: 'HTML5'
-      color: '#E34F26'
-    - icon: 'fab fa-css3-alt'
-      title: 'CSS3'
-      color: '#1572B6'
+    - icon: 'fab fa-node-js'
+      title: 'Astro 5'
+      color: '#FF5D01'
     - icon: 'fab fa-js-square'
-      title: 'JavaScript'
-      color: '#F7DF1E'
+      title: 'TypeScript'
+      color: '#3178C6'
+    - icon: 'fab fa-css3-alt'
+      title: 'Tailwind v4'
+      color: '#06B6D4'
   deployment:
     titleKey: 'case_deployment_title'
     pKey: 'case_cars_deployment_text'

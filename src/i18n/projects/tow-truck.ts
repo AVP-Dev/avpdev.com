@@ -11,7 +11,6 @@ export const towTruckTranslations = {
         case_tow_solution_title: 'Mobile-First решение для экстренных ситуаций',
         case_tow_solution_p: 'Я создал классический одностраничный сайт, где вся ключевая информация находится на первом экране. Основной фокус был сделан на Mobile-First подходе: крупные, кликабельные номера телефонов, простая навигация и быстрая загрузка, чтобы пользователь мог получить помощь в несколько касаний.',
         case_tow_deployment_text: 'Лендинг развернут на хостинге <strong>Netlify</strong>, который обеспечивает автоматическую сборку из Git, глобальное развертывание через CDN и высокую скорость загрузки. Это идеальное решение для статических сайтов, где важна максимальная производительность и надежность.',
-        case_tow_features_p: 'Ключевые элементы лендинга:',
         case_tow_solution_li1: '<strong>Крупные номера телефонов:</strong> Номера телефонов размещены в шапке сайта и продублированы на главном баннере. На мобильных устройствах они кликабельны для мгновенного набора.',
         case_tow_solution_li2: '<strong>Интерактивная карта:</strong> Добавлена карта с четко очерченной зоной обслуживания, чтобы клиенты сразу понимали, смогут ли им помочь.',
         case_tow_solution_li3: '<strong>Форма обратной связи:</strong> Простая форма для тех, кто хочет заказать эвакуацию не срочно или задать вопрос.',
@@ -35,7 +34,6 @@ export const towTruckTranslations = {
         case_tow_solution_title: 'A Mobile-First Solution for Emergencies',
         case_tow_solution_p: 'I created a classic single-page website where all key information is on the first screen. The main focus was on a Mobile-First approach: large, clickable phone numbers, simple navigation, and fast loading, so a user can get help in just a few taps.',
         case_tow_deployment_text: 'The landing page is deployed on <strong>Netlify</strong>, which provides automatic builds from Git, global deployment via CDN, and high loading speeds. This is an ideal solution for static sites where maximum performance and reliability are critical.',
-        case_tow_features_p: 'Key elements of the landing page:',
         case_tow_solution_li1: '<strong>Large Phone Numbers:</strong> Phone numbers are placed in the website header and duplicated on the main banner. On mobile devices, they are clickable for instant dialing.',
         case_tow_solution_li2: '<strong>Interactive Map:</strong> An interactive map with a clearly defined service area was added so that clients could immediately understand if they could be helped.',
         case_tow_solution_li3: '<strong>Contact Form:</strong> A simple form for those who want to order evacuation non-urgently or ask a question.',
@@ -47,4 +45,4 @@ export const towTruckTranslations = {
         gallery_caption_tow_testimonials: 'Testimonials: Confirmation of service quality from real clients',
         gallery_caption_tow_contacts_form: 'Order Form: An alternative contact method for non-urgent cases',
     }
- } as const;
+} as const;

@@ -9,7 +9,6 @@ export const carsTranslations = {
         case_cars_solution_title: 'Решение, которое строит доверие',
         case_cars_solution_p: 'Я разработал сайт, ключевым элементом которого стал многошаговый интерактивный калькулятор. Калькулятор реализован на чистом JavaScript для мгновенного отклика без задержек и позволяет пользователям в реальном времени самостоятельно рассчитать финальную стоимость автомобиля, включая все сборы и пошлины, делая процесс полностью прозрачным. Это не только повысило конверсию, но и значительно сократило время на консультации для менеджеров.',
         case_cars_deployment_text: 'Сайт является полностью статическим (HTML, CSS, JavaScript), что обеспечивает максимальную скорость загрузки и надежность. Для развертывания используется платформа Netlify, которая автоматически собирает проект из Git-репозитория и распространяет его через глобальную CDN. Такой подход гарантирует мгновенный доступ для пользователей по всему миру и не требует сложной серверной поддержки.',
-        case_cars_features_p_portfolio: 'В рамках проекта были реализованы следующие ключевые возможности:',
         case_cars_solution_li1_portfolio: '<strong>Интерактивный калькулятор растаможки:</strong> Разработан многошаговый калькулятор, позволяющий пользователям в реальном времени рассчитать полную стоимость автомобиля с учетом всех сборов и пошлин.',
         case_cars_solution_li2_portfolio: '<strong>Подробное описание услуг:</strong> Созданы секции с детальным описанием комплексных услуг по подбору, доставке, таможенному оформлению и регистрации автомобилей.',
         case_cars_solution_li3_portfolio: '<strong>Галерея примеров автомобилей:</strong> Реализован раздел с примерами уже доставленных или доступных для заказа автомобилей, с подробными характеристиками и ценами.',
@@ -34,7 +33,6 @@ export const carsTranslations = {
         case_cars_solution_title: 'A Solution That Builds Trust',
         case_cars_solution_p: 'I developed a website where the key element is a multi-step interactive calculator. The calculator is implemented in pure JavaScript to provide instant feedback without delays, allowing users to independently calculate the final cost of a car in real time, including all fees and duties, making the process completely transparent. This not only increased conversion but also significantly reduced consultation time for managers.',
         case_cars_deployment_text: 'The site is completely static (HTML, CSS, JavaScript), which ensures maximum loading speed and reliability. The Netlify platform is used for deployment, which automatically builds the project from the Git repository and distributes it through a global CDN. This approach guarantees instant access for users worldwide and does not require complex server support.',
-        case_cars_features_p_portfolio: 'The following key features were implemented as part of the project:',
         case_cars_solution_li1_portfolio: '<strong>Interactive Customs Calculator:</strong> Developed a multi-step calculator allowing users to instantly calculate the full cost of a car including all fees and duties.',
         case_cars_solution_li2_portfolio: '<strong>Detailed Service Descriptions:</strong> Created sections with detailed descriptions of comprehensive services for car selection, delivery, customs clearance, and registration.',
         case_cars_solution_li3_portfolio: '<strong>Gallery of Car Examples:</strong> Implemented a section with examples of cars already delivered or available for order, with detailed specifications and prices.',
@@ -49,4 +47,4 @@ export const carsTranslations = {
         gallery_caption_cars_testimonials: 'Testimonials: Confirmation of reliability from real clients',
         gallery_caption_cars_contact: 'Inquiry Form: A simple and clear next step',
     }
- } as const;
+} as const;
