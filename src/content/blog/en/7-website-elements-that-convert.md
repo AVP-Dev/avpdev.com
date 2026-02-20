@@ -41,7 +41,7 @@ Don't make the client think. Every section of the site should end with a logical
 ## 3. Social Proof (Portfolio and Testimonials) {#social}
 
 Before clicking that button, a visitor asks: "Can I trust them?"
-* **Case Studies:** Not just pictures, but a story of problem-solving. Check out our [Sentralix case study](/en/project/sentralix)—it's a prime example of how architecture solves business challenges.
+* **Case Studies:** Not just pictures, but a story of problem-solving. This is a prime example of how architecture solves business challenges.
 * **Testimonials:** Real words from real clients.
 
 ## 4. Seamless Mobile Adaptation

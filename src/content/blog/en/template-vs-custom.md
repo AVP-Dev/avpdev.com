@@ -43,7 +43,7 @@ Custom development is when a site is created from scratch according to a unique 
 
 - **Thought-out Layout.** The site is initially designed around your business processes. Every "room" (section) and every "door" (button) is exactly where your customers need them. The site works for you, not you trying to fit into its framework.
 
-- **A Solid Foundation for Growth.** Your business grows, and the site grows with it. The foundation is initially laid with the expectation that you can add a second floor (a new section) or complex functionality (like an [interactive customs calculator](/en/project/cars)) without fear of the whole structure collapsing.
+- **A Solid Foundation for Growth.** Your business grows, and the site grows with it. The foundation is initially laid with the expectation that you can add a second floor (a new section) or complex functionality (like an interactive customs calculator) without fear of the whole structure collapsing.
 
 - **Reliability and High Speed.** No extra corridors or unused rooms. The code only contains the functions you need, so the site works quickly and stably. Loading speed directly affects your Google search engine rankings.
 

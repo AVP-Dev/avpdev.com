@@ -47,7 +47,7 @@ You don't need to throw away a site with complex user accounts and carts that co
 
 We use **Islands Architecture** powered by **Astro**:
 
-1. **Keep Your Business Logic (React):** Your complex calculators and carts (like in our [car import case study](/en/project/cars)) stay on React but load only when scrolled into view.
+1. **Keep Your Business Logic (React):** Your complex calculators and carts stay on React but load only when scrolled into view.
 2. **Server-Side Rendering (SSR/SSG):** Essential content (catalog, articles) reaches the browser instantly as lightweight HTML.
 3. **SEO Advantage:** Search engines see fast code and rank you above slower competitors.
 
