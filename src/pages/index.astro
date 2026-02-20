@@ -1,8 +1,15 @@
 ---
 // src/pages/index.astro
-// Отключаем пререндеринг, чтобы редирект происходил на уровне сервера (мгновенно),
-// а не через HTML-страницу с надписью "Redirecting..."
 export const prerender = false;
 
-return Astro.redirect('/ru/', 301);
+const preferred = Astro.preferredLocale || 'ru';
+const targetLocale = `/${preferred}/`;
+
+return new Response(null, {
+  status: 302,
+  headers: {
+    'Location': targetLocale,
+    'Cache-Control': 'no-store, no-cache, must-revalidate',
+  }
+});
 ---

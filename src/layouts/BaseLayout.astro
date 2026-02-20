@@ -154,6 +154,20 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
         document.addEventListener('astro:after-swap', applyTheme);
     </script>
 
+    {/* Уничтожение старых Service Workers, которые ломают редиректы и кешируют старые страницы */}
+    <script is:inline>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    registration.unregister();
+                }
+            }).catch(function(err) {
+                console.log('Service Worker unregistration failed: ', err);
+            });
+        }
+    </script>
+
+
     <ClientRouter />
 
     <style is:inline>
