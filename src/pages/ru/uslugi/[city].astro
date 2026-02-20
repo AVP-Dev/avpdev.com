@@ -7,8 +7,7 @@ import { geoContent } from '../../../data/geo-content';
 export const prerender = true;
 
 export async function getStaticPaths() {
-    const ruLocations = locations.filter(loc => loc.name_ru);
-    return ruLocations.map(loc => ({
+    return locations.map(loc => ({
         params: { city: loc.slug },
     }));
 }
@@ -18,6 +17,9 @@ const cityData = locations.find(loc => loc.slug === city);
 const content = city && geoContent[city]?.ru;
 
 if (!cityData || !content) {
+    if (city && geoContent[city]?.en) {
+        return Astro.redirect(`/en/services/${city}/`);
+    }
     return Astro.redirect('/ru/404/');
 }
 

@@ -56,7 +56,7 @@ const t = useTranslations(lang);
                 </nav>
             </div>
 
-            <!-- Column 3: Legal -->
+            <!-- Column 3: Legal & Local -->
             <div class="footer-col legal-col">
                 <h4 class="footer-title">{t("footer_legal")}</h4>
                 <nav class="footer-nav secondary">
@@ -75,7 +75,11 @@ const t = useTranslations(lang);
 
         {/* Geo Links Section for SEO */}
         <div class="footer-geo-section">
-            <h4 class="footer-title">{t("geoLinks.title")}</h4>
+            <h4 class="footer-title">
+                <a href={`/${lang}/locations/`} class="geo-title-link">
+                    {t("geoLinks.title")}
+                </a>
+            </h4>
             <div class="geo-links-row">
                 {
                     [
@@ -89,9 +93,9 @@ const t = useTranslations(lang);
                         { slug: "europe", ru: "Европа", en: "Europe" },
                         { slug: "usa", ru: "США", en: "USA" },
                     ].map((loc) => (
-                        <span class="geo-tag">
+                        <a href={`/${lang}/locations/`} class="geo-tag">
                             {lang === "ru" ? loc.ru : loc.en}
-                        </span>
+                        </a>
                     ))
                 }
             </div>
@@ -245,6 +249,17 @@ const t = useTranslations(lang);
     .footer-geo-section .footer-title {
         text-align: center;
         width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .geo-title-link {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .geo-title-link:hover {
+        color: var(--accent-color-start);
     }
 
     .geo-links-row {
@@ -258,12 +273,13 @@ const t = useTranslations(lang);
         font-size: 0.85rem;
         color: var(--text-secondary-color);
         opacity: 0.6;
-        cursor: default;
-        transition: opacity 0.3s ease;
+        text-decoration: none;
+        transition: all 0.3s ease;
     }
 
     .geo-tag:hover {
         opacity: 1;
+        color: var(--accent-color-start);
     }
 
     .footer-signature :global(.w-full) {

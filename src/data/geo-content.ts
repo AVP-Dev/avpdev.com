@@ -539,10 +539,10 @@ export const geoContent: { [key: string]: { [lang: string]: { title: string; des
       p: 'Navigate the competitive Berlin market with a powerful website. We specialize in custom web applications and digital experiences.'
     },
     'ru': {
-        title: 'Веб-разработка в Берлине | Инновационные технические решения',
-        description: 'Ваш партнер по веб-разработке в Берлине. Мы создаем масштабируемые, безопасные и удобные для пользователей веб-сайты для стартапов и уже существующих компаний в Германии.',
-        h1: 'Веб-разработка в Берлине',
-        p: 'Ориентируйтесь на конкурентном рынке Берлина с помощью мощного веб-сайта. Мы специализируемся на пользовательских веб-приложениях и цифровых технологиях.'
+      title: 'Веб-разработка в Берлине | Инновационные технические решения',
+      description: 'Ваш партнер по веб-разработке в Берлине. Мы создаем масштабируемые, безопасные и удобные для пользователей веб-сайты для стартапов и уже существующих компаний в Германии.',
+      h1: 'Веб-разработка в Берлине',
+      p: 'Ориентируйтесь на конкурентном рынке Берлина с помощью мощного веб-сайта. Мы специализируемся на пользовательских веб-приложениях и цифровых технологиях.'
     }
   },
   'munich': {
@@ -553,10 +553,10 @@ export const geoContent: { [key: string]: { [lang: string]: { title: string; des
       p: 'Combine German engineering with modern web design. Our Munich-focused team builds robust websites that perform flawlessly.'
     },
     'ru': {
-        title: 'Услуги веб-разработки в Мюнхене | Качество и точность',
-        description: 'Веб-разработка в Мюнхене, выполненная с высокой точностью. Мы поставляем высококачественные веб-сайты и цифровые продукты для бизнеса в Баварии и за ее пределами.',
-        h1: 'Веб-разработка в Мюнхене',
-        p: 'Сочетайте немецкую инженерию с современным веб-дизайном. Наша команда, ориентированная на Мюнхен, создает надежные веб-сайты, которые работают безупречно.'
+      title: 'Услуги веб-разработки в Мюнхене | Качество и точность',
+      description: 'Веб-разработка в Мюнхене, выполненная с высокой точностью. Мы поставляем высококачественные веб-сайты и цифровые продукты для бизнеса в Баварии и за ее пределами.',
+      h1: 'Веб-разработка в Мюнхене',
+      p: 'Сочетайте немецкую инженерию с современным веб-дизайном. Наша команда, ориентированная на Мюнхен, создает надежные веб-сайты, которые работают безупречно.'
     }
   },
   'prague': {
@@ -567,10 +567,10 @@ export const geoContent: { [key: string]: { [lang: string]: { title: string; des
       p: 'Let us build your digital presence in the heart of Europe. We offer comprehensive web solutions for the Prague market.'
     },
     'ru': {
-        title: 'Веб-разработка в Праге | Креативное веб-агентство',
-        description: 'Креативные и надежные услуги по веб-разработке в Праге. Мы помогаем компаниям связываться со своей аудиторией через красивые и функциональные веб-сайты.',
-        h1: 'Веб-разработка в Праге',
-        p: 'Позвольте нам создать ваше цифровое присутствие в сердце Европы. Мы предлагаем комплексные веб-решения для пражского рынка.'
+      title: 'Веб-разработка в Праге | Креативное веб-агентство',
+      description: 'Креативные и надежные услуги по веб-разработке в Праге. Мы помогаем компаниям связываться со своей аудиторией через красивые и функциональные веб-сайты.',
+      h1: 'Веб-разработка в Праге',
+      p: 'Позвольте нам создать ваше цифровое присутствие в сердце Европы. Мы предлагаем комплексные веб-решения для пражского рынка.'
     }
   },
   'vilnius': {
@@ -581,10 +581,10 @@ export const geoContent: { [key: string]: { [lang: string]: { title: string; des
       p: 'Accelerate your growth in the Baltics with a website built by our expert team. We focus on performance and user experience.'
     },
     'ru': {
-        title: 'Веб-разработка в Вильнюсе | Балтийский технологический центр',
-        description: 'Первоклассная веб-разработка в Вильнюсе. Мы обслуживаем процветающую технологическую сцену в Литве, создавая современные, быстрые и безопасные веб-сайты.',
-        h1: 'Веб-разработка в Вильнюсе',
-        p: 'Ускорьте свой рост в странах Балтии с помощью веб-сайта, созданного нашей командой экспертов. Мы ориентируемся на производительность и удобство для пользователей.'
+      title: 'Веб-разработка в Вильнюсе | Балтийский технологический центр',
+      description: 'Первоклассная веб-разработка в Вильнюсе. Мы обслуживаем процветающую технологическую сцену в Литве, создавая современные, быстрые и безопасные веб-сайты.',
+      h1: 'Веб-разработка в Вильнюсе',
+      p: 'Ускорьте свой рост в странах Балтии с помощью веб-сайта, созданного нашей командой экспертов. Мы ориентируемся на производительность и удобство для пользователей.'
     }
   },
   'riga': {
@@ -595,10 +595,10 @@ export const geoContent: { [key: string]: { [lang: string]: { title: string; des
       p: 'From concept to launch, we provide end-to-end web development solutions for companies in Riga, tailored to the local market.'
     },
     'ru': {
-        title: 'Веб-разработка в Риге | Цифровые решения для роста',
-        description: 'Профессиональные услуги по веб-разработке в Риге. Мы создаем эффективные цифровые платформы, чтобы помочь вашему бизнесу добиться успеха в Латвии.',
-        h1: 'Веб-разработка в Риге',
-        p: 'От концепции до запуска мы предоставляем комплексные решения по веб-разработке для компаний в Риге, адаптированные к местному рынку.'
+      title: 'Веб-разработка в Риге | Цифровые решения для роста',
+      description: 'Профессиональные услуги по веб-разработке в Риге. Мы создаем эффективные цифровые платформы, чтобы помочь вашему бизнесу добиться успеха в Латвии.',
+      h1: 'Веб-разработка в Риге',
+      p: 'От концепции до запуска мы предоставляем комплексные решения по веб-разработке для компаний в Риге, адаптированные к местному рынку.'
     }
   },
   'tallinn': {
@@ -609,10 +609,10 @@ export const geoContent: { [key: string]: { [lang: string]: { title: string; des
       p: 'Join the digital revolution with a website crafted in Tallinn. We specialize in high-tech solutions for forward-thinking businesses.'
     },
     'ru': {
-        title: 'Веб-разработка в Таллинне | Технологический партнер e-Estonia',
-        description: 'Передовая веб-разработка в Таллинне. Как технологический партнер в e-Estonia, мы создаем инновационные и безопасные веб-сайты для цифрового мира.',
-        h1: 'Веб-разработка в Таллинне',
-        p: 'Присоединяйтесь к цифровой революции с веб-сайтом, созданным в Таллинне. Мы специализируемся на высокотехнологичных решениях для дальновидных компаний.'
+      title: 'Веб-разработка в Таллинне | Технологический партнер e-Estonia',
+      description: 'Передовая веб-разработка в Таллинне. Как технологический партнер в e-Estonia, мы создаем инновационные и безопасные веб-сайты для цифрового мира.',
+      h1: 'Веб-разработка в Таллинне',
+      p: 'Присоединяйтесь к цифровой революции с веб-сайтом, созданным в Таллинне. Мы специализируемся на высокотехнологичных решениях для дальновидных компаний.'
     }
   },
   'amsterdam': {
@@ -623,10 +623,458 @@ export const geoContent: { [key: string]: { [lang: string]: { title: string; des
       p: 'Expand your reach in the Netherlands with a professionally built website. Our Amsterdam team is ready to bring your vision to life.'
     },
     'ru': {
-        title: 'Веб-разработка в Амстердаме | Креатив и технологии',
-        description: 'Ведущее агентство по веб-разработке в Амстердаме. Мы сочетаем креативный дизайн с надежными технологиями для создания выдающихся веб-сайтов.',
-        h1: 'Веб-разработка в Амстердаме',
-        p: 'Расширьте свое присутствие в Нидерландах с помощью профессионально созданного веб-сайта. Наша команда в Амстердаме готова воплотить ваше видение в жизнь.'
+      title: 'Веб-разработка в Амстердаме | Креатив и технологии',
+      description: 'Ведущее агентство по веб-разработке в Амстердаме. Мы сочетаем креативный дизайн с надежными технологиями для создания выдающихся веб-сайтов.',
+      h1: 'Веб-разработка в Амстердаме',
+      p: 'Расширьте свое присутствие в Нидерландах с помощью профессионально созданного веб-сайта. Наша команда в Амстердаме готова воплотить ваше видение в жизнь.'
+    }
+  },
+  'almaty': {
+    'ru': {
+      title: 'Разработка сайтов в Алматы | Создание сайтов для бизнеса',
+      description: 'Профессиональная веб-разработка в Алматы. Создаем современные, адаптивные и высококонверсионные сайты для бизнеса в Казахстане.',
+      h1: 'Создание сайтов в Алматы',
+      p: 'Закажите разработку сайта в Алматы. Наша команда поможет вашему бизнесу выйти на новый уровень в цифровом пространстве Казахстана, предлагая передовые веб-решения.'
+    },
+    'en': {
+      title: 'Website Development in Almaty | Business Web Solutions',
+      description: 'Professional web development in Almaty. We create modern, responsive, and high-converting websites for businesses in Kazakhstan.',
+      h1: 'Website Creation in Almaty',
+      p: 'Order website development in Almaty. Our team will help your business reach a new level in the digital space of Kazakhstan, offering cutting-edge web solutions.'
+    }
+  },
+  'astana': {
+    'ru': {
+      title: 'Создание сайтов в Астане | IT-решения для бизнеса',
+      description: 'Разработка сайтов в Астане (Нур-Султан). Разрабатываем корпоративные порталы, интернет-магазины и лендинги для столичного бизнеса.',
+      h1: 'Разработка сайтов в Астане',
+      p: 'Мы предоставляем полный спектр услуг по созданию сайтов в Астане. Доверьте цифровизацию вашего бизнеса профессионалам AVPdev.'
+    },
+    'en': {
+      title: 'Website Creation in Astana | IT Solutions for Business',
+      description: 'Website development in Astana (Nur-Sultan). We develop corporate portals, online stores, and landing pages for capital businesses.',
+      h1: 'Web Development in Astana',
+      p: 'We provide a full range of website creation services in Astana. Entrust the digitalization of your business to the professionals at AVPdev.'
+    }
+  },
+  'karaganda': {
+    'ru': {
+      title: 'Разработка сайтов в Караганде | Заказать качественный сайт',
+      description: 'Надежная веб-разработка в Караганде. Создаем сайты, которые работают на результат и привлекают новых клиентов.',
+      h1: 'Разработка сайтов в Караганде',
+      p: 'Укрепите свои позиции на рынке с профессиональным сайтом от нашей команды разработчиков в Караганде. Гарантия качества и сроки.'
+    },
+    'en': {
+      title: 'Web Development in Karaganda | Order a Quality Website',
+      description: 'Reliable web development in Karaganda. We create websites that deliver results and attract new customers.',
+      h1: 'Website Development in Karaganda',
+      p: 'Strengthen your market position with a professional website from our development team in Karaganda. Quality assurance and deadlines.'
+    }
+  },
+  'shymkent': {
+    'ru': {
+      title: 'Создание сайтов в Шымкенте | Услуги веб-студии',
+      description: 'Нужен современный сайт в Шымкенте? Мы предлагаем комплексный подход к созданию и продвижению веб-проектов.',
+      h1: 'Создание сайтов в Шымкенте',
+      p: 'Наша студия предлагает эффективные веб-решения в Шымкенте, помогая местному бизнесу масштабироваться через интернет.'
+    },
+    'en': {
+      title: 'Website Creation in Shymkent | Web Studio Services',
+      description: 'Need a modern website in Shymkent? We offer a comprehensive approach to the creation and promotion of web projects.',
+      h1: 'Website Creation in Shymkent',
+      p: 'Our studio offers effective web solutions in Shymkent, helping local businesses scale via the Internet.'
+    }
+  },
+  'new-york': {
+    'en': {
+      title: 'Web Development in New York | Tech-Driven Solutions',
+      description: 'Top web development agency in New York. We build custom, high-performance websites for startups and enterprises in NYC.',
+      h1: 'Website Development in New York',
+      p: 'Elevate your business in the competitive New York market with a cutting-edge digital presence. We deliver scalable and secure web solutions.'
+    }
+  },
+  'los-angeles': {
+    'en': {
+      title: 'Web Development in Los Angeles | Creative Web Studio',
+      description: 'Creative web development in Los Angeles. We combine stunning design with robust technology to help LA businesses stand out.',
+      h1: 'Website Development in Los Angeles',
+      p: 'Capture your audience’s attention with a visually compelling website. Our team provides top-tier web development services across Los Angeles.'
+    }
+  },
+  'chicago': {
+    'en': {
+      title: 'Web Development in Chicago | Professional Web Services',
+      description: 'Expert web development company in Chicago. We build reliable, conversion-focused websites for local and global businesses.',
+      h1: 'Website Development in Chicago',
+      p: 'Partner with us to create a high-quality website that drives growth for your Chicago-based business. We focus on performance and usability.'
+    }
+  },
+  'miami': {
+    'en': {
+      title: 'Web Development in Miami | Modern Digital Solutions',
+      description: 'Innovative web development in Miami. We create fast, mobile-friendly websites designed to convert visitors into customers.',
+      h1: 'Website Development in Miami',
+      p: 'Expand your digital footprint in Miami with our professional web development services. We build websites that look great and perform flawlessly.'
+    }
+  },
+  'austin': {
+    'en': {
+      title: 'Web Development in Austin | Agile Tech Partner',
+      description: 'Leading web development in Austin, the thriving tech hub. We create custom, scalable web applications for forward-thinking companies.',
+      h1: 'Website Development in Austin',
+      p: 'Join Austin’s fast-growing tech scene with a powerful website. We provide full-cycle web development tailored to your specific needs.'
+    }
+  },
+  'san-francisco': {
+    'en': {
+      title: 'Web Development in San Francisco | Silicon Valley Standards',
+      description: 'Premium web development in San Francisco. We deliver world-class websites and web apps for startups and tech giants.',
+      h1: 'Website Development in San Francisco',
+      p: 'Achieve Silicon Valley standards with a modern, high-performance website. We specialize in advanced web solutions for the SF Bay Area.'
+    }
+  },
+  'london': {
+    'en': {
+      title: 'Web Development in London | Premier Web Agency',
+      description: 'Expert web development services in London. We design and build high-quality websites that drive results for UK businesses.',
+      h1: 'Website Development in London',
+      p: 'Establish a powerful online presence in London with our custom web solutions. We specialize in fast, scalable, and secure applications.'
+    }
+  },
+  'paris': {
+    'en': {
+      title: 'Web Development in Paris | Creative Tech Solutions',
+      description: 'Top-tier web development in Paris. We combine elegant design with robust engineering for outstanding digital experiences.',
+      h1: 'Website Development in Paris',
+      p: 'Bring your vision to life in Paris with our comprehensive web development services. We build websites that inspire and convert.'
+    }
+  },
+  'madrid': {
+    'en': {
+      title: 'Web Development in Madrid | Innovative Web Design',
+      description: 'Leading web development company in Madrid. We create dynamic, responsive websites tailored for your business growth.',
+      h1: 'Website Development in Madrid',
+      p: 'Accelerate your digital transformation in Madrid. We deliver cutting-edge websites and applications for modern enterprises.'
+    }
+  },
+  'rome': {
+    'en': {
+      title: 'Web Development in Rome | Professional Digital Services',
+      description: 'Reliable web development in Rome. We craft functional and beautiful websites that help Italian businesses thrive online.',
+      h1: 'Website Development in Rome',
+      p: 'Expand your reach in Rome with a professionally engineered website. We ensure high performance and superior user experience.'
+    }
+  },
+  'dubai': {
+    'en': {
+      title: 'Web Development in Dubai | Elite Tech Agency',
+      description: 'Premium web development in Dubai. We build state-of-the-art web platforms for businesses in the UAE and the Middle East.',
+      h1: 'Website Development in Dubai',
+      p: 'Stand out in Dubai\'s dynamic market with a cutting-edge website. We specialize in scalable solutions for enterprise clients.'
+    }
+  },
+  'abu-dhabi': {
+    'en': {
+      title: 'Web Development in Abu Dhabi | Corporate Web Solutions',
+      description: 'Expert web development services in Abu Dhabi. We deliver secure and scalable digital solutions for government and corporate sectors.',
+      h1: 'Website Development in Abu Dhabi',
+      p: 'Drive digital innovation in Abu Dhabi with our professional web development team. We create powerful web-based platforms.'
+    }
+  },
+  'singapore': {
+    'en': {
+      title: 'Web Development in Singapore | Future-Ready Web Apps',
+      description: 'Leading web development in Singapore. We engineer fast, secure, and highly scalable web applications for tech-driven businesses.',
+      h1: 'Website Development in Singapore',
+      p: 'Connect with a global audience from Singapore through our advanced web solutions. We build for performance and reliability.'
+    }
+  },
+  'tokyo': {
+    'en': {
+      title: 'Web Development in Tokyo | Advanced Digital Engineering',
+      description: 'High-performance web development in Tokyo. We combine innovative technology with exceptional design for the Japanese market.',
+      h1: 'Website Development in Tokyo',
+      p: 'Elevate your business in Tokyo with our modern web development services. We focus on speed, precision, and user engagement.'
+    }
+  },
+  'toronto': {
+    'en': {
+      title: 'Web Development in Toronto | Agile Tech Specialists',
+      description: 'Top-rated web development in Toronto. We build custom websites and applications that fuel business growth across Canada.',
+      h1: 'Website Development in Toronto',
+      p: 'Power your digital strategy in Toronto with our custom web solutions. We deliver robust platforms optimized for conversion.'
+    }
+  },
+  'vancouver': {
+    'en': {
+      title: 'Web Development in Vancouver | Creative Digital Studio',
+      description: 'Professional web development in Vancouver. Our team crafts stunning websites designed for performance and global reach.',
+      h1: 'Website Development in Vancouver',
+      p: 'Boost your online presence in Vancouver. We create dynamic web experiences that resonate with your target audience.'
+    }
+  },
+  'sydney': {
+    'en': {
+      title: 'Web Development in Sydney | Premier Digital Agency',
+      description: 'Expert web development services in Sydney. We build modern, scalable websites to help Australian businesses succeed online.',
+      h1: 'Website Development in Sydney',
+      p: 'Transform your digital presence in Sydney. We offer end-to-end web development tailored to your specific business needs.'
+    }
+  },
+  'melbourne': {
+    'en': {
+      title: 'Web Development in Melbourne | Innovative Tech Solutions',
+      description: 'Creative and reliable web development in Melbourne. We engineered bespoke websites that drive engagement and sales.',
+      h1: 'Website Development in Melbourne',
+      p: 'Partner with us in Melbourne for top-tier web development. We build future-proof platforms for brands that demand excellence.'
+    }
+  },
+  'manchester': {
+    'en': {
+      title: 'Web Development in Manchester | Digital Agency',
+      description: 'Expert web development services in Manchester. We design and build high-quality websites for UK businesses.',
+      h1: 'Website Development in Manchester',
+      p: 'Establish a powerful online presence in Manchester with our custom web solutions. We specialize in fast, scalable, and secure applications.'
+    }
+  },
+  'birmingham': {
+    'en': {
+      title: 'Web Development in Birmingham | Custom Web Solutions',
+      description: 'Top-tier web development in Birmingham. We build modern websites that drive digital growth.',
+      h1: 'Website Development in Birmingham',
+      p: 'Accelerate your business with robust web solutions in Birmingham tailored to your digital strategy.'
+    }
+  },
+  'edinburgh': {
+    'en': {
+      title: 'Web Development in Edinburgh | Web Studio',
+      description: 'Reliable web development in Edinburgh. We craft functional and beautiful websites.',
+      h1: 'Website Development in Edinburgh',
+      p: 'Expand your reach in Edinburgh with a professionally engineered website. We ensure high performance.'
+    }
+  },
+  'glasgow': {
+    'en': {
+      title: 'Web Development in Glasgow | Tech-Driven Solutions',
+      description: 'Professional web development in Glasgow. We deliver fast, secure web applications.',
+      h1: 'Website Development in Glasgow',
+      p: 'Power your digital strategy in Glasgow with out custom web solutions and modern design.'
+    }
+  },
+  'lyon': {
+    'en': {
+      title: 'Web Development in Lyon | Creative Web Agency',
+      description: 'Expert web development services in Lyon. We design and build high-quality websites.',
+      h1: 'Website Development in Lyon',
+      p: 'Bring your vision to life in Lyon with our comprehensive web development services. We build websites that inspire and convert.'
+    }
+  },
+  'marseille': {
+    'en': {
+      title: 'Web Development in Marseille | Digital Solutions',
+      description: 'Top-rated web development in Marseille. We build custom websites and applications.',
+      h1: 'Website Development in Marseille',
+      p: 'Expand your digital footprint in Marseille with our professional web development services.'
+    }
+  },
+  'toulouse': {
+    'en': {
+      title: 'Web Development in Toulouse | Tech Hub Agency',
+      description: 'Reliable and fast web development in Toulouse. We craft custom web platforms.',
+      h1: 'Website Development in Toulouse',
+      p: 'Empower your business in Toulouse with reliable, conversion-focused websites.'
+    }
+  },
+  'frankfurt': {
+    'en': {
+      title: 'Web Development in Frankfurt | Business Web IT',
+      description: 'Premium web development in Frankfurt. We build state-of-the-art web platforms for businesses in Germany.',
+      h1: 'Website Development in Frankfurt',
+      p: 'Stand out in Frankfurt\'s dynamic market with a cutting-edge website. We specialize in scalable solutions for enterprise clients.'
+    }
+  },
+  'hamburg': {
+    'en': {
+      title: 'Web Development in Hamburg | Creative Digital Agency',
+      description: 'Innovative web development in Hamburg. We combine elegant design with robust engineering.',
+      h1: 'Website Development in Hamburg',
+      p: 'Accelerate your digital transformation in Hamburg. We deliver cutting-edge websites and applications.'
+    }
+  },
+  'cologne': {
+    'en': {
+      title: 'Web Development in Cologne | Modern Web Services',
+      description: 'Leading web development company in Cologne. We create dynamic, responsive websites.',
+      h1: 'Website Development in Cologne',
+      p: 'Expand your reach in Cologne with a professionally engineered website for modern enterprises.'
+    }
+  },
+  'stuttgart': {
+    'en': {
+      title: 'Web Development in Stuttgart | Advanced Engineering',
+      description: 'Expert web development services in Stuttgart. We deliver secure and scalable digital solutions.',
+      h1: 'Website Development in Stuttgart',
+      p: 'Drive digital innovation in Stuttgart with our professional web development team.'
+    }
+  },
+  'barcelona': {
+    'en': {
+      title: 'Web Development in Barcelona | Digital Creators',
+      description: 'Leading web development in Barcelona. We engineer fast, secure, and highly scalable web applications.',
+      h1: 'Website Development in Barcelona',
+      p: 'Connect with a global audience from Barcelona through our advanced web solutions. We build for performance.'
+    }
+  },
+  'valencia': {
+    'en': {
+      title: 'Web Development in Valencia | Tech Agency',
+      description: 'High-performance web development in Valencia. We combine innovative technology with exceptional design.',
+      h1: 'Website Development in Valencia',
+      p: 'Elevate your business in Valencia with our modern web development services. We focus on speed and user engagement.'
+    }
+  },
+  'seville': {
+    'en': {
+      title: 'Web Development in Seville | Professional Digital Services',
+      description: 'Reliable web development in Seville. We craft beautiful websites that help Spanish businesses thrive online.',
+      h1: 'Website Development in Seville',
+      p: 'Transform your digital presence in Seville. We offer end-to-end web development tailored to your specific needs.'
+    }
+  },
+  'milan': {
+    'en': {
+      title: 'Web Development in Milan | Premier Web Studio',
+      description: 'Top-tier web development in Milan. We combine sleek design with robust technology.',
+      h1: 'Website Development in Milan',
+      p: 'Capture your audience with a visually compelling website. Our team provides top-tier web development services in Milan.'
+    }
+  },
+  'naples': {
+    'en': {
+      title: 'Web Development in Naples | Digital Solutions',
+      description: 'Expert web development services in Naples. We build reliable, conversion-focused websites.',
+      h1: 'Website Development in Naples',
+      p: 'Partner with us to create a high-quality website that drives growth for your Naples-based business.'
+    }
+  },
+  'turin': {
+    'en': {
+      title: 'Web Development in Turin | Advanced Tech Partner',
+      description: 'Leading web development in Turin. We create custom, scalable web applications for forward-thinking companies.',
+      h1: 'Website Development in Turin',
+      p: 'Join Turin’s thriving tech scene with a powerful website. We provide full-cycle web development.'
+    }
+  },
+  'wroclaw': {
+    'en': {
+      title: 'Web Development in Wroclaw | Agile Tech Partner',
+      description: 'Top-rated web development in Wroclaw. We build custom websites and applications for business growth.',
+      h1: 'Website Development in Wroclaw',
+      p: 'Power your digital strategy in Wroclaw with our custom web solutions. We deliver robust platforms.'
+    }
+  },
+  'poznan': {
+    'en': {
+      title: 'Web Development in Poznan | IT Solutions',
+      description: 'Professional web development in Poznan. Our team crafts stunning websites designed for performance.',
+      h1: 'Website Development in Poznan',
+      p: 'Boost your online presence in Poznan. We create dynamic web experiences that resonate with your target audience.'
+    }
+  },
+  'seattle': {
+    'en': {
+      title: 'Web Development in Seattle | Pacific Tech Solutions',
+      description: 'Expert web development services in Seattle. We design and build high-quality websites that drive results.',
+      h1: 'Website Development in Seattle',
+      p: 'Establish a powerful online presence in Seattle with our custom web solutions. We specialize in fast and secure applications.'
+    }
+  },
+  'denver': {
+    'en': {
+      title: 'Web Development in Denver | Innovative Web Design',
+      description: 'Leading web development company in Denver. We create dynamic, responsive websites tailored for your growth.',
+      h1: 'Website Development in Denver',
+      p: 'Accelerate your digital transformation in Denver. We deliver cutting-edge websites and applications.'
+    }
+  },
+  'boston': {
+    'en': {
+      title: 'Web Development in Boston | Corporate Web Solutions',
+      description: 'Reliable web development in Boston. We craft functional and beautiful websites that help businesses thrive online.',
+      h1: 'Website Development in Boston',
+      p: 'Expand your reach in Boston with a professionally engineered website. We ensure high performance and superior user experience.'
+    }
+  },
+  'houston': {
+    'en': {
+      title: 'Web Development in Houston | Elite Tech Agency',
+      description: 'Premium web development in Houston. We build state-of-the-art web platforms for enterprise and startup clients.',
+      h1: 'Website Development in Houston',
+      p: 'Stand out in Houston\'s dynamic market with a cutting-edge website. We specialize in scalable web solutions.'
+    }
+  },
+  'atlanta': {
+    'en': {
+      title: 'Web Development in Atlanta | Professional Digital Services',
+      description: 'Expert web development services in Atlanta. We deliver secure and scalable digital solutions for modern sectors.',
+      h1: 'Website Development in Atlanta',
+      p: 'Drive digital innovation in Atlanta with our professional web development team. We create powerful web-based platforms.'
+    }
+  },
+  'las-vegas': {
+    'en': {
+      title: 'Web Development in Las Vegas | Future-Ready Web Apps',
+      description: 'Leading web development in Las Vegas. We engineer fast, secure, and highly scalable web applications.',
+      h1: 'Website Development in Las Vegas',
+      p: 'Connect with a global audience from Las Vegas through our advanced web solutions. We build for performance.'
+    }
+  },
+  'washington': {
+    'en': {
+      title: 'Web Development in Washington D.C. | Advanced Digital Engineering',
+      description: 'High-performance web development in Washington D.C. We combine innovative technology with exceptional design.',
+      h1: 'Website Development in Washington D.C.',
+      p: 'Elevate your business in Washington D.C. with our modern web development services. We focus on security and precision.'
+    }
+  },
+  'montreal': {
+    'en': {
+      title: 'Web Development in Montreal | Agile Tech Specialists',
+      description: 'Top-rated web development in Montreal. We build custom websites and applications that fuel business growth across Canada.',
+      h1: 'Website Development in Montreal',
+      p: 'Power your digital strategy in Montreal with our custom web solutions. We deliver robust platforms optimized for conversion.'
+    }
+  },
+  'calgary': {
+    'en': {
+      title: 'Web Development in Calgary | Creative Digital Studio',
+      description: 'Professional web development in Calgary. Our team crafts stunning websites designed for performance and global reach.',
+      h1: 'Website Development in Calgary',
+      p: 'Boost your online presence in Calgary. We create dynamic web experiences that resonate with your target audience.'
+    }
+  },
+  'brisbane': {
+    'en': {
+      title: 'Web Development in Brisbane | Premier Digital Agency',
+      description: 'Expert web development services in Brisbane. We build modern, scalable websites to help Australian businesses succeed online.',
+      h1: 'Website Development in Brisbane',
+      p: 'Transform your digital presence in Brisbane. We offer end-to-end web development tailored to your specific business needs.'
+    }
+  },
+  'perth': {
+    'en': {
+      title: 'Web Development in Perth | Innovative Tech Solutions',
+      description: 'Creative and reliable web development in Perth. We engineered bespoke websites that drive engagement and sales.',
+      h1: 'Website Development in Perth',
+      p: 'Partner with us in Perth for top-tier web development. We build future-proof platforms for brands that demand excellence.'
+    }
+  },
+  'adelaide': {
+    'en': {
+      title: 'Web Development in Adelaide | Digital Solutions Partner',
+      description: 'Top-rated web development in Adelaide. We build robust and modern websites focusing on SEO and performance.',
+      h1: 'Website Development in Adelaide',
+      p: 'Power your digital strategy in Adelaide with our custom web solutions. We deliver highly optimized platforms.'
     }
   }
 };
