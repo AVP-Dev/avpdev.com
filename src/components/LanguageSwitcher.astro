@@ -17,8 +17,16 @@ if (pathWithoutLang.startsWith(`/${lang}/`)) {
 <div class="lang-switcher">
     {locales.map((locale, index) => {
         const isActive = locale === lang;
-        // Просто формируем ссылку /ru/... или /en/...
-        const url = `/${locale}${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
+        
+        // Мапинг путей для локалей
+        let targetPath = pathWithoutLang;
+        if (targetPath.startsWith('/uslugi/') && locale === 'en') {
+            targetPath = targetPath.replace(/^\/uslugi\//, '/services/');
+        } else if (targetPath.startsWith('/services/') && locale === 'ru') {
+            targetPath = targetPath.replace(/^\/services\//, '/uslugi/');
+        }
+
+        const url = `/${locale}${targetPath === '/' ? '' : targetPath}`;
         
         return (
             <>

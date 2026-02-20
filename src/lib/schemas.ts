@@ -26,7 +26,7 @@ export const BriefFormSchema = z.object({
 
     // --- About Company and Project ---
     business_sphere: z.string().trim().min(1, { message: 'Business description is required' }),
-    current_site: z.string().trim().url({ message: 'Invalid URL' }).optional().or(z.literal('')),
+    current_site: z.string().trim().optional(),
     competitors: z.string().trim().optional(),
 
     // --- Goals and Objectives ---
