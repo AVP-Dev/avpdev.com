@@ -129,8 +129,10 @@ const t = useTranslations(lang);
         });
     }
 
-    // Инициализация при загрузке страницы (astro:page-load поддерживает ClientRouter)
-    document.addEventListener("astro:page-load", loadParticlesConfig);
+    // Инициализация при загрузке страницы с задержкой (чтобы освободить основной поток и улучшить LCP/TTI)
+    document.addEventListener("astro:page-load", () => {
+        setTimeout(loadParticlesConfig, 1000);
+    });
     // Также слушаем кастомное событие смены темы
     document.addEventListener("theme:changed", loadParticlesConfig);
 </script>

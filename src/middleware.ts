@@ -5,12 +5,30 @@ const redirectMap: Record<string, string> = {
   '/index.html': '/ru/',
   '/index': '/ru/',
   '/index/': '/ru/',
-  '/privacy-policy': '/ru/privacy-policy/',
-  '/terms-of-service': '/ru/terms-of-service/',
-  '/terms-of-service/': '/ru/terms-of-service/',
+
+  // Legal pages
+  '/privacy-policy': '/ru/legal/privacy-policy/',
+  '/privacy-policy/': '/ru/legal/privacy-policy/',
+  '/privacy-policy.html': '/ru/legal/privacy-policy/',
+  '/en/privacy-policy': '/en/legal/privacy-policy/',
+  '/terms-of-service': '/ru/legal/terms-of-service/',
+  '/terms-of-service/': '/ru/legal/terms-of-service/',
+  '/terms-of-service.html': '/ru/legal/terms-of-service/',
+  '/brief/': '/ru/brief/',
+
+  // Projects
   '/project-furniture.html': '/ru/project/project-furniture/',
-  '/project/project-mekohaus/': '/ru/project/project-mekohaus/',
   '/project/project-furniture/': '/ru/project/project-furniture/',
+  '/project-mekohaus.html': '/ru/project/project-mekohaus/',
+  '/project/project-mekohaus/': '/ru/project/project-mekohaus/',
+  '/project-travel.html': '/ru/project/project-travel/',
+  '/project/project-travel/': '/ru/project/project-travel/',
+  '/project-cars.html': '/ru/project/project-cars/',
+  '/project/project-cars/': '/ru/project/project-cars/',
+  '/project-tow-truck.html': '/ru/project/project-tow-truck/',
+  '/project/project-tow-truck/': '/ru/project/project-tow-truck/',
+  '/project-3d-modeling.html': '/ru/project/project-3d-modeling/',
+  '/project/project-3d-modeling/': '/ru/project/project-3d-modeling/',
 };
 
 export const onRequest = defineMiddleware(async (context, next) => {
@@ -18,8 +36,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const path = url.pathname;
 
   // 0. Strict Canonical Redirection (Force HTTPS & Non-WWW)
-  // DISABLED for local network access troubleshooting
-  /*
+  // ENABLED to fix non-WWW and HTTPS canonical errors in GSC
   const protocol = context.request.headers.get('x-forwarded-proto') || url.protocol.replace(':', '');
   const host = context.request.headers.get('host') || url.host;
 
@@ -32,7 +49,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const newUrl = `https://${cleanHost}${path}${url.search}`;
     return context.redirect(newUrl, 301);
   }
-  */
 
   // 1. Exact Match Redirects
   if (redirectMap[path]) {
@@ -57,6 +73,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (path.endsWith('.html')) {
     const cleanPath = path.slice(0, -5);
     return context.redirect(`${cleanPath}/`, 301);
+  }
+
+  // 4.5. Enforce Trailing Slash (except for files)
+  // Fixes "Duplicate without user-selected canonical" for URLs missing slashes
+  if (!path.endsWith('/') && !path.split('/').pop()?.includes('.')) {
+    return context.redirect(`${path}/${url.search}`, 301);
   }
 
   // 5. Process Request
