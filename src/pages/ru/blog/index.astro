@@ -25,9 +25,6 @@ allPosts.sort(
 const hasPosts = allPosts.length > 0;
 const latestPost = hasPosts ? allPosts[0] : null;
 const otherPosts = hasPosts ? allPosts.slice(1) : [];
-
-// Собираем все уникальные теги для кнопок-фильтров
-// const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
 ---
 
 <BaseLayout title="blog_page_title" description="blog_page_desc">
@@ -80,17 +77,24 @@ const otherPosts = hasPosts ? allPosts.slice(1) : [];
                 ))}
               </div>
             )}
+            
+            <div id="pagination-container" style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 3rem; display: none;">
+                <button id="prev-page-btn" class="cta-button secondary" style="padding: 10px 20px;">Назад</button>
+                <span id="page-info" style="font-weight: 600; color: var(--text-color);">1 / 3</span>
+                <button id="next-page-btn" class="cta-button secondary" style="padding: 10px 20px;">Вперед</button>
+            </div>
           </div>
         )
       }
 
-      <p
+      <div
         id="no-results-message"
         class="no-results-message"
         style="display: none;"
       >
-        {t("blog_no_results")}
-      </p>
+        <p style="margin-bottom: 1rem;">{t("blog_no_results")}</p>
+        <button id="reset-search-btn" class="cta-button secondary" style="font-size: 0.9rem; padding: 10px 24px;">Сбросить поиск</button>
+      </div>
 
       {!hasPosts && <p class="no-results-message">{t("blog_no_posts_yet")}</p>}
     </div>
@@ -104,6 +108,11 @@ const otherPosts = hasPosts ? allPosts.slice(1) : [];
     ) as HTMLInputElement | null;
     const postsGrid = document.getElementById("posts-grid");
     const noResultsMessage = document.getElementById("no-results-message");
+    const paginationContainer = document.getElementById("pagination-container");
+    const prevPageBtn = document.getElementById("prev-page-btn") as HTMLButtonElement | null;
+    const nextPageBtn = document.getElementById("next-page-btn") as HTMLButtonElement | null;
+    const pageInfo = document.getElementById("page-info");
+    const resetSearchBtn = document.getElementById("reset-search-btn");
 
     if (!postsGrid || !searchInput || !noResultsMessage) {
       return;
@@ -114,11 +123,13 @@ const otherPosts = hasPosts ? allPosts.slice(1) : [];
     );
 
     let currentQuery = "";
+    let currentPage = 1;
+    const POSTS_PER_PAGE = 6;
+    let filteredCards: HTMLElement[] = [];
 
-    function filterPosts() {
-      let visibleCount = 0;
-
-      allCards.forEach((card) => {
+    function renderLayout() {
+      // 1. Фильтруем карточки по текстовому поиску
+      filteredCards = allCards.filter((card) => {
         const title = card.dataset.title || "";
         const description = card.dataset.description || "";
         const tags = card.dataset.tags || "";
@@ -129,23 +140,89 @@ const otherPosts = hasPosts ? allPosts.slice(1) : [];
           description.includes(currentQuery) ||
           tags.includes(currentQuery);
 
-        const isVisible = matchesQuery;
-
-        card.style.display = isVisible ? "" : "none";
-
-        if (isVisible) {
-          visibleCount++;
-        }
+        return matchesQuery;
       });
 
+      // Сообщение "Ничего не найдено"
       if (noResultsMessage) {
-        noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
+        noResultsMessage.style.display = filteredCards.length === 0 ? "block" : "none";
+      }
+      
+      const totalPages = Math.ceil(filteredCards.length / POSTS_PER_PAGE) || 1;
+      
+      // Сброс страницы, если после фильтрации она оказалась больше доступного количества
+      if (currentPage > totalPages) {
+          currentPage = 1;
+      }
+      
+      const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+      const endIndex = startIndex + POSTS_PER_PAGE;
+      
+      // 2. Скрываем все и показываем только карточки текущей страницы
+      allCards.forEach(card => card.style.display = "none");
+      
+      filteredCards.slice(startIndex, endIndex).forEach(card => {
+          card.style.display = "";
+      });
+
+      // Отображение UI пагинации
+      if (paginationContainer && prevPageBtn && nextPageBtn && pageInfo) {
+          if (filteredCards.length <= POSTS_PER_PAGE && currentQuery === "") {
+              paginationContainer.style.display = "none";
+          } else if (filteredCards.length > 0) {
+              paginationContainer.style.display = "flex";
+              pageInfo.textContent = `${currentPage} / ${totalPages}`;
+              
+              prevPageBtn.disabled = currentPage === 1;
+              prevPageBtn.style.opacity = currentPage === 1 ? "0.3" : "1";
+              prevPageBtn.style.cursor = currentPage === 1 ? "not-allowed" : "pointer";
+              
+              nextPageBtn.disabled = currentPage === totalPages;
+              nextPageBtn.style.opacity = currentPage === totalPages ? "0.3" : "1";
+              nextPageBtn.style.cursor = currentPage === totalPages ? "not-allowed" : "pointer";
+          } else {
+              paginationContainer.style.display = "none";
+          }
       }
     }
 
     searchInput.addEventListener("input", (e) => {
       currentQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
-      filterPosts();
+      currentPage = 1; 
+      renderLayout();
     });
+    
+    if (prevPageBtn) {
+        prevPageBtn.addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderLayout();
+                postsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
+
+    if (nextPageBtn) {
+        nextPageBtn.addEventListener("click", () => {
+            const totalPages = Math.ceil(filteredCards.length / POSTS_PER_PAGE);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderLayout();
+                postsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
+    
+    if (resetSearchBtn) {
+        resetSearchBtn.addEventListener("click", () => {
+            currentQuery = "";
+            searchInput.value = "";
+            currentPage = 1;
+            renderLayout();
+        });
+    }
+    
+    // Начальный рендер
+    renderLayout();
   });
 </script>

@@ -38,6 +38,7 @@ export default defineConfig({
   integrations: [
     // 3. Интеграция Sitemap с добавлением динамических страниц
     sitemap({
+      filter: (page) => page !== `${site}/`,
       customPages: geoPages, // Теперь переменная используется!
       changefreq: 'weekly',
       priority: 0.7,

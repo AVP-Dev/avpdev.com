@@ -120,8 +120,8 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
             <>
                 <link rel="alternate" hreflang="ru" href={ruUrl} />
                 <link rel="alternate" hreflang="en" href={enUrl} />
-                {/* x-default указывает на русскую версию как основную */}
-                <link rel="alternate" hreflang="x-default" href={ruUrl} />
+                {/* x-default указывает на корень (router) */}
+                <link rel="alternate" hreflang="x-default" href={new URL('/', siteBase).href} />
             </>
         );
     }}
