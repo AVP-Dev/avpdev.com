@@ -10,10 +10,17 @@ const redirectMap: Record<string, string> = {
   '/privacy-policy': '/ru/legal/privacy-policy/',
   '/privacy-policy/': '/ru/legal/privacy-policy/',
   '/privacy-policy.html': '/ru/legal/privacy-policy/',
+  '/ru/privacy-policy': '/ru/legal/privacy-policy/',
+  '/ru/privacy-policy/': '/ru/legal/privacy-policy/',
   '/en/privacy-policy': '/en/legal/privacy-policy/',
+  '/en/privacy-policy/': '/en/legal/privacy-policy/',
   '/terms-of-service': '/ru/legal/terms-of-service/',
   '/terms-of-service/': '/ru/legal/terms-of-service/',
   '/terms-of-service.html': '/ru/legal/terms-of-service/',
+  '/ru/terms-of-service': '/ru/legal/terms-of-service/',
+  '/ru/terms-of-service/': '/ru/legal/terms-of-service/',
+  '/en/terms-of-service': '/en/legal/terms-of-service/',
+  '/en/terms-of-service/': '/en/legal/terms-of-service/',
   '/brief/': '/ru/brief/',
 
   // Projects

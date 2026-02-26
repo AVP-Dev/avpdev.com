@@ -16,6 +16,10 @@ function cleanInput(val: any): any {
     return val;
 }
 
+export const GET: APIRoute = async ({ redirect }) => {
+    return redirect('/ru/', 301);
+};
+
 export const POST: APIRoute = async ({ request }) => {
     try {
         const data = await request.json();
