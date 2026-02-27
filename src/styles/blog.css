@@ -344,6 +344,7 @@
 .back-to-main:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px var(--accent-color-start);
+  color: #000;
 }
 
 /* Typography and content styling inside the article */
