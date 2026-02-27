@@ -54,7 +54,7 @@ export default defineConfig({
     port: 3000
   },
 
-  compressHTML: true,
+  compressHTML: false,
 
   // 7. Интернационализация (i18n)
   i18n: {
