@@ -50,7 +50,14 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // By skipping headers access on localhost and during development, we avoid the Astro warning:
   // "Astro.request.headers is not available on prerendered pages".
   const isDev = import.meta.env.DEV;
-  if (!isDev && !host.includes('localhost') && !host.includes('127.0.0.1')) {
+  // Detect if we are currently running the build process (astro build)
+  const isBuild = typeof process !== 'undefined' && (
+    process.argv.some(arg => arg.includes('astro')) ||
+    process.env.npm_lifecycle_event === 'build' ||
+    process.argv.some(arg => arg.includes('build'))
+  );
+
+  if (!isBuild && !isDev && !host.includes('localhost') && !host.includes('127.0.0.1')) {
     try {
       protocol = context.request.headers.get('x-forwarded-proto') || protocol;
       host = context.request.headers.get('host') || host;
