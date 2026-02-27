@@ -23,6 +23,12 @@ if (!cityData || !content) {
     return Astro.redirect('/en/404/');
 }
 
+// Fetch relevant projects for THIS city/language to avoid prop-passing bug
+import { getCollection } from 'astro:content';
+const lang = 'en';
+const allProjects = await getCollection('projects', ({ id }) => id.startsWith(lang + '/'));
+const projects = allProjects.slice(0, 6);
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -46,8 +52,50 @@ const schema = {
     description={content.description}
     h1={content.h1}
     p={content.p}
+    projects={projects}
+    citySlug={city}
 >
   <Fragment slot="head">
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   </Fragment>
+
+  <section class="city-specific-content container fade-in">
+    <h2 class="section-title">Why choose AVPdev in {cityData.name_en}</h2>
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <i class="fas fa-rocket"></i>
+        <h3>Speed</h3>
+        <p>Your website will be lightning fast, providing the best user experience in {cityData.name_en}.</p>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-search"></i>
+        <h3>SEO Focus</h3>
+        <p>Local optimization specifically for the {cityData.name_en} market.</p>
+      </div>
+    </div>
+  </section>
 </GeoPageLayout>
+
+<style>
+  .city-specific-content {
+    padding: 6rem 0;
+    text-align: center;
+  }
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    margin-top: 4rem;
+  }
+  .benefit-item i {
+    font-size: 3rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+  }
+  .benefit-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+</style>

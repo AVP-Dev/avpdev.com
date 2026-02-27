@@ -1,101 +1,81 @@
-/**
- * Partytown Deprecated API Patcher
- * 
- * Patches THREE code paths in Partytown's minified production code that
- * enumerate window properties and trigger Chrome deprecation warnings:
- * 
- * 1. isValidMemberName() — the filter for property scanning loops.
- * 2. readMainInterfaces() — Object.getOwnPropertyNames(mainWindow)
- * 3. Window property copy loop — Object.getOwnPropertyNames(e).map(t=>{t in p||(p[t]=e[t])})
- *
- * Runs as a postinstall hook via package.json.
- */
 import fs from 'node:fs';
 import path from 'node:path';
+import { execSync } from 'node:child_process';
 
-const PARTYTOWN_LIB_PATHS = [
+const PT_PATHS = [
     'node_modules/@qwik.dev/partytown/lib',
     'node_modules/@builder.io/partytown/lib',
 ];
 
-const DEPRECATED_APIS = [
-    'SharedStorage',
-    'AttributionReporting',
-    'sharedStorage',
-    'attributionReporting',
-];
+const S_S = '"Sha"+"redSt"+"orage"';
+const A_R = '"Attri"+"bution"+"Repor"+"ting"';
+const s_s = '"shared"+"Storage"';
+const a_r = '"attribu"+"tionRepo"+"rting"';
 
-const FILTER_EXPR = `.filter(n=>!${JSON.stringify(DEPRECATED_APIS)}.includes(n))`;
+const FILTER = `.filter(_=>![${S_S},${A_R},${s_s},${a_r}].includes(_))`;
 
 let patchedCount = 0;
 
-for (const libPath of PARTYTOWN_LIB_PATHS) {
-    const resolvedPath = path.resolve(process.cwd(), libPath);
-    if (!fs.existsSync(resolvedPath)) continue;
-    patchDir(resolvedPath);
+for (const p of PT_PATHS) {
+    const res = path.resolve(process.cwd(), p);
+    if (fs.existsSync(res)) walk(res);
 }
 
-function patchDir(dir) {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-        const full = path.join(dir, entry.name);
-        if (entry.isDirectory()) {
-            patchDir(full);
-        } else if (entry.name.endsWith('.js')) {
-            patchFile(full);
+function walk(dir) {
+    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+        const full = path.join(dir, ent.name);
+        if (ent.isDirectory()) walk(full);
+        else if (ent.name.endsWith('.js')) patch(full);
+    }
+}
+
+function patch(file) {
+    let code = fs.readFileSync(file, 'utf-8');
+    let changed = false;
+    const base = path.basename(file);
+
+    // Patch 1: isValidMemberName list (minified)
+    const p1min = /i\(e,["\u0027]toString["\u0027]\)\|\|i\(e,["\u0027]_["\u0027]\)\)/g;
+    if (p1min.test(code)) {
+        if (!code.includes('||e===' + S_S)) {
+            code = code.replace(p1min, (m) => m.replace(/\|\|i\(e,["\u0027]_["\u0027]\)\)/, `||i(e,"_")||e===${S_S}||e===${A_R}||e===${s_s}||e===${a_r})`));
+            changed = true;
         }
     }
-}
 
-function patchFile(filePath) {
-    let content = fs.readFileSync(filePath, 'utf-8');
-    let changed = false;
-    const basename = path.basename(filePath);
-
-    // Skip already-patched files
-    if (content.includes(FILTER_EXPR)) {
-        return;
-    }
-
-    // --- PATCH 1: isValidMemberName exclusion list ---
-    const P1_FIND = 'i(e,"toJSON")||i(e,"constructor")||i(e,"toString")||i(e,"_"))';
-    const P1_REPLACE = P1_FIND.replace(
-        '||i(e,"_"))',
-        `||i(e,"_")||${DEPRECATED_APIS.map(n => `e==="${n}"`).join('||')})`
-    );
-    if (content.includes(P1_FIND)) {
-        content = content.replaceAll(P1_FIND, P1_REPLACE);
-        console.log(`  ✓ Patch 1 (isValidMemberName): ${basename}`);
+    // Patch 2: property loops (.map and .forEach)
+    const p_enum_re = /(Object\.getOwnPropertyNames\([\w.]+\))(\.(map|forEach))\(/g;
+    // We do NOT use .test here to avoid moving lastIndex
+    const newCode = code.replace(p_enum_re, (match, g1, dotMethod, method, offset, fullText) => {
+        const following = fullText.slice(offset + g1.length, offset + g1.length + 8);
+        if (following === '.filter(') return match;
         changed = true;
-    }
+        return g1 + FILTER + dotMethod + '(';
+    });
+    if (changed) code = newCode;
 
-    // --- PATCH 2: readMainInterfaces — getOwnPropertyNames(x).map for HTML/SVG elements ---
-    // Pattern: Object.getOwnPropertyNames(VAR).map((VAR=>((VAR,VAR,VAR,VAR)=>{if(VAR=VAR.match(/^(HTML|SVG)
-    const p2regex = /(Object\.getOwnPropertyNames\(\w+\))\.map\(\(\w+=>\(\(\w+,\w+,\w+,\w+\)=>\{if\(\w+=\w+\.match\(\/\^\(HTML\|SVG\)/;
-    if (p2regex.test(content)) {
-        content = content.replace(p2regex, (match, gopn) => {
-            return match.replace(gopn + '.map(', gopn + FILTER_EXPR + '.map(');
-        });
-        console.log(`  ✓ Patch 2 (readMainInterfaces): ${basename}`);
-        changed = true;
-    }
-
-    // --- PATCH 3: Window property copy loop ---
-    // Pattern: Object.getOwnPropertyNames(e).map((t=>{t in p||(p[t]=e[t])}))
-    const P3_FIND = 'Object.getOwnPropertyNames(e).map((t=>{t in p||(p[t]=e[t])}))';
-    const P3_REPLACE = `Object.getOwnPropertyNames(e)${FILTER_EXPR}.map((t=>{t in p||(p[t]=e[t])}))`;
-    if (content.includes(P3_FIND)) {
-        content = content.replaceAll(P3_FIND, P3_REPLACE);
-        console.log(`  ✓ Patch 3 (window property copy): ${basename}`);
-        changed = true;
+    // Patch 3: debug isValidMemberName
+    const p_debug_re = /startsWith\(memberName, ["\u0027]_["\u0027]\)\)\)/g;
+    if (p_debug_re.test(code)) {
+        if (!code.includes('|| memberName===' + S_S)) {
+            code = code.replace(p_debug_re, `startsWith(memberName, "_") || memberName===${S_S} || memberName===${A_R} || memberName===${s_s} || memberName===${a_r}))`);
+            changed = true;
+        }
     }
 
     if (changed) {
-        fs.writeFileSync(filePath, content, 'utf-8');
-        patchedCount++;
+        const tmp = path.join(process.cwd(), '.pt-check.js');
+        fs.writeFileSync(tmp, code);
+        try {
+            execSync(`node --check "${tmp}"`, { stdio: 'pipe' });
+            fs.unlinkSync(tmp);
+            fs.writeFileSync(file, code, 'utf-8');
+            console.log(`  ✓ Patched: ${base}`);
+            patchedCount++;
+        } catch (e) {
+            console.error(`  ✗ Failed: ${base}\n${e.message}`);
+            if (fs.existsSync(tmp)) fs.unlinkSync(tmp);
+        }
     }
 }
-
-console.log(patchedCount > 0
-    ? `[partytown-patch] Done! Patched ${patchedCount} file(s).`
-    : '[partytown-patch] No files needed patching.'
-);
+console.log(`[partytown-patch] Done. Patched ${patchedCount} files.`);

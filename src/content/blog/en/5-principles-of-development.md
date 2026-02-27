@@ -1,6 +1,6 @@
 ---
 title: "Website Development Principles: 5 Rules That Save Business Budget"
-description: "How to avoid turning an IT project into chaos? We break down 5 fundamental development principles: from strategy and prototyping to launch and long-term support."
+description: "How to avoid turning an IT project into chaos? We break down 5 fundamental development principles: from strategy and prototyping to launch and long-term..."
 pubDate: 2025-10-04
 heroImage: "../../../assets/images/blog/development-process.webp"
 tags: ["development process", "business", "it consulting", "website development"]

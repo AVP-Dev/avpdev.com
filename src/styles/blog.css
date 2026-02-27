@@ -97,9 +97,7 @@
   transform: translateY(-2px);
 }
 
-.blog-grid {
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-}
+/* .blog-grid now inherits from shared styles in style.css */
 
 .no-results-message {
   text-align: center;
@@ -169,7 +167,7 @@
 }
 
 .blog-card-image {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   width: 100%;
   overflow: hidden;
 }
@@ -181,7 +179,7 @@
 }
 
 .blog-card-image-placeholder {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   width: 100%;
   background-color: var(--filter-btn-bg);
 }
@@ -196,10 +194,8 @@
   font-size: 1.3rem;
   line-height: 1.4;
   margin-bottom: 0.75rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  display: block;
+  /* Removed line-clamping */
   min-height: calc(1.3rem * 1.4 * 2);
 }
 

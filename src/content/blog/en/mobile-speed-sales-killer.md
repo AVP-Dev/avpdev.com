@@ -1,6 +1,6 @@
 ---
 title: "Mobile Website Speed: Why Slow React is Killing Your Sales"
-description: "Why do 7 out of 10 clients leave a site after 5 seconds? We break down the impact of Core Web Vitals on conversion, CSR issues, and how to speed up your site with Astro and React."
+description: "Why do 7 out of 10 clients leave a site after 5 seconds? We break down the impact of Core Web Vitals on conversion, CSR issues, and how to speed up your..."
 pubDate: 2025-12-02
 heroImage: "../../../assets/images/blog/mobile-speed-sales-killer.webp"
 tags: ["website speed", "mobile-first", "optimization", "SEO", "Astro", "React", "Core Web Vitals"]

@@ -12,6 +12,7 @@ export const ContactFormSchema = z.object({
     consent: z.coerce.boolean().refine((val) => val === true, {
         message: 'You must agree to personal data processing'
     }),
+    'cf-turnstile-response': z.string().min(1, { message: 'Please complete the captcha' }),
 });
 
 /**
@@ -63,6 +64,7 @@ export const BriefFormSchema = z.object({
     consent: z.coerce.boolean().refine((val) => val === true, {
         message: 'You must agree to personal data processing'
     }),
+    'cf-turnstile-response': z.string().min(1, { message: 'Please complete the captcha' }),
 });
 
 // Export TypeScript types

@@ -193,6 +193,14 @@ export const ui = {
         // Geo Links
         'geoLinks.title': 'География проектов:',
 
+        // Accessibility (aria-labels & alts)
+        aria_theme_switcher: 'Переключить тему',
+        aria_open_menu: 'Открыть меню',
+        aria_scroll_top: 'Наверх',
+        alt_logo: 'Логотип AVPdev.com',
+        alt_about_photo: 'Фотография Алексея Пацкевича, full-stack разработчика',
+        alt_blog_cover: 'Обложка статьи:',
+
         // Project Translations
         ...carsTranslations.ru,
         ...travelTranslations.ru,
@@ -388,6 +396,14 @@ export const ui = {
         project_fragments_title: 'Project Fragments',
         case_deployment_title: 'Architecture and Deployment',
         case_deployment_text: 'To ensure maximum performance and flexibility, the project is hosted on a dedicated virtual server (VPS). The deployment process is fully automated using the self-hosted platform <strong>Coolify</strong>, which implements a CI/CD pipeline. With each push to the Git repository, Coolify automatically builds the application in an isolated Docker container and seamlessly updates it on the server with zero downtime. This approach ensures stability, security, and rapid delivery of new functionality.',
+
+        // Accessibility (aria-labels & alts)
+        aria_theme_switcher: 'Toggle theme',
+        aria_open_menu: 'Open menu',
+        aria_scroll_top: 'Scroll to top',
+        alt_logo: 'AVPdev.com Logo',
+        alt_about_photo: 'Photo of Alexey Patskevich, full-stack developer',
+        alt_blog_cover: 'Cover for article:',
 
         // Project Translations
         ...carsTranslations.en,

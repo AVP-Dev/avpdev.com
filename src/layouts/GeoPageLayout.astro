@@ -1,11 +1,9 @@
 ---
-// src/layouts/GeoPageLayout.astro
 import BaseLayout from './BaseLayout.astro';
 import Cta from '../components/Cta.astro';
 import GeoHero from '../components/sections/GeoHero.astro';
 import Services from '../components/sections/Services.astro';
 import Portfolio from '../components/sections/Portfolio.astro';
-import { getCollection } from 'astro:content';
 import { getLangFromUrl } from '../i18n/utils';
 
 interface Props {
@@ -13,13 +11,16 @@ interface Props {
   description: string;
   h1: string;
   p: string;
+  projects?: any[]; // Pass specific projects for this city
+  citySlug?: string;
 }
 
-const { title, description, h1, p } = Astro.props;
+const { title, description, h1, p, projects, citySlug } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
-// Получаем проекты для секции портфолио в зависимости от языка
-const projects = await getCollection('projects', ({ id }) => id.startsWith(lang + '/'));
+// Dynamic ordering logic to avoid identical DOM structure across all geo-pages
+// Even slugs get Service-first, odd slugs get Portfolio-first
+const isEven = citySlug ? citySlug.length % 2 === 0 : true;
 ---
 <BaseLayout title={title} description={description} isTranslationKey={false}>
   <Fragment slot="head">
@@ -27,10 +28,34 @@ const projects = await getCollection('projects', ({ id }) => id.startsWith(lang 
   </Fragment>
 
   <GeoHero h1={h1} p={p} />
-  <Services />
-  <Portfolio projects={projects} />
+  
+  <div class="geo-sections-wrapper">
+    {isEven ? (
+      <>
+        <Services />
+        <Portfolio projects={projects} />
+      </>
+    ) : (
+      <>
+        <Portfolio projects={projects} />
+        <Services />
+      </>
+    )}
+    
+    <div class="geo-custom-content">
+      <slot />
+    </div>
+  </div>
 
   <div class="container">
     <Cta />
   </div>
 </BaseLayout>
+
+<style>
+  .geo-sections-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+</style>

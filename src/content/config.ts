@@ -6,7 +6,7 @@ const blogCollection = defineCollection({
 	// Используем `image()` из `schema` helper для обработки изображений
 	schema: ({ image }) => z.object({
 		title: z.string(),
-		description: z.string(),
+		description: z.string().max(160, "SEO Description must be <= 160 chars."),
 		pubDate: z.date(),
 		// heroImage теперь будет обрабатываться Astro, а не просто строкой
 		heroImage: image().optional(),

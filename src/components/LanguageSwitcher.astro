@@ -20,10 +20,16 @@ if (pathWithoutLang.startsWith(`/${lang}/`)) {
         
         // Мапинг путей для локалей
         let targetPath = pathWithoutLang;
-        if (targetPath.startsWith('/uslugi/') && locale === 'en') {
-            targetPath = targetPath.replace(/^\/uslugi\//, '/services/');
-        } else if (targetPath.startsWith('/services/') && locale === 'ru') {
-            targetPath = targetPath.replace(/^\/services\//, '/uslugi/');
+        
+        // Match exact "/uslugi" or "/uslugi/..."
+        if (targetPath === '/uslugi' || targetPath.startsWith('/uslugi/')) {
+            if (locale === 'en') {
+                targetPath = targetPath.replace(/^\/uslugi/, '/services');
+            }
+        } else if (targetPath === '/services' || targetPath.startsWith('/services/')) {
+            if (locale === 'ru') {
+                targetPath = targetPath.replace(/^\/services/, '/uslugi');
+            }
         }
 
         const url = `/${locale}${targetPath === '/' ? '' : targetPath}`;

@@ -1,6 +1,10 @@
 ---
 // src/components/ScrollToTop.astro
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
-<a href="#" class="scroll-to-top" aria-label="Наверх">
+<a href="#" class="scroll-to-top" aria-label={t("aria_scroll_top")}>
     <i class="fas fa-arrow-up" aria-hidden="true"></i>
 </a>
