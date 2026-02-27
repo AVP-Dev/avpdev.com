@@ -332,10 +332,10 @@
   justify-content: center;
   padding: 1rem 2.5rem;
   background: var(--accent-gradient);
-  color: white;
+  color: #000;
   text-decoration: none;
   border-radius: 30px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.1rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
