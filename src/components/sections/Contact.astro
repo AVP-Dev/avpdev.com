@@ -1,6 +1,7 @@
 ---
 // src/components/sections/Contact.astro
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Icon from "../Icon.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -110,7 +111,7 @@ const t = useTranslations(lang);
                         <span style="margin-right: 12px;"
                             >{t("form_button")}</span
                         >
-                        <i class="fas fa-paper-plane"></i>
+                        <Icon name="fa-paper-plane" />
                     </button>
                     <div
                         id="form-spinner"

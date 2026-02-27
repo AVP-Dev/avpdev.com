@@ -2,6 +2,7 @@
 // src/components/Footer.astro refactoring
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { CreatorSignature } from "./ui/CreatorSignature";
+import Icon from "./Icon.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -25,7 +26,7 @@ const t = useTranslations(lang);
                         rel="noopener"
                         aria-label="GitHub"
                     >
-                        <i class="fab fa-github"></i>
+                        <Icon name="fa-github" />
                     </a>
                     <a
                         href="https://www.linkedin.com/in/aliaksei-alexey-patskevich-545586b8/"
@@ -33,7 +34,7 @@ const t = useTranslations(lang);
                         rel="noopener"
                         aria-label="LinkedIn"
                     >
-                        <i class="fab fa-linkedin-in"></i>
+                        <Icon name="fa-linkedin-in" />
                     </a>
                     <a
                         href="https://t.me/AVP_Dev"
@@ -41,7 +42,7 @@ const t = useTranslations(lang);
                         rel="noopener"
                         aria-label="Telegram"
                     >
-                        <i class="fab fa-telegram-plane"></i>
+                        <Icon name="fa-telegram-plane" />
                     </a>
                     <a
                         href="https://wa.me/375291217371"
@@ -49,7 +50,7 @@ const t = useTranslations(lang);
                         rel="noopener"
                         aria-label="WhatsApp"
                     >
-                        <i class="fab fa-whatsapp"></i>
+                        <Icon name="fa-whatsapp" />
                     </a>
                 </div>
             </div>

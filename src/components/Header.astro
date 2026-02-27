@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import logo from "../assets/images/logo.svg";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import Icon from "./Icon.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -39,7 +40,7 @@ const homePath = `/${lang}/`;
                 class="control-btn theme-switcher"
                 aria-label={t("aria_theme_switcher")}
             >
-                <i class="fas fa-sun" aria-hidden="true"></i>
+                <Icon name="fa-sun" aria-hidden="true" />
             </button>
             <LanguageSwitcher />
         </div>

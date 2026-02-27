@@ -1,6 +1,7 @@
 ---
 // src/components/sections/Services.astro
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import Icon from '../Icon.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -10,17 +11,17 @@ const t = useTranslations(lang);
         <h2 class="section-title fade-in" set:html={t('services_h2')}></h2>
         <div class="services-grid">
             <div class="card fade-in" style="transition-delay: 100ms;">
-                <i class="fas fa-laptop-code card-icon" aria-hidden="true"></i>
+                <Icon name="fa-laptop-code" class="card-icon" aria-hidden="true" />
                 <h3>{t('services_card1_h3')}</h3>
                 <p>{t('services_card1_p')}</p>
             </div>
             <div class="card fade-in" style="transition-delay: 200ms;">
-                <i class="fas fa-cogs card-icon" aria-hidden="true"></i>
+                <Icon name="fa-cogs" class="card-icon" aria-hidden="true" />
                 <h3>{t('services_card2_h3')}</h3>
                 <p>{t('services_card2_p')}</p>
             </div>
             <div class="card fade-in" style="transition-delay: 300ms;">
-                <i class="fas fa-rocket card-icon" aria-hidden="true"></i>
+                <Icon name="fa-rocket" class="card-icon" aria-hidden="true" />
                 <h3>{t('services_card3_h3')}</h3>
                 <p>{t('services_card3_p')}</p>
             </div>
