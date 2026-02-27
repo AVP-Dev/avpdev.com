@@ -1386,6 +1386,13 @@ textarea.form-control {
 
 /* --- Legal Page Styles --- */
 .legal-page-content {
+    padding-top: 120px;
+    padding-bottom: 80px;
+}
+
+.legal-container {
+    max-width: 900px;
+    margin: 0 auto;
     padding: 2rem 3rem;
     background-color: var(--primary-color);
     border-radius: 15px;
