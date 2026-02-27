@@ -23,6 +23,18 @@ interface CustomEventMap {
 	'modal:open': CustomEvent<{ modalId: string }>;
 	'theme:changed': CustomEvent;
 }
+
+interface ImportMetaEnv {
+	readonly CHAT_ID: string;
+	readonly TOPIC_ID?: string;
+	readonly PUBLIC_TURNSTILE_SITE_KEY: string;
+	readonly TURNSTILE_SECRET_KEY: string;
+}
+
+interface ImportMeta {
+	readonly env: ImportMetaEnv;
+}
+
 declare global {
 	interface Document {
 		addEventListener<K extends keyof CustomEventMap>(type: K, listener: (this: Document, ev: CustomEventMap[K]) => void): void;

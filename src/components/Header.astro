@@ -15,7 +15,7 @@ const homePath = `/${lang}/`;
         <a href={homePath} class="logo">
             <Image
                 src={logo}
-                alt="AVPdev.com Logo"
+                alt={t("alt_logo")}
                 class="logo-img"
                 width="40"
                 height="40"
@@ -37,13 +37,13 @@ const homePath = `/${lang}/`;
         <div class="controls">
             <button
                 class="control-btn theme-switcher"
-                aria-label="Переключить тему"
+                aria-label={t("aria_theme_switcher")}
             >
                 <i class="fas fa-sun" aria-hidden="true"></i>
             </button>
             <LanguageSwitcher />
         </div>
-        <button class="burger-menu" aria-label="Открыть меню">
+        <button class="burger-menu" aria-label={t("aria_open_menu")}>
             <div></div>
             <div></div>
             <div></div>
@@ -65,7 +65,7 @@ const homePath = `/${lang}/`;
     <div class="mobile-controls">
         <button
             class="control-btn theme-switcher"
-            aria-label="Переключить тему"
+            aria-label={t("aria_theme_switcher")}
         >
             <i class="fas fa-sun" aria-hidden="true"></i>
         </button>

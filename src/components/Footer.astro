@@ -56,7 +56,7 @@ const t = useTranslations(lang);
 
             <!-- Column 2: Navigation -->
             <div class="footer-col nav-col">
-                <h4 class="footer-title">{t("catalog_title")}</h4>
+                <h3 class="footer-title">{t("catalog_title")}</h3>
                 <nav class="footer-nav">
                     <a href={`/${lang}/projects/`}>{t("catalog_title")}</a>
                     <a href={`/${lang}/blog/`}>{t("nav_blog")}</a>
@@ -66,7 +66,7 @@ const t = useTranslations(lang);
 
             <!-- Column 3: Legal & Local -->
             <div class="footer-col legal-col">
-                <h4 class="footer-title">{t("footer_legal")}</h4>
+                <h3 class="footer-title">{t("footer_legal")}</h3>
                 <nav class="footer-nav secondary">
                     <a href={`/${lang}/legal/privacy-policy`}
                         >{t("footer_privacy")}</a
@@ -83,11 +83,11 @@ const t = useTranslations(lang);
 
         {/* Geo Links Section for SEO */}
         <div class="footer-geo-section">
-            <h4 class="footer-title">
+            <h3 class="footer-title">
                 <a href={`/${lang}/locations/`} class="geo-title-link">
                     {t("geoLinks.title")}
                 </a>
-            </h4>
+            </h3>
             <div class="geo-links-row">
                 {
                     [
@@ -236,7 +236,7 @@ const t = useTranslations(lang);
     .copyright {
         font-size: 0.85rem;
         color: var(--text-secondary-color);
-        opacity: 0.6;
+        opacity: 0.9;
         margin: 0;
         text-align: left;
         white-space: nowrap;
@@ -280,7 +280,7 @@ const t = useTranslations(lang);
     .geo-tag {
         font-size: 0.85rem;
         color: var(--text-secondary-color);
-        opacity: 0.6;
+        opacity: 0.9;
         text-decoration: none;
         transition: all 0.3s ease;
     }

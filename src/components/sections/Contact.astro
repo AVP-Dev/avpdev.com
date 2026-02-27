@@ -120,6 +120,11 @@ const t = useTranslations(lang);
                     </div>
                 </div>
 
+                <!-- Turnstile Widget Container -->
+                <div class="turnstile-container">
+                    <div class="cf-turnstile" data-sitekey={String(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA")} data-theme="dark"></div>
+                </div>
+
                 <p id="consent-error" class="error-text hidden">
                     {
                         lang === "ru"
@@ -174,6 +179,13 @@ const t = useTranslations(lang);
         margin-top: 0.5rem;
         font-family: var(--font-mono);
         opacity: 0.7;
+    }
+
+    .turnstile-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
     }
 
     @media (max-width: 640px) {
@@ -255,6 +267,16 @@ const t = useTranslations(lang);
             );
             if (consentError) consentError.classList.add("hidden");
             if (messageError) messageError.classList.add("hidden");
+
+            // Turnstile validation
+            const turnstileResponse = form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement;
+            if (!turnstileResponse || !turnstileResponse.value) {
+                if (messageError) {
+                    messageError.textContent = "Please complete the anti-spam check.";
+                    messageError.classList.remove("hidden");
+                }
+                return;
+            }
 
             let isValid = true;
 
@@ -338,7 +360,12 @@ const t = useTranslations(lang);
             } finally {
                 if (submitButton) submitButton.style.display = "block";
                 if (spinner) spinner.style.display = "none";
+                // Reset Turnstile on error/success
+                if (window.turnstile) {
+                    window.turnstile.reset();
+                }
             }
         });
     });
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>

@@ -81,6 +81,15 @@ const t = useTranslations(lang);
             return;
         }
 
+        // Skip for small mobile screens or if user prefers reduced motion
+        const isMobile = window.innerWidth < 768;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        
+        if (isMobile || prefersReducedMotion) {
+            console.log("Particles disabled for performance or accessibility");
+            return;
+        }
+
         const bodyStyles = getComputedStyle(document.body);
         const particleColor =
             bodyStyles
@@ -96,23 +105,23 @@ const t = useTranslations(lang);
         particlesJS("particles-js", {
             particles: {
                 number: {
-                    value: 30, // Еще меньше для мобил
-                    density: { enable: true, value_area: 800 },
+                    value: 40,
+                    density: { enable: true, value_area: 1200 },
                 },
                 color: { value: particleColor },
                 shape: { type: "circle" },
                 opacity: { value: 0.3, random: false },
-                size: { value: 3, random: true },
+                size: { value: 2, random: true },
                 line_linked: {
                     enable: true,
                     distance: 150,
                     color: particleLineColor,
-                    opacity: 0.2,
+                    opacity: 0.15,
                     width: 1,
                 },
                 move: {
                     enable: true,
-                    speed: 1, // Медленнее
+                    speed: 0.8,
                     direction: "none",
                     out_mode: "out",
                 },
@@ -125,7 +134,7 @@ const t = useTranslations(lang);
                     resize: true,
                 },
             },
-            retina_detect: false, // Отключаем для перфоманса
+            retina_detect: false,
         });
     }
 

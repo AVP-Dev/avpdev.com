@@ -3,8 +3,10 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Cta from '../../../components/Cta.astro';
+import BlogCard from '../../../components/BlogCard.astro';
 import type { CollectionEntry } from 'astro:content';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import { Image } from 'astro:assets';
 
 export const prerender = true;
 
@@ -31,6 +33,10 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString(lang, {
   month: 'long',
   day: 'numeric'
 });
+
+const allPostsForLang = await getCollection('blog', ({ id }) => id.startsWith(`${lang}/`) && id !== post.id);
+import { getRandomItems } from "../../../utils/random";
+const relatedPosts = getRandomItems(allPostsForLang, 3);
 
 const backLink = `/${lang}/blog/`;
 
@@ -88,13 +94,14 @@ const articleSchema = {
     <header class="blog-post-hero">
         {post.data.heroImage && (
             <div class="hero-image-container">
-                <img
-                    src={post.data.heroImage.src}
+                <Image
+                    src={post.data.heroImage}
                     alt={`Cover for article: ${post.data.title}`}
-                    width="1200"
-                    height="600"
+                    width={1200}
+                    height={600}
                     loading="eager"
-                    decoding="auto"
+                    fetchpriority="high"
+                    decoding="async"
                     style="object-fit: cover; width: 100%; height: 100%;"
                 />
             </div>
@@ -120,7 +127,17 @@ const articleSchema = {
         <Cta />
     </div>
 
-    <div class="blog-post-container">
+    <div class="blog-post-container" style="text-align: center; margin-top: 4rem;">
+        {relatedPosts.length > 0 && (
+            <div class="related-posts-wrapper">
+                <h3 class="related-posts-title" style="font-size: 2.5rem; margin-bottom: 3rem; font-weight: 800;">{t('blog_other_posts')}</h3>
+                <div class="recommendation-grid" style="margin-bottom: 4rem;">
+                    {relatedPosts.map(related => (
+                        <BlogCard post={related} />
+                    ))}
+                </div>
+            </div>
+        )}
         <div class="back-link-wrapper">
             <a href={backLink} class="back-to-main">{t('blog_back_to_all')}</a>
         </div>

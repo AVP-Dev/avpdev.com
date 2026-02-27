@@ -1,6 +1,6 @@
 ---
 title: "AI: Why It's Your Most Capable and Most Dangerous Student"
-description: "For 10 years in development, I've seen technologies die and be born, but now we're at a special point. AI is not just another library or framework. It's a new type of relationship with information."
+description: "For 10 years in development, I've seen technologies die and be born, but now we're at a special point. AI is not just another library or framework. It's a..."
 pubDate: 2026-02-23
 heroImage: "../../../assets/images/blog/ai-capable-dangerous-student.webp"
 tags: ["AI", "development", "architecture", "Drizzle ORM", "best practices", "future of tech"]

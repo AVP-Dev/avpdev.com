@@ -24,6 +24,14 @@ lerna-debug.log*
 .DS_Store
 Thumbs.db
 
+# Lighthouse Reports
+lh-*.json
+lh.json
+
+# Partytown temporary/diagnostic files
+partytown-*-served.*
+.partytown-temp-check.js
+
 # Системные папки IDE и Git
 .git
 .idea

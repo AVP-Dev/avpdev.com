@@ -2,6 +2,7 @@
 import type { APIRoute } from 'astro';
 import sanitizeHtml from 'sanitize-html';
 import { ContactFormSchema } from '../../lib/schemas';
+import { rateLimit } from '../../lib/rateLimit';
 
 function cleanInput(str: string | undefined | null): string {
     if (!str) return '';
@@ -15,8 +16,17 @@ export const GET: APIRoute = async ({ redirect }) => {
     return redirect('/ru/', 301);
 };
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, clientAddress }) => {
     try {
+        // Enforce rate limiting
+        const ip = clientAddress || request.headers.get('x-forwarded-for') || 'unknown';
+        if (!rateLimit.check(ip)) {
+            return new Response(JSON.stringify({
+                success: false,
+                message: "Too many requests. Please try again later."
+            }), { status: 429 });
+        }
+
         const data = await request.json();
         const result = ContactFormSchema.safeParse(data);
 
@@ -38,10 +48,31 @@ export const POST: APIRoute = async ({ request }) => {
             `\n<b>Сообщение:</b>\n${cleanInput(message)}`
         ].join('\n');
 
-        const { BOT_TOKEN, CHAT_ID, TOPIC_ID } = import.meta.env;
+        const { BOT_TOKEN, CHAT_ID, TOPIC_ID, TURNSTILE_SECRET_KEY } = import.meta.env;
 
-        if (!BOT_TOKEN || !CHAT_ID) {
-            throw new Error("Server configuration error: Telegram credentials missing.");
+        if (!BOT_TOKEN || !CHAT_ID || !TURNSTILE_SECRET_KEY) {
+            throw new Error("Server configuration error: Required credentials missing.");
+        }
+
+        // Verify Turnstile Token
+        const token = result.data['cf-turnstile-response'];
+        const turnstileFormData = new URLSearchParams();
+        turnstileFormData.append('secret', TURNSTILE_SECRET_KEY);
+        turnstileFormData.append('response', token);
+
+        const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            body: turnstileFormData,
+        });
+
+        const turnstileResult = await turnstileResponse.json();
+
+        if (!turnstileResult.success) {
+            console.error('Turnstile verification failed:', turnstileResult);
+            return new Response(JSON.stringify({
+                success: false,
+                message: "Cloudflare Turnstile verification failed. Please try again.",
+            }), { status: 403 });
         }
 
         const tgResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {

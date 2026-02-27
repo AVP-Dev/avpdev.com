@@ -15,7 +15,15 @@ function initializePage() {
         }
 
         themeSwitchers.forEach(switcher => {
-            switcher.innerHTML = theme === 'dark-theme' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            // Remove all children
+            while (switcher.firstChild) {
+                switcher.removeChild(switcher.firstChild);
+            }
+
+            // Create icon element safely
+            const icon = document.createElement('i');
+            icon.className = theme === 'dark-theme' ? 'fas fa-sun' : 'fas fa-moon';
+            switcher.appendChild(icon);
         });
     }
 

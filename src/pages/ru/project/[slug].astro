@@ -3,6 +3,7 @@
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import CaseStudyLayout from "../../../layouts/CaseStudyLayout.astro";
+import PortfolioCard from "../../../components/PortfolioCard.astro";
 import { useTranslations } from "../../../i18n/utils";
 import type { TranslationKey } from "../../../env.d.ts";
 
@@ -39,6 +40,10 @@ const {
     header,
     content,
 } = project.data;
+
+const allProjects = await getCollection("projects", ({ id }) => id.startsWith(`${lang}/`) && id !== project.id);
+import { getRandomItems } from "../../../utils/random";
+const relatedProjects = getRandomItems(allProjects, 3);
 
 const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -180,6 +185,26 @@ const projectSchema = {
                                     />
                                 </figure>
                             </div>
+                        ))}
+                    </div>
+                </div>
+            )
+        }
+
+        {
+            relatedProjects.length > 0 && (
+                <div class="related-projects" style="margin-top: 5rem; text-align: center;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 3rem; font-weight: 800;" class="section-title">{lang === 'ru' ? 'Другие проекты' : 'Related Projects'}</h2>
+                    <div class="recommendation-grid">
+                        {relatedProjects.map((p) => (
+                            <PortfolioCard
+                                img={p.data.heroImage}
+                                titleKey={p.data.titleKey}
+                                descriptionKey={p.data.descriptionKey}
+                                link={`/${lang}/project/${p.slug.replace(/^ru\/|^en\//, "")}/`}
+                                techStack={p.data.content.techStack}
+                                category={p.data.category}
+                            />
                         ))}
                     </div>
                 </div>
