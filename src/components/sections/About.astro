@@ -16,9 +16,8 @@ const homePath = `/${lang}/`;
                 <Image
                     src={aboutPhoto}
                     alt={t("alt_about_photo")}
-                    width={320}
-                    height={420}
-                    densities={[1.5, 2]}
+                    widths={[320, 640]}
+                    sizes="(max-width: 640px) 316px, 320px"
                     loading="eager"
                     fetchpriority="high"
                     decoding="async"

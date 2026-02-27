@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-// Simplified and non-recursive patch script for performance
+// Improved patch script to silence SharedStorage and AttributionReporting
 const PT_PATHS = [
     'node_modules/@qwik.dev/partytown/lib',
     'node_modules/@builder.io/partytown/lib',
@@ -22,24 +22,25 @@ for (const p of PT_PATHS) {
     const res = path.resolve(process.cwd(), p);
     if (!fs.existsSync(res)) continue;
 
-    // Only target files known to cause issues
-    const files = [
-        'partytown.js',
-        'partytown-sw.js',
-        'partytown-sandbox-sw.js',
-        'debug/partytown.js',
-        'debug/partytown-sw.js',
-        'debug/partytown-sandbox-sw.js'
-    ];
+    // Scan all .js and .html files (for sandbox)
+    function walk(dir) {
+        for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+            const full = path.join(dir, ent.name);
+            if (ent.isDirectory()) walk(full);
+            else if (ent.name.endsWith('.js') || ent.name.endsWith('.html')) patch(full);
+        }
+    }
 
-    for (const file of files) {
-        const fullPath = path.join(res, file);
-        if (!fs.existsSync(fullPath)) continue;
+    walk(res);
+}
 
-        let code = fs.readFileSync(fullPath, 'utf-8');
-        let changed = false;
+function patch(fullPath) {
+    let code = fs.readFileSync(fullPath, 'utf-8');
+    let changed = false;
+    const isJS = fullPath.endsWith('.js');
 
-        // Optimized Regex for property loops
+    // 1. JS: Optimized Regex for property loops
+    if (isJS) {
         const p_enum_re = /(Object\.getOwnPropertyNames\([\w.]+\))(\.(map|forEach))\(/g;
         if (p_enum_re.test(code)) {
             if (!code.includes('.filter(')) {
@@ -47,12 +48,31 @@ for (const p of PT_PATHS) {
                 changed = true;
             }
         }
+    }
 
-        if (changed) {
-            fs.writeFileSync(fullPath, code, 'utf-8');
-            console.log(`  ✓ Patched: ${file}`);
-            patchedCount++;
+    // 2. Global: String replacement for common warning triggers
+    // Direct replacement of problematic strings in code/html
+    const targets = [
+        ['sharedStorage', '""'],
+        ['attributionReporting', '""']
+    ];
+
+    for (const [target, replacement] of targets) {
+        if (code.includes(target) && !code.includes('/*patched*/')) {
+            // Be careful not to break paths or valid logic, but in PT sandbox these are usually property lookups
+            // We'll target them if they look like standalone property strings
+            const re = new RegExp(`['"]${target}['"]`, 'g');
+            if (re.test(code)) {
+                code = code.replace(re, replacement);
+                changed = true;
+            }
         }
+    }
+
+    if (changed) {
+        fs.writeFileSync(fullPath, code + (isJS ? '\n/*patched*/' : '<!--patched-->'), 'utf-8');
+        console.log(`  ✓ Patched: ${path.basename(fullPath)}`);
+        patchedCount++;
     }
 }
 

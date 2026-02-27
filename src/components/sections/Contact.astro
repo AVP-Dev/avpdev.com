@@ -120,9 +120,13 @@ const t = useTranslations(lang);
                     </div>
                 </div>
 
-                <!-- Turnstile Widget Container -->
+                <!-- Turnstile Widget: interaction-only mode preserves premium aesthetic -->
                 <div class="turnstile-container">
-                    <div class="cf-turnstile" data-sitekey={String(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA")} data-theme="dark"></div>
+                    <div class="cf-turnstile" 
+                        data-sitekey={String(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA")} 
+                        data-theme="dark"
+                        data-appearance="interaction-only">
+                    </div>
                 </div>
 
                 <p id="consent-error" class="error-text hidden">
@@ -184,8 +188,8 @@ const t = useTranslations(lang);
     .turnstile-container {
         display: flex;
         justify-content: center;
-        margin-top: 1.5rem;
-        margin-bottom: 0.5rem;
+        margin-top: 1rem;
+        min-height: 0;
     }
 
     @media (max-width: 640px) {
