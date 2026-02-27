@@ -47,7 +47,8 @@ export default defineConfig({
   // 6. Настройки путей и сервера
   trailingSlash: 'always',
   build: {
-    format: 'directory'
+    format: 'directory',
+    inlineStylesheets: 'auto'
   },
   server: {
     host: '0.0.0.0',

@@ -1323,8 +1323,8 @@ textarea.form-control {
     bottom: 20px;
     left: 20px;
     right: 20px;
-    background-color: rgba(var(--bg-color-rgb), 0.9);
-    color: var(--text-primary-color);
+    background-color: rgba(var(--primary-color-rgb), 0.95);
+    color: var(--text-color);
     padding: 20px 25px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -1352,8 +1352,14 @@ textarea.form-control {
 
 .cookie-text a {
     color: var(--accent-color-start);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 3px;
     font-weight: 500;
+}
+
+.light-theme .cookie-text a {
+    color: #d94e00;
+    /* Darker orange for better contrast on light bg */
 }
 
 .cookie-text a:hover {
