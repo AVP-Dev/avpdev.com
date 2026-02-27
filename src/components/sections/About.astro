@@ -17,10 +17,9 @@ const homePath = `/${lang}/`;
                 <Image
                     src={aboutPhoto}
                     alt={t("alt_about_photo")}
-                    widths={[320, 640]}
-                    sizes="(max-width: 640px) 316px, 320px"
-                    loading="eager"
-                    fetchpriority="high"
+                    widths={[320, 480, 640]}
+                    sizes="(max-width: 640px) 320px, 320px"
+                    loading="lazy"
                     decoding="async"
                     quality={80}
                     class="about-image"
