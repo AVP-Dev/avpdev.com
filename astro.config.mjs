@@ -9,17 +9,7 @@ import { geoContent } from './src/data/geo-content.ts';
 
 const site = 'https://avpdev.com';
 
-// Генерируем массив полных URL для sitemap (только те, у которых есть SEO-контент, чтобы избежать 301 редиректов в sitemap)
-const geoPages = locations.flatMap(loc => {
-  const urls = [];
-  if (geoContent[loc.slug]?.ru) {
-    urls.push(`${site}/ru/uslugi/${loc.slug}/`);
-  }
-  if (geoContent[loc.slug]?.en) {
-    urls.push(`${site}/en/services/${loc.slug}/`);
-  }
-  return urls;
-});
+// Sitemap will automatically include pre-rendered [city] pages from dist/
 
 export default defineConfig({
   site: site,
@@ -39,7 +29,6 @@ export default defineConfig({
     // 3. Интеграция Sitemap с добавлением динамических страниц
     sitemap({
       filter: (page) => page !== `${site}/`,
-      customPages: geoPages, // Теперь переменная используется!
       changefreq: 'weekly',
       priority: 0.7,
     }),
