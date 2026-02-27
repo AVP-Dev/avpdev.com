@@ -4,7 +4,7 @@ FROM oven/bun:1.2-alpine AS builder
 WORKDIR /app
 
 # Копируем файлы зависимостей и скрипт патча
-COPY package.json bun.lockb* ./
+COPY package.json bun.lock* ./
 COPY scripts ./scripts
 
 # Устанавливаем зависимости
