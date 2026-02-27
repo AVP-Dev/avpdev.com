@@ -1,5 +1,5 @@
 # Этап 1: Сборка приложения (Builder)
-FROM oven/bun:1.2-alpine AS builder
+FROM oven/bun:1.2 AS builder
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ COPY package.json bun.lock* ./
 COPY scripts ./scripts
 
 # Устанавливаем зависимости
-RUN bun install --frozen-lockfile
+RUN bun install
 
 # Копируем всё остальное
 COPY . .
@@ -17,13 +17,13 @@ COPY . .
 RUN bun run build
 
 # Этап 2: Производственный образ (Production)
-FROM oven/bun:1.2-alpine AS production
+FROM oven/bun:1.2-slim AS production
 
 WORKDIR /app
 
 # Безопасность и системные утилиты
-RUN addgroup -S astro_group && adduser -S astro_user -G astro_group
-RUN apk add --no-cache dumb-init curl
+RUN groupadd -r astro_group && useradd -r -g astro_group astro_user
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Копируем билд и зависимости
 COPY --from=builder /app/dist ./dist
@@ -46,5 +46,5 @@ ENV NODE_ENV=production
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:3000 || exit 1
 
-# Запуск через bun (так как образа node в системе нет)
-CMD ["dumb-init", "bun", "./dist/server/entry.mjs"]
+# Запуск через bun
+CMD ["bun", "./dist/server/entry.mjs"]
