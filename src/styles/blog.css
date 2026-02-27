@@ -323,20 +323,27 @@
 .back-link-wrapper {
   text-align: center;
   margin-top: 4rem;
+  margin-bottom: 2rem;
 }
 
 .back-to-main {
-  color: var(--accent-color-start);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  background: var(--gradient-primary);
+  color: white;
   text-decoration: none;
+  border-radius: 30px;
   font-weight: 600;
-  display: inline-block;
-  transition: transform 0.3s ease;
   font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .back-to-main:hover {
-  transform: translateX(-5px);
-  text-decoration: underline;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--accent-color-start);
 }
 
 /* Typography and content styling inside the article */

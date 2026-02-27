@@ -36,7 +36,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString(lang, {
 
 const allPostsForLang = await getCollection('blog', ({ id }) => id.startsWith(`${lang}/`) && id !== post.id);
 import { getRandomItems } from "../../../utils/random";
-const relatedPosts = getRandomItems(allPostsForLang, 3);
+const relatedPosts = getRandomItems(allPostsForLang, 2);
 
 const backLink = `/${lang}/blog/`;
 
@@ -127,13 +127,15 @@ const articleSchema = {
         <Cta />
     </div>
 
-    <div class="blog-post-container" style="text-align: center; margin-top: 4rem;">
+    <div class="blog-post-container">
         {relatedPosts.length > 0 && (
-            <div class="related-posts-wrapper">
-                <h3 class="related-posts-title" style="font-size: 2.5rem; margin-bottom: 3rem; font-weight: 800;">{t('blog_other_posts')}</h3>
-                <div class="recommendation-grid" style="margin-bottom: 4rem;">
+            <div class="related-wrapper">
+                <h3 class="related-title">{t('blog_other_posts')}</h3>
+                <div class="related-flex">
                     {relatedPosts.map(related => (
-                        <BlogCard post={related} />
+                        <div class="related-item">
+                            <BlogCard post={related} />
+                        </div>
                     ))}
                 </div>
             </div>
