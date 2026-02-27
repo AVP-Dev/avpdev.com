@@ -40,7 +40,7 @@ export default defineConfig({
   trailingSlash: 'always',
   build: {
     format: 'directory',
-    inlineStylesheets: 'always'
+    inlineStylesheets: 'auto'
   },
   server: {
     host: '0.0.0.0',
