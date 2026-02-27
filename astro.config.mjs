@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
-import partytown from '@astrojs/partytown';
 import react from '@astrojs/react';
 import remarkHeadingId from 'remark-heading-id';
 import { locations } from './src/data/locations.ts';
@@ -31,13 +30,6 @@ export default defineConfig({
       filter: (page) => page !== `${site}/`,
       changefreq: 'weekly',
       priority: 0.7,
-    }),
-
-    // 4. Оптимизация скриптов (Google Tag Manager и др.)
-    partytown({
-      config: {
-        forward: ["dataLayer.push"],
-      },
     }),
 
     // 5. Поддержка React компонентов

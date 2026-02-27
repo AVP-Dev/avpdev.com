@@ -13,13 +13,12 @@
     "astro": "astro",
     "check": "astro check",
     "sync": "astro sync",
-    "postinstall": "node scripts/patch-partytown.mjs"
+    "postinstall": "echo 'No postinstall needed'"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/node": "^9.5.4",
-    "@astrojs/partytown": "^2.1.4",
-    "@astrojs/react": "^4.4.2",
+    "@astrojs/react": "^4.2.4",
     "@astrojs/sitemap": "^3.7.0",
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource-variable/plus-jakarta-sans": "^5.2.8",

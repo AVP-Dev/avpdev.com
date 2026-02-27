@@ -43,7 +43,7 @@ const {
 
 const allProjects = await getCollection("projects", ({ id }) => id.startsWith(`${lang}/`) && id !== project.id);
 import { getRandomItems } from "../../../utils/random";
-const relatedProjects = getRandomItems(allProjects, 3);
+const relatedProjects = getRandomItems(allProjects, 2);
 
 const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -193,18 +193,20 @@ const projectSchema = {
 
         {
             relatedProjects.length > 0 && (
-                <div class="related-projects" style="margin-top: 5rem; text-align: center;">
-                    <h2 style="font-size: 2.5rem; margin-bottom: 3rem; font-weight: 800;" class="section-title">{lang === 'ru' ? 'Другие проекты' : 'Related Projects'}</h2>
-                    <div class="recommendation-grid">
+                <div class="related-wrapper">
+                    <h2 class="related-title">{lang === 'ru' ? 'Другие проекты' : 'Related Projects'}</h2>
+                    <div class="related-flex">
                         {relatedProjects.map((p) => (
-                            <PortfolioCard
-                                img={p.data.heroImage}
-                                titleKey={p.data.titleKey}
-                                descriptionKey={p.data.descriptionKey}
-                                link={`/${lang}/project/${p.slug.replace(/^ru\/|^en\//, "")}/`}
-                                techStack={p.data.content.techStack}
-                                category={p.data.category}
-                            />
+                            <div class="related-item">
+                                <PortfolioCard
+                                    img={p.data.heroImage}
+                                    titleKey={p.data.titleKey}
+                                    descriptionKey={p.data.descriptionKey}
+                                    link={`/${lang}/project/${p.slug.replace(/^ru\/|^en\//, "")}/`}
+                                    techStack={p.data.content.techStack}
+                                    category={p.data.category}
+                                />
+                            </div>
                         ))}
                     </div>
                 </div>
