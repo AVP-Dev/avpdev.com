@@ -3,6 +3,7 @@
 import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import type { Project, TranslationKey } from "../env.d.ts";
+import Icon from "./Icon.astro";
 
 interface Props extends Project {}
 
@@ -46,7 +47,7 @@ const linkTextKey = "portfolio_card_link";
                 }
             </div>
             <a href={link} class="case-arrow-link" aria-label={t(linkTextKey)}>
-                <i class="fas fa-arrow-right"></i>
+                <Icon name="fa-arrow-right" />
             </a>
         </div>
     </div>

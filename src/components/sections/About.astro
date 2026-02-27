@@ -3,6 +3,7 @@
 import { Image } from "astro:assets";
 import aboutPhoto from "../../assets/images/about-photo.webp";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Icon from "../Icon.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -50,11 +51,7 @@ const homePath = `/${lang}/`;
             <div class="tech-categories">
                 <div class="tech-category-card">
                     <h4>
-                        <i
-                            class="fas fa-server"
-                            aria-hidden="true"
-                            style="color: var(--accent-color-start); margin-right: 12px;"
-                        ></i>Backend
+                    <Icon name="fa-server" aria-hidden="true" style="color: var(--accent-color-start); margin-right: 12px;" />Backend
                     </h4>
                     <div class="tech-list">
                         <span>Python (Flask, Django)</span>
@@ -65,11 +62,7 @@ const homePath = `/${lang}/`;
                 </div>
                 <div class="tech-category-card">
                     <h4>
-                        <i
-                            class="fas fa-laptop-code"
-                            aria-hidden="true"
-                            style="color: var(--accent-color-start); margin-right: 12px;"
-                        ></i>Frontend
+                    <Icon name="fa-laptop-code" aria-hidden="true" style="color: var(--accent-color-start); margin-right: 12px;" />Frontend
                     </h4>
                     <div class="tech-list">
                         <span>React (Next.js, Astro)</span>
@@ -80,11 +73,7 @@ const homePath = `/${lang}/`;
                 </div>
                 <div class="tech-category-card">
                     <h4>
-                        <i
-                            class="fas fa-database"
-                            aria-hidden="true"
-                            style="color: var(--accent-color-start); margin-right: 12px;"
-                        ></i>Databases
+                    <Icon name="fa-database" aria-hidden="true" style="color: var(--accent-color-start); margin-right: 12px;" />Databases
                     </h4>
                     <div class="tech-list">
                         <span>PostgreSQL / MySQL</span>
@@ -94,11 +83,7 @@ const homePath = `/${lang}/`;
                 </div>
                 <div class="tech-category-card">
                     <h4>
-                        <i
-                            class="fas fa-cloud"
-                            aria-hidden="true"
-                            style="color: var(--accent-color-start); margin-right: 12px;"
-                        ></i>DevOps
+                    <Icon name="fa-cloud" aria-hidden="true" style="color: var(--accent-color-start); margin-right: 12px;" />DevOps
                     </h4>
                     <div class="tech-list">
                         <span>Docker / Kubernetes</span>
