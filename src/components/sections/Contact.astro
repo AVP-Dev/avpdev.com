@@ -373,4 +373,45 @@ const t = useTranslations(lang);
         });
     });
 </script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+</script>
+<script>
+    // Lazy-load Cloudflare Turnstile to prevent third-party cookies on initial page load
+    document.addEventListener("astro:page-load", () => {
+        const turnstileContainer = document.querySelector('.cf-turnstile');
+        const contactForm = document.getElementById('contact-form');
+        let turnstileLoaded = false;
+
+        if (!turnstileContainer || !contactForm) return;
+
+        const loadTurnstile = () => {
+            if (turnstileLoaded) return;
+            turnstileLoaded = true;
+            
+            console.log("🛡️ Lazy loading Cloudflare Turnstile...");
+            const script = document.createElement('script');
+            script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+            script.defer = true;
+            document.head.appendChild(script);
+
+            // Cleanup event listeners
+            contactForm.removeEventListener('focusin', loadTurnstile);
+            contactForm.removeEventListener('click', loadTurnstile);
+            contactForm.removeEventListener('touchstart', loadTurnstile);
+        };
+
+        // Load on any interaction with the form
+        contactForm.addEventListener('focusin', loadTurnstile, { once: true });
+        contactForm.addEventListener('click', loadTurnstile, { once: true });
+        contactForm.addEventListener('touchstart', loadTurnstile, { once: true });
+
+        // Load when scrolling near the form (using IntersectionObserver)
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                loadTurnstile();
+                observer.disconnect();
+            }
+        }, { rootMargin: "300px" }); // Load when within 300px of viewport
+
+        observer.observe(contactForm);
+    });
+</script>
