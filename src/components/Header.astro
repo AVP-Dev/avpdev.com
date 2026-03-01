@@ -3,6 +3,7 @@
 import { Image } from "astro:assets";
 import logo from "../assets/images/logo.svg";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import Icon from "./Icon.astro";
 
@@ -13,27 +14,61 @@ const homePath = `/${lang}/`;
 
 <header>
     <nav class="container">
-        <a href={homePath} class="logo">
-            <Image
-                src={logo}
-                alt={t("alt_logo")}
-                class="logo-img"
-                width="40"
-                height="40"
-                loading="eager"
-                fetchpriority="high"
-            />
-            <span class="logo-text"
-                >AVP<span class="gradient-text">dev.com</span></span
-            >
+        <a href={homePath} class="logo" aria-label={t("alt_logo")}>
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-img" width="40" height="40">
+                <path d="M50 0L0 100H25L50 50L75 100H100L50 0Z" fill="currentColor"/>
+                <path d="M50 50L62.5 75L75 50L87.5 75L100 100H75L62.5 75L50 100H25L50 50Z" fill="url(#paint_logo_orange)"/>
+                <defs>
+                    <linearGradient id="paint_logo_orange" x1="62.5" y1="50" x2="62.5" y2="100" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FFC837"/>
+                        <stop offset="1" stop-color="#FF8C00"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <span class="logo-text">AVP<span class="gradient-text">dev.com</span></span>
         </a>
         <ul class="nav-links">
             <li><a href={`${homePath}#about`}>{t("nav_about")}</a></li>
-            <li><a href={`${homePath}#stack`}>{t("nav_services")}</a></li>
+            <div class="nav-dropdown">
+          <button class="nav-dropbtn" aria-haspopup="true" aria-expanded="false">
+            {t('nav_services')} <i class="fa-solid fa-chevron-down text-xs ml-1 transition-transform duration-300"></i>
+          </button>
+          <div class="nav-dropdown-content">
+            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development')} class="dropdown-item">
+              <i class="fa-solid fa-laptop-code"></i>
+              <div class="dropdown-text">
+                <span class="dropdown-title">{t('nav_service_web')}</span>
+              </div>
+            </a>
+            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps')} class="dropdown-item">
+              <i class="fa-brands fa-telegram"></i>
+              <div class="dropdown-text">
+                <span class="dropdown-title">{t('nav_service_tma')}</span>
+              </div>
+            </a>
+            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration')} class="dropdown-item">
+              <i class="fa-solid fa-brain"></i>
+              <div class="dropdown-text">
+                <span class="dropdown-title">{t('nav_service_ai')}</span>
+              </div>
+            </a>
+            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development')} class="dropdown-item">
+              <i class="fa-solid fa-robot"></i>
+              <div class="dropdown-text">
+                <span class="dropdown-title">{t('nav_service_bots')}</span>
+              </div>
+            </a>
+            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp')} class="dropdown-item">
+              <i class="fa-solid fa-rocket"></i>
+              <div class="dropdown-text">
+                <span class="dropdown-title">{t('nav_service_saas')}</span>
+              </div>
+            </a>
+          </div>
+        </div>
             <li><a href={`/${lang}/projects/`}>{t("nav_portfolio")}</a></li>
             <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
-            <li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
-            <li><a href={`${homePath}#contact`}>{t("nav_contact")}</a></li>
+            <li><a href={`/${lang}/brief/`} class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">{t("nav_brief")}</a></li>
         </ul>
         <div class="controls">
             <button
@@ -55,13 +90,17 @@ const homePath = `/${lang}/`;
 <!-- Мобильное меню вынесено сюда же для инкапсуляции -->
 <div class="mobile-nav-overlay"></div>
 <div class="mobile-nav">
-    <ul>
+    <ul class="mobile-menu-list">
         <li><a href={`${homePath}#about`}>{t("nav_about")}</a></li>
-        <li><a href={`${homePath}#stack`}>{t("nav_services")}</a></li>
+        <li class="mobile-menu-section-title">{t("nav_services")}</li>
+        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development')} class="mobile-nav-link"><i class="fa-solid fa-laptop-code"></i> {t('nav_service_web')}</a></li>
+        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps')} class="mobile-nav-link"><i class="fa-brands fa-telegram"></i> {t('nav_service_tma')}</a></li>
+        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration')} class="mobile-nav-link"><i class="fa-solid fa-brain"></i> {t('nav_service_ai')}</a></li>
+        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development')} class="mobile-nav-link"><i class="fa-solid fa-robot"></i> {t('nav_service_bots')}</a></li>
+        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp')} class="mobile-nav-link"><i class="fa-solid fa-rocket"></i> {t('nav_service_saas')}</a></li>
         <li><a href={`/${lang}/projects/`}>{t("nav_portfolio")}</a></li>
         <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
-        <li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
-        <li><a href={`${homePath}#contact`}>{t("nav_contact")}</a></li>
+        <li class="mobile-menu-brief"><a href={`/${lang}/brief/`} class="btn btn-primary">{t("nav_brief")}</a></li>
     </ul>
     <div class="mobile-controls">
         <button

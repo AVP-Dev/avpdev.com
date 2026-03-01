@@ -21,14 +21,41 @@ if (pathWithoutLang.startsWith(`/${lang}/`)) {
         // Мапинг путей для локалей
         let targetPath = pathWithoutLang;
         
-        // Match exact "/uslugi" or "/uslugi/..."
-        if (targetPath === '/uslugi' || targetPath.startsWith('/uslugi/')) {
-            if (locale === 'en') {
-                targetPath = targetPath.replace(/^\/uslugi/, '/services');
+        const servicePairs = {
+            'razrabotka-saitov': 'website-development',
+            'ai-integracii': 'ai-integration',
+            'razrabotka-botov-i-parserov': 'bot-and-scraper-development',
+            'telegram-mini-apps': 'telegram-mini-apps',
+            'saas-mvp': 'saas-mvp'
+        };
+
+        const cleanPath = targetPath.endsWith('/') ? targetPath.slice(0, -1) : targetPath;
+
+        if (locale === 'en') {
+            // Translating to EN
+            let found = false;
+            for (const [ruSlug, enSlug] of Object.entries(servicePairs)) {
+                if (cleanPath === `/uslugi/${ruSlug}`) {
+                    targetPath = `/services/${enSlug}`;
+                    found = true;
+                    break;
+                }
             }
-        } else if (targetPath === '/services' || targetPath.startsWith('/services/')) {
-            if (locale === 'ru') {
-                targetPath = targetPath.replace(/^\/services/, '/uslugi');
+            if (!found && (cleanPath === '/uslugi')) {
+                targetPath = '/services';
+            }
+        } else if (locale === 'ru') {
+            // Translating to RU
+            let found = false;
+            for (const [ruSlug, enSlug] of Object.entries(servicePairs)) {
+                if (cleanPath === `/services/${enSlug}`) {
+                    targetPath = `/uslugi/${ruSlug}`;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found && (cleanPath === '/services')) {
+                targetPath = '/uslugi';
             }
         }
 

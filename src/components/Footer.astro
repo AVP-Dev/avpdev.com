@@ -14,6 +14,16 @@ const t = useTranslations(lang);
             <!-- Column 1: Brand & Social -->
             <div class="footer-col brand-col">
                 <a href={`/${lang}/`} class="footer-logo">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="footer-logo-img" width="30" height="30" style="margin-right: 10px; vertical-align: middle;">
+                        <path d="M50 0L0 100H25L50 50L75 100H100L50 0Z" fill="currentColor"/>
+                        <path d="M50 50L62.5 75L75 50L87.5 75L100 100H75L62.5 75L50 100H25L50 50Z" fill="url(#paint_footer_logo_orange)"/>
+                        <defs>
+                            <linearGradient id="paint_footer_logo_orange" x1="62.5" y1="50" x2="62.5" y2="100" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FFC837"/>
+                                <stop offset="1" stop-color="#FF8C00"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                     AVP<span>dev.com</span>
                 </a>
                 <p class="footer-tagline">
@@ -62,6 +72,7 @@ const t = useTranslations(lang);
                     <a href={`/${lang}/projects/`}>{t("catalog_title")}</a>
                     <a href={`/${lang}/blog/`}>{t("nav_blog")}</a>
                     <a href={`/${lang}/brief/`}>{t("nav_brief")}</a>
+                    <a href={`/${lang}/#contact`}>{t("nav_contact")}</a>
                 </nav>
             </div>
 
@@ -156,7 +167,8 @@ const t = useTranslations(lang);
         text-decoration: none;
         color: var(--text-color);
         margin-bottom: 1.5rem;
-        display: inline-block;
+        display: flex;
+        align-items: center;
     }
 
     .footer-logo span {

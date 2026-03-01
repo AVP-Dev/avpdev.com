@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieBanner from '../components/CookieBanner.astro';
@@ -40,6 +41,50 @@ const finalDescription = isTranslationKey ? t(description as any) : description;
 
 const canonicalURL = new URL(Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`, Astro.site);
 const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
+
+// SEO: Hreflang Tags Logic
+let currentPath = Astro.url.pathname;
+if (!currentPath.endsWith('/')) { currentPath += '/'; }
+
+const pathWithoutLocale = currentPath.replace(/^\/(ru|en)\//, '/');
+const cleanPath = pathWithoutLocale.endsWith('/') ? pathWithoutLocale.slice(0, -1) : pathWithoutLocale;
+
+const servicePairs = {
+    'razrabotka-saitov': 'website-development',
+    'ai-integracii': 'ai-integration',
+    'razrabotka-botov-i-parserov': 'bot-and-scraper-development',
+    'telegram-mini-apps': 'telegram-mini-apps',
+    'saas-mvp': 'saas-mvp'
+};
+
+let enSlug = pathWithoutLocale;
+let ruSlug = pathWithoutLocale;
+
+let isServicePage = false;
+for (const [ru, en] of Object.entries(servicePairs)) {
+    if (cleanPath === `/uslugi/${ru}`) {
+        enSlug = `/services/${en}`;
+        ruSlug = `/uslugi/${ru}`;
+        isServicePage = true;
+        break;
+    }
+    if (cleanPath === `/services/${en}`) {
+        enSlug = `/services/${en}`;
+        ruSlug = `/uslugi/${ru}`;
+        isServicePage = true;
+        break;
+    }
+}
+
+if (!isServicePage) {
+    enSlug = pathWithoutLocale.replace(/^\/uslugi/, '/services');
+    ruSlug = pathWithoutLocale.replace(/^\/services/, '/uslugi');
+}
+
+const siteBase = Astro.site ? Astro.site.toString() : 'https://avpdev.com';
+const ruUrl = new URL(`ru${ruSlug.endsWith('/') ? ruSlug : ruSlug + '/'}`, siteBase).href;
+const enUrl = new URL(`en${enSlug.endsWith('/') ? enSlug : enSlug + '/'}`, siteBase).href;
+const xDefaultUrl = new URL('/', siteBase).href;
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -65,14 +110,19 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
 
 
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="manifest" href="/site.webmanifest">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#030305">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png?v=2">
+    <link rel="manifest" href="/site.webmanifest?v=2">
 
     {/* FontAwesome CDN: required for techStack icons (fab) and UI components (fas). 
         Loaded non-blocking using media="print" trick to prevent Lighthouse warnings. */}
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <style>
         @font-face { font-family: "Font Awesome 6 Free"; font-style: normal; font-weight: 900; font-display: swap; src: url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2) format("woff2"); }
         @font-face { font-family: "Font Awesome 6 Brands"; font-style: normal; font-weight: 400; font-display: swap; src: url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-brands-400.woff2) format("woff2"); }
@@ -118,39 +168,9 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
         </>
     )}
 
-    {/* SEO: Hreflang Tags */}
-    {() => {
-        // 1. Получаем текущий путь
-        let currentPath = Astro.url.pathname;
-        if (!currentPath.endsWith('/')) {
-            currentPath += '/';
-        }
-        
-        // 2. Убираем текущую локаль из пути, чтобы получить "чистый" slug
-        const pathWithoutLocale = currentPath.replace(/^\/(ru|en)\//, '/');
-        
-        // 3. Обрабатываем переводы путей
-        let enSlug = pathWithoutLocale.replace(/^\/uslugi\//, '/services/');
-        let ruSlug = pathWithoutLocale.replace(/^\/services\//, '/uslugi/');
-
-        // 4. Удаляем начальный слэш для объединения с базовым доменом
-        enSlug = enSlug.replace(/^\//, '');
-        ruSlug = ruSlug.replace(/^\//, '');
-        
-        const siteBase = Astro.site ? Astro.site.toString() : 'https://avpdev.com';
-
-        const ruUrl = new URL(`ru/${ruSlug}`, siteBase).href;
-        const enUrl = new URL(`en/${enSlug}`, siteBase).href;
-
-        return (
-            <>
-                <link rel="alternate" hreflang="ru" href={ruUrl} />
-                <link rel="alternate" hreflang="en" href={enUrl} />
-                {/* x-default указывает на корень (router) */}
-                <link rel="alternate" hreflang="x-default" href={new URL('/', siteBase).href} />
-            </>
-        );
-    }}
+    <link rel="alternate" hreflang="ru" href={ruUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
 
     <script is:inline>
         function applyTheme() {
@@ -251,6 +271,7 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
             --primary-color-rgb: 255, 255, 255;
             --text-color: #18181B;
             --text-secondary-color: #52525B;
+            --accent-color: #FF5C00;
             --border-color: rgba(0, 0, 0, 0.08);
             --glass-bg: rgba(255, 255, 255, 0.7);
             --glass-border: rgba(0, 0, 0, 0.05);
@@ -273,6 +294,7 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
             --primary-color-rgb: 17, 17, 26;
             --text-color: #FFFFFF;
             --text-secondary-color: #94949E;
+            --accent-color: #FFB800;
             --border-color: rgba(255, 255, 255, 0.1);
             --glass-bg: rgba(17, 17, 26, 0.8);
             --glass-border: rgba(255, 255, 255, 0.15);
@@ -335,11 +357,17 @@ const GTAG_ID = import.meta.env.PUBLIC_GTAG_ID;
 </head>
 <body>
     <Header />
-    <main>
-        <slot />
+    
+    <main class="flex-grow pt-[80px]"> <!-- pt-[80px] to account for fixed header -->
+      <slot />
     </main>
-    <CookieBanner />
+
     <Footer />
+
+    <!-- Floating Action Button (FAB) -->
+    <a href="https://t.me/AVP_Dev" target="_blank" rel="noopener noreferrer" class="fab-contact" aria-label="Contact Telegram">
+      <i class="fa-brands fa-telegram-plane"></i>
+    </a>
     <ScrollToTop />
     <script src="/src/scripts/main.ts"></script>
 </body>

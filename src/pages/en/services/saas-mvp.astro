@@ -1,0 +1,405 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import ServicesList from '../../../components/sections/Services.astro';
+import Contact from '../../../components/sections/Contact.astro';
+
+const seoTitle = "SaaS & MVP Development for Startups | AVPdev";
+const seoDescription = "Quick MVP launch for startups and scalable SaaS platform development on Next.js, Node.js, and Astro. From idea to first users in 4-8 weeks.";
+
+const features = [
+  {
+    title: "Powerful Backend & API",
+    desc: "We develop reliable microservice or monolithic architectures (Node.js, Go, Python). Build REST/GraphQL APIs for your mobile and web applications.",
+    icon: "fa-server"
+  },
+  {
+    title: "Modern Frontend (Next.js)",
+    desc: "We create reactive, fast, and SEO-optimized interfaces (React, Vue, Next.js) that work instantly.",
+    icon: "fa-gauge-high"
+  },
+  {
+    title: "Security & DevOps",
+    desc: "We set up CI/CD pipelines, containerization (Docker, Coolify), and protect your users' data. Your service will handle any load.",
+    icon: "fa-shield-halved"
+  }
+];
+
+const faqs = [
+  {
+    q: "What is an MVP and why do I need it?",
+    a: "An MVP (Minimum Viable Product) is the smallest version of your product that can be launched. we build only the core features so you can launch in 1-2 months, test the market, and get investment without spending years and huge budgets."
+  },
+  {
+    q: "Is your stack suitable for high-load SaaS?",
+    a: "Absolutely. We use Next.js (SSR) for the frontend and Node.js with microservices for the backend. This is the same stack used by Netflix and Uber."
+  },
+  {
+    q: "Can you provide ongoing support?",
+    a: "Yes, an MVP is just the beginning. After release, we provide SLA, bug fixing, and gradual feature rollouts (Agile/Scrum)."
+  },
+  {
+    q: "How do you ensure data security?",
+    a: "We implement modern encryption protocols, access tokens (JWT), DDoS protection, and we configure automated database backups from day one."
+  },
+  {
+    q: "Do you design the system architecture?",
+    a: "Yes, before writing any code we design the database schemas, API contracts, microservices layout, and cloud infrastructure."
+  },
+  {
+    q: "Can my own team eventually take over?",
+    a: "Absolutely. We deliver clean, commented, and fully documented source code. Any skilled developer can take over the codebase effortlessly."
+  },
+  {
+    q: "Do you configure subscription payments?",
+    a: "Yes, we integrate Stripe, Braintree, and other providers with automated webhook handling for complex subscription tiers."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "SaaS & MVP Development",
+      "description": seoDescription,
+      "provider": {
+        "@type": "Person",
+        "name": "Alexey Patskevich"
+      },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "SaaS Services",
+        "itemListElement": features.map(f => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": f.title,
+            "description": f.desc
+          }
+        }))
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(f => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": f.a
+        }
+      }))
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  schema={schema}
+>
+  <Hero 
+    title="SaaS & MVP Development"
+    subtitle="Transform your idea into a working product in 4-8 weeks. We code scalable architectures."
+    variant="services"
+  />
+
+  <section class="services-info">
+    <div class="container">
+      <div class="section-content-split">
+        <div class="text-content">
+          <span class="section-label">Development</span>
+          <h2 class="section-title-left">From Idea to Launch in 4 Weeks</h2>
+          <p class="section-description">
+            We help startups and businesses test hypotheses quickly. We create scalable MVPs that don't need to be rewritten after growth.
+          </p>
+          
+          <div class="feature-list">
+            {features.map(f => (
+              <div class="feature-item">
+                <div class="feature-icon-glass">
+                  <i class={`fa-solid ${f.icon}`}></i>
+                </div>
+                <div class="feature-text">
+                  <h3>{f.title}</h3>
+                  <p>{f.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="visual-content">
+           <div class="service-graphic-box-premium">
+              <div class="graphic-glow"></div>
+              <i class="fa-solid fa-rocket graphic-icon-main"></i>
+           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-header">
+        <h2 class="section-title">Common Questions</h2>
+        <p class="section-subtitle">About launching new products</p>
+      </div>
+      <div class="faq-container">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              {faq.q}
+              <div class="faq-plus"></div>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+</BaseLayout>
+
+<style>
+  .services-info {
+    padding: 140px 0;
+    background-color: var(--bg-color);
+  }
+
+  .section-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+  }
+
+  .section-title-left {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+
+  .section-content-split {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .section-description {
+    font-size: 1.15rem;
+    color: var(--text-color);
+    opacity: 0.85;
+    margin-bottom: 4rem;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .feature-item {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .feature-icon-glass {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .feature-item:hover .feature-icon-glass {
+    background: rgba(var(--accent-color-start-rgb), 0.1);
+    border-color: rgba(var(--accent-color-start-rgb), 0.3);
+    transform: translateY(-5px);
+  }
+
+  .feature-text h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+  }
+
+  .feature-text p {
+    color: var(--text-color);
+    opacity: 0.75;
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  .visual-content {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .service-graphic-box-premium {
+    width: 100%;
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .graphic-glow {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(var(--accent-color-start-rgb), 0.1) 0%, transparent 60%);
+    z-index: 0;
+  }
+
+  .graphic-icon-main {
+    font-size: 10rem;
+    color: var(--accent-color);
+    filter: drop-shadow(0 0 30px rgba(var(--accent-color-start-rgb), 0.3));
+    z-index: 1;
+  }
+
+  .faq-section {
+    padding: 140px 0;
+    background-color: var(--primary-color);
+  }
+
+  .faq-header {
+    margin-bottom: 5rem;
+  }
+
+  .faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-item:hover {
+    border-color: rgba(var(--accent-color-start-rgb), 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .faq-question {
+    padding: 2rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color);
+    position: relative;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-plus {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    transition: transform 0.4s ease;
+  }
+
+  .faq-plus::before, .faq-plus::after {
+    content: '';
+    position: absolute;
+    background: var(--accent-color);
+    border-radius: 2px;
+  }
+
+  .faq-plus::before {
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .faq-plus::after {
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .faq-item[open] .faq-plus {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 2rem 2.5rem;
+    color: var(--text-secondary-color);
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 1200px) {
+    .section-content-split {
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .section-content-split {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .section-title-left {
+      text-align: center;
+    }
+    .section-description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .feature-item {
+      text-align: left;
+    }
+    .visual-content {
+      display: none;
+    }
+  }
+</style>
