@@ -142,9 +142,6 @@ const t = useTranslations(lang);
     </div>
 </section>
 
-<!-- Cloudflare Turnstile: Loaded with defer to ensure reliability without blocking the main thread -->
-<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
-
 <style>
     .container-narrow {
         max-width: 800px;
@@ -153,18 +150,6 @@ const t = useTranslations(lang);
     .section-center {
         text-align: center;
         margin-bottom: 4rem;
-    }
-
-    .badge {
-        display: inline-block;
-        padding: 4px 12px;
-        background: var(--tag-bg);
-        color: var(--tag-text);
-        border-radius: 6px;
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        margin-bottom: 1rem;
-        font-weight: 600;
     }
 
     .contact-form {
@@ -232,32 +217,50 @@ const t = useTranslations(lang);
 
     document.addEventListener("astro:page-load", () => {
         const form = document.getElementById("contact-form") as HTMLFormElement;
-        const submitButton = document.getElementById(
-            "submit-button",
-        ) as HTMLButtonElement;
+        const submitButton = document.getElementById("submit-button") as HTMLButtonElement;
         const spinner = document.getElementById("form-spinner") as HTMLElement;
-        const consentCheckbox = document.getElementById(
-            "legal-consent",
-        ) as HTMLInputElement;
-        const consentError = document.getElementById(
-            "consent-error",
-        ) as HTMLElement;
-        const messageError = document.getElementById(
-            "message-error",
-        ) as HTMLElement;
-        const messageInput = form.querySelector(
-            'textarea[name="message"]',
-        ) as HTMLTextAreaElement;
+        const consentCheckbox = document.getElementById("legal-consent") as HTMLInputElement;
+        const consentError = document.getElementById("consent-error") as HTMLElement;
+        const messageError = document.getElementById("message-error") as HTMLElement;
+        const messageInput = form?.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
         const charCounter = document.getElementById("char-counter");
 
         if (!form) return;
+
+        // --- INTELLIGENT ON-DEMAND LOADING FOR TURNSTILE ---
+        // Prevents 3rd-party cookie warnings on initial page load.
+        // Script is loaded only when user interacts with or scrolls near the form.
+        let turnstileLoaded = false;
+        const loadTurnstile = () => {
+            if (turnstileLoaded) return;
+            turnstileLoaded = true;
+
+            const script = document.createElement('script');
+            script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+            script.async = true;
+            document.head.appendChild(script);
+
+            form.removeEventListener('focusin', loadTurnstile);
+            form.removeEventListener('click', loadTurnstile);
+            observer.disconnect();
+        };
+
+        form.addEventListener('focusin', loadTurnstile, { once: true });
+        form.addEventListener('click', loadTurnstile, { once: true });
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                loadTurnstile();
+            }
+        }, { rootMargin: "300px" });
+        observer.observe(form);
+        // ----------------------------------------------------
 
         // Character counter logic
         if (messageInput && charCounter) {
             messageInput.addEventListener("input", () => {
                 const length = messageInput.value.length;
                 charCounter.textContent = `${length} / 2000`;
-
                 if (length > 0 && length < 10) {
                     (charCounter as HTMLElement).style.color = "#ef4444";
                 } else {
@@ -276,11 +279,15 @@ const t = useTranslations(lang);
             if (consentError) consentError.classList.add("hidden");
             if (messageError) messageError.classList.add("hidden");
 
-            // Turnstile validation
+            // Turnstile validation — if not loaded yet, trigger load and show a hint
             const turnstileResponse = form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement;
             if (!turnstileResponse || !turnstileResponse.value) {
+                loadTurnstile(); // force-load immediately on submit attempt
+                const pageLang = document.documentElement.lang;
                 if (messageError) {
-                    messageError.textContent = "Please complete the anti-spam check.";
+                    messageError.textContent = pageLang === "ru"
+                        ? "Защита загружается, подождите секунду и попробуйте снова."
+                        : "Please wait a moment and try again.";
                     messageError.classList.remove("hidden");
                 }
                 return;
@@ -289,9 +296,7 @@ const t = useTranslations(lang);
             let isValid = true;
 
             // Validate text inputs
-            form.querySelectorAll(
-                "input[required], textarea[required]",
-            ).forEach((field) => {
+            form.querySelectorAll("input[required], textarea[required]").forEach((field) => {
                 const input = field as HTMLInputElement | HTMLTextAreaElement;
                 if (!input.value.trim()) {
                     input.classList.add("error-field");
@@ -320,15 +325,10 @@ const t = useTranslations(lang);
             if (spinner) spinner.style.display = "block";
 
             const formData = new FormData(form);
-            // Use 'any' type to allow boolean conversion
-            const data: Record<string, any> = Object.fromEntries(
-                formData.entries(),
-            );
+            const data: Record<string, any> = Object.fromEntries(formData.entries());
 
             // CRITICAL: Convert checkbox from "on"/undefined to boolean
             data.consent = formData.get("consent") === "on";
-
-            console.log("📤 Sending contact form data:", data);
 
             try {
                 const response = await fetch("/api/sendMessage/", {
@@ -349,8 +349,7 @@ const t = useTranslations(lang);
                     const errorData = await response.json();
                     if (errorData.errors && errorData.errors.message) {
                         if (messageError) {
-                            messageError.textContent =
-                                errorData.errors.message[0];
+                            messageError.textContent = errorData.errors.message[0];
                             messageError.classList.remove("hidden");
                             messageInput.classList.add("error-field");
                         }
@@ -368,7 +367,6 @@ const t = useTranslations(lang);
             } finally {
                 if (submitButton) submitButton.style.display = "block";
                 if (spinner) spinner.style.display = "none";
-                // Reset Turnstile on error/success
                 if (window.turnstile) {
                     window.turnstile.reset();
                 }
