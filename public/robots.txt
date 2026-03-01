@@ -1,7 +1,16 @@
-# Разрешаем всем поисковым роботам индексировать весь сайт
 User-agent: *
+# Разрешаем доступ ко всей статике (критично для CSS/JS в Astro)
+Allow: /_astro/
+# Запрещаем только эндпоинты API
 Disallow: /api/
 Allow: /
 
-# Указываем прямой путь к карте сайта
+# Блокировка агрессивных AI-ботов для защиты контента
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Прямой путь к карте сайта
 Sitemap: https://avpdev.com/sitemap-index.xml

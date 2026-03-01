@@ -176,6 +176,20 @@ function initializePage() {
     if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear().toString();
     }
+
+    // --- FAQ EXCLUSIVE ACCORDION ---
+    const faqs = document.querySelectorAll('.faq-item') as NodeListOf<HTMLDetailsElement>;
+    faqs.forEach(faq => {
+        faq.addEventListener('toggle', (e) => {
+            if (faq.open) {
+                faqs.forEach(otherFaq => {
+                    if (otherFaq !== faq && otherFaq.open) {
+                        otherFaq.open = false;
+                    }
+                });
+            }
+        });
+    });
 }
 
 document.addEventListener("astro:page-load", initializePage);

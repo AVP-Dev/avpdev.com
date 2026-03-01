@@ -1,6 +1,6 @@
 ---
-// src/components/sections/Services.astro
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import Icon from '../Icon.astro';
 
 const lang = getLangFromUrl(Astro.url);
@@ -10,21 +10,101 @@ const t = useTranslations(lang);
     <div class="container">
         <h2 class="section-title fade-in" set:html={t('services_h2')}></h2>
         <div class="services-grid">
-            <div class="card fade-in" style="transition-delay: 100ms;">
+            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development')} class="card fade-in" style="transition-delay: 100ms;">
+                <div class="card-glass-effect"></div>
                 <Icon name="fa-laptop-code" class="card-icon" aria-hidden="true" />
                 <h3>{t('services_card1_h3')}</h3>
                 <p>{t('services_card1_p')}</p>
-            </div>
-            <div class="card fade-in" style="transition-delay: 200ms;">
+                <div class="card-footer">
+                    <span class="learn-more">{t('nav_services')} <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+            
+            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development')} class="card fade-in" style="transition-delay: 200ms;">
+                <div class="card-glass-effect"></div>
                 <Icon name="fa-cogs" class="card-icon" aria-hidden="true" />
                 <h3>{t('services_card2_h3')}</h3>
                 <p>{t('services_card2_p')}</p>
-            </div>
-            <div class="card fade-in" style="transition-delay: 300ms;">
+                <div class="card-footer">
+                    <span class="learn-more">{t('nav_services')} <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+            
+            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp')} class="card fade-in" style="transition-delay: 300ms;">
+                <div class="card-glass-effect"></div>
                 <Icon name="fa-rocket" class="card-icon" aria-hidden="true" />
                 <h3>{t('services_card3_h3')}</h3>
                 <p>{t('services_card3_p')}</p>
-            </div>
+                <div class="card-footer">
+                    <span class="learn-more">{t('nav_services')} <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration')} class="card fade-in" style="transition-delay: 400ms;">
+                <div class="card-glass-effect"></div>
+                <Icon name="fa-brain" class="card-icon" aria-hidden="true" />
+                <h3>{lang === 'ru' ? 'AI Интеграции' : 'AI Integration'}</h3>
+                <p>{lang === 'ru' ? 'Внедрение нейросетей и обучение LLM на ваших данных.' : 'Neural network integration and LLM training on your data.'}</p>
+                <div class="card-footer">
+                    <span class="learn-more">{t('nav_services')} <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps')} class="card fade-in" style="transition-delay: 500ms;">
+                <div class="card-glass-effect"></div>
+                <Icon name="fa-brands fa-telegram" class="card-icon" aria-hidden="true" />
+                <h3>{lang === 'ru' ? 'Telegram Mini Apps' : 'Telegram Mini Apps'}</h3>
+                <p>{lang === 'ru' ? 'Полноценные приложения внутри Telegram (WebApps).' : 'Full-featured applications inside Telegram (WebApps).'}</p>
+                <div class="card-footer">
+                    <span class="learn-more">{t('nav_services')} <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
         </div>
+<style>
+    .card {
+        flex: 1 1 380px;
+        max-width: 420px;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+    .card:hover {
+        transition-delay: 0s !important;
+    }
+    .card-glass-effect {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(var(--accent-color-start-rgb), 0.05), transparent 60%);
+        pointer-events: none;
+    }
+    .card-footer {
+        margin-top: auto;
+        padding-top: 2rem;
+    }
+    .learn-more {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: gap 0.3s ease;
+    }
+    :global(.light-theme) .learn-more {
+        color: #E65200; /* Darker accent for light theme contrast */
+    }
+    .card:hover .learn-more {
+        gap: 0.8rem;
+    }
+    .services-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+        margin: 4rem auto;
+        justify-content: center;
+        max-width: 1400px;
+    }
+</style>
     </div>
 </section>

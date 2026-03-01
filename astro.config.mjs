@@ -40,14 +40,14 @@ export default defineConfig({
   trailingSlash: 'always',
   build: {
     format: 'directory',
-    inlineStylesheets: 'auto'
+    inlineStylesheets: 'always'
   },
   server: {
     host: '0.0.0.0',
     port: 3000
   },
 
-  compressHTML: false,
+  compressHTML: true,
 
   // 7. Интернационализация (i18n)
   i18n: {

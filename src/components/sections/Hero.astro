@@ -2,17 +2,41 @@
 // src/components/sections/Hero.astro
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  variant?: "home" | "services";
+}
+
+const { title, subtitle, variant = "home" } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section id="hero" class="hero-section">
-    <div id="particles-js"></div>
+<section id="hero" class={`hero-section ${variant}`}>
+    {variant !== "services" && <div id="particles-js"></div>}
+    
+    {variant === "services" && (
+      <div class="services-hero-bg">
+        <div class="grid-pattern"></div>
+        <div class="glow-blob top"></div>
+        <div class="glow-blob bottom"></div>
+      </div>
+    )}
+
     <div class="container hero-container">
         <div class="hero-content">
-            <div class="hero-text fade-in">
-                <h1 set:html={t("hero_h1")} />
-                <p>{t("hero_p")}</p>
+            <div class={`hero-text fade-in ${variant === 'services' ? 'services-text' : ''}`}>
+                {variant === "services" && <span class="hero-badge">{t('nav_services')}</span>}
+                
+                {title ? (
+                  <h1>{title}</h1>
+                ) : (
+                  <h1 set:html={t("hero_h1")} />
+                )}
+                
+                <p>{subtitle || t("hero_p")}</p>
+                
                 <div class="cta-group">
                     <a href={`/${lang}/#contact`} class="cta-button">
                         {t("hero_cta")}
@@ -36,10 +60,78 @@ const t = useTranslations(lang);
         overflow: hidden;
     }
 
+    .hero-section.services {
+        min-height: auto;
+        padding-top: clamp(140px, 20vh, 220px);
+        padding-bottom: clamp(80px, 12vh, 120px);
+        background: var(--bg-color);
+        border-bottom: 1px solid var(--border-color);
+        text-align: center;
+    }
+
+    .services-hero-bg {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        z-index: 0;
+    }
+
+    .grid-pattern {
+        position: absolute;
+        inset: 0;
+        background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+        mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+        -webkit-mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+        opacity: 0.5;
+    }
+
+    .glow-blob {
+        position: absolute;
+        width: 60vw;
+        height: 60vw;
+        max-width: 600px;
+        max-height: 600px;
+        background: radial-gradient(circle, rgba(var(--accent-color-start-rgb), 0.12) 0%, rgba(var(--accent-color-end-rgb), 0) 70%);
+        filter: blur(80px);
+        z-index: 0;
+        opacity: 0.6;
+    }
+
+    .glow-blob.top {
+        top: -10%;
+        left: 50%;
+        transform: translate(-50%, -20%);
+    }
+
+    .glow-blob.bottom {
+        bottom: -20%;
+        right: 10%;
+        background: radial-gradient(circle, rgba(var(--accent-color-end-rgb), 0.08) 0%, rgba(var(--accent-color-start-rgb), 0) 70%);
+    }
+
     .hero-container {
         width: 100%;
         position: relative;
         z-index: 2;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1.25rem;
+        background: rgba(var(--accent-color-start-rgb), 0.08);
+        color: var(--accent-color);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        border-radius: 9999px;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(var(--accent-color-start-rgb), 0.15);
+        backdrop-filter: blur(4px);
     }
 
     .hero-text h1 {
@@ -48,12 +140,43 @@ const t = useTranslations(lang);
         margin-bottom: 1.5rem;
     }
 
+    .hero-section.services .hero-text h1 {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        margin-bottom: 24px;
+        font-weight: 900;
+        background: linear-gradient(to bottom, #fff 30%, rgba(255, 255, 255, 0.7) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    :global(.light-theme) .hero-section.services .hero-text h1 {
+        background: linear-gradient(to bottom, var(--text-color) 40%, #555 100%);
+        -webkit-background-clip: text;
+    }
+
     .hero-text p {
         font-size: clamp(1.1rem, 2vw, 1.35rem);
         margin-bottom: 2.5rem;
         max-width: 700px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .hero-section.services .hero-text p {
+        font-size: clamp(1.1rem, 1.8vw, 1.25rem);
+        color: var(--text-secondary-color);
+        margin-bottom: 2.5rem;
+        max-width: 800px;
+        line-height: 1.6;
+    }
+
+    :global(.dark-theme) .hero-section.services .hero-text p {
+        color: #B4B4B4; /* Lighter than standard secondary for better contrast against blobs */
     }
 
     .cta-group {
@@ -66,6 +189,10 @@ const t = useTranslations(lang);
     @media (max-width: 768px) {
         .hero-section {
             padding-top: clamp(120px, 20vh, 160px);
+        }
+        .hero-section.services {
+            padding-top: 140px;
+            padding-bottom: 60px;
         }
     }
 </style>
