@@ -1,7 +1,6 @@
-
 import { locations } from '../src/data/locations';
 import { geoContent } from '../src/data/geo-content';
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync } from 'fs';
 import path from 'path';
 
 const BASE_PRICES = { astro: 250, next: 300, app: 750, bot: 50 };
@@ -60,7 +59,7 @@ function generateFaq(loc: any, lang: 'ru' | 'en', rates: any) {
     }
 }
 
-async function sendTelegramNotification(rates: any) {
+async function sendTelegramNotification(rates: any, isInitial: boolean) {
     const BOT_TOKEN = process.env.BOT_TOKEN;
     const CHAT_ID = process.env.CHAT_ID;
     const TOPIC_ID = process.env.TOPIC_ID;
@@ -69,6 +68,12 @@ async function sendTelegramNotification(rates: any) {
         console.log('⚠️  TG notification skipped (no BOT_TOKEN/CHAT_ID in env)');
         return;
     }
+
+    const now = new Date().toLocaleString('ru-RU', {
+        timeZone: 'Europe/Minsk',
+        day: '2-digit', month: '2-digit', year: '2-digit',
+        hour: '2-digit', minute: '2-digit'
+    });
 
     const byPrices = {
         astro: formatPrice(getPriceDetails('astro', 'BY', rates)),
@@ -87,13 +92,14 @@ async function sendTelegramNotification(rates: any) {
 
     const msg = [
         `<b>💰 Гео-цены обновлены (НБРБ)</b>`,
+        `🕒 <i>Дата обновления: ${now}</i>`,
         ``,
         `<b>Курсы:</b>`,
         `USD/BYN: ${rates.BYN}`,
         `BYN/100RUB: ${(rates.RUB * 100).toFixed(4)}`,
         `BYN/1000KZT: ${(rates.KZT * 1000).toFixed(4)}`,
         ``,
-        `<b>Пример цен:</b>`,
+        `<b>Пример цен на сайте:</b>`,
         `🇧🇾 BY: Astro ${byPrices.astro} | Next ${byPrices.next} | App ${byPrices.app} | Bot ${byPrices.bot}`,
         `🇷🇺 RU: Astro ${ruPrices.astro} | App ${ruPrices.app}`,
         `🇰🇿 KZ: Astro ${kzPrices.astro} | App ${kzPrices.app}`,
@@ -103,34 +109,86 @@ async function sendTelegramNotification(rates: any) {
     ].join('\n');
 
     try {
-        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: 'HTML', ...(TOPIC_ID && { message_thread_id: TOPIC_ID }) }),
-        });
-        if (res.ok) console.log('📩 TG notification sent');
-        else console.error('TG error:', await res.text());
+        // 1. Try to find if there is a pinned message by checking chat info
+        const chatRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getChat?chat_id=${CHAT_ID}`).then(r => r.json());
+        const pinnedId = chatRes?.result?.pinned_message?.message_id;
+
+        let editSuccess = false;
+        if (pinnedId) {
+            // Try to edit the pinned message
+            const editRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    message_id: pinnedId,
+                    text: msg,
+                    parse_mode: 'HTML'
+                }),
+            }).then(r => r.json());
+
+            if (editRes.ok) {
+                console.log('📩 TG message updated (Edited pinned message)');
+                editSuccess = true;
+            }
+        }
+
+        if (!editSuccess) {
+            // 2. If no pinned message or edit failed (e.g. pinned message isn't ours), send NEW and PIN
+            const sendRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: msg,
+                    parse_mode: 'HTML',
+                    ...(TOPIC_ID && { message_thread_id: TOPIC_ID })
+                }),
+            }).then(r => r.json());
+
+            if (sendRes.ok) {
+                const messageId = sendRes.result.message_id;
+                console.log('📩 TG new message sent');
+
+                // Pin the new message
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/pinChatMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        message_id: messageId,
+                        disable_notification: true
+                    }),
+                });
+            } else {
+                console.error('TG send error:', sendRes);
+            }
+        }
     } catch (e) {
-        console.error('TG send failed:', e);
+        console.error('TG communication failed:', e);
     }
 }
 
 async function run() {
+    const geoPath = path.join(process.cwd(), 'src/data/geo-content.ts');
+    let oldContent = "";
+    try { oldContent = readFileSync(geoPath, 'utf-8'); } catch (e) { }
+
     const rates = await getExchangeRates();
-    const newContent: Record<string, any> = {};
+    const newContentObj: Record<string, any> = {};
 
     for (const loc of locations) {
         const existing = geoContent[loc.slug] || {};
-        newContent[loc.slug] = {};
+        newContentObj[loc.slug] = {};
 
         if (existing.ru || loc.name_ru) {
-            newContent[loc.slug].ru = {
+            newContentObj[loc.slug].ru = {
                 ...existing.ru,
                 faq: generateFaq(loc, 'ru', rates)
             };
         }
         if (existing.en) {
-            newContent[loc.slug].en = {
+            newContentObj[loc.slug].en = {
                 ...existing.en,
                 faq: generateFaq(loc, 'en', rates)
             };
@@ -141,10 +199,18 @@ async function run() {
  * ТИПИЗИРОВАННЫЙ КОНТЕНТ ДЛЯ ГЕО-СТРАНИЦ 
  * (Автогенерируемый файл, не редактируйте вручную!)
  */
-export const geoContent: Record<string, any> = ${JSON.stringify(newContent, null, 2)};`;
-    writeFileSync(path.join(process.cwd(), 'src/data/geo-content.ts'), output);
-    console.log('✅ REGENERATION COMPLETE: FAQ and Prices fixed for all 98 cities.');
+export const geoContent: Record<string, any> = ${JSON.stringify(newContentObj, null, 2)};`;
 
-    await sendTelegramNotification(rates);
+    // Only update and notify if content HAS CHANGED
+    // We compare without indentation/spaces to be sure
+    const isDifferent = output.replace(/\s/g, '') !== oldContent.replace(/\s/g, '');
+
+    if (isDifferent) {
+        writeFileSync(geoPath, output);
+        console.log('✅ REGENERATION COMPLETE: Prices updated.');
+        await sendTelegramNotification(rates, false);
+    } else {
+        console.log('ℹ️  No price changes detected. Skipping file update and TG notification.');
+    }
 }
 run();
