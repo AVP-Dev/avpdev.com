@@ -205,9 +205,7 @@ export const geoContent: Record<string, any> = ${JSON.stringify(newContentObj, n
     // We compare without indentation/spaces to be sure
     const isDifferent = output.replace(/\s/g, '') !== oldContent.replace(/\s/g, '');
 
-    console.log(`Checking env: BOT_TOKEN=${!!process.env.BOT_TOKEN}, CHAT_ID=${!!process.env.CHAT_ID}`);
-
-    if (isDifferent || true) { // FORCE UPDATE FOR TESTING
+    if (isDifferent) {
         writeFileSync(geoPath, output);
         console.log('✅ REGENERATION COMPLETE: Prices updated.');
         await sendTelegramNotification(rates, false);
