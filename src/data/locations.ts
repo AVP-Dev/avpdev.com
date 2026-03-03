@@ -36,6 +36,7 @@ export const locations: Location[] = [
   { slug: 'kalinkovichi', name_ru: 'Калинковичах', name_en: 'Kalinkovichi', country: 'BY' },
   { slug: 'rogachev', name_ru: 'Рогачеве', name_en: 'Rogachev', country: 'BY' },
   { slug: 'gorki', name_ru: 'Горках', name_en: 'Gorki', country: 'BY' },
+  { slug: 'osipovichi', name_ru: 'Осиповичах', name_en: 'Osipovichi', country: 'BY' },
 
   // --- Россия ---
   { slug: 'moscow', name_ru: 'Москве', name_en: 'Moscow', country: 'RU' },

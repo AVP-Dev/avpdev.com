@@ -1,38 +1,102 @@
 ---
 // src/components/LanguageSwitcher.astro
 import { getLangFromUrl } from '../i18n/utils';
+import { locations } from '../data/locations';
+import { geoContent } from '../data/geo-content';
 
 const lang = getLangFromUrl(Astro.url);
 const locales = ['ru', 'en'];
 
-// Логика получения пути для другого языка
-// Если мы на /ru/about, то pathWithoutLang будет /about
 let pathWithoutLang = Astro.url.pathname;
 if (pathWithoutLang.startsWith(`/${lang}/`)) {
     pathWithoutLang = pathWithoutLang.replace(`/${lang}/`, '/');
 } else if (pathWithoutLang === `/${lang}` || pathWithoutLang === `/${lang}/`) {
     pathWithoutLang = '/';
 }
+
+// Named service slug pairs (ru <-> en)
+const servicePairs: Record<string, string> = {
+    'razrabotka-saitov': 'website-development',
+    'ai-integracii': 'ai-integration',
+    'razrabotka-botov-i-parserov': 'bot-and-scraper-development',
+    'telegram-mini-apps': 'telegram-mini-apps',
+    'saas-mvp': 'saas-mvp'
+};
+
+// Detect if we're on a geo city page
+// RU: /uslugi/[city]  |  EN: /services/[city]
+const cleanCurrentPath = pathWithoutLang.endsWith('/') ? pathWithoutLang.slice(0, -1) : pathWithoutLang;
+const ruCityMatch = cleanCurrentPath.match(/^\/uslugi\/([^/]+)$/);
+const enCityMatch = cleanCurrentPath.match(/^\/services\/([^/]+)$/);
+const currentCitySlug = ruCityMatch?.[1] ?? enCityMatch?.[1] ?? null;
+
+// Determine if this city slug has both RU + EN content or only EN
+let cityHasRU = false;
+let cityHasEN = false;
+if (currentCitySlug) {
+    const locData = locations.find(l => l.slug === currentCitySlug);
+    cityHasRU = !!locData?.name_ru && !!(geoContent as any)[currentCitySlug]?.ru;
+    cityHasEN = !!(geoContent as any)[currentCitySlug]?.en;
+}
 ---
 <div class="lang-switcher">
     {locales.map((locale, index) => {
         const isActive = locale === lang;
-        
-        // Мапинг путей для локалей
-        let targetPath = pathWithoutLang;
-        
-        const servicePairs = {
-            'razrabotka-saitov': 'website-development',
-            'ai-integracii': 'ai-integration',
-            'razrabotka-botov-i-parserov': 'bot-and-scraper-development',
-            'telegram-mini-apps': 'telegram-mini-apps',
-            'saas-mvp': 'saas-mvp'
-        };
 
+        // --- Geo city page logic ---
+        if (currentCitySlug) {
+            if (locale === 'ru') {
+                if (cityHasRU) {
+                    const url = `/ru/uslugi/${currentCitySlug}/`;
+                    return (
+                        <>
+                            {isActive ? (
+                                <button class="lang-btn active">RU</button>
+                            ) : (
+                                <a href={url} class="lang-btn">RU</a>
+                            )}
+                            {index < locales.length - 1 && <span class="lang-separator">|</span>}
+                        </>
+                    );
+                } else {
+                    // EN-only city: show RU as disabled/current stays
+                    return (
+                        <>
+                            <button class="lang-btn disabled" disabled title="Русская версия недоступна">RU</button>
+                            {index < locales.length - 1 && <span class="lang-separator">|</span>}
+                        </>
+                    );
+                }
+            }
+            if (locale === 'en') {
+                if (cityHasEN) {
+                    const url = `/en/services/${currentCitySlug}/`;
+                    return (
+                        <>
+                            {isActive ? (
+                                <button class="lang-btn active">EN</button>
+                            ) : (
+                                <a href={url} class="lang-btn">EN</a>
+                            )}
+                            {index < locales.length - 1 && <span class="lang-separator">|</span>}
+                        </>
+                    );
+                } else {
+                    return (
+                        <>
+                            <button class="lang-btn disabled" disabled title="English version unavailable">EN</button>
+                            {index < locales.length - 1 && <span class="lang-separator">|</span>}
+                        </>
+                    );
+                }
+            }
+        }
+
+        // --- Standard page logic (non-city pages) ---
+        let targetPath = pathWithoutLang;
         const cleanPath = targetPath.endsWith('/') ? targetPath.slice(0, -1) : targetPath;
 
         if (locale === 'en') {
-            // Translating to EN
             let found = false;
             for (const [ruSlug, enSlug] of Object.entries(servicePairs)) {
                 if (cleanPath === `/uslugi/${ruSlug}`) {
@@ -41,11 +105,12 @@ if (pathWithoutLang.startsWith(`/${lang}/`)) {
                     break;
                 }
             }
-            if (!found && (cleanPath === '/uslugi')) {
-                targetPath = '/services';
+            if (!found && cleanPath === '/uslugi') targetPath = '/services';
+            // Generic: /uslugi/... → /services/...
+            if (!found && cleanPath.startsWith('/uslugi/')) {
+                targetPath = cleanPath.replace('/uslugi/', '/services/');
             }
         } else if (locale === 'ru') {
-            // Translating to RU
             let found = false;
             for (const [ruSlug, enSlug] of Object.entries(servicePairs)) {
                 if (cleanPath === `/services/${enSlug}`) {
@@ -54,13 +119,15 @@ if (pathWithoutLang.startsWith(`/${lang}/`)) {
                     break;
                 }
             }
-            if (!found && (cleanPath === '/services')) {
-                targetPath = '/uslugi';
+            if (!found && cleanPath === '/services') targetPath = '/uslugi';
+            // Generic: /services/... → /uslugi/...
+            if (!found && cleanPath.startsWith('/services/')) {
+                targetPath = cleanPath.replace('/services/', '/uslugi/');
             }
         }
 
         const url = `/${locale}${targetPath === '/' ? '' : targetPath}`;
-        
+
         return (
             <>
                 {isActive ? (
@@ -73,3 +140,11 @@ if (pathWithoutLang.startsWith(`/${lang}/`)) {
         )
     })}
 </div>
+
+<style>
+    .lang-btn.disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+</style>
