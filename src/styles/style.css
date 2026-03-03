@@ -809,7 +809,7 @@ nav {
 /* --- Floating Action Button (FAB) --- */
 .fab-contact {
   position: fixed;
-  bottom: 90px;
+  bottom: 40px;
   right: 20px;
   width: 60px;
   height: 60px;
@@ -858,7 +858,7 @@ nav {
 
 @media (max-width: 768px) {
   .fab-contact {
-    bottom: 80px;
+    bottom: 30px;
     right: 15px;
     width: 50px;
     height: 50px;
@@ -1583,8 +1583,8 @@ textarea.form-control {
 
 .scroll-to-top {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 40px;
+  left: 20px;
   background: var(--accent-gradient);
   color: #000;
   width: 50px;
@@ -1603,8 +1603,15 @@ textarea.form-control {
     visibility 0.3s,
     transform 0.3s,
     box-shadow 0.3s;
-  z-index: 999;
+  z-index: 998;
 }
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    display: none !important;
+  }
+}
+
 
 .scroll-to-top.visible {
   opacity: 1;

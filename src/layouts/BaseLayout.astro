@@ -7,6 +7,8 @@ import CookieBanner from '../components/CookieBanner.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { ui } from '../i18n/ui';
+import { locations } from '../data/locations';
+import { geoContent } from '../data/geo-content';
 
 // --- ШРИФТЫ (Self-hosted) ---
 import '@fontsource-variable/sora';
@@ -79,6 +81,22 @@ for (const [ru, en] of Object.entries(servicePairs)) {
 if (!isServicePage) {
     enSlug = pathWithoutLocale.replace(/^\/uslugi/, '/services');
     ruSlug = pathWithoutLocale.replace(/^\/services/, '/uslugi');
+}
+
+// Detect geo city pages and check if they have RU content
+const ruCityGeoMatch = cleanPath.match(/^\/uslugi\/([^/]+)$/);
+const enCityGeoMatch = cleanPath.match(/^\/services\/([^/]+)$/);
+const geoCitySlug = ruCityGeoMatch?.[1] ?? enCityGeoMatch?.[1] ?? null;
+
+let geoHasRU = true;
+let geoHasEN = true;
+if (geoCitySlug) {
+    const locData = locations.find(l => l.slug === geoCitySlug);
+    geoHasRU = !!locData?.name_ru && !!(geoContent as any)[geoCitySlug]?.ru;
+    geoHasEN = !!(geoContent as any)[geoCitySlug]?.en;
+    // For geo pages: build the correct cross-lang URLs
+    enSlug = `/services/${geoCitySlug}`;
+    ruSlug = `/uslugi/${geoCitySlug}`;
 }
 
 const siteBase = Astro.site ? Astro.site.toString() : 'https://avpdev.com';
@@ -168,9 +186,10 @@ const xDefaultUrl = new URL('/', siteBase).href;
         </>
     )}
 
-    <link rel="alternate" hreflang="ru" href={ruUrl} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
+    {(!geoCitySlug || geoHasRU) && <link rel="alternate" hreflang="ru" href={ruUrl} />}
+    {(!geoCitySlug || geoHasEN) && <link rel="alternate" hreflang="en" href={enUrl} />}
+    {(!geoCitySlug || geoHasRU) && <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />}
+    {geoCitySlug && !geoHasRU && <link rel="alternate" hreflang="x-default" href={enUrl} />}
 
     <script is:inline>
         function applyTheme() {

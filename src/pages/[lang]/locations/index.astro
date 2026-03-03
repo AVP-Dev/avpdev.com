@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { locations } from '../../../data/locations';
+import { geoContent } from '../../../data/geo-content';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
 export const prerender = true;
@@ -80,7 +81,7 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
-    <main class="locations-page">
+    <div class="locations-page">
         <section class="locations-hero relative">
             <div class="glow-bg top-glow"></div>
             <div class="container text-center relative z-10 mx-auto px-4 pt-32 pb-16">
@@ -151,7 +152,11 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
                             <ul class="cities-list mt-6 grid grid-cols-2 gap-3" aria-label={`Cities in ${countryName}`}>
                                 {visibleCities.map(loc => {
                                     const cityName = (currentLang === 'ru' ? loc.name_ru : loc.name_en) || loc.name_en || loc.name_ru || loc.slug;
-                                    const url = currentLang === 'ru' ? `/ru/uslugi/${loc.slug}/` : `/en/services/${loc.slug}/`;
+                                    // Always use EN URL for cities without RU content — avoids redirect chain / 404
+                                    const hasRuContent = !!(geoContent as any)[loc.slug]?.ru;
+                                    const url = (currentLang === 'ru' && hasRuContent)
+                                        ? `/ru/uslugi/${loc.slug}/`
+                                        : `/en/services/${loc.slug}/`;
                                     return (
                                         <li>
                                             <a href={url} class="city-pill group">
@@ -163,7 +168,11 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
                                 })}
                                 {hasHidden && hiddenCities.map(loc => {
                                     const cityName = (currentLang === 'ru' ? loc.name_ru : loc.name_en) || loc.name_en || loc.name_ru || loc.slug;
-                                    const url = currentLang === 'ru' ? `/ru/uslugi/${loc.slug}/` : `/en/services/${loc.slug}/`;
+                                    // Always use EN URL for cities without RU content — avoids redirect chain / 404
+                                    const hasRuContent = !!(geoContent as any)[loc.slug]?.ru;
+                                    const url = (currentLang === 'ru' && hasRuContent)
+                                        ? `/ru/uslugi/${loc.slug}/`
+                                        : `/en/services/${loc.slug}/`;
                                     return (
                                         <li class="hidden-city-item" style="display: none;">
                                             <a href={url} class="city-pill group">
@@ -194,7 +203,7 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
                 <p class="text-xl text-text-secondary">{currentLang === 'ru' ? 'Нет доступных локаций в этом регионе.' : 'No available locations in this region.'}</p>
             </div>
         </section>
-    </main>
+    </div>
 </BaseLayout>
 
 <script>
@@ -274,14 +283,12 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
             });
         });
 
-        // Initial animation
-        setTimeout(() => {
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add('visible');
-                }, index * 50);
+        // Initial animation - much simpler to avoid main thread jank
+        requestAnimationFrame(() => {
+            cards.forEach((card) => {
+                card.classList.add('visible');
             });
-        }, 100);
+        });
     }
 
     // Run on first load and on astro page swaps
@@ -311,6 +318,7 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
         top: -300px;
         left: 50%;
         transform: translateX(-50%);
+        will-change: transform; /* OK here as it's only one large element */
     }
 
     /* Tabs Styling */
@@ -320,39 +328,26 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
         width: 100%;
         margin-top: 3rem;
         position: relative;
-    }
-
-    /* Edge shadows for scroll feedback on mobile */
-    .tabs-container::before, 
-    .tabs-container::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 30px;
-        z-index: 2;
-        pointer-events: none;
-        opacity: 0;
+        z-index: 20;
     }
 
     @media (max-width: 768px) {
-        .tabs-container::before {
-            left: 0;
-            background: linear-gradient(to right, var(--bg-color), transparent);
-            opacity: 1;
-        }
-        .tabs-container::after {
-            right: 0;
-            background: linear-gradient(to left, var(--bg-color), transparent);
-            opacity: 1;
+        .tabs-container {
+            justify-content: flex-start;
+            padding: 0 1rem;
+            margin-top: 2rem;
+            /* Use a simpler approach for mobile to avoid scroll lag */
+            overflow: hidden;
         }
     }
 
     .tabs-scroll {
         display: flex;
-        gap: 0.75rem;
-        padding: 0.5rem;
+        gap: 0.5rem;
+        padding: 0.4rem;
         background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--glass-border);
         border-radius: 999px;
         overflow-x: auto;
@@ -360,6 +355,8 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
         scrollbar-width: none;  /* Firefox */
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
+        margin: 0 auto;
+        max-width: 100%;
     }
 
     .tabs-scroll::-webkit-scrollbar {
@@ -373,12 +370,19 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
         font-family: var(--font-body);
         font-weight: 500;
         font-size: 0.95rem;
-        padding: 0.7rem 1.25rem;
+        padding: 0.7rem 1.1rem;
         border-radius: 999px;
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         white-space: nowrap;
         scroll-snap-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .tab-btn {
+            font-size: 0.85rem;
+            padding: 0.6rem 0.9rem;
+        }
     }
 
     .tab-btn:hover {
@@ -410,6 +414,9 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
         height: 100%;
         display: flex;
         flex-direction: column;
+        /* Performance boost: only render what's near the viewport */
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 400px;
     }
 
     .country-title {
@@ -479,8 +486,7 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
     .fade-in {
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        will-change: opacity, transform;
+        transition: opacity 0.4s ease-out, transform 0.4s ease-out;
     }
 
     .fade-in.visible {
@@ -531,12 +537,10 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
         }
 
         .tabs-scroll {
-            border-radius: 0;
-            border-left: none;
-            border-right: none;
-            padding: 0.5rem 1rem;
-            width: 100vw;
-            margin-left: -1rem; /* Break out of container */
+            border-radius: 999px;
+            width: auto;
+            margin-left: 0;
+            padding: 0.4rem;
         }
     }
 </style>
