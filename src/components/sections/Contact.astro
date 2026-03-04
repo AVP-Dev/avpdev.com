@@ -330,6 +330,14 @@ const t = useTranslations(lang);
             // CRITICAL: Convert checkbox from "on"/undefined to boolean
             data.consent = formData.get("consent") === "on";
 
+            // Add UTM Data if available
+            if (typeof window !== 'undefined' && typeof window.getUtmParams === 'function') {
+                const utms = window.getUtmParams();
+                if (utms) {
+                    Object.assign(data, utms);
+                }
+            }
+
             try {
                 const response = await fetch("/api/sendMessage/", {
                     method: "POST",
