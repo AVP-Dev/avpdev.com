@@ -12,7 +12,7 @@ export const carsTranslations = {
         case_cars_solution_li1_portfolio: '<strong>Интерактивный калькулятор растаможки:</strong> Разработан многошаговый калькулятор, позволяющий пользователям в реальном времени рассчитать полную стоимость автомобиля с учетом всех сборов и пошлин.',
         case_cars_solution_li2_portfolio: '<strong>Подробное описание услуг:</strong> Созданы секции с детальным описанием комплексных услуг по подбору, доставке, таможенному оформлению и регистрации автомобилей.',
         case_cars_solution_li3_portfolio: '<strong>Галерея примеров автомобилей:</strong> Реализован раздел с примерами уже доставленных или доступных для заказа автомобилей, с подробными характеристиками и ценами.',
-        case_cars_solution_li4_portfolio: '<strong>Секция отзывов клиентов:</strong> Интегрирован блок с реальными отзывами, повышающий доверие к компании и демонстрирующий успешные кейсы.',
+        case_cars_solution_li4_portfolio: '<strong>Ответы на вопросы и отзывы:</strong> Интегрирован блок с ответами на частые вопросы и реальными отзывами, повышающий доверие к компании.',
         case_cars_solution_li5_portfolio: '<strong>Удобная контактная форма:</strong> Разработана форма обратной связи для быстрого получения индивидуальных предложений и консультаций.',
         case_cars_solution_li6_portfolio: '<strong>Адаптивный дизайн и производительность:</strong> Обеспечена быстрая загрузка и корректное отображение сайта на всех устройствах, включая мобильные.',
         gallery_caption_cars_hero: 'Главный экран: Четкое предложение и призыв к действию',
@@ -20,7 +20,7 @@ export const carsTranslations = {
         gallery_caption_cars_services: 'Услуги: Визуализация полного цикла работы с клиентом',
         gallery_caption_cars_inspiration: 'Галерея авто: Примеры выполненных заказов как социальное доказательство',
         gallery_caption_cars_calculator: 'Калькулятор: Ключевой инструмент для снятия возражений по цене',
-        gallery_caption_cars_testimonials: 'Отзывы: Подтверждение надежности от реальных клиентов',
+        gallery_caption_cars_testimonials: 'Ответы на вопросы и отзывы: Подтверждение надежности от реальных клиентов',
         gallery_caption_cars_contact: 'Форма заявки: Простой способ начать сотрудничество',
     },
     en: {
@@ -36,7 +36,7 @@ export const carsTranslations = {
         case_cars_solution_li1_portfolio: '<strong>Interactive Customs Calculator:</strong> Developed a multi-step calculator allowing users to instantly calculate the full cost of a car including all fees and duties.',
         case_cars_solution_li2_portfolio: '<strong>Detailed Service Descriptions:</strong> Created sections with detailed descriptions of comprehensive services for car selection, delivery, customs clearance, and registration.',
         case_cars_solution_li3_portfolio: '<strong>Gallery of Car Examples:</strong> Implemented a section with examples of cars already delivered or available for order, with detailed specifications and prices.',
-        case_cars_solution_li4_portfolio: '<strong>Client Testimonials Section:</strong> Integrated a block with real testimonials, increasing trust in the company and demonstrating successful cases.',
+        case_cars_solution_li4_portfolio: '<strong>FAQ and Reviews Section:</strong> Integrated a block with answers to frequently asked questions and real testimonials, increasing trust in the company.',
         case_cars_solution_li5_portfolio: '<strong>Convenient Contact Form:</strong> Developed a contact form for quick receipt of individual offers and consultations.',
         case_cars_solution_li6_portfolio: '<strong>Responsive Design and Performance:</strong> Ensured fast loading and correct display of the website on all devices, including mobile.',
         gallery_caption_cars_hero: 'Hero Screen: Clear proposition and call to action',
@@ -44,7 +44,7 @@ export const carsTranslations = {
         gallery_caption_cars_services: 'Services: Visualizing the full client workflow',
         gallery_caption_cars_inspiration: 'Car Gallery: Examples of completed orders as social proof',
         gallery_caption_cars_calculator: 'Calculator: The key tool for addressing price objections',
-        gallery_caption_cars_testimonials: 'Testimonials: Confirmation of reliability from real clients',
+        gallery_caption_cars_testimonials: 'FAQ and Reviews: Confirmation of reliability from real clients',
         gallery_caption_cars_contact: 'Inquiry Form: A simple and clear next step',
     }
 } as const;
