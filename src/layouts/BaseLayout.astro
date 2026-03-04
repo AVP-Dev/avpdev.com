@@ -161,57 +161,69 @@ const xDefaultUrl = new URL('/', siteBase).href;
 
     {GTAG_ID && (
         <>
-            {/* Google Analytics & Yandex.Metrika - deferred loading to improve performance and prevent layout thrashing */}
+            {/* Analytics Initialization */}
             <script define:vars={{ GTAG_ID }}>
-              window.analyticsLoaded = false;
-              
-              // 1. Синхронное объявление функций (чтобы боты аналитики видели свое присутствие сразу)
-              // Google Analytics Init
+              // GA4
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', GTAG_ID, { 'send_page_view': false });
 
-              // Yandex.Metrika Init
+              const initAnalytics = () => {
+                  if (window.analyticsInjected) return;
+                  window.analyticsInjected = true;
+
+                  // Load GA4
+                  const scriptGA = document.createElement('script');
+                  scriptGA.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
+                  scriptGA.async = true;
+                  document.head.appendChild(scriptGA);
+
+                  // Load Yandex.Metrika
+                  const scriptYM = document.createElement('script');
+                  scriptYM.src = 'https://mc.yandex.ru/metrika/tag.js';
+                  scriptYM.async = true;
+                  document.head.appendChild(scriptYM);
+              };
+
+              // Yandex.Metrika Counter Initialization
               const ymId = 107147089;
               (function(m,e,t,r,i,k,a){
                   m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                   m[i].l=1*new Date();
               })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-              ym(ymId, 'init', {
-                  clickmap:true,
-                  trackLinks:true,
-                  accurateTrackBounce:true,
-                  webvisor:true,
-                  ecommerce:"dataLayer", 
-                  referrer: document.referrer, 
-                  url: location.href,
-                  ssr:true
+              const initYm = () => {
+                  ym(ymId, 'init', {
+                      clickmap:true,
+                      trackLinks:true,
+                      accurateTrackBounce:true,
+                      webvisor:true,
+                      ecommerce:"dataLayer", 
+                      referrer: document.referrer, 
+                      url: location.href,
+                      ssr:true
+                  });
+              };
+              
+              // Call ym init immediately
+              initYm();
+              
+              // Fix for Astro View Transitions (re-init on page change)
+              document.addEventListener('astro:page-load', () => {
+                  if(window.ym) {
+                      ym(ymId, 'hit', location.href, {
+                          title: document.title,
+                          referer: document.referrer
+                      });
+                  }
               });
 
-              // 2. Асинхронная загрузка тяжелых скриптов (отложено или по клику/скроллу)
-              const loadAnalyticsConfigs = () => {
-                if (window.analyticsLoaded) return;
-                window.analyticsLoaded = true;
-                
-                // Загружаем скрипт GA
-                const scriptGA = document.createElement('script');
-                scriptGA.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
-                scriptGA.async = true;
-                document.head.appendChild(scriptGA);
-
-                // Загружаем скрипт Yandex.Metrika
-                const scriptYM = document.createElement('script');
-                scriptYM.src = 'https://mc.yandex.ru/metrika/tag.js';
-                scriptYM.async = true;
-                document.head.appendChild(scriptYM);
-              };
-
-              // Откладываем тяжелые скрипты
-              setTimeout(loadAnalyticsConfigs, 3500);
-              const interactionEvents = ['scroll', 'click', 'mousemove', 'touchstart'];
-              interactionEvents.forEach(e => window.addEventListener(e, loadAnalyticsConfigs, { once: true, passive: true }));
+              // Delayed inject of heavy scripts
+              setTimeout(initAnalytics, 3000);
+              ['scroll', 'click', 'mousemove', 'touchstart'].forEach(e => 
+                  window.addEventListener(e, initAnalytics, { once: true, passive: true })
+              );
             </script>
             <noscript><div><img src="https://mc.yandex.ru/watch/107147089" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         </>
