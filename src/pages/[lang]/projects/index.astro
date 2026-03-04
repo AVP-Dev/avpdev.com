@@ -48,10 +48,12 @@ const filteredProjects = allProjects.filter((project) => {
     return match;
 });
 
-// Sort by date (newest first)
-filteredProjects.sort(
-    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
-);
+// Sort by featured first, then by date (newest first)
+filteredProjects.sort((a, b) => {
+    if (a.data.featured && !b.data.featured) return -1;
+    if (!a.data.featured && b.data.featured) return 1;
+    return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
 
 const categoryMap: Record<string, "sites" | "apps"> = {
     "web-site": "sites",
@@ -280,21 +282,21 @@ const categories = [
     }
 
     .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 2rem;
-        align-items: stretch;
     }
 
-    @media (min-width: 1024px) {
-        .portfolio-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
+    .portfolio-grid > :global(*) {
+        width: calc(33.333% - 1.34rem);
+        min-width: 300px;
     }
 
     @media (max-width: 768px) {
-        .portfolio-grid {
-            grid-template-columns: 1fr;
+        .portfolio-grid > :global(*) {
+            width: 100%;
+            min-width: unset;
         }
 
         .archive-header {

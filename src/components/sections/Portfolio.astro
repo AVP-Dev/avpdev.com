@@ -91,15 +91,15 @@ const PROJECTS_DATA: Project[] = featuredProjects.map((project, index) => ({
   }
 
   .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
   }
 
-  @media (min-width: 1024px) {
-    .portfolio-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .portfolio-card-wrapper {
+    width: calc(33.333% - 1.34rem);
+    min-width: 300px;
   }
 
   @media (max-width: 768px) {
@@ -108,8 +108,9 @@ const PROJECTS_DATA: Project[] = featuredProjects.map((project, index) => ({
       gap: 1.25rem;
     }
 
-    .portfolio-grid {
-      grid-template-columns: 1fr;
+    .portfolio-card-wrapper {
+      width: 100%;
+      min-width: unset;
     }
   }
 </style>

@@ -24,7 +24,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Минске?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -64,7 +64,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Minsk?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -106,7 +106,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Гомеле?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -146,7 +146,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Gomel?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -188,7 +188,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Могилеве?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -228,7 +228,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Mogilev?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -270,7 +270,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Витебске?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -310,7 +310,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Vitebsk?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -352,7 +352,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Гродно?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -397,7 +397,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Grodno?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -439,7 +439,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Бресте?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -484,7 +484,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Brest?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -526,7 +526,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Бобруйске?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -566,7 +566,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Bobruisk?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -608,7 +608,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Барановичах?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -648,7 +648,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Baranovichi?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -690,7 +690,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Борисове?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -730,7 +730,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Borisov?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -772,7 +772,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Пинске?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -812,7 +812,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Pinsk?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -854,7 +854,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Орше?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -894,7 +894,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Orsha?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -936,7 +936,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Мозыре?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -976,7 +976,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Mozyr?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1018,7 +1018,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Лиде?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1058,7 +1058,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Lida?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1100,7 +1100,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Солигорске?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1140,7 +1140,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Soligorsk?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1182,7 +1182,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Новополоцке?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1222,7 +1222,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Novopolotsk?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1264,7 +1264,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Молодечно?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1304,7 +1304,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Molodechno?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1346,7 +1346,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Полоцке?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1386,7 +1386,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Polotsk?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1428,7 +1428,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Жлобине?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1468,7 +1468,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Zhlobin?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1510,7 +1510,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Речице?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1550,7 +1550,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Rechitsa?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1592,7 +1592,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Светлогорске?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1632,7 +1632,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Svetlogorsk?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1674,7 +1674,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Слуцке?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1714,7 +1714,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Slutsk?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1756,7 +1756,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Кобрине?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1796,7 +1796,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Kobrin?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1838,7 +1838,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Слониме?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1878,7 +1878,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Slonim?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -1920,7 +1920,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Волковыске?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -1960,7 +1960,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Volkovysk?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -2002,7 +2002,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Жодино?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2042,7 +2042,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Zhodino?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -2084,7 +2084,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Сморгони?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2124,7 +2124,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Smorgon?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -2166,7 +2166,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Калинковичах?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2206,7 +2206,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Kalinkovichi?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -2248,7 +2248,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Рогачеве?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2288,7 +2288,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Rogachev?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -2330,7 +2330,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Горках?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2370,7 +2370,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Gorki?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -2412,7 +2412,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Осиповичах?",
-          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 860 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2150 BYN."
+          "a": "Цены начинаются от 720 BYN за лэндинг на Astro и от 870 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2170 BYN."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2452,7 +2452,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Osipovichi?",
-          "a": "Pricing starts from 720 BYN for Astro landing pages and 860 BYN for Next.js websites. Custom web applications start from 2150 BYN."
+          "a": "Pricing starts from 720 BYN for Astro landing pages and 870 BYN for Next.js websites. Custom web applications start from 2170 BYN."
         },
         {
           "q": "What is your project timeline?",
@@ -2494,7 +2494,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Москве?",
-          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 25500 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64000 руб.."
+          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64500 руб.."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2534,7 +2534,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Moscow?",
-          "a": "Pricing starts from 21500 руб. for Astro landing pages and 25500 руб. for Next.js websites. Custom web applications start from 64000 руб.."
+          "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 64500 руб.."
         },
         {
           "q": "What is your project timeline?",
@@ -2576,7 +2576,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Санкт-Петербурге?",
-          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 25500 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64000 руб.."
+          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64500 руб.."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2616,7 +2616,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Saint Petersburg?",
-          "a": "Pricing starts from 21500 руб. for Astro landing pages and 25500 руб. for Next.js websites. Custom web applications start from 64000 руб.."
+          "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 64500 руб.."
         },
         {
           "q": "What is your project timeline?",
@@ -2658,7 +2658,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Новосибирске?",
-          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 25500 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64000 руб.."
+          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64500 руб.."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2698,7 +2698,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Novosibirsk?",
-          "a": "Pricing starts from 21500 руб. for Astro landing pages and 25500 руб. for Next.js websites. Custom web applications start from 64000 руб.."
+          "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 64500 руб.."
         },
         {
           "q": "What is your project timeline?",
@@ -2740,7 +2740,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Екатеринбурге?",
-          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 25500 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64000 руб.."
+          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64500 руб.."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2780,7 +2780,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Yekaterinburg?",
-          "a": "Pricing starts from 21500 руб. for Astro landing pages and 25500 руб. for Next.js websites. Custom web applications start from 64000 руб.."
+          "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 64500 руб.."
         },
         {
           "q": "What is your project timeline?",
@@ -2822,7 +2822,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Казани?",
-          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 25500 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64000 руб.."
+          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64500 руб.."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2862,7 +2862,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Kazan?",
-          "a": "Pricing starts from 21500 руб. for Astro landing pages and 25500 руб. for Next.js websites. Custom web applications start from 64000 руб.."
+          "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 64500 руб.."
         },
         {
           "q": "What is your project timeline?",
@@ -2904,7 +2904,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Краснодаре?",
-          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 25500 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64000 руб.."
+          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64500 руб.."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -2944,7 +2944,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Krasnodar?",
-          "a": "Pricing starts from 21500 руб. for Astro landing pages and 25500 руб. for Next.js websites. Custom web applications start from 64000 руб.."
+          "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 64500 руб.."
         },
         {
           "q": "What is your project timeline?",
@@ -2986,7 +2986,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Сочи?",
-          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 25500 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64000 руб.."
+          "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64500 руб.."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -3026,7 +3026,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Sochi?",
-          "a": "Pricing starts from 21500 руб. for Astro landing pages and 25500 руб. for Next.js websites. Custom web applications start from 64000 руб.."
+          "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 64500 руб.."
         },
         {
           "q": "What is your project timeline?",
@@ -3068,7 +3068,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Алматы?",
-          "a": "Цены начинаются от 191000 ₸ за лэндинг на Astro и от 230000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 574000 ₸."
+          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 232000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 579000 ₸."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -3076,7 +3076,7 @@ export const geoContent: Record<string, any> = {
         },
         {
           "q": "Разрабатываете ли вы Telegram-ботов?",
-          "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 38000 ₸ в зависимости от сложности."
+          "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 39000 ₸ в зависимости от сложности."
         },
         {
           "q": "Вы предоставляете поддержку после запуска?",
@@ -3108,7 +3108,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Almaty?",
-          "a": "Pricing starts from 191000 ₸ for Astro landing pages and 230000 ₸ for Next.js websites. Custom web applications start from 574000 ₸."
+          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 232000 ₸ for Next.js websites. Custom web applications start from 579000 ₸."
         },
         {
           "q": "What is your project timeline?",
@@ -3116,7 +3116,7 @@ export const geoContent: Record<string, any> = {
         },
         {
           "q": "Do you develop Telegram bots and Mini Apps?",
-          "a": "Yes, we build intelligent bots for business automation. Prices start from 38000 ₸ depending on the requirements."
+          "a": "Yes, we build intelligent bots for business automation. Prices start from 39000 ₸ depending on the requirements."
         },
         {
           "q": "Do you provide post-launch support?",
@@ -3150,7 +3150,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Астане?",
-          "a": "Цены начинаются от 191000 ₸ за лэндинг на Astro и от 230000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 574000 ₸."
+          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 232000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 579000 ₸."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -3158,7 +3158,7 @@ export const geoContent: Record<string, any> = {
         },
         {
           "q": "Разрабатываете ли вы Telegram-ботов?",
-          "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 38000 ₸ в зависимости от сложности."
+          "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 39000 ₸ в зависимости от сложности."
         },
         {
           "q": "Вы предоставляете поддержку после запуска?",
@@ -3190,7 +3190,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Astana?",
-          "a": "Pricing starts from 191000 ₸ for Astro landing pages and 230000 ₸ for Next.js websites. Custom web applications start from 574000 ₸."
+          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 232000 ₸ for Next.js websites. Custom web applications start from 579000 ₸."
         },
         {
           "q": "What is your project timeline?",
@@ -3198,7 +3198,7 @@ export const geoContent: Record<string, any> = {
         },
         {
           "q": "Do you develop Telegram bots and Mini Apps?",
-          "a": "Yes, we build intelligent bots for business automation. Prices start from 38000 ₸ depending on the requirements."
+          "a": "Yes, we build intelligent bots for business automation. Prices start from 39000 ₸ depending on the requirements."
         },
         {
           "q": "Do you provide post-launch support?",
@@ -3232,7 +3232,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Караганде?",
-          "a": "Цены начинаются от 191000 ₸ за лэндинг на Astro и от 230000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 574000 ₸."
+          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 232000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 579000 ₸."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -3240,7 +3240,7 @@ export const geoContent: Record<string, any> = {
         },
         {
           "q": "Разрабатываете ли вы Telegram-ботов?",
-          "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 38000 ₸ в зависимости от сложности."
+          "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 39000 ₸ в зависимости от сложности."
         },
         {
           "q": "Вы предоставляете поддержку после запуска?",
@@ -3272,7 +3272,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Karaganda?",
-          "a": "Pricing starts from 191000 ₸ for Astro landing pages and 230000 ₸ for Next.js websites. Custom web applications start from 574000 ₸."
+          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 232000 ₸ for Next.js websites. Custom web applications start from 579000 ₸."
         },
         {
           "q": "What is your project timeline?",
@@ -3280,7 +3280,7 @@ export const geoContent: Record<string, any> = {
         },
         {
           "q": "Do you develop Telegram bots and Mini Apps?",
-          "a": "Yes, we build intelligent bots for business automation. Prices start from 38000 ₸ depending on the requirements."
+          "a": "Yes, we build intelligent bots for business automation. Prices start from 39000 ₸ depending on the requirements."
         },
         {
           "q": "Do you provide post-launch support?",
@@ -3314,7 +3314,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Шымкенте?",
-          "a": "Цены начинаются от 191000 ₸ за лэндинг на Astro и от 230000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 574000 ₸."
+          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 232000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 579000 ₸."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -3322,7 +3322,7 @@ export const geoContent: Record<string, any> = {
         },
         {
           "q": "Разрабатываете ли вы Telegram-ботов?",
-          "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 38000 ₸ в зависимости от сложности."
+          "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 39000 ₸ в зависимости от сложности."
         },
         {
           "q": "Вы предоставляете поддержку после запуска?",
@@ -3354,7 +3354,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Shymkent?",
-          "a": "Pricing starts from 191000 ₸ for Astro landing pages and 230000 ₸ for Next.js websites. Custom web applications start from 574000 ₸."
+          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 232000 ₸ for Next.js websites. Custom web applications start from 579000 ₸."
         },
         {
           "q": "What is your project timeline?",
@@ -3362,7 +3362,7 @@ export const geoContent: Record<string, any> = {
         },
         {
           "q": "Do you develop Telegram bots and Mini Apps?",
-          "a": "Yes, we build intelligent bots for business automation. Prices start from 38000 ₸ depending on the requirements."
+          "a": "Yes, we build intelligent bots for business automation. Prices start from 39000 ₸ depending on the requirements."
         },
         {
           "q": "Do you provide post-launch support?",
