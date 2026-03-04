@@ -49,7 +49,20 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
             Object.entries(result.data).map(([key, value]) => [key, cleanInput(value)])
         );
 
-        const shortMessage = `<b>🔥 Новый бриф на разработку!</b>\n\n<b>От:</b> ${sanitizedData.company_name}\n<b>Контакт:</b> ${sanitizedData.contacts}`;
+        const { utm_source, utm_medium, utm_campaign, utm_term, utm_content, company_name, contacts } = sanitizedData;
+
+        // Build UTM block if any UTM exists
+        const utms = [
+            utm_source && `Source: ${utm_source}`,
+            utm_medium && `Medium: ${utm_medium}`,
+            utm_campaign && `Campaign: ${utm_campaign}`,
+            utm_term && `Term: ${utm_term}`,
+            utm_content && `Content: ${utm_content}`
+        ].filter(Boolean);
+
+        const utmBlock = utms.length > 0 ? `\n\n<b>📊 Аналитика (UTM):</b>\n${utms.join('\n')}` : '';
+
+        const shortMessage = `<b>🔥 Новый бриф на разработку!</b>\n\n<b>От:</b> ${company_name}\n<b>Контакт:</b> ${contacts}${utmBlock}`;
 
         const jsonData = JSON.stringify(sanitizedData, null, 2);
         const jsonBlob = new Blob([jsonData], { type: 'application/json' });

@@ -161,12 +161,13 @@ const xDefaultUrl = new URL('/', siteBase).href;
 
     {GTAG_ID && (
         <>
-            {/* Google Analytics - deferred loading */}
+            {/* Analytics Initialization (Deferred for PageSpeed) */}
             <script define:vars={{ GTAG_ID }}>
               const loadAnalytics = () => {
                 if (window.analyticsInjected) return;
                 window.analyticsInjected = true;
 
+                // Load GA4
                 const scriptGA = document.createElement('script');
                 scriptGA.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
                 scriptGA.async = true;
@@ -176,37 +177,39 @@ const xDefaultUrl = new URL('/', siteBase).href;
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', GTAG_ID, { 'send_page_view': false });
+
+                // Load Yandex.Metrika
+                const ymId = 107147089;
+                const scriptYM = document.createElement('script');
+                scriptYM.src = 'https://mc.yandex.ru/metrika/tag.js';
+                scriptYM.async = true;
+                document.head.appendChild(scriptYM);
+
+                (function(m,e,t,r,i,k,a){
+                    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
+
+                ym(ymId, 'init', {
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    ecommerce:"dataLayer", 
+                    referrer: document.referrer, 
+                    url: location.href,
+                    ssr:true
+                });
               };
+              
+              // Delayed inject of heavy scripts
               setTimeout(loadAnalytics, 3000);
               ['scroll', 'click', 'mousemove', 'touchstart'].forEach(e => 
                   window.addEventListener(e, loadAnalytics, { once: true, passive: true })
               );
             </script>
+            <noscript><div><img src="https://mc.yandex.ru/watch/107147089" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         </>
     )}
-
-    {/* Yandex.Metrika counter - RAW AND UNMODIFIED */}
-    <script is:inline>
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
-
-        ym(107147089, 'init', {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true,
-            ecommerce:"dataLayer",
-            referrer: document.referrer, 
-            url: location.href,
-            ssr:true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/107147089" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    {/* /Yandex.Metrika counter */}
 
     {(!geoCitySlug || geoHasRU) && <link rel="alternate" hreflang="ru" href={ruUrl} />}
     {(!geoCitySlug || geoHasEN) && <link rel="alternate" hreflang="en" href={enUrl} />}
@@ -239,6 +242,45 @@ const xDefaultUrl = new URL('/', siteBase).href;
 
         applyTheme();
         document.addEventListener('astro:after-swap', applyTheme);
+
+        // --- UTM Tracker ---
+        function trackUtmParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+            let hasNewParams = false;
+            let currentUtms = {};
+
+            try {
+                const stored = localStorage.getItem('utm_data');
+                if (stored) currentUtms = JSON.parse(stored);
+            } catch (e) {}
+
+            utmParams.forEach(param => {
+                if (urlParams.has(param)) {
+                    currentUtms[param] = urlParams.get(param);
+                    hasNewParams = true;
+                }
+            });
+
+            if (hasNewParams) {
+                currentUtms.timestamp = new Date().toISOString();
+                localStorage.setItem('utm_data', JSON.stringify(currentUtms));
+            }
+        }
+        
+        // Add global helper to read UTMs for forms
+        window.getUtmParams = function() {
+            try {
+                const stored = localStorage.getItem('utm_data');
+                return stored ? JSON.parse(stored) : null;
+            } catch (e) {
+                return null;
+            }
+        };
+
+        trackUtmParams();
+        document.addEventListener('astro:page-load', trackUtmParams);
+    </script>
     </script>
 
     {/* Уничтожение старых Service Workers, которые ломают редиректы и кешируют старые страницы */}

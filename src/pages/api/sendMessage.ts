@@ -39,14 +39,26 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
             }), { status: 400 });
         }
 
-        const { name, contact, message } = result.data;
+        const { name, contact, message, utm_source, utm_medium, utm_campaign, utm_term, utm_content } = result.data;
+
+        // Build UTM block if any UTM exists
+        const utms = [
+            utm_source && `Source: ${cleanInput(utm_source)}`,
+            utm_medium && `Medium: ${cleanInput(utm_medium)}`,
+            utm_campaign && `Campaign: ${cleanInput(utm_campaign)}`,
+            utm_term && `Term: ${cleanInput(utm_term)}`,
+            utm_content && `Content: ${cleanInput(utm_content)}`
+        ].filter(Boolean);
+
+        const utmBlock = utms.length > 0 ? `\n\n<b>📊 Аналитика (UTM):</b>\n${utms.join('\n')}` : '';
 
         const tgMessage = [
             `<b>🔥 Новая заявка с сайта!</b>`,
             `<b>Имя:</b> ${cleanInput(name)}`,
             `<b>Контакты:</b> ${cleanInput(contact)}`,
-            `\n<b>Сообщение:</b>\n${cleanInput(message)}`
-        ].join('\n');
+            `\n<b>Сообщение:</b>\n${cleanInput(message)}`,
+            utmBlock
+        ].filter(Boolean).join('\n');
 
         const { BOT_TOKEN, CHAT_ID, TOPIC_ID, TURNSTILE_SECRET_KEY } = import.meta.env;
 

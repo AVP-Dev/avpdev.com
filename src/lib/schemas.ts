@@ -13,6 +13,13 @@ export const ContactFormSchema = z.object({
         message: 'You must agree to personal data processing'
     }),
     'cf-turnstile-response': z.string().min(1, { message: 'Please complete the captcha' }),
+
+    // --- UTM Parameters ---
+    utm_source: z.string().optional(),
+    utm_medium: z.string().optional(),
+    utm_campaign: z.string().optional(),
+    utm_term: z.string().optional(),
+    utm_content: z.string().optional(),
 });
 
 /**
@@ -65,6 +72,13 @@ export const BriefFormSchema = z.object({
         message: 'You must agree to personal data processing'
     }),
     'cf-turnstile-response': z.string().min(1, { message: 'Please complete the captcha' }),
+
+    // --- UTM Parameters ---
+    utm_source: z.string().optional(),
+    utm_medium: z.string().optional(),
+    utm_campaign: z.string().optional(),
+    utm_term: z.string().optional(),
+    utm_content: z.string().optional(),
 });
 
 // Export TypeScript types
