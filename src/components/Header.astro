@@ -92,12 +92,21 @@ const homePath = `/${lang}/`;
 <div class="mobile-nav">
     <ul class="mobile-menu-list">
         <li><a href={`${homePath}#about`}>{t("nav_about")}</a></li>
-        <li class="mobile-menu-section-title">{t("nav_services")}</li>
-        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development')} class="mobile-nav-link"><i class="fa-solid fa-laptop-code"></i> {t('nav_service_web')}</a></li>
-        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps')} class="mobile-nav-link"><i class="fa-brands fa-telegram"></i> {t('nav_service_tma')}</a></li>
-        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration')} class="mobile-nav-link"><i class="fa-solid fa-brain"></i> {t('nav_service_ai')}</a></li>
-        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development')} class="mobile-nav-link"><i class="fa-solid fa-robot"></i> {t('nav_service_bots')}</a></li>
-        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp')} class="mobile-nav-link"><i class="fa-solid fa-rocket"></i> {t('nav_service_saas')}</a></li>
+        <li class="mobile-accordion-item">
+            <button class="mobile-accordion-trigger" aria-expanded="false">
+                <span>{t("nav_services")}</span>
+                <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+            </button>
+            <div class="mobile-accordion-content">
+                <div class="mobile-accordion-inner">
+                    <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development')} class="mobile-nav-link"><i class="fa-solid fa-laptop-code"></i> {t('nav_service_web')}</a>
+                    <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps')} class="mobile-nav-link"><i class="fa-brands fa-telegram"></i> {t('nav_service_tma')}</a>
+                    <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration')} class="mobile-nav-link"><i class="fa-solid fa-brain"></i> {t('nav_service_ai')}</a>
+                    <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development')} class="mobile-nav-link"><i class="fa-solid fa-robot"></i> {t('nav_service_bots')}</a>
+                    <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp')} class="mobile-nav-link"><i class="fa-solid fa-rocket"></i> {t('nav_service_saas')}</a>
+                </div>
+            </div>
+        </li>
         <li><a href={`/${lang}/projects/`}>{t("nav_portfolio")}</a></li>
         <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
         <li class="mobile-menu-brief"><a href={`/${lang}/brief/`} class="btn btn-primary">{t("nav_brief")}</a></li>

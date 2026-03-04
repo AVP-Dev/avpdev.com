@@ -31,7 +31,6 @@ content:
   techStack:
     - icon: 'fab fa-react'
       title: 'Next.js'
-      color: '#FFFFFF'
     - icon: 'fab fa-react'
       title: 'React'
       color: '#61DAFB'
