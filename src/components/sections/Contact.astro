@@ -338,6 +338,11 @@ const t = useTranslations(lang);
                 });
 
                 if (response.ok) {
+                    if (typeof window !== 'undefined') {
+                        if (window.gtag) window.gtag('event', 'generate_lead', { form_name: 'contact_form' });
+                        if (window.ym) window.ym(107147089, 'reachGoal', 'form_submit');
+                    }
+                    
                     document.dispatchEvent(
                         new CustomEvent("modal:open", {
                             detail: { modalId: "success-modal" },

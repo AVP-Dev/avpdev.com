@@ -161,28 +161,50 @@ const xDefaultUrl = new URL('/', siteBase).href;
 
     {GTAG_ID && (
         <>
-            {/* Google Analytics - deferred loading to improve performance and prevent layout thrashing */}
+            {/* Google Analytics & Yandex.Metrika - deferred loading to improve performance and prevent layout thrashing */}
             <script define:vars={{ GTAG_ID }}>
-              const loadGtag = () => {
-                if (window.gtagLoaded) return;
-                window.gtagLoaded = true;
+              const loadAnalytics = () => {
+                if (window.analyticsLoaded) return;
+                window.analyticsLoaded = true;
                 
-                const script = document.createElement('script');
-                script.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
-                script.async = true;
-                document.head.appendChild(script);
+                // Google Analytics
+                const scriptGA = document.createElement('script');
+                scriptGA.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
+                scriptGA.async = true;
+                document.head.appendChild(scriptGA);
 
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 gtag('config', GTAG_ID, { 'send_page_view': false });
+
+                // Yandex.Metrika
+                const ymId = 107147089;
+                (function(m,e,t,r,i,k,a){
+                    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                    m[i].l=1*new Date();
+                    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+                })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id='+ymId, 'ym');
+
+                ym(ymId, 'init', {
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    ecommerce:"dataLayer", 
+                    referrer: document.referrer, 
+                    url: location.href,
+                    ssr:true
+                });
               };
 
               // Load after a delay or on user interaction
-              setTimeout(loadGtag, 3500);
+              setTimeout(loadAnalytics, 3500);
               const interactionEvents = ['scroll', 'click', 'mousemove', 'touchstart'];
-              interactionEvents.forEach(e => window.addEventListener(e, loadGtag, { once: true, passive: true }));
+              interactionEvents.forEach(e => window.addEventListener(e, loadAnalytics, { once: true, passive: true }));
             </script>
+            <noscript><div><img src="https://mc.yandex.ru/watch/107147089" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         </>
     )}
 
@@ -384,7 +406,7 @@ const xDefaultUrl = new URL('/', siteBase).href;
     <Footer />
 
     <!-- Floating Action Button (FAB) -->
-    <a href="https://t.me/AVP_Dev" target="_blank" rel="noopener noreferrer" class="fab-contact" aria-label="Contact Telegram">
+    <a href="https://t.me/AVP_Dev" target="_blank" rel="noopener noreferrer" class="fab-contact" aria-label="Contact Telegram" onclick="if(window.gtag) window.gtag('event', 'click_telegram'); if(window.ym) window.ym(107147089, 'reachGoal', 'click_telegram');">
       <i class="fa-brands fa-telegram-plane"></i>
     </a>
     <!-- Lightbox Modal -->
