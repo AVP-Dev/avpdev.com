@@ -7,7 +7,7 @@ servicesKey: 'case_nyxauto_services'
 year: 2025
 featured: false
 category: 'crm-erp'
-stack: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'PostgreSQL']
+stack: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Redis', 'Tailwind']
 publishDate: 2025-09-10
 heroImage: '../../../assets/images/projects/nyx-auto/hero.webp'
 heroImageAlt: 'NYX OS Auto - CRM for Auto Repair Shops'
@@ -38,12 +38,18 @@ content:
     - icon: 'fab fa-js-square'
       title: 'TypeScript'
       color: '#3178C6'
-    - icon: 'fab fa-css3-alt'
-      title: 'Tailwind'
-      color: '#06B6D4'
     - icon: 'fas fa-database'
       title: 'PostgreSQL'
       color: '#4169E1'
+    - icon: 'fas fa-layer-group'
+      title: 'Drizzle ORM'
+      color: '#C5F74F'
+    - icon: 'fas fa-bolt'
+      title: 'Redis'
+      color: '#DC382D'
+    - icon: 'fab fa-css3-alt'
+      title: 'Tailwind'
+      color: '#06B6D4'
   deployment:
     titleKey: 'case_deployment_title'
     pKey: 'case_nyxauto_deployment_text'
