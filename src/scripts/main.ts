@@ -62,6 +62,16 @@ function initializePage() {
         burger.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
         mobileOverlay.addEventListener('click', toggleMenu);
 
+        // --- MOBILE ACCORDION ---
+        const accordionTrigger = mobileNav.querySelector('.mobile-accordion-trigger');
+        if (accordionTrigger) {
+            accordionTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isActive = accordionTrigger.classList.toggle('active');
+                accordionTrigger.setAttribute('aria-expanded', isActive.toString());
+            });
+        }
+
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 if (mobileNav.classList.contains('open')) toggleMenu();
@@ -190,6 +200,60 @@ function initializePage() {
             }
         });
     });
+    // --- LIGHTBOX ---
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    if (lightbox && lightboxImg && lightboxClose) {
+        const openLightbox = (src: string, captionText: string) => {
+            lightbox.classList.add('loading');
+            lightboxImg.style.opacity = '0';
+
+            lightboxImg.onload = () => {
+                lightbox.classList.remove('loading');
+                lightboxImg.style.opacity = '1';
+            };
+
+            lightboxImg.src = src;
+            if (lightboxCaption) {
+                lightboxCaption.innerHTML = captionText;
+            }
+            lightbox.classList.add('visible');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+        };
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('visible');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+            setTimeout(() => { lightboxImg.src = ''; }, 300);
+        };
+
+        const triggers = document.querySelectorAll('.lightbox-trigger');
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const img = trigger as HTMLImageElement;
+                const src = trigger.getAttribute('data-lightbox') || img.src;
+                const figure = trigger.closest('figure');
+                const caption = figure ? figure.querySelector('figcaption')?.innerHTML : '';
+                openLightbox(src, caption || '');
+            });
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('visible')) {
+                closeLightbox();
+            }
+        });
+    }
 }
 
 document.addEventListener("astro:page-load", initializePage);

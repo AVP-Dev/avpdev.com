@@ -141,11 +141,8 @@ const projectSchema = {
         </ul>
 
         <h2 set:html={t("case_tech")} />
-        <div class="tech-stack" style="margin-top: 1rem; margin-bottom: 2rem;">
-            <div
-                class="icons"
-                style="gap: 2rem; font-size: 3rem; justify-content: center;"
-            >
+        <div class="tech-stack">
+            <div class="icons">
                 {
                     content.techStack.map((tech) => (
                         <i
@@ -177,6 +174,8 @@ const projectSchema = {
                                             item.captionKey as TranslationKey,
                                         )}
                                         loading="lazy"
+                                        class="lightbox-trigger"
+                                        data-lightbox={item.img.src}
                                     />
                                     <figcaption
                                         set:html={t(

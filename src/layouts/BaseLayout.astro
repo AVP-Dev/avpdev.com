@@ -387,6 +387,16 @@ const xDefaultUrl = new URL('/', siteBase).href;
     <a href="https://t.me/AVP_Dev" target="_blank" rel="noopener noreferrer" class="fab-contact" aria-label="Contact Telegram">
       <i class="fa-brands fa-telegram-plane"></i>
     </a>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog">
+        <button class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+        <div class="lightbox-loader"></div>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Full size image" />
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
     <ScrollToTop />
     <script src="/src/scripts/main.ts"></script>
 </body>

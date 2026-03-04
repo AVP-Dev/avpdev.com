@@ -63,7 +63,8 @@ const homePath = `/${lang}/`;
         <Image
             src={heroImage}
             alt={heroImageAlt}
-            class="main-project-image"
+            class="main-project-image lightbox-trigger"
+            data-lightbox={heroImage.src}
             loading="eager"
             fetchpriority="high"
             widths={[400, 800, 1200, 1600]}
