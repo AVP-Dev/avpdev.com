@@ -161,73 +161,52 @@ const xDefaultUrl = new URL('/', siteBase).href;
 
     {GTAG_ID && (
         <>
-            {/* Analytics Initialization */}
+            {/* Google Analytics - deferred loading */}
             <script define:vars={{ GTAG_ID }}>
-              // GA4
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', GTAG_ID, { 'send_page_view': false });
+              const loadAnalytics = () => {
+                if (window.analyticsInjected) return;
+                window.analyticsInjected = true;
 
-              const initAnalytics = () => {
-                  if (window.analyticsInjected) return;
-                  window.analyticsInjected = true;
+                const scriptGA = document.createElement('script');
+                scriptGA.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
+                scriptGA.async = true;
+                document.head.appendChild(scriptGA);
 
-                  // Load GA4
-                  const scriptGA = document.createElement('script');
-                  scriptGA.src = `https://www.googletagmanager.com/gtag/js?id=${GTAG_ID}`;
-                  scriptGA.async = true;
-                  document.head.appendChild(scriptGA);
-
-                  // Load Yandex.Metrika
-                  const scriptYM = document.createElement('script');
-                  scriptYM.src = 'https://mc.yandex.ru/metrika/tag.js';
-                  scriptYM.async = true;
-                  document.head.appendChild(scriptYM);
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', GTAG_ID, { 'send_page_view': false });
               };
-
-              // Yandex.Metrika Counter Initialization
-              const ymId = 107147089;
-              (function(m,e,t,r,i,k,a){
-                  m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                  m[i].l=1*new Date();
-              })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
-
-              const initYm = () => {
-                  ym(ymId, 'init', {
-                      clickmap:true,
-                      trackLinks:true,
-                      accurateTrackBounce:true,
-                      webvisor:true,
-                      ecommerce:"dataLayer", 
-                      referrer: document.referrer, 
-                      url: location.href,
-                      ssr:true
-                  });
-              };
-              
-              // Call ym init immediately
-              initYm();
-              
-              // Fix for Astro View Transitions (re-init on page change)
-              document.addEventListener('astro:page-load', () => {
-                  if(window.ym) {
-                      ym(ymId, 'hit', location.href, {
-                          title: document.title,
-                          referer: document.referrer
-                      });
-                  }
-              });
-
-              // Delayed inject of heavy scripts
-              setTimeout(initAnalytics, 3000);
+              setTimeout(loadAnalytics, 3000);
               ['scroll', 'click', 'mousemove', 'touchstart'].forEach(e => 
-                  window.addEventListener(e, initAnalytics, { once: true, passive: true })
+                  window.addEventListener(e, loadAnalytics, { once: true, passive: true })
               );
             </script>
-            <noscript><div><img src="https://mc.yandex.ru/watch/107147089" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         </>
     )}
+
+    {/* Yandex.Metrika counter - RAW AND UNMODIFIED */}
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
+
+        ym(107147089, 'init', {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            ecommerce:"dataLayer",
+            referrer: document.referrer, 
+            url: location.href,
+            ssr:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/107147089" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    {/* /Yandex.Metrika counter */}
 
     {(!geoCitySlug || geoHasRU) && <link rel="alternate" hreflang="ru" href={ruUrl} />}
     {(!geoCitySlug || geoHasEN) && <link rel="alternate" hreflang="en" href={enUrl} />}
