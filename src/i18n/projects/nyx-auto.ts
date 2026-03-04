@@ -12,10 +12,10 @@ export const nyxAutoTranslations = {
         case_nyxauto_feat_3: '<strong>Spare Parts Inventory:</strong> Учет остатков запчастей на складе в реальном времени с автоматическими уведомлениями о дозаказе.',
         case_case_nyxauto_feat_4: '<strong>Mechanics Workload:</strong> Планировщик загрузки сотрудников: равномерное распределение заказ-нарядов без простоев.',
         case_nyxauto_deployment_text: 'Приложение развернуто на базе Docker с использованием PostgreSQL для хранения данных клиентов и истории ремонтов. Архитектура готова к масштабированию на сеть автосервисов с единой панелью управления для владельца.',
-        gallery_caption_nyxauto_hero: 'Главная: Обзор текущих заказ-нарядов и статусов',
-        gallery_caption_nyxauto_dashboard: 'Дашборд: Аналитика загрузки СТО и выручки',
-        gallery_caption_nyxauto_service: 'Обслуживание: Карточка автомобиля и история ремонтов',
-        gallery_caption_nyxauto_clients: 'Клиенты: База владельцев и их транспортных средств',
+        gallery_caption_nyxauto_hero: 'Дашборд: Загруженность СТО, аналитика и отчеты',
+        gallery_caption_nyxauto_dashboard: 'Заказы: Управление заказ-нарядами и статусами',
+        gallery_caption_nyxauto_service: 'Клиенты: База владельцев и их транспортных средств',
+        gallery_caption_nyxauto_clients: 'Склад и Услуги: Номенклатура запчастей и сервисные операции',
     },
     en: {
         case_nyxauto_title: 'Case Study: NYX OS Auto Service CRM',
@@ -30,9 +30,9 @@ export const nyxAutoTranslations = {
         case_nyxauto_feat_3: '<strong>Spare Parts Inventory:</strong> Real-time warehouse tracking with automated reorder alerts when stock runs low.',
         case_case_nyxauto_feat_4: '<strong>Mechanics Workload:</strong> Employee load planner for even distribution of work orders, preventing downtime and burnout.',
         case_nyxauto_deployment_text: 'Deployed on Docker with PostgreSQL powering client data and repair history storage. The architecture is blueprint-ready for multi-location scaling with a centralized owner dashboard across a chain of auto service centers.',
-        gallery_caption_nyxauto_hero: 'Overview: Active work orders and real-time statuses',
-        gallery_caption_nyxauto_dashboard: 'Dashboard: Service center analytics and revenue tracking',
-        gallery_caption_nyxauto_service: 'Service: Vehicle card and full repair history',
-        gallery_caption_nyxauto_clients: 'Clients: Owner database and vehicle registry',
+        gallery_caption_nyxauto_hero: 'Dashboard: Workload analytics, metrics, and reports',
+        gallery_caption_nyxauto_dashboard: 'Orders: Work order management and status tracking',
+        gallery_caption_nyxauto_service: 'Clients: Owner database and vehicle registry',
+        gallery_caption_nyxauto_clients: 'Warehouse & Services: Parts catalog and service operations',
     }
 } as const;

@@ -13,10 +13,10 @@ export const nyxOsTranslations = {
         case_case_nyxos_feat_4: '<strong>Shop-Floor PWA:</strong> Упрощенный адаптивный интерфейс для планшетов в цеху, рассчитанный на касания в рабочих перчатках.',
         case_nyxos_deployment_text: 'Созданная архитектура поставляется в трех сборках (MVP, Business, Enterprise). Движок "Nyx OS Policy Engine" позволяет гибко масштабировать правила доверия между цехом и складом, обеспечивая строгий контроль или доверчивую микро-коррекцию на выбор руководства.',
         gallery_caption_nyxos_hero: 'Дашборд Директора: Полный контроль и финансовая прозрачность',
-        gallery_caption_nyxos_dashboard: 'Аналитика в реальном времени и отслеживание мощностей',
-        gallery_caption_nyxos_roles: 'Ролевая модель: Разделение интерфейсов для Офиса и Цеха',
-        gallery_caption_nyxos_storno: 'Механизм Сторно: Корректировка выработки без удаления истории',
-        gallery_caption_nyxos_pwa: 'PWA Цеха: Крупный интерфейс для планшетов на производстве',
+        gallery_caption_nyxos_dashboard: 'CRM-Заказы: Управление заказ-нарядами и статусами',
+        gallery_caption_nyxos_roles: 'Корпоративная почта: Внутренняя система уведомлений',
+        gallery_caption_nyxos_storno: 'Склад: Учет сырья и готовой продукции',
+        gallery_caption_nyxos_pwa: 'Настройки: Гибкая конфигурация ролей и политик',
     },
     en: {
         case_nyxos_title: 'Case Study: NYX OS RTI Industrial ERP/MES',
@@ -32,9 +32,9 @@ export const nyxOsTranslations = {
         case_case_nyxos_feat_4: '<strong>Shop-Floor PWA:</strong> An oversized, adaptive interface deployed to inexpensive factory floor tablets, optimized for gloved interactions.',
         case_nyxos_deployment_text: 'The architecture is packaged across tier-based deliverables (MVP, Business, Enterprise). Supported by the Nyx OS Policy Engine, trust-rules can scale dynamically between the shop floor and warehouse, allowing leadership to toggle between strict authorization and trusting micro-corrections.',
         gallery_caption_nyxos_hero: 'Executive Dashboard: Macroscopic control and fiscal fidelity',
-        gallery_caption_nyxos_dashboard: 'Real-time analytics and mechanical capacity tracking',
-        gallery_caption_nyxos_roles: 'Role Modeling: Divergent UI experiences for Office and Floor personnel',
-        gallery_caption_nyxos_storno: 'Storno Protocol: Production correction protecting historical integrity',
-        gallery_caption_nyxos_pwa: 'Shop Floor PWA: Robust tablet integration for industrial environments',
+        gallery_caption_nyxos_dashboard: 'CRM Orders: Work order management and status tracking',
+        gallery_caption_nyxos_roles: 'Corporate Mail: Internal notification and communication system',
+        gallery_caption_nyxos_storno: 'Warehouse: Raw materials and finished goods inventory',
+        gallery_caption_nyxos_pwa: 'Settings: Flexible role and policy configuration panel',
     }
 } as const;

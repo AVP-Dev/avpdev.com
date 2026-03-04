@@ -7,7 +7,7 @@ servicesKey: 'case_nyxos_services'
 year: 2026
 featured: true
 category: 'crm-erp'
-stack: ['Next.js', 'React', 'TypeScript', 'Bun', 'PWA']
+stack: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Redis', 'Bun', 'PWA']
 publishDate: 2026-02-17
 heroImage: '../../../assets/images/projects/nyx-os/hero.webp'
 heroImageAlt: 'NYX OS - Industrial ERP/MES System'
@@ -38,6 +38,15 @@ content:
     - icon: 'fab fa-js-square'
       title: 'TypeScript'
       color: '#3178C6'
+    - icon: 'fas fa-database'
+      title: 'PostgreSQL'
+      color: '#4169E1'
+    - icon: 'fas fa-layer-group'
+      title: 'Drizzle ORM'
+      color: '#C5F74F'
+    - icon: 'fas fa-bolt'
+      title: 'Redis'
+      color: '#DC382D'
     - icon: 'fas fa-mobile-alt'
       title: 'PWA'
       color: '#8A2BE2'
