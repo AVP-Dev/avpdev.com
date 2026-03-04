@@ -16,7 +16,7 @@ export const sentralixTranslations = {
         gallery_caption_sentralix_hero: 'Визуальная концепция: Баланс между эстетикой ИИ и производительностью',
         gallery_caption_sentralix_about: 'Детализация: Использование прозрачности и теней для иерархии контента',
         gallery_caption_sentralix_features: 'Архитектура возможностей: Модульная сетка для легкого добавления новых функций',
-        gallery_caption_sentralix_faq: 'Острова интерактива: FAQ-секция с мгновенным откликом на базе React 19',
+        gallery_caption_sentralix_faq: 'Острова интерактива: FAQ-секция на React 19',
         gallery_caption_sentralix_contact: 'Точка конверсии: Бесшовная форма захвата лидов с валидацией данных',
     },
     en: {
@@ -36,7 +36,7 @@ export const sentralixTranslations = {
         gallery_caption_sentralix_hero: 'Visual Concept: A balance between AI aesthetics and technical performance',
         gallery_caption_sentralix_about: 'Detailing: Leveraging transparency and shadows for clear content hierarchy',
         gallery_caption_sentralix_features: 'Scalability Grid: A modular layout designed for effortless future feature addition',
-        gallery_caption_sentralix_faq: 'Interactive Islands: FAQ section with instant response powered by React 19',
+        gallery_caption_sentralix_faq: 'Interactive Islands: FAQ section on React 19',
         gallery_caption_sentralix_contact: 'Conversion Point: Seamless lead capture form with real-time data validation',
     }
- } as const;
+} as const;

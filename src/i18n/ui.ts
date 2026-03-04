@@ -6,6 +6,15 @@ import { printing3dTranslations } from './projects/3d-printing';
 import { mekohausTranslations } from './projects/mekohaus';
 import { sentralixTranslations } from './projects/sentralix';
 import { urbanSpotTranslations } from './projects/urban-spot';
+import { ralfRingerTranslations } from './projects/ralf-ringer';
+import { auraHomeTranslations } from './projects/aura-home';
+import { fluxDeskTranslations } from './projects/flux-desk';
+import { nyxOsTranslations } from './projects/nyx-os';
+import { nyxAutoTranslations } from './projects/nyx-auto';
+import { lederWerkTranslations } from './projects/leder-werk';
+import { pureTrustTranslations } from './projects/pure-trust';
+import { rozhkovaTranslations } from './projects/rozhkova';
+import { techmetalTranslations } from './projects/techmetal';
 
 export const ui = {
     ru: {
@@ -215,6 +224,15 @@ export const ui = {
         ...mekohausTranslations.ru,
         ...sentralixTranslations.ru,
         ...urbanSpotTranslations.ru,
+        ...ralfRingerTranslations.ru,
+        ...auraHomeTranslations.ru,
+        ...fluxDeskTranslations.ru,
+        ...nyxOsTranslations.ru,
+        ...nyxAutoTranslations.ru,
+        ...lederWerkTranslations.ru,
+        ...pureTrustTranslations.ru,
+        ...rozhkovaTranslations.ru,
+        ...techmetalTranslations.ru,
     },
     en: {
         // Geo Links
@@ -424,5 +442,14 @@ export const ui = {
         ...mekohausTranslations.en,
         ...sentralixTranslations.en,
         ...urbanSpotTranslations.en,
+        ...ralfRingerTranslations.en,
+        ...auraHomeTranslations.en,
+        ...fluxDeskTranslations.en,
+        ...nyxOsTranslations.en,
+        ...nyxAutoTranslations.en,
+        ...lederWerkTranslations.en,
+        ...pureTrustTranslations.en,
+        ...rozhkovaTranslations.en,
+        ...techmetalTranslations.en,
     }
 } as const;
