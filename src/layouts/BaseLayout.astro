@@ -211,6 +211,22 @@ const xDefaultUrl = new URL('/', siteBase).href;
         </>
     )}
 
+    {/* OneSignal Push Notifications SDK */}
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script define:vars={{ ONESIGNAL_APP_ID: import.meta.env.PUBLIC_ONESIGNAL_APP_ID }}>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: ONESIGNAL_APP_ID || "PASTE_YOUR_ONESIGNAL_APP_ID_HERE",
+          safari_web_id: "web.onesignal.auto.10b8f047-9750-48e7-9191-28564a938883", // Optional: replace with your own
+          notifyButton: {
+            enable: true,
+          },
+          allowLocalhostAsSecureOrigin: true,
+        });
+      });
+    </script>
+
     {(!geoCitySlug || geoHasRU) && <link rel="alternate" hreflang="ru" href={ruUrl} />}
     {(!geoCitySlug || geoHasEN) && <link rel="alternate" hreflang="en" href={enUrl} />}
     {(!geoCitySlug || geoHasRU) && <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />}
@@ -283,18 +299,6 @@ const xDefaultUrl = new URL('/', siteBase).href;
     </script>
     </script>
 
-    {/* Уничтожение старых Service Workers, которые ломают редиректы и кешируют старые страницы */}
-    <script is:inline>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for(let registration of registrations) {
-                    registration.unregister();
-                }
-            }).catch(function(err) {
-                console.log('Service Worker unregistration failed: ', err);
-            });
-        }
-    </script>
 
 
     <ClientRouter />
