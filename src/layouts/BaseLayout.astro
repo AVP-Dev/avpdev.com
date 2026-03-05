@@ -218,9 +218,31 @@ const xDefaultUrl = new URL('/', siteBase).href;
       OneSignal.push(function() {
         OneSignal.init({
           appId: ONESIGNAL_APP_ID || "PASTE_YOUR_ONESIGNAL_APP_ID_HERE",
-          safari_web_id: "web.onesignal.auto.10b8f047-9750-48e7-9191-28564a938883", // Optional: replace with your own
+          safari_web_id: "web.onesignal.auto.10b8f047-9750-48e7-9191-28564a938883",
           notifyButton: {
             enable: true,
+            position: 'bottom-right',
+            size: 'medium',
+            theme: 'default',
+          },
+          promptOptions: {
+            slidedown: {
+              prompts: [
+                {
+                  type: "push",
+                  autoPrompt: true,
+                  text: {
+                    actionMessage: "Хотите получать уведомления о новых кейсах и статьях?",
+                    acceptButton: "Подписаться",
+                    cancelButton: "Позже"
+                  },
+                  delay: {
+                    pageViews: 1,
+                    timeDelay: 5
+                  }
+                }
+              ]
+            }
           },
           allowLocalhostAsSecureOrigin: true,
         });
