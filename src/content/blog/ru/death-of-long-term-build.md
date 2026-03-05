@@ -1,7 +1,7 @@
 ---
 title: "Смерть долгостроя: Как AI стал моей командой разработки"
 description: "Как переход от одиночного разработчика к дирижеру нейросетей помог оживить заброшенный проект ERP-системы."
-pubDate: 2024-05-20
+pubDate: 2026-03-06
 heroImage: "../../../assets/images/blog/ai-orchestra.webp"
 tags: ["AI", "ERP", "NestJS", "Next.js", "Drizzle ORM"]
 ---

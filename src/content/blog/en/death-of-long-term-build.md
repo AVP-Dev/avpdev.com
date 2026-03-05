@@ -1,7 +1,7 @@
 ---
 title: "The Death of Vaporware: How AI Became My Development Team"
 description: "How transitioning from a solo developer to an AI neural network conductor helped revive an abandoned ERP system project."
-pubDate: 2024-05-20
+pubDate: 2026-03-06
 heroImage: "../../../assets/images/blog/ai-orchestra.webp"
 tags: ["AI", "ERP", "NestJS", "Next.js", "Drizzle ORM"]
 ---
