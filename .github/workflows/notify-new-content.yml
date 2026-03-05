@@ -1,0 +1,61 @@
+name: Notify New Content
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/content/blog/**'
+      - 'src/content/projects/**'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get changed files
+        id: files
+        run: |
+          # Find new markdown files in the specific directories
+          MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E 'src/content/(blog|projects)/.*\.md' | xargs)
+          echo "files=$MODIFIED_FILES" >> $GITHUB_OUTPUT
+
+      - name: Send Push Notification
+        if: steps.files.outputs.files != ''
+        run: |
+          FILES="${{ steps.files.outputs.files }}"
+          for FILE in $FILES; do
+            # Extract title from frontmatter (simple grep for 'title:')
+            TITLE=$(grep -m 1 '^title:' "$FILE" | sed 's/title: //;s/"//g;s/ //')
+            if [ -z "$TITLE" ]; then
+              TITLE="Новое в блоге / кейсах!"
+            fi
+            
+            # Extract slug for URL (filename without extension)
+            SLUG=$(basename "$FILE" .md)
+            
+            # Determine URL based on directory
+            if [[ "$FILE" == *"blog"* ]]; then
+              URL="https://avpdev.com/ru/blog/$SLUG"
+            else
+              URL="https://avpdev.com/ru/project/$SLUG"
+            fi
+
+            echo "Sending notification for $TITLE at $URL"
+
+            curl --request POST \
+              --url https://onesignal.com/api/v1/notifications \
+              --header 'Authorization: Basic ${{ secrets.ONESIGNAL_REST_API_KEY }}' \
+              --header 'accept: application/json' \
+              --header 'content-type: application/json' \
+              --data "{
+                \"app_id\": \"${{ secrets.ONESIGNAL_APP_ID }}\",
+                \"contents\": {\"en\": \"New content published: $TITLE\", \"ru\": \"Опубликован новый материал: $TITLE\"},
+                \"headings\": {\"en\": \"AVPdev Update\", \"ru\": \"Обновление AVPdev\"},
+                \"url\": \"$URL\"
+              }"
+          done
