@@ -37,6 +37,7 @@
     "remark-heading-id": "^1.0.1",
     "sanitize-html": "^2.17.1",
     "sharp": "^0.34.5",
+    "web-push": "^3.6.7",
     "zod": "^4.3.6"
   },
   "devDependencies": {
