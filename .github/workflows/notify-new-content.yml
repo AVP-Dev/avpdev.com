@@ -1,12 +1,12 @@
-name: Notify New Content
+name: Notify New Content (Native)
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'src/content/blog/**'
-      - 'src/content/projects/**'
+      - 'src/content/blog/**/*.md'
+      - 'src/content/projects/**/*.md'
 
 jobs:
   notify:
@@ -17,45 +17,32 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Get changed files
-        id: files
-        run: |
-          # Find new markdown files in the specific directories
-          MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E 'src/content/(blog|projects)/.*\.md' | xargs)
-          echo "files=$MODIFIED_FILES" >> $GITHUB_OUTPUT
-
       - name: Send Push Notification
-        if: steps.files.outputs.files != ''
         run: |
-          FILES="${{ steps.files.outputs.files }}"
-          for FILE in $FILES; do
-            # Extract title from frontmatter (simple grep for 'title:')
-            TITLE=$(grep -m 1 '^title:' "$FILE" | sed 's/title: //;s/"//g;s/ //')
-            if [ -z "$TITLE" ]; then
-              TITLE="Новое в блоге / кейсах!"
-            fi
+          NEW_FILES=$(git diff --name-only HEAD^ HEAD | grep -E 'src/content/(blog|projects)/.*\.md' || true)
+          if [ -z "$NEW_FILES" ]; then
+            echo "No new content files found."
+            exit 0
+          fi
+
+          for FILE in $NEW_FILES; do
+            TITLE=$(grep '^title:' "$FILE" | head -1 | sed 's/title: //;s/"//g;s/ //')
+            FILENAME=$(basename "$FILE" .md)
+            FOLDER=$(echo "$FILE" | cut -d'/' -f3)
+            LANG=$(echo "$FILE" | cut -d'/' -f4)
+            URL="https://avpdev.com/$LANG/$FOLDER/$FILENAME"
             
-            # Extract slug for URL (filename without extension)
-            SLUG=$(basename "$FILE" .md)
-            
-            # Determine URL based on directory
-            if [[ "$FILE" == *"blog"* ]]; then
-              URL="https://avpdev.com/ru/blog/$SLUG"
+            # RU/EN localization for push
+            if [ "$LANG" == "ru" ]; then
+                BODY="Опубликован новый кейс или статья: $TITLE"
+                NOTIF_TITLE="AVPdev - Новое"
             else
-              URL="https://avpdev.com/ru/project/$SLUG"
+                BODY="New case or article published: $TITLE"
+                NOTIF_TITLE="AVPdev - Updates"
             fi
 
-            echo "Sending notification for $TITLE at $URL"
-
-            curl --request POST \
-              --url https://onesignal.com/api/v1/notifications \
-              --header 'Authorization: Basic ${{ secrets.ONESIGNAL_REST_API_KEY }}' \
-              --header 'accept: application/json' \
-              --header 'content-type: application/json' \
-              --data "{
-                \"app_id\": \"${{ secrets.ONESIGNAL_APP_ID }}\",
-                \"contents\": {\"en\": \"New content published: $TITLE\", \"ru\": \"Опубликован новый материал: $TITLE\"},
-                \"headings\": {\"en\": \"AVPdev Update\", \"ru\": \"Обновление AVPdev\"},
-                \"url\": \"$URL\"
-              }"
+            curl -X POST "https://avpdev.com/api/push/send" \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer ${{ secrets.PUSH_SECRET }}" \
+              -d "{\"title\": \"$NOTIF_TITLE\", \"body\": \"$BODY\", \"url\": \"$URL\"}"
           done
