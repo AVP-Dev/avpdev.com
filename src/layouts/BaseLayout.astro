@@ -211,13 +211,12 @@ const xDefaultUrl = new URL('/', siteBase).href;
         </>
     )}
 
-    {/* OneSignal Push Notifications SDK */}
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script define:vars={{ ONESIGNAL_APP_ID: import.meta.env.PUBLIC_ONESIGNAL_APP_ID }}>
-      window.OneSignal = window.OneSignal || [];
-      OneSignal.push(function() {
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(function(OneSignal) {
         OneSignal.init({
-          appId: ONESIGNAL_APP_ID || "PASTE_YOUR_ONESIGNAL_APP_ID_HERE",
+          appId: ONESIGNAL_APP_ID || "41f312d7-7d44-4ed0-a813-5d96fbfa4deb",
           safari_web_id: "web.onesignal.auto.10b8f047-9750-48e7-9191-28564a938883",
           notifyButton: {
             enable: true,
