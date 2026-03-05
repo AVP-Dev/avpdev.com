@@ -3068,7 +3068,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Алматы?",
-          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 232000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 579000 ₸."
+          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 231000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 578000 ₸."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -3108,7 +3108,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Almaty?",
-          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 232000 ₸ for Next.js websites. Custom web applications start from 579000 ₸."
+          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 231000 ₸ for Next.js websites. Custom web applications start from 578000 ₸."
         },
         {
           "q": "What is your project timeline?",
@@ -3150,7 +3150,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Астане?",
-          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 232000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 579000 ₸."
+          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 231000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 578000 ₸."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -3190,7 +3190,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Astana?",
-          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 232000 ₸ for Next.js websites. Custom web applications start from 579000 ₸."
+          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 231000 ₸ for Next.js websites. Custom web applications start from 578000 ₸."
         },
         {
           "q": "What is your project timeline?",
@@ -3232,7 +3232,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Караганде?",
-          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 232000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 579000 ₸."
+          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 231000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 578000 ₸."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -3272,7 +3272,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Karaganda?",
-          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 232000 ₸ for Next.js websites. Custom web applications start from 579000 ₸."
+          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 231000 ₸ for Next.js websites. Custom web applications start from 578000 ₸."
         },
         {
           "q": "What is your project timeline?",
@@ -3314,7 +3314,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "Сколько стоит разработка сайта в Шымкенте?",
-          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 232000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 579000 ₸."
+          "a": "Цены начинаются от 193000 ₸ за лэндинг на Astro и от 231000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 578000 ₸."
         },
         {
           "q": "Как быстро вы запускаете проекты?",
@@ -3354,7 +3354,7 @@ export const geoContent: Record<string, any> = {
       "faq": [
         {
           "q": "What is the cost of web development in Shymkent?",
-          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 232000 ₸ for Next.js websites. Custom web applications start from 579000 ₸."
+          "a": "Pricing starts from 193000 ₸ for Astro landing pages and 231000 ₸ for Next.js websites. Custom web applications start from 578000 ₸."
         },
         {
           "q": "What is your project timeline?",
