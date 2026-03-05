@@ -212,9 +212,12 @@ const xDefaultUrl = new URL('/', siteBase).href;
     )}
 
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script define:vars={{ ONESIGNAL_APP_ID: import.meta.env.PUBLIC_ONESIGNAL_APP_ID }}>
+    <script define:vars={{ ONESIGNAL_APP_ID: import.meta.env.PUBLIC_ONESIGNAL_APP_ID, lang }}>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(function(OneSignal) {
+        
+        const isRu = lang === 'ru';
+        
         OneSignal.init({
           appId: ONESIGNAL_APP_ID || "41f312d7-7d44-4ed0-a813-5d96fbfa4deb",
           safari_web_id: "web.onesignal.auto.10b8f047-9750-48e7-9191-28564a938883",
@@ -223,6 +226,20 @@ const xDefaultUrl = new URL('/', siteBase).href;
             position: 'bottom-right',
             size: 'medium',
             theme: 'default',
+            colors: {
+              'circle.background': '#11111A',
+              'circle.foreground': '#FFB800',
+              'badge.background': '#FFB800',
+              'badge.foreground': '#11111A',
+              'pulse.color': '#FFB800',
+            },
+            text: {
+              'tip.state.unsubscribed': isRu ? 'Подписаться на уведомления' : 'Subscribe to notifications',
+              'tip.state.subscribed': isRu ? 'Вы подписаны' : "You're subscribed",
+              'message.prenotify': isRu ? 'Нажмите, чтобы подписаться на новости' : 'Click to subscribe to news',
+              'action.subscribe': isRu ? 'ПОДПИСАТЬСЯ' : 'SUBSCRIBE',
+              'action.unsubscribe': isRu ? 'ОТПИСАТЬСЯ' : 'UNSUBSCRIBE'
+            }
           },
           promptOptions: {
             slidedown: {
@@ -231,9 +248,11 @@ const xDefaultUrl = new URL('/', siteBase).href;
                   type: "push",
                   autoPrompt: true,
                   text: {
-                    actionMessage: "Хотите получать уведомления о новых кейсах и статьях?",
-                    acceptButton: "Подписаться",
-                    cancelButton: "Позже"
+                    actionMessage: isRu 
+                      ? "Хотите получать уведомления о новых кейсах и статьях?" 
+                      : "Would you like to receive notifications about new cases and articles?",
+                    acceptButton: isRu ? "Подписаться" : "Subscribe",
+                    cancelButton: isRu ? "Позже" : "Later"
                   },
                   delay: {
                     pageViews: 1,
@@ -247,6 +266,38 @@ const xDefaultUrl = new URL('/', siteBase).href;
         });
       });
     </script>
+
+    <style is:global>
+        /* OneSignal Slidedown Premium Styling */
+        #onesignal-slidedown-container #onesignal-slidedown-dialog {
+            background: #11111A !important;
+            border: 1px solid rgba(255, 184, 0, 0.2) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
+            border-radius: 16px !important;
+        }
+        #onesignal-slidedown-container #onesignal-slidedown-dialog #onesignal-slidedown-body {
+            color: #FFFFFF !important;
+            font-family: 'Plus Jakarta Sans Variable', sans-serif !important;
+        }
+        #onesignal-slidedown-container .onesignal-slidedown-footer .primary.button {
+            background-color: #FFB800 !important;
+            color: #11111A !important;
+            border-radius: 8px !important;
+            font-weight: 700 !important;
+            transition: transform 0.2s ease !important;
+        }
+        #onesignal-slidedown-container .onesignal-slidedown-footer .primary.button:hover {
+            transform: translateY(-2px) !important;
+        }
+        #onesignal-slidedown-container .onesignal-slidedown-footer .secondary.button {
+            color: #94949E !important;
+            font-weight: 600 !important;
+        }
+        /* Custom Bell pulse effect */
+        .onesignal-bell-launcher-pulse {
+            border: 3px solid #FFB800 !important;
+        }
+    </style>
 
     {(!geoCitySlug || geoHasRU) && <link rel="alternate" hreflang="ru" href={ruUrl} />}
     {(!geoCitySlug || geoHasEN) && <link rel="alternate" hreflang="en" href={enUrl} />}
