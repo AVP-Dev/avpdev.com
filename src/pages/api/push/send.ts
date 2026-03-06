@@ -3,7 +3,7 @@ import { Database } from 'bun:sqlite';
 import webpush from 'web-push';
 import path from 'path';
 
-const dbPath = path.resolve('src/data/push_subscriptions.db');
+const dbPath = path.resolve('data/push_subscriptions.db');
 const db = new Database(dbPath);
 
 webpush.setVapidDetails(

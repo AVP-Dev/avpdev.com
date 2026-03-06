@@ -508,120 +508,160 @@ const xDefaultUrl = new URL('/', siteBase).href;
     </style>
 
     <style is:global>
-        /* Custom Native Notification Prompt Styling */
+        /* Premium Native Notification Prompt Styling */
         .custom-notif-prompt {
             position: fixed;
-            top: -120%;
+            top: -150%;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
-            max-width: 450px;
-            background: rgba(17, 17, 26, 0.95);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 184, 0, 0.3);
-            border-radius: 24px;
+            max-width: 440px;
+            background: var(--primary-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(var(--accent-color-start-rgb), 0.1) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(var(--accent-color-end-rgb), 0.05) 0, transparent 50%);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
             padding: 24px;
             z-index: 10000;
-            transition: top 0.7s cubic-bezier(0.68, -0.6, 0.3, 1.6);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 184, 0, 0.1);
+            transition: top 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: var(--card-shadow);
         }
+
+        .dark-theme .custom-notif-prompt {
+            background: rgba(17, 17, 26, 0.9);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 184, 0, 0.05);
+        }
+
+        .light-theme .custom-notif-prompt {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(var(--accent-color-start-rgb), 0.2);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        }
+
         .custom-notif-prompt.active {
-            top: 32px;
+            top: 24px;
         }
+
         .prompt-content {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 20px;
         }
+
         .prompt-icon {
-            width: 56px;
-            height: 56px;
+            width: 60px;
+            height: 60px;
             background: var(--accent-gradient);
-            border-radius: 16px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 26px;
             color: #11111A;
             flex-shrink: 0;
-            animation: bell-pulse 2s infinite ease-in-out;
+            animation: bell-bounce 2s infinite ease-in-out;
+            box-shadow: 0 8px 16px rgba(var(--accent-color-start-rgb), 0.2);
         }
+
         .prompt-text h3 {
-            margin: 0 0 6px 0;
-            font-size: 1.1rem;
-            color: #FFFFFF;
+            margin: 0 0 4px 0;
+            font-size: 1.05rem;
+            color: var(--text-color);
             font-family: var(--font-heading);
+            font-weight: 800;
         }
+
         .prompt-text p {
             margin: 0;
-            font-size: 0.9rem;
-            color: #94949E;
+            font-size: 0.85rem;
+            color: var(--text-secondary-color);
             line-height: 1.5;
+            font-weight: 500;
         }
+
         .prompt-actions {
             display: flex;
             gap: 12px;
             margin-top: 20px;
             justify-content: flex-end;
         }
+
         .prompt-actions button {
             padding: 10px 24px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 800;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
         }
+
         .btn-later {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94949E;
-        }
-        .btn-later:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #FFFFFF;
-        }
-        .btn-subscribe {
-            background: #FFB800;
-            border: none;
-            color: #11111A;
-            box-shadow: 0 4px 15px rgba(255, 184, 0, 0.2);
-        }
-        .btn-subscribe:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 184, 0, 0.4);
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary-color);
         }
 
-        @keyframes bell-pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 184, 0, 0.4); }
-            50% { transform: scale(1.1) rotate(15deg); box-shadow: 0 0 20px 10px rgba(255, 184, 0, 0); }
+        .btn-later:hover {
+            color: var(--text-color);
+            border-color: var(--text-color);
+            background: rgba(var(--accent-color-start-rgb), 0.05);
+        }
+
+        .btn-subscribe {
+            background: var(--accent-gradient);
+            border: none;
+            color: #11111A;
+            box-shadow: 0 4px 15px rgba(var(--accent-color-start-rgb), 0.3);
+        }
+
+        .btn-subscribe:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(var(--accent-color-start-rgb), 0.4);
+        }
+
+        @keyframes bell-bounce {
+            0%, 100% { transform: scale(1) rotate(0); }
+            50% { transform: scale(1.1) rotate(15deg); }
         }
 
         @media (max-width: 640px) {
             .custom-notif-prompt {
-                bottom: -120%;
+                bottom: -150%;
                 top: auto;
-                transition: bottom 0.7s cubic-bezier(0.68, -0.6, 0.3, 1.6);
+                transition: bottom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+                border-radius: 28px 28px 0 0;
+                width: 100%;
+                max-width: none;
+                left: 0;
+                right: 0;
+                transform: none;
             }
+
             .custom-notif-prompt.active {
-                bottom: 32px;
+                bottom: 0;
                 top: auto;
             }
+
             .prompt-content {
                 flex-direction: column;
                 text-align: center;
-                gap: 20px;
-            }
-            .prompt-actions {
-                width: 100%;
                 gap: 16px;
             }
+
+            .prompt-actions {
+                width: 100%;
+                gap: 12px;
+            }
+
             .prompt-actions button {
                 flex: 1;
                 padding: 14px;
             }
         }
+    </style>
     </style>
 </head>
 <body>
