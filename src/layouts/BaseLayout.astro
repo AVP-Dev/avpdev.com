@@ -99,10 +99,10 @@ if (geoCitySlug) {
     ruSlug = `/uslugi/${geoCitySlug}`;
 }
 
-const siteBase = Astro.site ? Astro.site.toString() : 'https://avpdev.com';
-const ruUrl = new URL(`ru${ruSlug.endsWith('/') ? ruSlug : ruSlug + '/'}`, siteBase).href;
-const enUrl = new URL(`en${enSlug.endsWith('/') ? enSlug : enSlug + '/'}`, siteBase).href;
-const xDefaultUrl = new URL('/', siteBase).href;
+const siteBase = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://avpdev.com';
+const ruUrl = new URL(`/ru${ruSlug.endsWith('/') ? ruSlug : ruSlug + '/'}`, siteBase).href;
+const enUrl = new URL(`/en${enSlug.endsWith('/') ? enSlug : enSlug + '/'}`, siteBase).href;
+const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU) instead of redirecting root /
 ---
 <!DOCTYPE html>
 <html lang={lang}>

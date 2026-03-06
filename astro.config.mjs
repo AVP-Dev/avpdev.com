@@ -33,13 +33,25 @@ export default defineConfig({
     sitemap({
       // Фильтрация: убираем корень и RU-города без русского контента (redirect-only)
       filter: (page) => {
-        // Исключить корневой URL (делает redirect)
-        if (page === `${site}/`) return false;
+        // Исключить корневой URL (делает 301 redirect в index.astro)
+        if (page === `${site}/` || page === `${site}`) return false;
 
-        // Исключить RU-страницы городов, у которых нет русского контента
-        for (const slug of enOnlyCitySlugs) {
-          if (page === `${site}/ru/uslugi/${slug}/`) return false;
+        // Исключить любые страницы, которых нет в контенте для конкретного языка
+        const isRuGeo = page.includes('/ru/uslugi/');
+        const isEnGeo = page.includes('/en/services/');
+
+        if (isRuGeo) {
+          const slug = page.split('/ru/uslugi/')[1].replace(/\//g, '');
+          if (enOnlyCitySlugs.includes(slug)) return false;
         }
+
+        // Исключить страницы, которые мы знаем как редиректы из middleware
+        const redirects = [
+          '/ru/privacy-policy/', '/en/privacy-policy/',
+          '/ru/terms-of-service/', '/en/terms-of-service/',
+          '/ru/brief/', '/index.html'
+        ];
+        if (redirects.some(r => page.endsWith(r))) return false;
 
         return true;
       },

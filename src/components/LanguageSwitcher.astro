@@ -126,7 +126,8 @@ if (currentCitySlug) {
             }
         }
 
-        const url = `/${locale}${targetPath === '/' ? '' : targetPath}`;
+        const finalPath = targetPath.endsWith('/') ? targetPath : `${targetPath}/`;
+        const url = `/${locale}${finalPath}`;
 
         return (
             <>
