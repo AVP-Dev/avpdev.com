@@ -8,6 +8,103 @@ const t = useTranslations(lang);
 const cookieText = t('cookie_text').replace('/privacy-policy', `/${lang}/legal/privacy-policy/`);
 ---
 <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
-    <p class="cookie-text" set:html={cookieText}></p>
+    <div class="cookie-content">
+        <div class="cookie-icon">
+            <i class="fa-solid fa-cookie-bite"></i>
+        </div>
+        <p class="cookie-text" set:html={cookieText}></p>
+    </div>
     <button id="cookie-accept-btn" class="cookie-button">{t('cookie_accept')}</button>
 </div>
+
+<style>
+    .cookie-banner {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        background: var(--primary-color);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        z-index: 10001;
+        transform: translateX(-150%);
+        transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: var(--card-shadow);
+        max-width: 400px;
+    }
+
+    .cookie-banner.show {
+        transform: translateX(0);
+    }
+
+    .cookie-content {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .cookie-icon {
+        color: var(--accent-color-start);
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .cookie-text {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    :global(.cookie-text a) {
+        color: var(--accent-color-start);
+        text-decoration: underline;
+        font-weight: 700;
+    }
+
+    .cookie-button {
+        background: var(--text-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .cookie-button:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+
+    @media (max-width: 640px) {
+        .cookie-banner {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: none;
+            border-radius: 12px 12px 0 0;
+            transform: translateY(150%);
+            padding: 16px;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+
+        .cookie-button {
+            width: 100%;
+            padding: 12px;
+        }
+    }
+</style>
