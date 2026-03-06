@@ -367,7 +367,6 @@ const xDefaultUrl = new URL('/', siteBase).href;
         trackUtmParams();
         document.addEventListener('astro:page-load', trackUtmParams);
     </script>
-    </script>
 
 
 
@@ -662,7 +661,6 @@ const xDefaultUrl = new URL('/', siteBase).href;
             }
         }
     </style>
-    </style>
 </head>
 <body>
     <Header />
@@ -689,6 +687,7 @@ const xDefaultUrl = new URL('/', siteBase).href;
 
     <ScrollToTop />
     <script src="/src/scripts/main.ts"></script>
+    <CookieBanner />
 
     <!-- Custom Native Notification Prompt -->
     <div id="custom-notif-prompt" class="custom-notif-prompt">
