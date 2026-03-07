@@ -11,6 +11,8 @@ import Contact from "../../components/sections/Contact.astro";
 import SuccessModal from "../../components/modals/SuccessModal.astro";
 import ErrorModal from "../../components/modals/ErrorModal.astro";
 import { getCollection } from "astro:content";
+// Импортируем изображение для Schema
+import aboutPhoto from "../../assets/images/about-photo.webp";
 
 const pageTitleKey = "page_title";
 const pageDescKey = "hero_p";
@@ -36,7 +38,8 @@ const schema = {
       name: "Alexey Patskevich",
       jobTitle: "Full-Stack Developer",
       url: Astro.site,
-      image: new URL("/assets/images/about-photo.webp", Astro.site).href,
+      image: new URL(aboutPhoto.src, Astro.site).href,
+      inLanguage: "en-US",
       sameAs: [
         "https://github.com/AVP-Dev",
         "https://t.me/AVP_Dev",

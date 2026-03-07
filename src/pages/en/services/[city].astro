@@ -34,6 +34,7 @@ const projects = allProjects.slice(0, 6);
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
+  "inLanguage": "en-US",
   "serviceType": "Web Development",
   "provider": {
     "@type": "Organization",
@@ -52,6 +53,7 @@ const schema = {
 const faqSchema = content.faq && content.faq.length > 0 ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "inLanguage": "en-US",
   "mainEntity": content.faq.map(f => ({
     "@type": "Question",
     "name": f.q,

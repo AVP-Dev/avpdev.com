@@ -43,6 +43,7 @@ const backLink = `/${lang}/blog/`;
 const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "inLanguage": "en-US",
     "itemListElement": [
         {
             "@type": "ListItem",
@@ -68,6 +69,7 @@ const breadcrumbSchema = {
 const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "inLanguage": "en-US",
     "headline": post.data.title,
     "description": post.data.description,
     "author": {

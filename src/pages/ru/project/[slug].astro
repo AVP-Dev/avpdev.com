@@ -48,6 +48,7 @@ const relatedProjects = getRandomItems(allProjects, 2);
 const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "inLanguage": "ru-RU",
     itemListElement: [
         {
             "@type": "ListItem",
@@ -73,6 +74,7 @@ const breadcrumbSchema = {
 const projectSchema = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
+    "inLanguage": "ru-RU",
     headline: t(titleKey as TranslationKey),
     description: t(descriptionKey as TranslationKey),
     author: {

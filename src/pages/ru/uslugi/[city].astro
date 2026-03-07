@@ -34,6 +34,7 @@ const projects = allProjects.slice(0, 6);
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
+  "inLanguage": "ru-RU",
   "serviceType": "Веб-разработка",
   "provider": {
     "@type": "Organization",
@@ -46,12 +47,14 @@ const schema = {
   },
   "name": content.title,
   "description": content.description,
-  "url": Astro.url.href
+  "url": Astro.url.href,
+  "inLanguage": "ru-RU"
 };
 
 const faqSchema = content.faq && content.faq.length > 0 ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "inLanguage": "ru-RU",
   "mainEntity": content.faq.map(f => ({
     "@type": "Question",
     "name": f.q,

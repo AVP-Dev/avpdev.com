@@ -80,6 +80,7 @@ const pageDesc = t("catalog_subtitle");
 const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "inLanguage": lang === "ru" ? "ru-RU" : "en-US",
     itemListElement: [
         {
             "@type": "ListItem",
@@ -99,6 +100,7 @@ const breadcrumbSchema = {
 const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    "inLanguage": lang === "ru" ? "ru-RU" : "en-US",
     numberOfItems: PROJECTS_DATA.length,
     itemListElement: PROJECTS_DATA.map((project, index) => ({
         "@type": "ListItem",
