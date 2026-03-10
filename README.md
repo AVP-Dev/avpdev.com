@@ -39,13 +39,21 @@ Distributed under the MIT License. This repository is fully open-source as an ed
 
 <br />
 <p align="center">
-  <b><a href="https://avpdev.com/en/">Alexios Odos</a></b>
+  <a href="https://avpdev.com/en/"><b>Alexios Odos</b></a>
   &nbsp;|&nbsp;
-  <b><a href="https://avpdev.com/ru/">Aliaksei Patskevich</a></b>
+  <a href="https://avpdev.com/ru/"><b>Aliaksei Patskevich</b></a>
   <br />
   <sub>
-    Senior Full-stack Engineer
+    <b>Software Engineer</b> • Code, Design & AI
+    <br />
+    TypeScript &bull; Node.js &bull; Python &bull; Next.js
     <br />
     <a href="https://github.com/AVP-Dev">GitHub</a> &bull; <a href="https://t.me/AVP_Dev">Telegram</a>
   </sub>
+</p>
+
+<p align="center">
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=AVP-Dev&show_icons=true&theme=transparent&hide_border=true&title_color=3b82f6&icon_color=3b82f6&text_color=9ca3af&bg_color=0,0b0c15" />
+  
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=AVP-Dev&layout=compact&theme=transparent&hide_border=true&title_color=3b82f6&icon_color=3b82f6&text_color=9ca3af&bg_color=0,0b0c15" />
 </p>
