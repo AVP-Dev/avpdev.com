@@ -46,14 +46,18 @@ AVP-Dev Portfolio Core — это production-ready портфолио и тех�
   <sub>
     <b>Software Engineer</b> • Code, Design & AI
     <br />
-    TypeScript &bull; Node.js &bull; Python &bull; Next.js
-    <br />
     <a href="https://github.com/AVP-Dev">GitHub</a> &bull; <a href="https://t.me/AVP_Dev">Telegram</a>
   </sub>
 </p>
 
 <p align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=AVP-Dev&show_icons=true&theme=transparent&hide_border=true&title_color=3b82f6&icon_color=3b82f6&text_color=9ca3af&bg_color=0,0b0c15" />
-  
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=AVP-Dev&layout=compact&theme=transparent&hide_border=true&title_color=3b82f6&icon_color=3b82f6&text_color=9ca3af&bg_color=0,0b0c15" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" />
+  <br />
+  <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white" />
+  <img src="https://img.shields.io/badge/Autodesk_Fusion_360-0696D7?style=flat-square&logo=autodesk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwindcss&logoColor=white" />
 </p>
+
