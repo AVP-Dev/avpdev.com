@@ -20,6 +20,16 @@ db.run(`
   )
 `);
 
+// Ensure subscriptions table exists so we don't crash when querying it
+db.run(`
+  CREATE TABLE IF NOT EXISTS subscriptions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    subscription TEXT UNIQUE NOT NULL,
+    lang TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  )
+`);
+
 webpush.setVapidDetails(
     process.env.VAPID_SUBJECT || 'mailto:admin@avpdev.com',
     process.env.PUBLIC_VAPID_KEY || '',
