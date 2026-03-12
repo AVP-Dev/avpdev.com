@@ -26,23 +26,32 @@ jobs:
           fi
 
           for FILE in $NEW_FILES; do
-            TITLE=$(grep '^title:' "$FILE" | head -1 | sed 's/title: //;s/"//g;s/ //')
+            TITLE=$(grep -i '^title:' "$FILE" | head -1 | sed "s/^title:[ \t]*//i; s/['\"]//g")
             FILENAME=$(basename "$FILE" .md)
             FOLDER=$(echo "$FILE" | cut -d'/' -f3)
             LANG=$(echo "$FILE" | cut -d'/' -f4)
-            URL="https://avpdev.com/$LANG/$FOLDER/$FILENAME"
+            
+            # Form the correct URL depending on whether it's blog or project
+            if [ "$FOLDER" == "blog" ]; then
+                PATH_URL="blog"
+            else
+                PATH_URL="project"
+            fi
+            
+            URL="https://avpdev.com/$LANG/$PATH_URL/$FILENAME/"
             
             # RU/EN localization for push
             if [ "$LANG" == "ru" ]; then
-                BODY="Опубликован новый кейс или статья: $TITLE"
-                NOTIF_TITLE="AVPdev - Новое"
+                BODY="$TITLE"
+                NOTIF_TITLE="Новая статья в блоге!"
             else
-                BODY="New case or article published: $TITLE"
-                NOTIF_TITLE="AVPdev - Updates"
+                BODY="$TITLE"
+                NOTIF_TITLE="New article published!"
             fi
 
-            curl -X POST "https://avpdev.com/api/push/send" \
+            echo "Sending push for: $TITLE ($URL)"
+
+            curl -X POST "https://avpdev.com/api/push/send?secret=${{ secrets.PUSH_SECRET }}" \
               -H "Content-Type: application/json" \
-              -H "Authorization: Bearer ${{ secrets.PUSH_SECRET }}" \
-              -d "{\"title\": \"$NOTIF_TITLE\", \"body\": \"$BODY\", \"url\": \"$URL\"}"
+              -d "{\"title\": \"$NOTIF_TITLE\", \"body\": \"$BODY\", \"url\": \"$URL\", \"icon\": \"/favicon-96x96.png\"}"
           done
