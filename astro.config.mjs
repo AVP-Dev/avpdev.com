@@ -145,6 +145,12 @@ export default defineConfig({
     port: 3000
   },
 
+  vite: {
+    ssr: {
+      external: ['bun:sqlite'],
+    },
+  },
+
   compressHTML: true,
 
   // 7. Интернационализация (i18n)
