@@ -2,7 +2,13 @@ import type { APIRoute } from 'astro';
 import { Database } from 'bun:sqlite';
 import path from 'path';
 
+import fs from 'fs';
+
 const dbPath = path.resolve('data/push_subscriptions.db');
+const dbDir = path.dirname(dbPath);
+if (!fs.existsSync(dbDir)) {
+    fs.mkdirSync(dbDir, { recursive: true });
+}
 const db = new Database(dbPath, { create: true });
 
 // Initialize DB table if it doesn't exist

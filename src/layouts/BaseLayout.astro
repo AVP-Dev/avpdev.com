@@ -240,7 +240,7 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
       }
 
       async function subscribeUser() {
-        const registration = await navigator.serviceWorker.getRegistration();
+        const registration = await navigator.serviceWorker.ready;
         if (!registration) return;
 
         const subscribeOptions = {
@@ -281,10 +281,11 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
       };
 
       async function initPush() {
-        await registerServiceWorker();
+        const swReg = await registerServiceWorker();
+        if (!swReg || !('PushManager' in window)) return;
         
         // Show prompt if not subscribed and not dismissed
-        if (Notification.permission === 'default' && !sessionStorage.getItem('notif_prompt_dismissed')) {
+        if ('Notification' in window && Notification.permission === 'default' && !sessionStorage.getItem('notif_prompt_dismissed')) {
           const prompt = document.getElementById('custom-notif-prompt');
           if (prompt) {
             setTimeout(() => prompt.classList.add('active'), 3000);
