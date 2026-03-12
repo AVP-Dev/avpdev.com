@@ -282,14 +282,32 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
 
       async function initPush() {
         const swReg = await registerServiceWorker();
-        if (!swReg || !('PushManager' in window)) return;
         
-        // Show prompt if not subscribed and not dismissed
-        if ('Notification' in window && Notification.permission === 'default' && !sessionStorage.getItem('notif_prompt_dismissed')) {
-          const prompt = document.getElementById('custom-notif-prompt');
-          if (prompt) {
+        // Detect iOS and PWA mode
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+        
+        const prompt = document.getElementById('custom-notif-prompt');
+        if (!prompt || sessionStorage.getItem('notif_prompt_dismissed')) return;
+
+        // If it's iOS and NOT added to home screen, show an instructional prompt
+        if (isIOS && !isStandalone) {
+            const titleEl = prompt.querySelector('.prompt-text h3');
+            const descEl = prompt.querySelector('.prompt-text p');
+            const btnEl = prompt.querySelector('.btn-subscribe');
+            if (titleEl) titleEl.innerHTML = lang === 'ru' ? 'Пуш-уведомления для iOS' : 'Push notifications for iOS';
+            if (descEl) descEl.innerHTML = lang === 'ru' ? 'Нажмите "Поделиться" и "На экран «Домой»" 📱<br>Затем откройте нашу иконку с рабочего стола, чтобы включить уведомления.' : 'Tap "Share" then "Add to Home Screen" 📱<br>Then open our app from your home screen to enable notifications.';
+            if (btnEl) btnEl.style.display = 'none'; // Hide the allow button since we can't allow it here
             setTimeout(() => prompt.classList.add('active'), 3000);
-          }
+            return;
+        }
+
+        // If push is generally unsupported (and we aren't handling the specific iOS case above)
+        if (!swReg || !('PushManager' in window) || !('Notification' in window)) return;
+        
+        // Normal subscription prompt
+        if (Notification.permission === 'default') {
+          setTimeout(() => prompt.classList.add('active'), 3000);
         }
       }
 
