@@ -51,7 +51,7 @@ jobs:
 
             echo "Sending push for: $TITLE ($URL)"
 
-            curl -X POST "https://avpdev.com/api/push/send?secret=${{ secrets.PUSH_SECRET }}" \
+            curl -X POST "https://avpdev.com/api/push/send/?secret=${{ secrets.PUSH_SECRET }}" \
               -H "Content-Type: application/json" \
               -d "{\"title\": \"$NOTIF_TITLE\", \"body\": \"$BODY\", \"url\": \"$URL\", \"icon\": \"/favicon-96x96.png\"}"
           done
