@@ -253,7 +253,7 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
           console.log('User Subscribed:', subscription);
           
           // Send to backend
-          await fetch('/api/push/subscribe', {
+          await fetch('/api/push/subscribe/', {
             method: 'POST',
             body: JSON.stringify({ subscription, lang }),
             headers: { 'Content-Type': 'application/json' }
