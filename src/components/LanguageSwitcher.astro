@@ -28,15 +28,20 @@ const servicePairs: Record<string, string> = {
 const cleanCurrentPath = pathWithoutLang.endsWith('/') ? pathWithoutLang.slice(0, -1) : pathWithoutLang;
 const ruCityMatch = cleanCurrentPath.match(/^\/uslugi\/([^/]+)$/);
 const enCityMatch = cleanCurrentPath.match(/^\/services\/([^/]+)$/);
-const currentCitySlug = ruCityMatch?.[1] ?? enCityMatch?.[1] ?? null;
+let currentCitySlug = ruCityMatch?.[1] ?? enCityMatch?.[1] ?? null;
 
 // Determine if this city slug has both RU + EN content or only EN
 let cityHasRU = false;
 let cityHasEN = false;
 if (currentCitySlug) {
     const locData = locations.find(l => l.slug === currentCitySlug);
-    cityHasRU = !!locData?.name_ru && !!(geoContent as any)[currentCitySlug]?.ru;
-    cityHasEN = !!(geoContent as any)[currentCitySlug]?.en;
+    if (locData) {
+        cityHasRU = !!locData?.name_ru && !!(geoContent as any)[currentCitySlug]?.ru;
+        cityHasEN = !!(geoContent as any)[currentCitySlug]?.en;
+    } else {
+        // If not found in locations, it's a service slug, not a city
+        currentCitySlug = null;
+    }
 }
 ---
 <div class="lang-switcher">
