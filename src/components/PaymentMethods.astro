@@ -257,12 +257,19 @@ const allBrandImages = [
     /* Responsive Ribbon */
     @media (max-width: 768px) {
         .ribbon-content {
-            gap: 1.5rem;
+            gap: 2rem;
             flex-direction: column;
         }
+        .ribbon-row {
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem; /* Reduced gap for smaller screens */
+        }
         .ribbon-divider {
-            width: 40px;
-            height: 1px;
+            display: none; /* Dividers don't work well with wrapping on mobile */
+        }
+        .brand-img {
+            max-height: 22px; /* Slightly smaller for better fit */
         }
     }
 
