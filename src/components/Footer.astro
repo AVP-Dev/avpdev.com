@@ -3,6 +3,7 @@
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { CreatorSignature } from "./ui/CreatorSignature";
 import Icon from "./Icon.astro";
+import PaymentMethods from "./PaymentMethods.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -120,6 +121,8 @@ const t = useTranslations(lang);
                 }
             </div>
         </div>
+
+        <PaymentMethods isRibbon={true} />
 
         <div class="footer-bottom">
             <div class="footer-bottom-content">

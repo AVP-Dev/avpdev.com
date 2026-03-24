@@ -216,6 +216,13 @@ export const ui = {
         // Geo Links
         'geoLinks.title': 'География проектов:',
 
+        // Payment Methods
+        'footer_payment_methods': 'Мы принимаем:',
+        'payment_hub_cards': 'Банковские карты',
+        'payment_hub_processing': 'Процессинг: ЮKassa, ExpressPay, BSB',
+        'payment_hub_fast': 'Быстрые платежи',
+        'payment_hub_crypto': 'Цифровые активы',
+
         // Accessibility (aria-labels & alts)
         aria_theme_switcher: 'Переключить тему',
         aria_open_menu: 'Открыть меню',
@@ -246,6 +253,13 @@ export const ui = {
     en: {
         // Geo Links
         'geoLinks.title': 'Project Geography:',
+
+        // Payment Methods
+        'footer_payment_methods': 'We accept:',
+        'payment_hub_cards': 'Bank Cards',
+        'payment_hub_processing': 'Processing: Yookassa, ExpressPay, BSB',
+        'payment_hub_fast': 'Fast Payments',
+        'payment_hub_crypto': 'Digital Assets',
 
         // Main page and common
         page_title: 'AVPdev | Full-Stack Development & Business Automation',
