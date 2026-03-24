@@ -1,0 +1,576 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { Image } from "astro:assets";
+
+interface Props {
+    isMinimal?: boolean;
+    isRibbon?: boolean;
+}
+
+const { isMinimal = false, isRibbon = false } = Astro.props;
+
+// Import authentic logos
+import visaLogo from "../assets/images/payments/Visa_Inc._logo_(2021–present).svg.png";
+import mcLogo from "../assets/images/payments/Mastercard-logo.svg.png";
+import mirLogo from "../assets/images/payments/Mir-logo.SVG.svg.png";
+import belcardLogo from "../assets/images/payments/belcard.png";
+import sbpLogo from "../assets/images/payments/SBP.png";
+import eripLogo from "../assets/images/payments/erip.png";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const allBrandImages = [
+    { src: visaLogo, alt: "Visa", width: 300, height: 150, class: "visa" },
+    { src: mcLogo, alt: "Mastercard", width: 250, height: 150, class: "mc" },
+    { src: mirLogo, alt: "Мир", width: 250, height: 100, class: "mir" },
+    { src: belcardLogo, alt: "Белкарт", width: 300, height: 100, class: "belcard" }
+];
+---
+
+<div class={`payment-hub-wrapper ${isMinimal || isRibbon ? 'minimal' : ''} ${isRibbon ? 'ribbon-wrapper' : ''}`}>
+    {!isRibbon && <p class="hub-title">{t('footer_payment_methods')}</p>}
+    
+    <div class={`payment-hub ${isMinimal || isRibbon ? 'minimal-hub' : ''} ${isRibbon ? 'ribbon-hub' : ''}`}>
+        {isRibbon ? (
+            <div class="ribbon-content">
+                <div class="ribbon-row">
+                    {allBrandImages.map(img => (
+                        <div class="brand-img-wrapper" title={img.alt}>
+                            <Image src={img.src} alt={img.alt} width={img.width} height={img.height} densities={[2, 3]} quality="high" class={`brand-img ${img.class}`} />
+                        </div>
+                    ))}
+                    <div class="brand-icon-wrapper" title="PayPal">
+                        <i class="fa-brands fa-paypal"></i>
+                    </div>
+                </div>
+                
+                <div class="ribbon-divider"></div>
+                
+                <div class="ribbon-row">
+                    <div class="brand-item sbp" title="СБП">
+                        <Image src={sbpLogo} alt="СБП" width={120} height={120} densities={[2, 3]} quality="high" class="brand-img-sbp" />
+                    </div>
+                    <div class="brand-item erip" title="ЕРИП">
+                        <Image src={eripLogo} alt="ЕРИП" width={120} height={60} densities={[2, 3]} quality="high" class="brand-img-erip" />
+                    </div>
+                </div>
+
+                <div class="ribbon-divider"></div>
+
+                <div class="ribbon-row">
+                    <div class="brand-item tether" title="USDT">
+                        <div class="crypto-icon">₮</div>
+                    </div>
+                    <div class="brand-item btc" title="Bitcoin">
+                        <i class="fa-brands fa-bitcoin"></i>
+                    </div>
+                    <div class="brand-item eth" title="Ethereum">
+                        <i class="fa-brands fa-ethereum"></i>
+                    </div>
+                </div>
+            </div>
+        ) : (
+            <>
+                <!-- Section 1: Bank Cards & Currencies -->
+                <div class="hub-section cards-section">
+                    <div class="section-header">{t('payment_hub_cards')}</div>
+                    
+                    <div class="icon-row mt-sm">
+                        <div class="brand-img-wrapper" title="Visa">
+                            <Image src={visaLogo} alt="Visa" width={300} height={150} densities={[2, 3]} quality="high" class="brand-img visa" />
+                        </div>
+                        <div class="brand-img-wrapper" title="Mastercard">
+                            <Image src={mcLogo} alt="Mastercard" width={250} height={150} densities={[2, 3]} quality="high" class="brand-img mc" />
+                        </div>
+                        <div class="brand-img-wrapper" title="Мир">
+                            <Image src={mirLogo} alt="Мир" width={250} height={100} densities={[2, 3]} quality="high" class="brand-img mir" />
+                        </div>
+                        <div class="brand-img-wrapper" title="Белкарт">
+                            <Image src={belcardLogo} alt="Белкарт" width={300} height={100} densities={[2, 3]} quality="high" class="brand-img belcard" />
+                        </div>
+                        <div class="brand-icon-wrapper" title="PayPal">
+                            <i class="fa-brands fa-paypal"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="currencies-row">
+                        <span class="currency">RUB</span>
+                        <span class="currency">BYN</span>
+                        <span class="currency">USD</span>
+                        <span class="currency">EUR</span>
+                    </div>
+                    
+                    <div class="processing-note">{t('payment_hub_processing')}</div>
+                </div>
+
+                <div class="hub-divider"></div>
+
+                <!-- Section 2: Fast / Local Payments -->
+                <div class="hub-section fast-section">
+                    <div class="section-header">{t('payment_hub_fast')}</div>
+                    
+                    <div class="vertical-brand-list mt-sm">
+                        <!-- SBP -->
+                        <div class="brand-item sbp" title="СБП (Система Быстрых Платежей)">
+                            <div class="brand-img-wrapper">
+                                <Image src={sbpLogo} alt="СБП" width={150} height={150} densities={[2, 3]} quality="high" class="brand-img-sbp" />
+                            </div>
+                            <span class="brand-text">СБП</span>
+                        </div>
+                        
+                        <!-- ERIP / BSB -->
+                        <div class="brand-item erip" title="ЕРИП / BSB Link">
+                            <div class="brand-img-wrapper">
+                                <Image src={eripLogo} alt="ЕРИП" width={150} height={75} densities={[2, 3]} quality="high" class="brand-img-erip" />
+                            </div>
+                            <span class="brand-text">ЕРИП / BSB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hub-divider"></div>
+
+                <!-- Section 3: Crypto -->
+                <div class="hub-section crypto-section">
+                    <div class="section-header">{t('payment_hub_crypto')}</div>
+                    
+                    <div class="vertical-brand-list mt-sm">
+                        <div class="brand-item tether" title="USDT (Tether)">
+                            <div class="crypto-icon">₮</div>
+                            <span class="brand-text">USDT</span>
+                        </div>
+                        
+                        <div class="brand-item btc" title="Bitcoin">
+                            <i class="fa-brands fa-bitcoin"></i>
+                            <span class="brand-text">BTC</span>
+                        </div>
+                        
+                        <div class="brand-item eth" title="Ethereum">
+                            <i class="fa-brands fa-ethereum"></i>
+                            <span class="brand-text">ETH</span>
+                        </div>
+                    </div>
+                </div>
+            </>
+        )}
+    </div>
+
+    {!isRibbon && (
+        <div class="trust-badge">
+            <i class="fa-solid fa-lock"></i>
+            <span>SSL Secured | PCI DSS Compliant</span>
+        </div>
+    )}
+</div>
+
+<style>
+    .payment-hub-wrapper {
+        margin-top: 4rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .payment-hub-wrapper.minimal {
+        margin-top: 2rem;
+    }
+
+    .payment-hub-wrapper.ribbon-wrapper {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hub-title {
+        font-size: 0.8rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-secondary-color);
+        opacity: 0.8;
+        margin-bottom: 1.25rem;
+        text-align: center;
+    }
+
+    .payment-hub {
+        display: flex;
+        align-items: stretch;
+        gap: 2.5rem;
+        padding: 2rem 3rem;
+        background: rgba(var(--primary-color-rgb), 0.15);
+        border: 1px solid var(--border-color);
+        border-radius: 24px;
+        backdrop-filter: blur(16px);
+        box-shadow: 
+            0 10px 40px rgba(0,0,0,0.05),
+            inset 0 0 20px rgba(255,255,255,0.02);
+    }
+
+    .payment-hub.minimal-hub {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        padding: 1rem 0;
+    }
+
+    .payment-hub.ribbon-hub {
+        padding: 0.5rem 0;
+    }
+
+    /* Ribbon Styles */
+    .ribbon-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .ribbon-row {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem; /* Increased for a premium, spacious feel */
+    }
+
+    .ribbon-row i {
+        font-size: 1.4rem; /* Balanced with 28px height images */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ribbon-divider {
+        width: 1px;
+        height: 20px;
+        background: var(--border-color);
+        opacity: 0.3;
+    }
+    
+    .ribbon-row .crypto-icon {
+        width: 28px; /* Fixed width to match icons for perfect spacing */
+        height: 28px;
+        font-size: 0.8rem;
+    }
+
+    /* Responsive Ribbon */
+    @media (max-width: 768px) {
+        .ribbon-content {
+            gap: 1.5rem;
+            flex-direction: column;
+        }
+        .ribbon-divider {
+            width: 40px;
+            height: 1px;
+        }
+    }
+
+    .payment-hub.minimal-hub {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        padding: 1rem 0;
+    }
+
+    .dark-theme .payment-hub {
+        background: rgba(17, 17, 26, 0.4);
+    }
+
+    .hub-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .cards-section {
+        min-width: 220px;
+    }
+
+    .fast-section, .crypto-section {
+        min-width: 140px;
+    }
+
+    .section-header {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+        font-family: var(--font-heading);
+    }
+
+    .mt-sm {
+        margin-top: 0.25rem;
+    }
+
+    .hub-divider {
+        width: 1px;
+        background: var(--border-color);
+        opacity: 0.4;
+        margin: 0.5rem 0;
+    }
+
+    /* Common Icon/Image Row */
+    .icon-row {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+    }
+
+    .brand-img-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        filter: grayscale(100%);
+        opacity: 0.6;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: default;
+    }
+
+    .brand-img-wrapper:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: translateY(-2px) scale(1.05);
+    }
+
+    .brand-icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-secondary-color);
+        opacity: 0.6;
+        filter: grayscale(100%);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: default;
+    }
+
+    .brand-icon-wrapper i {
+        font-size: 1.6rem;
+    }
+
+    .brand-icon-wrapper:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        color: #003087; /* PayPal Blue */
+        transform: translateY(-2px) scale(1.05);
+    }
+
+    .brand-img {
+        width: auto;
+        height: auto;
+        max-height: 28px;
+        object-fit: contain;
+    }
+
+    .brand-img.mir, .brand-img.belcard {
+        max-height: 28px;
+    }
+
+    /* Text Logos (Fallback) */
+    .text-logo {
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        padding: 0.2rem 0.4rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        color: var(--text-secondary-color);
+        opacity: 0.7;
+        transition: all 0.3s ease;
+        cursor: default;
+    }
+    
+    .text-logo:hover {
+        opacity: 1;
+        color: var(--text-color);
+        border-color: var(--text-color);
+        transform: translateY(-2px);
+    }
+
+    /* Currencies */
+    .currencies-row {
+        display: flex;
+        gap: 0.4rem;
+        margin-top: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .currency {
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 0.2rem 0.5rem;
+        background: rgba(128, 128, 128, 0.08);
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: var(--text-secondary-color);
+        transition: all 0.3s ease;
+    }
+
+    .currency:hover {
+        color: var(--text-color);
+        border-color: var(--border-color);
+        background: rgba(128, 128, 128, 0.15);
+    }
+
+    /* Processing Note */
+    .processing-note {
+        font-size: 0.65rem;
+        color: var(--text-secondary-color);
+        opacity: 0.45;
+        margin-top: auto;
+        line-height: 1.4;
+    }
+
+    /* Vertical Brand List (Fast & Crypto) */
+    .vertical-brand-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .brand-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-secondary-color);
+        opacity: 0.6;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: default;
+    }
+
+    .brand-item:hover {
+        opacity: 1;
+        color: var(--text-color);
+        transform: translateY(-2px) scale(1.05);
+    }
+
+    .brand-item i {
+        font-size: 1.4rem;
+        width: 28px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .brand-img-sbp, .brand-img-erip {
+        width: auto;
+        height: auto;
+        max-height: 28px;
+        filter: grayscale(100%);
+        opacity: 0.7;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .brand-img-erip {
+        max-height: 28px;
+    }
+
+    .brand-item:hover .brand-img-sbp,
+    .brand-item:hover .brand-img-erip {
+        filter: grayscale(0%);
+        opacity: 1;
+    }
+
+    .brand-text {
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    /* Specific Brand Colors on Hover */
+    .sbp:hover .brand-text { color: #007AFF; }
+    .erip:hover .brand-text { color: #0066CC; }
+
+    .btc:hover i { color: #F7931A; }
+    .eth:hover i { color: #627EEA; }
+
+    /* Crypto Icon (Tether) */
+    .crypto-icon {
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--text-secondary-color);
+        color: var(--bg-color);
+        border-radius: 50%;
+        font-size: 0.7rem;
+        font-weight: bold;
+        opacity: 0.8;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .tether:hover .crypto-icon {
+        background: #26A17B;
+        color: #FFF;
+        opacity: 1;
+    }
+    
+    .tether:hover .brand-text {
+        color: #26A17B;
+    }
+
+    /* Trust Badge */
+    .trust-badge {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: var(--text-secondary-color);
+        opacity: 0.5;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-family: var(--font-heading);
+    }
+
+    .trust-badge i {
+        font-size: 0.7rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+        .payment-hub {
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+        }
+        .hub-divider {
+            width: 100%;
+            height: 1px;
+            margin: 0;
+        }
+        .cards-section {
+            align-items: center;
+            text-align: center;
+        }
+        .icon-row, .currencies-row {
+            justify-content: center;
+        }
+        .processing-note {
+            margin-top: 1rem;
+        }
+        
+        .fast-section, .crypto-section {
+            align-items: center;
+        }
+        
+        .vertical-brand-list {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .payment-hub {
+            padding: 1.5rem;
+        }
+        .vertical-brand-list {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+</style>
