@@ -14,7 +14,7 @@ export async function getStaticPaths() {
         return id.startsWith("ru/");
     });
     return allProjects.map((project) => ({
-        params: { slug: project.slug.replace(/^ru\//, "") },
+        params: { slug: project.id.replace(/^ru\//, "").replace(/\.mdx?$/, "") },
         props: { project },
     }));
 }
@@ -22,7 +22,8 @@ export async function getStaticPaths() {
 const lang = "ru";
 const t = useTranslations(lang);
 const { project } = Astro.props;
-const { Content } = await project.render();
+import { render } from 'astro:content';
+const { Content } = await render(project);
 
 if (!project) {
     return Astro.redirect(`/${lang}/404`);
@@ -200,12 +201,13 @@ const projectSchema = {
                         {relatedProjects.map((p) => (
                             <div class="related-item">
                                 <PortfolioCard
+                                    id={0 as any}
+                                    tags={p.data.stack as any}
                                     img={p.data.heroImage}
-                                    titleKey={p.data.titleKey}
-                                    descriptionKey={p.data.descriptionKey}
-                                    link={`/${lang}/project/${p.slug.replace(/^ru\/|^en\//, "")}/`}
+                                    titleKey={p.data.titleKey as any}
+                                    link={`/${lang}/project/${p.id.replace(/^ru\/|^en\//, "").replace(/\.mdx?$/, "")}/`}
                                     techStack={p.data.content.techStack}
-                                    category={p.data.category}
+                                    category={p.data.category as any}
                                 />
                             </div>
                         ))}

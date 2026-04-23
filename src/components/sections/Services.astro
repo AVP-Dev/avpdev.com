@@ -3,17 +3,30 @@ import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import Icon from '../Icon.astro';
 
+export interface Props {
+    cityName?: string;
+}
+
+const { cityName } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const h2Content = cityName 
+    ? (lang === 'ru' 
+        ? `ИТ <span class="gradient-text">Услуги</span> в ${cityName}` 
+        : `IT <span class="gradient-text">Services</span> in ${cityName}`)
+    : t('services_h2');
+
+const cardSuffix = cityName ? (lang === 'ru' ? ` для бизнеса в ${cityName}` : ` for ${cityName} businesses`) : '';
 ---
 <section id="services">
     <div class="container">
-        <h2 class="section-title fade-in" set:html={t('services_h2')}></h2>
+        <h2 class="section-title fade-in" set:html={h2Content}></h2>
         <div class="services-grid">
             <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development')} class="card fade-in" style="transition-delay: 100ms;">
                 <div class="card-glass-effect"></div>
                 <Icon name="fa-laptop-code" class="card-icon" aria-hidden="true" />
-                <h3>{t('services_card1_h3')}</h3>
+                <h3>{t('services_card1_h3')}{cardSuffix}</h3>
                 <p>{t('services_card1_p')}</p>
                 <div class="card-footer">
                     <span class="learn-more">{t('nav_services')} <i class="fa-solid fa-arrow-right"></i></span>
@@ -23,7 +36,7 @@ const t = useTranslations(lang);
             <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development')} class="card fade-in" style="transition-delay: 200ms;">
                 <div class="card-glass-effect"></div>
                 <Icon name="fa-cogs" class="card-icon" aria-hidden="true" />
-                <h3>{t('services_card2_h3')}</h3>
+                <h3>{t('services_card2_h3')}{cardSuffix}</h3>
                 <p>{t('services_card2_p')}</p>
                 <div class="card-footer">
                     <span class="learn-more">{t('nav_services')} <i class="fa-solid fa-arrow-right"></i></span>
@@ -33,7 +46,7 @@ const t = useTranslations(lang);
             <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp')} class="card fade-in" style="transition-delay: 300ms;">
                 <div class="card-glass-effect"></div>
                 <Icon name="fa-rocket" class="card-icon" aria-hidden="true" />
-                <h3>{t('services_card3_h3')}</h3>
+                <h3>{t('services_card3_h3')}{cardSuffix}</h3>
                 <p>{t('services_card3_p')}</p>
                 <div class="card-footer">
                     <span class="learn-more">{t('nav_services')} <i class="fa-solid fa-arrow-right"></i></span>
@@ -43,7 +56,7 @@ const t = useTranslations(lang);
             <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration')} class="card fade-in" style="transition-delay: 400ms;">
                 <div class="card-glass-effect"></div>
                 <Icon name="fa-brain" class="card-icon" aria-hidden="true" />
-                <h3>{lang === 'ru' ? 'AI Интеграции' : 'AI Integration'}</h3>
+                <h3>{lang === 'ru' ? 'AI Интеграции' : 'AI Integration'}{cardSuffix}</h3>
                 <p>{lang === 'ru' ? 'Внедрение нейросетей и обучение LLM на ваших данных.' : 'Neural network integration and LLM training on your data.'}</p>
                 <div class="card-footer">
                     <span class="learn-more">{t('nav_services')} <i class="fa-solid fa-arrow-right"></i></span>
@@ -53,7 +66,7 @@ const t = useTranslations(lang);
             <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps')} class="card fade-in" style="transition-delay: 500ms;">
                 <div class="card-glass-effect"></div>
                 <Icon name="fa-brands fa-telegram" class="card-icon" aria-hidden="true" />
-                <h3>{lang === 'ru' ? 'Telegram Mini Apps' : 'Telegram Mini Apps'}</h3>
+                <h3>{lang === 'ru' ? 'Telegram Mini Apps' : 'Telegram Mini Apps'}{cardSuffix}</h3>
                 <p>{lang === 'ru' ? 'Полноценные приложения внутри Telegram (WebApps).' : 'Full-featured applications inside Telegram (WebApps).'}</p>
                 <div class="card-footer">
                     <span class="learn-more">{t('nav_services')} <i class="fa-solid fa-arrow-right"></i></span>

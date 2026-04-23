@@ -13,7 +13,7 @@ export const prerender = true;
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog', ({ id }) => id.startsWith('ru/'));
   return allPosts.map(post => ({
-    params: { slug: post.slug.replace('ru/', '') },
+    params: { slug: post.id.replace(/^ru\//, '').replace(/\.mdx?$/, '') },
     props: { post },
   }));
 }
@@ -23,7 +23,8 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+import { render } from 'astro:content';
+const { Content } = await render(post);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

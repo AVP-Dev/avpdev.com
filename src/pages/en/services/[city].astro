@@ -2,31 +2,34 @@
 // src/pages/en/services/[city].astro
 import GeoPageLayout from '../../../layouts/GeoPageLayout.astro';
 import { locations } from '../../../data/locations';
-import { geoContent } from '../../../data/geo-content';
+import { getCollection } from 'astro:content';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-    return locations
-        .filter(loc => geoContent[loc.slug]?.en)
-        .map(loc => ({
-            params: { city: loc.slug },
-        }));
+    const allGeo = await getCollection('geo');
+    return allGeo.map(entry => ({
+        params: { city: entry.id },
+        props: { geoEntry: entry },
+    }));
 }
 
 const { city } = Astro.params;
+const { geoEntry } = Astro.props;
 const cityData = locations.find(loc => loc.slug === city);
-const content = city && geoContent[city]?.en;
+const content = geoEntry.data.en;
 
-if (!cityData || !content) {
-    if (city && geoContent[city]?.ru) {
-        return Astro.redirect(`/ru/uslugi/${city}/`);
-    }
-    return Astro.redirect('/en/404/');
+if (!cityData) {
+    return new Response(null, { status: 404 });
 }
 
-// Fetch relevant projects for THIS city/language to avoid prop-passing bug
-import { getCollection } from 'astro:content';
+if (!content) {
+    if (geoEntry.data.ru) {
+        return Astro.redirect(`/ru/uslugi/${city}/`, 301);
+    }
+    return new Response(null, { status: 404 });
+}
+
 const lang = 'en';
 const allProjects = await getCollection('projects', ({ id }) => id.startsWith(lang + '/'));
 const projects = allProjects.slice(0, 6);
@@ -54,7 +57,7 @@ const faqSchema = content.faq && content.faq.length > 0 ? {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "inLanguage": "en-US",
-  "mainEntity": content.faq.map(f => ({
+  "mainEntity": content.faq.map((f: any) => ({
     "@type": "Question",
     "name": f.q,
     "acceptedAnswer": {
@@ -71,6 +74,7 @@ const faqSchema = content.faq && content.faq.length > 0 ? {
     p={content.p}
     projects={projects}
     citySlug={city}
+    cityName={cityData.name_en || undefined}
 >
   <Fragment slot="head">
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

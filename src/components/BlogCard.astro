@@ -20,7 +20,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString(lang, {
 ---
 
 <a
-  href={`/${lang}/blog/${post.slug.split("/")[1]}/`}
+  href={`/${lang}/blog/${post.id.replace(/^(ru|en)\//, '').replace(/\.mdx?$/, '')}/`}
   class="portfolio-card blog-card-link"
   data-title={post.data.title.toLowerCase()}
   data-description={post.data.description.toLowerCase()}

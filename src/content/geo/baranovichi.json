@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "Разработка Next.js и ботов в Барановичах | AVPdev",
+    "description": "AVPdev: Профессиональная разработка сложных веб-приложений, ботов Telegram и парсеров для бизнеса в Барановичах. Скорость и надежность на Next.js.",
+    "h1": "Экспертная веб-разработка для бизнеса Барановичей: от Next.js до сложных систем",
+    "p": "Ваш бизнес в Барановичах стремится к инновациям? AVPdev создает высокопроизводительные веб-платформы на Next.js и Astro, а также автоматизирует процессы с помощью кастомных Telegram-ботов, идеально подходящих для производственного и торгового хаба Барановичи.",
+    "benefits": [
+      {
+        "icon": "fa-robot",
+        "title": "Смарт-автоматизация на Node.js",
+        "desc": "Создаем Telegram-ботов, которые интегрируются с вашей CRM или складом в Барановичах, обеспечивая мгновенную обработку данных и заказов."
+      },
+      {
+        "icon": "fa-cogs",
+        "title": "Современный стек: Next.js и Astro",
+        "desc": "Мы строим надежные интерфейсы, которые работают молниеносно, обеспечивая лучший SEO-результат для вашего бизнеса в Барановичах."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Барановичах?",
+        "a": "Цены начинаются от 730 BYN за лэндинг на Astro и от 880 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2190 BYN."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 150 BYN в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Web Development Specialists in Baranovichi | AVPdev",
+    "description": "Scale your Baranovichi business with custom Next.js applications, Telegram automation, and efficient data scrapers from AVPdev engineering team.",
+    "h1": "High-End Software Engineering for Baranovichi Enterprises",
+    "p": "For companies in Baranovichi, digital efficiency is key. AVPdev provides specialized full-stack development using modern technologies like Next.js and Astro to build robust, scalable web applications and automation tools tailored for the local market.",
+    "benefits": [
+      {
+        "icon": "fa-robot",
+        "title": "Business Process Automation",
+        "desc": "Deploy intelligent Telegram bots designed to streamline your Baranovichi operations and enhance customer engagement automatically."
+      },
+      {
+        "icon": "fa-cogs",
+        "title": "Optimized Web Performance",
+        "desc": "Get lightning-fast Next.js apps that dominate search engines and provide smooth experiences for your users in Baranovichi and beyond."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Baranovichi?",
+        "a": "Pricing starts from 730 BYN for Astro landing pages and 880 BYN for Next.js websites. Custom web applications start from 2190 BYN."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 150 BYN depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

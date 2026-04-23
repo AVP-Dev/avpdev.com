@@ -1,0 +1,42 @@
+{
+  "en": {
+    "title": "Web Development in Riga | Digital Solutions for Growth",
+    "description": "Professional web development services in Riga. We build effective digital platforms to help your business succeed in Latvia.",
+    "h1": "Baltic E-Commerce & Web Engineering Hub — Riga",
+    "p": "Expand your digital presence across the Baltic region with AVPdev. We build conversion-optimized Next.js stores and automation tools for Riga businesses.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Elite Web Performance for Riga",
+        "desc": "We build Astro and Next.js websites for Riga's Baltic tech and e-commerce hub, achieving 90+ Lighthouse scores and top search rankings."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Intelligent Automation Bots",
+        "desc": "Custom Telegram bots for Riga businesses: lead capture, notifications, and 24/7 customer service on autopilot."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Riga?",
+        "a": "Pricing starts from €250 for Astro landing pages and €300 for Next.js websites. Custom web applications start from €750."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from €50 depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

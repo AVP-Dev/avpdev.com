@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "Создание сайтов в Минске | ПРОфессиональная веб-разработка",
+    "description": "Заказать разработку сайта в Минске. Быстрые, современные и продающие сайты. AVPdev – ваш надежный ИТ партнер в Беларуси.",
+    "h1": "Разработка сайтов и Web-Apps в Минске",
+    "p": "Ищете надежного партнера для создания веб-сервиса в столице Беларуси? Мы предлагаем полный спектр услуг: от быстрых лендингов до сложных корпоративных порталов на Astro и Next.js, а также разработку парсеров и ботов.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Высокая конверсия и Скорость",
+        "desc": "Проектируем UX/UI с фокусом на продажи и гарантируем мгновенную загрузку благодаря современному стеку."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Индивидуальные решения",
+        "desc": "Автоматизируем ваш бизнес с помощью нестандартных решений: кастомные Telegram-боты и системы веб-скрапинга."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Минске?",
+        "a": "Цены начинаются от 730 BYN за лэндинг на Astro и от 880 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2190 BYN."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 150 BYN в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Website Development in Minsk | Full-Stack Web Services",
+    "description": "Order website development in Minsk. We create fast, modern, and complex web apps for business. Full-cycle services from AVPdev.",
+    "h1": "Web & App Development in Minsk",
+    "p": "Looking for a reliable tech partner in Belarus? We offer a full range of web development services in Minsk, from fast corporate portals on Astro to complex SaaS platforms on Next.js, including bots and scrapers.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "High Conversion & Speed",
+        "desc": "We design UX/UI focusing on sales and guarantee instant load times backed by our modern tech stack."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Custom Automation",
+        "desc": "We automate your business workflows using custom solutions like Telegram bots and advanced web scraping systems."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Minsk?",
+        "a": "Pricing starts from 730 BYN for Astro landing pages and 880 BYN for Next.js websites. Custom web applications start from 2190 BYN."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 150 BYN depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "en": {
+    "title": "Web Development Services in Munich | Quality & Precision",
+    "description": "Precision-engineered web development in Munich. We deliver high-quality websites and digital products for businesses in Bavaria and beyond.",
+    "h1": "World-Class Web Engineering for Berlin Startups & Enterprises",
+    "p": "AVPdev brings Silicon Valley-grade engineering to Berlin. We build performant Next.js platforms, SaaS MVPs, and smart Telegram bots for the German market.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Elite Web Performance for Munich",
+        "desc": "We build Astro and Next.js websites for Munich's engineering and automotive sector, achieving 90+ Lighthouse scores and top search rankings."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Intelligent Automation Bots",
+        "desc": "Custom Telegram bots for Munich businesses: lead capture, notifications, and 24/7 customer service on autopilot."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Berlin?",
+        "a": "Pricing starts from €250 for Astro landing pages and €300 for Next.js websites. Custom web applications start from €750."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from €50 depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

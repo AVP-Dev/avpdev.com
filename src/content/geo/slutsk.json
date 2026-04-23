@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "Разработка сайтов и автоматизация в Слуцке | AVPdev",
+    "description": "Создание сайтов на Next.js и Telegram ботов в Слуцке. Профессиональная веб-разработка и системы сбора данных (парсеры) от экспертов.",
+    "h1": "Технологичное развитие вашего бизнеса в Слуцке",
+    "p": "Слуцк известен своей деловой хваткой. Мы помогаем предпринимателям Слуцка стать еще эффективнее, внедряя современные сайты на Next.js и автоматизируя процессы продаж и учета через кастомных ботов в Telegram.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Скорость — ваше преимущество",
+        "desc": "Ваш сайт в Слуцке будет летать на Astro, обгоняя конкурентов в поиске и радуя клиентов мгновенным откликом."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Боты для Слуцка",
+        "desc": "Автоматизируем сбор заказов, рассылку уведомлений и поддержку клиентов 24/7 для вашего бизнеса в Слуцке."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Слуцке?",
+        "a": "Цены начинаются от 730 BYN за лэндинг на Astro и от 880 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2190 BYN."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 150 BYN в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Slutsk Web Development Specialists | AVPdev",
+    "description": "Scale your Slutsk business with high-performance web apps on Next.js and custom Telegram bot automation. Data-driven tools for modern brands.",
+    "h1": "Empowering Slutsk Brands with Custom Software & Automation",
+    "p": "In Slutsk, efficient operations lead to success. AVPdev engineers specialized digital tools, using modern frameworks like Next.js and Node.js to build fast, scalable websites and automation bots for your enterprise.",
+    "benefits": [
+      {
+        "icon": "fa-chart-pie",
+        "title": "Performance-Focused Design",
+        "desc": "We build aesthetic websites in Slutsk that convert better due to extreme speed and superior mobile responsiveness."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "24/7 Operational Bots",
+        "desc": "Reduce overhead in your Slutsk office by deploying intelligent bots that handle customer care and internal task management."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Slutsk?",
+        "a": "Pricing starts from 730 BYN for Astro landing pages and 880 BYN for Next.js websites. Custom web applications start from 2190 BYN."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 150 BYN depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

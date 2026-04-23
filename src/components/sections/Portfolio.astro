@@ -33,7 +33,7 @@ const PROJECTS_DATA: Project[] = featuredProjects.map((project, index) => ({
   category: categoryMap[project.data.category] || "sites",
   img: project.data.heroImage,
   titleKey: project.data.header.titleKey as TranslationKey,
-  link: `/${lang}/project/${project.slug.replace(/^(ru|en)\//, "")}/`,
+  link: `/${lang}/project/${project.id.replace(/^(ru|en)\//, "").replace(/\.mdx?$/, "")}/`,
   techStack: project.data.content.techStack,
   tags: project.data.stack,
 }));

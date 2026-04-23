@@ -1,0 +1,64 @@
+{
+  "en": {
+    "title": "Web Development in Stuttgart | Advanced Engineering",
+    "description": "Expert web development services in Stuttgart. We deliver secure and scalable digital solutions.",
+    "h1": "Precision Web Engineering for Stuttgart's Automotive & Tech Industry",
+    "p": "AVPdev delivers Next.js platforms and automation tools built to the exacting standards of Stuttgart's world-leading engineering culture.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Fast Launch",
+        "desc": "We launch MVP projects in the shortest possible time, saving your budget.",
+        "benefits": [
+          {
+            "icon": "fa-cubes",
+            "title": "Extensive Tech Stack",
+            "desc": "We build more than just websites: complex SPAs on Next.js, Astro, plus custom bots and web scrapers."
+          },
+          {
+            "icon": "fa-robot",
+            "title": "Automation & Bots",
+            "desc": "We automate business processes by developing smart Telegram bots and custom scraping systems."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Is it possible to develop a custom data scraper?",
+            "a": "Yes, we create tailored solutions for automated data extraction and processing from diverse internet resources."
+          },
+          {
+            "q": "Do you only build traditional websites?",
+            "a": "No, we specialize in high-load Web Apps, PWAs, Telegram bots, and complex data collection scripts (scrapers)."
+          }
+        ]
+      },
+      {
+        "icon": "fa-search",
+        "title": "SEO Optimization",
+        "desc": "All websites are developed taking into account current search engine algorithms for better ranking."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Stuttgart?",
+        "a": "Pricing starts from €250 for Astro landing pages and €300 for Next.js websites. Custom web applications start from €750."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from €50 depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

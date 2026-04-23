@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "Разработка сайтов и ботов в Осиповичах | AVPdev",
+    "description": "AVPdev в Осиповичах: профессиональная разработка веб-приложений на Next.js, Telegram ботов и систем автоматизации. Эксперты в React и Node.js.",
+    "h1": "Цифровые инструменты и автоматизация для бизнеса в Осиповичах",
+    "p": "Осиповичи — важный промышленный и транспортный узел Могилевской области. Команда AVPdev разрабатывает высокопроизводительные сайты на Next.js и автоматизирует бизнес-процессы через умных Telegram-ботов, помогая предприятиям Осипович двигаться быстрее.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Скорость как конкурентное преимущество",
+        "desc": "Сайты на Astro загружаются мгновенно, обеспечивая лучшее SEO и высокие позиции в поиске для бизнеса в Осиповичах."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Умные Telegram-боты",
+        "desc": "Создаем ботов для промышленных и сервисных компаний Осипович — принимают заявки, отправляют уведомления и работают 24/7."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Осиповичах?",
+        "a": "Цены начинаются от 730 BYN за лэндинг на Astro и от 880 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2190 BYN."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 150 BYN в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Osipovichi Web Development | Next.js & Node.js Agency",
+    "description": "AVPdev Osipovichi: High-performance web applications, custom Telegram bots, and scalable backend solutions for Mogilev region businesses.",
+    "h1": "Elite Software Engineering for Osipovichi Enterprises",
+    "p": "Osipovichi is a key industrial and transport hub of the Mogilev region. At AVPdev, we build high-speed websites on Next.js and automate business workflows with intelligent bots, helping Osipovichi companies grow faster.",
+    "benefits": [
+      {
+        "icon": "fa-server",
+        "title": "Scalable High-Load Systems",
+        "desc": "Our Next.js platforms are designed to handle traffic of any scale while maintaining extreme speed for Osipovichi regional businesses."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Intelligent Telegram Bots",
+        "desc": "Streamline your Osipovichi business operations with custom Telegram assistants that handle orders, notifications and workflows 24/7."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Osipovichi?",
+        "a": "Pricing starts from 730 BYN for Astro landing pages and 880 BYN for Next.js websites. Custom web applications start from 2190 BYN."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 150 BYN depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

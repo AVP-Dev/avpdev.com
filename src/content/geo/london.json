@@ -1,0 +1,42 @@
+{
+  "en": {
+    "title": "Web Design & Development Agency in London | Next-Gen Tech",
+    "description": "Expert web development agency in London, UK. We build highly converting e-commerce sites, fintech apps, and B2B platforms using the modern JS ecosystem.",
+    "h1": "Premium Web Engineering for London's Most Ambitious Businesses",
+    "p": "AVPdev builds the digital infrastructure London businesses need to compete globally: Next.js platforms, scalable APIs, and intelligent Telegram automation.",
+    "benefits": [
+      {
+        "icon": "fa-shield-check",
+        "title": "GDPR & UK Privacy",
+        "desc": "We build privacy-first applications ensuring full compliance with strict UK data protection laws."
+      },
+      {
+        "icon": "fa-pound-sign",
+        "title": "E-commerce Mastery",
+        "desc": "Seamless integration with Shopify, Stripe, and UK-focused logistics and payment providers for maximum checkout conversions."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in London?",
+        "a": "Pricing starts from £250 for Astro landing pages and £300 for Next.js websites. Custom web applications start from £750."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from £50 depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

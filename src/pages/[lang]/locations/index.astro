@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { locations } from '../../../data/locations';
-import { geoContent } from '../../../data/geo-content';
-import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import { getCollection } from 'astro:content';
 
 export const prerender = true;
 
@@ -15,7 +14,9 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 const currentLang = lang || 'ru';
-const t = useTranslations(currentLang as 'ru' | 'en');
+
+const allGeo = await getCollection('geo');
+const geoMap = Object.fromEntries(allGeo.map(e => [e.id, e.data]));
 
 // Названия стран
 const countryNames: Record<string, {ru: string, en: string}> = {
@@ -153,7 +154,7 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
                                 {visibleCities.map(loc => {
                                     const cityName = (currentLang === 'ru' ? loc.name_ru : loc.name_en) || loc.name_en || loc.name_ru || loc.slug;
                                     // Always use EN URL for cities without RU content — avoids redirect chain / 404
-                                    const hasRuContent = !!(geoContent as any)[loc.slug]?.ru;
+                                    const hasRuContent = !!geoMap[loc.slug]?.ru;
                                     const url = (currentLang === 'ru' && hasRuContent)
                                         ? `/ru/uslugi/${loc.slug}/`
                                         : `/en/services/${loc.slug}/`;
@@ -169,7 +170,7 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
                                 {hasHidden && hiddenCities.map(loc => {
                                     const cityName = (currentLang === 'ru' ? loc.name_ru : loc.name_en) || loc.name_en || loc.name_ru || loc.slug;
                                     // Always use EN URL for cities without RU content — avoids redirect chain / 404
-                                    const hasRuContent = !!(geoContent as any)[loc.slug]?.ru;
+                                    const hasRuContent = !!geoMap[loc.slug]?.ru;
                                     const url = (currentLang === 'ru' && hasRuContent)
                                         ? `/ru/uslugi/${loc.slug}/`
                                         : `/en/services/${loc.slug}/`;

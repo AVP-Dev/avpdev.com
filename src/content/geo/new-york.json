@@ -1,0 +1,42 @@
+{
+  "en": {
+    "title": "Web Development in New York | Enterprise Digital Solutions",
+    "description": "Top-tier web development agency in NYC. We build fast, accessible, and scalable tech platforms for startups and enterprises across New York.",
+    "h1": "NYC-Scale Web Engineering for Ambitious Businesses",
+    "p": "AVPdev builds Wall Street-grade Next.js platforms, SaaS MVPs, and intelligent automation for New York's fastest-growing startups and enterprises.",
+    "benefits": [
+      {
+        "icon": "fa-building",
+        "title": "Enterprise-Grade Scale",
+        "desc": "Our architectures handle high traffic spikes, ensuring your application stays up during intense media coverage or marketing drops."
+      },
+      {
+        "icon": "fa-universal-access",
+        "title": "ADA Compliance",
+        "desc": "We natively implement rigorous accessibility (a11y) standards crucial for operating within US and NY state regulations."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in New York?",
+        "a": "Pricing starts from $250 for Astro landing pages and $300 for Next.js websites. Custom web applications start from $750."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from $50 depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

@@ -14,17 +14,17 @@ import visaLogo from "../assets/images/payments/Visa_Inc._logo_(2021–present).
 import mcLogo from "../assets/images/payments/Mastercard-logo.svg.png";
 import mirLogo from "../assets/images/payments/Mir-logo.SVG.svg.png";
 import belcardLogo from "../assets/images/payments/belcard.png";
-import sbpLogo from "../assets/images/payments/SBP.png";
+import sbpLogo from "../assets/images/payments/sbp.svg";
 import eripLogo from "../assets/images/payments/erip.png";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const allBrandImages = [
-    { src: visaLogo, alt: "Visa", width: 300, height: 150, class: "visa" },
-    { src: mcLogo, alt: "Mastercard", width: 250, height: 150, class: "mc" },
-    { src: mirLogo, alt: "Мир", width: 250, height: 100, class: "mir" },
-    { src: belcardLogo, alt: "Белкарт", width: 300, height: 100, class: "belcard" }
+    { src: visaLogo, alt: "Visa", class: "visa" },
+    { src: mcLogo, alt: "Mastercard", class: "mc" },
+    { src: mirLogo, alt: "Мир", class: "mir" },
+    { src: belcardLogo, alt: "Белкарт", class: "belcard" }
 ];
 ---
 
@@ -37,7 +37,7 @@ const allBrandImages = [
                 <div class="ribbon-row">
                     {allBrandImages.map(img => (
                         <div class="brand-img-wrapper" title={img.alt}>
-                            <Image src={img.src} alt={img.alt} width={img.width} height={img.height} densities={[2, 3]} quality="high" class={`brand-img ${img.class}`} />
+                            <Image src={img.src} alt={img.alt} height={64} densities={[1.5, 2, 3]} quality="high" class={`brand-img ${img.class}`} />
                         </div>
                     ))}
                     <div class="brand-icon-wrapper" title="PayPal">
@@ -49,10 +49,10 @@ const allBrandImages = [
                 
                 <div class="ribbon-row">
                     <div class="brand-item sbp" title="СБП">
-                        <Image src={sbpLogo} alt="СБП" width={120} height={120} densities={[2, 3]} quality="high" class="brand-img-sbp" />
+                        <Image src={sbpLogo} alt="СБП" height={64} densities={[1.5, 2, 3]} quality="high" class="brand-img-sbp" />
                     </div>
                     <div class="brand-item erip" title="ЕРИП">
-                        <Image src={eripLogo} alt="ЕРИП" width={120} height={60} densities={[2, 3]} quality="high" class="brand-img-erip" />
+                        <Image src={eripLogo} alt="ЕРИП" height={64} densities={[1.5, 2, 3]} quality="high" class="brand-img-erip" />
                     </div>
                 </div>
 
@@ -78,16 +78,16 @@ const allBrandImages = [
                     
                     <div class="icon-row mt-sm">
                         <div class="brand-img-wrapper" title="Visa">
-                            <Image src={visaLogo} alt="Visa" width={300} height={150} densities={[2, 3]} quality="high" class="brand-img visa" />
+                            <Image src={visaLogo} alt="Visa" height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img visa" />
                         </div>
                         <div class="brand-img-wrapper" title="Mastercard">
-                            <Image src={mcLogo} alt="Mastercard" width={250} height={150} densities={[2, 3]} quality="high" class="brand-img mc" />
+                            <Image src={mcLogo} alt="Mastercard" height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img mc" />
                         </div>
                         <div class="brand-img-wrapper" title="Мир">
-                            <Image src={mirLogo} alt="Мир" width={250} height={100} densities={[2, 3]} quality="high" class="brand-img mir" />
+                            <Image src={mirLogo} alt="Мир" height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img mir" />
                         </div>
                         <div class="brand-img-wrapper" title="Белкарт">
-                            <Image src={belcardLogo} alt="Белкарт" width={300} height={100} densities={[2, 3]} quality="high" class="brand-img belcard" />
+                            <Image src={belcardLogo} alt="Белкарт" height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img belcard" />
                         </div>
                         <div class="brand-icon-wrapper" title="PayPal">
                             <i class="fa-brands fa-paypal"></i>
@@ -114,7 +114,7 @@ const allBrandImages = [
                         <!-- SBP -->
                         <div class="brand-item sbp" title="СБП (Система Быстрых Платежей)">
                             <div class="brand-img-wrapper">
-                                <Image src={sbpLogo} alt="СБП" width={150} height={150} densities={[2, 3]} quality="high" class="brand-img-sbp" />
+                                <Image src={sbpLogo} alt="СБП" height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img-sbp" />
                             </div>
                             <span class="brand-text">СБП</span>
                         </div>
@@ -122,7 +122,7 @@ const allBrandImages = [
                         <!-- ERIP / BSB -->
                         <div class="brand-item erip" title="ЕРИП / BSB Link">
                             <div class="brand-img-wrapper">
-                                <Image src={eripLogo} alt="ЕРИП" width={150} height={75} densities={[2, 3]} quality="high" class="brand-img-erip" />
+                                <Image src={eripLogo} alt="ЕРИП" height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img-erip" />
                             </div>
                             <span class="brand-text">ЕРИП / BSB</span>
                         </div>
@@ -235,7 +235,7 @@ const allBrandImages = [
     }
 
     .ribbon-row i {
-        font-size: 1.4rem; /* Balanced with 28px height images */
+        font-size: 1.4rem; /* Balanced with 32px containers */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -245,12 +245,12 @@ const allBrandImages = [
         width: 1px;
         height: 20px;
         background: var(--border-color);
-        opacity: 0.3;
+        opacity: 0.2;
     }
     
     .ribbon-row .crypto-icon {
-        width: 28px; /* Fixed width to match icons for perfect spacing */
-        height: 28px;
+        width: 26px; 
+        height: 26px;
         font-size: 0.8rem;
     }
 
@@ -330,6 +330,7 @@ const allBrandImages = [
         display: flex;
         align-items: center;
         justify-content: center;
+        height: 32px;
         filter: grayscale(100%);
         opacity: 0.6;
         transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -346,6 +347,7 @@ const allBrandImages = [
         display: flex;
         align-items: center;
         justify-content: center;
+        height: 32px;
         color: var(--text-secondary-color);
         opacity: 0.6;
         filter: grayscale(100%);
@@ -365,14 +367,19 @@ const allBrandImages = [
     }
 
     .brand-img {
-        width: auto;
-        height: auto;
-        max-height: 28px;
-        object-fit: contain;
+        display: block;
+        width: auto !important;
+        height: auto !important;
+        max-height: 20px !important; /* Base height for Visa/Mir */
+        object-fit: contain !important;
     }
 
-    .brand-img.mir, .brand-img.belcard {
-        max-height: 28px;
+    .brand-img.mc, .brand-img.belcard {
+        max-height: 24px !important; /* Visually smaller logos get more height to balance */
+    }
+
+    .brand-img.mir {
+        max-height: 18px !important; /* Mir logo is very dense, slightly less height helps */
     }
 
     /* Text Logos (Fallback) */
@@ -440,6 +447,7 @@ const allBrandImages = [
     .brand-item {
         display: flex;
         align-items: center;
+        height: 32px;
         gap: 0.5rem;
         color: var(--text-secondary-color);
         opacity: 0.6;
@@ -463,7 +471,7 @@ const allBrandImages = [
     .brand-img-sbp, .brand-img-erip {
         width: auto;
         height: auto;
-        max-height: 28px;
+        max-height: 22px !important;
         filter: grayscale(100%);
         opacity: 0.7;
         transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);

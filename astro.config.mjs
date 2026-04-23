@@ -4,7 +4,6 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import remarkHeadingId from 'remark-heading-id';
 import { locations } from './src/data/locations.ts';
-import { geoContent } from './src/data/geo-content.ts';
 
 const site = 'https://avpdev.com';
 
@@ -33,25 +32,28 @@ export default defineConfig({
     sitemap({
       // Фильтрация: убираем корень и RU-города без русского контента (redirect-only)
       filter: (page) => {
-        // Исключить корневой URL (делает 301 redirect в index.astro)
+        // Exclude root (301 redirect in index.astro)
         if (page === `${site}/` || page === `${site}`) return false;
 
-        // Исключить любые страницы, которых нет в контенте для конкретного языка
-        const isRuGeo = page.includes('/ru/uslugi/');
-        const isEnGeo = page.includes('/en/services/');
+        // Exclude any 404 pages
+        if (page.includes('/404/') || page.endsWith('/404')) return false;
 
-        if (isRuGeo) {
-          const slug = page.split('/ru/uslugi/')[1].replace(/\//g, '');
-          if (enOnlyCitySlugs.includes(slug)) return false;
-        }
-
-        // Исключить страницы, которые мы знаем как редиректы из middleware
-        const redirects = [
-          '/ru/privacy-policy/', '/en/privacy-policy/',
-          '/ru/terms-of-service/', '/en/terms-of-service/',
-          '/ru/brief/', '/index.html'
+        // Exclude known redirect-only pages (handled in middleware)
+        const redirectOnlyPaths = [
+          '/ru/privacy-policy/',
+          '/en/privacy-policy/',
+          '/ru/terms-of-service/',
+          '/en/terms-of-service/',
+          '/ru/brief/',
         ];
-        if (redirects.some(r => page.endsWith(r))) return false;
+        if (redirectOnlyPaths.some(r => page.endsWith(r))) return false;
+
+        // Exclude RU geo-pages for EN-only cities (they 301 redirect to EN)
+        const isRuGeo = page.includes('/ru/uslugi/');
+        if (isRuGeo) {
+          const slug = page.split('/ru/uslugi/')[1]?.replace(/\//g, '');
+          if (slug && enOnlyCitySlugs.includes(slug)) return false;
+        }
 
         return true;
       },

@@ -13,9 +13,10 @@ interface Props {
   p: string;
   projects?: any[]; // Pass specific projects for this city
   citySlug?: string;
+  cityName?: string;
 }
 
-const { title, description, h1, p, projects, citySlug } = Astro.props;
+const { title, description, h1, p, projects, citySlug, cityName } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
 // Dynamic ordering logic to avoid identical DOM structure across all geo-pages
@@ -32,13 +33,13 @@ const isEven = citySlug ? citySlug.length % 2 === 0 : true;
   <div class="geo-sections-wrapper">
     {isEven ? (
       <>
-        <Services />
+        <Services cityName={cityName} />
         <Portfolio projects={projects} />
       </>
     ) : (
       <>
         <Portfolio projects={projects} />
-        <Services />
+        <Services cityName={cityName} />
       </>
     )}
     

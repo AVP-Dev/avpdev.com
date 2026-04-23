@@ -190,7 +190,7 @@ function initializePage() {
     // --- FAQ EXCLUSIVE ACCORDION ---
     const faqs = document.querySelectorAll('.faq-item') as NodeListOf<HTMLDetailsElement>;
     faqs.forEach(faq => {
-        faq.addEventListener('toggle', (e) => {
+        faq.addEventListener('toggle', () => {
             if (faq.open) {
                 faqs.forEach(otherFaq => {
                     if (otherFaq !== faq && otherFaq.open) {

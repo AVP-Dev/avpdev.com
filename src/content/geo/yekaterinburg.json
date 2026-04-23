@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "ИТ-разработка в Екатеринбурге | Сайты на Next.js и Боты",
+    "description": "AVPdev в Екатеринбурге: экспертное создание веб-систем, Telegram ботов и парсеров. Автоматизируйте бизнес с помощью Node.js и React.",
+    "h1": "Цифровая мощь для бизнеса и промышленности Екатеринбурга",
+    "p": "Екатеринбург — индустриальное сердце Урала. Мы предлагаем ИТ-решения, соответствующие масштабу региона: сверхбыстрые сайты на Astro и функциональные приложения на Next.js с глубокой автоматизацией на базе Node.js.",
+    "benefits": [
+      {
+        "icon": "fa-industry",
+        "title": "ИТ для промышленности",
+        "desc": "Проектируем системы мониторинга и отчетности для промышленных гигантов и среднего бизнеса Екатеринбурга."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Умная автоматизация",
+        "desc": "Внедряем ботов, которые автоматизируют логистику, продажи и клиентский сервис в Екатеринбурге."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Екатеринбурге?",
+        "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64500 руб.."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 4500 руб. в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Yekaterinburg Tech Solutions | Next.js & Node.js Development",
+    "description": "Full-stack software engineering for Yekaterinburg enterprises. High-speed websites, Telegram automation, and robust web applications from AVPdev.",
+    "h1": "Engineering Industrial Excellence for Yekaterinburg Brands",
+    "p": "Empower your Yekaterinburg operations with high-performance digital tools. AVPdev specializes in building resilient web architectures and intelligent automation bots designed for the Ural region's dynamic economy.",
+    "benefits": [
+      {
+        "icon": "fa-bolt",
+        "title": "Speed-Driven Performance",
+        "desc": "Our Astro and Next.js sites provide world-class load times for your Yekaterinburg audience, boosting ROI."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Autonomous Business Bots",
+        "desc": "Eliminate manual tasks with custom software assistants tailored for the Yekaterinburg commercial market."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Yekaterinburg?",
+        "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 64500 руб.."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 4500 руб. depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

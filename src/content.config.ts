@@ -1,14 +1,14 @@
-// src/content/config.ts
+// src/content.config.ts
+// Astro 6: Content Collections with glob() loader
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const blogCollection = defineCollection({
-	type: 'content',
-	// Используем `image()` из `schema` helper для обработки изображений
+	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/blog' }),
 	schema: ({ image }) => z.object({
 		title: z.string(),
 		description: z.string().max(160, "SEO Description must be <= 160 chars."),
 		pubDate: z.date(),
-		// heroImage теперь будет обрабатываться Astro, а не просто строкой
 		heroImage: image().optional(),
 		tags: z.array(z.string()),
 		draft: z.boolean().optional(),
@@ -16,7 +16,7 @@ const blogCollection = defineCollection({
 });
 
 const projectsCollection = defineCollection({
-	type: 'content',
+	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/projects' }),
 	schema: ({ image }) =>
 		z.object({
 			titleKey: z.string(),
@@ -78,7 +78,7 @@ const projectsCollection = defineCollection({
 });
 
 const legalCollection = defineCollection({
-	type: 'content',
+	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/legal' }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
@@ -86,8 +86,45 @@ const legalCollection = defineCollection({
 	}),
 });
 
+const geo = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/content/geo" }),
+  schema: z.object({
+    ru: z.object({
+      title: z.string(),
+      description: z.string(),
+      h1: z.string(),
+      p: z.string(),
+      benefits: z.array(z.object({
+        icon: z.string(),
+        title: z.string(),
+        desc: z.string()
+      })).optional(),
+      faq: z.array(z.object({
+        q: z.string(),
+        a: z.string()
+      })).optional()
+    }).optional(),
+    en: z.object({
+      title: z.string(),
+      description: z.string(),
+      h1: z.string(),
+      p: z.string(),
+      benefits: z.array(z.object({
+        icon: z.string(),
+        title: z.string(),
+        desc: z.string()
+      })).optional(),
+      faq: z.array(z.object({
+        q: z.string(),
+        a: z.string()
+      })).optional()
+    }).optional(),
+  })
+});
+
 export const collections = {
 	blog: blogCollection,
 	projects: projectsCollection,
 	legal: legalCollection,
+	geo: geo,
 };

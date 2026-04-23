@@ -1,0 +1,87 @@
+{
+  "ru": {
+    "title": "Разработка Next.js и Ботов в Бресте | AVPdev",
+    "description": "AVPdev: Комплексные веб-решения, боты и парсеры для бизнеса в Бресте. Профессиональный стек: React, Node.js, Astro.",
+    "h1": "Цифровая трансформация вашего бизнеса в Бресте с AVPdev",
+    "p": "AVPdev предлагает передовые решения для компаний в Бресте, нуждающихся в высокой производительности и автоматизации. Мы создаем сложные веб-приложения на Next.js, мощные системы на Node.js и специализированные инструменты, такие как кастомные Telegram-боты и интеллектуальные парсеры данных, чтобы обеспечить вашему бизнесу конкурентное преимущество.",
+    "benefits": [
+      {
+        "icon": "fa-robot",
+        "title": "Автоматизация процессов с ботами",
+        "desc": "Разрабатываем высокоинтегрированные Telegram-боты для Бреста, которые берут на себя рутинные задачи, улучшают взаимодействие с клиентами и автоматизируют внутренние рабочие процессы, освобождая ваши ресурсы."
+      },
+      {
+        "icon": "fa-cogs",
+        "title": "Производительные веб-приложения",
+        "desc": "Используя React и Next.js, мы строим быстрые, масштабируемые и надежные фронтенд и бэкенд системы, которые гарантируют безупречный пользовательский опыт для ваших клиентов в Бресте."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Бресте?",
+        "a": "Цены начинаются от 730 BYN за лэндинг на Astro и от 880 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2190 BYN."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 150 BYN в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Brest Web Development Experts: Next.js & Custom Systems",
+    "description": "AVPdev delivers high-performance web solutions, custom Telegram bots, and powerful data scrapers for businesses operating in Brest.",
+    "h1": "Advanced Web Solutions & Automation for Brest Businesses",
+    "p": "Elevate your digital footprint in Brest with AVPdev's specialized expertise in cutting-edge frameworks like Next.js and Astro. We engineer robust, scalable backend systems and deploy intelligent automation tools, including custom Telegram Bots and complex data parsers, tailored precisely to the unique operational demands of the Brest market.",
+    "benefits": [
+      {
+        "icon": "fa-robot",
+        "title": "Intelligent Process Automation",
+        "desc": "We build custom Telegram Bots and automated data scrapers that integrate seamlessly into your Brest operations, eliminating manual effort and ensuring you capture critical market intelligence efficiently."
+      },
+      {
+        "icon": "fa-cogs",
+        "title": "Blazing Fast Performance Architectures",
+        "desc": "Leveraging React, Next.js, and Astro, we construct web applications designed for unparalleled speed and reliability, providing your Brest clientele with a superior user experience that drives engagement."
+      },
+      {
+        "icon": "fa-server",
+        "title": "Robust Backend Engineering",
+        "desc": "Our proficiency in Node.js allows us to develop secure, high-throughput backend systems capable of handling complex transaction volumes and data processing required by growing enterprises in Brest."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Brest?",
+        "a": "Pricing starts from 730 BYN for Astro landing pages and 880 BYN for Next.js websites. Custom web applications start from 2190 BYN."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 150 BYN depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

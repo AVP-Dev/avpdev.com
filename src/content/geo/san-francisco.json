@@ -1,0 +1,64 @@
+{
+  "en": {
+    "title": "Web Development in San Francisco | Silicon Valley Standards",
+    "description": "Premium web development in San Francisco. We deliver world-class websites and web apps for startups and tech giants.",
+    "h1": "Bay Area-Caliber Web Engineering for SF's Innovative Companies",
+    "p": "AVPdev delivers SaaS-ready Next.js platforms, AI integrations, and intelligent Telegram bots for San Francisco's most forward-thinking startups.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Fast Launch",
+        "desc": "We launch MVP projects in the shortest possible time, saving your budget.",
+        "benefits": [
+          {
+            "icon": "fa-server",
+            "title": "Backend & Web Apps",
+            "desc": "We architect fault-tolerant web applications and complex APIs tailored to your business needs."
+          },
+          {
+            "icon": "fa-cubes",
+            "title": "Extensive Tech Stack",
+            "desc": "We build more than just websites: complex SPAs on Next.js, Astro, plus custom bots and web scrapers."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Do you only build traditional websites?",
+            "a": "No, we specialize in high-load Web Apps, PWAs, Telegram bots, and complex data collection scripts (scrapers)."
+          },
+          {
+            "q": "How is the project cost estimated?",
+            "a": "Pricing is calculated individually based on the technical specification. Effort varies greatly between a simple landing page and a complex web app."
+          }
+        ]
+      },
+      {
+        "icon": "fa-search",
+        "title": "SEO Optimization",
+        "desc": "All websites are developed taking into account current search engine algorithms for better ranking."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in San Francisco?",
+        "a": "Pricing starts from $250 for Astro landing pages and $300 for Next.js websites. Custom web applications start from $750."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from $50 depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "ИТ-разработка в Краснодаре | Next.js, Боты, Агротех",
+    "description": "AVPdev Краснодар: разработка премиальных сайтов на Next.js, Telegram ботов и систем автоматизации для бизнеса. Эксперты в Node.js системной разработке.",
+    "h1": "Технологии будущего для растущего рынка Краснодара",
+    "p": "Краснодар — один из самых динамичных регионов России. Мы помогаем застройщикам, агрохолдингам и ритейлу Краснодара внедрять передовые ИТ-инструменты: от сверхбыстрых сайтов на Astro до умных ботов на Node.js.",
+    "benefits": [
+      {
+        "icon": "fa-sun",
+        "title": "Решения для юга России",
+        "desc": "Проектируем масштабируемые архитектуры на Next.js, готовые к высокому трафику краснодарского рынка."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Боты для бизнеса",
+        "desc": "Автоматизируйте взаимодействие с клиентами в Краснодаре через кастомных ботов в Telegram."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Краснодаре?",
+        "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64500 руб.."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 4500 руб. в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Krasnodar Web Engineering | Next.js & Automation Specialists",
+    "description": "AVPdev Krasnodar: specialized in high-performance web apps, custom Telegram bots, and scalable backend for modern brands in Southern Russia.",
+    "h1": "Crafting High-End Digital Solutions for the Krasnodar Market",
+    "p": "Accelerate your Krasnodar-based enterprise with premium software engineering. At AVPdev, we build fast, scalable web applications and intelligent automation tools that empower your brand to lead.",
+    "benefits": [
+      {
+        "icon": "fa-palette",
+        "title": "Premium UI/UX Design",
+        "desc": "We deliver stunning React interfaces backed by lightning-fast Next.js architectures for the elite Krasnodar market."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Advanced Bot Ecosystems",
+        "desc": "Stay connected with your audience in Krasnodar 24/7 with custom software assistants that handle complex workflows."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Krasnodar?",
+        "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 64500 руб.."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 4500 руб. depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

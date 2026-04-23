@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "ИТ-разработка в Жодино | Next.js, Боты, Парсеры",
+    "description": "AVPdev в Жодино: современные веб-приложения для промышленности и бизнеса. Разработка ботов в Telegram и систем сбора данных.",
+    "h1": "Цифровая трансформация для промышленного лидера — Жодино",
+    "p": "В Жодино ценят мощь и эффективность. Мы разрабатываем ИТ-инструменты такого же масштаба: отказоустойчивые веб-системы на Next.js и мощные боты на Node.js для автоматизации сложных промышленных и бизнес-процессов.",
+    "benefits": [
+      {
+        "icon": "fa-industry",
+        "title": "Решения для индустрии",
+        "desc": "Проектируем панели управления и ботов-контролеров для производственных циклов предприятий Жодино."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Интеллектуальные Боты",
+        "desc": "Автоматизируйте уведомления и отчетность в вашем подразделении в Жодино с помощью надежных кастомных ботов."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Жодино?",
+        "a": "Цены начинаются от 730 BYN за лэндинг на Astro и от 880 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2190 BYN."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 150 BYN в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Zhodino Tech Solutions | Next.js & Industrial Automation",
+    "description": "High-end web engineering for Zhodino industries. We build robust, scalable applications and intelligent automation tools on Node.js.",
+    "h1": "Empowering Zhodino's Industrial Might with Superior Tech",
+    "p": "Zhodino enterprises require resilient, high-speed digital infrastructure. At AVPdev, we specialize in building complex backend systems and modern web interfaces tailored for high-load industrial operations.",
+    "benefits": [
+      {
+        "icon": "fa-cogs",
+        "title": "Resilient Architectures",
+        "desc": "Our software is designed to handle large-scale data and transaction volumes for major Zhodino enterprises."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Enterprise Automation Bots",
+        "desc": "Connect your Zhodino operations with automated Telegram tools that handle logging, alerts, and reporting seamlessly."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Zhodino?",
+        "a": "Pricing starts from 730 BYN for Astro landing pages and 880 BYN for Next.js websites. Custom web applications start from 2190 BYN."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 150 BYN depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

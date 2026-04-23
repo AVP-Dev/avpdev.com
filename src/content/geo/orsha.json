@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "Разработка на Next.js и ботов в Орше | AVPdev",
+    "description": "AVPdev: Профессиональная разработка веб-приложений, ботов и парсеров в Орше. Технологии: Next.js, Node.js, Astro. Автоматизируйте бизнес уже сегодня.",
+    "h1": "Экспертные ИТ-решения для логистического и делового центра Орши",
+    "p": "Орша — ключевой узел, требующий четких и быстрых ИТ-решений. AVPdev специализируется на создании высокопроизводительных систем автоматизации и веб-приложений на Next.js, помогая компаниям в Орше эффективно управлять данными и взаимодействовать с клиентами.",
+    "benefits": [
+      {
+        "icon": "fa-robot",
+        "title": "Автоматизация для логистики и ритейла",
+        "desc": "Наши боты на Node.js могут обрабатывать статусы заказов, маршруты и уведомления в реальном времени, что идеально для бизнеса в Орше."
+      },
+      {
+        "icon": "fa-rocket",
+        "title": "Высокая производительность",
+        "desc": "Приложения на Next.js и Astro обеспечивают мгновенный отклик, что критически важно для оперативной работы компаний Орши."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Орше?",
+        "a": "Цены начинаются от 730 BYN за лэндинг на Astro и от 880 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2190 BYN."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 150 BYN в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Web Development & Automation in Orsha | AVPdev",
+    "description": "Boost your Orsha operations with expert Next.js development and custom Telegram bots. Robust software solutions for a high-performance era.",
+    "h1": "Custom Software Engineering for the Modern Orsha Business Landscape",
+    "p": "Orsha enterprises need technology that moves as fast as global markets. At AVPdev, we specialize in building complex web apps on Next.js and custom automation tools on Node.js, ensuring your Orsha-based business remains agile and data-driven.",
+    "benefits": [
+      {
+        "icon": "fa-robot",
+        "title": "Strategic Bot Automation",
+        "desc": "Implement Telegram bots that handle complex transactional logic and customer workflows, specifically designed for the Orsha business environment."
+      },
+      {
+        "icon": "fa-cogs",
+        "title": "Agile Web Platforms",
+        "desc": "Leverage Next.js and Astro to build platforms that scale effortlessly as your digital needs in Orsha expand, maintaining peak efficiency."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Orsha?",
+        "a": "Pricing starts from 730 BYN for Astro landing pages and 880 BYN for Next.js websites. Custom web applications start from 2190 BYN."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 150 BYN depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}
