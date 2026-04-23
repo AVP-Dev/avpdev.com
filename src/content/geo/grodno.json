@@ -1,0 +1,87 @@
+{
+  "ru": {
+    "title": "Разработка Next.js и ботов в Гродно | AVPdev",
+    "description": "AVPdev: Профессиональная разработка сложных веб-приложений, ботов Telegram и парсеров для бизнеса в Гродно. Технологии Next.js, React, Node.js.",
+    "h1": "Экспертная веб-разработка для бизнеса в Гродно: Скорость и Масштаб",
+    "p": "Ваш бизнес в Гродно нуждается в передовых цифровых решениях? AVPdev специализируется на создании высокопроизводительных веб-приложений на Next.js и Astro, а также на автоматизации процессов с помощью кастомных Telegram-ботов и мощных парсеров данных, чтобы обеспечить вам конкурентное преимущество.",
+    "benefits": [
+      {
+        "icon": "fa-robot",
+        "title": "Автоматизация с Telegram Ботами",
+        "desc": "Разрабатываем сложные, интегрированные Telegram-боты, которые берут на себя рутинные задачи вашего предприятия в Гродно, будь то управление заказами, уведомления или сбор обратной связи, высвобождая ресурсы команды."
+      },
+      {
+        "icon": "fa-cogs",
+        "title": "Производительность на Next.js и Astro",
+        "desc": "Мы строим современные, молниеносно быстрые веб-интерфейсы и корпоративные порталы, используя React, Next.js и Astro, что критически важно для удержания пользователей и SEO-позиций вашего проекта в регионе Гродно."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Гродно?",
+        "a": "Цены начинаются от 730 BYN за лэндинг на Astro и от 880 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2190 BYN."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 150 BYN в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Expert Web Development in Grodno | Next.js & Node.js",
+    "description": "AVPdev delivers cutting-edge web solutions for Grodno businesses. Specializing in high-performance Next.js apps, custom Telegram bots, and advanced data scraping.",
+    "h1": "Elevating Grodno Businesses with Advanced Custom Software Solutions",
+    "p": "For forward-thinking enterprises in Grodno seeking a competitive edge, AVPdev engineers robust, scalable digital platforms. Whether you require intricate backend systems powered by Node.js or highly efficient, modern interfaces built with Next.js and Astro, we transform complex digital challenges into powerful operational advantages right here in Grodno.",
+    "benefits": [
+      {
+        "icon": "fa-robot",
+        "title": "Hyper-Efficient Process Automation",
+        "desc": "We design and deploy sophisticated custom Telegram Bots tailored to streamline communication, internal workflows, and customer engagement specifically for operational needs within the Grodno commercial ecosystem, ensuring consistent productivity."
+      },
+      {
+        "icon": "fa-cogs",
+        "title": "Blazing Fast, Reliable Web Applications",
+        "desc": "Leveraging modern frameworks like Next.js and Astro, we build web applications that offer unparalleled speed and reliability, ensuring your Grodno-based users and customers experience flawless performance across all devices."
+      },
+      {
+        "icon": "fa-database",
+        "title": "Intelligent Data Acquisition Systems",
+        "desc": "Our expertise in complex Data Scrapers (parsers) allows Grodno companies to ethically gather critical market intelligence and competitive insights, turning raw data streams into actionable business intelligence."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Grodno?",
+        "a": "Pricing starts from 730 BYN for Astro landing pages and 880 BYN for Next.js websites. Custom web applications start from 2190 BYN."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 150 BYN depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

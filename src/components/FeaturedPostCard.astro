@@ -19,7 +19,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString(lang, {
 });
 ---
 
-<a href={`/${lang}/blog/${post.slug.split("/")[1]}/`} class="featured-card">
+<a href={`/${lang}/blog/${post.id.replace(/^(ru|en)\//, '').replace(/\.mdx?$/, '')}/`} class="featured-card">
   {
     post.data.heroImage && (
       <div class="featured-card-image">

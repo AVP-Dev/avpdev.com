@@ -36,8 +36,16 @@ interface ImportMeta {
 }
 
 declare global {
+	interface Window {
+		turnstile?: any;
+		ym?: (id: number, action: string, target: string) => void;
+		gtag?: (command: string, action: string, params: any) => void;
+		getUtmParams?: () => Record<string, string>;
+		particlesJS?: (tag_id: string, params: any) => void;
+	}
 	interface Document {
 		addEventListener<K extends keyof CustomEventMap>(type: K, listener: (this: Document, ev: CustomEventMap[K]) => void): void;
 		dispatchEvent<K extends keyof CustomEventMap>(ev: CustomEventMap[K]): boolean;
 	}
+	function particlesJS(tag_id: string, params: any): void;
 }

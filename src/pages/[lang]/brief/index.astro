@@ -935,7 +935,8 @@ input[type="checkbox"]:checked+span::after {
             // Turnstile validation
             const turnstileResponse = form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement;
             if (!turnstileResponse || !turnstileResponse.value) {
-                alert(lang === "ru" ? "Пожалуйста, пройдите проверку на спам." : "Please complete the anti-spam check.");
+                const currentLang = document.documentElement.lang;
+                alert(currentLang === "ru" ? "Пожалуйста, пройдите проверку на спам." : "Please complete the anti-spam check.");
                 return;
             }
 
@@ -1039,4 +1040,4 @@ input[type="checkbox"]:checked+span::after {
         });
     });
 </script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>

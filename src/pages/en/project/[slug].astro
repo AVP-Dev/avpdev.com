@@ -1,6 +1,6 @@
 ---
 // src/pages/en/project/[slug].astro
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import CaseStudyLayout from "../../../layouts/CaseStudyLayout.astro";
 import PortfolioCard from "../../../components/PortfolioCard.astro";
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
         return id.startsWith("en/");
     });
     return allProjects.map((project) => ({
-        params: { slug: project.slug.replace(/^en\//, "") },
+        params: { slug: project.id.replace(/^en\//, "").replace(/\.mdx?$/, "") },
         props: { project },
     }));
 }
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 const lang = "en";
 const t = useTranslations(lang);
 const { project } = Astro.props;
-const { Content } = await project.render();
+const { Content } = await render(project);
 
 if (!project) {
     return Astro.redirect(`/${lang}/404`);
@@ -195,17 +195,18 @@ const projectSchema = {
         {
             relatedProjects.length > 0 && (
                 <div class="related-wrapper">
-                    <h2 class="related-title">{lang === 'ru' ? 'Другие проекты' : 'Related Projects'}</h2>
+                    <h2 class="related-title">{'Related Projects'}</h2>
                     <div class="related-flex">
                         {relatedProjects.map((p) => (
                             <div class="related-item">
                                 <PortfolioCard
+                                    id={0 as any}
+                                    tags={p.data.stack as any}
                                     img={p.data.heroImage}
-                                    titleKey={p.data.titleKey}
-                                    descriptionKey={p.data.descriptionKey}
-                                    link={`/${lang}/project/${p.slug.replace(/^ru\/|^en\//, "")}/`}
+                                    titleKey={p.data.titleKey as any}
+                                    link={`/${lang}/project/${p.id.replace(/^ru\/|^en\//, "").replace(/\.mdx?$/, "")}/`}
                                     techStack={p.data.content.techStack}
-                                    category={p.data.category}
+                                    category={p.data.category as any}
                                 />
                             </div>
                         ))}

@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "Разработка сайтов и ботов в Кобрине | AVPdev",
+    "description": "AVPdev в Кобрине: современные решения на Next.js, Telegram боты и парсеры данных для автоматизации вашего бизнеса. Скорость и качество.",
+    "h1": "ИТ-партнер для предпринимателей и компаний Кобрина",
+    "p": "Кобрин — город с активным торговым и производственным сектором. Мы предлагаем современные веб-площадки на базе Next.js и Astro, а также автоматизацию ежедневной рутины через умных Telegram-ботов и парсеры на Node.js.",
+    "benefits": [
+      {
+        "icon": "fa-robot",
+        "title": "Автоматизация в Telegram",
+        "desc": "Создаем ботов для Кобрина, которые принимают заказы и консультируют клиентов 24/7, экономя ваше время."
+      },
+      {
+        "icon": "fa-cogs",
+        "title": "Современные Web-Apps",
+        "desc": "Разрабатываем сложные веб-интерфейсы на React и Next.js для управления задачами вашего бизнеса в Кобрине."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Кобрине?",
+        "a": "Цены начинаются от 730 BYN за лэндинг на Astro и от 880 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2190 BYN."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 150 BYN в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Web Engineering in Kobrin | Next.js & Custom Bots",
+    "description": "Scale your Kobrin business with high-performance web applications and intelligent Telegram automation. Expert Node.js services from AVPdev.",
+    "h1": "Advanced Digital Tools for Kobrin Business Growth",
+    "p": "Empower your Kobrin-based operations with cutting-edge tech. AVPdev specializes in building fast, scalable applications using Next.js and Astro, coupled with custom automation bots tailored for the local market.",
+    "benefits": [
+      {
+        "icon": "fa-bolt",
+        "title": "High-Performance Stack",
+        "desc": "We utilize modern JS frameworks to provide the best possible user experience for your Kobrin customers."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Automated Workflows",
+        "desc": "Streamline your internal processes in Kobrin with sophisticated bots that handle data entry and client care seamlessly."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Kobrin?",
+        "a": "Pricing starts from 730 BYN for Astro landing pages and 880 BYN for Next.js websites. Custom web applications start from 2190 BYN."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 150 BYN depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

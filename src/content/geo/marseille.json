@@ -1,0 +1,64 @@
+{
+  "en": {
+    "title": "Web Development in Marseille | Digital Solutions",
+    "description": "Top-rated web development in Marseille. We build custom websites and applications.",
+    "h1": "Mediterranean Commerce Goes Digital with AVPdev in Marseille",
+    "p": "AVPdev engineers fast, scalable Next.js websites and logistics automation for Marseille's port commerce and tourism sectors.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Fast Launch",
+        "desc": "We launch MVP projects in the shortest possible time, saving your budget.",
+        "benefits": [
+          {
+            "icon": "fa-server",
+            "title": "Backend & Web Apps",
+            "desc": "We architect fault-tolerant web applications and complex APIs tailored to your business needs."
+          },
+          {
+            "icon": "fa-robot",
+            "title": "Automation & Bots",
+            "desc": "We automate business processes by developing smart Telegram bots and custom scraping systems."
+          }
+        ],
+        "faq": [
+          {
+            "q": "What technologies do you use in development?",
+            "a": "Our stack encompasses fast SSG sites on Astro to robust enterprise systems on Next.js. We also develop parsers and bots."
+          },
+          {
+            "q": "Is it possible to develop a custom data scraper?",
+            "a": "Yes, we create tailored solutions for automated data extraction and processing from diverse internet resources."
+          }
+        ]
+      },
+      {
+        "icon": "fa-search",
+        "title": "SEO Optimization",
+        "desc": "All websites are developed taking into account current search engine algorithms for better ranking."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Marseille?",
+        "a": "Pricing starts from €250 for Astro landing pages and €300 for Next.js websites. Custom web applications start from €750."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from €50 depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "en": {
+    "title": "Web Development in Tallinn | e-Estonia's Tech Partner",
+    "description": "Advanced web development in Tallinn. As a tech partner in e-Estonia, we build innovative and secure websites for a digital-first world.",
+    "h1": "Digital-First Web Solutions for Tallinn's E-Governance Economy",
+    "p": "AVPdev builds secure, API-driven Next.js applications and Telegram bots that align with Tallinn's world-leading digital infrastructure standards.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Elite Web Performance for Tallinn",
+        "desc": "We build Astro and Next.js websites for Tallinn's e-governance and digital innovation, achieving 90+ Lighthouse scores and top search rankings."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Intelligent Automation Bots",
+        "desc": "Custom Telegram bots for Tallinn businesses: lead capture, notifications, and 24/7 customer service on autopilot."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Tallinn?",
+        "a": "Pricing starts from €250 for Astro landing pages and €300 for Next.js websites. Custom web applications start from €750."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from €50 depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

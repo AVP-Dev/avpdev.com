@@ -2,7 +2,7 @@
 // src/components/LanguageSwitcher.astro
 import { getLangFromUrl } from '../i18n/utils';
 import { locations } from '../data/locations';
-import { geoContent } from '../data/geo-content';
+import { getEntry } from 'astro:content';
 
 const lang = getLangFromUrl(Astro.url);
 const locales = ['ru', 'en'];
@@ -35,9 +35,10 @@ let cityHasRU = false;
 let cityHasEN = false;
 if (currentCitySlug) {
     const locData = locations.find(l => l.slug === currentCitySlug);
-    if (locData) {
-        cityHasRU = !!locData?.name_ru && !!(geoContent as any)[currentCitySlug]?.ru;
-        cityHasEN = !!(geoContent as any)[currentCitySlug]?.en;
+    const geoEntry = await getEntry('geo', currentCitySlug as any);
+    if (locData && geoEntry) {
+        cityHasRU = !!geoEntry.data.ru;
+        cityHasEN = !!geoEntry.data.en;
     } else {
         // If not found in locations, it's a service slug, not a city
         currentCitySlug = null;

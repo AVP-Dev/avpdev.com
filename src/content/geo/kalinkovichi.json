@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "Разработка сайтов и ботов в Калинковичах | AVPdev",
+    "description": "AVPdev: Современная веб-разработка в Калинковичах. Создаем быстрые сайты на Next.js, Telegram ботов и парсеры для автоматизации вашего бизнеса.",
+    "h1": "ИТ-решения для бизнеса и логистики в Калинковичах",
+    "p": "Калинковичи — важный транспортный узел. Мы предлагаем инструменты, которые помогут вашему бизнесу работать быстрее и точнее: от сайтов на Astro до систем автоматизации на Node.js и кастомных ботов.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Скорость загрузки",
+        "desc": "Ваш сайт в Калинковичах будет загружаться мгновенно на любом устройстве благодаря архитектуре Astro."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Боты-логисты",
+        "desc": "Автоматизация уведомлений и отчетности через Telegram — идеальное решение для бизнеса в Калинковичах."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Калинковичах?",
+        "a": "Цены начинаются от 730 BYN за лэндинг на Astro и от 880 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 2190 BYN."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 150 BYN в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Kalinkovichi Web Engineering | Next.js & Node.js Experts",
+    "description": "Full-stack software development for Kalinkovichi companies. Experience high-speed Next.js apps and intelligent automation with AVPdev.",
+    "h1": "Empowering Kalinkovichi Business with Advanced Digital Tools",
+    "p": "Leverage the power of modern web technologies for your Kalinkovichi enterprise. At AVPdev, we build high-performance applications and automation bots designed to solve real operational challenges.",
+    "benefits": [
+      {
+        "icon": "fa-layer-group",
+        "title": "Modern Technology Stack",
+        "desc": "We use industrial-grade JavaScript frameworks to ensure your Kalinkovichi project is fast and secure."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "24/7 Automation Bots",
+        "desc": "Deploy smart Telegram assistants in Kalinkovichi to manage customer care and internal task reporting."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Kalinkovichi?",
+        "a": "Pricing starts from 730 BYN for Astro landing pages and 880 BYN for Next.js websites. Custom web applications start from 2190 BYN."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 150 BYN depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "en": {
+    "title": "Web Development in Turin | Advanced Tech Partner",
+    "description": "Leading web development in Turin. We create custom, scalable web applications for forward-thinking companies.",
+    "h1": "Engineering-First Web Solutions for Turin's Automotive & Tech Sector",
+    "p": "AVPdev builds high-load Next.js platforms and Telegram automation for Turin's precision engineering and technology companies.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Fast Launch",
+        "desc": "We launch MVP projects in the shortest possible time, saving your budget.",
+        "benefits": [
+          {
+            "icon": "fa-code",
+            "title": "Modern Technologies",
+            "desc": "We utilize cutting-edge frameworks (Astro, React, Vue) for maximum UI performance."
+          },
+          {
+            "icon": "fa-robot",
+            "title": "Automation & Bots",
+            "desc": "We automate business processes by developing smart Telegram bots and custom scraping systems."
+          }
+        ],
+        "faq": [
+          {
+            "q": "How is the project cost estimated?",
+            "a": "Pricing is calculated individually based on the technical specification. Effort varies greatly between a simple landing page and a complex web app."
+          },
+          {
+            "q": "Is it possible to develop a custom data scraper?",
+            "a": "Yes, we create tailored solutions for automated data extraction and processing from diverse internet resources."
+          }
+        ]
+      },
+      {
+        "icon": "fa-search",
+        "title": "SEO Optimization",
+        "desc": "All websites are developed taking into account current search engine algorithms for better ranking."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Turin?",
+        "a": "Pricing starts from €250 for Astro landing pages and €300 for Next.js websites. Custom web applications start from €750."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from €50 depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

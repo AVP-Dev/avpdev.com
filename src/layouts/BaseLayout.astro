@@ -8,7 +8,7 @@ import ScrollToTop from '../components/ScrollToTop.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { ui } from '../i18n/ui';
 import { locations } from '../data/locations';
-import { geoContent } from '../data/geo-content';
+import { getEntry } from 'astro:content';
 
 // --- ШРИФТЫ (Self-hosted) ---
 import '@fontsource-variable/sora';
@@ -92,8 +92,9 @@ let geoHasRU = true;
 let geoHasEN = true;
 if (geoCitySlug) {
     const locData = locations.find(l => l.slug === geoCitySlug);
-    geoHasRU = !!locData?.name_ru && !!(geoContent as any)[geoCitySlug]?.ru;
-    geoHasEN = !!(geoContent as any)[geoCitySlug]?.en;
+    const geoEntry = await getEntry('geo', geoCitySlug as any);
+    geoHasRU = !!locData?.name_ru && !!geoEntry?.data.ru;
+    geoHasEN = !!geoEntry?.data.en;
     // For geo pages: build the correct cross-lang URLs
     enSlug = `/services/${geoCitySlug}`;
     ruSlug = `/uslugi/${geoCitySlug}`;

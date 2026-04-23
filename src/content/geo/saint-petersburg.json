@@ -1,0 +1,82 @@
+{
+  "ru": {
+    "title": "Разработка сайтов и ПО в Санкт-Петербурге | AVPdev",
+    "description": "AVPdev СПб: Профессиональная разработка на Next.js, создание сложных Telegram ботов и масштабируемых веб-сервисов. Современные ИТ-решения для бизнеса.",
+    "h1": "ИТ-экспертиза мирового уровня в Санкт-Петербурге",
+    "p": "В Петербурге ценят стиль и технологическую глубину. Команда AVPdev создает эстетичные и сверхбыстрые веб-приложения на Next.js, а также автоматизирует бизнес-логику через мощные бэкенд системы на Node.js и кастомных ботов.",
+    "benefits": [
+      {
+        "icon": "fa-gem",
+        "title": "Эстетика и Производительность",
+        "desc": "Создаем премиальные интерфейсы на React, которые работают так же идеально, как выглядят, обеспечивая лучший UX в Петербурге."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Умные Системы Автоматизации",
+        "desc": "Внедряем ботов в Telegram, которые берут на себя рутину: от приема платежей до управления клиентским сервисом в СПб."
+      }
+    ],
+    "faq": [
+      {
+        "q": "Сколько стоит разработка сайта в Санкт-Петербурге?",
+        "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 64500 руб.."
+      },
+      {
+        "q": "Как быстро вы запускаете проекты?",
+        "a": "Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца."
+      },
+      {
+        "q": "Разрабатываете ли вы Telegram-ботов?",
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 4500 руб. в зависимости от сложности."
+      },
+      {
+        "q": "Вы предоставляете поддержку после запуска?",
+        "a": "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов."
+      },
+      {
+        "q": "Какой технологический стек вы используете?",
+        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+      }
+    ]
+  },
+  "en": {
+    "title": "Web Engineering in Saint Petersburg | Custom Software Agency",
+    "description": "AVPdev St. Petersburg: Specialized in high-performance Next.js apps, custom Telegram bots, and scalable Node.js backend systems for modern brands.",
+    "h1": "Crafting High-End Digital Solutions in Saint Petersburg",
+    "p": "Combine St. Petersburg's aesthetic tradition with global tech standards. At AVPdev, we build future-proof web applications and intelligent automation tools that empower your brand to lead in the digital era.",
+    "benefits": [
+      {
+        "icon": "fa-palette",
+        "title": "Premium UI/UX Performance",
+        "desc": "We deliver stunning React interfaces backed by lightning-fast Next.js architectures for the elite St. Petersburg market."
+      },
+      {
+        "icon": "fa-robot",
+        "title": "Advanced Bot Ecosystems",
+        "desc": "Stay connected with your audience in St. Petersburg 24/7 with custom-built software assistants that handle complex customer workflows."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Saint Petersburg?",
+        "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 64500 руб.."
+      },
+      {
+        "q": "What is your project timeline?",
+        "a": "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks."
+      },
+      {
+        "q": "Do you develop Telegram bots and Mini Apps?",
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 4500 руб. depending on the requirements."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations."
+      },
+      {
+        "q": "What tech stack do you use?",
+        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+      }
+    ]
+  }
+}

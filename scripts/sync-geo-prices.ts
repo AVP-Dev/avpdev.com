@@ -1,6 +1,5 @@
 import { locations } from '../src/data/locations';
-import { geoContent } from '../src/data/geo-content';
-import { writeFileSync, readFileSync } from 'fs';
+import { writeFileSync, readFileSync, readdirSync } from 'fs';
 import path from 'path';
 
 const BASE_PRICES = { astro: 250, next: 300, app: 750, bot: 50 };
@@ -59,7 +58,7 @@ function generateFaq(loc: any, lang: 'ru' | 'en', rates: any) {
     }
 }
 
-async function sendTelegramNotification(rates: any, isInitial: boolean) {
+async function sendTelegramNotification(rates: any) {
     const BOT_TOKEN = process.env.BOT_TOKEN;
     const CHAT_ID = process.env.CHAT_ID;
     const TOPIC_ID = process.env.TOPIC_ID;
@@ -91,7 +90,7 @@ async function sendTelegramNotification(rates: any, isInitial: boolean) {
     };
 
     const msg = [
-        `<b>💰 Гео-цены обновлены (НБРБ)</b>`,
+        `<b>💰 Гео-цены обновлены (Astro Collections)</b>`,
         `🕒 <i>Дата обновления: ${now}</i>`,
         ``,
         `<b>Курсы:</b>`,
@@ -109,13 +108,11 @@ async function sendTelegramNotification(rates: any, isInitial: boolean) {
     ].join('\n');
 
     try {
-        // 1. Try to find if there is a pinned message by checking chat info
         const chatRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getChat?chat_id=${CHAT_ID}`).then(r => r.json());
         const pinnedId = chatRes?.result?.pinned_message?.message_id;
 
         let editSuccess = false;
         if (pinnedId) {
-            // Try to edit the pinned message
             const editRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -134,7 +131,6 @@ async function sendTelegramNotification(rates: any, isInitial: boolean) {
         }
 
         if (!editSuccess) {
-            // 2. If no pinned message or edit failed (e.g. pinned message isn't ours), send NEW and PIN
             const sendRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -149,8 +145,6 @@ async function sendTelegramNotification(rates: any, isInitial: boolean) {
             if (sendRes.ok) {
                 const messageId = sendRes.result.message_id;
                 console.log('📩 TG new message sent');
-
-                // Pin the new message
                 await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/pinChatMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -160,8 +154,6 @@ async function sendTelegramNotification(rates: any, isInitial: boolean) {
                         disable_notification: true
                     }),
                 });
-            } else {
-                console.error('TG send error:', sendRes);
             }
         }
     } catch (e) {
@@ -170,47 +162,38 @@ async function sendTelegramNotification(rates: any, isInitial: boolean) {
 }
 
 async function run() {
-    const geoPath = path.join(process.cwd(), 'src/data/geo-content.ts');
-    let oldContent = "";
-    try { oldContent = readFileSync(geoPath, 'utf-8'); } catch (e) { }
-
+    const GEO_DIR = path.join(process.cwd(), 'src/content/geo');
     const rates = await getExchangeRates();
-    const newContentObj: Record<string, any> = {};
+    let updatedCount = 0;
 
-    for (const loc of locations) {
-        const existing = geoContent[loc.slug] || {};
-        newContentObj[loc.slug] = {};
+    const files = readdirSync(GEO_DIR).filter(f => f.endsWith('.json'));
 
-        if (existing.ru || loc.name_ru) {
-            newContentObj[loc.slug].ru = {
-                ...existing.ru,
-                faq: generateFaq(loc, 'ru', rates)
-            };
+    for (const file of files) {
+        const slug = file.replace('.json', '');
+        const loc = locations.find(l => l.slug === slug);
+        if (!loc) continue;
+
+        const filePath = path.join(GEO_DIR, file);
+        const content = JSON.parse(readFileSync(filePath, 'utf-8'));
+        let changed = false;
+
+        if (content.ru) {
+            content.ru.faq = generateFaq(loc, 'ru', rates);
+            changed = true;
         }
-        if (existing.en) {
-            newContentObj[loc.slug].en = {
-                ...existing.en,
-                faq: generateFaq(loc, 'en', rates)
-            };
+        if (content.en) {
+            content.en.faq = generateFaq(loc, 'en', rates);
+            changed = true;
+        }
+
+        if (changed) {
+            writeFileSync(filePath, JSON.stringify(content, null, 2));
+            updatedCount++;
         }
     }
 
-    const output = `/**
- * ТИПИЗИРОВАННЫЙ КОНТЕНТ ДЛЯ ГЕО-СТРАНИЦ 
- * (Автогенерируемый файл, не редактируйте вручную!)
- */
-export const geoContent: Record<string, any> = ${JSON.stringify(newContentObj, null, 2)};`;
-
-    // Only update and notify if content HAS CHANGED
-    // We compare without indentation/spaces to be sure
-    const isDifferent = output.replace(/\s/g, '') !== oldContent.replace(/\s/g, '');
-
-    if (isDifferent) {
-        writeFileSync(geoPath, output);
-        console.log('✅ REGENERATION COMPLETE: Prices updated.');
-        await sendTelegramNotification(rates, false);
-    } else {
-        console.log('ℹ️  No price changes detected. Skipping file update and TG notification.');
-    }
+    console.log(`✅ Prices updated for ${updatedCount} geo files.`);
+    await sendTelegramNotification(rates);
 }
+
 run();

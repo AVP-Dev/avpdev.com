@@ -6,10 +6,10 @@ const preferred = Astro.preferredLocale || 'ru';
 const targetLocale = `/${preferred}/`;
 
 return new Response(null, {
-  status: 302,
+  status: 301,
   headers: {
     'Location': targetLocale,
-    'Cache-Control': 'public, max-age=3600',
+    'Cache-Control': 'public, max-age=86400',
     'Vary': 'Accept-Language'
   }
 });
