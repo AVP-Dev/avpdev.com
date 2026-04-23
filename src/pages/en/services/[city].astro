@@ -8,10 +8,12 @@ export const prerender = true;
 
 export async function getStaticPaths() {
     const allGeo = await getCollection('geo');
-    return allGeo.map(entry => ({
-        params: { city: entry.id },
-        props: { geoEntry: entry },
-    }));
+    return allGeo
+        .filter(entry => entry.data.en || entry.data.ru) // Only build if there is SOME content
+        .map(entry => ({
+            params: { city: entry.id },
+            props: { geoEntry: entry },
+        }));
 }
 
 const { city } = Astro.params;

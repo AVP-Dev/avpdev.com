@@ -1,1 +1,35 @@
-{}
+{
+  "en": {
+    "title": "Web Development in Munich | Professional Digital Services",
+    "description": "Expert web development in Munich. We build high-performance websites and applications for businesses in Germany's tech hub.",
+    "h1": "Premium Digital Solutions for Munich's Tech & Business Sector",
+    "p": "AVPdev creates cutting-edge Next.js and Astro websites for Munich's innovative companies — from startups to established enterprises.",
+    "benefits": [
+      {
+        "icon": "fa-rocket",
+        "title": "Fast Launch",
+        "desc": "We launch MVP projects in the shortest possible time, saving your budget and time-to-market."
+      },
+      {
+        "icon": "fa-cubes",
+        "title": "Modern Tech Stack",
+        "desc": "We use Next.js, React, and Astro to build websites that are both beautiful and extremely fast."
+      },
+      {
+        "icon": "fa-server",
+        "title": "Backend Expertise",
+        "desc": "We architect scalable APIs and complex web applications tailored to German business standards."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What is the cost of web development in Munich?",
+        "a": "Pricing starts from $250 for Astro landing pages and $300 for Next.js websites. Custom solutions vary by complexity."
+      },
+      {
+        "q": "How long does it take to build a website?",
+        "a": "A typical landing page takes 7–14 days. More complex projects generally take 4–8 weeks."
+      }
+    ]
+  }
+}
