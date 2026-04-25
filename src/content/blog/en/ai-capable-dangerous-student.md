@@ -59,4 +59,4 @@ In the end, you are responsible for the result, not the algorithm.
 **Do you want to optimize your project using modern tools safely?**
 [Contact me on Telegram](https://t.me/AVP_Dev) — I will conduct a technical audit and show you how to accelerate your business with minimal risk.
 
-*Read also: [Template vs Custom: Choosing the Right Approach for Your Project](/en/blog/template-vs-custom)*
+*Read also: [Template vs Custom: Choosing the Right Approach](/en/blog/template-vs-custom) | [Ghosts in the Machine: Avoiding AI Tech Debt](/en/blog/ghost-in-the-machine)*

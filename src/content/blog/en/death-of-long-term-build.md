@@ -40,4 +40,4 @@ A project that had been gathering dust for years got off the ground when I stopp
 If you have a project sitting on GitHub that you'll "finish someday"—now is the best time to blow the dust off it. You're no longer alone. You have the fastest development team in the world. Use it.
 
 ---
-*Read also: [Choosing a Tech Stack for a Custom CRM](/en/blog/custom-crm-tech-stack)*
+*Read also: [Choosing a Tech Stack for a Custom CRM](/en/blog/custom-crm-tech-stack) | [Ghosts in the Machine: The AI Development Trap](/en/blog/ghost-in-the-machine)*
