@@ -1,8 +1,8 @@
 ---
-title: "Ghosts in the Machine: Preventing AI from Burying Your Project Under 'Working' Garbage"
-description: "In the era of agentic development, your project can start rotting long before release. Why architectural control is now more important than writing code."
+title: "Ghosts in the Machine: Preventing AI from Burying Your Project Under Junk"
+description: "In the era of AI, your project can start rotting long before release. Why architectural control is now more important than writing code."
 pubDate: 2026-04-26
-heroImage: "../../../assets/images/blog/ghost-code-architecture.png"
+heroImage: "../../../assets/images/blog/ghost-code-architecture.webp"
 tags: ["AI", "Architecture", "Technical Debt", "TypeScript", "Drizzle ORM"]
 ---
 

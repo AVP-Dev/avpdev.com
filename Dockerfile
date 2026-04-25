@@ -1,5 +1,5 @@
 # Этап 1: Сборка приложения (Builder)
-FROM oven/bun:1.2 AS builder
+FROM oven/bun:latest AS builder
 
 WORKDIR /app
 
@@ -17,7 +17,7 @@ COPY . .
 RUN bun run build
 
 # Этап 2: Производственный образ (Production)
-FROM oven/bun:1.2-slim AS production
+FROM oven/bun:latest AS production
 
 WORKDIR /app
 
@@ -40,6 +40,7 @@ EXPOSE 3000
 # Переменные окружения для работы внутри контейнера
 ENV HOST=0.0.0.0
 ENV PORT=3000
+ENV ASTRO_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
 # Healthcheck на порт 3000
