@@ -106,17 +106,46 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // 5. Process Request
   const response = await next();
 
-  // 6. 404 Handling - Return AS IS
+  // 6. 404 Handling - Return AS IS (or we can still add headers to 404)
   if (response.status === 404) {
     return response;
   }
 
-  // 7. Security Headers (Only for existing pages)
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('X-Frame-Options', 'DENY');
-  response.headers.set('X-XSS-Protection', '1; mode=block');
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), shared-storage=(), attribution-reporting=()');
+  // 7. Security Headers Implementation
+  // We create a new Response to ensure headers are mutable and applied correctly
+  const newResponse = new Response(response.body, response);
 
-  return response;
+  // HSTS (Strict-Transport-Security) - 1 year
+  newResponse.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+
+  // X-Content-Type-Options
+  newResponse.headers.set('X-Content-Type-Options', 'nosniff');
+
+  // X-Frame-Options (SAMEORIGIN is safer than DENY if you ever need to frame your own pages)
+  newResponse.headers.set('X-Frame-Options', 'SAMEORIGIN');
+
+  // Referrer-Policy
+  newResponse.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+  // Permissions-Policy
+  newResponse.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), speaker=(), usb=(), interest-cohort=()');
+
+  // Content-Security-Policy (CSP)
+  // Comprehensive policy for AVPdev.com
+  const csp = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://mc.yandex.ru https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
+    "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com",
+    "img-src 'self' data: https://www.googletagmanager.com https://mc.yandex.ru https://www.google-analytics.com",
+    "font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com",
+    "connect-src 'self' https://www.google-analytics.com https://mc.yandex.ru",
+    "frame-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "upgrade-insecure-requests"
+  ].join('; ');
+
+  newResponse.headers.set('Content-Security-Policy', csp);
+
+  return newResponse;
 });
