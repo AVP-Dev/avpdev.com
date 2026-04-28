@@ -82,5 +82,6 @@ Publication of this Agreement on the Contractor's official website at [https://a
 * **Website:** [avpdev.com](https://avpdev.com)
 * **Email:** [contact@avpdev.com](mailto:contact@avpdev.com)
 * **Telegram:** [@AVP_Dev](https://t.me/AVP_Dev)
+* **WhatsApp:** [Message](https://wa.me/375291217371)
 
 *Full bank details and postal address are provided to the Customer in the Invoice.*

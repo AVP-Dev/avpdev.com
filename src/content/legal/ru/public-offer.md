@@ -80,5 +80,6 @@ lastUpdated: "4 февраля 2026 г."
 * **Сайт:** [avpdev.com](https://avpdev.com)
 * **Email:** [contact@avpdev.com](mailto:contact@avpdev.com)
 * **Telegram:** [@AVP_Dev](https://t.me/AVP_Dev)
+* **WhatsApp:** [Message](https://wa.me/375291217371)
 
 *Полные банковские реквизиты и почтовый адрес предоставляются Заказчику в Счете на оплату (Инвойсе).*
