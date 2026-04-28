@@ -57,6 +57,38 @@ export const onRequest = defineMiddleware(async (context, next) => {
     process.argv.some(arg => arg.includes('build'))
   );
 
+  // Helper to apply security headers to any response
+  const applySecurityHeaders = (res: Response) => {
+    // If the response is a redirect or has no body, we still need to clone it to modify headers
+    // but we must be careful with the body.
+    const newRes = new Response(res.body, res);
+
+    // Security Headers
+    newRes.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+    newRes.headers.set('X-Content-Type-Options', 'nosniff');
+    newRes.headers.set('X-Frame-Options', 'SAMEORIGIN');
+    newRes.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+    newRes.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), speaker=(), usb=(), interest-cohort=()');
+    newRes.headers.set('X-AVP-Debug', 'Middleware-Applied');
+
+    // CSP
+    const csp = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://mc.yandex.ru https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
+      "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com",
+      "img-src 'self' data: https://www.googletagmanager.com https://mc.yandex.ru https://www.google-analytics.com",
+      "font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com",
+      "connect-src 'self' https://www.google-analytics.com https://mc.yandex.ru",
+      "frame-src 'self'",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "upgrade-insecure-requests"
+    ].join('; ');
+    newRes.headers.set('Content-Security-Policy', csp);
+
+    return newRes;
+  };
+
   if (!isBuild && !isDev && !host.includes('localhost') && !host.includes('127.0.0.1')) {
     try {
       protocol = context.request.headers.get('x-forwarded-proto') || protocol;
@@ -71,81 +103,36 @@ export const onRequest = defineMiddleware(async (context, next) => {
     ) {
       const cleanHost = host.startsWith('www.') ? host.slice(4) : host;
       const newUrl = `https://${cleanHost}${path}${url.search}`;
-      return context.redirect(newUrl, 301);
+      return applySecurityHeaders(context.redirect(newUrl, 301));
     }
   }
 
   // 1. Exact Match Redirects
   if (redirectMap[path]) {
-    return context.redirect(redirectMap[path], 301);
+    return applySecurityHeaders(context.redirect(redirectMap[path], 301));
   }
 
   // 2. Folder Mapping: /en/uslugi/ -> /en/services/
-  // Example: /en/uslugi/rogachev/ -> /en/services/rogachev/
   if (path.startsWith('/en/uslugi/')) {
     const remainder = path.replace('/en/uslugi/', '');
-    // Ensure trailing slash for the new path
     const newPath = `/en/services/${remainder.endsWith('/') ? remainder : remainder + '/'}`;
-    return context.redirect(newPath, 301);
+    return applySecurityHeaders(context.redirect(newPath, 301));
   }
-
-  // Note: Root Redirect (/) is now handled by src/pages/index.astro using SSR
 
   // 4. Remove .html extension
   if (path.endsWith('.html')) {
     const cleanPath = path.slice(0, -5);
-    return context.redirect(`${cleanPath}/`, 301);
+    return applySecurityHeaders(context.redirect(`${cleanPath}/`, 301));
   }
 
-  // 4.5. Enforce Trailing Slash (except for files)
-  // Fixes "Duplicate without user-selected canonical" for URLs missing slashes
+  // 4.5. Enforce Trailing Slash
   if (!path.endsWith('/') && !path.split('/').pop()?.includes('.')) {
-    return context.redirect(`${path}/${url.search}`, 301);
+    return applySecurityHeaders(context.redirect(`${path}/${url.search}`, 301));
   }
 
   // 5. Process Request
   const response = await next();
 
-  // 6. 404 Handling - Return AS IS (or we can still add headers to 404)
-  if (response.status === 404) {
-    return response;
-  }
-
-  // 7. Security Headers Implementation
-  // We create a new Response to ensure headers are mutable and applied correctly
-  const newResponse = new Response(response.body, response);
-
-  // HSTS (Strict-Transport-Security) - 1 year
-  newResponse.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
-
-  // X-Content-Type-Options
-  newResponse.headers.set('X-Content-Type-Options', 'nosniff');
-
-  // X-Frame-Options (SAMEORIGIN is safer than DENY if you ever need to frame your own pages)
-  newResponse.headers.set('X-Frame-Options', 'SAMEORIGIN');
-
-  // Referrer-Policy
-  newResponse.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-
-  // Permissions-Policy
-  newResponse.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), speaker=(), usb=(), interest-cohort=()');
-
-  // Content-Security-Policy (CSP)
-  // Comprehensive policy for AVPdev.com
-  const csp = [
-    "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://mc.yandex.ru https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
-    "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com",
-    "img-src 'self' data: https://www.googletagmanager.com https://mc.yandex.ru https://www.google-analytics.com",
-    "font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com",
-    "connect-src 'self' https://www.google-analytics.com https://mc.yandex.ru",
-    "frame-src 'self'",
-    "object-src 'none'",
-    "base-uri 'self'",
-    "upgrade-insecure-requests"
-  ].join('; ');
-
-  newResponse.headers.set('Content-Security-Policy', csp);
-
-  return newResponse;
+  // 6. Return response with security headers (including 404s)
+  return applySecurityHeaders(response);
 });
