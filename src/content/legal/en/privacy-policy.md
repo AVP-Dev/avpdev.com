@@ -78,4 +78,4 @@ Using the Site means the User's unconditional consent to this Policy and the ter
 
 - **Email:** [contact@avpdev.com](mailto:contact@avpdev.com)
 - **Telegram:** [@AVP_Dev](https://t.me/AVP_Dev)
-- **WhatsApp (BY):** [Message](https://wa.me/375291217371)
+- **WhatsApp:** [Message](https://wa.me/375291217371)

@@ -67,4 +67,4 @@ By starting to use the Site, the User confirms that they have fully read the ter
 
 - **Email:** [contact@avpdev.com](mailto:contact@avpdev.com)
 - **Telegram:** [@AVP_Dev](https://t.me/AVP_Dev)
-- **WhatsApp (BY):** [Message](https://wa.me/375291217371)
+- **WhatsApp:** [Message](https://wa.me/375291217371)

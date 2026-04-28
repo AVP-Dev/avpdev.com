@@ -78,4 +78,4 @@ lastUpdated: "18 сентября 2025 г."
 
 - **Email:** [contact@avpdev.com](mailto:contact@avpdev.com)
 - **Telegram:** [@AVP_Dev](https://t.me/AVP_Dev)
-- **WhatsApp (BY):** [Написать](https://wa.me/375291217371)
+- **WhatsApp:** [Написать](https://wa.me/375291217371)
