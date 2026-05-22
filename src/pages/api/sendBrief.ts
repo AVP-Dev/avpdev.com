@@ -120,7 +120,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         console.error("Critical error in /api/sendBrief:", error);
         return new Response(JSON.stringify({
             success: false,
-            message: error.message || "Internal Server Error"
+            message: "Internal Server Error"
         }), { status: 500 });
     }
 };

@@ -69,7 +69,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
     newRes.headers.set('X-Frame-Options', 'SAMEORIGIN');
     newRes.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
     newRes.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), speaker=(), usb=(), interest-cohort=()');
-    newRes.headers.set('X-AVP-Debug', 'Middleware-Applied');
 
     // CSP
     const csp = [

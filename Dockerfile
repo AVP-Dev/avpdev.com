@@ -1,4 +1,6 @@
 # Этап 1: Сборка приложения (Builder)
+# Security: pin a specific Bun version instead of 'latest' for reproducible builds
+# e.g. FROM oven/bun:1.1.38 AS builder
 FROM oven/bun:latest AS builder
 
 WORKDIR /app
@@ -17,6 +19,8 @@ COPY . .
 RUN bun run build
 
 # Этап 2: Производственный образ (Production)
+# Security: pin a specific Bun version instead of 'latest' for reproducible builds
+# e.g. FROM oven/bun:1.1.38 AS production
 FROM oven/bun:latest AS production
 
 WORKDIR /app

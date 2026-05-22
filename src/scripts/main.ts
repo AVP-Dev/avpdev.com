@@ -218,7 +218,8 @@ function initializePage() {
 
             lightboxImg.src = src;
             if (lightboxCaption) {
-                lightboxCaption.innerHTML = captionText;
+                // Use textContent to prevent XSS via figcaption content
+                lightboxCaption.textContent = captionText;
             }
             lightbox.classList.add('visible');
             lightbox.setAttribute('aria-hidden', 'false');
@@ -238,7 +239,8 @@ function initializePage() {
                 const img = trigger as HTMLImageElement;
                 const src = trigger.getAttribute('data-lightbox') || img.src;
                 const figure = trigger.closest('figure');
-                const caption = figure ? figure.querySelector('figcaption')?.innerHTML : '';
+                // Use textContent to prevent XSS via innerHTML
+                const caption = figure ? figure.querySelector('figcaption')?.textContent : '';
                 openLightbox(src, caption || '');
             });
         });

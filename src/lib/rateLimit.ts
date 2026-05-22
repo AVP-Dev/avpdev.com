@@ -23,5 +23,22 @@ export const rateLimit = {
         this.store.set(ip, recentTimestamps);
 
         return true; // Allowed
-    }
+    },
+
+    // Removes expired entries from the store to prevent memory leak
+    cleanup: function () {
+        const now = Date.now();
+        for (const [ip, timestamps] of this.store.entries()) {
+            const recent = timestamps.filter(t => now - t < this.windowMs);
+            if (recent.length === 0) {
+                this.store.delete(ip);
+            } else {
+                this.store.set(ip, recent);
+            }
+        }
+    },
 };
+
+// Run cleanup every 5 minutes to keep the store lean
+setInterval(() => rateLimit.cleanup(), 5 * 60 * 1000);
+
