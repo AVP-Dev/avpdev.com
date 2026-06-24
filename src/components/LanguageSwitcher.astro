@@ -4,6 +4,17 @@ import { getLangFromUrl } from '../i18n/utils';
 import { locations } from '../data/locations';
 import { getEntry } from 'astro:content';
 
+interface Props {
+    /**
+     * For blog articles: the slug of the counterpart article in the other language.
+     * E.g. on /en/blog/lessons-from-amsterdam/ pass "uroki-amsterdama"
+     * so clicking RU links to /ru/blog/uroki-amsterdama/
+     * If omitted, falls back to the current slug (works when both languages share the same slug).
+     */
+    translationSlug?: string;
+}
+
+const { translationSlug } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const locales = ['ru', 'en'];
 
@@ -29,6 +40,10 @@ const cleanCurrentPath = pathWithoutLang.endsWith('/') ? pathWithoutLang.slice(0
 const ruCityMatch = cleanCurrentPath.match(/^\/uslugi\/([^/]+)$/);
 const enCityMatch = cleanCurrentPath.match(/^\/services\/([^/]+)$/);
 let currentCitySlug = ruCityMatch?.[1] ?? enCityMatch?.[1] ?? null;
+
+// Detect if we're on a blog article page
+const blogSlugMatch = cleanCurrentPath.match(/^\/blog\/([^/]+)$/);
+const isBlogArticle = !!blogSlugMatch;
 
 // Determine if this city slug has both RU + EN content or only EN
 let cityHasRU = false;
@@ -98,7 +113,27 @@ if (currentCitySlug) {
             }
         }
 
-        // --- Standard page logic (non-city pages) ---
+        // --- Blog article page logic ---
+        if (isBlogArticle) {
+            const currentSlug = blogSlugMatch![1];
+            // Use translationSlug if provided; otherwise assume same slug works in both languages
+            const targetSlug = translationSlug ?? currentSlug;
+            // Build the target-language blog URL
+            const targetBlogSlug = (locale === lang) ? currentSlug : targetSlug;
+            const url = `/${locale}/blog/${targetBlogSlug}/`;
+            return (
+                <>
+                    {isActive ? (
+                        <button class="lang-btn active">{locale.toUpperCase()}</button>
+                    ) : (
+                        <a href={url} class="lang-btn">{locale.toUpperCase()}</a>
+                    )}
+                    {index < locales.length - 1 && <span class="lang-separator">|</span>}
+                </>
+            );
+        }
+
+        // --- Standard page logic (non-city, non-blog pages) ---
         let targetPath = pathWithoutLang;
         const cleanPath = targetPath.endsWith('/') ? targetPath.slice(0, -1) : targetPath;
 

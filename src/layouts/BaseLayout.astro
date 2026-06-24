@@ -25,6 +25,12 @@ export interface Props {
     ogImage?: string;
     isTranslationKey?: boolean;
     schema?: Record<string, any>;
+    /**
+     * For blog articles: the slug of the counterpart article in the OTHER language.
+     * E.g. on /en/blog/lessons-from-amsterdam/ pass translationSlug="uroki-amsterdama"
+     * so hreflang and LanguageSwitcher can link to /ru/blog/uroki-amsterdama/
+     */
+    translationSlug?: string;
 }
 
 const {
@@ -33,6 +39,7 @@ const {
     ogImage = '/og-image.webp',
     isTranslationKey = true,
     schema,
+    translationSlug,
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -62,25 +69,40 @@ const servicePairs = {
 let enSlug = pathWithoutLocale;
 let ruSlug = pathWithoutLocale;
 
-let isServicePage = false;
-for (const [ru, en] of Object.entries(servicePairs)) {
-    if (cleanPath === `/uslugi/${ru}`) {
-        enSlug = `/services/${en}`;
-        ruSlug = `/uslugi/${ru}`;
-        isServicePage = true;
-        break;
+// Blog article: use translationSlug to build the cross-language path directly
+const blogSlugMatch = cleanPath.match(/^\/blog\/([^/]+)$/);
+if (blogSlugMatch && translationSlug) {
+    const currentSlug = blogSlugMatch[1];
+    if (lang === 'en') {
+        // Current page is EN, counterpart is RU
+        enSlug = `/blog/${currentSlug}`;
+        ruSlug = `/blog/${translationSlug}`;
+    } else {
+        // Current page is RU, counterpart is EN
+        ruSlug = `/blog/${currentSlug}`;
+        enSlug = `/blog/${translationSlug}`;
     }
-    if (cleanPath === `/services/${en}`) {
-        enSlug = `/services/${en}`;
-        ruSlug = `/uslugi/${ru}`;
-        isServicePage = true;
-        break;
+} else {
+    let isServicePage = false;
+    for (const [ru, en] of Object.entries(servicePairs)) {
+        if (cleanPath === `/uslugi/${ru}`) {
+            enSlug = `/services/${en}`;
+            ruSlug = `/uslugi/${ru}`;
+            isServicePage = true;
+            break;
+        }
+        if (cleanPath === `/services/${en}`) {
+            enSlug = `/services/${en}`;
+            ruSlug = `/uslugi/${ru}`;
+            isServicePage = true;
+            break;
+        }
     }
-}
 
-if (!isServicePage) {
-    enSlug = pathWithoutLocale.replace(/^\/uslugi/, '/services');
-    ruSlug = pathWithoutLocale.replace(/^\/services/, '/uslugi');
+    if (!isServicePage) {
+        enSlug = pathWithoutLocale.replace(/^\/uslugi/, '/services');
+        ruSlug = pathWithoutLocale.replace(/^\/services/, '/uslugi');
+    }
 }
 
 // Detect geo city pages and check if they have RU content
@@ -426,7 +448,7 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
     </style>
 </head>
 <body>
-    <Header />
+    <Header translationSlug={translationSlug} />
     
     <main class="flex-grow pt-[80px]"> <!-- pt-[80px] to account for fixed header -->
       <slot />
