@@ -92,6 +92,7 @@ const articleSchema = {
   isTranslationKey={false}
   ogImage={post.data.heroImage ? post.data.heroImage.src : '/og-image.webp'}
   schema={[breadcrumbSchema, articleSchema]}
+  translationSlug={post.data.translationSlug}
 >
   <article class="blog-post-article">
     <header class="blog-post-hero">

@@ -4,6 +4,7 @@ description: "Reflections on how Amsterdam's architecture and rhythm teach us fl
 pubDate: 2025-10-07
 heroImage: "../../../assets/images/blog/uroki-amsterdama.webp"
 tags: ["travel", "inspiration", "creativity", "philosophy"]
+translationSlug: "uroki-amsterdama"
 ---
 
 There are cities of avenues, straight and clear, where everything is subject to the logic of wide streets. And then there is Amsterdam. A city that lives by the laws of water and bicycle bells.

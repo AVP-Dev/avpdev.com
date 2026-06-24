@@ -7,6 +7,11 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import Icon from "./Icon.astro";
 
+interface Props {
+    translationSlug?: string;
+}
+
+const { translationSlug } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const homePath = `/${lang}/`;
@@ -77,7 +82,7 @@ const homePath = `/${lang}/`;
             >
                 <Icon name="fa-sun" aria-hidden="true" />
             </button>
-            <LanguageSwitcher />
+            <LanguageSwitcher translationSlug={translationSlug} />
         </div>
         <button class="burger-menu" aria-label={t("aria_open_menu")}>
             <div></div>
@@ -118,6 +123,6 @@ const homePath = `/${lang}/`;
         >
             <i class="fas fa-sun" aria-hidden="true"></i>
         </button>
-        <LanguageSwitcher />
+        <LanguageSwitcher translationSlug={translationSlug} />
     </div>
 </div>

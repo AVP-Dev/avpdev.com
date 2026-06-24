@@ -12,6 +12,10 @@ const blogCollection = defineCollection({
 		heroImage: image().optional(),
 		tags: z.array(z.string()),
 		draft: z.boolean().optional(),
+		// Slug of the translated counterpart article (different language).
+		// Example: EN article with slug "lessons-from-amsterdam" sets translationSlug: "uroki-amsterdama"
+		// so the language switcher can build the correct RU URL.
+		translationSlug: z.string().optional(),
 	}),
 });
 
