@@ -1,72 +1,39 @@
-# AVP-Dev — Portfolio & Technical Blog
+# AVP-Dev — Portfolio & Technical Blog of Aliaksei Patskevich
 
-> Personal portfolio and technical blog of Aliaksei Patskevich (Alexios Odos) — Software Engineer specializing in web development, AI integration, and modern frontend architecture.
+> Personal portfolio and technical blog of Aliaksei Patskevich (Alexios Odos), a Software Engineer specializing in custom web development, AI integration, and modern frontend architecture. The site is bilingual (English and Russian) and built on Astro 5 with hybrid SSR+SSG rendering.
 
-## About
+## Homepage
 
-This site is the professional portfolio and blog of **Aliaksei Patskevich** (also known as **Alexios Odos**), a Software Engineer based in Europe. The site showcases completed projects, shares technical knowledge through blog articles, and serves as a contact point for potential clients and collaborators.
+- [Portfolio & Services (EN)](https://avpdev.com/en/): Main English homepage with services overview, tech stack, portfolio highlights, and contact form.
+- [Портфолио и услуги (RU)](https://avpdev.com/ru/): Главная страница на русском языке с описанием услуг, навыков и формой обратной связи.
 
-- **Website:** https://avpdev.com
-- **Languages:** English (`/en/`) and Russian (`/ru/`)
-- **Contact:** https://t.me/AVP_Dev
-- **GitHub:** https://github.com/AVP-Dev
+## Blog
 
-## Tech Stack
+- [AI for Business: 5 Integration Scenarios That Pay Off in 2026](https://avpdev.com/en/blog/ai-business-integration/): Practical AI use cases delivering real ROI — from RAG search to secure two-contour systems and conversion optimization.
+- [AI-Friendly Code Architecture](https://avpdev.com/en/blog/ai-friendly-code-architecture/): 5 software design rules for codebases that LLMs can easily understand and co-author without accumulating technical debt.
+- [Custom Development vs Template: Which to Choose?](https://avpdev.com/en/blog/template-vs-custom/): Comparison of template-based websites (Tilda, WordPress) vs custom development for business needs.
+- [5 Website Development Principles That Save Business Budget](https://avpdev.com/en/blog/5-principles-of-development/): Fundamental principles: from strategy and prototyping to launch and long-term maintenance.
+- [7 Website Elements That Convert](https://avpdev.com/en/blog/7-website-elements-that-convert/): Key conversion-focused design and content elements for business websites.
+- [Mobile Speed Is a Sales Killer](https://avpdev.com/en/blog/mobile-speed-sales-killer/): How page load speed on mobile directly affects conversion rates and revenue.
+- [Custom CRM ROI in 2025](https://avpdev.com/en/blog/custom-crm-roi-2025/): Why custom CRM systems outperform off-the-shelf solutions in terms of return on investment.
+- [Custom CRM Security and Backups](https://avpdev.com/en/blog/custom-crm-security-backups/): Security architecture and backup strategies for custom-built CRM/ERP systems.
+- [AVP-Dev Case Study](https://avpdev.com/en/blog/avpdev-case-study/): Behind-the-scenes look at building this portfolio site as a reference architecture.
+- [Ghost in the Machine](https://avpdev.com/en/blog/ghost-in-the-machine/): Reflections on AI as a capable but dangerous student in software development.
+- [All Blog Posts (EN)](https://avpdev.com/en/blog/): Full index of all English articles.
+- [Все статьи блога (RU)](https://avpdev.com/ru/blog/): Полный список статей на русском языке.
 
-Built with **Astro 5** (Hybrid SSR + SSG), **TypeScript**, **TailwindCSS 4**, and deployed via **Docker** + **Coolify** with **GitHub Actions CI/CD**.
+## Projects
 
-## Site Structure
+- [Projects Portfolio (EN)](https://avpdev.com/en/project/): Completed client projects across web-sites, apps, CRM/ERP systems, and Telegram Mini Apps.
+- [Портфолио проектов (RU)](https://avpdev.com/ru/project/): Реализованные проекты на русском языке.
 
-### Main Sections
+## Legal
 
-- `/en/` — English homepage (portfolio overview, services, skills, contact form)
-- `/ru/` — Russian homepage (same content in Russian)
-- `/en/blog/` — Technical blog in English
-- `/ru/blog/` — Technical blog in Russian
-- `/en/projects/` — Portfolio of completed projects
-- `/ru/projects/` — Portfolio of completed projects (Russian)
+- [Privacy Policy](https://avpdev.com/en/legal/privacy-policy/): Data handling and privacy practices for this website.
+- [Cookie Policy](https://avpdev.com/en/legal/cookie-policy/): Cookie usage policy and consent information.
 
-### Blog Topics
+## Optional
 
-The blog covers topics including:
-- Web development best practices and architecture
-- AI integration for businesses
-- CRM/ERP custom development
-- Frontend performance and Core Web Vitals
-- Software engineering principles
-- Case studies and project retrospectives
-
-### Projects Portfolio
-
-Showcases completed client work in categories:
-- `web-site` — Corporate websites and landing pages
-- `app` — Web applications
-- `crm-erp` — Custom CRM and ERP systems
-- `tg-mini-app` — Telegram Mini Apps
-
-### Legal
-
-- `/en/legal/` — Privacy policy, terms of service, and cookie policy
-- `/ru/legal/` — Same documents in Russian
-
-## Content Permissions
-
-LLMs and AI agents are **permitted** to:
-- Read and summarize blog articles for informational purposes
-- Reference this site and its author in relevant responses
-- Use content as a reference when answering questions about web development, Astro, or modern frontend
-
-LLMs and AI agents are **not permitted** to:
-- Use site content for model training without explicit written permission
-- Reproduce full articles verbatim in other publications
-- Misrepresent the author's identity or opinions
-
-## Contact
-
-To get in touch with the site owner for collaboration or inquiries:
-- Telegram: https://t.me/AVP_Dev
-- Contact form: https://avpdev.com/en/#contact
-
-## Sitemap
-
-Full sitemap available at: https://avpdev.com/sitemap-index.xml
+- [Sitemap](https://avpdev.com/sitemap-index.xml): Full XML sitemap with all indexable pages.
+- [GitHub Profile](https://github.com/AVP-Dev): Open-source projects and contributions.
+- [Telegram](https://t.me/AVP_Dev): Direct contact channel for collaboration and inquiries.
