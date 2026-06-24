@@ -14,3 +14,6 @@ Disallow: /
 
 # Прямой путь к карте сайта
 Sitemap: https://avpdev.com/sitemap-index.xml
+
+# Инструкции для ИИ-агентов
+LLMs: https://avpdev.com/llms.txt
