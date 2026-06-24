@@ -155,6 +155,12 @@ export default defineConfig({
 
   compressHTML: true,
 
+  // 8. 301 редиректы: старые Russian-transliterated EN-slugs → правильные EN-slugs
+  redirects: {
+    '/en/blog/uroki-amsterdama':   '/en/blog/lessons-from-amsterdam',
+    '/en/blog/uroki-amsterdama/':  '/en/blog/lessons-from-amsterdam/',
+  },
+
   // 7. Интернационализация (i18n)
   i18n: {
     defaultLocale: 'ru',
