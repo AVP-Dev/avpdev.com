@@ -456,10 +456,22 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
 
     <Footer />
 
-    <!-- Floating Action Button (FAB) -->
-    <a href="https://t.me/AVP_Dev" target="_blank" rel="noopener noreferrer" class="fab-contact" aria-label="Contact Telegram" onclick="if(window.gtag) window.gtag('event', 'click_telegram'); if(window.ym) window.ym(107147089, 'reachGoal', 'click_telegram');">
-      <i class="fa-brands fa-telegram-plane"></i>
-    </a>
+    <!-- Unified Contact FAB -->
+    <div class="contact-fab-wrapper" id="contactFabWrapper">
+      <div class="contact-fab-menu" id="contactFabMenu">
+        <a href="https://t.me/AVP_Dev" target="_blank" rel="noopener noreferrer" onclick="if(window.gtag) window.gtag('event', 'click_telegram'); if(window.ym) window.ym(107147089, 'reachGoal', 'click_telegram');">
+          <i class="fa-brands fa-telegram-plane"></i>
+          <span>Написать в Telegram</span>
+        </a>
+        <a href="#" id="openAiBot" onclick="event.preventDefault();">
+          <i class="fa-solid fa-robot"></i>
+          <span>Задать вопрос боту</span>
+        </a>
+      </div>
+      <button class="contact-fab" id="contactFabBtn" aria-label="Связаться">
+        <i class="fa-solid fa-comment-dots"></i>
+      </button>
+    </div>
     <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog">
         <button class="lightbox-close" aria-label="Close Lightbox">&times;</button>
@@ -474,7 +486,7 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
     <script src="/src/scripts/main.ts"></script>
     <CookieBanner />
 
-    <!-- Paralect AI Chat Widget -->
+    <!-- Paralect AI Chat Widget (hidden launcher) -->
     <script
       is:inline
       src="https://ParalectAI.avpdev.com/loader.js"
@@ -482,7 +494,67 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
       data-position="bottom-right"
       data-theme="auto"
       data-primary-color="#F97316"
+      data-hide-launcher="true"
     ></script>
+
+    <!-- Unified FAB Logic -->
+    <script is:inline>
+      (function () {
+        const btn = document.getElementById('contactFabBtn');
+        const menu = document.getElementById('contactFabMenu');
+        const botBtn = document.getElementById('openAiBot');
+        if (!btn || !menu) return;
+
+        let isOpen = false;
+
+        function toggleMenu(e) {
+          e.stopPropagation();
+          isOpen = !isOpen;
+          menu.classList.toggle('is-visible', isOpen);
+          btn.classList.toggle('is-open', isOpen);
+        }
+
+        function closeMenu() {
+          if (!isOpen) return;
+          isOpen = false;
+          menu.classList.remove('is-visible');
+          btn.classList.remove('is-open');
+        }
+
+        btn.addEventListener('click', toggleMenu);
+        document.addEventListener('click', closeMenu);
+        menu.addEventListener('click', function (e) { e.stopPropagation(); });
+
+        if (botBtn) {
+          botBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            closeMenu();
+            /* Try common Paralect AI API patterns to open the chat */
+            if (typeof window.ParalectAI !== 'undefined' && typeof window.ParalectAI.open === 'function') {
+              window.ParalectAI.open();
+            } else {
+              /* Fallback: find and click the widget's hidden launcher */
+              var launcher = document.querySelector('[class*="paralect"][class*="launcher"], [class*="paralect"][class*="widget-button"], [class*="paralect"][class*="fab"]');
+              if (launcher) { launcher.click(); }
+              else {
+                /* Last resort: dispatch a custom event the widget may listen to */
+                document.dispatchEvent(new CustomEvent('paralect:open'));
+                window.dispatchEvent(new CustomEvent('paralect:open'));
+              }
+            }
+          });
+        }
+
+        /* Re-init after Astro page transitions */
+        document.addEventListener('astro:after-swap', function () {
+          isOpen = false;
+          var m = document.getElementById('contactFabMenu');
+          var b = document.getElementById('contactFabBtn');
+          if (m) m.classList.remove('is-visible');
+          if (b) b.classList.remove('is-open');
+        });
+      })();
+    </script>
 
 </body>
 </html>
