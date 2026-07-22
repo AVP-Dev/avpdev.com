@@ -882,16 +882,18 @@ nav {
   letter-spacing: 0.05em;
 }
 
-/* --- Floating Action Button (FAB) --- */
-.fab-contact {
+/* --- Unified Contact FAB with Menu --- */
+.contact-fab-wrapper {
   position: fixed;
   bottom: 40px;
   right: 20px;
+  z-index: 999;
+}
+
+.contact-fab {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg,
-      var(--accent-color-start),
-      var(--accent-color-end));
+  background: linear-gradient(135deg, var(--accent-color-start), var(--accent-color-end));
   color: var(--bg-color);
   border-radius: 50%;
   display: flex;
@@ -899,47 +901,109 @@ nav {
   align-items: center;
   font-size: 1.5rem;
   cursor: pointer;
-  text-decoration: none !important;
+  border: none;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  z-index: 998;
   transition:
     transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     background 0.3s ease;
   animation: pulse-fab 2s infinite;
+  position: relative;
+  z-index: 2;
 }
 
-.fab-contact:hover {
+.contact-fab:hover {
   transform: scale(1.1) translateY(-5px);
-  color: var(--bg-color);
-  text-decoration: none !important;
   animation: none;
-  background: linear-gradient(135deg,
-      var(--accent-color-end),
-      var(--accent-color-start));
+  background: linear-gradient(135deg, var(--accent-color-end), var(--accent-color-start));
+}
+
+.contact-fab.is-open {
+  transform: rotate(45deg);
+  animation: none;
+  background: linear-gradient(135deg, var(--accent-color-end), var(--accent-color-start));
 }
 
 @keyframes pulse-fab {
-  0% {
-    box-shadow: 0 0 0 0 rgba(79, 172, 254, 0.7);
-  }
+  0%   { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.6); }
+  70%  { box-shadow: 0 0 0 15px rgba(249, 115, 22, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+}
 
-  70% {
-    box-shadow: 0 0 0 15px rgba(79, 172, 254, 0);
-  }
+.contact-fab-menu {
+  position: absolute;
+  bottom: 72px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.95);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  pointer-events: none;
+}
 
-  100% {
-    box-shadow: 0 0 0 0 rgba(79, 172, 254, 0);
-  }
+.contact-fab-menu.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.contact-fab-menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text-color);
+  text-decoration: none !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: var(--card-shadow);
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.contact-fab-menu a:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  transform: translateX(-4px);
+}
+
+.contact-fab-menu a i {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
-  .fab-contact {
+  .contact-fab-wrapper {
     bottom: 30px;
     right: 15px;
+  }
+  .contact-fab {
     width: 50px;
     height: 50px;
     font-size: 1.2rem;
   }
+  .contact-fab-menu a {
+    font-size: 0.8rem;
+    padding: 8px 14px;
+  }
+}
+
+/* Hide Paralect AI default launcher — we use our own FAB */
+[class*="paralect"][class*="launcher"],
+[class*="paralect"][class*="widget-button"],
+[class*="paralect"][class*="fab"] {
+  display: none !important;
 }
 
 .mobile-controls {
