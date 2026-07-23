@@ -529,18 +529,11 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
           botBtn.addEventListener('click', function (e) {
             e.preventDefault();
             closeMenu();
-            /* Try common Paralect AI API patterns to open the chat */
-            if (typeof window.ParalectAI !== 'undefined' && typeof window.ParalectAI.open === 'function') {
-              window.ParalectAI.open();
-            } else {
-              /* Fallback: find and click the widget's hidden launcher */
-              var launcher = document.querySelector('[class*="paralect"][class*="launcher"], [class*="paralect"][class*="widget-button"], [class*="paralect"][class*="fab"]');
-              if (launcher) { launcher.click(); }
-              else {
-                /* Last resort: dispatch a custom event the widget may listen to */
-                document.dispatchEvent(new CustomEvent('paralect:open'));
-                window.dispatchEvent(new CustomEvent('paralect:open'));
-              }
+            /* Open Paralect widget via its global API */
+            var w = window.ParalectWidget;
+            if (w) {
+              if (typeof w.open === 'function') w.open();
+              else if (typeof w.toggle === 'function') w.toggle();
             }
           });
         }
