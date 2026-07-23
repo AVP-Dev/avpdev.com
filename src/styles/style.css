@@ -999,11 +999,16 @@ nav {
   }
 }
 
-/* Hide Paralect AI default launcher — we use our own FAB */
-[class*="paralect"][class*="launcher"],
-[class*="paralect"][class*="widget-button"],
-[class*="paralect"][class*="fab"] {
+/*
+ * Hide Paralect widget's own launcher button and popup bubble.
+ * The loader creates elements with IDs: pw-<random>-btn, pw-<random>-popup.
+ * We target by ID prefix/suffix pattern so the iframe (pw-<random>) stays untouched.
+ * ParalectWidget.open()/.toggle() still works — it only adds class "pw-open" to the iframe.
+ */
+[id^="pw-"][id$="-btn"],
+[id^="pw-"][id$="-popup"] {
   display: none !important;
+  pointer-events: none !important;
 }
 
 .mobile-controls {
