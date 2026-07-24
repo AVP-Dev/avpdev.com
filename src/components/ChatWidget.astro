@@ -1,0 +1,60 @@
+---
+/**
+ * Paralect AI Chat Widget wrapper.
+ * Handles re-initialization after Astro ClientRouter (View Transitions) navigation.
+ *
+ * The loader.js IIFE creates DOM elements (button, popup, iframe) on document.body.
+ * When ClientRouter swaps <body>, those elements are destroyed but the script tag
+ * is not re-executed. This component listens for astro:page-load and re-injects
+ * the loader script after cleaning up stale elements.
+ */
+---
+
+<script
+  is:inline
+  src="https://ParalectAI.avpdev.com/loader.js"
+  data-bot-id="6189cc04-81ac-4023-9522-3a190f8849bd"
+  data-position="bottom-right"
+  data-theme="auto"
+  data-primary-color="#F97316"
+></script>
+
+<script is:inline>
+  (function () {
+    var BOT_ID = "6189cc04-81ac-4023-9522-3a190f8849bd";
+    var initCount = 0;
+
+    function cleanup() {
+      // Remove widget DOM elements created by loader.js (btn, popup, iframe)
+      document.querySelectorAll("[id^='pw-']").forEach(function (el) {
+        el.remove();
+      });
+      // Remove injected styles from previous init
+      document.querySelectorAll("style").forEach(function (s) {
+        if (s.textContent && s.textContent.indexOf("pw-btn") !== -1) s.remove();
+      });
+      // Reset API so stale references don't linger
+      window.ParalectWidget = undefined;
+    }
+
+    function reinit() {
+      initCount++;
+      // First call is handled by the <script src="..."> tag above — skip it
+      if (initCount <= 1) return;
+
+      cleanup();
+
+      // Re-inject the loader script so it runs its IIFE again
+      var s = document.createElement("script");
+      s.src = "https://ParalectAI.avpdev.com/loader.js";
+      s.setAttribute("data-bot-id", BOT_ID);
+      s.setAttribute("data-position", "bottom-right");
+      s.setAttribute("data-theme", "auto");
+      s.setAttribute("data-primary-color", "#F97316");
+      document.body.appendChild(s);
+    }
+
+    // astro:page-load fires on initial load AND on every client-side navigation
+    document.addEventListener("astro:page-load", reinit);
+  })();
+</script>

@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieBanner from '../components/CookieBanner.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
+import ChatWidget from '../components/ChatWidget.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { ui } from '../i18n/ui';
 import { locations } from '../data/locations';
@@ -470,15 +471,7 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
     <script src="/src/scripts/main.ts"></script>
     <CookieBanner />
 
-    <!-- Paralect AI Chat Widget -->
-    <script
-      is:inline
-      src="https://ParalectAI.avpdev.com/loader.js"
-      data-bot-id="6189cc04-81ac-4023-9522-3a190f8849bd"
-      data-position="bottom-right"
-      data-theme="auto"
-      data-primary-color="#F97316"
-    ></script>
+    <ChatWidget />
 
 </body>
 </html>
