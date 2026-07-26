@@ -1,22 +1,17 @@
 ---
-/**
- * Paralect AI Chat Widget wrapper.
- * Handles re-initialization after Astro ClientRouter (View Transitions) navigation.
- *
- * The loader.js IIFE creates DOM elements (button, popup, iframe) on document.body.
- * When ClientRouter swaps <body>, those elements are destroyed but the script tag
- * is not re-executed. This component listens for astro:page-load and re-injects
- * the loader script after cleaning up stale elements.
- */
 ---
 
 <script
   is:inline
-  src="https://ParalectAI.avpdev.com/loader.js"
+  src="https://paralectai.avpdev.com/loader.js"
   data-bot-id="6189cc04-81ac-4023-9522-3a190f8849bd"
   data-position="bottom-right"
-  data-theme="auto"
-  data-primary-color="#F97316"
+  data-primary-color="#ffd500"
+  data-locale="ru"
+  data-gradient-enabled="true"
+  data-gradient-start="#ea781a"
+  data-gradient-end="#7c3aed"
+  data-gradient-angle="135"
 ></script>
 
 <script is:inline>
@@ -25,36 +20,34 @@
     var initCount = 0;
 
     function cleanup() {
-      // Remove widget DOM elements created by loader.js (btn, popup, iframe)
       document.querySelectorAll("[id^='pw-']").forEach(function (el) {
         el.remove();
       });
-      // Remove injected styles from previous init
       document.querySelectorAll("style").forEach(function (s) {
         if (s.textContent && s.textContent.indexOf("pw-btn") !== -1) s.remove();
       });
-      // Reset API so stale references don't linger
       window.ParalectWidget = undefined;
     }
 
     function reinit() {
       initCount++;
-      // First call is handled by the <script src="..."> tag above — skip it
       if (initCount <= 1) return;
 
       cleanup();
 
-      // Re-inject the loader script so it runs its IIFE again
       var s = document.createElement("script");
-      s.src = "https://ParalectAI.avpdev.com/loader.js";
+      s.src = "https://paralectai.avpdev.com/loader.js";
       s.setAttribute("data-bot-id", BOT_ID);
       s.setAttribute("data-position", "bottom-right");
-      s.setAttribute("data-theme", "auto");
-      s.setAttribute("data-primary-color", "#F97316");
+      s.setAttribute("data-primary-color", "#ffd500");
+      s.setAttribute("data-locale", "ru");
+      s.setAttribute("data-gradient-enabled", "true");
+      s.setAttribute("data-gradient-start", "#ea781a");
+      s.setAttribute("data-gradient-end", "#7c3aed");
+      s.setAttribute("data-gradient-angle", "135");
       document.body.appendChild(s);
     }
 
-    // astro:page-load fires on initial load AND on every client-side navigation
     document.addEventListener("astro:page-load", reinit);
   })();
 </script>
