@@ -1,53 +1,50 @@
 ---
----
 
-<script
-  is:inline
-  src="https://paralectai.avpdev.com/loader.js"
-  data-bot-id="6189cc04-81ac-4023-9522-3a190f8849bd"
-  data-position="bottom-right"
-  data-primary-color="#ffd500"
-  data-locale="ru"
-  data-gradient-enabled="true"
-  data-gradient-start="#ea781a"
-  data-gradient-end="#7c3aed"
-  data-gradient-angle="135"
-></script>
+---
 
 <script is:inline>
   (function () {
     var BOT_ID = "6189cc04-81ac-4023-9522-3a190f8849bd";
     var initCount = 0;
+    var loaded = false;
 
     function cleanup() {
-      document.querySelectorAll("[id^='pw-']").forEach(function (el) {
-        el.remove();
-      });
+      document.querySelectorAll("[id^='pw-']").forEach(function (el) { el.remove(); });
       document.querySelectorAll("style").forEach(function (s) {
         if (s.textContent && s.textContent.indexOf("pw-btn") !== -1) s.remove();
       });
       window.ParalectWidget = undefined;
     }
 
-    function reinit() {
-      initCount++;
-      if (initCount <= 1) return;
-
-      cleanup();
-
+    function inject() {
+      if (loaded) return;
+      loaded = true;
       var s = document.createElement("script");
-      s.src = "https://paralectai.avpdev.com/loader.js";
+      s.src = "https://ParalectAI.avpdev.com/loader.js";
+      s.async = true;
       s.setAttribute("data-bot-id", BOT_ID);
-      s.setAttribute("data-position", "bottom-right");
-      s.setAttribute("data-primary-color", "#ffd500");
-      s.setAttribute("data-locale", "ru");
-      s.setAttribute("data-gradient-enabled", "true");
-      s.setAttribute("data-gradient-start", "#ea781a");
-      s.setAttribute("data-gradient-end", "#7c3aed");
-      s.setAttribute("data-gradient-angle", "135");
       document.body.appendChild(s);
     }
 
-    document.addEventListener("astro:page-load", reinit);
+    function tryLoad() {
+      if (!loaded) inject();
+    }
+
+    document.addEventListener("astro:page-load", function () {
+      initCount++;
+      if (initCount === 1) {
+        document.addEventListener("scroll", tryLoad, { once: true });
+        document.addEventListener("mousemove", tryLoad, { once: true });
+        document.addEventListener("touchstart", tryLoad, { once: true });
+        document.addEventListener("click", tryLoad, { once: true });
+        window.addEventListener("load", function () {
+          setTimeout(tryLoad, 3000);
+        });
+      } else {
+        cleanup();
+        loaded = false;
+        inject();
+      }
+    });
   })();
 </script>
