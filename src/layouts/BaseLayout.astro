@@ -5,7 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieBanner from '../components/CookieBanner.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
-import ChatWidget from '../components/ChatWidget.astro';
+// import ChatWidget from '../components/ChatWidget.astro'; // TODO: включить после доработки
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { ui } from '../i18n/ui';
 import { locations } from '../data/locations';
@@ -470,7 +470,7 @@ const xDefaultUrl = ruUrl; // Point x-default to the default locale version (RU)
     <ScrollToTop />
     <script src="/src/scripts/main.ts"></script>
     <CookieBanner />
-    <ChatWidget />
+    {/* <ChatWidget /> */}
 
 </body>
 </html>
