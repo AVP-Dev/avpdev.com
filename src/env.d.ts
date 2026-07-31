@@ -1,5 +1,13 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
+
+declare global {
+  namespace App {
+    interface Locals {
+      isAIBot: boolean;
+    }
+  }
+}
 import type { ui } from './i18n/ui';
 import type { ImageMetadata } from 'astro';
 

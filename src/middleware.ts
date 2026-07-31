@@ -1,5 +1,19 @@
 import { defineMiddleware } from 'astro:middleware';
 
+// AI bot User-Agent detection patterns
+const AI_BOT_PATTERNS = [
+  'GPTBot', 'ChatGPT-User', 'Claude-Web', 'ClaudeBot', 'Claude-SearchBot',
+  'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Googlebot',
+  'Gemini', 'Gemini-User', 'CCBot', 'anthropic-ai', 'Bytespider',
+  'cohere-ai', 'FacebookBot', 'Meta-ExternalAgent', 'Applebot',
+  'Amazonbot', 'OAI-SearchBot', 'coze',
+];
+
+function isAIBot(userAgent: string): boolean {
+  const ua = userAgent.toLowerCase();
+  return AI_BOT_PATTERNS.some(pattern => ua.includes(pattern.toLowerCase()));
+}
+
 // 1. Exact Match Map (301 Redirects)
 const redirectMap: Record<string, string> = {
   '/index.html': '/ru/',
@@ -129,7 +143,16 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return applySecurityHeaders(context.redirect(`${path}/${url.search}`, 301));
   }
 
-  // 5. Process Request
+  // 5. AI bot detection — set flag for downstream components
+  let userAgent = '';
+  if (!isBuild && !isDev) {
+    try {
+      userAgent = context.request.headers.get('user-agent') || '';
+    } catch (e) { /* ignore */ }
+  }
+  context.locals.isAIBot = userAgent ? isAIBot(userAgent) : false;
+
+  // 6. Process Request
   const response = await next();
 
   // 6. Return response with security headers (including 404s)
