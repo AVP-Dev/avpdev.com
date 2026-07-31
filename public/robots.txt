@@ -16,3 +16,4 @@ User-agent: CCBot
 Disallow: /
 
 Sitemap: https://avpdev.com/sitemap-index.xml
+Sitemap: https://avpdev.com/sitemap.xml
