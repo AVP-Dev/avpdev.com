@@ -2,10 +2,26 @@
 
 > Personal portfolio and technical blog of Aliaksei Patskevich (Alexios Odos), a Software Engineer specializing in custom web development, AI integration, and modern frontend architecture. The site is bilingual (English and Russian) and built on Astro 5 with hybrid SSR+SSG rendering.
 
+## About
+
+Aliaksei Patskevich — full-stack developer with 8+ years of experience. Specializes in: custom web development, AI integration (RAG, LLM agents, automation), CRM/ERP systems, Telegram Mini Apps, SaaS MVP development, bots and scrapers. Based in Warsaw, serves clients worldwide.
+
+## Full Content (for AI training & RAG)
+
+- [Complete Site Content (EN)](https://avpdev.com/llms-full.txt): Full text of all English blog articles in a single document (~17K tokens) for AI training, RAG ingestion, and summarization.
+
 ## Homepage
 
 - [Portfolio & Services (EN)](https://avpdev.com/en/): Main English homepage with services overview, tech stack, portfolio highlights, and contact form.
 - [Портфолио и услуги (RU)](https://avpdev.com/ru/): Главная страница на русском языке с описанием услуг, навыков и формой обратной связи.
+
+## Services
+
+- [AI Integration](https://avpdev.com/en/services/ai-integration/): RAG chatbots, AI agents, document processing, knowledge bases, AI-powered automation for business.
+- [Website Development](https://avpdev.com/en/services/website-development/): Custom websites, landing pages, corporate portals, e-commerce solutions.
+- [Bot & Scraper Development](https://avpdev.com/en/services/bot-and-scraper-development/): Telegram bots, data scrapers, parsers, workflow automation bots.
+- [SaaS MVP Development](https://avpdev.com/en/services/saas-mvp/): Rapid prototyping, minimum viable product, cloud-native SaaS architecture.
+- [Telegram Mini Apps](https://avpdev.com/en/services/telegram-mini-apps/): Web apps inside Telegram with TON integration, payment systems, and custom UI.
 
 ## Blog
 
@@ -19,17 +35,44 @@
 - [Custom CRM Security and Backups](https://avpdev.com/en/blog/custom-crm-security-backups/): Security architecture and backup strategies for custom-built CRM/ERP systems.
 - [AVP-Dev Case Study](https://avpdev.com/en/blog/avpdev-case-study/): Behind-the-scenes look at building this portfolio site as a reference architecture.
 - [Ghost in the Machine](https://avpdev.com/en/blog/ghost-in-the-machine/): Reflections on AI as a capable but dangerous student in software development.
+- [Custom CRM Tech Stack: Key Components and Architecture](https://avpdev.com/en/blog/custom-crm-tech-stack/): Technology choices and architectural decisions for building custom CRM systems.
+- [The Death of Long-Term Build in Web Development](https://avpdev.com/en/blog/death-of-long-term-build/): Why modern web development is shifting from monolithic builds to iterative, component-based approaches.
+- [Nyx Building: Digital Environment for Architecture Studio](https://avpdev.com/en/blog/nyx-building-digital-environment/): Case study of building a comprehensive digital ecosystem for an architecture studio.
+- [Lessons from Amsterdam](https://avpdev.com/en/blog/lessons-from-amsterdam/): Urban planning and digital experience lessons from Amsterdam's approach to city design.
+- [Website Post-Launch: Next Steps and Maintenance Guide](https://avpdev.com/en/blog/site-post-launch/): What to do after launching a website — monitoring, maintenance, and growth strategies.
+- [AI: Your Most Capable and Most Dangerous Student](https://avpdev.com/en/blog/ai-capable-dangerous-student/): Understanding AI as a powerful tool that requires careful guidance and oversight.
 - [All Blog Posts (EN)](https://avpdev.com/en/blog/): Full index of all English articles.
 - [Все статьи блога (RU)](https://avpdev.com/ru/blog/): Полный список статей на русском языке.
 
 ## Projects
 
-- [Projects Portfolio (EN)](https://avpdev.com/en/project/): Completed client projects across web-sites, apps, CRM/ERP systems, and Telegram Mini Apps.
+- [Project Portfolio (EN)](https://avpdev.com/en/project/): All completed client projects with detailed case studies.
 - [Портфолио проектов (RU)](https://avpdev.com/ru/project/): Реализованные проекты на русском языке.
+
+### Featured Projects
+
+- [Sentralix](https://avpdev.com/en/project/project-sentralix/): AI-native ITSM platform with agentic automation, real-time topology mapping, and self-healing infrastructure.
+- [Nyx Auto](https://avpdev.com/en/project/project-nyx-auto/): Enterprise CRM for automotive business with analytics and reporting.
+- [Nyx OS](https://avpdev.com/en/project/project-nyx-os/): Operating system-like platform for business process management.
+- [Pure Trust](https://avpdev.com/en/project/project-pure-trust/): Trust and safety platform with user verification systems.
+- [TechMetal](https://avpdev.com/en/project/project-techmetal/): Industrial equipment marketplace with catalog management.
+- [Flux Desk](https://avpdev.com/en/project/project-flux-desk/): Co-working space management platform with booking system.
+- [Leder Werk](https://avpdev.com/en/project/project-leder-werk/): E-commerce platform for leather goods with custom ordering.
+- [Aura Home](https://avpdev.com/en/project/project-aura-home/): Smart home device management dashboard.
+- [Ralf Ringer](https://avpdev.com/en/project/project-ralf-ringer/): Brand website for footwear manufacturer with catalog integration.
+- [Rozhkova](https://avpdev.com/en/project/project-rozhkova/): Personal brand website for interior designer with portfolio.
+- [MekoHaus](https://avpdev.com/en/project/project-mekohaus/): Furniture manufacturer website with product catalog.
+- [Travel](https://avpdev.com/en/project/project-travel/): Travel agency website with tour booking and itinerary management.
+- [Cars](https://avpdev.com/en/project/project-cars/): Car dealership website with inventory management and search.
+- [Furniture](https://avpdev.com/en/project/project-furniture/): Furniture store e-commerce platform.
+- [Tow Truck](https://avpdev.com/en/project/project-tow-truck/): Emergency tow truck service booking platform.
+- [3D Modeling](https://avpdev.com/en/project/project-3d-modeling/): 3D modeling and visualization service portfolio.
+- [Urban Spot](https://avpdev.com/en/project/project-urban-spot/): Urban space booking and management platform.
 
 ## Legal
 
 - [Privacy Policy](https://avpdev.com/en/legal/privacy-policy/): Data handling and privacy practices for this website.
+- [Terms of Service](https://avpdev.com/en/legal/terms-of-service/): Terms governing the use of this website.
 - [Cookie Policy](https://avpdev.com/en/legal/cookie-policy/): Cookie usage policy and consent information.
 
 ## Optional

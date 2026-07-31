@@ -1,16 +1,18 @@
+# Allow all well-behaved bots
 User-agent: *
-# Разрешаем доступ ко всей статике (критично для CSS/JS в Astro)
 Allow: /_astro/
-# Запрещаем только эндпоинты API
 Disallow: /api/
 Allow: /
 
-# Блокировка агрессивных AI-ботов для защиты контента
+# ChatGPT / OpenAI — разрешаем для AI-поиска и цитирования
 User-agent: GPTBot
-Disallow: /
+Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
+# Common Crawl / машинное обучение — блокируем
 User-agent: CCBot
 Disallow: /
 
-# Прямой путь к карте сайта
 Sitemap: https://avpdev.com/sitemap-index.xml
