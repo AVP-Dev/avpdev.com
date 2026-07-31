@@ -125,6 +125,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return applySecurityHeaders(context.redirect(redirectMap[path], 301));
   }
 
+  // 1.5. Sitemap alias: /sitemap.xml -> /sitemap-index.xml
+  if (path === '/sitemap.xml' || path === '/sitemap.xml/') {
+    return applySecurityHeaders(context.redirect('/sitemap-index.xml', 301));
+  }
+
   // 2. Folder Mapping: /en/uslugi/ -> /en/services/
   if (path.startsWith('/en/uslugi/')) {
     const remainder = path.replace('/en/uslugi/', '');
