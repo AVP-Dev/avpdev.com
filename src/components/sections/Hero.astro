@@ -35,11 +35,15 @@ const t = useTranslations(lang);
                   <h1 set:html={t("hero_h1")} />
                 )}
                 
-                <p>{subtitle || t("hero_p")}</p>
+                <p>{subtitle || t("hero_subtitle")}</p>
                 
                 <div class="cta-group">
                     <a href={`/${lang}/#contact`} class="cta-button">
                         {t("hero_cta")}
+                    </a>
+                    <a href="https://t.me/AVP_Dev" target="_blank" rel="noopener" class="cta-button secondary">
+                        {t("hero_cta_secondary")}
+                        <i class="fa-brands fa-telegram" style="margin-left: 0.5rem;"></i>
                     </a>
                 </div>
             </div>

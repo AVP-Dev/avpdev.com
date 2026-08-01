@@ -2,48 +2,100 @@ import React from 'react';
 
 export const CreatorSignature = () => {
     return (
-        <div className="w-full py-4 text-center select-none">
-            <div className="font-sans leading-tight text-sm text-inherit">
-                {/* Имена: Твой бренд и реальное имя */}
-                <div className="flex items-center justify-center gap-3">
-                    <a
-                        href="https://avpdev.com/en/"
-                        className="font-bold opacity-90 hover:opacity-100 transition-opacity no-underline text-inherit"
-                    >
-                        Alexios Odos
-                    </a>
-                    <span className="opacity-20 font-light">|</span>
+        <>
+            <style>{`
+                .sig-root {
+                    --sig-primary: #FFFFFF;
+                    --sig-secondary: #C0BDBF;
+                    --sig-dim: #A09D9F;
+                    --sig-accent: #FF8C00;
+                }
+                .light-theme .sig-root {
+                    --sig-primary: #18181B;
+                    --sig-secondary: #52525B;
+                    --sig-dim: #3F3F46;
+                }
+            `}</style>
+            <div
+                className="sig-root"
+                style={{
+                    width: '100%',
+                    paddingTop: '14px',
+                    paddingBottom: '14px',
+                    textAlign: 'center',
+                    userSelect: 'none',
+                    fontFamily: "'Plus Jakarta Sans Variable', sans-serif",
+                    lineHeight: 1.4,
+                }}
+            >
+                <div style={{ marginBottom: '6px' }}>
                     <a
                         href="https://avpdev.com/ru/"
-                        className="font-bold opacity-90 hover:opacity-100 transition-opacity no-underline text-inherit"
+                        style={{
+                            fontWeight: 700,
+                            fontSize: '0.85rem',
+                            color: 'var(--sig-primary)',
+                            opacity: 0.95,
+                            textDecoration: 'none',
+                            transition: 'color 0.3s ease',
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--sig-accent)'}
+                        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--sig-primary)'}
                     >
-                        Aliaksei Patskevich
+                        Aliaksei Patskevich (AVPDev)
                     </a>
                 </div>
-
-                {/* Роль и основные точки входа */}
-                <div className="mt-2 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.1em] font-medium opacity-40">
-                    <span>Software Engineer</span>
-                    <span className="opacity-30">•</span>
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        fontSize: '0.7rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        color: 'var(--sig-secondary)',
+                    }}
+                >
+                    <span style={{ opacity: 0.9 }}>AI Solutions Architect</span>
+                    <span style={{ color: 'var(--sig-secondary)', opacity: 0.4 }}>•</span>
                     <a
                         href="https://github.com/AVP-Dev"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:opacity-100 hover:text-blue-500 transition-colors text-inherit decoration-current"
+                        style={{
+                            fontSize: '0.7rem',
+                            textTransform: 'none',
+                            letterSpacing: '0',
+                            color: 'var(--sig-dim)',
+                            textDecoration: 'none',
+                            fontWeight: 500,
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--sig-accent)'}
+                        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--sig-dim)'}
                     >
                         GitHub
                     </a>
-                    <span className="opacity-30">•</span>
+                    <span style={{ color: 'var(--sig-secondary)', opacity: 0.4 }}>•</span>
                     <a
                         href="https://t.me/AVP_Dev"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:opacity-100 hover:text-blue-500 transition-colors text-inherit decoration-current"
+                        style={{
+                            fontSize: '0.7rem',
+                            textTransform: 'none',
+                            letterSpacing: '0',
+                            color: 'var(--sig-dim)',
+                            textDecoration: 'none',
+                            fontWeight: 500,
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--sig-accent)'}
+                        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--sig-dim)'}
                     >
                         Telegram
                     </a>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
