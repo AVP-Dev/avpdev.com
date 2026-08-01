@@ -4,17 +4,21 @@ export const prerender = true;
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Hero from "../../components/sections/Hero.astro";
+import ProofBar from "../../components/sections/ProofBar.astro";
+import ProblemOutcome from "../../components/sections/ProblemOutcome.astro";
+import HowWeWork from "../../components/sections/HowWeWork.astro";
 import Services from "../../components/sections/Services.astro";
+import Process from "../../components/sections/Process.astro";
 import About from "../../components/sections/About.astro";
 import Portfolio from "../../components/sections/Portfolio.astro";
+import FAQ from "../../components/sections/FAQ.astro";
 import Contact from "../../components/sections/Contact.astro";
 import SuccessModal from "../../components/modals/SuccessModal.astro";
 import ErrorModal from "../../components/modals/ErrorModal.astro";
-// Импортируем изображение для Schema
 import aboutPhoto from "../../assets/images/about-photo.webp";
 
 const pageTitleKey = "page_title";
-const pageDescKey = "hero_p";
+const pageDescKey = "hero_subtitle";
 
 // ОБНОВЛЕННАЯ SCHEMA.ORG (English version)
 const schema = {
@@ -53,9 +57,14 @@ const schema = {
 
 <BaseLayout title={pageTitleKey} description={pageDescKey} schema={schema}>
   <Hero />
+  <ProofBar />
+  <ProblemOutcome />
+  <HowWeWork />
   <Services />
+  <Process />
   <About />
   <Portfolio />
+  <FAQ />
   <Contact />
 
   <SuccessModal />

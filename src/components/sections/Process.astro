@@ -1,0 +1,196 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import Icon from '../Icon.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<section id="process" class="section">
+    <div class="container">
+        <h2 class="section-title fade-in" set:html={t('process_h2')} />
+        <div class="process-steps fade-in">
+            <div class="process-step">
+                <div class="step-number">01</div>
+                <div class="step-card">
+                    <div class="step-icon-wrapper">
+                        <Icon name="fa-pen-to-square" aria-hidden="true" />
+                    </div>
+                    <div class="step-body">
+                        <div class="step-time">{lang === 'ru' ? '5 минут' : '5 min'}</div>
+                        <h4>{t('process_step1_title')}</h4>
+                        <p>{t('process_step1_desc')}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="process-connector">
+                <span class="connector-dot"></span>
+                <span class="connector-line"></span>
+                <span class="connector-dot"></span>
+            </div>
+            <div class="process-step">
+                <div class="step-number">02</div>
+                <div class="step-card">
+                    <div class="step-icon-wrapper">
+                        <Icon name="fa-file-lines" aria-hidden="true" />
+                    </div>
+                    <div class="step-body">
+                        <div class="step-time">{lang === 'ru' ? '48 часов' : '48 h'}</div>
+                        <h4>{t('process_step2_title')}</h4>
+                        <p>{t('process_step2_desc')}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="process-connector">
+                <span class="connector-dot"></span>
+                <span class="connector-line"></span>
+                <span class="connector-dot"></span>
+            </div>
+            <div class="process-step">
+                <div class="step-number">03</div>
+                <div class="step-card">
+                    <div class="step-icon-wrapper">
+                        <Icon name="fa-cubes" aria-hidden="true" />
+                    </div>
+                    <div class="step-body">
+                        <div class="step-time">{lang === 'ru' ? '2–8 недель' : '2–8 weeks'}</div>
+                        <h4>{t('process_step3_title')}</h4>
+                        <p>{t('process_step3_desc')}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="process-cta fade-in">
+            <a href={`/${lang}/brief/`} class="cta-button">{t('process_cta')}</a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .section { padding: 80px 0; }
+    .process-steps {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+        margin-top: 3rem;
+        justify-content: center;
+    }
+    .process-step {
+        flex: 1;
+        max-width: 340px;
+        position: relative;
+    }
+    .step-number {
+        font-size: 4rem;
+        font-weight: 900;
+        color: rgba(var(--accent-color-start-rgb), 0.1);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        pointer-events: none;
+        user-select: none;
+    }
+    .step-card {
+        background: var(--primary-color);
+        padding: 2rem;
+        border-radius: 24px;
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--card-shadow);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .step-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(var(--accent-color-start-rgb), 0.4);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    }
+    .step-icon-wrapper {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, rgba(var(--accent-color-start-rgb), 0.1), rgba(var(--accent-color-end-rgb), 0.05));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+        color: var(--accent-color-start);
+        font-size: 1.5rem;
+        border: 1px solid rgba(var(--accent-color-start-rgb), 0.2);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .step-card:hover .step-icon-wrapper {
+        transform: scale(1.1) rotate(5deg);
+    }
+    .step-body h4 {
+        font-size: 1.15rem;
+        color: var(--text-color);
+        margin-bottom: 0.6rem;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+    .step-body p {
+        font-size: 0.95rem;
+        color: var(--text-secondary-color);
+        line-height: 1.55;
+        margin: 0;
+    }
+    .step-time {
+        display: inline-flex;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        border-radius: 9999px;
+        background: rgba(var(--accent-color-start-rgb), 0.1);
+        color: var(--accent-color-start);
+        border: 1px solid rgba(var(--accent-color-start-rgb), 0.2);
+        margin-bottom: 0.75rem;
+    }
+    .process-connector {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 4.5rem 1rem 0;
+        gap: 0;
+        flex-shrink: 0;
+    }
+    .connector-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent-color-start);
+        opacity: 0.5;
+        flex-shrink: 0;
+    }
+    .connector-line {
+        width: 2px;
+        height: 80px;
+        background: linear-gradient(to bottom, var(--accent-color-start), transparent);
+        opacity: 0.3;
+        flex-shrink: 0;
+    }
+    .process-cta {
+        text-align: center;
+        margin-top: 3rem;
+    }
+    @media (max-width: 900px) {
+        .process-steps {
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+        .process-step {
+            max-width: 100%;
+            width: 100%;
+        }
+        .process-connector {
+            padding: 0.5rem 0;
+            flex-direction: row;
+            width: 100%;
+            justify-content: center;
+        }
+        .connector-line {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent-color-start), transparent);
+        }
+    }
+</style>

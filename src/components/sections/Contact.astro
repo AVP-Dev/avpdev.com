@@ -1,389 +1,613 @@
 ---
-// src/components/sections/Contact.astro
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import Icon from "../Icon.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
-
 <section id="contact">
-    <div class="container container-narrow">
-        <div class="section-center">
-            <h2 class="section-title fade-in" set:html={t("contact_h2")} />
-            <p class="section-subtitle fade-in">{t("contact_p")}</p>
+  <div class="container container-narrow">
+    <div class="contact-wrapper">
+
+      <div class="contact-cta-block fade-in">
+        <h2 class="section-title" set:html={t("final_cta_h2")} />
+        <p class="section-subtitle">{t("final_cta_sub")}</p>
+        <div class="final-cta-group">
+          <a href={`/${lang}/brief/`} class="cta-button">
+            {t("final_cta_brief")}
+            <i class="fa-solid fa-arrow-right" style="margin-left: 0.5rem;"></i>
+          </a>
+          <a href="https://t.me/AVP_Dev" target="_blank" rel="noopener" class="cta-button secondary">
+            <i class="fa-brands fa-telegram" style="margin-right: 0.5rem;"></i>
+            {t("final_cta_telegram")}
+          </a>
         </div>
+      </div>
 
-        <form id="contact-form" class="contact-form fade-in" novalidate>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label class="form-label" for="contact-name">{t("form_name")}</label>
-                    <input
-                        id="contact-name"
-                        type="text"
-                        name="name"
-                        placeholder="John Doe"
-                        required
-                        autocomplete="name"
-                        class="form-control"
-                    />
-                </div>
+      <div class="or-divider">
+        <span class="or-divider-line"></span>
+        <span class="or-divider-text">{t("final_cta_or")}</span>
+        <span class="or-divider-line"></span>
+      </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="contact-email">{t("form_email")}</label>
-                    <input
-                        id="contact-email"
-                        type="email"
-                        name="contact"
-                        placeholder="Email / Telegram / Phone"
-                        autocomplete="email"
-                        class="form-control"
-                        required
-                    />
-                    <span class="form-hint-text">{t("form_hint")}</span>
-                </div>
-
-                <div class="form-group full-width">
-                    <label class="form-label" for="contact-message">{t("form_message")}</label>
-                    <textarea
-                        id="contact-message"
-                        name="message"
-                        placeholder={t("form_message")}
-                        required
-                        class="form-control"
-                        rows="5"></textarea>
-                    <div class="message-info">
-                        <span class="form-hint-text"
-                            >{t("form_error_message_short")}</span
-                        >
-                        <span id="char-counter" class="char-counter"
-                            >0 / 2000</span
-                        >
-                    </div>
-                    <p id="message-error" class="error-text hidden">
-                        {t("form_error_message_short")}
-                    </p>
-                </div>
+      <div class="contact-form-card fade-in">
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="contact-name">{t("form_name")}</label>
+              <input
+                id="contact-name"
+                type="text"
+                name="name"
+                placeholder="John Doe"
+                required
+                autocomplete="name"
+                class="form-control"
+              />
             </div>
 
-            <div class="form-footer">
-                <div class="checkbox-wrapper">
-                    <input
-                        type="checkbox"
-                        id="legal-consent"
-                        name="consent"
-                        class="custom-checkbox"
-                        required
-                    />
-                    <label for="legal-consent" class="checkbox-label">
-                        {
-                            lang === "ru" ? (
-                                <>
-                                    Я принимаю условия{" "}
-                                    <a href="/ru/legal/public-offer/">
-                                        Публичной оферты
-                                    </a>{" "}
-                                    и даю согласие на обработку{" "}
-                                    <a href="/ru/legal/privacy-policy/">
-                                        персональных данных
-                                    </a>
-                                    .
-                                </>
-                            ) : (
-                                <>
-                                    I accept the{" "}
-                                    <a href="/en/legal/public-offer/">
-                                        Public Offer
-                                    </a>{" "}
-                                    and agree to the processing of{" "}
-                                    <a href="/en/legal/privacy-policy/">
-                                        personal data
-                                    </a>
-                                    .
-                                </>
-                            )
-                        }
-                    </label>
-                </div>
-
-                <div class="submit-area">
-                    <button id="submit-button" type="submit" class="cta-button">
-                        <span style="margin-right: 12px;"
-                            >{t("form_button")}</span
-                        >
-                        <Icon name="fa-paper-plane" />
-                    </button>
-                    <div
-                        id="form-spinner"
-                        class="spinner"
-                        style="display: none;"
-                    >
-                    </div>
-                </div>
-
-                <!-- Turnstile Widget: interaction-only mode preserves premium aesthetic -->
-                <div class="turnstile-container">
-                    <div class="cf-turnstile" 
-                        data-sitekey={String(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA")} 
-                        data-theme="dark"
-                        data-appearance="interaction-only">
-                    </div>
-                </div>
-
-                <p id="consent-error" class="error-text hidden">
-                    {
-                        lang === "ru"
-                            ? "Вы должны согласиться на обработку персональных данных."
-                            : "You must agree to personal data processing."
-                    }
-                </p>
+            <div class="form-group">
+              <label class="form-label" for="contact-email">{t("form_email")}</label>
+              <input
+                id="contact-email"
+                type="email"
+                name="contact"
+                placeholder="Email / Telegram / Phone"
+                autocomplete="email"
+                class="form-control"
+                required
+              />
+              <span class="form-hint-text">{t("form_hint")}</span>
             </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="contact-message">{t("form_message")}</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                placeholder={t("form_message")}
+                required
+                class="form-control"
+                rows="5"
+              ></textarea>
+              <div class="message-info">
+                <span class="form-hint-text">{t("form_error_message_short")}</span>
+                <span id="char-counter" class="char-counter">0 / 2000</span>
+              </div>
+              <p id="message-error" class="error-text hidden">{t("form_error_message_short")}</p>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <div class="checkbox-wrapper">
+              <input
+                type="checkbox"
+                id="legal-consent"
+                name="consent"
+                class="custom-checkbox"
+                required
+              />
+              <label for="legal-consent" class="checkbox-label">
+                {lang === "ru" ? (
+                  <>
+                    Я принимаю условия{" "}
+                    <a href="/ru/legal/public-offer/">Публичной оферты</a>{" "}
+                    и даю согласие на обработку{" "}
+                    <a href="/ru/legal/privacy-policy/">персональных данных</a>.
+                  </>
+                ) : (
+                  <>
+                    I accept the{" "}
+                    <a href="/en/legal/public-offer/">Public Offer</a>{" "}
+                    and agree to the processing of{" "}
+                    <a href="/en/legal/privacy-policy/">personal data</a>.
+                  </>
+                )}
+              </label>
+            </div>
+
+            <div class="submit-area">
+              <button id="submit-button" type="submit" class="cta-button">
+                <span style="margin-right: 12px;">{t("form_button")}</span>
+                <Icon name="fa-paper-plane" />
+              </button>
+              <div id="form-spinner" class="spinner" style="display: none;"></div>
+            </div>
+
+            <div class="turnstile-container">
+              <div
+                class="cf-turnstile"
+                data-sitekey={String(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA")}
+                data-theme="dark"
+                data-appearance="interaction-only"
+              ></div>
+            </div>
+
+            <p id="consent-error" class="error-text hidden">
+              {lang === "ru"
+                ? "Вы должны согласиться на обработку персональных данных."
+                : "You must agree to personal data processing."}
+            </p>
+          </div>
         </form>
+      </div>
+
     </div>
+  </div>
 </section>
 
 <style>
-    .container-narrow {
-        max-width: 800px;
+  .container-narrow {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .contact-cta-block {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-cta-block .section-title {
+    margin-bottom: 1rem;
+  }
+
+  .final-cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+
+  .or-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+
+  .or-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--border-color) 30%,
+      var(--border-color) 70%,
+      transparent 100%
+    );
+  }
+
+  .or-divider-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary-color);
+    white-space: nowrap;
+    opacity: 0.8;
+    letter-spacing: 0.02em;
+  }
+
+  .contact-form-card {
+    width: 100%;
+    max-width: 720px;
+  }
+
+  .contact-form {
+    background: var(--primary-color);
+    padding: 2.5rem;
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--card-shadow);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .full-width {
+    grid-column: span 2;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-color);
+    letter-spacing: 0.02em;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-family: inherit;
+    line-height: 1.5;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .form-control::placeholder {
+    color: var(--text-secondary-color);
+    opacity: 0.5;
+  }
+
+  .form-control:focus {
+    border-color: rgba(var(--accent-color-start-rgb), 0.5);
+    box-shadow: 0 0 0 3px rgba(var(--accent-color-start-rgb), 0.1);
+    background: var(--primary-color);
+  }
+
+  .form-control.error-field {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+  }
+
+  .form-hint-text {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary-color);
+    font-family: var(--font-mono);
+    opacity: 0.7;
+  }
+
+  .message-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+
+  .char-counter {
+    font-size: 0.75rem;
+    color: var(--text-secondary-color);
+    font-family: var(--font-mono);
+    opacity: 0.7;
+  }
+
+  .message-info .form-hint-text {
+    margin-top: 0;
+  }
+
+  .form-footer {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .checkbox-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .custom-checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-color);
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: var(--accent-color-start);
+    transition: border-color 0.2s ease;
+  }
+
+  .custom-checkbox:focus {
+    border-color: rgba(var(--accent-color-start-rgb), 0.5);
+    outline: none;
+  }
+
+  .custom-checkbox.error-field {
+    border-color: #ef4444 !important;
+  }
+
+  .checkbox-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary-color);
+    line-height: 1.5;
+    user-select: none;
+  }
+
+  .checkbox-label a {
+    color: var(--accent-color-start);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .checkbox-label a:hover {
+    opacity: 0.8;
+  }
+
+  .submit-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2rem;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+    white-space: nowrap;
+  }
+
+  .cta-button:not(.secondary) {
+    background: linear-gradient(135deg, var(--accent-color-start), var(--accent-color-end));
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(var(--accent-color-start-rgb), 0.35);
+  }
+
+  .cta-button:not(.secondary):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(var(--accent-color-start-rgb), 0.45);
+  }
+
+.cta-button.secondary {
+        background: transparent;
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
     }
 
-    .section-center {
-        text-align: center;
-        margin-bottom: 4rem;
+    .cta-button.secondary:hover {
+        border-color: rgba(var(--accent-color-start-rgb), 0.5);
+        color: var(--accent-color-start);
+        background: rgba(var(--accent-color-start-rgb), 0.06);
+        transform: translateY(-2px);
+    }
+
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-top-color: var(--accent-color-start);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .error-text {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+
+  .error-text.hidden {
+    display: none;
+  }
+
+  .turnstile-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    min-height: 0;
+  }
+
+  @media (max-width: 640px) {
+    .contact-wrapper {
+      padding-top: 60px;
+      padding-bottom: 60px;
     }
 
     .contact-form {
-        background: var(--primary-color);
-        padding: 3rem;
-        border-radius: 24px;
-        border: 1px solid var(--border-color);
-        box-shadow: var(--card-shadow);
+      padding: 1.5rem;
     }
 
-    .submit-area {
-        display: flex;
-        justify-content: center;
+    .form-grid {
+      grid-template-columns: 1fr;
     }
 
-    .form-hint-text {
-        display: block;
-        font-size: 0.75rem;
-        color: var(--text-secondary-color);
-        margin-top: 0.5rem;
-        font-family: var(--font-mono);
-        opacity: 0.7;
+    .full-width {
+      grid-column: span 1;
     }
 
-    .turnstile-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-        min-height: 0;
+    .final-cta-group {
+      flex-direction: column;
+      align-items: center;
     }
 
-    @media (max-width: 640px) {
-        .contact-form {
-            padding: 1.5rem;
-        }
-        .form-grid {
-            grid-template-columns: 1fr;
-        }
-        .full-width {
-            grid-column: span 1;
-        }
+    .cta-button {
+      width: 100%;
+      max-width: 320px;
     }
 
-    .message-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 0.5rem;
+    .or-divider {
+      max-width: 300px;
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .or-divider {
+      gap: 0.75rem;
     }
 
-    .char-counter {
-        font-size: 0.75rem;
-        color: var(--text-secondary-color);
-        font-family: var(--font-mono);
-        opacity: 0.7;
+    .or-divider-text {
+      font-size: 0.78rem;
     }
-
-    .message-info .form-hint-text {
-        margin-top: 0;
-    }
+  }
 </style>
 
 <script>
-    import { navigate } from "astro:transitions/client";
+  import { navigate } from "astro:transitions/client";
 
-    document.addEventListener("astro:page-load", () => {
-        const form = document.getElementById("contact-form") as HTMLFormElement;
-        const submitButton = document.getElementById("submit-button") as HTMLButtonElement;
-        const spinner = document.getElementById("form-spinner") as HTMLElement;
-        const consentCheckbox = document.getElementById("legal-consent") as HTMLInputElement;
-        const consentError = document.getElementById("consent-error") as HTMLElement;
-        const messageError = document.getElementById("message-error") as HTMLElement;
-        const messageInput = form?.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
-        const charCounter = document.getElementById("char-counter");
+  document.addEventListener("astro:page-load", () => {
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    const submitButton = document.getElementById("submit-button") as HTMLButtonElement | null;
+    const spinner = document.getElementById("form-spinner") as HTMLElement | null;
+    const consentCheckbox = document.getElementById("legal-consent") as HTMLInputElement | null;
+    const consentError = document.getElementById("consent-error") as HTMLElement | null;
+    const messageError = document.getElementById("message-error") as HTMLElement | null;
+    const messageInput = form?.querySelector('textarea[name="message"]') as HTMLTextAreaElement | null;
+    const charCounter = document.getElementById("char-counter");
 
-        if (!form) return;
+    if (!form) return;
 
-        // --- INTELLIGENT ON-DEMAND LOADING FOR TURNSTILE ---
-        // Prevents 3rd-party cookie warnings on initial page load.
-        // Script is loaded only when user interacts with or scrolls near the form.
-        let turnstileLoaded = false;
-        const loadTurnstile = () => {
-            if (turnstileLoaded) return;
-            turnstileLoaded = true;
+    let turnstileLoaded = false;
+    const loadTurnstile = () => {
+      if (turnstileLoaded) return;
+      turnstileLoaded = true;
+      const script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      script.async = true;
+      document.head.appendChild(script);
+      form.removeEventListener("focusin", loadTurnstile);
+      form.removeEventListener("click", loadTurnstile);
+      observer.disconnect();
+    };
 
-            const script = document.createElement('script');
-            script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-            script.async = true;
-            document.head.appendChild(script);
+    form.addEventListener("focusin", loadTurnstile, { once: true });
+    form.addEventListener("click", loadTurnstile, { once: true });
 
-            form.removeEventListener('focusin', loadTurnstile);
-            form.removeEventListener('click', loadTurnstile);
-            observer.disconnect();
-        };
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        loadTurnstile();
+      }
+    }, { rootMargin: "300px" });
+    observer.observe(form);
 
-        form.addEventListener('focusin', loadTurnstile, { once: true });
-        form.addEventListener('click', loadTurnstile, { once: true });
-
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                loadTurnstile();
-            }
-        }, { rootMargin: "300px" });
-        observer.observe(form);
-        // ----------------------------------------------------
-
-        // Character counter logic
-        if (messageInput && charCounter) {
-            messageInput.addEventListener("input", () => {
-                const length = messageInput.value.length;
-                charCounter.textContent = `${length} / 2000`;
-                if (length > 0 && length < 10) {
-                    (charCounter as HTMLElement).style.color = "#ef4444";
-                } else {
-                    (charCounter as HTMLElement).style.color = "";
-                }
-            });
+    if (messageInput && charCounter) {
+      messageInput.addEventListener("input", () => {
+        charCounter.textContent = `${messageInput.value.length} / 2000`;
+        if (messageInput.value.length > 0 && messageInput.value.length < 10) {
+          charCounter.style.color = "#ef4444";
+        } else {
+          charCounter.style.color = "";
         }
+      });
+    }
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-            // Reset errors
-            form.querySelectorAll(".error-field").forEach((el) =>
-                el.classList.remove("error-field"),
-            );
-            if (consentError) consentError.classList.add("hidden");
-            if (messageError) messageError.classList.add("hidden");
+      form.querySelectorAll(".error-field").forEach((el) => {
+        el.classList.remove("error-field");
+      });
+      if (consentError) consentError.classList.add("hidden");
+      if (messageError) messageError.classList.add("hidden");
 
-            // Turnstile validation — if not loaded yet, trigger load and show a hint
-            const turnstileResponse = form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement;
-            if (!turnstileResponse || !turnstileResponse.value) {
-                loadTurnstile(); // force-load immediately on submit attempt
-                const pageLang = document.documentElement.lang;
-                if (messageError) {
-                    messageError.textContent = pageLang === "ru"
-                        ? "Защита загружается, подождите секунду и попробуйте снова."
-                        : "Please wait a moment and try again.";
-                    messageError.classList.remove("hidden");
-                }
-                return;
-            }
+      const turnstileResponse = form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null;
+      if (!turnstileResponse || !turnstileResponse.value) {
+        loadTurnstile();
+        const pageLang = document.documentElement.lang;
+        if (messageError) {
+          messageError.textContent = pageLang === "ru"
+            ? "Защита загружается, подождите секунду и попробуйте снова."
+            : "Please wait a moment and try again.";
+          messageError.classList.remove("hidden");
+        }
+        return;
+      }
 
-            let isValid = true;
+      let isValid = true;
 
-            // Validate text inputs
-            form.querySelectorAll("input[required], textarea[required]").forEach((field) => {
-                const input = field as HTMLInputElement | HTMLTextAreaElement;
-                if (!input.value.trim()) {
-                    input.classList.add("error-field");
-                    isValid = false;
-                }
-            });
+      form.querySelectorAll("input[required], textarea[required]").forEach((field) => {
+        const input = field as HTMLInputElement | HTMLTextAreaElement;
+        if (!input.value.trim()) {
+          input.classList.add("error-field");
+          isValid = false;
+        }
+      });
 
-            // Validate message length (min 10)
-            if (messageInput && messageInput.value.trim().length < 10) {
-                messageInput.classList.add("error-field");
-                if (messageError) messageError.classList.remove("hidden");
-                isValid = false;
-            }
+      if (messageInput && messageInput.value.trim().length < 10) {
+        messageInput.classList.add("error-field");
+        if (messageError) messageError.classList.remove("hidden");
+        isValid = false;
+      }
 
-            // Validate consent
-            if (!consentCheckbox.checked) {
-                consentCheckbox.classList.add("error-field");
-                if (consentError) consentError.classList.remove("hidden");
-                isValid = false;
-            }
+      if (!consentCheckbox?.checked) {
+        if (consentCheckbox) consentCheckbox.classList.add("error-field");
+        if (consentError) consentError.classList.remove("hidden");
+        isValid = false;
+      }
 
-            if (!isValid) return;
+      if (!isValid) return;
 
-            // Show loading state
-            if (submitButton) submitButton.style.display = "none";
-            if (spinner) spinner.style.display = "block";
+      if (submitButton) submitButton.style.display = "none";
+      if (spinner) spinner.style.display = "block";
 
-            const formData = new FormData(form);
-            const data: Record<string, any> = Object.fromEntries(formData.entries());
+      const formData = new FormData(form);
+      const data: Record<string, any> = Object.fromEntries(formData.entries());
+      data.consent = formData.get("consent") === "on";
 
-            // CRITICAL: Convert checkbox from "on"/undefined to boolean
-            data.consent = formData.get("consent") === "on";
+      if (typeof window !== "undefined" && typeof window.getUtmParams === "function") {
+        const utms = window.getUtmParams();
+        if (utms) Object.assign(data, utms);
+      }
 
-            // Add UTM Data if available
-            if (typeof window !== 'undefined' && typeof window.getUtmParams === 'function') {
-                const utms = window.getUtmParams();
-                if (utms) {
-                    Object.assign(data, utms);
-                }
-            }
-
-            try {
-                const response = await fetch("/api/sendMessage/", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data),
-                });
-
-                if (response.ok) {
-                    if (typeof window !== 'undefined') {
-                        if (window.gtag) window.gtag('event', 'generate_lead', { form_name: 'contact_form' });
-                        if (window.ym) window.ym(107147089, 'reachGoal', 'form_submit');
-                    }
-                    
-                    document.dispatchEvent(
-                        new CustomEvent("modal:open", {
-                            detail: { modalId: "success-modal" },
-                        }),
-                    );
-                    form.reset();
-                    if (charCounter) charCounter.textContent = "0 / 2000";
-                } else {
-                    const errorData = await response.json();
-                    if (errorData.errors && errorData.errors.message) {
-                        if (messageError) {
-                            messageError.textContent = errorData.errors.message[0];
-                            messageError.classList.remove("hidden");
-                            messageInput.classList.add("error-field");
-                        }
-                        throw new Error("Validation failed");
-                    }
-                    throw new Error("Submission failed");
-                }
-            } catch (error) {
-                console.error(error);
-                document.dispatchEvent(
-                    new CustomEvent("modal:open", {
-                        detail: { modalId: "error-modal" },
-                    }),
-                );
-            } finally {
-                if (submitButton) submitButton.style.display = "block";
-                if (spinner) spinner.style.display = "none";
-                if (window.turnstile) {
-                    window.turnstile.reset();
-                }
-            }
+      try {
+        const response = await fetch("/api/sendMessage/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
         });
+
+        if (response.ok) {
+          if (typeof window.gtag !== "undefined") window.gtag("event", "generate_lead", { form_name: "contact_form" });
+          if (typeof window.ym !== "undefined") window.ym(107147089, "reachGoal", "form_submit");
+
+          document.dispatchEvent(
+            new CustomEvent("modal:open", { detail: { modalId: "success-modal" } })
+          );
+          form.reset();
+          if (charCounter) charCounter.textContent = "0 / 2000";
+        } else {
+          const errorData = await response.json();
+          if (errorData.errors?.message) {
+            if (messageError) {
+              messageError.textContent = errorData.errors.message[0];
+              messageError.classList.remove("hidden");
+            }
+            throw new Error("Validation failed");
+          }
+          throw new Error("Submission failed");
+        }
+      } catch (err) {
+        document.dispatchEvent(
+          new CustomEvent("modal:open", { detail: { modalId: "error-modal" } })
+        );
+      } finally {
+        if (submitButton) submitButton.style.display = "block";
+        if (spinner) spinner.style.display = "none";
+        if (window.turnstile) window.turnstile.reset();
+      }
     });
+  });
 </script>

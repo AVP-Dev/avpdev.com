@@ -67,34 +67,29 @@ const t = useTranslations(lang);
             </div>
 
             <!-- Column 2: Navigation -->
-            <div class="footer-col nav-col">
-                <h3 class="footer-title">{t("catalog_title")}</h3>
-                <nav class="footer-nav">
-                    <a href={`/${lang}/projects/`}>{t("catalog_title")}</a>
-                    <a href={`/${lang}/blog/`}>{t("nav_blog")}</a>
-                    <a href={`/${lang}/brief/`}>{t("nav_brief")}</a>
-                    <a href={`/${lang}/#contact`}>{t("nav_contact")}</a>
-                </nav>
-            </div>
+<div class="footer-col nav-col">
+    <h3 class="footer-title">{t("catalog_title")}</h3>
+    <nav class="footer-nav">
+        <a href={`/${lang}/projects/`}>{t("catalog_title")}</a>
+        <a href={`/${lang}/blog/`}>{t("nav_blog")}</a>
+        <a href={`/${lang}/#faq`}>{t("nav_faq")}</a>
+        <a href={`/${lang}/brief/`}>{t("nav_brief")}</a>
+        <a href={`/${lang}/#contact`}>{t("nav_contact")}</a>
+    </nav>
+</div>
 
             <!-- Column 3: Legal & Local -->
             <div class="footer-col legal-col">
                 <h3 class="footer-title">{t("footer_legal")}</h3>
                 <nav class="footer-nav secondary">
-                    <a href={`/${lang}/legal/privacy-policy/`}
-                        >{t("footer_privacy")}</a
-                    >
-                    <a href={`/${lang}/legal/terms-of-service/`}
-                        >{t("footer_terms")}</a
-                    >
-                    <a href={`/${lang}/legal/public-offer/`}
-                        >{t("footer_public_offer")}</a
-                    >
+<a href={`/${lang}/legal/privacy-policy/`}>{t("footer_privacy")}</a>
+        <a href={`/${lang}/legal/terms-of-service/`}>{t("footer_terms")}</a>
+        <a href={`/${lang}/legal/public-offer/`}>{t("footer_public_offer")}</a>
                 </nav>
             </div>
         </div>
 
-        {/* Geo Links Section for SEO */}
+        <!-- Geo Links Section for SEO -->
         <div class="footer-geo-section">
             <h3 class="footer-title">
                 <a href={`/${lang}/locations/`} class="geo-title-link">
@@ -128,7 +123,7 @@ const t = useTranslations(lang);
             <div class="footer-bottom-content">
                 <p class="copyright" set:html={t("footer_copyright")} />
                 <div class="footer-signature">
-                    <CreatorSignature client:visible />
+                    <CreatorSignature />
                 </div>
             </div>
         </div>
@@ -144,11 +139,10 @@ const t = useTranslations(lang);
         position: relative;
     }
 
-    /* Prevent any blue links in footer or signature */
-    .footer-root :global(a) {
-        color: inherit !important;
-        text-decoration-color: currentColor;
-    }
+/* Footer links: clean underline, no forced color inheritance */
+.footer-root :global(a) {
+    text-decoration-color: currentColor;
+}
 
     .footer-grid {
         display: grid;
@@ -258,9 +252,42 @@ const t = useTranslations(lang);
         white-space: nowrap;
     }
 
-    .footer-signature {
-        flex-shrink: 0;
-    }
+.footer-signature {
+    flex-shrink: 0;
+    font-family: var(--font-body);
+}
+
+.footer-signature a {
+    color: var(--text-color) !important;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-signature a:hover {
+    color: var(--accent-color-start) !important;
+}
+
+.footer-signature .sig-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.footer-signature .sig-role {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary-color);
+    opacity: 0.7;
+}
+
+.footer-signature .sig-role a {
+    font-size: 0.7rem;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.8;
+}
 
     /* --- Geo Links Styling --- */
     .footer-geo-section {
