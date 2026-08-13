@@ -78,7 +78,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const newRes = new Response(res.body, res);
 
     // Security Headers
-    newRes.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+    // HSTS отправляем только в продакшене на реальном домене (не на localhost/IP),
+    // иначе браузер запомнит "всегда HTTPS" и сломает локальную разработку по HTTP.
+    const isLocalHost = host.includes('localhost') || host.includes('127.0.0.1') || host.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/);
+    if (!isDev && !isBuild && !isLocalHost) {
+      newRes.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+    }
     newRes.headers.set('X-Content-Type-Options', 'nosniff');
     newRes.headers.set('X-Frame-Options', 'SAMEORIGIN');
     newRes.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');

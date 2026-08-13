@@ -74,9 +74,10 @@ const t = useTranslations(lang);
 
         cards.forEach(card => {
             const summary = card.querySelector('.faq-question');
+            const details = card as HTMLDetailsElement;
 
-            summary.addEventListener('click', (e) => {
-                if (!card.open) {
+            summary?.addEventListener('click', () => {
+                if (!details.open) {
                     cards.forEach(other => {
                         if (other !== card) {
                             other.removeAttribute('open');

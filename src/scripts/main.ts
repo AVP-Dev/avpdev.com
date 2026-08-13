@@ -1,6 +1,9 @@
 import { initPortfolio } from './portfolio';
 
 function initializePage() {
+    if ((document as any).__avpInitDone) return;
+    (document as any).__avpInitDone = true;
+
     // --- THEME SWITCHER ---
     let currentTheme = localStorage.getItem('theme') || 'dark-theme';
     const themeSwitchers = document.querySelectorAll('.theme-switcher');
@@ -113,6 +116,8 @@ function initializePage() {
     setupModals();
 
     // --- FADE IN ANIMATION ---
+    // Fallback: если observer не сработает (гонка с module-скриптом), показываем всё сразу
+    document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -258,4 +263,19 @@ function initializePage() {
     }
 }
 
-document.addEventListener("astro:page-load", initializePage);
+function run() {
+    // При первом заходе DOM может быть уже готов (module-скрипт грузится асинхронно),
+    // а astro:page-load мог сработать раньше. Вызываем инициализацию в обоих случаях.
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializePage, { once: true });
+    } else {
+        initializePage();
+    }
+}
+
+document.addEventListener("astro:page-load", () => {
+    // При переходах между страницами (view transitions) DOM заменяется — нужен новый observer
+    (document as any).__avpInitDone = false;
+    initializePage();
+});
+run();
