@@ -4,7 +4,7 @@
 
 <script is:inline>
   (function () {
-    var BOT_ID = "c1ad87f0-32c1-4291-80e7-a567ac739b6a";
+    var BOT_ID = "1572a3ba-3e01-45e8-ba3a-fe64936141d2";
     var initCount = 0;
     var loaded = false;
 
@@ -13,14 +13,14 @@
       document.querySelectorAll("style").forEach(function (s) {
         if (s.textContent && s.textContent.indexOf("pw-btn") !== -1) s.remove();
       });
-      window.ParalectWidget = undefined;
+      window.PraviaWidget = undefined;
     }
 
     function inject() {
       if (loaded) return;
       loaded = true;
       var s = document.createElement("script");
-      s.src = "https://ParalectAI.avpdev.com/loader.js";
+      s.src = "https://pravia.dev/loader.js";
       s.async = true;
       s.setAttribute("data-bot-id", BOT_ID);
       document.body.appendChild(s);

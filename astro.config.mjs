@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
+import { unified } from '@astrojs/markdown-remark';
 import remarkHeadingId from 'remark-heading-id';
 import { locations } from './src/data/locations.ts';
 
@@ -18,7 +19,9 @@ export default defineConfig({
 
   // 1. Поддержка кастомных ID в заголовках Markdown
   markdown: {
-    remarkPlugins: [remarkHeadingId],
+    processor: unified({
+      remarkPlugins: [remarkHeadingId],
+    }),
   },
 
   // 2. Настройка серверного рендеринга (Node.js)
@@ -156,8 +159,8 @@ export default defineConfig({
   compressHTML: true,
 
   // 8. 301 редиректы: старые Russian-transliterated EN-slugs → правильные EN-slugs
+  // (только со слешем — при trailingSlash:'always' Astro сам обрабатывает вариант без слеша)
   redirects: {
-    '/en/blog/uroki-amsterdama':   '/en/blog/lessons-from-amsterdam',
     '/en/blog/uroki-amsterdama/':  '/en/blog/lessons-from-amsterdam/',
   },
 

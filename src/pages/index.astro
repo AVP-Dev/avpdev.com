@@ -2,8 +2,37 @@
 // src/pages/index.astro
 export const prerender = false;
 
-const preferred = Astro.preferredLocale || 'ru';
-const targetLocale = `/${preferred}/`;
+// Ручной разбор Accept-Language с учётом префиксов ("ru-RU" -> "ru"),
+// потому что Astro.preferredLocale в v7 сопоставляет только точные коды
+// и русскоязычные пользователи с "ru-RU,en-US;q=0.9" (без чистого "ru")
+// ошибочно получали английскую версию.
+function getPreferredLocale(request: Request): string {
+  const header = request.headers.get('accept-language');
+  if (!header) return 'ru';
+
+  // Парсим "ru-RU,ru;q=0.9,en;q=0.8" в [{ code, q }], сортируем по q
+  const locales = header
+    .split(',')
+    .map((part) => {
+      const [code, ...params] = part.trim().split(';');
+      const q = params.find((p) => p.trim().startsWith('q='));
+      const qValue = q ? parseFloat(q.trim().slice(2)) : 1;
+      return { code: code.trim().toLowerCase(), q: isNaN(qValue) ? 0 : qValue };
+    })
+    .filter((l) => l.code && l.code !== '*')
+    .sort((a, b) => b.q - a.q);
+
+  for (const l of locales) {
+    // Точное совпадение или префикс (ru-RU -> ru, en-GB -> en)
+    const base = l.code.split('-')[0];
+    if (base === 'ru' || l.code === 'ru') return 'ru';
+    if (base === 'en' || l.code === 'en') return 'en';
+  }
+
+  return 'ru';
+}
+
+const targetLocale = `/${getPreferredLocale(Astro.request)}/`;
 
 return new Response(null, {
   status: 301,
