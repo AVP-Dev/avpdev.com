@@ -269,8 +269,8 @@ header {
   transform: translate(-50%, 0);
   width: auto;
   padding: 0.5rem 0.75rem;
-  z-index: 1005;
-  /* Above everything except potentially mobile nav if we want it below */
+  z-index: 2100;
+  /* Above mobile nav (2000) and overlay (1999), чтобы бургер оставался кликабельным при открытом меню */
   background: var(--glass-bg);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
