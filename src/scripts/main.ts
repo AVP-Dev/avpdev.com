@@ -1,12 +1,67 @@
 import { initPortfolio } from './portfolio';
 
+// Делегирование событий мобильного меню.
+// Вешаем один раз на document — работает при View Transitions (DOM пересоздаётся),
+// а повторные вызовы initializePage() не создают дубликатов обработчиков.
+let mobileMenuReady = false;
+function setupMobileMenu() {
+    if (mobileMenuReady) return;
+    mobileMenuReady = true;
+
+    const toggleMenu = (open?: boolean) => {
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileOverlay = document.querySelector('.mobile-nav-overlay');
+        if (!mobileNav || !mobileOverlay) return;
+
+        const isOpen = open ?? !mobileNav.classList.contains('open');
+        mobileNav.classList.toggle('open', isOpen);
+        document.querySelectorAll('.burger-menu').forEach(b => b.classList.toggle('open', isOpen));
+        mobileOverlay.classList.toggle('visible', isOpen);
+        document.body.classList.toggle('modal-open', isOpen);
+    };
+
+    document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+
+        // Бургер: открыть/закрыть меню
+        if (target.closest('.burger-menu')) {
+            e.stopPropagation();
+            toggleMenu();
+            return;
+        }
+
+        // Оверлей: закрыть
+        if (target.closest('.mobile-nav-overlay')) {
+            toggleMenu(false);
+            return;
+        }
+
+        // Ссылка в мобильном меню: закрыть после перехода
+        const mobileNav = document.querySelector('.mobile-nav');
+        if (mobileNav?.classList.contains('open') && mobileNav.contains(target)) {
+            const link = target.closest('a');
+            if (link && !target.closest('.mobile-accordion-trigger')) {
+                toggleMenu(false);
+            }
+        }
+    });
+
+    // --- MOBILE ACCORDION (делегирование) ---
+    document.addEventListener('click', (e) => {
+        const trigger = (e.target as HTMLElement).closest('.mobile-accordion-trigger');
+        if (!trigger) return;
+        e.stopPropagation();
+        const isActive = trigger.classList.toggle('active');
+        trigger.setAttribute('aria-expanded', isActive.toString());
+    });
+}
+
 function initializePage() {
     if ((document as any).__avpInitDone) return;
     (document as any).__avpInitDone = true;
 
-    // --- THEME SWITCHER ---
+    // --- THEME SWITCHER (делегирование — защита от двойной инициализации) ---
     let currentTheme = localStorage.getItem('theme') || 'dark-theme';
-    const themeSwitchers = document.querySelectorAll('.theme-switcher');
 
     function applyThemeClasses(theme: string) {
         if (theme === 'dark-theme') {
@@ -17,7 +72,7 @@ function initializePage() {
             document.documentElement.classList.remove('dark-theme');
         }
 
-        themeSwitchers.forEach(switcher => {
+        document.querySelectorAll('.theme-switcher').forEach(switcher => {
             // Remove all children
             while (switcher.firstChild) {
                 switcher.removeChild(switcher.firstChild);
@@ -30,57 +85,30 @@ function initializePage() {
         });
     }
 
-    function toggleTheme() {
-        const newTheme = document.documentElement.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme';
-
-        // Add class to enable transition only during manual switch
-        document.body.classList.add('theme-transitioning');
-
-        localStorage.setItem('theme', newTheme);
-        applyThemeClasses(newTheme);
-        document.dispatchEvent(new CustomEvent('theme:changed', { detail: { theme: newTheme } }));
-
-        // Remove class after transition completes
-        setTimeout(() => {
-            document.body.classList.remove('theme-transitioning');
-        }, 400);
-    }
-
-    themeSwitchers.forEach(switcher => switcher.addEventListener('click', toggleTheme));
     applyThemeClasses(currentTheme);
 
-    // --- MOBILE MENU ---
-    const burger = document.querySelector('.burger-menu');
-    const mobileNav = document.querySelector('.mobile-nav');
-    const mobileOverlay = document.querySelector('.mobile-nav-overlay');
+    if (!(document as any).__themeListenerReady) {
+        (document as any).__themeListenerReady = true;
+        document.addEventListener('click', (e) => {
+            if (!(e.target as HTMLElement).closest('.theme-switcher')) return;
+            const newTheme = document.documentElement.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme';
 
-    if (burger && mobileNav && mobileOverlay) {
-        const toggleMenu = () => {
-            const isOpen = mobileNav.classList.toggle('open');
-            burger.classList.toggle('open', isOpen);
-            mobileOverlay.classList.toggle('visible', isOpen);
-            document.body.classList.toggle('modal-open', isOpen);
-        };
+            // Add class to enable transition only during manual switch
+            document.body.classList.add('theme-transitioning');
 
-        burger.addEventListener('click', (e) => { e.stopPropagation(); toggleMenu(); });
-        mobileOverlay.addEventListener('click', toggleMenu);
+            localStorage.setItem('theme', newTheme);
+            applyThemeClasses(newTheme);
+            document.dispatchEvent(new CustomEvent('theme:changed', { detail: { theme: newTheme } }));
 
-        // --- MOBILE ACCORDION ---
-        const accordionTrigger = mobileNav.querySelector('.mobile-accordion-trigger');
-        if (accordionTrigger) {
-            accordionTrigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const isActive = accordionTrigger.classList.toggle('active');
-                accordionTrigger.setAttribute('aria-expanded', isActive.toString());
-            });
-        }
-
-        mobileNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (mobileNav.classList.contains('open')) toggleMenu();
-            });
+            // Remove class after transition completes
+            setTimeout(() => {
+                document.body.classList.remove('theme-transitioning');
+            }, 400);
         });
     }
+
+    // --- MOBILE MENU (event delegation: устойчив к View Transitions и двойной инициализации) ---
+    setupMobileMenu();
 
     // --- MODALS ---
     function setupModals() {
