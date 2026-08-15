@@ -483,12 +483,12 @@ A clean script cleans, dedupes, and normalizes typos across hundreds of thousand
 Here is a practical case study from my own engineering work where relying purely on AI would have been a catastrophic bottleneck, whereas a hybrid workflow delivered extraordinary results.
 
 ### The Objective:
-Build an end-to-end search query and advertising gap analysis engine:
-1. Export massive datasets of search queries, metrics, and attributes from Google Search Console, Google Ads, and spreadsheets.
-2. Clean noise, normalize typos, and deduplicate entries.
-3. Compare the dataset against existing active campaigns and competitor intelligence.
-4. Calculate the "delta": identify high-intent search terms we are missing and pinpoint exact keyword gaps.
-5. Generate polished, ready-to-run ad copy for those new clusters and export a clean file directly importable into the ad platform.
+Automate the data ingestion pipeline for massive export datasets (GSC, Google Ads, spreadsheets) and campaign preparation:
+1. **Ingest and Parse Big Data:** Process datasets with dozens of attributes (search queries, misspellings, impressions, CTR, landing pages) from Google Search Console, ad platforms, and raw spreadsheets.
+2. **Clean and Normalize:** Instantly filter hundreds of thousands of repetitive search strings, cluster typo variations, eliminate noise, and structure into a uniform format.
+3. **Analyze Differences:** Cross-reference the processed data against active campaigns and competitor intelligence.
+4. **Isolate the Delta:** Pinpoint exact semantic gaps — discovering high-intent queries that are missing from existing keyword lists.
+5. **Generate and Export:** Leverage AI to craft tailored, high-converting ad copy and headlines for the missing clusters, then use a final script to package everything into a valid file ready for instant upload into the ad cabinet.
 
 ```mermaid
 flowchart TD
