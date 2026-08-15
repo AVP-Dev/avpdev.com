@@ -100,7 +100,7 @@ const articleSchema = {
             <div class="hero-image-container">
                 <Image
                     src={post.data.heroImage}
-                    alt={`Cover for article: ${post.data.title}`}
+                    alt={`${t('alt_blog_cover')} ${post.data.title}`}
                     width={1200}
                     height={600}
                     loading="eager"
