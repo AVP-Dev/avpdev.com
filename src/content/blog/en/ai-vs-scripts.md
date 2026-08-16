@@ -57,7 +57,7 @@ Here is a practical case study from my own engineering work where relying purely
 
 ### The Objective:
 Automate the data ingestion pipeline for massive export datasets (GSC, Google Ads, spreadsheets) and campaign preparation:
-1. **Ingest and Parse Big Data:** Process datasets with dozens of attributes (search queries, misspellings, impressions, CTR, landing pages) from Google Search Console, ad platforms, and raw spreadsheets.
+1. **Ingest and Parse Big Data:** Process datasets with dozens of attributes — search queries, misspellings, impressions, CTR, landing pages — from Google Search Console, ad platforms, and raw spreadsheets.
 2. **Clean and Normalize:** Instantly filter hundreds of thousands of repetitive search strings, cluster typo variations, eliminate noise, and structure into a uniform format.
 3. **Analyze Differences:** Cross-reference the processed data against active campaigns and competitor intelligence.
 4. **Isolate the Delta:** Pinpoint exact semantic gaps — discovering high-intent queries that are missing from existing keyword lists.
