@@ -18,7 +18,7 @@ In this article, we'll examine why AI is not a magic silver bullet, where determ
 ### In this article:
 - [Probability vs Determinism: The Core Difference](#math-vs-probability)
 - [Where Neural Networks Fail at Routine Tasks](#where-ai-fails)
-- [Real Case: Processing Hundreds of Thousands of Rows from Search Console & Ads](#real-case)
+- [Case: Processing Hundreds of Thousands of Rows from Search Console & Ads](#case)
 - [Where AI Truly Shines: Semantic Superpowers](#ai-superpowers)
 - [The Sandwich Architecture: A Formula for Resilient Automation](#hybrid-sandwich)
 - [Conclusion](#conclusion)
@@ -51,7 +51,7 @@ A clean script cleans, dedupes, and normalizes typos across hundreds of thousand
 
 ---
 
-## Real Case: Processing Hundreds of Thousands of Rows from Search Console & Ads {#real-case}
+## Case: Processing Hundreds of Thousands of Rows from Search Console & Ads {#case}
 
 Here is a practical case study from my own engineering work where relying purely on AI would have been a catastrophic bottleneck, whereas a hybrid workflow delivered extraordinary results.
 
