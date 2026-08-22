@@ -31,7 +31,7 @@
       },
       {
         "q": "Вы предоставляете поддержку после запуска?",
-        "a": "Да. Гарантия на все работы — 1 месяц после запуска: исправление багов в сданном функционале (количество итераций правок зависит от сложности и объёма проекта). Дальше — техническая поддержка и развитие на отдельных условиях: мониторинг доступности, обновления безопасности и новые доработки."
+        "a": "Да. Гарантия начинается от 1 месяца после запуска — точный срок зависит от объёма и стоимости проекта: чем крупнее проект, тем длиннее гарантия. В гарантию входит исправление багов в сданном функционале. Дальше — техническая поддержка и развитие на отдельных условиях: мониторинг доступности, обновления безопасности и новые доработки."
       },
       {
         "q": "Какой технологический стек вы используете?",
@@ -71,7 +71,7 @@
       },
       {
         "q": "Do you provide post-launch support?",
-        "a": "Yes. All work comes with a 1-month warranty after launch, covering bug fixes in delivered functionality (the number of revision iterations depends on project complexity). Beyond that, ongoing technical support and development are available on separate terms: uptime monitoring, security updates, and new features."
+        "a": "Yes. The warranty starts at 1 month after launch — the exact term depends on the project's scope and budget: larger projects come with a longer warranty period. It covers bug fixes in delivered functionality. Beyond that, ongoing technical support and development are available on separate terms: uptime monitoring, security updates, and new features."
       },
       {
         "q": "What tech stack do you use?",
