@@ -10,7 +10,7 @@ category: 'web-site'
 stack: ['Astro', 'TypeScript', 'Tailwind']
 publishDate: 2024-05-15
 heroImage: '../../../assets/images/projects/cars/hero.webp'
-heroImageAlt: 'Hero image for the AutoMir Import website'
+heroImageAlt: 'Hero image for the car import website'
 header:
   titleKey: 'case_cars_h1_portfolio'
   descriptionKey: 'case_cars_desc_portfolio'

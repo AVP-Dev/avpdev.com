@@ -2,15 +2,15 @@ import { locations } from '../src/data/locations';
 import { writeFileSync, readFileSync, readdirSync } from 'fs';
 import path from 'path';
 
-const BASE_PRICES = { astro: 250, next: 300, app: 750, bot: 50 };
+const BASE_PRICES = { astro: 400, next: 600, app: 1500, bot: 150 };
 
 async function getExchangeRates() {
     try {
         const usd = await fetch('https://api.nbrb.by/exrates/rates/431').then(res => res.json());
-        const rub = await fetch('https://api.nbrb.by/exrates/rates/451').then(res => res.json());
-        const kzt = await fetch('https://api.nbrb.by/exrates/rates/456').then(res => res.json());
+        const rub = await fetch('https://api.nbrb.by/exrates/rates/456').then(res => res.json());
+        const kzt = await fetch('https://api.nbrb.by/exrates/rates/459').then(res => res.json());
         return { BYN: usd.Cur_OfficialRate, RUB: rub.Cur_OfficialRate / 100, KZT: kzt.Cur_OfficialRate / 1000 };
-    } catch (e) { return { BYN: 2.87, RUB: 0.033, KZT: 0.0037 }; }
+    } catch (e) { return { BYN: 3.0, RUB: 0.036, KZT: 0.0065 }; }
 }
 
 function roundPrice(val: number, step: number) {

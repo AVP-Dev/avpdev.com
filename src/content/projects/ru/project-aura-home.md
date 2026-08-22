@@ -10,7 +10,7 @@ category: 'web-site'
 stack: ['Astro', 'React', 'Tailwind', 'Bun']
 publishDate: 2024-06-15
 heroImage: '../../../assets/images/projects/aura-home/hero.webp'
-heroImageAlt: 'Aura Home - Архитектурный ИИ'
+heroImageAlt: 'Умный дом - Архитектурный ИИ'
 header:
   titleKey: 'case_aura_home_h1'
   descriptionKey: 'case_aura_home_desc'

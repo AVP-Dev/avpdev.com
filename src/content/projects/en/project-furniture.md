@@ -10,7 +10,7 @@ category: 'app'
 stack: ['Next.js', 'React', 'PostgreSQL', 'Docker']
 publishDate: 2025-03-10
 heroImage: '../../../assets/images/projects/furniture/hero.webp'
-heroImageAlt: 'Hero image for the Terra Forma website'
+heroImageAlt: 'Hero image of the furniture boutique website'
 header:
   titleKey: 'case_furniture_h1_short'
   descriptionKey: 'case_furniture_desc_short'

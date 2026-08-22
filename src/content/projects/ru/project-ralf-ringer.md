@@ -10,7 +10,7 @@ category: 'web-site'
 stack: ['Astro', 'TypeScript', 'Tailwind']
 publishDate: 2025-10-05
 heroImage: '../../../assets/images/projects/ralf-ringer/hero.webp'
-heroImageAlt: 'Лендинг-заглушка Ральф Рингер'
+heroImageAlt: 'Лендинг-заглушка сервиса по уходу за обувью'
 header:
   titleKey: 'case_ralf_ringer_h1'
   descriptionKey: 'case_ralf_ringer_desc'

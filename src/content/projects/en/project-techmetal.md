@@ -10,7 +10,7 @@ category: 'app'
 stack: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'Bun']
 publishDate: 2024-06-05
 heroImage: '../../../assets/images/projects/techmetal/hero.webp'
-heroImageAlt: 'Tech-Metal - Industrial Hub'
+heroImageAlt: 'Industrial B2B Portal Hub'
 header:
   titleKey: 'case_techmetal_h1'
   descriptionKey: 'case_techmetal_desc'

@@ -10,7 +10,7 @@ category: 'web-site'
 stack: ['Astro', 'TypeScript', 'Tailwind']
 publishDate: 2025-10-05
 heroImage: '../../../assets/images/projects/ralf-ringer/hero.webp'
-heroImageAlt: 'Ralf Ringer Landing Page'
+heroImageAlt: 'Shoe Care Service Landing Page'
 header:
   titleKey: 'case_ralf_ringer_h1'
   descriptionKey: 'case_ralf_ringer_desc'
