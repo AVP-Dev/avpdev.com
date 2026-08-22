@@ -45,7 +45,7 @@ function generateFaq(loc: any, lang: 'ru' | 'en', rates: any) {
             { q: "Как быстро вы запускаете проекты?", a: `Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца.` },
             { q: "Разрабатываете ли вы Telegram-ботов?", a: `Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от ${p.bot} в зависимости от сложности.` },
             { q: "Вы предоставляете поддержку после запуска?", a: "Да. Гарантия начинается от 1 месяца после запуска — точный срок зависит от объёма и стоимости проекта: чем крупнее проект, тем длиннее гарантия. В гарантию входит исправление багов в сданном функционале. Дальше — техническая поддержка и развитие на отдельных условиях: мониторинг доступности, обновления безопасности и новые доработки." },
-            { q: "Какой технологический стек вы используете?", a: "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность." }
+            { q: "Какой технологический стек вы используете?", a: "Фронтенд: Astro и Next.js на React с TypeScript и Tailwind CSS. Бэкенд и автоматизация: Node.js и Bun; Python — для парсеров и скриптов; Go — для высоконагруженных систем. Данные: PostgreSQL, Redis, Drizzle ORM, развёртывание в Docker. Стек подбираем под задачу, а не наоборот." }
         ];
     } else {
         return [
@@ -53,7 +53,7 @@ function generateFaq(loc: any, lang: 'ru' | 'en', rates: any) {
             { q: "What is your project timeline?", a: "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks." },
             { q: "Do you develop Telegram bots and Mini Apps?", a: `Yes, we build intelligent bots for business automation. Prices start from ${p.bot} depending on the requirements.` },
             { q: "Do you provide post-launch support?", a: "Yes. The warranty starts at 1 month after launch — the exact term depends on the project's scope and budget: larger projects come with a longer warranty period. It covers bug fixes in delivered functionality. Beyond that, ongoing technical support and development are available on separate terms: uptime monitoring, security updates, and new features." },
-            { q: "What tech stack do you use?", a: "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results." }
+            { q: "What tech stack do you use?", a: "Frontend: Astro and Next.js built on React with TypeScript and Tailwind CSS. Backend and automation: Node.js and Bun; Python for parsers and scripts; Go for high-load systems. Data: PostgreSQL, Redis, Drizzle ORM, deployed in Docker. We pick the stack for the task, not the other way around." }
         ];
     }
 }

@@ -35,7 +35,7 @@
       },
       {
         "q": "Какой технологический стек вы используете?",
-        "a": "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность."
+        "a": "Фронтенд: Astro и Next.js на React с TypeScript и Tailwind CSS. Бэкенд и автоматизация: Node.js и Bun; Python — для парсеров и скриптов; Go — для высоконагруженных систем. Данные: PostgreSQL, Redis, Drizzle ORM, развёртывание в Docker. Стек подбираем под задачу, а не наоборот."
       }
     ]
   },
@@ -80,7 +80,7 @@
       },
       {
         "q": "What tech stack do you use?",
-        "a": "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results."
+        "a": "Frontend: Astro and Next.js built on React with TypeScript and Tailwind CSS. Backend and automation: Node.js and Bun; Python for parsers and scripts; Go for high-load systems. Data: PostgreSQL, Redis, Drizzle ORM, deployed in Docker. We pick the stack for the task, not the other way around."
       }
     ]
   }
