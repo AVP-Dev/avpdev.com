@@ -10,7 +10,7 @@ category: 'app'
 stack: ['Next.js', 'React', 'Tailwind', 'PostgreSQL']
 publishDate: 2024-11-20
 heroImage: '../../../assets/images/projects/flux-desk/hero.webp'
-heroImageAlt: 'FluxDesk - AI Support Platform'
+heroImageAlt: 'AI-платформа клиентской поддержки'
 header:
   titleKey: 'case_flux_desk_h1'
   descriptionKey: 'case_flux_desk_desc'

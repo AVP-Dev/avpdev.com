@@ -10,7 +10,7 @@ category: 'web-site'
 stack: ['Next.js 16', 'React 19', 'Tailwind 4', 'Bun', 'Docker']
 publishDate: 2026-02-06
 heroImage: '../../../assets/images/projects/urban-spot/hero.webp'
-heroImageAlt: 'URBAN SPOT Interface: Brutalism and High Performance'
+heroImageAlt: 'Brutalist Coworking Platform Interface'
 header:
   titleKey: 'case_urban_spot_h1'
   descriptionKey: 'case_urban_spot_desc'

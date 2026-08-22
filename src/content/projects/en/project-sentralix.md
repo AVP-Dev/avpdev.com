@@ -10,7 +10,7 @@ category: 'web-site'
 stack: ['Astro', 'React', 'Tailwind', 'Docker']
 publishDate: 2026-02-01
 heroImage: '../../../assets/images/projects/sentralix/hero.webp'
-heroImageAlt: 'Sentralix Platform Main Screen'
+heroImageAlt: 'Enterprise SaaS Platform Main Screen'
 header:
   titleKey: 'case_sentralix_h1'
   descriptionKey: 'case_sentralix_desc'

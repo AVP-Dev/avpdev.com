@@ -445,7 +445,7 @@ In this article, we'll examine why AI is not a magic silver bullet, where determ
 ### In this article:
 - [Probability vs Determinism: The Core Difference](#math-vs-probability)
 - [Where Neural Networks Fail at Routine Tasks](#where-ai-fails)
-- [Real Case: Processing Hundreds of Thousands of Rows from Search Console & Ads](#real-case)
+- [Case: Processing Hundreds of Thousands of Rows from Search Console & Ads](#case)
 - [Where AI Truly Shines: Semantic Superpowers](#ai-superpowers)
 - [The Sandwich Architecture: A Formula for Resilient Automation](#hybrid-sandwich)
 - [Conclusion](#conclusion)
@@ -478,13 +478,13 @@ A clean script cleans, dedupes, and normalizes typos across hundreds of thousand
 
 ---
 
-## Real Case: Processing Hundreds of Thousands of Rows from Search Console & Ads {#real-case}
+## Case: Processing Hundreds of Thousands of Rows from Search Console & Ads {#case}
 
 Here is a practical case study from my own engineering work where relying purely on AI would have been a catastrophic bottleneck, whereas a hybrid workflow delivered extraordinary results.
 
 ### The Objective:
 Automate the data ingestion pipeline for massive export datasets (GSC, Google Ads, spreadsheets) and campaign preparation:
-1. **Ingest and Parse Big Data:** Process datasets with dozens of attributes (search queries, misspellings, impressions, CTR, landing pages) from Google Search Console, ad platforms, and raw spreadsheets.
+1. **Ingest and Parse Big Data:** Process datasets with dozens of attributes — search queries, misspellings, impressions, CTR, landing pages — from Google Search Console, ad platforms, and raw spreadsheets.
 2. **Clean and Normalize:** Instantly filter hundreds of thousands of repetitive search strings, cluster typo variations, eliminate noise, and structure into a uniform format.
 3. **Analyze Differences:** Cross-reference the processed data against active campaigns and competitor intelligence.
 4. **Isolate the Delta:** Pinpoint exact semantic gaps — discovering high-intent queries that are missing from existing keyword lists.

@@ -19,7 +19,7 @@
     "faq": [
       {
         "q": "Сколько стоит разработка сайта в Новосибирске?",
-        "a": "Цены начинаются от 21500 руб. за лэндинг на Astro и от 26000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 65000 руб.."
+        "a": "Цены начинаются от 33500 руб. за лэндинг на Astro и от 50000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 125000 руб.."
       },
       {
         "q": "Как быстро вы запускаете проекты?",
@@ -27,7 +27,7 @@
       },
       {
         "q": "Разрабатываете ли вы Telegram-ботов?",
-        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 4500 руб. в зависимости от сложности."
+        "a": "Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от 12500 руб. в зависимости от сложности."
       },
       {
         "q": "Вы предоставляете поддержку после запуска?",
@@ -59,7 +59,7 @@
     "faq": [
       {
         "q": "What is the cost of web development in Novosibirsk?",
-        "a": "Pricing starts from 21500 руб. for Astro landing pages and 26000 руб. for Next.js websites. Custom web applications start from 65000 руб.."
+        "a": "Pricing starts from 33500 руб. for Astro landing pages and 50000 руб. for Next.js websites. Custom web applications start from 125000 руб.."
       },
       {
         "q": "What is your project timeline?",
@@ -67,7 +67,7 @@
       },
       {
         "q": "Do you develop Telegram bots and Mini Apps?",
-        "a": "Yes, we build intelligent bots for business automation. Prices start from 4500 руб. depending on the requirements."
+        "a": "Yes, we build intelligent bots for business automation. Prices start from 12500 руб. depending on the requirements."
       },
       {
         "q": "Do you provide post-launch support?",

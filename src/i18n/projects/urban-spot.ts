@@ -1,9 +1,9 @@
 export const urbanSpotTranslations = {
     ru: {
-        case_urban_spot_title: 'Кейс: Бруталистская платформа URBAN SPOT',
-        case_urban_spot_h1: 'URBAN SPOT: Манифест брутализма и абсолютной производительности',
+        case_urban_spot_title: 'Кейс: Бруталистская платформа для сети коворкингов',
+        case_urban_spot_h1: 'Манифест брутализма и абсолютной производительности',
         case_urban_spot_desc: 'Разработка высокопроизводительного хаба на Next.js 16 и Bun с интерактивной сеткой и стабильным Lighthouse 100.',
-        case_urban_spot_client: 'URBAN SPOT Coworking',
+        case_urban_spot_client: 'Сеть коворкингов',
         case_urban_spot_services: 'UX/UI Engineering, Full-stack Development, System Architecture',
         case_urban_spot_task_p: 'Задача заключалась в создании платформы-манифеста. Требовалась суровая эстетика брутализма, резонирующая с аудиторией разработчиков и творцов, при сохранении экстремальной скорости работы. Главным вызовом стала реализация интерактивного плана этажа (The Grid) с мгновенным откликом на любых устройствах.',
         case_urban_spot_solution_p: 'Выбор пал на стек Next.js 16 (React 19) и рантайм Bun. Архитектура построена на принципе SSR-first для мгновенной отрисовки интерфейса. Интерактивная сетка реализована через гибрид SVG и серверных компонентов. Система полностью контейнеризирована через Docker для стабильного развертывания и масштабирования.',
@@ -18,10 +18,10 @@ export const urbanSpotTranslations = {
         gallery_caption_urban_spot_contacts: 'Навигация: Финальный акцент на типографике и функциональности',
     },
     en: {
-        case_urban_spot_title: 'Case Study: URBAN SPOT Brutalist Platform',
-        case_urban_spot_h1: 'URBAN SPOT: A Manifesto of Brutalism and Absolute Performance',
+        case_urban_spot_title: 'Case Study: Brutalist Platform for a Coworking Network',
+        case_urban_spot_h1: 'A Manifesto of Brutalism and Absolute Performance',
         case_urban_spot_desc: 'High-performance hub development using Next.js 16 and Bun with interactive floor plan and 100 Lighthouse score.',
-        case_urban_spot_client: 'URBAN SPOT Coworking',
+        case_urban_spot_client: 'Coworking Network',
         case_urban_spot_services: 'UX/UI Engineering, Full-stack Development, System Architecture',
         case_urban_spot_task_p: 'The goal was to create a manifesto platform. It required a raw brutalist aesthetic to resonate with developers and creators, while maintaining extreme performance. The main challenge was the interactive floor plan (The Grid) with instant feedback across all devices.',
         case_urban_spot_solution_p: 'The choice was made in favor of Next.js 16 (React 19) and Bun runtime. The architecture follows an SSR-first principle for instant rendering. The interactive grid is built using an SVG-Server Components hybrid. The system is fully containerized with Docker for stable deployment.',

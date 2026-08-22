@@ -51,23 +51,23 @@ Aliaksei Patskevich — full-stack developer with 8+ years of experience. Specia
 
 ### Featured Projects
 
-- [Sentralix](https://avpdev.com/en/project/project-sentralix/): AI-native ITSM platform with agentic automation, real-time topology mapping, and self-healing infrastructure.
+- [Enterprise AI Automation Platform](https://avpdev.com/en/project/project-sentralix/): AI-native ITSM platform with agentic automation, real-time topology mapping, and self-healing infrastructure.
 - [Nyx Auto](https://avpdev.com/en/project/project-nyx-auto/): Enterprise CRM for automotive business with analytics and reporting.
 - [Nyx OS](https://avpdev.com/en/project/project-nyx-os/): Operating system-like platform for business process management.
-- [Pure Trust](https://avpdev.com/en/project/project-pure-trust/): Trust and safety platform with user verification systems.
-- [TechMetal](https://avpdev.com/en/project/project-techmetal/): Industrial equipment marketplace with catalog management.
-- [Flux Desk](https://avpdev.com/en/project/project-flux-desk/): Co-working space management platform with booking system.
-- [Leder Werk](https://avpdev.com/en/project/project-leder-werk/): E-commerce platform for leather goods with custom ordering.
-- [Aura Home](https://avpdev.com/en/project/project-aura-home/): Smart home device management dashboard.
-- [Ralf Ringer](https://avpdev.com/en/project/project-ralf-ringer/): Brand website for footwear manufacturer with catalog integration.
-- [Rozhkova](https://avpdev.com/en/project/project-rozhkova/): Personal brand website for interior designer with portfolio.
-- [MekoHaus](https://avpdev.com/en/project/project-mekohaus/): Furniture manufacturer website with product catalog.
+- [Digital Dental Clinic](https://avpdev.com/en/project/project-pure-trust/): Trust and safety platform with user verification systems.
+- [Industrial B2B Portal](https://avpdev.com/en/project/project-techmetal/): Industrial equipment marketplace with catalog management.
+- [AI Customer Support Platform](https://avpdev.com/en/project/project-flux-desk/): Co-working space management platform with booking system.
+- [Leather Goods E-commerce](https://avpdev.com/en/project/project-leder-werk/): E-commerce platform for leather goods with custom ordering.
+- [Smart Home Dashboard](https://avpdev.com/en/project/project-aura-home/): Smart home device management dashboard.
+- [Shoe Care Service Landing](https://avpdev.com/en/project/project-ralf-ringer/): Brand website for footwear manufacturer with catalog integration.
+- [Premium Confectionery](https://avpdev.com/en/project/project-rozhkova/): Personal brand website for interior designer with portfolio.
+- [Furniture Factory Portal](https://avpdev.com/en/project/project-mekohaus/): Furniture manufacturer website with product catalog.
 - [Travel](https://avpdev.com/en/project/project-travel/): Travel agency website with tour booking and itinerary management.
 - [Cars](https://avpdev.com/en/project/project-cars/): Car dealership website with inventory management and search.
 - [Furniture](https://avpdev.com/en/project/project-furniture/): Furniture store e-commerce platform.
 - [Tow Truck](https://avpdev.com/en/project/project-tow-truck/): Emergency tow truck service booking platform.
 - [3D Modeling](https://avpdev.com/en/project/project-3d-modeling/): 3D modeling and visualization service portfolio.
-- [Urban Spot](https://avpdev.com/en/project/project-urban-spot/): Urban space booking and management platform.
+- [Coworking Platform](https://avpdev.com/en/project/project-urban-spot/): Urban space booking and management platform.
 
 ## Legal
 

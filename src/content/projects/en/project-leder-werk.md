@@ -10,7 +10,7 @@ category: 'web-site'
 stack: ['Astro', 'React', 'Tailwind', 'Bun']
 publishDate: 2025-04-10
 heroImage: '../../../assets/images/projects/leder-werk/hero.webp'
-heroImageAlt: 'LederWerk - Leather Craftsmanship'
+heroImageAlt: 'Handcrafted Leather Goods'
 header:
   titleKey: 'case_leder_werk_h1'
   descriptionKey: 'case_leder_werk_desc'

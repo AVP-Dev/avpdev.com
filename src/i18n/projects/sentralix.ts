@@ -1,9 +1,9 @@
 export const sentralixTranslations = {
     ru: {
-        case_sentralix_title: 'Кейс: Enterprise-платформа для ИИ-автоматизации Sentralix',
-        case_sentralix_h1: 'Sentralix: Проектирование высоконагруженной экосистемы в режиме экстремального спринта',
+        case_sentralix_title: 'Кейс: Enterprise SaaS-платформа для ИИ-автоматизации',
+        case_sentralix_h1: 'Проектирование высоконагруженной SaaS-экосистемы в режиме экстремального спринта',
         case_sentralix_desc: 'Как за 48 часов создать масштабируемую архитектуру на Astro 5 и React 19, объединив премиальный дизайн и мгновенную скорость загрузки.',
-        case_sentralix_client: 'Sentralix Enterprise',
+        case_sentralix_client: 'Enterprise SaaS-платформа',
         case_sentralix_services: 'Системная архитектура, Full-stack разработка, AI-Workflow проектирование',
         case_sentralix_task_p: 'Заказчик поставил амбициозный вызов: за 48 часов превратить концепт ИИ-платформы в живой технологичный инструмент. Основная сложность заключалась в создании «Moon Landing» эффекта — интерфейса с тяжелой графикой и спецэффектами, который при этом должен был показывать идеальные Core Web Vitals. Требовался фундамент, способный без переписывания кода масштабироваться из лендинга в сложную SaaS-систему.',
         case_sentralix_solution_p: 'Для реализации был выбран стек Astro 5 + React 19 + Tailwind v4, работающий по принципу «архитектурного минимализма». Основной акцент сделан на серверном рендеринге (SSR) для SEO, где интерактив вынесен в изолированные острова (Astro Islands). Уникальной чертой проекта стало внедрение AI-Native документации: структура файлов спроектирована как Single Source of Truth (SSoT), что позволяет ИИ-агентам мгновенно включаться в развитие проекта без потери качества кода.',
@@ -20,10 +20,10 @@ export const sentralixTranslations = {
         gallery_caption_sentralix_contact: 'Точка конверсии: Бесшовная форма захвата лидов с валидацией данных',
     },
     en: {
-        case_sentralix_title: 'Case Study: Sentralix AI Automation Enterprise Platform',
-        case_sentralix_h1: 'Sentralix: Engineering a High-Load Ecosystem in Extreme Sprint Mode',
+        case_sentralix_title: 'Case Study: Enterprise AI Automation SaaS Platform',
+        case_sentralix_h1: 'Engineering a High-Load Ecosystem in Extreme Sprint Mode',
         case_sentralix_desc: 'Creating a scalable architecture on Astro 5 and React 19 in 48 hours, combining premium design with instant load speeds.',
-        case_sentralix_client: 'Sentralix Enterprise',
+        case_sentralix_client: 'Enterprise SaaS Platform',
         case_sentralix_services: 'Systems Architecture, Full-stack Development, AI-Workflow Design',
         case_sentralix_task_p: 'The client set an ambitious challenge: transform an AI platform concept into a live technological tool within 48 hours. The main difficulty was creating a "Moon Landing" effect—an interface with heavy graphics and special effects that still maintained perfect Core Web Vitals. A foundation was required that could scale from a landing page to a complex SaaS system without rewriting code.',
         case_sentralix_solution_p: 'Astro 5 + React 19 + Tailwind v4 was chosen as the strategic stack, following the principle of "architectural minimalism." The focus was on Server-Side Rendering (SSR) for SEO, with interactivity strategically isolated in Astro Islands. A unique feature was the implementation of AI-Native documentation: the file structure acts as a Single Source of Truth (SSoT), allowing AI agents to instantly contribute to development while maintaining code integrity.',

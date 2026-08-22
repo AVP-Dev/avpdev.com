@@ -10,7 +10,7 @@ category: 'web-site'
 stack: ['Astro', 'Bun', 'Docker', 'SQLite', 'Telegram API']
 publishDate: 2024-03-12
 heroImage: '../../../assets/images/projects/rozhkova/hero.webp'
-heroImageAlt: 'Rozhkova Cakes - Premium Confectionery Platform'
+heroImageAlt: 'Онлайн-витрина премиальной кондитерской'
 header:
   titleKey: 'case_rozhkova_h1'
   descriptionKey: 'case_rozhkova_desc'

@@ -10,7 +10,7 @@ category: 'app'
 stack: ['Next.js', 'React', 'Prisma', 'NextAuth', 'Docker']
 publishDate: 2025-01-20
 heroImage: '../../../assets/images/projects/travel/hero.webp'
-heroImageAlt: 'Главное изображение проекта Happy Tour'
+heroImageAlt: 'Главное изображение проекта платформы бронирования туров'
 header:
   titleKey: 'case_travel_h1'
   descriptionKey: 'case_travel_desc'

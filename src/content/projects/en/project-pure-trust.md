@@ -10,7 +10,7 @@ category: 'web-site'
 stack: ['Astro', 'React', 'Tailwind', 'TypeScript']
 publishDate: 2025-07-20
 heroImage: '../../../assets/images/projects/pure-trust/hero.webp'
-heroImageAlt: 'Pure Trust Dentistry - Spa-Level Care'
+heroImageAlt: 'Dental Clinic Website - Spa-Level Care'
 header:
   titleKey: 'case_pure_trust_h1'
   descriptionKey: 'case_pure_trust_desc'

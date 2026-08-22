@@ -10,7 +10,7 @@ category: 'web-site'
 stack: ['PHP', 'Vanilla JS', 'Admin Panel']
 publishDate: 2025-01-10
 heroImage: '../../../assets/images/projects/mekohaus/hero.webp'
-heroImageAlt: 'Главный экран сайта Mekohaus'
+heroImageAlt: 'Главный экран сайта мебельной фабрики'
 header:
   titleKey: 'case_mekohaus_h1'
   descriptionKey: 'case_mekohaus_desc'

@@ -1,9 +1,9 @@
 export const ralfRingerTranslations = {
     ru: {
-        case_ralf_ringer_title: 'Кейс: Лендинг-заглушка для сервиса «Новая жизнь обуви» Ральф Рингер',
-        case_ralf_ringer_h1: 'Ральф Рингер: Запуск сервиса «Новая жизнь обуви»',
+        case_ralf_ringer_title: 'Кейс: Лендинг-заглушка для сервиса «Новая жизнь обуви»',
+        case_ralf_ringer_h1: 'Запуск сервиса «Новая жизнь обуви» для обувного бренда',
         case_ralf_ringer_desc: 'Разработка оптимизированного лендинга для тестирования спроса и сбора предзаписей на новый сервис профессионального ухода за обувью.',
-        case_ralf_ringer_client: 'Ralf Ringer',
+        case_ralf_ringer_client: 'Обувной бренд',
         case_ralf_ringer_services: 'Web Development, Frontend, UX/UI',
         case_ralf_ringer_task_p: 'Перед полноценным запуском нового сервиса по уходу за обувью стояла задача в кратчайшие сроки разработать страницу-заглушку. Основная цель — быстрая индексация поисковыми системами (Яндекс и Google) для получения органического трафика с первого дня официального запуска.',
         case_ralf_ringer_solution_p: 'Я разработал адаптивный и максимально быстрый одностраничный сайт, используя компонентный подход. Особое внимание было уделено семантической верстке и микроразметке (Schema.org) для обеспечения высоких позиций в SEO. Также был интегрирован модуль предзаписи с полным соответствием ФЗ-152 и продвинутой аналитикой Яндекс Метрики (Электронная коммерция) для тестирования спроса.',
@@ -21,10 +21,10 @@ export const ralfRingerTranslations = {
         gallery_caption_ralf_ringer_contact: 'Заявка на сервис: Форма предзаписи с соблюдением 152-ФЗ',
     },
     en: {
-        case_ralf_ringer_title: 'Case Study: Pre-launch Landing Page for Ralf Ringer Shoe Service',
-        case_ralf_ringer_h1: 'Ralf Ringer: Launching "New Life for Shoes" Service',
+        case_ralf_ringer_title: 'Case Study: Pre-launch Landing Page for a Shoe Care Service',
+        case_ralf_ringer_h1: 'Launching a "New Life for Shoes" Service',
         case_ralf_ringer_desc: 'Development of an optimized landing page to test demand and collect pre-registrations for a new professional shoe care service.',
-        case_ralf_ringer_client: 'Ralf Ringer',
+        case_ralf_ringer_client: 'Footwear Brand',
         case_ralf_ringer_services: 'Web Development, Frontend, UX/UI',
         case_ralf_ringer_task_p: 'Before the full launch of the new shoe care service, the task was to quickly develop a pre-launch landing page. The main goal was rapid indexing by search engines (Yandex and Google) to secure organic traffic from the first day of the official launch.',
         case_ralf_ringer_solution_p: 'I developed a responsive and lightning-fast single-page website using a component-based approach. Special attention was paid to semantic HTML and Schema.org markup to ensure strong SEO rankings. A pre-registration module was also integrated in full compliance with data protection regulations, alongside advanced Yandex Metrica analytics to test market demand.',
