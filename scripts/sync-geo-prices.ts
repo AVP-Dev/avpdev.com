@@ -44,7 +44,7 @@ function generateFaq(loc: any, lang: 'ru' | 'en', rates: any) {
             { q: `Сколько стоит разработка сайта в ${loc.name_ru || loc.name_en}?`, a: `Цены начинаются от ${p.astro} за лэндинг на Astro и от ${p.next} за сайт на Next.js. Сложные системы (CRM, ERP) — от ${p.app}.` },
             { q: "Как быстро вы запускаете проекты?", a: `Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца.` },
             { q: "Разрабатываете ли вы Telegram-ботов?", a: `Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от ${p.bot} в зависимости от сложности.` },
-            { q: "Вы предоставляете поддержку после запуска?", a: "Да, каждый проект включает 12 месяцев технической поддержки, мониторинг доступности и консультации специалистов." },
+            { q: "Вы предоставляете поддержку после запуска?", a: "Да. Гарантия на все работы — 1 месяц после запуска: исправление багов в сданном функционале (количество итераций правок зависит от сложности и объёма проекта). Дальше — техническая поддержка и развитие на отдельных условиях: мониторинг доступности, обновления безопасности и новые доработки." },
             { q: "Какой технологический стек вы используете?", a: "Наш стек: Next.js и React для приложений, Astro для быстрых сайтов и Node.js для бэкенда. Это гарантирует максимальную производительность." }
         ];
     } else {
@@ -52,7 +52,7 @@ function generateFaq(loc: any, lang: 'ru' | 'en', rates: any) {
             { q: `What is the cost of web development in ${loc.name_en}?`, a: `Pricing starts from ${p.astro} for Astro landing pages and ${p.next} for Next.js websites. Custom web applications start from ${p.app}.` },
             { q: "What is your project timeline?", a: "Astro landing pages take 7–14 days. Full Next.js websites take 2–4 weeks, and complex custom systems take 4–12 weeks." },
             { q: "Do you develop Telegram bots and Mini Apps?", a: `Yes, we build intelligent bots for business automation. Prices start from ${p.bot} depending on the requirements.` },
-            { q: "Do you provide post-launch support?", a: "Yes, we offer 12 months of technical support after launch, including bug fixes, uptime monitoring, and consultations." },
+            { q: "Do you provide post-launch support?", a: "Yes. All work comes with a 1-month warranty after launch, covering bug fixes in delivered functionality (the number of revision iterations depends on project complexity). Beyond that, ongoing technical support and development are available on separate terms: uptime monitoring, security updates, and new features." },
             { q: "What tech stack do you use?", a: "We specialize in Next.js, React, Node.js, and Astro. This stack ensures the best performance, scalability, and SEO results." }
         ];
     }
