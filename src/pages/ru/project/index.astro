@@ -1,0 +1,29 @@
+---
+export const prerender = true;
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Hero from "../../../components/sections/Hero.astro";
+import Portfolio from "../../../components/sections/Portfolio.astro";
+import Contact from "../../../components/sections/Contact.astro";
+
+const seoTitle = "Кейсы — автоматизация, AI-платформы, ERP и магазины | AVPdev";
+const seoDescription = "Реальные проекты: задачи, решения, стек и результат. Автоматизация бизнес-процессов, AI-системы, SaaS, Telegram Mini Apps и интернет-магазины.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": seoTitle,
+  "description": seoDescription,
+  "inLanguage": "ru-RU",
+};
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} schema={schema}>
+  <Hero
+    title="Кейсы: что было, что стало"
+    subtitle="Задача, решение, стек и результат по каждому проекту. Без имён клиентов — только суть работы."
+    variant="services"
+  />
+  <Portfolio all />
+  <Contact />
+</BaseLayout>

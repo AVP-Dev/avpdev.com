@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Hero from '../../../components/sections/Hero.astro';
 import Contact from '../../../components/sections/Contact.astro';
+import ServicePricing from '../../../components/sections/ServicePricing.astro';
 
 const seoTitle = "Разработка интернет-магазинов под ключ: каталог, корзина, оплата | AVPdev";
 const seoDescription = "Создаем быстрые интернет-магазины на Astro и Next.js: витрины, каталоги, онлайн-оплата, учет остатков и админка с автосжатием изображений. Уведомления о заказах в Telegram.";
@@ -95,6 +96,8 @@ const schema = {
     }
   ]
 };
+
+const pricing = {"title": "Стоимость", "tiers": [{"value": "от $1 500", "label": "Интернет-магазин", "note": "каталог, корзина, оплата, админка"}, {"value": "по объёму", "label": "Нестандартная логика", "note": "маркетплейс, подписки, интеграции склада"}], "facts": [{"k": "Срок", "v": "3–6 недель"}, {"k": "Платежи", "v": "ЮKassa, ExpressPay, Stripe, крипта"}, {"k": "Гарантия", "v": "от 1 месяца после сдачи"}], "note": "Стартовая цена. Финальная смета — после согласования объёма проекта."}
 ---
 
 <BaseLayout
@@ -142,6 +145,7 @@ const schema = {
     </div>
   </section>
 
+    <ServicePricing title={pricing.title} tiers={pricing.tiers} facts={pricing.facts} note={pricing.note} />
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">

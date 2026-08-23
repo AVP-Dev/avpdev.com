@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Hero from '../../../components/sections/Hero.astro';
 import Contact from '../../../components/sections/Contact.astro';
+import ServicePricing from '../../../components/sections/ServicePricing.astro';
 
 const seoTitle = "E-commerce Development: Storefront, Cart, Payments | AVPdev";
 const seoDescription = "We build fast online stores on Astro and Next.js: storefronts, catalogs, online payments, stock management and an admin panel with automatic image compression. Order notifications in Telegram.";
@@ -95,6 +96,8 @@ const schema = {
     }
   ]
 };
+
+const pricing = {"title": "Pricing", "tiers": [{"value": "from $1,500", "label": "Online store", "note": "catalog, cart, payments, admin panel"}, {"value": "scope-based", "label": "Custom logic", "note": "marketplace, subscriptions, warehouse sync"}], "facts": [{"k": "Timeline", "v": "3–6 weeks"}, {"k": "Payments", "v": "Yookassa, ExpressPay, Stripe, crypto"}, {"k": "Warranty", "v": "from 1 month after delivery"}], "note": "Starting price. The final quote is fixed after we agree on the project scope."}
 ---
 
 <BaseLayout
@@ -142,6 +145,7 @@ const schema = {
     </div>
   </section>
 
+    <ServicePricing title={pricing.title} tiers={pricing.tiers} facts={pricing.facts} note={pricing.note} />
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">

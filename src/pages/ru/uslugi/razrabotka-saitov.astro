@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Hero from '../../../components/sections/Hero.astro';
 import Contact from '../../../components/sections/Contact.astro';
+import ServicePricing from '../../../components/sections/ServicePricing.astro';
 
 const seoTitle = "Разработка сайтов под ключ: Лендинги, Магазины, Порталы | AVPdev";
 const seoDescription = "Создаем высокопроизводительные сайты на Next.js, Astro и React. От продающих лендингов до сложных маркетплейсов и корпоративных порталов.";
@@ -99,6 +100,8 @@ const schema = {
     }
   ]
 };
+
+const pricing = {"title": "Стоимость", "tiers": [{"value": "от $400", "label": "Сайт на Astro", "note": "быстрый статический сайт, блог, лендинг"}, {"value": "от $600", "label": "Сайт на Next.js", "note": "динамика, интеграции, сложная логика"}], "facts": [{"k": "Срок", "v": "7–14 дней типовой сайт"}, {"k": "SEO-база", "v": "скорость, семантика, sitemap, микроразметка"}, {"k": "Гарантия", "v": "от 1 месяца после сдачи"}], "note": "Стартовая цена. Финальная смета — после согласования объёма проекта."}
 ---
 
 <BaseLayout
@@ -146,6 +149,7 @@ const schema = {
     </div>
   </section>
 
+    <ServicePricing title={pricing.title} tiers={pricing.tiers} facts={pricing.facts} note={pricing.note} />
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">

@@ -3,14 +3,20 @@ import { getCollection } from "astro:content";
 import type { Project, TranslationKey } from "../../env.d.ts";
 import PortfolioCard from "../PortfolioCard.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
 
+interface Props {
+  all?: boolean;
+}
+
+const { all = false } = Astro.props;
 const lang = getLangFromUrl(Astro.url) as "ru" | "en";
 const t = useTranslations(lang);
 
 // 1. Load collection for current language
 const projectsCollection = await getCollection("projects", ({ id, data }) => {
-  // Filter for current language AND featured projects
-  return id.startsWith(`${lang}/`) && data.featured === true;
+  // Filter for current language AND (all | featured only)
+  return id.startsWith(`${lang}/`) && (all || data.featured === true);
 });
 
 // 2. Sort by publishDate (descending)
@@ -18,8 +24,8 @@ const sortedProjects = projectsCollection.sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 
-// 3. Take top 6
-const featuredProjects = sortedProjects.slice(0, 6);
+// 3. Take top 6 unless showing all
+const featuredProjects = all ? sortedProjects : sortedProjects.slice(0, 6);
 
 const categoryMap: Record<string, "sites" | "apps"> = {
   "web-site": "sites",
@@ -47,11 +53,15 @@ const PROJECTS_DATA: Project[] = featuredProjects.map((project, index) => ({
         class="section-title"
         set:html={t("portfolio_h2")}
       />
-      <div class="section-actions fade-in">
-        <a href={`/${lang}/projects/`} class="cta-button secondary">
-          {t("portfolio_btn_all")}
-        </a>
-      </div>
+      {
+        !all && (
+          <div class="section-actions fade-in">
+            <a href={getRelativeLocaleUrl(lang, 'project')} class="cta-button secondary">
+              {t("portfolio_btn_all")}
+            </a>
+          </div>
+        )
+      }
     </div>
 
     {

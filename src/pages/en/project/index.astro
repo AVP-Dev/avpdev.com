@@ -1,0 +1,29 @@
+---
+export const prerender = true;
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Hero from "../../../components/sections/Hero.astro";
+import Portfolio from "../../../components/sections/Portfolio.astro";
+import Contact from "../../../components/sections/Contact.astro";
+
+const seoTitle = "Case Studies — Automation, AI Platforms, ERP & E-commerce | AVPdev";
+const seoDescription = "Real projects: task, solution, stack and outcome. Business process automation, AI systems, SaaS, Telegram Mini Apps and online stores.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": seoTitle,
+  "description": seoDescription,
+  "inLanguage": "en-US",
+};
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} schema={schema}>
+  <Hero
+    title="Case Studies: Before & After"
+    subtitle="Task, solution, stack and outcome for every project. No client names — just the substance of the work."
+    variant="services"
+  />
+  <Portfolio all />
+  <Contact />
+</BaseLayout>

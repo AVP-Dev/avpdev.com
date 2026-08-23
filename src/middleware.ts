@@ -16,6 +16,8 @@ function isAIBot(userAgent: string): boolean {
 
 // 1. Exact Match Map (301 Redirects)
 const redirectMap: Record<string, string> = {
+  '/ru/projects/': '/ru/project/',
+  '/en/projects/': '/en/project/',
   '/index.html': '/ru/',
   '/index': '/ru/',
   '/index/': '/ru/',
