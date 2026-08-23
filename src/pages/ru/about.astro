@@ -1,0 +1,27 @@
+---
+export const prerender = true;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import About from "../../components/sections/About.astro";
+import HowWeWork from "../../components/sections/HowWeWork.astro";
+import Process from "../../components/sections/Process.astro";
+import Contact from "../../components/sections/Contact.astro";
+
+const seoTitle = "Обо мне — Алексей Пацкевич | AVPdev: разработка и автоматизация";
+const seoDescription = "Инженер с 18-летним опытом: от CNC и железа до full-stack разработки и AI-оркестрации. Подход, стек, принципы работы и как строится проект от брифа до запуска.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": seoTitle,
+  "description": seoDescription,
+  "inLanguage": "ru-RU",
+};
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} schema={schema}>
+  <About />
+  <HowWeWork />
+  <Process />
+  <Contact />
+</BaseLayout>
