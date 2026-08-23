@@ -18,60 +18,32 @@ const h2Content = cityName
     : t('services_h2');
 
 const cardSuffix = cityName ? (lang === 'ru' ? ` для бизнеса в ${cityName}` : ` for ${cityName} businesses`) : '';
+
+// Порядок: приоритет — автоматизация и AI, затем продукты, затем сайты
+const services = [
+    { icon: 'fa-cogs', path: lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development', h3Key: 'services_card2_h3', pKey: 'services_card2_p', delay: 100 },
+    { icon: 'fa-brain', path: lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration', h3Key: 'services_card4_h3', pKey: 'services_card4_p', delay: 200 },
+    { icon: 'fa-rocket', path: lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp', h3Key: 'services_card3_h3', pKey: 'services_card3_p', delay: 300 },
+    { icon: 'fa-cart-shopping', path: lang === 'ru' ? 'uslugi/internet-magaziny' : 'services/ecommerce-development', h3Key: 'services_card_shop_h3', pKey: 'services_card_shop_p', delay: 400 },
+    { icon: 'fa-laptop-code', path: lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development', h3Key: 'services_card1_h3', pKey: 'services_card1_p', delay: 500 },
+    { icon: 'fa-brands fa-telegram', path: lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps', h3Key: 'services_card5_h3', pKey: 'services_card5_p', delay: 600 },
+];
 ---
 <section id="services">
     <div class="container">
         <h2 class="section-title fade-in" set:html={h2Content}></h2>
         <div class="services-grid">
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development')} class="card fade-in" style="transition-delay: 100ms;">
+            {services.map(s => (
+            <a href={getRelativeLocaleUrl(lang, s.path)} class="card fade-in" style={`transition-delay: ${s.delay}ms;`}>
                 <div class="card-glass-effect"></div>
-                <Icon name="fa-laptop-code" class="card-icon" aria-hidden="true" />
-                <h3>{t('services_card1_h3')}{cardSuffix}</h3>
-                <p>{t('services_card1_p')}</p>
+                <Icon name={s.icon} class="card-icon" aria-hidden="true" />
+                <h3>{t(s.h3Key)}{cardSuffix}</h3>
+                <p>{t(s.pKey)}</p>
                 <div class="card-footer">
                     <span class="learn-more">{t('services_learn_more')} <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
             </a>
-            
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development')} class="card fade-in" style="transition-delay: 200ms;">
-                <div class="card-glass-effect"></div>
-                <Icon name="fa-cogs" class="card-icon" aria-hidden="true" />
-                <h3>{t('services_card2_h3')}{cardSuffix}</h3>
-                <p>{t('services_card2_p')}</p>
-                <div class="card-footer">
-                    <span class="learn-more">{t('services_learn_more')} <i class="fa-solid fa-arrow-right"></i></span>
-                </div>
-            </a>
-            
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp')} class="card fade-in" style="transition-delay: 300ms;">
-                <div class="card-glass-effect"></div>
-                <Icon name="fa-rocket" class="card-icon" aria-hidden="true" />
-                <h3>{t('services_card3_h3')}{cardSuffix}</h3>
-                <p>{t('services_card3_p')}</p>
-                <div class="card-footer">
-                    <span class="learn-more">{t('services_learn_more')} <i class="fa-solid fa-arrow-right"></i></span>
-                </div>
-            </a>
-
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration')} class="card fade-in" style="transition-delay: 400ms;">
-                <div class="card-glass-effect"></div>
-                <Icon name="fa-brain" class="card-icon" aria-hidden="true" />
-                <h3>{t('services_card4_h3')}{cardSuffix}</h3>
-                <p>{t('services_card4_p')}</p>
-                <div class="card-footer">
-                    <span class="learn-more">{t('services_learn_more')} <i class="fa-solid fa-arrow-right"></i></span>
-                </div>
-            </a>
-
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps')} class="card fade-in" style="transition-delay: 500ms;">
-                <div class="card-glass-effect"></div>
-                <Icon name="fa-brands fa-telegram" class="card-icon" aria-hidden="true" />
-                <h3>{t('services_card5_h3')}{cardSuffix}</h3>
-                <p>{t('services_card5_p')}</p>
-                <div class="card-footer">
-                    <span class="learn-more">{t('services_learn_more')} <i class="fa-solid fa-arrow-right"></i></span>
-                </div>
-            </a>
+            ))}
         </div>
 <style>
     .card {

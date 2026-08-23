@@ -1,0 +1,75 @@
+---
+export const prerender = true;
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Services from "../../../components/sections/Services.astro";
+import FAQ from "../../../components/sections/FAQ.astro";
+import Contact from "../../../components/sections/Contact.astro";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const seoTitle = "IT Services for Business: Websites, Bots, Automation & AI | AVPdev";
+const seoDescription = "Website and landing page development, Telegram bots and scrapers, AI integration, SaaS/MVP, e-commerce stores and Mini Apps. Full cycle: from idea to launch and support.";
+
+const lang = 'en';
+const serviceLinks = [
+  { name: "Automation & Integrations", url: getRelativeLocaleUrl(lang, 'services/bot-and-scraper-development') },
+  { name: "AI Integration", url: getRelativeLocaleUrl(lang, 'services/ai-integration') },
+  { name: "SaaS / MVP Development", url: getRelativeLocaleUrl(lang, 'services/saas-mvp') },
+  { name: "E-commerce Stores", url: getRelativeLocaleUrl(lang, 'services/ecommerce-development') },
+  { name: "Website Development", url: getRelativeLocaleUrl(lang, 'services/website-development') },
+  { name: "Telegram Mini Apps", url: getRelativeLocaleUrl(lang, 'services/telegram-mini-apps') },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": seoTitle,
+  "description": seoDescription,
+  "inLanguage": "en-US",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": serviceLinks.map((s, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": s.name,
+      "url": new URL(s.url, Astro.site).href,
+    })),
+  },
+};
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} schema={schema}>
+  <section class="hub-intro">
+    <div class="container">
+      <h1 class="hub-title">IT Services <span class="gradient-text">for Your Business</span></h1>
+      <p class="hub-description">
+        Six directions — from routine automation to full-scale products. Pick what matches your task:
+        each page covers the approach, stack, timelines, and answers to common questions.
+      </p>
+    </div>
+  </section>
+  <Services />
+  <FAQ />
+  <Contact />
+</BaseLayout>
+
+<style>
+  .hub-intro {
+    padding: 160px 0 0;
+    background-color: var(--bg-color);
+  }
+  .hub-title {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+  .hub-description {
+    max-width: 720px;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--text-muted, var(--text-color));
+    opacity: 0.85;
+  }
+</style>

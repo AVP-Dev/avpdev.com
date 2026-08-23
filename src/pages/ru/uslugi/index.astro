@@ -1,0 +1,75 @@
+---
+export const prerender = true;
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Services from "../../../components/sections/Services.astro";
+import FAQ from "../../../components/sections/FAQ.astro";
+import Contact from "../../../components/sections/Contact.astro";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const seoTitle = "IT-услуги для бизнеса: сайты, боты, автоматизация и AI | AVPdev";
+const seoDescription = "Разработка сайтов и лендингов, Telegram-ботов и парсеров, AI-интеграции, SaaS/MVP, интернет-магазины и Mini Apps. Полный цикл: от идеи до запуска и поддержки.";
+
+const lang = 'ru';
+const serviceLinks = [
+  { name: "Автоматизация и интеграции", url: getRelativeLocaleUrl(lang, 'uslugi/razrabotka-botov-i-parserov') },
+  { name: "AI-интеграции", url: getRelativeLocaleUrl(lang, 'uslugi/ai-integracii') },
+  { name: "SaaS / MVP разработка", url: getRelativeLocaleUrl(lang, 'uslugi/saas-mvp') },
+  { name: "Интернет-магазины", url: getRelativeLocaleUrl(lang, 'uslugi/internet-magaziny') },
+  { name: "Разработка сайтов", url: getRelativeLocaleUrl(lang, 'uslugi/razrabotka-saitov') },
+  { name: "Telegram Mini Apps", url: getRelativeLocaleUrl(lang, 'uslugi/telegram-mini-apps') },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": seoTitle,
+  "description": seoDescription,
+  "inLanguage": "ru-RU",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": serviceLinks.map((s, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": s.name,
+      "url": new URL(s.url, Astro.site).href,
+    })),
+  },
+};
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} schema={schema}>
+  <section class="hub-intro">
+    <div class="container">
+      <h1 class="hub-title">IT-услуги <span class="gradient-text">для вашего бизнеса</span></h1>
+      <p class="hub-description">
+        Шесть направлений — от автоматизации рутины до полноценных продуктов. Выберите то, что соответствует вашей задаче:
+        внутри каждой страницы — подход, стек, сроки и ответы на частые вопросы.
+      </p>
+    </div>
+  </section>
+  <Services />
+  <FAQ />
+  <Contact />
+</BaseLayout>
+
+<style>
+  .hub-intro {
+    padding: 160px 0 0;
+    background-color: var(--bg-color);
+  }
+  .hub-title {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+  .hub-description {
+    max-width: 720px;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--text-muted, var(--text-color));
+    opacity: 0.85;
+  }
+</style>

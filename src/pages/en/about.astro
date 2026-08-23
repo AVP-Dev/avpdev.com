@@ -1,0 +1,27 @@
+---
+export const prerender = true;
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import About from "../../components/sections/About.astro";
+import HowWeWork from "../../components/sections/HowWeWork.astro";
+import Process from "../../components/sections/Process.astro";
+import Contact from "../../components/sections/Contact.astro";
+
+const seoTitle = "About Me — Alexey Patskevich | AVPdev: Development & Automation";
+const seoDescription = "An engineer with 18 years of experience: from CNC and hardware to full-stack development and AI orchestration. Approach, stack, working principles, and how a project runs from brief to launch.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": seoTitle,
+  "description": seoDescription,
+  "inLanguage": "en-US",
+};
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} schema={schema}>
+  <About />
+  <HowWeWork />
+  <Process />
+  <Contact />
+</BaseLayout>

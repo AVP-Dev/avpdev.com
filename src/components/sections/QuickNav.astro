@@ -1,0 +1,79 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Icon from '../Icon.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const links = [
+    { icon: 'fa-briefcase', href: getRelativeLocaleUrl(lang, 'project'), h3Key: 'quicknav_portfolio_h3', pKey: 'quicknav_portfolio_p', delay: 100 },
+    { icon: 'fa-user-tie', href: getRelativeLocaleUrl(lang, 'about'), h3Key: 'quicknav_about_h3', pKey: 'quicknav_about_p', delay: 200 },
+    { icon: 'fa-pen-nib', href: getRelativeLocaleUrl(lang, 'blog'), h3Key: 'quicknav_blog_h3', pKey: 'quicknav_blog_p', delay: 300 },
+    { icon: 'fa-paper-plane', href: getRelativeLocaleUrl(lang, 'brief'), h3Key: 'quicknav_brief_h3', pKey: 'quicknav_brief_p', delay: 400 },
+];
+---
+<section id="explore">
+    <div class="container">
+        <h2 class="section-title fade-in">{t('quicknav_h2')}</h2>
+        <div class="services-grid">
+            {links.map(l => (
+            <a href={l.href} class="card fade-in" style={`transition-delay: ${l.delay}ms;`}>
+                <div class="card-glass-effect"></div>
+                <Icon name={l.icon} class="card-icon" aria-hidden="true" />
+                <h3>{t(l.h3Key)}</h3>
+                <p>{t(l.pKey)}</p>
+                <div class="card-footer">
+                    <span class="learn-more">{t('services_learn_more')} <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+            ))}
+        </div>
+<style>
+    .card {
+        flex: 1 1 380px;
+        max-width: 420px;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+    .card:hover {
+        transition-delay: 0s !important;
+    }
+    .card-glass-effect {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(var(--accent-color-start-rgb), 0.05), transparent 60%);
+        pointer-events: none;
+    }
+    .card-footer {
+        margin-top: auto;
+        padding-top: 2rem;
+    }
+    .learn-more {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: gap 0.3s ease;
+    }
+    :global(.light-theme) .learn-more {
+        color: #E65200;
+    }
+    .card:hover .learn-more {
+        gap: 0.8rem;
+    }
+    .services-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+        margin: 4rem auto;
+        justify-content: center;
+        max-width: 1400px;
+    }
+</style>
+    </div>
+</section>
