@@ -1,7 +1,7 @@
 ---
 titleKey: 'case_urban_spot_title'
 descriptionKey: 'case_urban_spot_desc'
-ogImage: '/images/projects/urban-spot/hero.webp'
+ogImage: '/images/projects/coworking-platform/hero.webp'
 clientKey: 'case_urban_spot_client'
 servicesKey: 'case_urban_spot_services'
 year: 2026
@@ -9,7 +9,7 @@ featured: true
 category: 'web-site'
 stack: ['Next.js 16', 'React 19', 'Tailwind 4', 'Bun', 'Docker']
 publishDate: 2026-02-06
-heroImage: '../../../assets/images/projects/urban-spot/hero.webp'
+heroImage: '../../../assets/images/projects/coworking-platform/hero.webp'
 heroImageAlt: 'Brutalist Coworking Platform Interface'
 header:
   titleKey: 'case_urban_spot_h1'
@@ -48,13 +48,13 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '../../../assets/images/projects/urban-spot/the-grid.webp'
+      - img: '../../../assets/images/projects/coworking-platform/the-grid.webp'
         captionKey: 'gallery_caption_urban_spot_grid'
         alt: 'The Grid interactive floor plan'
-      - img: '../../../assets/images/projects/urban-spot/pricing.webp'
+      - img: '../../../assets/images/projects/coworking-platform/pricing.webp'
         captionKey: 'gallery_caption_urban_spot_pricing'
         alt: 'Coworking rates section'
-      - img: '../../../assets/images/projects/urban-spot/contacts-footer.webp'
+      - img: '../../../assets/images/projects/coworking-platform/contacts-footer.webp'
         captionKey: 'gallery_caption_urban_spot_contacts'
         alt: 'Website footer typography'
 ---

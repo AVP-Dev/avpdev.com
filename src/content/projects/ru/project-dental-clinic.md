@@ -1,7 +1,7 @@
 ---
 titleKey: 'case_pure_trust_title'
 descriptionKey: 'case_pure_trust_desc'
-ogImage: '/images/projects/pure-trust/hero.webp'
+ogImage: '/images/projects/dental-clinic/hero.webp'
 clientKey: 'case_pure_trust_client'
 servicesKey: 'case_pure_trust_services'
 year: 2025
@@ -9,7 +9,7 @@ featured: true
 category: 'web-site'
 stack: ['Astro', 'React', 'Tailwind', 'TypeScript']
 publishDate: 2025-07-20
-heroImage: '../../../assets/images/projects/pure-trust/hero.webp'
+heroImage: '../../../assets/images/projects/dental-clinic/hero.webp'
 heroImageAlt: 'Сайт стоматологической клиники уровня spa'
 header:
   titleKey: 'case_pure_trust_h1'
@@ -47,14 +47,14 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '../../../assets/images/projects/pure-trust/hero.webp'
+      - img: '../../../assets/images/projects/dental-clinic/hero.webp'
         captionKey: 'gallery_caption_pure_trust_hero'
-      - img: '../../../assets/images/projects/pure-trust/about.webp'
+      - img: '../../../assets/images/projects/dental-clinic/about.webp'
         captionKey: 'gallery_caption_pure_trust_about'
-      - img: '../../../assets/images/projects/pure-trust/features.webp'
+      - img: '../../../assets/images/projects/dental-clinic/features.webp'
         captionKey: 'gallery_caption_pure_trust_features'
-      - img: '../../../assets/images/projects/pure-trust/gallery.webp'
+      - img: '../../../assets/images/projects/dental-clinic/gallery.webp'
         captionKey: 'gallery_caption_pure_trust_gallery'
-      - img: '../../../assets/images/projects/pure-trust/contact.webp'
+      - img: '../../../assets/images/projects/dental-clinic/contact.webp'
         captionKey: 'gallery_caption_pure_trust_contact'
 ---

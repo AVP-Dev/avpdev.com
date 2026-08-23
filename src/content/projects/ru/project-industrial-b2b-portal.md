@@ -1,7 +1,7 @@
 ---
 titleKey: 'case_techmetal_title'
 descriptionKey: 'case_techmetal_desc'
-ogImage: '/images/projects/techmetal/hero.webp'
+ogImage: '/images/projects/industrial-b2b-portal/hero.webp'
 clientKey: 'case_techmetal_client'
 servicesKey: 'case_techmetal_services'
 year: 2024
@@ -9,7 +9,7 @@ featured: false
 category: 'app'
 stack: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'Bun']
 publishDate: 2024-06-05
-heroImage: '../../../assets/images/projects/techmetal/hero.webp'
+heroImage: '../../../assets/images/projects/industrial-b2b-portal/hero.webp'
 heroImageAlt: 'Промышленный B2B-портал'
 header:
   titleKey: 'case_techmetal_h1'
@@ -49,14 +49,14 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '../../../assets/images/projects/techmetal/hero.webp'
+      - img: '../../../assets/images/projects/industrial-b2b-portal/hero.webp'
         captionKey: 'gallery_caption_techmetal_hero'
-      - img: '../../../assets/images/projects/techmetal/features.webp'
+      - img: '../../../assets/images/projects/industrial-b2b-portal/features.webp'
         captionKey: 'gallery_caption_techmetal_features'
-      - img: '../../../assets/images/projects/techmetal/rfq.webp'
+      - img: '../../../assets/images/projects/industrial-b2b-portal/rfq.webp'
         captionKey: 'gallery_caption_techmetal_rfq'
-      - img: '../../../assets/images/projects/techmetal/about.webp'
+      - img: '../../../assets/images/projects/industrial-b2b-portal/about.webp'
         captionKey: 'gallery_caption_techmetal_about'
-      - img: '../../../assets/images/projects/techmetal/contact.webp'
+      - img: '../../../assets/images/projects/industrial-b2b-portal/contact.webp'
         captionKey: 'gallery_caption_techmetal_contact'
 ---

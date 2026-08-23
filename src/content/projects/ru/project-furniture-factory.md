@@ -1,7 +1,7 @@
 ---
 titleKey: 'case_mekohaus_title'
 descriptionKey: 'case_mekohaus_desc'
-ogImage: '/images/projects/mekohaus/hero.webp'
+ogImage: '/images/projects/furniture-factory/hero.webp'
 clientKey: 'case_mekohaus_client'
 servicesKey: 'case_mekohaus_services'
 year: 2025
@@ -9,8 +9,8 @@ featured: false
 category: 'web-site'
 stack: ['PHP', 'Vanilla JS', 'Admin Panel']
 publishDate: 2025-01-10
-heroImage: '../../../assets/images/projects/mekohaus/hero.webp'
-heroImageAlt: 'Hero image of the furniture factory website'
+heroImage: '../../../assets/images/projects/furniture-factory/hero.webp'
+heroImageAlt: 'Главный экран сайта мебельной фабрики'
 header:
   titleKey: 'case_mekohaus_h1'
   descriptionKey: 'case_mekohaus_desc'
@@ -48,12 +48,12 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '../../../assets/images/projects/mekohaus/hero.webp'
+      - img: '../../../assets/images/projects/furniture-factory/hero.webp'
         captionKey: 'gallery_caption_mekohaus_hero'
-      - img: '../../../assets/images/projects/mekohaus/catalog.webp'
+      - img: '../../../assets/images/projects/furniture-factory/catalog.webp'
         captionKey: 'gallery_caption_mekohaus_catalog'
-      - img: '../../../assets/images/projects/mekohaus/about.webp'
+      - img: '../../../assets/images/projects/furniture-factory/about.webp'
         captionKey: 'gallery_caption_mekohaus_about'
-      - img: '../../../assets/images/projects/mekohaus/form.webp'
+      - img: '../../../assets/images/projects/furniture-factory/form.webp'
         captionKey: 'gallery_caption_mekohaus_form'
 ---

@@ -1,7 +1,7 @@
 ---
 titleKey: 'case_sentralix_title'
 descriptionKey: 'case_sentralix_desc'
-ogImage: '/images/projects/sentralix/hero.webp'
+ogImage: '/images/projects/enterprise-ai-platform/hero.webp'
 clientKey: 'case_sentralix_client'
 servicesKey: 'case_sentralix_services'
 year: 2026
@@ -9,7 +9,7 @@ featured: true
 category: 'web-site'
 stack: ['Astro', 'React', 'Tailwind', 'Docker']
 publishDate: 2026-02-01
-heroImage: '../../../assets/images/projects/sentralix/hero.webp'
+heroImage: '../../../assets/images/projects/enterprise-ai-platform/hero.webp'
 heroImageAlt: 'Enterprise SaaS Platform Main Screen'
 header:
   titleKey: 'case_sentralix_h1'
@@ -48,14 +48,14 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '../../../assets/images/projects/sentralix/hero.webp'
+      - img: '../../../assets/images/projects/enterprise-ai-platform/hero.webp'
         captionKey: 'gallery_caption_sentralix_hero'
-      - img: '../../../assets/images/projects/sentralix/about.webp'
+      - img: '../../../assets/images/projects/enterprise-ai-platform/about.webp'
         captionKey: 'gallery_caption_sentralix_about'
-      - img: '../../../assets/images/projects/sentralix/features.webp'
+      - img: '../../../assets/images/projects/enterprise-ai-platform/features.webp'
         captionKey: 'gallery_caption_sentralix_features'
-      - img: '../../../assets/images/projects/sentralix/faq.webp'
+      - img: '../../../assets/images/projects/enterprise-ai-platform/faq.webp'
         captionKey: 'gallery_caption_sentralix_faq'
-      - img: '../../../assets/images/projects/sentralix/contact.webp'
+      - img: '../../../assets/images/projects/enterprise-ai-platform/contact.webp'
         captionKey: 'gallery_caption_sentralix_contact'
 ---

@@ -1,7 +1,7 @@
 ---
 titleKey: 'case_ralf_ringer_title'
 descriptionKey: 'case_ralf_ringer_desc'
-ogImage: '/images/projects/ralf-ringer/hero.webp'
+ogImage: '/images/projects/footwear-brand/hero.webp'
 clientKey: 'case_ralf_ringer_client'
 servicesKey: 'case_ralf_ringer_services'
 year: 2025
@@ -9,8 +9,8 @@ featured: true
 category: 'web-site'
 stack: ['Astro', 'TypeScript', 'Tailwind']
 publishDate: 2025-10-05
-heroImage: '../../../assets/images/projects/ralf-ringer/hero.webp'
-heroImageAlt: 'Shoe Care Service Landing Page'
+heroImage: '../../../assets/images/projects/footwear-brand/hero.webp'
+heroImageAlt: 'Лендинг-заглушка сервиса по уходу за обувью'
 header:
   titleKey: 'case_ralf_ringer_h1'
   descriptionKey: 'case_ralf_ringer_desc'
@@ -44,18 +44,18 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '../../../assets/images/projects/ralf-ringer/hero.webp'
+      - img: '../../../assets/images/projects/footwear-brand/hero.webp'
         captionKey: 'gallery_caption_ralf_ringer_hero'
-      - img: '../../../assets/images/projects/ralf-ringer/services.webp'
+      - img: '../../../assets/images/projects/footwear-brand/services.webp'
         captionKey: 'gallery_caption_ralf_ringer_services'
-      - img: '../../../assets/images/projects/ralf-ringer/pricing.webp'
+      - img: '../../../assets/images/projects/footwear-brand/pricing.webp'
         captionKey: 'gallery_caption_ralf_ringer_pricing'
-      - img: '../../../assets/images/projects/ralf-ringer/howitworks.webp'
+      - img: '../../../assets/images/projects/footwear-brand/howitworks.webp'
         captionKey: 'gallery_caption_ralf_ringer_howitworks'
-      - img: '../../../assets/images/projects/ralf-ringer/gallery.webp'
+      - img: '../../../assets/images/projects/footwear-brand/gallery.webp'
         captionKey: 'gallery_caption_ralf_ringer_gallery'
-      - img: '../../../assets/images/projects/ralf-ringer/faq.webp'
+      - img: '../../../assets/images/projects/footwear-brand/faq.webp'
         captionKey: 'gallery_caption_ralf_ringer_faq'
-      - img: '../../../assets/images/projects/ralf-ringer/contact.webp'
+      - img: '../../../assets/images/projects/footwear-brand/contact.webp'
         captionKey: 'gallery_caption_ralf_ringer_contact'
 ---
