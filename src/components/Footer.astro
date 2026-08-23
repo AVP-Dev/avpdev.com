@@ -1,6 +1,7 @@
 ---
 // src/components/Footer.astro refactoring
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import { CreatorSignature } from "./ui/CreatorSignature";
 import Icon from "./Icon.astro";
 import PaymentMethods from "./PaymentMethods.astro";
@@ -70,9 +71,9 @@ const t = useTranslations(lang);
 <div class="footer-col nav-col">
     <h3 class="footer-title">{t("catalog_title")}</h3>
     <nav class="footer-nav">
-        <a href={`/${lang}/projects/`}>{t("catalog_title")}</a>
+        <a href={getRelativeLocaleUrl(lang, 'project')}>{t("catalog_title")}</a>
         <a href={`/${lang}/blog/`}>{t("nav_blog")}</a>
-        <a href={`/${lang}/#faq`}>{t("nav_faq")}</a>
+        <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services') + '#faq'}>{t("nav_faq")}</a>
         <a href={`/${lang}/brief/`}>{t("nav_brief")}</a>
         <a href={`/${lang}/#contact`}>{t("nav_contact")}</a>
     </nav>

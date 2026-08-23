@@ -3,6 +3,7 @@
 import { Image } from "astro:assets";
 import aboutPhoto from "../../assets/images/about-photo.webp";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import Icon from "../Icon.astro";
 
 const lang = getLangFromUrl(Astro.url);
@@ -35,7 +36,7 @@ const homePath = `/${lang}/`;
                 </div>
 
                 <div class="about-cta-container">
-                    <a href={`${homePath}#portfolio`} class="cta-button">
+                    <a href={getRelativeLocaleUrl(lang, 'project')} class="cta-button">
                         {t("about_cta_portfolio")}
                     </a>
                     <a
@@ -81,6 +82,24 @@ const homePath = `/${lang}/`;
                 </div>
             </div>
             
+            <div class="about-facts fade-in">
+                <h3 class="facts-title">{t("about_facts_h3")}</h3>
+                <div class="facts-grid">
+                    <div class="fact-card">
+                        <span class="fact-k">{t("about_fact1_k")}</span>
+                        <p>{t("about_fact1_v")}</p>
+                    </div>
+                    <div class="fact-card">
+                        <span class="fact-k">{t("about_fact2_k")}</span>
+                        <p>{t("about_fact2_v")}</p>
+                    </div>
+                    <div class="fact-card">
+                        <span class="fact-k">{t("about_fact3_k")}</span>
+                        <p>{t("about_fact3_v")}</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="about-conclusion-wrapper fade-in">
                 <p class="about-conclusion">
                     <span class="gradient-text gradient-accent">{t("about_conclusion")}</span>
@@ -348,6 +367,47 @@ const homePath = `/${lang}/`;
         padding-top: 3.5rem;
         margin-top: 1rem;
         position: relative;
+    }
+
+    .about-facts {
+        border-top: 1px solid var(--border-color);
+        padding-top: 2.5rem;
+    }
+
+    .facts-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+
+    .facts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .fact-card {
+        background: var(--primary-color);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 1.5rem 1.25rem;
+    }
+
+    .fact-k {
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--accent-color-start);
+        margin-bottom: 0.6rem;
+    }
+
+    .fact-card p {
+        margin: 0;
+        color: var(--text-secondary-color);
+        line-height: 1.55;
+        font-size: 0.98rem;
     }
 
     .about-conclusion {

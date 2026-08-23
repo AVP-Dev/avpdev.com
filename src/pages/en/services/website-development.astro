@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Hero from '../../../components/sections/Hero.astro';
 import Contact from '../../../components/sections/Contact.astro';
+import ServicePricing from '../../../components/sections/ServicePricing.astro';
 
 const seoTitle = "Custom Website Development: Landings, Shops, Portals | AVPdev";
 const seoDescription = "We create high-performance websites using Next.js, Astro, and React. From selling landing pages to complex marketplaces and corporate portals.";
@@ -99,6 +100,8 @@ const schema = {
     }
   ]
 };
+
+const pricing = {"title": "Pricing", "tiers": [{"value": "from $400", "label": "Astro website", "note": "fast static site, blog, landing page"}, {"value": "from $600", "label": "Next.js website", "note": "dynamic content, integrations, complex logic"}], "facts": [{"k": "Timeline", "v": "7–14 days for a typical site"}, {"k": "SEO base", "v": "speed, semantics, sitemap, structured data"}, {"k": "Warranty", "v": "from 1 month after delivery"}], "note": "Starting price. The final quote is fixed after we agree on the project scope."}
 ---
 
 <BaseLayout
@@ -146,6 +149,7 @@ const schema = {
     </div>
   </section>
 
+    <ServicePricing title={pricing.title} tiers={pricing.tiers} facts={pricing.facts} note={pricing.note} />
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">

@@ -33,7 +33,6 @@ const homePath = `/${lang}/`;
             <span class="logo-text">AVP<span class="gradient-text">dev.com</span></span>
         </a>
         <ul class="nav-links">
-            <li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
             <div class="nav-dropdown">
           <button class="nav-dropbtn" aria-haspopup="true" aria-expanded="false">
             {t('nav_services')} <i class="fa-solid fa-chevron-down text-xs ml-1 transition-transform duration-300"></i>
@@ -77,9 +76,10 @@ const homePath = `/${lang}/`;
             </a>
           </div>
         </div>
-            <li><a href={`/${lang}/project/`}>{t("nav_portfolio")}</a></li>
+            <li><a href={getRelativeLocaleUrl(lang, 'project')}>{t("nav_portfolio")}</a></li>
 <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
 <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services') + '#faq'}>{t("nav_faq")}</a></li>
+<li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
 <li><a href={`/${lang}/brief/`} class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">{t("nav_brief")}</a></li>
         </ul>
         <div class="controls">
@@ -103,7 +103,6 @@ const homePath = `/${lang}/`;
 <div class="mobile-nav-overlay"></div>
 <div class="mobile-nav">
     <ul class="mobile-menu-list">
-        <li><a href={`${homePath}#about`}>{t("nav_about")}</a></li>
         <li class="mobile-accordion-item">
             <button class="mobile-accordion-trigger" aria-expanded="false">
                 <span>{t("nav_services")}</span>
@@ -119,9 +118,10 @@ const homePath = `/${lang}/`;
                 </div>
             </div>
         </li>
-        <li><a href={`/${lang}/projects/`}>{t("nav_portfolio")}</a></li>
+        <li><a href={getRelativeLocaleUrl(lang, 'project')}>{t("nav_portfolio")}</a></li>
 <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
-<li><a href={`/${lang}/#faq`}>{t("nav_faq")}</a></li>
+<li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services') + '#faq'}>{t("nav_faq")}</a></li>
+<li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
 <li class="mobile-menu-brief"><a href={`/${lang}/brief/`} class="btn btn-primary">{t("nav_brief")}</a></li>
     </ul>
     <div class="mobile-controls">

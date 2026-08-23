@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Hero from '../../../components/sections/Hero.astro';
 import Contact from '../../../components/sections/Contact.astro';
+import ServicePricing from '../../../components/sections/ServicePricing.astro';
 
 const seoTitle = "Telegram Mini Apps (WebApps) Development | AVPdev";
 const seoDescription = "Professional Telegram Mini Apps (WebApps) development for e-commerce, crypto projects, and business. Integration with TON, smart contracts, and payment systems.";
@@ -97,6 +98,8 @@ const schema = {
     }
   ]
 };
+
+const pricing = {"title": "Pricing", "tiers": [{"value": "from $600", "label": "Mini App", "note": "storefront, booking, forms inside Telegram"}, {"value": "from $1,500", "label": "Mini App with payments", "note": "catalog, cart, payment providers"}], "facts": [{"k": "Timeline", "v": "2–4 weeks"}, {"k": "Payments", "v": "Yookassa, Stripe, CryptoPay"}, {"k": "Warranty", "v": "from 1 month after delivery"}], "note": "Starting price. The final quote is fixed after we agree on the project scope."}
 ---
 
 <BaseLayout
@@ -144,6 +147,7 @@ const schema = {
     </div>
   </section>
 
+    <ServicePricing title={pricing.title} tiers={pricing.tiers} facts={pricing.facts} note={pricing.note} />
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">

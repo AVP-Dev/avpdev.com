@@ -1,0 +1,142 @@
+---
+interface Tier {
+  value: string;
+  label: string;
+  note?: string;
+}
+interface Fact {
+  k: string;
+  v: string;
+}
+interface Props {
+  title: string;
+  tiers: Tier[];
+  facts?: Fact[];
+  note: string;
+}
+
+const { title, tiers, facts = [], note } = Astro.props;
+---
+
+<section class="svc-pricing">
+  <div class="container">
+    <h2 class="section-title">{title}</h2>
+    <div class="price-grid">
+      {tiers.map((t) => (
+        <div class="price-card">
+          <div class="price-value">{t.value}</div>
+          <div class="price-label">{t.label}</div>
+          {t.note && <div class="price-note">{t.note}</div>}
+        </div>
+      ))}
+    </div>
+
+    {facts.length > 0 && (
+      <dl class="fact-list">
+        {facts.map((f) => (
+          <div class="fact-row">
+            <dt>{f.k}</dt>
+            <dd>{f.v}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
+
+    <p class="pricing-disclaimer">
+      <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+      {note}
+    </p>
+  </div>
+</section>
+
+<style>
+  .svc-pricing {
+    padding: 90px 0;
+    background-color: var(--bg-color);
+  }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 36px;
+  }
+
+  .price-card {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: border-color 0.25s ease;
+  }
+
+  .price-card:hover {
+    border-color: var(--accent-color-start);
+  }
+
+  .price-value {
+    font-size: 2rem;
+    font-weight: 800;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .price-label {
+    margin-top: 8px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-color);
+  }
+
+  .price-note {
+    margin-top: 6px;
+    font-size: 0.92rem;
+    color: var(--text-secondary-color);
+  }
+
+  .fact-list {
+    margin: 32px 0 0;
+    border-top: 1px solid var(--border-color);
+    padding-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px 40px;
+  }
+
+  .fact-row {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+
+  .fact-list dt {
+    flex-shrink: 0;
+    min-width: 110px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary-color);
+  }
+
+  .fact-list dd {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 0.98rem;
+  }
+
+  .pricing-disclaimer {
+    margin: 28px 0 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pricing-disclaimer i {
+    color: var(--accent-color-start);
+  }
+</style>

@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Hero from '../../../components/sections/Hero.astro';
 import Contact from '../../../components/sections/Contact.astro';
+import ServicePricing from '../../../components/sections/ServicePricing.astro';
 
 const seoTitle = "Разработка SaaS и MVP для стартапов | AVPdev";
 const seoDescription = "Быстрый запуск MVP для стартапов и масштабируемая разработка SaaS платформ на Next.js, Node.js и Astro. От идеи до первых пользователей за 4-8 недель.";
@@ -94,6 +95,8 @@ const schema = {
     }
   ]
 };
+
+const pricing = {"title": "Стоимость", "tiers": [{"value": "от $1 500", "label": "MVP", "note": "один ключевой сценарий, без лишних фич"}, {"value": "по объёму", "label": "SaaS-платформа", "note": "архитектура под рост нагрузки и команды"}], "facts": [{"k": "Срок", "v": "4–8 недель до первой версии"}, {"k": "Стек", "v": "Next.js · Node.js/Bun · PostgreSQL"}, {"k": "Передача", "v": "код, инфраструктура и документация — ваши"}], "note": "Стартовая цена. Финальная смета — после согласования объёма проекта."}
 ---
 
 <BaseLayout
@@ -143,6 +146,7 @@ const schema = {
 
   
 
+    <ServicePricing title={pricing.title} tiers={pricing.tiers} facts={pricing.facts} note={pricing.note} />
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">

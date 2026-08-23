@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Hero from '../../../components/sections/Hero.astro';
 import Contact from '../../../components/sections/Contact.astro';
+import ServicePricing from '../../../components/sections/ServicePricing.astro';
 
 const seoTitle = "AI & Neural Network Integration for Business | AVPdev";
 const seoDescription = "ChatGPT, Claude, and custom LLM model integration. Support automation, RAG systems, and AI-powered content generation.";
@@ -94,6 +95,8 @@ const schema = {
     }
   ]
 };
+
+const pricing = {"title": "Pricing", "tiers": [{"value": "from $600", "label": "Targeted integration", "note": "support chatbot, summarization, classification"}, {"value": "scope-based", "label": "RAG & AI agents", "note": "knowledge bases, orchestration, internal processes"}], "facts": [{"k": "Timeline", "v": "2–6 weeks"}, {"k": "Approach", "v": "a pilot on your data before full rollout"}, {"k": "Warranty", "v": "from 1 month after delivery"}], "note": "Starting price. The final quote is fixed after we agree on the project scope."}
 ---
 
 <BaseLayout
@@ -141,6 +144,7 @@ const schema = {
     </div>
   </section>
 
+    <ServicePricing title={pricing.title} tiers={pricing.tiers} facts={pricing.facts} note={pricing.note} />
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">

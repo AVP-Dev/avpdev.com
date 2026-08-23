@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Hero from '../../../components/sections/Hero.astro';
 import Contact from '../../../components/sections/Contact.astro';
+import ServicePricing from '../../../components/sections/ServicePricing.astro';
 
 const seoTitle = "Bot and Scraper Development | AVPdev";
 const seoDescription = "Automation of data collection and Telegram bot development of any complexity. Web scraping, price monitoring, and integration with external services.";
@@ -94,6 +95,8 @@ const schema = {
     }
   ]
 };
+
+const pricing = {"title": "Pricing", "tiers": [{"value": "from $150", "label": "Telegram bot", "note": "auto-replies, lead capture, payments"}, {"value": "from $600", "label": "Automation & scrapers", "note": "service integrations, data collection, reports"}], "facts": [{"k": "Timeline", "v": "bot — 7–14 days; multi-system setup — 2–6 weeks"}, {"k": "Warranty", "v": "from 1 month after delivery"}, {"k": "Handover", "v": "code and docs stay with you"}], "note": "Starting price. The final quote is fixed after we agree on the project scope."}
 ---
 
 <BaseLayout
@@ -141,6 +144,7 @@ const schema = {
     </div>
   </section>
 
+    <ServicePricing title={pricing.title} tiers={pricing.tiers} facts={pricing.facts} note={pricing.note} />
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">

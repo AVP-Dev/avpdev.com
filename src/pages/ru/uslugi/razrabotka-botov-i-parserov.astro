@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Hero from '../../../components/sections/Hero.astro';
 import Contact from '../../../components/sections/Contact.astro';
+import ServicePricing from '../../../components/sections/ServicePricing.astro';
 
 const seoTitle = "Разработка ботов и парсеров | AVPdev";
 const seoDescription = "Автоматизация сбора данных и создание Telegram-ботов любой сложности. Парсинг сайтов, мониторинг цен и интеграция с внешними сервисами.";
@@ -94,6 +95,8 @@ const schema = {
     }
   ]
 };
+
+const pricing = {"title": "Стоимость", "tiers": [{"value": "от $150", "label": "Telegram-бот", "note": "автоответы, приём заявок, оплаты"}, {"value": "от $600", "label": "Автоматизация и парсеры", "note": "интеграции сервисов, сбор данных, отчёты"}], "facts": [{"k": "Срок", "v": "бот — 7–14 дней; связка систем — 2–6 недель"}, {"k": "Гарантия", "v": "от 1 месяца после сдачи"}, {"k": "Передача", "v": "код и документация остаются у вас"}], "note": "Стартовая цена. Финальная смета — после согласования объёма проекта."}
 ---
 
 <BaseLayout
@@ -141,6 +144,7 @@ const schema = {
     </div>
   </section>
 
+    <ServicePricing title={pricing.title} tiers={pricing.tiers} facts={pricing.facts} note={pricing.note} />
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">
