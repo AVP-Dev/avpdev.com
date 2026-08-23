@@ -1,7 +1,7 @@
 ---
 titleKey: 'case_aura_home_title'
 descriptionKey: 'case_aura_home_desc'
-ogImage: '/images/projects/aura-home/hero.webp'
+ogImage: '/images/projects/smart-home-dashboard/hero.webp'
 clientKey: 'case_aura_home_client'
 servicesKey: 'case_aura_home_services'
 year: 2024
@@ -9,8 +9,8 @@ featured: true
 category: 'web-site'
 stack: ['Astro', 'React', 'Tailwind', 'Bun']
 publishDate: 2024-06-15
-heroImage: '../../../assets/images/projects/aura-home/hero.webp'
-heroImageAlt: 'Smart Home - Architectural Intelligence'
+heroImage: '../../../assets/images/projects/smart-home-dashboard/hero.webp'
+heroImageAlt: 'Умный дом - Архитектурный ИИ'
 header:
   titleKey: 'case_aura_home_h1'
   descriptionKey: 'case_aura_home_desc'
@@ -47,16 +47,16 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '../../../assets/images/projects/aura-home/hero.webp'
+      - img: '../../../assets/images/projects/smart-home-dashboard/hero.webp'
         captionKey: 'gallery_caption_aura_home_hero'
-      - img: '../../../assets/images/projects/aura-home/about.webp'
+      - img: '../../../assets/images/projects/smart-home-dashboard/about.webp'
         captionKey: 'gallery_caption_aura_home_about'
-      - img: '../../../assets/images/projects/aura-home/features.webp'
+      - img: '../../../assets/images/projects/smart-home-dashboard/features.webp'
         captionKey: 'gallery_caption_aura_home_features'
-      - img: '../../../assets/images/projects/aura-home/gallery.webp'
+      - img: '../../../assets/images/projects/smart-home-dashboard/gallery.webp'
         captionKey: 'gallery_caption_aura_home_gallery'
-      - img: '../../../assets/images/projects/aura-home/faq.webp'
+      - img: '../../../assets/images/projects/smart-home-dashboard/faq.webp'
         captionKey: 'gallery_caption_aura_home_faq'
-      - img: '../../../assets/images/projects/aura-home/contact.webp'
+      - img: '../../../assets/images/projects/smart-home-dashboard/contact.webp'
         captionKey: 'gallery_caption_aura_home_contact'
 ---

@@ -1,7 +1,7 @@
 ---
 titleKey: 'case_rozhkova_title'
 descriptionKey: 'case_rozhkova_desc'
-ogImage: '/images/projects/rozhkova/hero.webp'
+ogImage: '/images/projects/confectionery/hero.webp'
 clientKey: 'case_rozhkova_client'
 servicesKey: 'case_rozhkova_services'
 year: 2024
@@ -9,7 +9,7 @@ featured: true
 category: 'web-site'
 stack: ['Astro', 'Bun', 'Docker', 'SQLite', 'Telegram API']
 publishDate: 2024-03-12
-heroImage: '../../../assets/images/projects/rozhkova/hero.webp'
+heroImage: '../../../assets/images/projects/confectionery/hero.webp'
 heroImageAlt: 'Premium Confectionery Online Storefront'
 header:
   titleKey: 'case_rozhkova_h1'
@@ -50,14 +50,14 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '../../../assets/images/projects/rozhkova/hero.webp'
+      - img: '../../../assets/images/projects/confectionery/hero.webp'
         captionKey: 'gallery_caption_rozhkova_hero'
-      - img: '../../../assets/images/projects/rozhkova/catalog.webp'
+      - img: '../../../assets/images/projects/confectionery/catalog.webp'
         captionKey: 'gallery_caption_rozhkova_catalog'
-      - img: '../../../assets/images/projects/rozhkova/product.webp'
+      - img: '../../../assets/images/projects/confectionery/product.webp'
         captionKey: 'gallery_caption_rozhkova_product'
-      - img: '../../../assets/images/projects/rozhkova/admin.webp'
+      - img: '../../../assets/images/projects/confectionery/admin.webp'
         captionKey: 'gallery_caption_rozhkova_admin'
-      - img: '../../../assets/images/projects/rozhkova/contact.webp'
+      - img: '../../../assets/images/projects/confectionery/contact.webp'
         captionKey: 'gallery_caption_rozhkova_contact'
 ---

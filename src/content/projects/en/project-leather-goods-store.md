@@ -1,7 +1,7 @@
 ---
 titleKey: 'case_leder_werk_title'
 descriptionKey: 'case_leder_werk_desc'
-ogImage: '/images/projects/leder-werk/hero.webp'
+ogImage: '/images/projects/leather-goods-store/hero.webp'
 clientKey: 'case_leder_werk_client'
 servicesKey: 'case_leder_werk_services'
 year: 2025
@@ -9,7 +9,7 @@ featured: true
 category: 'web-site'
 stack: ['Astro', 'React', 'Tailwind', 'Bun']
 publishDate: 2025-04-10
-heroImage: '../../../assets/images/projects/leder-werk/hero.webp'
+heroImage: '../../../assets/images/projects/leather-goods-store/hero.webp'
 heroImageAlt: 'Handcrafted Leather Goods'
 header:
   titleKey: 'case_leder_werk_h1'
@@ -47,14 +47,14 @@ content:
   gallery:
     titleKey: 'project_fragments_title'
     items:
-      - img: '../../../assets/images/projects/leder-werk/hero.webp'
+      - img: '../../../assets/images/projects/leather-goods-store/hero.webp'
         captionKey: 'gallery_caption_leder_werk_hero'
-      - img: '../../../assets/images/projects/leder-werk/collection.webp'
+      - img: '../../../assets/images/projects/leather-goods-store/collection.webp'
         captionKey: 'gallery_caption_leder_werk_collection'
-      - img: '../../../assets/images/projects/leder-werk/details.webp'
+      - img: '../../../assets/images/projects/leather-goods-store/details.webp'
         captionKey: 'gallery_caption_leder_werk_details'
-      - img: '../../../assets/images/projects/leder-werk/gallery.webp'
+      - img: '../../../assets/images/projects/leather-goods-store/gallery.webp'
         captionKey: 'gallery_caption_leder_werk_gallery'
-      - img: '../../../assets/images/projects/leder-werk/contact.webp'
+      - img: '../../../assets/images/projects/leather-goods-store/contact.webp'
         captionKey: 'gallery_caption_leder_werk_contact'
 ---
