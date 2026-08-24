@@ -1,9 +1,9 @@
 export const nyxAutoTranslations = {
     ru: {
-        case_nyxauto_title: 'Кейс: CRM для автосервиса NYX OS Auto',
-        case_nyxauto_h1: 'NYX OS Auto: Единая система управления СТО',
-        case_nyxauto_desc: 'CRM нового поколения для автосервисов на базе Next.js. Полный переход от бумажных блокнотов к прозрачной цифровой экосистеме.',
-        case_nyxauto_client: 'NYX OS Auto',
+        case_nyxauto_title: 'Кейс: CRM для управления автосервисом',
+        case_nyxauto_h1: 'Единая система управления автосервисом',
+        case_nyxauto_desc: 'CRM для автосервисов на базе Next.js: вместо бумажных блокнотов — единая система заказов с прозрачной историей по каждому автомобилю.',
+        case_nyxauto_client: 'Сеть автосервисов',
         case_nyxauto_services: 'CRM System, Next.js, Full-Stack Development',
         case_nyxauto_task_p: 'Типичная станция технического обслуживания (СТО) тонет в хаосе: история ремонтов записана в толстых бумажных блокнотах, остатки запчастей «в голове» у кладовщика, а загруженность механиков отслеживается на маркерной доске. Потеря даже одного блокнота — это потеря всей клиентской базы. Задача была амбициозной: за считанные недели перевести всю операционную деятельность СТО из бумажного хаоса в единую цифровую экосистему, где каждая деталь, каждый заказ-наряд и каждый клиент находятся в один клик.',
         case_nyxauto_solution_p: 'Мы построили полноценную CRM-платформу на <strong>Next.js</strong>, которая заменила собой все блокноты, таблицы и маркерные доски разом. Система автоматически ведет полную историю обслуживания каждого автомобиля: владелец видит, когда менялось масло, какие запчасти ставились и кто из механиков выполнял работу. Модуль управления складом отслеживает остатки запчастей в реальном времени и предупреждает о необходимости дозаказа. Встроенный планировщик загрузки механиков позволяет равномерно распределять заказ-наряды между сотрудниками, исключая простои и перегрузки.',
@@ -18,10 +18,10 @@ export const nyxAutoTranslations = {
         gallery_caption_nyxauto_clients: 'Склад и Услуги: Номенклатура запчастей и сервисные операции',
     },
     en: {
-        case_nyxauto_title: 'Case Study: NYX OS Auto Service CRM',
-        case_nyxauto_h1: 'NYX OS Auto: Unified Auto Repair Shop Management',
-        case_nyxauto_desc: 'A next-generation CRM for auto repair shops built on Next.js. A complete transition from paper notebooks to a transparent digital ecosystem.',
-        case_nyxauto_client: 'NYX OS Auto',
+        case_nyxauto_title: 'Case Study: Auto Repair Shop Management CRM',
+        case_nyxauto_h1: 'Unified Auto Repair Shop Management System',
+        case_nyxauto_desc: 'A CRM for auto repair shops built on Next.js: paper notebooks replaced by a single order system with a transparent history for every vehicle.',
+        case_nyxauto_client: 'Сеть автосервисов',
         case_nyxauto_services: 'CRM System, Next.js, Full-Stack Development',
         case_nyxauto_task_p: 'A typical auto repair shop (СТО) drowns in chaos: service histories are scribbled in thick paper notebooks, spare parts inventory lives "in the head" of the warehouse keeper, and mechanic workloads are tracked on a whiteboard. Losing a single notebook means losing the entire client base. The challenge was ambitious: within weeks, migrate the entire operational pipeline from paper chaos into a unified digital ecosystem where every part, every work order, and every client is just one click away.',
         case_nyxauto_solution_p: 'We built a comprehensive CRM platform on <strong>Next.js</strong> that replaced all notebooks, spreadsheets, and whiteboards in one fell swoop. The system automatically maintains a complete service history for every vehicle: the owner can see when the oil was changed, which parts were installed, and which mechanic performed the work. The inventory module tracks spare parts in real time and alerts staff when reordering is needed. A built-in mechanic workload planner distributes work orders evenly across employees, eliminating both idle time and overload.',

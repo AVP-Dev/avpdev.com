@@ -13,7 +13,7 @@ import ErrorModal from "../../components/modals/ErrorModal.astro";
 import aboutPhoto from "../../assets/images/about-photo.webp";
 
 const pageTitleKey = "page_title";
-const pageDescKey = "hero_subtitle";
+const pageDescKey = "page_desc";
 
 // ИСПОЛЬЗУЕМ @graph ДЛЯ ОБЪЕДИНЕНИЯ НЕСКОЛЬКИХ СУЩНОСТЕЙ
 const schema = {
@@ -25,7 +25,7 @@ const schema = {
       url: Astro.site,
       name: "AVPdev - Full-Stack Разработка",
       description:
-        "Профессиональная разработка сайтов и автоматизация бизнеса.",
+        "Разработка сайтов, интернет-магазинов, SaaS и Telegram Mini Apps с автоматизацией и AI-интеграциями.",
       inLanguage: "ru-RU",
       publisher: {
         "@id": new URL("/#person", Astro.site).href,
@@ -45,7 +45,7 @@ const schema = {
         "https://wa.me/375291217371",
       ],
       description:
-        "Full-Stack разработка. Создаем эффективные сайты и автоматизируем бизнес-процессы.",
+        "Разработка веб-систем и автоматизация бизнес-процессов. Инженерный подход: архитектура, измеримый результат, поддержка после запуска.",
     },
   ],
 };

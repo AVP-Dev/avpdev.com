@@ -1,7 +1,7 @@
 export const ralfRingerTranslations = {
     ru: {
-        case_ralf_ringer_title: 'Кейс: Лендинг-заглушка для сервиса «Новая жизнь обуви»',
-        case_ralf_ringer_h1: 'Запуск сервиса «Новая жизнь обуви» для обувного бренда',
+        case_ralf_ringer_title: 'Кейс: Лендинг-заглушка для сервиса ухода за обувью',
+        case_ralf_ringer_h1: 'Запуск сервиса по уходу за обувью для обувного бренда',
         case_ralf_ringer_desc: 'Разработка оптимизированного лендинга для тестирования спроса и сбора предзаписей на новый сервис профессионального ухода за обувью.',
         case_ralf_ringer_client: 'Обувной бренд',
         case_ralf_ringer_services: 'Web Development, Frontend, UX/UI',
@@ -22,7 +22,7 @@ export const ralfRingerTranslations = {
     },
     en: {
         case_ralf_ringer_title: 'Case Study: Pre-launch Landing Page for a Shoe Care Service',
-        case_ralf_ringer_h1: 'Launching a "New Life for Shoes" Service',
+        case_ralf_ringer_h1: 'Launching a Shoe Care Service for a Footwear Brand',
         case_ralf_ringer_desc: 'Development of an optimized landing page to test demand and collect pre-registrations for a new professional shoe care service.',
         case_ralf_ringer_client: 'Footwear Brand',
         case_ralf_ringer_services: 'Web Development, Frontend, UX/UI',

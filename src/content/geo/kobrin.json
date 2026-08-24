@@ -19,7 +19,7 @@
     "faq": [
       {
         "q": "Сколько стоит разработка сайта в Кобрине?",
-        "a": "Цены начинаются от 1190 BYN за лэндинг на Astro и от 1790 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 4470 BYN."
+        "a": "Цены начинаются от 1190 BYN за лэндинг на Astro и от 1790 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 4460 BYN и выше."
       },
       {
         "q": "Как быстро вы запускаете проекты?",
@@ -43,7 +43,7 @@
     "title": "Web Engineering in Kobrin | Next.js & Custom Bots",
     "description": "Scale your Kobrin business with high-performance web applications and intelligent Telegram automation. Expert Node.js services from AVPdev.",
     "h1": "Advanced Digital Tools for Kobrin Business Growth",
-    "p": "Empower your Kobrin-based operations with cutting-edge tech. AVPdev specializes in building fast, scalable applications using Next.js and Astro, coupled with custom automation bots tailored for the local market.",
+    "p": "For Kobrin companies AVPdev builds AVPdev specializes in building fast, scalable applications using Next.js and Astro, coupled with custom automation bots tailored for the local market.",
     "benefits": [
       {
         "icon": "fa-bolt",
@@ -53,13 +53,13 @@
       {
         "icon": "fa-robot",
         "title": "Automated Workflows",
-        "desc": "Streamline your internal processes in Kobrin with sophisticated bots that handle data entry and client care seamlessly."
+        "desc": "Streamline your internal processes in Kobrin with sophisticated bots that automate data entry and client communication."
       }
     ],
     "faq": [
       {
         "q": "What is the cost of web development in Kobrin?",
-        "a": "Pricing starts from 1190 BYN for Astro landing pages and 1790 BYN for Next.js websites. Custom web applications start from 4470 BYN."
+        "a": "Pricing starts from $400 for Astro landing pages and $600 for Next.js websites. Custom web applications start from $1,500."
       },
       {
         "q": "What is your project timeline?",
@@ -67,7 +67,7 @@
       },
       {
         "q": "Do you develop Telegram bots and Mini Apps?",
-        "a": "Yes, we build intelligent bots for business automation. Prices start from 450 BYN depending on the requirements."
+        "a": "Yes, we build intelligent bots for business automation. Prices start from $150 depending on the requirements."
       },
       {
         "q": "Do you provide post-launch support?",

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(for:*)",
+      "Shell(do:*)",
+      "Shell(done:*)",
+      "Shell(bun:*)",
+      "Shell(echo:*)",
+      "Shell(python3 -c  import json d = json.load(open('src/content/geo/moscow.json')) print(d['en']['faq'][0]['a'][:150]) print('---') print('RU:', d['ru']['faq'][0]['a'][:150]) )",
+      "Shell(python3 -c  import json d = json.load(open('src/content/geo/moscow.json')) print('RU:', d['ru']['faq'][0]['a'][-60:]) print('EN:', d['en']['faq'][0]['a'][:100]) )",
+      "Shell(git:*)",
+      "Shell(grep:*)",
+      "Shell(for f in src/i18n/projects/*.ts; do echo \"=== $(basename $f) ===\"; grep -E \"_title:|_h1:\" \"$f\" | head -4; done)",
+      "Shell(git add -A && git commit -F - <<'EOF' Overhaul non-blog site copy: unified \"we\" voice, verified facts, no AI fluff - Unify tone to \"we\" across hero, About, services, footer (RU+EN) - Fix experience numbers: 18+ years of engineering since 2007 everywhere - Update stale facts: Telegram 1B+ users (was 800M), Astro 7.x stack refs - Remove marketing buzzwords (мирового уровня, нового поколения, бесшовный, cutting-edge, world-class, Moon Landing effect) ~70 replacements - Rewrite Sentralix case study without buzzwords, keep hard numbers - Fix number mismatches: AI 75-85%, SaaS 4-8 weeks consistently - Geo pages: USD prices for EN versions via sync-geo-prices.ts - Remove client brand names from case titles/H1/clients/alts (NYX OS, AV3D, \"Новая жизнь обуви\") to avoid SERP competition with clients - Fix broken cookie privacy link, breadcrumbs /projects/ -> /project/ - Fix typos (Искуственный, растит, перенять проект), double period in RU prices - Remove unclosed loop in mekohaus case (\"will be presented separately\") - Fix 6 pre-existing type errors (as const for i18n keys arrays, unused prop) - Meta descriptions decoupled from hero subtitle on home pages Co-authored-by: CommandCodeBot <noreply@commandcode.ai> EOF)"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}

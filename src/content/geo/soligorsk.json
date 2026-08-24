@@ -19,7 +19,7 @@
     "faq": [
       {
         "q": "Сколько стоит разработка сайта в Солигорске?",
-        "a": "Цены начинаются от 1190 BYN за лэндинг на Astro и от 1790 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 4470 BYN."
+        "a": "Цены начинаются от 1190 BYN за лэндинг на Astro и от 1790 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 4460 BYN и выше."
       },
       {
         "q": "Как быстро вы запускаете проекты?",
@@ -43,7 +43,7 @@
     "title": "Soligorsk Tech Solutions | Next.js & Node.js Engineering",
     "description": "High-end web development for Soligorsk industries. We build fast, scalable applications and intelligent automation tools for modern enterprises.",
     "h1": "Precision Engineering for Soligorsk's Leading Enterprises",
-    "p": "Empower your Soligorsk operations with cutting-edge software. AVPdev provides full-stack engineering services, focusing on high-load web applications and robust backend systems tailored for industrial environments.",
+    "p": "Empower your Soligorsk operations with reliable software. AVPdev provides full-stack engineering services, focusing on high-load web applications and robust backend systems tailored for industrial environments.",
     "benefits": [
       {
         "icon": "fa-server",
@@ -53,13 +53,13 @@
       {
         "icon": "fa-robot",
         "title": "Enterprise Bot Integration",
-        "desc": "Automate complex internal processes in Soligorsk with custom bots that connect your workflows seamlessly."
+        "desc": "Automate complex internal processes in Soligorsk with custom bots that connect your workflows directly."
       }
     ],
     "faq": [
       {
         "q": "What is the cost of web development in Soligorsk?",
-        "a": "Pricing starts from 1190 BYN for Astro landing pages and 1790 BYN for Next.js websites. Custom web applications start from 4470 BYN."
+        "a": "Pricing starts from $400 for Astro landing pages and $600 for Next.js websites. Custom web applications start from $1,500."
       },
       {
         "q": "What is your project timeline?",
@@ -67,7 +67,7 @@
       },
       {
         "q": "Do you develop Telegram bots and Mini Apps?",
-        "a": "Yes, we build intelligent bots for business automation. Prices start from 450 BYN depending on the requirements."
+        "a": "Yes, we build intelligent bots for business automation. Prices start from $150 depending on the requirements."
       },
       {
         "q": "Do you provide post-launch support?",

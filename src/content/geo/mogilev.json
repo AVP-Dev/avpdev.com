@@ -3,7 +3,7 @@
     "title": "Создание сайтов в Могилеве | Веб-студия AVPdev",
     "description": "Профессиональная разработка сайтов в Могилеве. Создаем эффективные веб-решения для локального бизнеса. Гарантия качества и соблюдение сроков.",
     "h1": "Цифровой рывок для бизнеса в Могилёве",
-    "p": "AVPdev создаёт высокопроизводительные сайты на Next.js и умных Telegram-ботов для компаний Могилёва. Современный стек, прозрачные сроки, результат.",
+    "p": "AVPdev создаёт быстрые сайты на Next.js и умных Telegram-ботов для компаний Могилёва. Современный стек, прозрачные сроки, результат.",
     "benefits": [
       {
         "icon": "fa-rocket",
@@ -19,7 +19,7 @@
     "faq": [
       {
         "q": "Сколько стоит разработка сайта в Могилеве?",
-        "a": "Цены начинаются от 1190 BYN за лэндинг на Astro и от 1790 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 4470 BYN."
+        "a": "Цены начинаются от 1190 BYN за лэндинг на Astro и от 1790 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 4460 BYN и выше."
       },
       {
         "q": "Как быстро вы запускаете проекты?",
@@ -59,7 +59,7 @@
     "faq": [
       {
         "q": "What is the cost of web development in Mogilev?",
-        "a": "Pricing starts from 1190 BYN for Astro landing pages and 1790 BYN for Next.js websites. Custom web applications start from 4470 BYN."
+        "a": "Pricing starts from $400 for Astro landing pages and $600 for Next.js websites. Custom web applications start from $1,500."
       },
       {
         "q": "What is your project timeline?",
@@ -67,7 +67,7 @@
       },
       {
         "q": "Do you develop Telegram bots and Mini Apps?",
-        "a": "Yes, we build intelligent bots for business automation. Prices start from 450 BYN depending on the requirements."
+        "a": "Yes, we build intelligent bots for business automation. Prices start from $150 depending on the requirements."
       },
       {
         "q": "Do you provide post-launch support?",

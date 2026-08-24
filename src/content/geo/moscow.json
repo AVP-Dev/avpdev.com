@@ -1,9 +1,9 @@
 {
   "ru": {
     "title": "Разработка высоконагруженных систем в Москве | AVPdev",
-    "description": "AVPdev Москва: разработка Enterprise веб-приложений на Next.js, сложных Telegram ботов и масштабируемого бэкенда на Node.js. Качество мирового уровня.",
+    "description": "AVPdev Москва: разработка Enterprise веб-приложений на Next.js, сложных Telegram ботов и масштабируемого бэкенда на Node.js.",
     "h1": "Enterprise Веб-разработка и Автоматизация в Москве",
-    "p": "Рынок Москвы требует безупречного качества и масштабируемости. AVPdev проектирует и внедряет сложные высоконагруженные системы, работая на самом современном стеке: Next.js, React, Node.js. Мы создаем не просто сайты, а цифровые экосистемы.",
+    "p": "AVPdev проектирует и внедряет сложные высоконагруженные системы на стеке: Next.js, React, Node.js. ",
     "benefits": [
       {
         "icon": "fa-cubes",
@@ -12,14 +12,14 @@
       },
       {
         "icon": "fa-robot",
-        "title": "Масштабируемые Бот-экосистемы",
+        "title": "Telegram-боты и интеграции",
         "desc": "Разрабатываем сложных ботов с глубокой интеграцией в ваши бизнес-процессы, CRM и платежные шлюзы для работы на всю Россию."
       }
     ],
     "faq": [
       {
         "q": "Сколько стоит разработка сайта в Москве?",
-        "a": "Цены начинаются от 33500 руб. за лэндинг на Astro и от 50000 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 125000 руб.."
+        "a": "Цены начинаются от 33000 руб. за лэндинг на Astro и от 49500 руб. за сайт на Next.js. Сложные системы (CRM, ERP) — от 124000 руб. и выше."
       },
       {
         "q": "Как быстро вы запускаете проекты?",
@@ -43,7 +43,7 @@
     "title": "Enterprise Web Development in Moscow | Next.js & Node.js",
     "description": "AVPdev Moscow: Building high-load web applications, complex Telegram bots, and scalable enterprise architectures with Next.js and Node.js.",
     "h1": "High-End Software Engineering & Automation in Moscow",
-    "p": "The Moscow market demands excellence and infinite scalability. AVPdev engineers robust, high-performance digital ecosystems using a modular JavaScript stack, delivering world-class reliability for discerning corporate clients in Russia's capital.",
+    "p": "For companies in Moscow, AVPdev builds scalable web systems on a modular JavaScript stack for corporate clients in Russia's capital.",
     "benefits": [
       {
         "icon": "fa-server",
@@ -59,7 +59,7 @@
     "faq": [
       {
         "q": "What is the cost of web development in Moscow?",
-        "a": "Pricing starts from 33500 руб. for Astro landing pages and 50000 руб. for Next.js websites. Custom web applications start from 125000 руб.."
+        "a": "Pricing starts from $400 for Astro landing pages and $600 for Next.js websites. Custom web applications start from $1,500."
       },
       {
         "q": "What is your project timeline?",
@@ -67,7 +67,7 @@
       },
       {
         "q": "Do you develop Telegram bots and Mini Apps?",
-        "a": "Yes, we build intelligent bots for business automation. Prices start from 12500 руб. depending on the requirements."
+        "a": "Yes, we build intelligent bots for business automation. Prices start from $150 depending on the requirements."
       },
       {
         "q": "Do you provide post-launch support?",

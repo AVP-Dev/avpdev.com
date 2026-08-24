@@ -32,16 +32,18 @@ function formatPrice(details: { val: number, sym: string }) {
 }
 
 function generateFaq(loc: any, lang: 'ru' | 'en', rates: any) {
-    const p = {
-        astro: formatPrice(getPriceDetails('astro', loc.country, rates)),
-        next: formatPrice(getPriceDetails('next', loc.country, rates)),
-        app: formatPrice(getPriceDetails('app', loc.country, rates)),
-        bot: formatPrice(getPriceDetails('bot', loc.country, rates))
-    };
+    const p = lang === 'en'
+        ? { astro: '$400', next: '$600', app: '$1,500', bot: '$150' }
+        : {
+            astro: formatPrice(getPriceDetails('astro', loc.country, rates)),
+            next: formatPrice(getPriceDetails('next', loc.country, rates)),
+            app: formatPrice(getPriceDetails('app', loc.country, rates)),
+            bot: formatPrice(getPriceDetails('bot', loc.country, rates))
+        };
 
     if (lang === 'ru') {
         return [
-            { q: `Сколько стоит разработка сайта в ${loc.name_ru || loc.name_en}?`, a: `Цены начинаются от ${p.astro} за лэндинг на Astro и от ${p.next} за сайт на Next.js. Сложные системы (CRM, ERP) — от ${p.app}.` },
+            { q: `Сколько стоит разработка сайта в ${loc.name_ru || loc.name_en}?`, a: `Цены начинаются от ${p.astro} за лэндинг на Astro и от ${p.next} за сайт на Next.js. Сложные системы (CRM, ERP) — от ${p.app} и выше.` },
             { q: "Как быстро вы запускаете проекты?", a: `Лэндинг на Astro мы запускаем за 7–14 дней. Полноценный сайт на Next.js занимает 2–4 недели, а сложные решения — от 1 месяца.` },
             { q: "Разрабатываете ли вы Telegram-ботов?", a: `Да, мы создаем умных ботов для автоматизации бизнеса и Mini Apps. Стоимость — от ${p.bot} в зависимости от сложности.` },
             { q: "Вы предоставляете поддержку после запуска?", a: "Да. Гарантия начинается от 1 месяца после запуска — точный срок зависит от объёма и стоимости проекта: чем крупнее проект, тем длиннее гарантия. В гарантию входит исправление багов в сданном функционале. Дальше — техническая поддержка и развитие на отдельных условиях: мониторинг доступности, обновления безопасности и новые доработки." },

@@ -10,7 +10,7 @@ category: 'crm-erp'
 stack: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Redis', 'Tailwind']
 publishDate: 2025-09-10
 heroImage: '../../../assets/images/projects/nyx-auto/hero.webp'
-heroImageAlt: 'NYX OS Auto - CRM for Auto Repair Shops'
+heroImageAlt: 'Auto repair shop CRM - main system screen'
 header:
   titleKey: 'case_nyxauto_h1'
   descriptionKey: 'case_nyxauto_desc'

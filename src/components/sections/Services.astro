@@ -27,7 +27,7 @@ const services = [
     { icon: 'fa-cart-shopping', path: lang === 'ru' ? 'uslugi/internet-magaziny' : 'services/ecommerce-development', h3Key: 'services_card_shop_h3', pKey: 'services_card_shop_p', delay: 400 },
     { icon: 'fa-laptop-code', path: lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development', h3Key: 'services_card1_h3', pKey: 'services_card1_p', delay: 500 },
     { icon: 'fa-brands fa-telegram', path: lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps', h3Key: 'services_card5_h3', pKey: 'services_card5_p', delay: 600 },
-];
+] as const;
 ---
 <section id="services">
     <div class="container">
