@@ -11,7 +11,7 @@ const links = [
     { icon: 'fa-user-tie', href: getRelativeLocaleUrl(lang, 'about'), h3Key: 'quicknav_about_h3', pKey: 'quicknav_about_p', delay: 200 },
     { icon: 'fa-pen-nib', href: getRelativeLocaleUrl(lang, 'blog'), h3Key: 'quicknav_blog_h3', pKey: 'quicknav_blog_p', delay: 300 },
     { icon: 'fa-paper-plane', href: getRelativeLocaleUrl(lang, 'brief'), h3Key: 'quicknav_brief_h3', pKey: 'quicknav_brief_p', delay: 400 },
-];
+] as const;
 ---
 <section id="explore">
     <div class="container">
@@ -24,7 +24,7 @@ const links = [
                 <h3>{t(l.h3Key)}</h3>
                 <p>{t(l.pKey)}</p>
                 <div class="card-footer">
-                    <span class="learn-more">{t('services_learn_more')} <i class="fa-solid fa-arrow-right"></i></span>
+                    <span class="learn-more">{t('quicknav_more')} <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
             </a>
             ))}

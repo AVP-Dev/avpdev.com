@@ -2,7 +2,7 @@ export const urbanSpotTranslations = {
     ru: {
         case_urban_spot_title: 'Кейс: Бруталистская платформа для сети коворкингов',
         case_urban_spot_h1: 'Манифест брутализма и абсолютной производительности',
-        case_urban_spot_desc: 'Разработка высокопроизводительного хаба на Next.js 16 и Bun с интерактивной сеткой и стабильным Lighthouse 100.',
+        case_urban_spot_desc: 'Хаб для сети коворкингов на Next.js 16 и Bun с интерактивной картой мест и Lighthouse 100.',
         case_urban_spot_client: 'Сеть коворкингов',
         case_urban_spot_services: 'UX/UI Engineering, Full-stack Development, System Architecture',
         case_urban_spot_task_p: 'Задача заключалась в создании платформы-манифеста. Требовалась суровая эстетика брутализма, резонирующая с аудиторией разработчиков и творцов, при сохранении экстремальной скорости работы. Главным вызовом стала реализация интерактивного плана этажа (The Grid) с мгновенным откликом на любых устройствах.',

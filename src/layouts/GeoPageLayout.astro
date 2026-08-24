@@ -34,11 +34,11 @@ const isEven = citySlug ? citySlug.length % 2 === 0 : true;
     {isEven ? (
       <>
         <Services cityName={cityName} />
-        <Portfolio projects={projects} />
+        <Portfolio />
       </>
     ) : (
       <>
-        <Portfolio projects={projects} />
+        <Portfolio />
         <Services cityName={cityName} />
       </>
     )}

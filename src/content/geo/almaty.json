@@ -8,7 +8,7 @@
       {
         "icon": "fa-rocket",
         "title": "Быстрые сайты на Next.js",
-        "desc": "Создаём высокопроизводительные веб-платформы для компаний Алматы с отличным SEO и мгновенной загрузкой."
+        "desc": "Создаём быстрые веб-платформы для компаний Алматы с отличным SEO и мгновенной загрузкой."
       },
       {
         "icon": "fa-robot",
@@ -19,7 +19,7 @@
     "faq": [
       {
         "q": "Сколько стоит разработка сайта в Алматы?",
-        "a": "Цены начинаются от 183000 ₸ за лэндинг на Astro и от 274000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 686000 ₸."
+        "a": "Цены начинаются от 184000 ₸ за лэндинг на Astro и от 276000 ₸ за сайт на Next.js. Сложные системы (CRM, ERP) — от 689000 ₸ и выше."
       },
       {
         "q": "Как быстро вы запускаете проекты?",
@@ -59,7 +59,7 @@
     "faq": [
       {
         "q": "What is the cost of web development in Almaty?",
-        "a": "Pricing starts from 183000 ₸ for Astro landing pages and 274000 ₸ for Next.js websites. Custom web applications start from 686000 ₸."
+        "a": "Pricing starts from $400 for Astro landing pages and $600 for Next.js websites. Custom web applications start from $1,500."
       },
       {
         "q": "What is your project timeline?",
@@ -67,7 +67,7 @@
       },
       {
         "q": "Do you develop Telegram bots and Mini Apps?",
-        "a": "Yes, we build intelligent bots for business automation. Prices start from 69000 ₸ depending on the requirements."
+        "a": "Yes, we build intelligent bots for business automation. Prices start from $150 depending on the requirements."
       },
       {
         "q": "Do you provide post-launch support?",

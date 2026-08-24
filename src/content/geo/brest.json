@@ -13,13 +13,13 @@
       {
         "icon": "fa-cogs",
         "title": "Производительные веб-приложения",
-        "desc": "Используя React и Next.js, мы строим быстрые, масштабируемые и надежные фронтенд и бэкенд системы, которые гарантируют безупречный пользовательский опыт для ваших клиентов в Бресте."
+        "desc": "Используя React и Next.js, мы строим быстрые, масштабируемые и надежные фронтенд и бэкенд системы, которые работают стабильно для ваших клиентов в Бресте."
       }
     ],
     "faq": [
       {
         "q": "Сколько стоит разработка сайта в Бресте?",
-        "a": "Цены начинаются от 1190 BYN за лэндинг на Astro и от 1790 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 4470 BYN."
+        "a": "Цены начинаются от 1190 BYN за лэндинг на Astro и от 1790 BYN за сайт на Next.js. Сложные системы (CRM, ERP) — от 4460 BYN и выше."
       },
       {
         "q": "Как быстро вы запускаете проекты?",
@@ -43,17 +43,17 @@
     "title": "Brest Web Development Experts: Next.js & Custom Systems",
     "description": "AVPdev delivers high-performance web solutions, custom Telegram bots, and powerful data scrapers for businesses operating in Brest.",
     "h1": "Advanced Web Solutions & Automation for Brest Businesses",
-    "p": "Elevate your digital footprint in Brest with AVPdev's specialized expertise in cutting-edge frameworks like Next.js and Astro. We engineer robust, scalable backend systems and deploy intelligent automation tools, including custom Telegram Bots and complex data parsers, tailored precisely to the unique operational demands of the Brest market.",
+    "p": "For Brest companies AVPdev builds with modern frameworks like Next.js and Astro. We engineer robust, scalable backend systems and deploy intelligent automation tools, including custom Telegram Bots and complex data parsers, tailored precisely to the unique operational demands of the Brest market.",
     "benefits": [
       {
         "icon": "fa-robot",
         "title": "Intelligent Process Automation",
-        "desc": "We build custom Telegram Bots and automated data scrapers that integrate seamlessly into your Brest operations, eliminating manual effort and ensuring you capture critical market intelligence efficiently."
+        "desc": "We build custom Telegram Bots and automated data scrapers that plug into your Brest operations, eliminating manual effort and ensuring you capture critical market intelligence efficiently."
       },
       {
         "icon": "fa-cogs",
         "title": "Blazing Fast Performance Architectures",
-        "desc": "Leveraging React, Next.js, and Astro, we construct web applications designed for unparalleled speed and reliability, providing your Brest clientele with a superior user experience that drives engagement."
+        "desc": "Leveraging React, Next.js, and Astro, we construct web applications built for speed and reliability for your Brest clientele."
       },
       {
         "icon": "fa-server",
@@ -64,7 +64,7 @@
     "faq": [
       {
         "q": "What is the cost of web development in Brest?",
-        "a": "Pricing starts from 1190 BYN for Astro landing pages and 1790 BYN for Next.js websites. Custom web applications start from 4470 BYN."
+        "a": "Pricing starts from $400 for Astro landing pages and $600 for Next.js websites. Custom web applications start from $1,500."
       },
       {
         "q": "What is your project timeline?",
@@ -72,7 +72,7 @@
       },
       {
         "q": "Do you develop Telegram bots and Mini Apps?",
-        "a": "Yes, we build intelligent bots for business automation. Prices start from 450 BYN depending on the requirements."
+        "a": "Yes, we build intelligent bots for business automation. Prices start from $150 depending on the requirements."
       },
       {
         "q": "Do you provide post-launch support?",

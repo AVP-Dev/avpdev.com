@@ -10,7 +10,7 @@ category: 'crm-erp'
 stack: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Redis', 'Bun', 'PWA']
 publishDate: 2026-02-17
 heroImage: '../../../assets/images/projects/nyx-os/hero.webp'
-heroImageAlt: 'NYX OS - Industrial ERP/MES System'
+heroImageAlt: 'Industrial ERP/MES system for rubber goods manufacturing'
 header:
   titleKey: 'case_nyxos_h1'
   descriptionKey: 'case_nyxos_desc'
