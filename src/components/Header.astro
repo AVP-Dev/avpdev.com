@@ -6,6 +6,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import Icon from "./Icon.astro";
+import { NAV_ORDER, servicePath } from "../data/services";
 
 interface Props {
     translationSlug?: string;
@@ -15,6 +16,21 @@ const { translationSlug } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const homePath = `/${lang}/`;
+
+// Иконки пунктов меню услуг (порядок — NAV_ORDER из services.ts)
+const navIcons: Record<string, string> = {
+    websites: 'fa-solid fa-laptop-code',
+    shop: 'fa-solid fa-cart-shopping',
+    tma: 'fa-brands fa-telegram',
+    ai: 'fa-solid fa-brain',
+    bots: 'fa-solid fa-robot',
+    saas: 'fa-solid fa-rocket',
+};
+const navServiceLinks = NAV_ORDER.map((id) => ({
+    id,
+    icon: navIcons[id],
+    labelKey: `nav_service_${id}` as Parameters<typeof t>[0],
+}));
 ---
 
 <header class="site-header">
@@ -38,42 +54,14 @@ const homePath = `/${lang}/`;
             {t('nav_services')} <i class="fa-solid fa-chevron-down text-xs ml-1 transition-transform duration-300"></i>
           </button>
           <div class="nav-dropdown-content">
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development')} class="dropdown-item">
-              <i class="fa-solid fa-laptop-code"></i>
-              <div class="dropdown-text">
-                <span class="dropdown-title">{t('nav_service_web')}</span>
-              </div>
-            </a>
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/internet-magaziny' : 'services/ecommerce-development')} class="dropdown-item">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <div class="dropdown-text">
-                <span class="dropdown-title">{t('nav_service_shop')}</span>
-              </div>
-            </a>
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps')} class="dropdown-item">
-              <i class="fa-brands fa-telegram"></i>
-              <div class="dropdown-text">
-                <span class="dropdown-title">{t('nav_service_tma')}</span>
-              </div>
-            </a>
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration')} class="dropdown-item">
-              <i class="fa-solid fa-brain"></i>
-              <div class="dropdown-text">
-                <span class="dropdown-title">{t('nav_service_ai')}</span>
-              </div>
-            </a>
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development')} class="dropdown-item">
-              <i class="fa-solid fa-robot"></i>
-              <div class="dropdown-text">
-                <span class="dropdown-title">{t('nav_service_bots')}</span>
-              </div>
-            </a>
-            <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp')} class="dropdown-item">
-              <i class="fa-solid fa-rocket"></i>
-              <div class="dropdown-text">
-                <span class="dropdown-title">{t('nav_service_saas')}</span>
-              </div>
-            </a>
+            {navServiceLinks.map((s) => (
+              <a href={servicePath(s.id, lang)} class="dropdown-item">
+                <i class={s.icon}></i>
+                <div class="dropdown-text">
+                  <span class="dropdown-title">{t(s.labelKey)}</span>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
             <li><a href={getRelativeLocaleUrl(lang, 'project')}>{t("nav_portfolio")}</a></li>
@@ -110,11 +98,9 @@ const homePath = `/${lang}/`;
             </button>
             <div class="mobile-accordion-content">
                 <div class="mobile-accordion-inner">
-                    <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development')} class="mobile-nav-link"><i class="fa-solid fa-laptop-code"></i> {t('nav_service_web')}</a>
-                    <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps')} class="mobile-nav-link"><i class="fa-brands fa-telegram"></i> {t('nav_service_tma')}</a>
-                    <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration')} class="mobile-nav-link"><i class="fa-solid fa-brain"></i> {t('nav_service_ai')}</a>
-                    <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development')} class="mobile-nav-link"><i class="fa-solid fa-robot"></i> {t('nav_service_bots')}</a>
-                    <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp')} class="mobile-nav-link"><i class="fa-solid fa-rocket"></i> {t('nav_service_saas')}</a>
+                    {navServiceLinks.map((s) => (
+                        <a href={servicePath(s.id, lang)} class="mobile-nav-link"><i class={s.icon}></i> {t(s.labelKey)}</a>
+                    ))}
                 </div>
             </div>
         </li>
