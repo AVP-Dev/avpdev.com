@@ -1,7 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import { getRelativeLocaleUrl } from 'astro:i18n';
 import Icon from '../Icon.astro';
+import { getService, servicePath, CARD_UI_KEYS } from '../../data/services';
 
 export interface Props {
     cityName?: string;
@@ -17,24 +17,24 @@ const h2Content = cityName
         : `IT <span class="gradient-text">Services</span> in ${cityName}`)
     : t('services_h2');
 
-const cardSuffix = cityName ? (lang === 'ru' ? ` для бизнеса в ${cityName}` : ` for ${cityName} businesses`) : '';
-
 // Порядок: приоритет — автоматизация и AI, затем продукты, затем сайты
-const services = [
-    { icon: 'fa-cogs', path: lang === 'ru' ? 'uslugi/razrabotka-botov-i-parserov' : 'services/bot-and-scraper-development', h3Key: 'services_card2_h3', pKey: 'services_card2_p', delay: 100 },
-    { icon: 'fa-brain', path: lang === 'ru' ? 'uslugi/ai-integracii' : 'services/ai-integration', h3Key: 'services_card4_h3', pKey: 'services_card4_p', delay: 200 },
-    { icon: 'fa-rocket', path: lang === 'ru' ? 'uslugi/saas-mvp' : 'services/saas-mvp', h3Key: 'services_card3_h3', pKey: 'services_card3_p', delay: 300 },
-    { icon: 'fa-cart-shopping', path: lang === 'ru' ? 'uslugi/internet-magaziny' : 'services/ecommerce-development', h3Key: 'services_card_shop_h3', pKey: 'services_card_shop_p', delay: 400 },
-    { icon: 'fa-laptop-code', path: lang === 'ru' ? 'uslugi/razrabotka-saitov' : 'services/website-development', h3Key: 'services_card1_h3', pKey: 'services_card1_p', delay: 500 },
-    { icon: 'fa-brands fa-telegram', path: lang === 'ru' ? 'uslugi/telegram-mini-apps' : 'services/telegram-mini-apps', h3Key: 'services_card5_h3', pKey: 'services_card5_p', delay: 600 },
-] as const;
+const cardOrder = ['bots', 'ai', 'saas', 'shop', 'websites', 'tma'] as const;
+const cardSuffix = cityName ? (lang === 'ru' ? ` для бизнеса в ${cityName}` : ` for ${cityName} businesses`) : '';
+const services = cardOrder.map((id, i) => ({
+    id,
+    icon: getService(id).section[lang as 'ru' | 'en'].icon,
+    path: servicePath(id, lang as 'ru' | 'en'),
+    h3Key: CARD_UI_KEYS[id].h3 as Parameters<typeof t>[0],
+    pKey: CARD_UI_KEYS[id].p as Parameters<typeof t>[0],
+    delay: (i + 1) * 100,
+}));
 ---
 <section id="services">
     <div class="container">
         <h2 class="section-title fade-in" set:html={h2Content}></h2>
         <div class="services-grid">
             {services.map(s => (
-            <a href={getRelativeLocaleUrl(lang, s.path)} class="card fade-in" style={`transition-delay: ${s.delay}ms;`}>
+            <a href={s.path} class="card fade-in" style={`transition-delay: ${s.delay}ms;`}>
                 <div class="card-glass-effect"></div>
                 <Icon name={s.icon} class="card-icon" aria-hidden="true" />
                 <h3>{t(s.h3Key)}{cardSuffix}</h3>
