@@ -32,14 +32,14 @@ const { title, tiers, facts = [], note } = Astro.props;
     </div>
 
     {facts.length > 0 && (
-      <dl class="fact-list">
+      <ul class="fact-list">
         {facts.map((f) => (
-          <div class="fact-row">
-            <dt>{f.k}</dt>
-            <dd>{f.v}</dd>
-          </div>
+          <li class="fact-row">
+            <span class="fact-term">{f.k}</span>
+            <span class="fact-desc">{f.v}</span>
+          </li>
         ))}
-      </dl>
+      </ul>
     )}
 
     <p class="pricing-disclaimer">
@@ -98,11 +98,12 @@ const { title, tiers, facts = [], note } = Astro.props;
 
   .fact-list {
     margin: 32px 0 0;
+    padding: 24px 0 0;
     border-top: 1px solid var(--border-color);
-    padding-top: 24px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 14px 40px;
+    list-style: none;
   }
 
   .fact-row {
@@ -111,7 +112,7 @@ const { title, tiers, facts = [], note } = Astro.props;
     align-items: baseline;
   }
 
-  .fact-list dt {
+  .fact-term {
     flex-shrink: 0;
     min-width: 110px;
     font-size: 0.85rem;
@@ -121,8 +122,7 @@ const { title, tiers, facts = [], note } = Astro.props;
     color: var(--text-secondary-color);
   }
 
-  .fact-list dd {
-    margin: 0;
+  .fact-desc {
     color: var(--text-color);
     font-size: 0.98rem;
   }
