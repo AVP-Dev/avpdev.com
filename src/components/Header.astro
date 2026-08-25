@@ -6,7 +6,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import Icon from "./Icon.astro";
-import { NAV_ORDER, servicePath } from "../data/services";
+import { NAV_ORDER, servicePath, NAV_LABEL_KEYS } from "../data/services";
 
 interface Props {
     translationSlug?: string;
@@ -29,7 +29,7 @@ const navIcons: Record<string, string> = {
 const navServiceLinks = NAV_ORDER.map((id) => ({
     id,
     icon: navIcons[id],
-    labelKey: `nav_service_${id}` as Parameters<typeof t>[0],
+    labelKey: NAV_LABEL_KEYS[id] as Parameters<typeof t>[0],
 }));
 ---
 
@@ -50,9 +50,9 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
         </a>
         <ul class="nav-links">
             <div class="nav-dropdown">
-          <button class="nav-dropbtn" aria-haspopup="true" aria-expanded="false">
+          <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services')} class="nav-dropbtn" aria-haspopup="true">
             {t('nav_services')} <i class="fa-solid fa-chevron-down text-xs ml-1 transition-transform duration-300"></i>
-          </button>
+          </a>
           <div class="nav-dropdown-content">
             {navServiceLinks.map((s) => (
               <a href={servicePath(s.id, lang)} class="dropdown-item">
@@ -65,10 +65,10 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
           </div>
         </div>
             <li><a href={getRelativeLocaleUrl(lang, 'project')}>{t("nav_portfolio")}</a></li>
+<li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
 <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
 <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services') + '#faq'}>{t("nav_faq")}</a></li>
 <li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
-<li><a href={`/${lang}/brief/`} class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">{t("nav_brief")}</a></li>
         </ul>
         <div class="controls">
             <button
@@ -105,10 +105,10 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
             </div>
         </li>
         <li><a href={getRelativeLocaleUrl(lang, 'project')}>{t("nav_portfolio")}</a></li>
+<li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
 <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
 <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services') + '#faq'}>{t("nav_faq")}</a></li>
 <li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
-<li class="mobile-menu-brief"><a href={`/${lang}/brief/`} class="btn btn-primary">{t("nav_brief")}</a></li>
     </ul>
     <div class="mobile-controls">
         <button

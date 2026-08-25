@@ -422,12 +422,14 @@ export const services: ServicePageData[] = [
                 { title: 'Корзина и онлайн-оплата', desc: 'Платежные системы под ваш регион: Stripe, ЮKassa, WebPay, криптовалюта. Промокоды и оформление заказа в один шаг.', icon: 'fa-solid fa-credit-card' },
                 { title: 'Админка без лишнего', desc: 'Управление товарами, ценами и заказами в простой панели. Автоматическое сжатие изображений при загрузке — скорость не страдает.', icon: 'fa-solid fa-gauge-high' },
                 { title: 'Заказы в Telegram', desc: 'Мгновенные уведомления менеджеру о новых заказах и смена статусов прямо в мессенджере — без почты и лишних программ.', icon: 'fa-solid fa-bell' },
+                { title: 'Интеграция с CRM', desc: 'Заказы и клиенты автоматически попадают в вашу CRM (Bitrix24, amoCRM, Мой Склад) — без ручного переноса и потерь заявок.', icon: 'fa-solid fa-diagram-project' },
             ],
             en: [
                 { title: 'Storefronts & Catalogs', desc: 'Instant product page loads via pre-generation (SSG/ISR). Filters, product variants, search — no heavy page builders.', icon: 'fa-solid fa-box-open' },
                 { title: 'Cart & Online Payments', desc: 'Payment providers for your region: Stripe, local gateways, crypto. Promo codes and a one-step checkout flow.', icon: 'fa-solid fa-credit-card' },
                 { title: 'Admin Panel Without the Bloat', desc: 'Manage products, prices and orders in a simple dashboard. Images are compressed automatically on upload — speed stays intact.', icon: 'fa-solid fa-gauge-high' },
                 { title: 'Orders in Telegram', desc: 'Instant notifications to your manager about new orders and status updates right in the messenger — no email chains, no extra tools.', icon: 'fa-solid fa-bell' },
+                { title: 'CRM Integration', desc: 'Orders and customers flow into your CRM automatically (Bitrix24, amoCRM, Zoho) — no manual copying, no lost leads.', icon: 'fa-solid fa-diagram-project' },
             ],
         },
         faqs: {
@@ -588,6 +590,18 @@ export function servicePath(idOrSlug: string, lang: Lang): string {
     if (!svc) throw new Error(`Unknown service: ${idOrSlug}`);
     return lang === 'ru' ? `/ru/uslugi/${svc.slug}/` : `/en/services/${svc.slug}/`;
 }
+
+/**
+ * Ключи подписей услуг в шапке (src/i18n/ui.ts: nav_service_*).
+ */
+export const NAV_LABEL_KEYS: Record<ServicePageData['id'], string> = {
+    websites: 'nav_service_web',
+    shop: 'nav_service_shop',
+    tma: 'nav_service_tma',
+    ai: 'nav_service_ai',
+    bots: 'nav_service_bots',
+    saas: 'nav_service_saas',
+};
 
 /**
  * Ключи карточек услуг на главной (src/i18n/ui.ts).

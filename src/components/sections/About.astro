@@ -35,6 +35,24 @@ const homePath = `/${lang}/`;
                     <p>{t("about_p2")}</p>
                 </div>
 
+                <div class="about-stats fade-in">
+                    <h4 class="about-stats-title">{t("about_stats_title")}</h4>
+                    <div class="about-stats-grid">
+                        <div class="about-stat">
+                            <span class="about-stat-value">17+</span>
+                            <span class="about-stat-label">{t("about_stat_projects")}</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-value">5</span>
+                            <span class="about-stat-label">{t("about_stat_countries")}</span>
+                        </div>
+                        <div class="about-stat">
+                            <span class="about-stat-value">20+</span>
+                            <span class="about-stat-label">{t("about_stat_stack")}</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="about-cta-container">
                     <a href={getRelativeLocaleUrl(lang, 'project')} class="cta-button">
                         {t("about_cta_portfolio")}
@@ -82,6 +100,39 @@ const homePath = `/${lang}/`;
                 </div>
             </div>
             
+            <div class="about-promises fade-in">
+                <div class="approach-header">
+                    <h3 class="approach-section-title">{t("about_promises_title")}</h3>
+                    <div class="header-line"></div>
+                </div>
+                <div class="approach-grid">
+                    <div class="approach-card">
+                        <div class="card-glow"></div>
+                        <div class="approach-icon-wrapper">
+                            <Icon name="fa-file-contract" aria-hidden="true" />
+                        </div>
+                        <h4>{t("about_promise_1_title")}</h4>
+                        <p>{t("about_promise_1_desc")}</p>
+                    </div>
+                    <div class="approach-card">
+                        <div class="card-glow"></div>
+                        <div class="approach-icon-wrapper">
+                            <Icon name="fa-handshake" aria-hidden="true" />
+                        </div>
+                        <h4>{t("about_promise_2_title")}</h4>
+                        <p>{t("about_promise_2_desc")}</p>
+                    </div>
+                    <div class="approach-card">
+                        <div class="card-glow"></div>
+                        <div class="approach-icon-wrapper">
+                            <Icon name="fa-headset" aria-hidden="true" />
+                        </div>
+                        <h4>{t("about_promise_3_title")}</h4>
+                        <p>{t("about_promise_3_desc")}</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="about-conclusion-wrapper fade-in">
                 <p class="about-conclusion">
                     <span class="gradient-text gradient-accent">{t("about_conclusion")}</span>
@@ -220,6 +271,45 @@ const homePath = `/${lang}/`;
 
     .about-description {
         margin-bottom: 2.5rem;
+    }
+
+    .about-stats {
+        margin-bottom: 2.5rem;
+    }
+
+    .about-stats-title {
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-secondary-color);
+        margin-bottom: 1.25rem;
+    }
+
+    .about-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(90px, 1fr));
+        gap: 1.25rem;
+        max-width: 480px;
+    }
+
+    .about-stat-value {
+        display: block;
+        font-size: clamp(1.8rem, 4vw, 2.4rem);
+        font-weight: 900;
+        line-height: 1.1;
+        background: linear-gradient(135deg, var(--accent-color-start), var(--accent-color-end));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .about-stat-label {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--text-secondary-color);
+        margin-top: 0.35rem;
+        line-height: 1.35;
     }
 
     .about-approach-section {
@@ -466,6 +556,11 @@ const homePath = `/${lang}/`;
         }
         .about-cta-container {
             justify-content: center;
+        }
+        .about-stats-grid {
+            max-width: 100%;
+            justify-items: center;
+            text-align: center;
         }
     }
 </style>
