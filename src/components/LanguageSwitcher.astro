@@ -2,6 +2,7 @@
 // src/components/LanguageSwitcher.astro
 import { getLangFromUrl } from '../i18n/utils';
 import { locations } from '../data/locations';
+import { SERVICE_SLUG_PAIRS } from '../data/services';
 import { getEntry } from 'astro:content';
 
 interface Props {
@@ -26,13 +27,7 @@ if (pathWithoutLang.startsWith(`/${lang}/`)) {
 }
 
 // Named service slug pairs (ru <-> en)
-const servicePairs: Record<string, string> = {
-    'razrabotka-saitov': 'website-development',
-    'ai-integracii': 'ai-integration',
-    'razrabotka-botov-i-parserov': 'bot-and-scraper-development',
-    'telegram-mini-apps': 'telegram-mini-apps',
-    'saas-mvp': 'saas-mvp'
-};
+const servicePairs: Record<string, string> = SERVICE_SLUG_PAIRS;
 
 // Detect if we're on a geo city page
 // RU: /uslugi/[city]  |  EN: /services/[city]

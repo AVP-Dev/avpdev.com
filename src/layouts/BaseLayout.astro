@@ -9,6 +9,7 @@ import ChatWidget from '../components/ChatWidget.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { ui } from '../i18n/ui';
 import { locations } from '../data/locations';
+import { SERVICE_SLUG_PAIRS } from '../data/services';
 import { getEntry } from 'astro:content';
 
 // --- ШРИФТЫ (Self-hosted) ---
@@ -61,13 +62,7 @@ if (!currentPath.endsWith('/')) { currentPath += '/'; }
 const pathWithoutLocale = currentPath.replace(/^\/(ru|en)\//, '/');
 const cleanPath = pathWithoutLocale.endsWith('/') ? pathWithoutLocale.slice(0, -1) : pathWithoutLocale;
 
-const servicePairs = {
-    'razrabotka-saitov': 'website-development',
-    'ai-integracii': 'ai-integration',
-    'razrabotka-botov-i-parserov': 'bot-and-scraper-development',
-    'telegram-mini-apps': 'telegram-mini-apps',
-    'saas-mvp': 'saas-mvp'
-};
+const servicePairs = SERVICE_SLUG_PAIRS;
 
 let enSlug = pathWithoutLocale;
 let ruSlug = pathWithoutLocale;
@@ -111,7 +106,10 @@ if (blogSlugMatch && translationSlug) {
 // Detect geo city pages and check if they have RU content
 const ruCityGeoMatch = cleanPath.match(/^\/uslugi\/([^/]+)$/);
 const enCityGeoMatch = cleanPath.match(/^\/services\/([^/]+)$/);
-const geoCitySlug = ruCityGeoMatch?.[1] ?? enCityGeoMatch?.[1] ?? null;
+const geoCandidate = ruCityGeoMatch?.[1] ?? enCityGeoMatch?.[1] ?? null;
+// Слаг услуги (razrabotka-saitov и т.п.) — не город: гео-логика hreflang не применяется
+const geoCitySlug =
+    geoCandidate && locations.some(l => l.slug === geoCandidate) ? geoCandidate : null;
 
 let geoHasRU = true;
 let geoHasEN = true;

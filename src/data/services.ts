@@ -584,12 +584,36 @@ export function getServiceBySlug(slug: string): ServicePageData {
  */
 export const NAV_ORDER: ServicePageData['id'][] = ['websites', 'shop', 'tma', 'ai', 'bots', 'saas'];
 
+/**
+ * Слаг страницы услуги по локали. ЕДИНЫЙ источник для:
+ * навигации (Header), карточек (Services), переключателя языков
+ * (LanguageSwitcher) и hreflang (BaseLayout).
+ * Файлы страниц: ru → src/pages/ru/uslugi/<ru>/, en → src/pages/en/services/<en>/
+ */
+export const SERVICE_SLUGS: Record<ServicePageData['id'], Record<Lang, string>> = {
+    websites: { ru: 'razrabotka-saitov', en: 'website-development' },
+    shop: { ru: 'internet-magaziny', en: 'ecommerce-development' },
+    tma: { ru: 'telegram-mini-apps', en: 'telegram-mini-apps' },
+    ai: { ru: 'ai-integracii', en: 'ai-integration' },
+    bots: { ru: 'razrabotka-botov-i-parserov', en: 'bot-and-scraper-development' },
+    saas: { ru: 'saas-mvp', en: 'saas-mvp' },
+};
+
 /** Путь страницы услуги для локали: ru → /ru/uslugi/<slug>/, en → /en/services/<slug>/ */
 export function servicePath(idOrSlug: string, lang: Lang): string {
     const svc = services.find((s) => s.id === idOrSlug || s.slug === idOrSlug);
     if (!svc) throw new Error(`Unknown service: ${idOrSlug}`);
-    return lang === 'ru' ? `/ru/uslugi/${svc.slug}/` : `/en/services/${svc.slug}/`;
+    return lang === 'ru'
+        ? `/ru/uslugi/${SERVICE_SLUGS[svc.id].ru}/`
+        : `/en/services/${SERVICE_SLUGS[svc.id].en}/`;
 }
+
+/**
+ * Пары слагов ru ↔ en для перекрёстных ссылок (переключатель языков, hreflang).
+ */
+export const SERVICE_SLUG_PAIRS: Record<string, string> = Object.fromEntries(
+    Object.entries(SERVICE_SLUGS).map(([, slugs]) => [slugs.ru, slugs.en]),
+);
 
 /**
  * Ключи подписей услуг в шапке (src/i18n/ui.ts: nav_service_*).
