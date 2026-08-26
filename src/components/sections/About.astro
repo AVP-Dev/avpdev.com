@@ -501,12 +501,16 @@ const homePath = `/${lang}/`;
     }
 
     .tech-categories {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 2rem;
     }
 
     .tech-category-card {
+        flex: 1 1 280px;
+        max-width: 380px;
+        min-width: 260px;
         background: var(--primary-color);
         padding: 2.5rem 2rem;
         border-radius: 24px;
