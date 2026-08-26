@@ -29,7 +29,7 @@ const t = useTranslations(lang);
             <div class={`hero-text fade-in ${variant === 'services' ? 'services-text' : ''}`}>
                 
                 {title ? (
-                  <h1>{title}</h1>
+                  <h1 set:html={title}></h1>
                 ) : (
                   <h1 set:html={t("hero_h1")} />
                 )}
@@ -158,6 +158,14 @@ const t = useTranslations(lang);
     :global(.light-theme) .hero-section.services .hero-text h1 {
         background: linear-gradient(to bottom, var(--text-color) 40%, #555 100%);
         -webkit-background-clip: text;
+    }
+
+    /* Двухцветные заголовки на страницах услуг: часть текста с акцентным градиентом */
+    .hero-section.services .hero-text h1 :global(.gradient-text) {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
     .hero-text p {

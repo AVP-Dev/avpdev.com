@@ -75,8 +75,8 @@ export const services: ServicePageData[] = [
             en: 'We build websites on Astro, Next.js, and React: from ad-driven landing pages to online stores and corporate portals.',
         },
         hero: {
-            ru: { title: 'Сайты, которые приносят заявки', subtitle: 'Быстрые адаптивные сайты на Astro и Next.js: от лендинга под рекламу до корпоративного портала с интеграциями.' },
-            en: { title: 'Websites That Bring Leads', subtitle: 'Fast, responsive websites on Astro and Next.js: from ad landing pages to corporate portals with integrations.' },
+            ru: { title: 'Сайты, которые <span class="gradient-text">приносят заявки</span>', subtitle: 'Быстрые адаптивные сайты на Astro и Next.js: от лендинга под рекламу до корпоративного портала с интеграциями.' },
+            en: { title: 'Websites That <span class="gradient-text">Bring Leads</span>', subtitle: 'Fast, responsive websites on Astro and Next.js: from ad landing pages to corporate portals with integrations.' },
         },
         section: {
             ru: { label: 'Web Solutions', title: 'Сайт как рабочий инструмент', description: 'Мы не используем конструкторы вроде Tilda или Wix. Вы получаете чистый, оптимизированный код, который принадлежит полностью вам.', icon: 'fa-solid fa-laptop-code' },
@@ -160,8 +160,8 @@ export const services: ServicePageData[] = [
             en: 'Automation of data collection and Telegram bot development of any complexity. Web scraping, price monitoring, and integration with external services.',
         },
         hero: {
-            ru: { title: 'Боты и автоматизация, которые экономят часы', subtitle: 'Заявки, отчёты, парсинг и связка CRM с мессенджерами — под ключ. Ваша команда занимается делом, а не рутиной.' },
-            en: { title: 'Bots & Automation That Save Hours', subtitle: 'Lead routing, reports, scraping and CRM-to-messenger integrations — turnkey. Your team does the real work, not the busywork.' },
+            ru: { title: 'Боты и автоматизация, которые <span class="gradient-text">экономят часы</span>', subtitle: 'Заявки, отчёты, парсинг и связка CRM с мессенджерами — под ключ. Ваша команда занимается делом, а не рутиной.' },
+            en: { title: 'Bots & Automation That <span class="gradient-text">Save Hours</span>', subtitle: 'Lead routing, reports, scraping and CRM-to-messenger integrations — turnkey. Your team does the real work, not the busywork.' },
         },
         section: {
             ru: { label: 'Automation', title: 'Скрипты, которые работают за вас', description: 'Автоматизируем сбор данных, мониторинг цен и рутинные действия. Освободите свою команду для творческих задач.', icon: 'fa-solid fa-robot' },
@@ -243,8 +243,8 @@ export const services: ServicePageData[] = [
             en: 'GPT (OpenAI), Claude (Anthropic), and Gemini (Google) integration, plus self-hosted open-source models. Support automation, RAG systems, and AI-powered content generation.',
         },
         hero: {
-            ru: { title: 'Интеграция ИИ в бизнес', subtitle: 'Внедряем ИИ в рабочие процессы: боты поддержки, поиск по базам знаний, автоматизация рутины — на GPT, Claude и открытых моделях.' },
-            en: { title: 'AI Business Integration', subtitle: 'We bring AI into your workflows: support bots, knowledge-base search, routine automation — on GPT, Claude, and open models.' },
+            ru: { title: 'Интеграция <span class="gradient-text">ИИ в бизнес</span>', subtitle: 'Внедряем ИИ в рабочие процессы: боты поддержки, поиск по базам знаний, автоматизация рутины — на GPT, Claude и открытых моделях.' },
+            en: { title: 'AI <span class="gradient-text">Business Integration</span>', subtitle: 'We bring AI into your workflows: support bots, knowledge-base search, routine automation — on GPT, Claude, and open models.' },
         },
         section: {
             ru: { label: 'Expertise', title: 'Нейросети для вашего бизнеса', description: 'Мы строим кастомные системы, которые знают всё о вашей компании, продуктах и правилах. Превратите хаос в упорядоченную базу знаний.', icon: 'fa-solid fa-brain' },
@@ -326,8 +326,8 @@ export const services: ServicePageData[] = [
             en: 'Quick MVP launch for startups and scalable SaaS platform development on Next.js, Node.js, and Astro. MVPs typically launch within 14 days, then grow into a full product.',
         },
         hero: {
-            ru: { title: 'От идеи до работающего продукта за недели', subtitle: 'MVP запускаем как правило до 14 дней — на архитектуре, которая готова к росту, а не потребует переписывания.' },
-            en: { title: 'SaaS & MVP Development', subtitle: 'MVPs typically launch within 14 days — on architecture ready to grow with you, not demand a rewrite.' },
+            ru: { title: 'От идеи до <span class="gradient-text">работающего продукта</span> за недели', subtitle: 'MVP запускаем как правило до 14 дней — на архитектуре, которая готова к росту, а не потребует переписывания.' },
+            en: { title: 'SaaS & <span class="gradient-text">MVP Development</span>', subtitle: 'MVPs typically launch within 14 days — on architecture ready to grow with you, not demand a rewrite.' },
         },
         section: {
             ru: { label: 'Development', title: 'MVP — как правило до 14 дней', description: 'Мы помогаем стартапам и бизнесу быстро проверять гипотезы. Создаем масштабируемые MVP, которые не нужно переписывать после роста.', icon: 'fa-solid fa-rocket' },
@@ -409,8 +409,8 @@ export const services: ServicePageData[] = [
             en: 'We build fast online stores on Astro and Next.js: storefronts, catalogs, online payments, stock management and an admin panel with automatic image compression. Order notifications in Telegram.',
         },
         hero: {
-            ru: { title: 'Интернет-магазины, которые продают', subtitle: 'Быстрые витрины, удобная корзина, онлайн-оплата и заказы сразу в Telegram. От идеи до первой продажи.' },
-            en: { title: 'Online Stores That Sell', subtitle: 'Fast storefronts, smooth checkout, online payments and orders straight into Telegram. From idea to first sale.' },
+            ru: { title: 'Интернет-магазины, которые <span class="gradient-text">продают</span>', subtitle: 'Быстрые витрины, удобная корзина, онлайн-оплата и заказы сразу в Telegram. От идеи до первой продажи.' },
+            en: { title: 'Online Stores That <span class="gradient-text">Sell</span>', subtitle: 'Fast storefronts, smooth checkout, online payments and orders straight into Telegram. From idea to first sale.' },
         },
         section: {
             ru: { label: 'E-commerce', title: 'Магазин как инструмент продаж, а не витрина ради витрины', description: 'Никаких тяжеловесных CMS и шаблонов, которые тормозят при первом же наплыве покупателей. Чистый быстрый код, который принадлежит вам полностью.', icon: 'fa-solid fa-cart-shopping' },
@@ -494,8 +494,8 @@ export const services: ServicePageData[] = [
             en: 'Professional Telegram Mini Apps (WebApps) development for e-commerce, crypto projects, and business. Integration with TON, smart contracts, and payment systems.',
         },
         hero: {
-            ru: { title: 'Telegram Mini Apps', subtitle: 'Магазины, записи, крипто-приложения и CRM прямо в мессенджере — без установки приложения, с мгновенным входом через Telegram.' },
-            en: { title: 'Telegram Mini Apps', subtitle: 'Stores, bookings, crypto apps, and CRMs inside the messenger — no app install, instant login via Telegram.' },
+            ru: { title: 'Telegram <span class="gradient-text">Mini Apps</span>', subtitle: 'Магазины, записи, крипто-приложения и CRM прямо в мессенджере — без установки приложения, с мгновенным входом через Telegram.' },
+            en: { title: 'Telegram <span class="gradient-text">Mini Apps</span>', subtitle: 'Stores, bookings, crypto apps, and CRMs inside the messenger — no app install, instant login via Telegram.' },
         },
         section: {
             ru: { label: 'Telegram Apps', title: 'Ваш бизнес в кармане пользователя', description: 'Telegram Mini Apps (WebApps) — это полноценные веб-приложения внутри мессенджера: без публикации в App Store и Google Play и без их комиссий с продаж.', icon: 'fa-brands fa-telegram' },
