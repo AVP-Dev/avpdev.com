@@ -545,4 +545,21 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
             padding: 0.4rem;
         }
     }
+
+    /* Particles background (same as home hero) */
+    .locations-hero {
+        position: relative;
+        overflow: hidden;
+    }
+    .locations-hero #particles-js {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
 </style>
+
+<!-- Фоновые частицы (как на главной) -->
+<script is:inline src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+<script>
+    import '../../../scripts/particles';
+</script>
