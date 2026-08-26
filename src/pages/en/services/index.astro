@@ -40,6 +40,7 @@ const schema = {
 
 <BaseLayout title={seoTitle} description={seoDescription} schema={schema}>
   <section class="hub-intro">
+    <div id="particles-js"></div>
     <div class="container">
       <h1 class="hub-title">IT Services <span class="gradient-text">for Your Business</span></h1>
       <p class="hub-description">
@@ -57,6 +58,17 @@ const schema = {
   .hub-intro {
     padding: 160px 0 0;
     background-color: var(--bg-color);
+    position: relative;
+    overflow: hidden;
+  }
+  .hub-intro :global(#particles-js) {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hub-intro .container {
+    position: relative;
+    z-index: 2;
   }
   .hub-title {
     font-size: clamp(2.2rem, 6vw, 3.5rem);
@@ -73,3 +85,9 @@ const schema = {
     opacity: 0.85;
   }
 </style>
+
+<!-- Фоновые частицы (как на главной) -->
+<script is:inline src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+<script>
+    import '../../../scripts/particles';
+</script>
