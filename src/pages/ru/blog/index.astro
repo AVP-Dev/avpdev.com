@@ -29,6 +29,7 @@ const otherPosts = hasPosts ? allPosts.slice(1) : [];
 
 <BaseLayout title="blog_page_title" description="blog_page_desc">
   <section id="blog-list" class="blog-page">
+    <div id="particles-js"></div>
     <div class="container">
       <div class="blog-header fade-in">
         <h1 class="section-title" set:html={t("blog_h1")} />
@@ -225,4 +226,28 @@ const otherPosts = hasPosts ? allPosts.slice(1) : [];
     // Начальный рендер
     renderLayout();
   });
+</script>
+
+<style>
+    /* Particles background (same as home hero) */
+    .blog-page {
+        position: relative;
+        overflow: hidden;
+    }
+    .blog-page #particles-js {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        min-height: 420px;
+    }
+    .blog-header {
+        position: relative;
+        z-index: 2;
+    }
+</style>
+
+<!-- Фоновые частицы (как на главной) -->
+<script is:inline src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+<script>
+    import '../../../scripts/particles';
 </script>
