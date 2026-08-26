@@ -17,6 +17,7 @@ const t = useTranslations(lang as "en" | "ru");
 
 <BaseLayout title="brief_page_title" description="brief_page_desc">
     <section id="brief-form-section" class="case-study-header">
+        <div id="particles-js"></div>
         <div class="container container-narrow">
             <h1 class="section-title" set:html={t("brief_title")} />
             <p class="section-subtitle">{t("brief_subtitle")}</p>
@@ -861,7 +862,28 @@ input[type="checkbox"]:checked+span::after {
         margin-top: 1.5rem;
         margin-bottom: 2rem;
     }
+
+    /* Particles background (same as home hero) */
+    #brief-form-section {
+        position: relative;
+        overflow: hidden;
+    }
+    #brief-form-section #particles-js {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+    #brief-form-section .container-narrow {
+        position: relative;
+        z-index: 2;
+    }
 </style>
+
+<!-- Фоновые частицы (как на главной) -->
+<script is:inline src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+<script>
+    import '../../../scripts/particles';
+</script>
 
 <script>
     document.addEventListener("astro:page-load", () => {
