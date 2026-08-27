@@ -2,11 +2,13 @@
 // src/pages/ru/index.astro
 export const prerender = true;
 
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Hero from "../../components/sections/Hero.astro";
 import ProofBar from "../../components/sections/ProofBar.astro";
 import Services from "../../components/sections/Services.astro";
 import QuickNav from "../../components/sections/QuickNav.astro";
+import LatestPosts from "../../components/sections/LatestPosts.astro";
 import Contact from "../../components/sections/Contact.astro";
 import SuccessModal from "../../components/modals/SuccessModal.astro";
 import ErrorModal from "../../components/modals/ErrorModal.astro";
@@ -14,6 +16,14 @@ import aboutPhoto from "../../assets/images/about-photo.webp";
 
 const pageTitleKey = "page_title";
 const pageDescKey = "page_desc";
+
+const allBlogPosts = await getCollection("blog", ({ id, data }) =>
+  id.startsWith("ru/") && data.draft !== true,
+);
+allBlogPosts.sort(
+  (a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
+);
+const latestPosts = allBlogPosts.slice(0, 3);
 
 // ИСПОЛЬЗУЕМ @graph ДЛЯ ОБЪЕДИНЕНИЯ НЕСКОЛЬКИХ СУЩНОСТЕЙ
 const schema = {
@@ -56,6 +66,7 @@ const schema = {
   <ProofBar />
   <Services />
   <QuickNav />
+  <LatestPosts posts={latestPosts} />
   <Contact />
 
   <SuccessModal />
