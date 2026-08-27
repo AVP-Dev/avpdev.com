@@ -63,7 +63,10 @@ const t = useTranslations(lang);
         font-size: 0.95rem;
         font-weight: 600;
         color: var(--text-color);
-        white-space: nowrap;
+        line-height: 1.35;
+        overflow-wrap: break-word;
+        word-break: normal;
+        hyphens: none;
     }
     .proof-divider {
         width: 1px;
@@ -72,14 +75,15 @@ const t = useTranslations(lang);
     }
     @media (max-width: 640px) {
         .proof-bar {
-            gap: 1.5rem;
+            gap: 1.5rem 1rem;
         }
         .proof-divider {
             display: none;
         }
         .proof-item {
-            flex: 1 1 140px;
-            min-width: 120px;
+            flex: 1 1 100%;
+            min-width: 0;
+            max-width: 100%;
         }
     }
 </style>
