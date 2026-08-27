@@ -45,3 +45,5 @@ public/~partytown
 # Testing
 playwright-report
 test-results
+# CommandCode local config (per-user, not for repo)
+.commandcode/
