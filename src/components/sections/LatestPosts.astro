@@ -1,0 +1,81 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import BlogCard from "../BlogCard.astro";
+
+interface Props {
+    posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+{posts.length > 0 && (
+<section id="latest-posts" class="section">
+    <div class="container">
+        <div class="latest-posts-header fade-in">
+            <h2 class="section-title" set:html={t('blog_latest_section_h2')}></h2>
+            <p class="latest-posts-subtitle">{t('blog_latest_section_subtitle')}</p>
+        </div>
+        <div class="latest-posts-grid">
+            {posts.map(post => <BlogCard post={post} />)}
+        </div>
+        <div class="latest-posts-footer fade-in">
+            <a href={getRelativeLocaleUrl(lang, 'blog')} class="latest-posts-view-all">
+                {t('blog_latest_section_view_all')} <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+)}
+
+<style>
+    .section { padding: 80px 0; }
+    .latest-posts-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    .latest-posts-subtitle {
+        color: var(--text-secondary-color);
+        font-size: 1.05rem;
+        line-height: 1.6;
+        max-width: 620px;
+        margin: 1rem auto 0;
+    }
+    .latest-posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .latest-posts-footer {
+        text-align: center;
+        margin-top: 3rem;
+    }
+    .latest-posts-view-all {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--accent-color-start);
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border: 1px solid rgba(var(--accent-color-start-rgb), 0.3);
+        border-radius: 9999px;
+        transition: gap 0.3s ease, border-color 0.3s ease;
+    }
+    .latest-posts-view-all:hover {
+        gap: 0.8rem;
+        border-color: var(--accent-color-start);
+    }
+    @media (max-width: 768px) {
+        .section { padding: 60px 0; }
+        .latest-posts-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
