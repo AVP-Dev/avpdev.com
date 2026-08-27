@@ -39,6 +39,14 @@ const lang = 'ru';
 const allProjects = await getCollection('projects', ({ id }) => id.startsWith(lang + '/'));
 const projects = allProjects.slice(0, 6);
 
+// Per-city stable random selection of 2 blog posts.
+const allBlogPosts = await getCollection('blog', ({ id, data }) =>
+  id.startsWith('ru/') && data.draft !== true,
+);
+const cityBlogPosts = allBlogPosts.length > 0
+  ? getDeterministicItems(allBlogPosts, 2, hashSlug(city))
+  : [];
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
