@@ -450,7 +450,7 @@ export const services: ServicePageData[] = [
                 { q: 'What happens after the store launches?', a: 'The warranty starts at 1 month after launch (exact term depends on project scope) covering bug fixes in delivered functionality. Beyond that, ongoing support and development are available on separate terms.' },
             ],
         },
-        faqHeading: { ru: 'Вопросы и ответы', en: 'Вопросы и ответы' },
+        faqHeading: { ru: 'Вопросы и ответы', en: 'Common Questions' },
         faqSubtitle: { ru: 'О разработке интернет-магазинов', en: 'About online store development' },
         pricing: {
             ru: {
