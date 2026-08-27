@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import BlogCard from "../BlogCard.astro";
+
+interface Props {
+    posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+{posts.length > 0 && (
+<section class="city-blog-posts container fade-in">
+    <h2 class="section-title">{t('blog_other_posts')}</h2>
+    <div class="city-blog-grid">
+        {posts.map(post => <BlogCard post={post} />)}
+    </div>
+</section>
+)}
+
+<style>
+    .city-blog-posts {
+        padding: 4rem 0 2rem;
+        text-align: center;
+    }
+    .city-blog-posts .section-title {
+        margin-bottom: 3rem;
+    }
+    .city-blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+        .city-blog-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

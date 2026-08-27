@@ -6,6 +6,7 @@ import Hero from './sections/Hero.astro';
 import Contact from './sections/Contact.astro';
 import ServicePricing from './sections/ServicePricing.astro';
 import { FACTS, type ServicePageData, type Lang } from '../data/services';
+import { useTranslations } from '../i18n/utils';
 
 export interface Props {
     service: ServicePageData;
@@ -14,6 +15,7 @@ export interface Props {
 
 const { service, lang } = Astro.props;
 
+const t = useTranslations(lang);
 const hero = service.hero[lang];
 const section = service.section[lang];
 const features = service.features[lang];
@@ -22,7 +24,7 @@ const faqHeading = service.faqHeading[lang];
 const faqSubtitle = service.faqSubtitle[lang];
 const pricing = service.pricing[lang];
 
-const providerName = lang === 'ru' ? 'Алексей Пацкевич' : 'Alexey Patskevich';
+const providerName = t('author_name');
 
 const schema = {
   "@context": "https://schema.org",
@@ -100,7 +102,7 @@ const schema = {
     </div>
   </section>
 
-  <ServicePricing title={lang === 'ru' ? 'Стоимость' : 'Pricing'} tiers={pricing.tiers} facts={pricing.facts} note={FACTS.pricingNote[lang]} />
+  <ServicePricing title={t('pricing_title')} tiers={pricing.tiers} facts={pricing.facts} note={FACTS.pricingNote[lang]} />
 
   <section class="faq-section">
     <div class="container">
@@ -356,6 +358,9 @@ const schema = {
     }
     .feature-item {
       text-align: left;
+    }
+    .section-label {
+      letter-spacing: 0.1em;
     }
     .visual-content {
       display: none;

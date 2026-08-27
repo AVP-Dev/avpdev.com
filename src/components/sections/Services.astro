@@ -11,15 +11,13 @@ const { cityName } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const h2Content = cityName 
-    ? (lang === 'ru' 
-        ? `ИТ <span class="gradient-text">Услуги</span> в ${cityName}` 
-        : `IT <span class="gradient-text">Services</span> in ${cityName}`)
+const h2Content = cityName
+    ? `${t('services_h2_city_pre')}<span class="gradient-text">${t('services_h2_city_accent')}</span> ${t('services_h2_city_post')} ${cityName}`
     : t('services_h2');
 
 // Порядок: приоритет — автоматизация и AI, затем продукты, затем сайты
 const cardOrder = ['bots', 'ai', 'saas', 'shop', 'websites', 'tma'] as const;
-const cardSuffix = cityName ? (lang === 'ru' ? ` для бизнеса в ${cityName}` : ` for ${cityName} businesses`) : '';
+const cardSuffix = cityName ? ` ${t('services_card_city_suffix')} ${cityName}` : '';
 const services = cardOrder.map((id, i) => ({
     id,
     icon: getService(id).section[lang as 'ru' | 'en'].icon,
@@ -47,8 +45,10 @@ const services = cardOrder.map((id, i) => ({
         </div>
 <style>
     .card {
-        flex: 1 1 380px;
+        height: 100%;
         max-width: 420px;
+        justify-self: center;
+        width: 100%;
         text-decoration: none;
         display: flex;
         flex-direction: column;
@@ -83,11 +83,10 @@ const services = cardOrder.map((id, i) => ({
         gap: 0.8rem;
     }
     .services-grid {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2.5rem;
         margin: 4rem auto;
-        justify-content: center;
         max-width: 1400px;
     }
 </style>

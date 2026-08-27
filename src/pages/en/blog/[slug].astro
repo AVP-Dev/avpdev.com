@@ -49,13 +49,13 @@ const breadcrumbSchema = {
         {
             "@type": "ListItem",
             "position": 1,
-            "name": "Home",
+            "name": t("breadcrumb_home"),
             "item": new URL(`/${lang}/`, Astro.site).href
         },
         {
             "@type": "ListItem",
             "position": 2,
-            "name": "Blog",
+            "name": t("breadcrumb_blog"),
             "item": new URL(`/${lang}/blog/`, Astro.site).href
         },
         {
@@ -75,7 +75,7 @@ const articleSchema = {
     "description": post.data.description,
     "author": {
         "@type": "Person",
-        "name": "Alexey Patskevich",
+        "name": t("author_name"),
         "url": Astro.site ? Astro.site.toString() : ""
     },
     "datePublished": post.data.pubDate.toISOString(),

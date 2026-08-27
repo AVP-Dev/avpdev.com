@@ -9,7 +9,7 @@ const t = useTranslations(lang);
         <h2 class="section-title fade-in" set:html={t('problem_h2')} />
         <div class="po-grid fade-in">
             <div class="po-column problem-column">
-                <div class="column-badge problem-badge">{lang === 'ru' ? 'Проблема' : 'Problem'}</div>
+                <div class="column-badge problem-badge">{t('problem_badge')}</div>
                 <ul class="po-list">
                     <li class="po-item problem-item"><span class="bullet bullet-problem"></span>{t('problem_item1')}</li>
                     <li class="po-item problem-item"><span class="bullet bullet-problem"></span>{t('problem_item2')}</li>
@@ -21,7 +21,7 @@ const t = useTranslations(lang);
                 <span class="arrow-icon">&rarr;</span>
             </div>
             <div class="outcome-col">
-                <div class="column-badge outcome-badge">{lang === 'ru' ? 'Решение' : 'Solution'}</div>
+                <div class="column-badge outcome-badge">{t('outcome_badge')}</div>
                 <ul class="po-list">
                     <li class="po-item outcome-item"><span class="bullet bullet-outcome"></span>{t('outcome_item1')}</li>
                     <li class="po-item outcome-item"><span class="bullet bullet-outcome"></span>{t('outcome_item2')}</li>

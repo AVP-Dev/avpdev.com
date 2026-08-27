@@ -16,7 +16,7 @@ const t = useTranslations(lang);
                         <Icon name="fa-pen-to-square" aria-hidden="true" />
                     </div>
                     <div class="step-body">
-                        <div class="step-time">{lang === 'ru' ? '5 минут' : '5 min'}</div>
+                        <div class="step-time">{t('process_step1_time')}</div>
                         <h4>{t('process_step1_title')}</h4>
                         <p>{t('process_step1_desc')}</p>
                     </div>
@@ -34,7 +34,7 @@ const t = useTranslations(lang);
                         <Icon name="fa-file-lines" aria-hidden="true" />
                     </div>
                     <div class="step-body">
-                        <div class="step-time">{lang === 'ru' ? '48 часов' : '48 h'}</div>
+                        <div class="step-time">{t('process_step2_time')}</div>
                         <h4>{t('process_step2_title')}</h4>
                         <p>{t('process_step2_desc')}</p>
                     </div>
@@ -52,7 +52,7 @@ const t = useTranslations(lang);
                         <Icon name="fa-cubes" aria-hidden="true" />
                     </div>
                     <div class="step-body">
-                        <div class="step-time">{lang === 'ru' ? 'от 2 дней до 8 недель' : 'from 2 days to 8 weeks'}</div>
+                        <div class="step-time">{t('process_step3_time')}</div>
                         <h4>{t('process_step3_title')}</h4>
                         <p>{t('process_step3_desc')}</p>
                     </div>
@@ -137,12 +137,14 @@ const t = useTranslations(lang);
         font-size: 0.7rem;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.04em;
         border-radius: 9999px;
         background: rgba(var(--accent-color-start-rgb), 0.1);
         color: var(--accent-color-start);
         border: 1px solid rgba(var(--accent-color-start-rgb), 0.2);
         margin-bottom: 0.75rem;
+        max-width: 100%;
+        overflow-wrap: break-word;
     }
     .process-connector {
         display: flex;

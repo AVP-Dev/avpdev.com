@@ -1,8 +1,10 @@
 ---
 // src/pages/en/services/[city].astro
 import GeoPageLayout from '../../../layouts/GeoPageLayout.astro';
+import GeoBlogPosts from '../../../components/sections/GeoBlogPosts.astro';
 import { locations } from '../../../data/locations';
 import { getCollection } from 'astro:content';
+import { getDeterministicItems, hashSlug } from '../../../utils/random';
 
 export const prerender = true;
 
@@ -35,6 +37,14 @@ if (!content) {
 const lang = 'en';
 const allProjects = await getCollection('projects', ({ id }) => id.startsWith(lang + '/'));
 const projects = allProjects.slice(0, 6);
+
+// Per-city stable random selection of 2 blog posts.
+const allBlogPosts = await getCollection('blog', ({ id, data }) =>
+  id.startsWith('en/') && data.draft !== true,
+);
+const cityBlogPosts = allBlogPosts.length > 0
+  ? getDeterministicItems(allBlogPosts, 2, hashSlug(city))
+  : [];
 
 const schema = {
   "@context": "https://schema.org",
@@ -126,6 +136,8 @@ const faqSchema = content.faq && content.faq.length > 0 ? {
       </div>
     </section>
   )}
+
+  <GeoBlogPosts posts={cityBlogPosts} />
 </GeoPageLayout>
 
 <style>
