@@ -13,12 +13,12 @@ const linksToShow = locations.filter(loc => keyCities.includes(loc.slug));
   <ul class="geo-links-list">
     {linksToShow.map(loc => {
       const url = lang === 'ru' && loc.name_ru ? `/ru/uslugi/${loc.slug}/` : `/en/services/${loc.slug}/`;
-      const name = lang === 'ru' && loc.name_ru ? loc.name_ru.replace(/е$/, 'е') : loc.name_en; // Простое форматирование для примера
+      const name = lang === 'ru' && loc.name_ru ? loc.name_ru : loc.name_en;
       return <li><a href={url}>{name}</a></li>;
     })}
     <li class="view-all-locations">
       <a href={`/${lang}/locations/`} class="text-accent-color-start font-medium">
-        {lang === 'ru' ? 'Все города →' : 'View all cities →'}
+        {t('geoLinks.view_all')}
       </a>
     </li>
   </ul>
