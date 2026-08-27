@@ -339,7 +339,6 @@ nav {
 .nav-links {
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
