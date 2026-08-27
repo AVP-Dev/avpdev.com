@@ -7,7 +7,7 @@ const t = useTranslations(lang);
 
 const cookieText = t('cookie_text').replace('/privacy-policy', `/${lang}/legal/privacy-policy/`);
 ---
-<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label={t('cookie_aria_label')}>
     <div class="cookie-content">
         <div class="cookie-icon">
             <i class="fa-solid fa-cookie-bite"></i>
