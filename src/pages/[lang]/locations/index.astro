@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { locations } from '../../../data/locations';
 import { getCollection } from 'astro:content';
+import { useTranslations } from '../../../i18n/utils';
 
 export const prerender = true;
 
@@ -14,6 +15,7 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 const currentLang = lang || 'ru';
+const t = useTranslations(currentLang as 'ru' | 'en');
 
 const allGeo = await getCollection('geo');
 const geoMap = Object.fromEntries(allGeo.map(e => [e.id, e.data]));
@@ -51,11 +53,11 @@ const regionsMap: Record<string, string> = {
 };
 
 const filterTabs = [
-    { id: 'all', ru: 'Все регионы', en: 'All Regions' },
-    { id: 'cis', ru: 'СНГ', en: 'CIS' },
-    { id: 'europe', ru: 'Европа', en: 'Europe' },
-    { id: 'asia', ru: 'Азия и Восток', en: 'Asia & Middle East' },
-    { id: 'americas', ru: 'Америка и Океания', en: 'Americas & Oceania' }
+    { id: 'all', label: t('locations_filter_all') },
+    { id: 'cis', label: t('locations_filter_cis') },
+    { id: 'europe', label: t('locations_filter_europe') },
+    { id: 'asia', label: t('locations_filter_asia') },
+    { id: 'americas', label: t('locations_filter_americas') },
 ];
 
 // Фильтруем города по языку (теперь показываем все везде)
@@ -77,8 +79,8 @@ const sortedCountries = Object.keys(groupedLocations).sort((a, b) => {
     return nameA.localeCompare(nameB);
 });
 
-const pageTitle = currentLang === 'ru' ? 'География услуг AVPdev | Города и Страны' : 'Service Geography AVPdev | Cities & Countries';
-const pageDescription = currentLang === 'ru' ? 'Полный список стран и городов, где мы оказываем услуги по веб-разработке и автоматизации.' : 'Full list of countries and region hubs where we provide web development and automation services.';
+const pageTitle = t('locations_page_title');
+const pageDescription = t('locations_page_desc');
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -88,12 +90,10 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
             <div class="glow-bg top-glow"></div>
             <div class="container text-center relative z-10 mx-auto px-4 pt-32 pb-16">
                 <h1 class="font-extrabold mb-6 tracking-tight section-title text-5xl lg:text-6xl">
-                    {currentLang === 'ru' ? 'Наша ' : 'Our '}<span class="gradient-text">{currentLang === 'ru' ? 'География' : 'Geography'}</span>
+                    {t('locations_h1_pre')}<span class="gradient-text">{t('locations_h1_accent')}</span>
                 </h1>
                 <p class="section-subtitle">
-                    {currentLang === 'ru' ? 
-                        'Мы создаем надежные веб-решения для бизнеса по всему миру. Выберите свой регион и город, чтобы подробнее ознакомиться с нашими услугами.' : 
-                        'We build reliable web solutions for businesses worldwide. Select your region and city to learn more about our services.'}
+                    {t('locations_subtitle')}
                 </p>
                 
                 <!-- Filter Tabs -->
@@ -112,7 +112,7 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
                                     role="tab"
                                     aria-selected={idx === 0 ? "true" : "false"}
                                 >
-                                    {currentLang === 'ru' ? tab.ru : tab.en}
+                                    {tab.label}
                                 </button>
                             );
                         })}
@@ -140,8 +140,8 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
                     const hiddenCities = cities.slice(VISIBLE_LIMIT);
                     const hasHidden = hiddenCities.length > 0;
                     
-                    const textShow = currentLang === 'ru' ? `Показать все (${cities.length})` : `Show all (${cities.length})`;
-                    const textHide = currentLang === 'ru' ? 'Скрыть' : 'Show less';
+                    const textShow = t('locations_show_all').replace('{count}', String(cities.length));
+                    const textHide = t('locations_show_less');
 
                     return (
                         <article class="country-card card fade-in" data-region={region}>
@@ -202,7 +202,7 @@ const pageDescription = currentLang === 'ru' ? 'Полный список стр
             </div>
             
             <div id="no-results" class="hidden text-center py-16">
-                <p class="text-xl text-text-secondary">{currentLang === 'ru' ? 'Нет доступных локаций в этом регионе.' : 'No available locations in this region.'}</p>
+                <p class="text-xl text-text-secondary">{t('locations_no_results')}</p>
             </div>
         </section>
     </div>
