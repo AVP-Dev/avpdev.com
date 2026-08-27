@@ -31,8 +31,10 @@ const links = [
         </div>
 <style>
     .card {
-        flex: 1 1 380px;
+        height: 100%;
         max-width: 420px;
+        justify-self: center;
+        width: 100%;
         text-decoration: none;
         display: flex;
         flex-direction: column;
@@ -67,11 +69,10 @@ const links = [
         gap: 0.8rem;
     }
     .services-grid {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 2.5rem;
         margin: 4rem auto;
-        justify-content: center;
         max-width: 1400px;
     }
 </style>
