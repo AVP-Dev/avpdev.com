@@ -7,14 +7,15 @@
 > [!NOTE]
 > **Vision:** Этот репозиторий — не просто сайт-визитка, это эталонная архитектура современного фронтенда. Демонстрация идеального баланса между бескомпромиссной производительностью, продвинутым SEO и абсолютной безопасностью.
 
-[![Astro v5](https://img.shields.io/badge/Astro-v5-FF5D01?logo=astro)](https://astro.build)
-[![Bun](https://img.shields.io/badge/Bun-1.x-black?logo=bun)](https://bun.sh/)
+[![Astro v7](https://img.shields.io/badge/Astro-v7-FF5D01?logo=astro)](https://astro.build)
+[![React 19](https://img.shields.io/badge/React-19-20232A?logo=react)](https://react.dev)
+[![Bun](https://img.shields.io/badge/Bun-1.3+-black?logo=bun)](https://bun.sh/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Zod](https://img.shields.io/badge/Zod-4-3068B7?logo=zod&logoColor=white)](https://zod.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-AVP-Dev Portfolio Core — это production-ready портфолио и технический блог, построенный на **Astro 5**. Проект служит архитектурным чертежом для создания современных, быстрых и безопасных веб-приложений.
+AVP-Dev Portfolio Core — это production-ready портфолио и технический блог, построенный на **Astro 7**. Проект служит архитектурным чертежом для создания современных, быстрых и безопасных веб-приложений.
 
 ## 🚀 Ключевые особенности
 
@@ -59,5 +60,7 @@ AVP-Dev Portfolio Core — это production-ready портфолио и тех�
   <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white" />
   <img src="https://img.shields.io/badge/Autodesk_Fusion_360-0696D7?style=flat-square&logo=autodesk&logoColor=white" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/Zod-3068B7?style=flat-square&logo=zod&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white" />
 </p>
 
