@@ -31,7 +31,7 @@ const t = useTranslations(lang);
       </div>
 
       <div class="contact-form-card fade-in">
-        <form id="contact-form" class="contact-form" novalidate>
+        <form id="contact-form" class="contact-form" novalidate data-turnstile-loading={t("form_turnstile_loading")}>
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label" for="contact-name">{t("form_name")}</label>
@@ -39,7 +39,7 @@ const t = useTranslations(lang);
                 id="contact-name"
                 type="text"
                 name="name"
-                placeholder="John Doe"
+                placeholder={t("form_placeholder_name")}
                 required
                 autocomplete="name"
                 class="form-control"
@@ -52,7 +52,7 @@ const t = useTranslations(lang);
                 id="contact-email"
                 type="email"
                 name="contact"
-                placeholder="Email / Telegram / Phone"
+                placeholder={t("form_placeholder_email")}
                 autocomplete="email"
                 class="form-control"
                 required
@@ -88,21 +88,10 @@ const t = useTranslations(lang);
                 required
               />
               <label for="legal-consent" class="checkbox-label">
-                {lang === "ru" ? (
-                  <>
-                    Я принимаю условия{" "}
-                    <a href="/ru/legal/public-offer/">Публичной оферты</a>{" "}
-                    и даю согласие на обработку{" "}
-                    <a href="/ru/legal/privacy-policy/">персональных данных</a>.
-                  </>
-                ) : (
-                  <>
-                    I accept the{" "}
-                    <a href="/en/legal/public-offer/">Public Offer</a>{" "}
-                    and agree to the processing of{" "}
-                    <a href="/en/legal/privacy-policy/">personal data</a>.
-                  </>
-                )}
+                {t("form_consent_prefix")}{" "}
+                <a href={`/${lang}/legal/public-offer/`}>{t("form_consent_offer")}</a>{" "}
+                {t("form_consent_and")}{" "}
+                <a href={`/${lang}/legal/privacy-policy/`}>{t("form_consent_data")}</a>.
               </label>
             </div>
 
@@ -124,9 +113,7 @@ const t = useTranslations(lang);
             </div>
 
             <p id="consent-error" class="error-text hidden">
-              {lang === "ru"
-                ? "Вы должны согласиться на обработку персональных данных."
-                : "You must agree to personal data processing."}
+              {t("form_consent_required")}
             </p>
           </div>
         </form>
@@ -529,11 +516,8 @@ const t = useTranslations(lang);
       const turnstileResponse = form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null;
       if (!turnstileResponse || !turnstileResponse.value) {
         loadTurnstile();
-        const pageLang = document.documentElement.lang;
         if (messageError) {
-          messageError.textContent = pageLang === "ru"
-            ? "Защита загружается, подождите секунду и попробуйте снова."
-            : "Please wait a moment and try again.";
+          messageError.textContent = form.dataset.turnstileLoading || "";
           messageError.classList.remove("hidden");
         }
         return;
