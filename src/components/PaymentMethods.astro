@@ -23,8 +23,8 @@ const t = useTranslations(lang);
 const allBrandImages = [
     { src: visaLogo, alt: "Visa", class: "visa" },
     { src: mcLogo, alt: "Mastercard", class: "mc" },
-    { src: mirLogo, alt: "Мир", class: "mir" },
-    { src: belcardLogo, alt: "Белкарт", class: "belcard" }
+    { src: mirLogo, alt: t('alt_payment_mir'), class: "mir" },
+    { src: belcardLogo, alt: t('alt_payment_belcard'), class: "belcard" }
 ];
 ---
 
@@ -48,11 +48,11 @@ const allBrandImages = [
                 <div class="ribbon-divider"></div>
                 
                 <div class="ribbon-row">
-                    <div class="brand-item sbp" title="СБП">
-                        <Image src={sbpLogo} alt="СБП" height={64} densities={[1.5, 2, 3]} quality="high" class="brand-img-sbp" />
+                    <div class="brand-item sbp" title={t('alt_payment_sbp')}>
+                        <Image src={sbpLogo} alt={t('alt_payment_sbp')} height={64} densities={[1.5, 2, 3]} quality="high" class="brand-img-sbp" />
                     </div>
-                    <div class="brand-item erip" title="ЕРИП">
-                        <Image src={eripLogo} alt="ЕРИП" height={64} densities={[1.5, 2, 3]} quality="high" class="brand-img-erip" />
+                    <div class="brand-item erip" title={t('alt_payment_erip')}>
+                        <Image src={eripLogo} alt={t('alt_payment_erip')} height={64} densities={[1.5, 2, 3]} quality="high" class="brand-img-erip" />
                     </div>
                 </div>
 
@@ -83,11 +83,11 @@ const allBrandImages = [
                         <div class="brand-img-wrapper" title="Mastercard">
                             <Image src={mcLogo} alt="Mastercard" height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img mc" />
                         </div>
-                        <div class="brand-img-wrapper" title="Мир">
-                            <Image src={mirLogo} alt="Мир" height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img mir" />
+                        <div class="brand-img-wrapper" title={t('alt_payment_mir')}>
+                            <Image src={mirLogo} alt={t('alt_payment_mir')} height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img mir" />
                         </div>
-                        <div class="brand-img-wrapper" title="Белкарт">
-                            <Image src={belcardLogo} alt="Белкарт" height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img belcard" />
+                        <div class="brand-img-wrapper" title={t('alt_payment_belcard')}>
+                            <Image src={belcardLogo} alt={t('alt_payment_belcard')} height={128} densities={[1.5, 2, 3]} quality="high" class="brand-img belcard" />
                         </div>
                         <div class="brand-icon-wrapper" title="PayPal">
                             <i class="fa-brands fa-paypal"></i>
@@ -159,7 +159,7 @@ const allBrandImages = [
     {!isRibbon && (
         <div class="trust-badge">
             <i class="fa-solid fa-lock"></i>
-            <span>SSL Secured | PCI DSS Compliant</span>
+            <span>{t('payment_trust_badge')}</span>
         </div>
     )}
 </div>
