@@ -1,8 +1,10 @@
 ---
 // src/pages/ru/uslugi/[city].astro
 import GeoPageLayout from '../../../layouts/GeoPageLayout.astro';
+import GeoBlogPosts from '../../../components/sections/GeoBlogPosts.astro';
 import { locations } from '../../../data/locations';
 import { getCollection } from 'astro:content';
+import { getDeterministicItems, hashSlug } from '../../../utils/random';
 
 export const prerender = true;
 
@@ -127,6 +129,8 @@ const faqSchema = content.faq && content.faq.length > 0 ? {
       </div>
     </section>
   )}
+
+  <GeoBlogPosts posts={cityBlogPosts} />
 </GeoPageLayout>
 
 <style>
