@@ -33,12 +33,13 @@ const links = [
     .card {
         height: 100%;
         max-width: 420px;
-        justify-self: center;
         width: 100%;
         text-decoration: none;
         display: flex;
         flex-direction: column;
         position: relative;
+        flex: 1 1 300px;
+        min-width: 280px;
     }
     .card:hover {
         transition-delay: 0s !important;
@@ -69,8 +70,9 @@ const links = [
         gap: 0.8rem;
     }
     .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 2.5rem;
         margin: 4rem auto;
         max-width: 1400px;

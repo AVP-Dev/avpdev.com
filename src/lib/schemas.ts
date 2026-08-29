@@ -45,8 +45,11 @@ export const BriefFormSchema = z.object({
     target_audience: z.string().trim().optional(),
     user_action: z.string().trim().optional(),
 
-    // --- Type and Functionality ---
-    site_type: z.string().trim().min(1, { message: 'Please select project type' }),
+    // --- Type and Functionality (multi-select, full spectrum: site/store/SaaS/TMA/bot/automation/AI) ---
+    site_type: z.union([z.array(z.string()), z.string()]).refine(
+        (val) => (Array.isArray(val) ? val.length > 0 : typeof val === 'string' && val.trim().length > 0),
+        { message: 'Please select at least one project type' }
+    ),
     features: z.union([z.array(z.string()), z.string()]).optional(),
     features_other: z.string().trim().optional(),
 
@@ -61,6 +64,7 @@ export const BriefFormSchema = z.object({
 
     // --- Budget and Timeline ---
     budget: z.string().trim().optional(),
+    budget_other: z.string().trim().optional(),
     deadline: z.string().trim().optional(),
 
     // --- Additional Info ---

@@ -220,74 +220,104 @@ const t = useTranslations(lang as "en" | "ru");
                     <legend>{t("brief_step_5")}</legend>
                     <div class="form-group">
                         <label>{t("brief_site_type")}</label>
-                        <div class="radio-group">
+                        <p class="form-hint">{t("brief_site_type_hint")}</p>
+                        <div class="checkbox-group" id="site-type-group">
                             <label
                                 ><input
-                                    type="radio"
+                                    type="checkbox"
                                     name="site_type"
-                                    value="Landing Page"
-                                    checked
+                                    value="Website"
                                 /><span>{t("brief_site_type_1")}</span></label
                             >
                             <label
                                 ><input
-                                    type="radio"
+                                    type="checkbox"
                                     name="site_type"
-                                    value="Corporate Site"
+                                    value="Online Store"
                                 /><span>{t("brief_site_type_2")}</span></label
                             >
                             <label
                                 ><input
-                                    type="radio"
+                                    type="checkbox"
                                     name="site_type"
-                                    value="E-commerce"
+                                    value="Web Service / SaaS"
                                 /><span>{t("brief_site_type_3")}</span></label
                             >
                             <label
                                 ><input
-                                    type="radio"
+                                    type="checkbox"
                                     name="site_type"
-                                    value="Web Application"
+                                    value="Telegram Mini App"
                                 /><span>{t("brief_site_type_4")}</span></label
                             >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="site_type"
+                                    value="Bot / Parser"
+                                /><span>{t("brief_site_type_5")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="site_type"
+                                    value="Automation & Integrations"
+                                /><span>{t("brief_site_type_6")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="site_type"
+                                    value="AI Solution"
+                                /><span>{t("brief_site_type_7")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="site_type"
+                                    value="Need consultation"
+                                /><span>{t("brief_site_type_8")}</span></label
+                            >
                         </div>
+                        <p id="site-type-error" class="error-text hidden" style="margin-top:0.5rem;">{lang === 'ru' ? 'Выберите хотя бы один вариант' : 'Select at least one option'}</p>
                     </div>
                     <div class="form-group">
                         <label>{t("brief_functionality")}</label>
+                        <p class="form-hint">{t("brief_functionality_hint")}</p>
                         <div class="checkbox-group">
                             <label
                                 ><input
                                     type="checkbox"
                                     name="features"
-                                    value="Product/Service Catalog"
+                                    value="Catalog / Showcase"
                                 /><span>{t("brief_feat_1")}</span></label
                             >
                             <label
                                 ><input
                                     type="checkbox"
                                     name="features"
-                                    value="Blog/News"
+                                    value="Blog / News / SEO"
                                 /><span>{t("brief_feat_2")}</span></label
                             >
                             <label
                                 ><input
                                     type="checkbox"
                                     name="features"
-                                    value="User Account"
+                                    value="User Account & Roles"
                                 /><span>{t("brief_feat_3")}</span></label
                             >
                             <label
                                 ><input
                                     type="checkbox"
                                     name="features"
-                                    value="Online Payment"
+                                    value="Cart & Online Payments"
                                 /><span>{t("brief_feat_4")}</span></label
                             >
                             <label
                                 ><input
                                     type="checkbox"
                                     name="features"
-                                    value="Cost Calculator"
+                                    value="Calculator / Configurator"
                                 /><span>{t("brief_feat_5")}</span></label
                             >
                             <label
@@ -296,6 +326,27 @@ const t = useTranslations(lang as "en" | "ru");
                                     name="features"
                                     value="Multilingual"
                                 /><span>{t("brief_feat_6")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Integrations"
+                                /><span>{t("brief_feat_7")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="Bot & Notifications"
+                                /><span>{t("brief_feat_8")}</span></label
+                            >
+                            <label
+                                ><input
+                                    type="checkbox"
+                                    name="features"
+                                    value="AI Features"
+                                /><span>{t("brief_feat_9")}</span></label
                             >
                             <label
                                 ><input
@@ -445,7 +496,7 @@ const t = useTranslations(lang as "en" | "ru");
                                 ><input
                                     type="radio"
                                     name="budget"
-                                    value="Up to $500"
+                                    value="Up to $1000"
                                     checked
                                 /><span>{t("brief_budget_1")}</span></label
                             >
@@ -453,31 +504,48 @@ const t = useTranslations(lang as "en" | "ru");
                                 ><input
                                     type="radio"
                                     name="budget"
-                                    value="$500 - $1500"
+                                    value="$1000 - $3000"
                                 /><span>{t("brief_budget_2")}</span></label
                             >
                             <label
                                 ><input
                                     type="radio"
                                     name="budget"
-                                    value="$1500 - $3000"
+                                    value="$3000 - $7000"
                                 /><span>{t("brief_budget_3")}</span></label
                             >
                             <label
                                 ><input
                                     type="radio"
                                     name="budget"
-                                    value="Over $3000"
+                                    value="$7000 - $15000"
                                 /><span>{t("brief_budget_4")}</span></label
                             >
                             <label
                                 ><input
                                     type="radio"
                                     name="budget"
-                                    value="To be discussed"
+                                    value="Over $15000"
                                 /><span>{t("brief_budget_5")}</span></label
                             >
+                            <label
+                                ><input
+                                    type="radio"
+                                    name="budget"
+                                    value="To be discussed"
+                                /><span>{t("brief_budget_6")}</span></label
+                            >
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget_other">{t("brief_budget_other_label")}</label>
+                        <input
+                            type="text"
+                            id="budget_other"
+                            name="budget_other"
+                            class="form-control"
+                            placeholder={t("brief_budget_other_placeholder")}
+                        />
                     </div>
                     <div class="form-group">
                         <label for="deadline">{t("brief_deadline")}</label>
@@ -655,6 +723,26 @@ const t = useTranslations(lang as "en" | "ru");
 
 .form-block .form-group {
     margin-bottom: 1.5rem;
+}
+
+.form-hint {
+    font-size: 0.88rem;
+    color: var(--text-secondary-color);
+    margin: -0.25rem 0 1rem;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+.error-text.hidden { display: none; }
+.error-text {
+    color: #ff4d4d;
+    font-size: 0.88rem;
+    margin-top: 0.25rem;
+}
+#site-type-group.error-field {
+    outline: 1px solid #ff4d4d;
+    border-radius: 8px;
+    padding: 0.5rem;
 }
 
 /* Скрытое поле "Другое" */
@@ -917,6 +1005,18 @@ input[type="checkbox"]:checked+span::after {
                 }
             });
 
+            // --- Validate: at least one project type selected (new multi-select) ---
+            const siteTypeGroup = document.getElementById("site-type-group") as HTMLElement | null;
+            const siteTypeError = document.getElementById("site-type-error") as HTMLElement | null;
+            if (siteTypeGroup) siteTypeGroup.classList.remove("error-field");
+            if (siteTypeError) siteTypeError.classList.add("hidden");
+            const siteTypeChecked = form.querySelectorAll<HTMLInputElement>('input[name="site_type"]:checked');
+            if (siteTypeChecked.length === 0) {
+                if (siteTypeGroup) siteTypeGroup.classList.add("error-field");
+                if (siteTypeError) siteTypeError.classList.remove("hidden");
+                isValid = false;
+            }
+
             if (!consentCheckbox.checked) {
                 consentCheckbox.classList.add("error-field");
                 if (consentError) consentError.classList.remove("hidden");
@@ -942,14 +1042,15 @@ input[type="checkbox"]:checked+span::after {
 
             const formData = new FormData(form);
 
-            // Collect arrays for multiple-choice checkboxes
+            // Collect arrays for multiple-choice checkboxes (site_type теперь multi-select)
+            const siteTypes = formData.getAll("site_type");
             const features = formData.getAll("features");
             const support = formData.getAll("support");
 
             // Build data object from FormData, excluding arrays we'll add manually
             const data: Record<string, any> = {};
             for (const [key, value] of formData.entries()) {
-                if (key !== "features" && key !== "support") {
+                if (key !== "features" && key !== "support" && key !== "site_type") {
                     // Only take the first value for non-array fields
                     if (!data[key]) {
                         data[key] = value;
@@ -957,7 +1058,9 @@ input[type="checkbox"]:checked+span::after {
                 }
             }
 
-            // Add arrays explicitly
+            // Add arrays explicitly — site_type: string если 1, массив если несколько (поддерживает оба варианта в схеме)
+            if (siteTypes.length === 1) data.site_type = siteTypes[0];
+            else if (siteTypes.length > 1) data.site_type = siteTypes;
             if (features.length > 0) data.features = features;
             if (support.length > 0) data.support = support;
 
