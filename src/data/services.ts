@@ -4,6 +4,10 @@
 
 export type Lang = 'ru' | 'en';
 
+export const BASE_PRICES = { astro: 400, next: 600, app: 1500, bot: 150 } as const;
+// Единый источник базовых цен в USD — импортируется в scripts/sync-geo-prices.ts для гео-локализации
+// При изменении цен обнови также tiers ниже (websites/bots/saas/shop: от $400/600/1500/150)
+
 export const FACTS = {
     warranty: {
         ru: 'от 1 месяца после сдачи',

@@ -114,12 +114,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
     // CSP
     const csp = [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://mc.yandex.ru https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://mc.yandex.ru https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://challenges.cloudflare.com",
       "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com",
       "img-src 'self' data: https://www.googletagmanager.com https://mc.yandex.ru https://www.google-analytics.com",
       "font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com",
-      "connect-src 'self' https://www.google-analytics.com https://mc.yandex.ru",
-      "frame-src 'self'",
+      "connect-src 'self' https://www.google-analytics.com https://mc.yandex.ru https://challenges.cloudflare.com",
+      "frame-src 'self' https://challenges.cloudflare.com",
       "object-src 'none'",
       "base-uri 'self'",
       "upgrade-insecure-requests"

@@ -15,7 +15,10 @@ function setupMobileMenu() {
 
         const isOpen = open ?? !mobileNav.classList.contains('open');
         mobileNav.classList.toggle('open', isOpen);
-        document.querySelectorAll('.burger-menu').forEach(b => b.classList.toggle('open', isOpen));
+        document.querySelectorAll('.burger-menu').forEach(b => {
+            b.classList.toggle('open', isOpen);
+            b.setAttribute('aria-expanded', String(isOpen));
+        });
         mobileOverlay.classList.toggle('visible', isOpen);
         document.body.classList.toggle('modal-open', isOpen);
     };
@@ -44,6 +47,78 @@ function setupMobileMenu() {
                 toggleMenu(false);
             }
         }
+    });
+
+    // Esc — закрыть мобильное меню и вернуть фокус на бургер
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const mobileNav = document.querySelector('.mobile-nav');
+            if (mobileNav?.classList.contains('open')) {
+                toggleMenu(false);
+                (document.querySelector('.burger-menu') as HTMLElement | null)?.focus();
+            }
+        }
+    });
+
+    // Focus trap — удержание Tab внутри открытого мобильного меню
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab') return;
+        const mobileNav = document.querySelector('.mobile-nav.open') as HTMLElement | null;
+        if (!mobileNav) return;
+        const focusables = mobileNav.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const active = document.activeElement as HTMLElement | null;
+        if (e.shiftKey) {
+            if (active === first) {
+                e.preventDefault();
+                last.focus();
+            }
+        } else {
+            if (active === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+    });
+
+    // --- DESKTOP NAV DROPDOWN: keyboard support (Enter/Space + aria-expanded) ---
+    document.addEventListener('keydown', (e) => {
+        const btn = (e.target as HTMLElement).closest('.nav-dropbtn');
+        if (!btn) return;
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault();
+            const dropdown = btn.closest('.nav-dropdown');
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            const newState = !isExpanded;
+            btn.setAttribute('aria-expanded', String(newState));
+            dropdown?.classList.toggle('open', newState);
+        }
+    });
+
+    // Close desktop dropdown on Escape (global)
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        // also handle mobile logic already above; this closes desktop dropdown
+        document.querySelectorAll('.nav-dropdown.open').forEach(dd => {
+            dd.classList.remove('open');
+            const b = dd.querySelector('.nav-dropbtn');
+            if (b) b.setAttribute('aria-expanded', 'false');
+        });
+    });
+
+    // Close desktop dropdown on click outside
+    document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('.nav-dropdown')) return;
+        document.querySelectorAll('.nav-dropdown.open').forEach(dd => {
+            dd.classList.remove('open');
+            const b = dd.querySelector('.nav-dropbtn');
+            if (b) b.setAttribute('aria-expanded', 'false');
+        });
     });
 
     // --- MOBILE ACCORDION (делегирование) ---

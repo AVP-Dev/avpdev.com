@@ -63,7 +63,6 @@ const t = useTranslations(lang as "en" | "ru");
                                     type="radio"
                                     name="preferred_contact"
                                     value="WhatsApp"
-                                    checked
                                 /><span>WhatsApp</span></label
                             >
                             <label
@@ -1075,7 +1074,7 @@ input[type="checkbox"]:checked+span::after {
                 }
             }
 
-            console.log("📤 Sending brief data:", data);
+            if (import.meta.env.DEV) console.log("📤 Sending brief data:", data);
 
             try {
                 const response = await fetch("/api/sendBrief/", {

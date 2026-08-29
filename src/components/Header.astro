@@ -50,10 +50,10 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
         </a>
         <ul class="nav-links">
             <div class="nav-dropdown">
-          <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services')} class="nav-dropbtn" aria-haspopup="true">
+          <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services')} class="nav-dropbtn" aria-haspopup="true" aria-expanded="false" aria-controls="services-dropdown">
             {t('nav_services')} <i class="fa-solid fa-chevron-down text-xs ml-1 transition-transform duration-300"></i>
           </a>
-          <div class="nav-dropdown-content">
+          <div id="services-dropdown" class="nav-dropdown-content">
             {navServiceLinks.map((s) => (
               <a href={servicePath(s.id, lang)} class="dropdown-item">
                 <i class={s.icon}></i>
@@ -79,7 +79,7 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
             </button>
             <LanguageSwitcher translationSlug={translationSlug} />
         </div>
-        <button class="burger-menu" aria-label={t("aria_open_menu")}>
+        <button class="burger-menu" aria-label={t("aria_open_menu")} aria-expanded="false" aria-controls="mobile-nav">
             <div></div>
             <div></div>
             <div></div>
@@ -89,7 +89,7 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
 
 <!-- Мобильное меню вынесено сюда же для инкапсуляции -->
 <div class="mobile-nav-overlay"></div>
-<div class="mobile-nav">
+<div id="mobile-nav" class="mobile-nav">
     <ul class="mobile-menu-list">
         <li class="mobile-accordion-item">
             <button class="mobile-accordion-trigger" aria-expanded="false">

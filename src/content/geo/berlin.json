@@ -1,25 +1,25 @@
 {
   "en": {
-    "title": "Web Development Services in Munich | Quality & Precision",
-    "description": "Precision-engineered web development in Munich. We deliver high-quality websites and digital products for businesses in Bavaria and beyond.",
+    "title": "Web Development Services in Berlin | Quality & Precision",
+    "description": "Precision-engineered web development in Berlin. We deliver high-quality websites and digital products for businesses in Berlin and beyond.",
     "h1": "World-Class Web Engineering for Berlin Startups & Enterprises",
     "p": "AVPdev brings Silicon Valley-grade engineering to Berlin. We build performant Next.js platforms, SaaS MVPs, and smart Telegram bots for the German market.",
     "benefits": [
       {
         "icon": "fa-rocket",
-        "title": "Elite Web Performance for Munich",
-        "desc": "We build Astro and Next.js websites for Munich's engineering and automotive sector, achieving 90+ Lighthouse scores and top search rankings."
+        "title": "Elite Web Performance for Berlin",
+        "desc": "We build Astro and Next.js websites for Berlin's startup and enterprise sector, achieving 90+ Lighthouse scores and top search rankings."
       },
       {
         "icon": "fa-robot",
         "title": "Intelligent Automation Bots",
-        "desc": "Custom Telegram bots for Munich businesses: lead capture, notifications, and 24/7 customer service on autopilot."
+        "desc": "Custom Telegram bots for Berlin businesses: lead capture, notifications, and 24/7 customer service on autopilot."
       }
     ],
     "faq": [
       {
         "q": "What is the cost of web development in Berlin?",
-        "a": "Pricing starts from $400 for Astro landing pages and $600 for Next.js websites. Custom web applications start from $1,500."
+        "a": "Pricing starts from €400 for Astro landing pages and €600 for Next.js websites. Custom web applications start from €1500."
       },
       {
         "q": "What is your project timeline?",
@@ -27,7 +27,7 @@
       },
       {
         "q": "Do you develop Telegram bots and Mini Apps?",
-        "a": "Yes, we build intelligent bots for business automation. Prices start from $150 depending on the requirements."
+        "a": "Yes, we build intelligent bots for business automation. Prices start from €150 depending on the requirements."
       },
       {
         "q": "Do you provide post-launch support?",

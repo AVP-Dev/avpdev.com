@@ -1,16 +1,30 @@
 import { locations } from '../src/data/locations';
+import { BASE_PRICES } from '../src/data/services';
 import { writeFileSync, readFileSync, readdirSync } from 'fs';
 import path from 'path';
 
-const BASE_PRICES = { astro: 400, next: 600, app: 1500, bot: 150 };
-
 async function getExchangeRates() {
     try {
-        const usd = await fetch('https://api.nbrb.by/exrates/rates/431').then(res => res.json());
-        const rub = await fetch('https://api.nbrb.by/exrates/rates/456').then(res => res.json());
-        const kzt = await fetch('https://api.nbrb.by/exrates/rates/459').then(res => res.json());
+        const usdRes = await fetch('https://api.nbrb.by/exrates/rates/431');
+        if (!usdRes.ok) throw new Error(`NBRB USD fetch failed: ${usdRes.status}`);
+        const usd = await usdRes.json() as any;
+        const rubRes = await fetch('https://api.nbrb.by/exrates/rates/456');
+        if (!rubRes.ok) throw new Error(`NBRB RUB fetch failed: ${rubRes.status}`);
+        const rub = await rubRes.json() as any;
+        const kztRes = await fetch('https://api.nbrb.by/exrates/rates/459');
+        if (!kztRes.ok) throw new Error(`NBRB KZT fetch failed: ${kztRes.status}`);
+        const kzt = await kztRes.json() as any;
+        if (typeof usd.Cur_OfficialRate !== 'number' || typeof rub.Cur_OfficialRate !== 'number' || typeof kzt.Cur_OfficialRate !== 'number') {
+            throw new Error('Invalid Cur_OfficialRate type from NBRB');
+        }
+        if (isNaN(usd.Cur_OfficialRate) || isNaN(rub.Cur_OfficialRate) || isNaN(kzt.Cur_OfficialRate)) {
+            throw new Error('NaN rate from NBRB');
+        }
         return { BYN: usd.Cur_OfficialRate, RUB: rub.Cur_OfficialRate / 100, KZT: kzt.Cur_OfficialRate / 1000 };
-    } catch (e) { return { BYN: 3.0, RUB: 0.036, KZT: 0.0065 }; }
+    } catch (e) {
+        console.warn('⚠️  NBRB fetch failed, using fallback rates:', (e as Error).message);
+        return { BYN: 3.0, RUB: 0.036, KZT: 0.0065 };
+    }
 }
 
 function roundPrice(val: number, step: number) {
@@ -20,7 +34,9 @@ function roundPrice(val: number, step: number) {
 function getPriceDetails(type: 'astro' | 'next' | 'app' | 'bot', country: string, rates: any) {
     const usdPrice = BASE_PRICES[type];
     if (country === 'GB') return { val: usdPrice, sym: '£' };
-    if (['DE', 'FR', 'ES', 'IT', 'PL', 'CZ', 'NL', 'LT', 'LV', 'EE'].includes(country)) return { val: usdPrice, sym: '€' };
+    if (country === 'PL') return { val: usdPrice, sym: 'zł' };
+    if (country === 'CZ') return { val: usdPrice, sym: 'Kč' };
+    if (['DE', 'FR', 'ES', 'IT', 'NL', 'LT', 'LV', 'EE'].includes(country)) return { val: usdPrice, sym: '€' };
     if (country === 'BY') return { val: roundPrice(usdPrice * rates.BYN, 10), sym: 'BYN' };
     if (country === 'RU') return { val: roundPrice((usdPrice * rates.BYN) / rates.RUB, 500), sym: 'руб.' };
     if (country === 'KZ') return { val: roundPrice((usdPrice * rates.BYN) / rates.KZT, 1000), sym: '₸' };
@@ -32,14 +48,12 @@ function formatPrice(details: { val: number, sym: string }) {
 }
 
 function generateFaq(loc: any, lang: 'ru' | 'en', rates: any) {
-    const p = lang === 'en'
-        ? { astro: '$400', next: '$600', app: '$1,500', bot: '$150' }
-        : {
-            astro: formatPrice(getPriceDetails('astro', loc.country, rates)),
-            next: formatPrice(getPriceDetails('next', loc.country, rates)),
-            app: formatPrice(getPriceDetails('app', loc.country, rates)),
-            bot: formatPrice(getPriceDetails('bot', loc.country, rates))
-        };
+    const p = {
+        astro: formatPrice(getPriceDetails('astro', loc.country, rates)),
+        next: formatPrice(getPriceDetails('next', loc.country, rates)),
+        app: formatPrice(getPriceDetails('app', loc.country, rates)),
+        bot: formatPrice(getPriceDetails('bot', loc.country, rates))
+    };
 
     if (lang === 'ru') {
         return [
@@ -65,11 +79,6 @@ async function sendTelegramNotification(rates: any) {
     const CHAT_ID = process.env.CHAT_ID;
     const TOPIC_ID = process.env.TOPIC_ID;
 
-    if (!BOT_TOKEN || !CHAT_ID) {
-        console.log('⚠️  TG notification skipped (no BOT_TOKEN/CHAT_ID in env)');
-        return;
-    }
-
     const now = new Date().toLocaleString('ru-RU', {
         timeZone: 'Europe/Minsk',
         day: '2-digit', month: '2-digit', year: '2-digit',
@@ -84,30 +93,66 @@ async function sendTelegramNotification(rates: any) {
     };
     const ruPrices = {
         astro: formatPrice(getPriceDetails('astro', 'RU', rates)),
+        next: formatPrice(getPriceDetails('next', 'RU', rates)),
         app: formatPrice(getPriceDetails('app', 'RU', rates)),
+        bot: formatPrice(getPriceDetails('bot', 'RU', rates)),
     };
     const kzPrices = {
         astro: formatPrice(getPriceDetails('astro', 'KZ', rates)),
+        next: formatPrice(getPriceDetails('next', 'KZ', rates)),
         app: formatPrice(getPriceDetails('app', 'KZ', rates)),
+        bot: formatPrice(getPriceDetails('bot', 'KZ', rates)),
     };
+    const gbPrices = {
+        astro: formatPrice(getPriceDetails('astro', 'GB', rates)),
+        next: formatPrice(getPriceDetails('next', 'GB', rates)),
+        app: formatPrice(getPriceDetails('app', 'GB', rates)),
+        bot: formatPrice(getPriceDetails('bot', 'GB', rates)),
+    };
+    const euPrices = {
+        astro: formatPrice(getPriceDetails('astro', 'DE', rates)),
+        next: formatPrice(getPriceDetails('next', 'DE', rates)),
+        app: formatPrice(getPriceDetails('app', 'DE', rates)),
+        bot: formatPrice(getPriceDetails('bot', 'DE', rates)),
+    };
+    const usPrices = {
+        astro: formatPrice(getPriceDetails('astro', 'US', rates)),
+        next: formatPrice(getPriceDetails('next', 'US', rates)),
+        app: formatPrice(getPriceDetails('app', 'US', rates)),
+        bot: formatPrice(getPriceDetails('bot', 'US', rates)),
+    };
+    const plPrice = formatPrice(getPriceDetails('astro', 'PL', rates));
+    const czPrice = formatPrice(getPriceDetails('astro', 'CZ', rates));
 
     const msg = [
         `<b>💰 Гео-цены обновлены (Astro Collections)</b>`,
         `🕒 <i>Дата обновления: ${now}</i>`,
         ``,
         `<b>Курсы:</b>`,
-        `USD/BYN: ${rates.BYN}`,
+        `USD/BYN: ${rates.BYN.toFixed(4)}`,
         `BYN/100RUB: ${(rates.RUB * 100).toFixed(4)}`,
         `BYN/1000KZT: ${(rates.KZT * 1000).toFixed(4)}`,
         ``,
         `<b>Пример цен на сайте:</b>`,
         `🇧🇾 BY: Astro ${byPrices.astro} | Next ${byPrices.next} | App ${byPrices.app} | Bot ${byPrices.bot}`,
-        `🇷🇺 RU: Astro ${ruPrices.astro} | App ${ruPrices.app}`,
-        `🇰🇿 KZ: Astro ${kzPrices.astro} | App ${kzPrices.app}`,
-        `🇬🇧 UK: £250 | 🇪🇺 EU: €250 | 🇺🇸 US: $250`,
+        `🇷🇺 RU: Astro ${ruPrices.astro} | Next ${ruPrices.next} | App ${ruPrices.app} | Bot ${ruPrices.bot}`,
+        `🇰🇿 KZ: Astro ${kzPrices.astro} | Next ${kzPrices.next} | App ${kzPrices.app} | Bot ${kzPrices.bot}`,
+        `🇬🇧 UK: Astro ${gbPrices.astro} | Next ${gbPrices.next} | App ${gbPrices.app} | Bot ${gbPrices.bot}`,
+        `🇪🇺 EU: Astro ${euPrices.astro} | Next ${euPrices.next} | App ${euPrices.app} | Bot ${euPrices.bot} (PL ${plPrice} / CZ ${czPrice})`,
+        `🇺🇸 US: Astro ${usPrices.astro} | Next ${usPrices.next} | App ${usPrices.app} | Bot ${usPrices.bot}`,
         ``,
         `Обновлено ${locations.length} городов ✅`,
     ].join('\n');
+
+    // Тестовый вывод для аудита — всегда показываем сгенерированное TG-сообщение
+    console.log('--- TG MESSAGE PREVIEW ---');
+    console.log(msg);
+    console.log('--- END TG PREVIEW ---');
+
+    if (!BOT_TOKEN || !CHAT_ID) {
+        console.log('⚠️  TG notification skipped (no BOT_TOKEN/CHAT_ID in env)');
+        return;
+    }
 
     try {
         const chatRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getChat?chat_id=${CHAT_ID}`).then(r => r.json());
