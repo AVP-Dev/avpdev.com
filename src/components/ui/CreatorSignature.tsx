@@ -30,7 +30,7 @@ export const CreatorSignature = () => {
             >
                 <div style={{ marginBottom: '6px' }}>
                     <a
-                        href="https://avpdev.com/ru/"
+                        href="https://avpdev.com/"
                         style={{
                             fontWeight: 700,
                             fontSize: '0.85rem',
