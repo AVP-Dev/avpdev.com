@@ -21,6 +21,7 @@ const t = useTranslations(lang as "en" | "ru");
         <div class="container container-narrow">
             <h1 class="section-title" set:html={t("brief_title")} />
             <p class="section-subtitle">{t("brief_subtitle")}</p>
+            <div id="brief-progress" class="brief-progress"> <div class="brief-progress__bar"><div class="brief-progress__fill" id="brief-progress-fill"></div></div> <div class="brief-progress__text" id="brief-progress-text">{lang === 'ru' ? 'Шаг 1 из 10 — 10%' : 'Step 1 of 10 — 10%'}</div> </div>
 
             <form id="brief-form" class="brief-form" novalidate data-turnstile-alert={t("brief_alert_turnstile")}>
                 <fieldset class="form-block fade-in">
@@ -965,6 +966,10 @@ input[type="checkbox"]:checked+span::after {
         position: relative;
         z-index: 2;
     }
+    .brief-progress {position:sticky; top:78px; z-index:10; background:var(--primary-color); border:1px solid var(--border-color); border-radius:8px; padding:8px 12px; margin-bottom:1.5rem}
+    .brief-progress__bar {height:4px; background:var(--border-color); border-radius:2px; overflow:hidden}
+    .brief-progress__fill {height:100%; width:10%; background:var(--accent-gradient); transition:width 0.3s}
+    .brief-progress__text {font-size:0.85rem; color:var(--text-secondary-color); margin-top:6px; text-align:center}
 </style>
 
 <!-- Фоновые частицы (как на главной) -->
@@ -977,6 +982,123 @@ input[type="checkbox"]:checked+span::after {
     document.addEventListener("astro:page-load", () => {
         const form = document.getElementById("brief-form") as HTMLFormElement;
         if (!form) return;
+
+        // --- Progress bar, autosave, clear-draft, contacts validation ---
+        const currentLang = (window.location.pathname.split('/').filter(Boolean)[0] === 'ru' ? 'ru' : 'en') as 'ru' | 'en';
+        const progressFill = document.getElementById("brief-progress-fill") as HTMLElement | null;
+        const progressText = document.getElementById("brief-progress-text") as HTMLElement | null;
+        const formBlocks = Array.from(form.querySelectorAll(".form-block")) as HTMLElement[];
+        const updateProgress = (idx: number) => {
+            const pct = Math.round((idx / 10) * 100);
+            if (progressFill) progressFill.style.width = pct + "%";
+            if (progressText) {
+                progressText.textContent = currentLang === 'ru' ? `Шаг ${idx} из 10 — ${pct}%` : `Step ${idx} of 10 — ${pct}%`;
+            }
+        };
+        if (formBlocks.length && progressFill) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const idx = formBlocks.indexOf(entry.target as HTMLElement) + 1;
+                        if (idx > 0) updateProgress(idx);
+                    }
+                });
+            }, { root: null, rootMargin: "-40% 0px -40% 0px", threshold: 0.1 });
+            formBlocks.forEach((block) => observer.observe(block));
+            form.addEventListener("focusin", (e) => {
+                const target = e.target as HTMLElement;
+                const block = target.closest(".form-block") as HTMLElement | null;
+                if (block) {
+                    const idx = formBlocks.indexOf(block) + 1;
+                    if (idx > 0) updateProgress(idx);
+                }
+            });
+        }
+
+        // localStorage autosave key `brief-draft-${lang}`
+        const draftKey = `brief-draft-${currentLang}`;
+        const serialize = () => {
+            const data: Record<string, any> = {};
+            const fd = new FormData(form);
+            const keys = new Set<string>();
+            for (const [k] of (fd as any).entries()) keys.add(k as string);
+            keys.forEach((key) => {
+                const vals = fd.getAll(key);
+                if (vals.length > 1) data[key] = vals;
+                else data[key] = vals[0];
+            });
+            Array.from(form.elements).forEach((el: any) => {
+                if (!el.name) return;
+                if (el.type === "checkbox" || el.type === "radio") return;
+                if (!(el.name in data)) data[el.name] = el.value;
+            });
+            try { localStorage.setItem(draftKey, JSON.stringify(data)); } catch {}
+        };
+        const restore = () => {
+            try {
+                const raw = localStorage.getItem(draftKey);
+                if (!raw) return;
+                const data = JSON.parse(raw);
+                Object.entries(data).forEach(([key, value]) => {
+                    const els = form.querySelectorAll(`[name="${key}"]`);
+                    if (!els.length) return;
+                    els.forEach((el: any) => {
+                        if (el.type === "checkbox" || el.type === "radio") {
+                            if (Array.isArray(value)) {
+                                el.checked = (value as any[]).includes(el.value);
+                            } else {
+                                if (el.value === value) el.checked = true;
+                                if (value === "on" && el.type === "checkbox") el.checked = true;
+                            }
+                        } else {
+                            el.value = value as string;
+                        }
+                        if (el.type === "checkbox" && el.value === "other" && el.checked) {
+                            const otherInputDiv = el.closest(".checkbox-group")?.nextElementSibling as HTMLElement | null;
+                            if (otherInputDiv && otherInputDiv.classList.contains("other-input")) {
+                                otherInputDiv.style.display = "block";
+                            }
+                        }
+                    });
+                });
+            } catch {}
+        };
+        restore();
+        form.addEventListener("input", serialize);
+        form.addEventListener("change", serialize);
+
+        // Кнопка "Очистить черновик" рядом с submit
+        const submitContainer = form.querySelector(".form-submit-container") as HTMLElement | null;
+        let clearBtn = document.getElementById("brief-clear-draft") as HTMLButtonElement | null;
+        if (submitContainer && !clearBtn) {
+            clearBtn = document.createElement("button");
+            clearBtn.type = "button";
+            clearBtn.id = "brief-clear-draft";
+            clearBtn.textContent = currentLang === 'ru' ? "Очистить черновик" : "Clear draft";
+            (clearBtn as HTMLElement).style.marginLeft = "12px";
+            clearBtn.className = "cta-button cta-button--secondary";
+            (clearBtn as HTMLElement).style.background = "transparent";
+            (clearBtn as HTMLElement).style.border = "1px solid var(--border-color)";
+            (clearBtn as HTMLElement).style.color = "var(--text-secondary-color)";
+            submitContainer.appendChild(clearBtn);
+        }
+        if (clearBtn) {
+            clearBtn.addEventListener("click", () => {
+                try { localStorage.removeItem(draftKey); } catch {}
+                form.reset();
+                form.querySelectorAll<HTMLElement>(".other-input").forEach((el) => (el.style.display = "none"));
+                updateProgress(1);
+                form.querySelectorAll(".error-field").forEach((el) => el.classList.remove("error-field"));
+                const hiddenErrors = form.querySelectorAll(".error-text:not(.hidden)");
+                hiddenErrors.forEach((el) => el.classList.add("hidden"));
+                const consentErr = document.getElementById("consent-error");
+                if (consentErr) consentErr.classList.add("hidden");
+                const siteTypeErr = document.getElementById("site-type-error");
+                if (siteTypeErr) siteTypeErr.classList.add("hidden");
+                const siteTypeGroup = document.getElementById("site-type-group");
+                if (siteTypeGroup) siteTypeGroup.classList.remove("error-field");
+            });
+        }
 
         // --- Logic for showing/hiding "Other" field ---
         const otherCheckboxes = form.querySelectorAll<HTMLInputElement>(
@@ -1039,6 +1161,27 @@ input[type="checkbox"]:checked+span::after {
                 if (siteTypeGroup) siteTypeGroup.classList.add("error-field");
                 if (siteTypeError) siteTypeError.classList.remove("hidden");
                 isValid = false;
+            }
+
+            // --- Validate contacts (email regex if contains @ else 7 digits) ---
+            const contactsInput = form.querySelector<HTMLInputElement>('#contacts');
+            if (contactsInput) {
+                const val = contactsInput.value.trim();
+                if (val) {
+                    if (val.includes('@')) {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(val)) {
+                            contactsInput.classList.add("error-field");
+                            isValid = false;
+                        }
+                    } else {
+                        const digits = val.replace(/\D/g, '');
+                        if (digits.length < 7) {
+                            contactsInput.classList.add("error-field");
+                            isValid = false;
+                        }
+                    }
+                }
             }
 
             if (!consentCheckbox.checked) {
@@ -1120,6 +1263,9 @@ input[type="checkbox"]:checked+span::after {
                         }),
                     );
                     form.reset();
+                    try { localStorage.removeItem(draftKey); } catch {}
+                    updateProgress(1);
+                    form.querySelectorAll<HTMLElement>(".other-input").forEach((el) => (el.style.display = "none"));
                 } else {
                     if (response.status === 400) {
                         const resData = await response.json();

@@ -209,7 +209,7 @@ const pageDescription = t('locations_page_desc');
 </BaseLayout>
 
 <script>
-    // Tab Filtering Logic
+    // Tab Filtering Logic + URLSearchParams auto-filter (Footer deep-links: ?region=cis/europe/americas)
     function initFilters() {
         const tabs = document.querySelectorAll('.tab-btn');
         const cards = document.querySelectorAll('.country-card');
@@ -217,40 +217,104 @@ const pageDescription = t('locations_page_desc');
 
         if (!tabs.length || !cards.length) return;
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Update active state
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-selected', 'false');
-                });
-                tab.classList.add('active');
-                tab.setAttribute('aria-selected', 'true');
+        const VALID_FILTERS = ['all', 'cis', 'europe', 'asia', 'americas'];
+        const ALIAS_MAP = {
+            usa: 'americas',
+            us: 'americas',
+            america: 'americas',
+            'america & oceania': 'americas',
+        } as Record<string, string>;
 
-                // Filter logic
-                const filterValue = tab.getAttribute('data-filter');
-                let count = 0;
+        function normalizeFilter(raw: string | null): string | null {
+            if (!raw) return null;
+            let v = raw.toLowerCase().trim();
+            if ((ALIAS_MAP as Record<string, string>)[v]) v = (ALIAS_MAP as Record<string, string>)[v];
+            return VALID_FILTERS.includes(v) ? v : null;
+        }
 
-                cards.forEach(card => {
-                    const el = card as HTMLElement;
-                    if (filterValue === 'all' || el.dataset.region === filterValue) {
-                        el.style.display = 'flex'; // Country cards use flex flex-col!
-                        // Force a reflow to restart animations
-                        void el.offsetWidth;
-                        el.classList.add('fade-in');
-                        setTimeout(() => el.classList.add('visible'), 50);
-                        count++;
-                    } else {
-                        el.style.display = 'none';
-                        el.classList.remove('visible');
-                    }
-                });
+        function getRegionFromUrl(): string | null {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                let raw = params.get('region') || params.get('filter') || '';
+                if (!raw) {
+                    const hash = window.location.hash.replace(/^#/, '');
+                    raw = hash;
+                }
+                return normalizeFilter(raw);
+            } catch {
+                return null;
+            }
+        }
 
-                if (noResults) {
-                    noResults.style.display = count === 0 ? 'block' : 'none';
+        function applyFilter(filterValue: string | null, updateUrl = false) {
+            const normalized = normalizeFilter(filterValue) || 'all';
+            let count = 0;
+
+            // Update active tab
+            tabs.forEach((t) => {
+                const isActive = t.getAttribute('data-filter') === normalized;
+                t.classList.toggle('active', isActive);
+                t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            cards.forEach((card) => {
+                const el = card as HTMLElement;
+                if (normalized === 'all' || el.dataset.region === normalized) {
+                    el.style.display = 'flex';
+                    void el.offsetWidth;
+                    el.classList.add('fade-in');
+                    setTimeout(() => el.classList.add('visible'), 50);
+                    count++;
+                } else {
+                    el.style.display = 'none';
+                    el.classList.remove('visible');
                 }
             });
+
+            if (noResults) {
+                (noResults as HTMLElement).style.display = count === 0 ? 'block' : 'none';
+            }
+
+            if (updateUrl) {
+                try {
+                    const url = new URL(window.location.href);
+                    if (normalized === 'all') {
+                        url.searchParams.delete('region');
+                        url.searchParams.delete('filter');
+                        if (url.hash) url.hash = '';
+                    } else {
+                        url.searchParams.set('region', normalized);
+                        url.searchParams.delete('filter');
+                        if (url.hash) url.hash = '';
+                    }
+                    history.replaceState(null, '', url.toString());
+                } catch {}
+            }
+        }
+
+        // Attach tab listeners once (avoid double bind on astro:page-load)
+        tabs.forEach((tab) => {
+            const el = tab as HTMLElement;
+            if (el.dataset.filterListener === 'true') return;
+            el.dataset.filterListener = 'true';
+            tab.addEventListener('click', () => {
+                const filterValue = tab.getAttribute('data-filter');
+                applyFilter(filterValue, true);
+            });
         });
+
+        // Auto-apply filter from URL (?region=cis / ?filter=cis / #cis) on first load
+        const initial = getRegionFromUrl();
+        if (initial && initial !== 'all') {
+            applyFilter(initial, false);
+        } else {
+            // Initial animation - much simpler to avoid main thread jank
+            requestAnimationFrame(() => {
+                cards.forEach((card) => {
+                    card.classList.add('visible');
+                });
+            });
+        }
 
         // Show More Logic
         const toggleBtns = document.querySelectorAll('.toggle-cities-btn');
@@ -282,13 +346,6 @@ const pageDescription = t('locations_page_desc');
                     if (textSpan) textSpan.textContent = newBtn.getAttribute('data-text-hide');
                     if (icon) icon.style.transform = 'rotate(180deg)';
                 }
-            });
-        });
-
-        // Initial animation - much simpler to avoid main thread jank
-        requestAnimationFrame(() => {
-            cards.forEach((card) => {
-                card.classList.add('visible');
             });
         });
     }

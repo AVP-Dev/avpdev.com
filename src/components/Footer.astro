@@ -100,17 +100,18 @@ const t = useTranslations(lang);
             <div class="geo-links-row">
                 {
                     [
-                        { slug: "belarus", ru: "Беларусь", en: "Belarus" },
-                        { slug: "russia", ru: "Россия", en: "Russia" },
+                        { slug: "belarus", ru: "Беларусь", en: "Belarus", region: "cis" },
+                        { slug: "russia", ru: "Россия", en: "Russia", region: "cis" },
                         {
                             slug: "kazakhstan",
                             ru: "Казахстан",
                             en: "Kazakhstan",
+                            region: "cis",
                         },
-                        { slug: "europe", ru: "Европа", en: "Europe" },
-                        { slug: "usa", ru: "США", en: "USA" },
+                        { slug: "europe", ru: "Европа", en: "Europe", region: "europe" },
+                        { slug: "usa", ru: "США", en: "USA", region: "americas" },
                     ].map((loc) => (
-                        <a href={`/${lang}/locations/`} class="geo-tag">
+                        <a href={`/${lang}/locations/?region=${loc.region}`} class="geo-tag">
                             {lang === "ru" ? loc.ru : loc.en}
                         </a>
                     ))
