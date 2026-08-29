@@ -16,12 +16,12 @@ const t = useTranslations(lang as "en" | "ru");
 ---
 
 <BaseLayout title="brief_page_title" description="brief_page_desc">
+    <div id="brief-progress" class="brief-progress"> <div class="brief-progress__bar"><div class="brief-progress__fill" id="brief-progress-fill"></div></div> <div class="brief-progress__text" id="brief-progress-text">{lang === 'ru' ? 'Шаг 1 из 10 — 10%' : 'Step 1 of 10 — 10%'}</div> </div>
     <section id="brief-form-section" class="case-study-header">
         <div id="particles-js"></div>
         <div class="container container-narrow">
             <h1 class="section-title" set:html={t("brief_title")} />
             <p class="section-subtitle">{t("brief_subtitle")}</p>
-            <div id="brief-progress" class="brief-progress"> <div class="brief-progress__bar"><div class="brief-progress__fill" id="brief-progress-fill"></div></div> <div class="brief-progress__text" id="brief-progress-text">{lang === 'ru' ? 'Шаг 1 из 10 — 10%' : 'Step 1 of 10 — 10%'}</div> </div>
 
             <form id="brief-form" class="brief-form" novalidate data-turnstile-alert={t("brief_alert_turnstile")}>
                 <fieldset class="form-block fade-in">
@@ -955,21 +955,47 @@ input[type="checkbox"]:checked+span::after {
     /* Particles background (same as home hero) */
     #brief-form-section {
         position: relative;
-        overflow: hidden;
+        overflow: visible;
     }
     #brief-form-section #particles-js {
         position: absolute;
         inset: 0;
         z-index: 0;
+        pointer-events: none;
     }
     #brief-form-section .container-narrow {
         position: relative;
         z-index: 2;
+        overflow: visible;
     }
-    .brief-progress {position:sticky; top:78px; z-index:10; background:var(--primary-color); border:1px solid var(--border-color); border-radius:8px; padding:8px 12px; margin-bottom:1.5rem}
+    .brief-progress {
+        position: fixed;
+        top: 64px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(800px, calc(100% - 40px));
+        z-index: 100;
+        background: var(--primary-color);
+        background: color-mix(in srgb, var(--primary-color) 92%, transparent);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 10px 14px;
+        box-shadow: var(--card-shadow), 0 4px 20px rgba(0,0,0,0.08);
+    }
     .brief-progress__bar {height:4px; background:var(--border-color); border-radius:2px; overflow:hidden}
     .brief-progress__fill {height:100%; width:10%; background:var(--accent-gradient); transition:width 0.3s}
     .brief-progress__text {font-size:0.85rem; color:var(--text-secondary-color); margin-top:6px; text-align:center}
+    @media (max-width: 768px) {
+        .brief-progress {
+            top: 56px;
+            width: calc(100% - 24px);
+            padding: 8px 12px;
+        }
+    }
+    /* offset for fixed progress — prevent content jump under fixed bar */
+    .brief-form { margin-top: 4rem; }
 </style>
 
 <!-- Фоновые частицы (как на главной) -->
