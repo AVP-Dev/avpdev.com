@@ -30,11 +30,23 @@ const t = useTranslations(lang);
             <div class="terminal-crt-glow"></div>
             <div id="terminal-output" class="terminal-output">
                 <div class="t-line t-banner">
-                    =====================================================<br />
+                    ========================================================<br />
                     * * *  AVP-DEV CYBERNETIC TERMINAL v1.984  * * *<br />
                     (C) 1984-2026 AVP-DEV DIGITAL SYSTEMS CORP.<br />
-                    TYPE '<span class="hl">help</span>' FOR COMMANDS • '<span class="hl">matrix</span>' FOR RAIN • '<span class="hl">play</span>' FOR ARCADE<br />
-                    =====================================================
+                    STATUS: ONLINE // MEMORY: 640KB // AUTH: GUEST-DEV<br />
+                    ========================================================<br />
+                    <span class="hl-head">COMMAND QUICK LAUNCH (type or click):</span><br />
+                    • <span class="hl t-cmd-chip" data-cmd="play">play</span>     - 🕹️ Launch Retro Arcade (Defender & Bricks)<br />
+                    • <span class="hl t-cmd-chip" data-cmd="hire">hire</span>     - 💬 Telegram Uplink to @AVP_Dev<br />
+                    • <span class="hl t-cmd-chip" data-cmd="skills">skills</span>   - ⚡ Tech Stack & Architecture Meters<br />
+                    • <span class="hl t-cmd-chip" data-cmd="projects">projects</span> - 🚀 Client Case Studies & Production<br />
+                    • <span class="hl t-cmd-chip" data-cmd="about">about</span>    - 👤 Studio Dossier & Mission<br />
+                    • <span class="hl t-cmd-chip" data-cmd="music">music</span>    - 🎵 Next 8-Bit Chiptune Track<br />
+                    • <span class="hl t-cmd-chip" data-cmd="matrix">matrix</span>   - 🟢 Green Digital Rain Animation<br />
+                    • <span class="hl t-cmd-chip" data-cmd="quote">quote</span>    - 🤖 Cyberpunk Quote Generator<br />
+                    • <span class="hl t-cmd-chip" data-cmd="godmode">godmode</span>  - ⭐ Konami Cheat Fireworks<br />
+                    • <span class="hl t-cmd-chip" data-cmd="clear">clear</span>    - 🧹 Clear Screen  •  <span class="hl t-cmd-chip" data-cmd="exit">exit</span> - ❌ Close Window<br />
+                    ========================================================
                 </div>
             </div>
 
@@ -275,6 +287,13 @@ const t = useTranslations(lang);
             if (target.closest('#terminal-close-btn')) {
                 e.preventDefault();
                 closeTerminal();
+                return;
+            }
+
+            const chip = target.closest('.t-cmd-chip') as HTMLElement | null;
+            if (chip && chip.dataset.cmd) {
+                e.preventDefault();
+                executeCommand(chip.dataset.cmd);
                 return;
             }
         });

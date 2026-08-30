@@ -2821,6 +2821,22 @@ html.retro-mode .retro-dock-player {
   text-decoration: underline;
 }
 
+.t-cmd-chip {
+  cursor: pointer;
+  text-decoration: underline dotted;
+  padding: 1px 4px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.t-cmd-chip:hover {
+  color: #080612 !important;
+  background: #00ff66 !important;
+  text-shadow: none !important;
+  box-shadow: 0 0 10px #00ff66;
+}
+
 .terminal-input-row {
   display: flex;
   align-items: center;
