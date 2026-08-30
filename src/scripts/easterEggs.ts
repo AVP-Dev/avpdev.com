@@ -166,37 +166,42 @@ function spawnPixelCoinShower() {
 
 // --- 3. OVERCLOCK LOGO MODE (3x Click on Logo with navigation prevention) ---
 export function initLogoOverclock() {
+    if ((window as any).__logoOverclockInit) return;
+    (window as any).__logoOverclockInit = true;
+
     let clickCount = 0;
     let clickTimer: any = null;
 
-    // Use capture phase so we can preventDefault navigation on 2nd and 3rd clicks
     document.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
-        const logo = target?.closest('.logo, .footer-logo, .site-logo, .site-header .logo');
+        const logo = target?.closest('.logo, .footer-logo, .site-logo, .site-header .logo') as HTMLAnchorElement | null;
         if (!logo) return;
 
         clickCount++;
 
-        if (clickCount === 1) {
-            // Wait to see if more clicks arrive
-            if (clickTimer) clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => {
-                clickCount = 0;
-            }, 600);
-        } else if (clickCount === 2) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (clickTimer) clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => {
-                clickCount = 0;
-            }, 600);
-        } else if (clickCount >= 3) {
+        if (clickCount >= 3) {
             e.preventDefault();
             e.stopPropagation();
             if (clickTimer) clearTimeout(clickTimer);
             clickCount = 0;
             triggerOverclockMode();
+            return;
         }
+
+        // Delay single navigation by 340ms to detect rapid 3x click
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (clickTimer) clearTimeout(clickTimer);
+        const destination = logo.href;
+
+        clickTimer = setTimeout(() => {
+            if (clickCount > 0 && clickCount < 3 && destination) {
+                clickCount = 0;
+                window.location.href = destination;
+            }
+            clickCount = 0;
+        }, 340);
     }, true);
 }
 
