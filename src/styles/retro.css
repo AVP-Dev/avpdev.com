@@ -1941,81 +1941,89 @@ html.retro-mode .retro-dock-player {
 
 .dpad-group {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .vpad-btn {
-  width: 48px;
-  height: 44px;
-  background: rgba(0, 240, 255, 0.15);
-  border: 1.5px solid #00f0ff;
+  width: 54px;
+  height: 50px;
+  background: rgba(0, 240, 255, 0.18);
+  border: 2px solid #00f0ff;
   color: #00f0ff;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  border-radius: 10px;
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
   touch-action: manipulation;
   user-select: none;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
 }
 
 .vpad-btn:active {
   background: #00f0ff;
   color: #06040d;
-  box-shadow: 0 0 15px #00f0ff;
+  box-shadow: 0 0 20px #00f0ff;
+  transform: scale(0.95);
 }
 
 .action-group {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .vpad-action-btn {
-  height: 44px;
-  border-radius: 8px;
+  height: 50px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   touch-action: manipulation;
   user-select: none;
   cursor: pointer;
+  transition: transform 0.1s ease;
 }
 
 .vpad-action-btn.shield-btn {
-  width: 42px;
+  width: 48px;
   background: rgba(0, 255, 102, 0.2);
-  border: 1.5px solid #00ff66;
-  font-size: 1.1rem;
+  border: 2px solid #00ff66;
+  font-size: 1.25rem;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
 }
 
 .vpad-action-btn.shield-btn:active {
   background: #00ff66;
-  box-shadow: 0 0 15px #00ff66;
+  box-shadow: 0 0 20px #00ff66;
+  transform: scale(0.95);
 }
 
 .vpad-action-btn.emp-btn {
-  width: 42px;
+  width: 48px;
   background: rgba(255, 230, 0, 0.2);
-  border: 1.5px solid #ffe600;
-  font-size: 1.1rem;
+  border: 2px solid #ffe600;
+  font-size: 1.25rem;
+  box-shadow: 0 0 10px rgba(255, 230, 0, 0.3);
 }
 
 .vpad-action-btn.emp-btn:active {
   background: #ffe600;
-  box-shadow: 0 0 15px #ffe600;
+  box-shadow: 0 0 20px #ffe600;
+  transform: scale(0.95);
 }
 
 .vpad-action-btn.fire-btn {
-  width: 58px;
-  background: rgba(255, 0, 127, 0.25);
-  border: 1.5px solid #ff007f;
-  font-size: 1.2rem;
-  box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+  width: 72px;
+  background: rgba(255, 0, 127, 0.3);
+  border: 2px solid #ff007f;
+  font-size: 1.35rem;
+  box-shadow: 0 0 14px rgba(255, 0, 127, 0.5);
 }
 
 .vpad-action-btn.fire-btn:active {
   background: #ff007f;
-  box-shadow: 0 0 20px #ff007f;
+  box-shadow: 0 0 25px #ff007f;
+  transform: scale(0.95);
 }
 
 /* --------------------------------------------------------------------------

@@ -482,15 +482,16 @@ export class RetroArcadeRuntime {
             }
         }
 
-        // Update Invaders Movement & Attacks (Constant stable pacing across all levels)
+        // Update Invaders Movement & Attacks (Progressive shooting per level)
         if (this.invaders.length > 0) {
             let hitEdge = false;
-            // 100% constant speed across all levels (no sudden speedups)
+            // 100% constant speed across all levels (stable and predictable)
             const speed = 0.40 * step;
 
-            // Maximum 2 enemy bullets on screen (fair and readable)
+            // Progressive bullet scaling: Level 1: 2 bullets, Level 2: 3, Level 3: 4, Level 4: 5, Level 5: 6
             const activeEnemyBullets = this.bullets.filter(b => b.isEnemy).length;
-            const maxEnemyBullets = this.currentLevel === 5 ? 3 : 2;
+            const maxEnemyBullets = 1 + this.currentLevel;
+            const shootChance = 0.0009 + (this.currentLevel * 0.0004);
 
             for (const inv of this.invaders) {
                 inv.x += speed * this.fleetDirection;
@@ -503,9 +504,10 @@ export class RetroArcadeRuntime {
                     inv.isCloaked = !inv.isCloaked;
                 }
 
-                // Rare, controlled enemy shots
-                if (activeEnemyBullets < maxEnemyBullets && Math.random() < 0.0008) {
-                    this.shootEnemyBullet(inv.x + inv.width / 2, inv.y + inv.height);
+                // Progressive enemy shots
+                if (activeEnemyBullets < maxEnemyBullets && Math.random() < shootChance) {
+                    const bulletVy = 1.85 + (this.currentLevel - 1) * 0.08;
+                    this.shootEnemyBullet(inv.x + inv.width / 2, inv.y + inv.height, 0, bulletVy);
                 }
 
                 // Check invasion reaching player zone
@@ -931,12 +933,53 @@ export class RetroArcadeRuntime {
             if (e.code === 'KeyQ') this.keys.emp = false;
         };
 
+        // Direct Touch Drag / Tap on Canvas for mobile players
+        let isTouchingCanvas = false;
+        const handleTouchStart = (e: TouchEvent) => {
+            if (e.touches.length > 0) {
+                isTouchingCanvas = true;
+                const rect = this.canvas.getBoundingClientRect();
+                const touchX = e.touches[0].clientX - rect.left;
+                const scaleX = this.canvas.width / rect.width;
+                const targetX = touchX * scaleX - this.player.width / 2;
+                this.player.x = Math.max(10, Math.min(this.canvas.width - this.player.width - 10, targetX));
+                this.keys.shoot = true;
+                if (this.isGameOver || this.isVictory) {
+                    this.start();
+                }
+            }
+        };
+
+        const handleTouchMove = (e: TouchEvent) => {
+            if (isTouchingCanvas && e.touches.length > 0) {
+                e.preventDefault();
+                const rect = this.canvas.getBoundingClientRect();
+                const touchX = e.touches[0].clientX - rect.left;
+                const scaleX = this.canvas.width / rect.width;
+                const targetX = touchX * scaleX - this.player.width / 2;
+                this.player.x = Math.max(10, Math.min(this.canvas.width - this.player.width - 10, targetX));
+            }
+        };
+
+        const handleTouchEnd = () => {
+            isTouchingCanvas = false;
+            this.keys.shoot = false;
+        };
+
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp);
+        this.canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
+        this.canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        this.canvas.addEventListener('touchend', handleTouchEnd);
+        this.canvas.addEventListener('touchcancel', handleTouchEnd);
 
         this.cleanupListeners.push(() => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
+            this.canvas.removeEventListener('touchstart', handleTouchStart);
+            this.canvas.removeEventListener('touchmove', handleTouchMove);
+            this.canvas.removeEventListener('touchend', handleTouchEnd);
+            this.canvas.removeEventListener('touchcancel', handleTouchEnd);
         });
     }
 
@@ -965,3 +1008,4 @@ export class RetroArcadeRuntime {
         }
     }
 }
+
