@@ -1,15 +1,19 @@
 import { initPortfolio } from './portfolio';
 import { retroAudio } from './retroAudio';
+import { initKonamiCode, initLogoOverclock, initDevToolsApi, initFooterMascot } from './easterEggs';
 
 // Developer Console Easter Egg Welcome Banner (immediate execution on script load)
 if (typeof window !== 'undefined' && !(window as any).__consoleBannerPrinted) {
     (window as any).__consoleBannerPrinted = true;
     console.log(
-        "%c  ___ _   _____  ____  _______    __   ___ ___ _  _ \n /   \\ \\ / / _ \\/  _ \\/ __/\\ \\  / /  / _ \\ _ ) || |\n/ /_\\ \\ V / ___/  / // _\\   \\ \\/ /  | // / _ \\_  _|\n/_/   \\_\\_/_/   \\____/___/    \\__/    \\___|___/ |_| \n\n%c🕹️ AVP-DEV CYBERNETIC WEB & AI SYSTEMS // 198X\n%c⚡ Press [ ~ ] or click CLI button to open interactive Terminal.\n⭐ Try commands: hire, quote, matrix, godmode, skills",
+        "%c  ___ _   _____  ____  _______    __   ___ ___ _  _ \n /   \\ \\ / / _ \\/  _ \\/ __/\\ \\  / /  / _ \\ _ ) || |\n/ /_\\ \\ V / ___/  / // _\\   \\ \\/ /  | // / _ \\_  _|\n/_/   \\_\\_/_/   \\____/___/    \\__/    \\___|___/ |_| \n\n%c🕹️ AVP-DEV CYBERNETIC WEB & AI SYSTEMS // 198X\n%c⚡ Press [ ~ ] or click CLI button to open interactive Terminal.\n⭐ Type %cavp.help()%c in console for secret developer commands & cheats!",
         "color: #ff007f; font-weight: bold; font-family: monospace; font-size: 11px;",
         "color: #00f0ff; font-weight: bold; font-size: 12px;",
+        "color: #ffe600; font-family: monospace; font-size: 11px;",
+        "color: #00ff88; font-weight: bold; font-family: monospace; font-size: 12px; text-decoration: underline;",
         "color: #ffe600; font-family: monospace; font-size: 11px;"
     );
+    initDevToolsApi();
 }
 
 // Делегирование событий мобильного меню.
@@ -54,7 +58,7 @@ function setupMobileMenu() {
         // Ссылка в мобильном меню: закрыть после перехода
         const mobileNav = document.querySelector('.mobile-nav');
         if (mobileNav?.classList.contains('open') && mobileNav.contains(target)) {
-            const link = target.closest('a');
+            const link = target.closest('a, [data-open-terminal], [data-open-arcade]');
             if (link && !target.closest('.mobile-accordion-trigger')) {
                 toggleMenu(false);
             }
@@ -332,24 +336,25 @@ function initializePage() {
         }
         printConsoleBanner();
 
-        // Hotkey: `~` (Tilde / Backquote) to open/toggle Retro Terminal Modal
+        // Hotkey: `~` (Tilde / Backquote) to open/toggle Retro Terminal Modal across all layouts
         document.addEventListener('keydown', (e) => {
-            if (e.key === '`' || e.key === '~' || e.key === 'ё' || e.key === 'Ё') {
+            const isTilde = e.code === 'Backquote' || 
+                            e.keyCode === 192 || 
+                            (e as any).which === 192 || 
+                            e.key === '`' || 
+                            e.key === '~' || 
+                            e.key === 'ё' || 
+                            e.key === 'Ё' || 
+                            e.key === '§' || 
+                            e.key === 'Dead';
+
+            if (isTilde) {
                 const target = e.target as HTMLElement;
                 if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
                     return;
                 }
                 e.preventDefault();
-                const terminalModal = document.getElementById('retro-terminal-modal');
-                if (terminalModal) {
-                    const isVisible = terminalModal.classList.contains('visible');
-                    if (isVisible) {
-                        terminalModal.classList.remove('visible');
-                        document.body.classList.remove('modal-open');
-                    } else {
-                        document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'retro-terminal-modal' } }));
-                    }
-                }
+                document.dispatchEvent(new CustomEvent('open-retro-terminal'));
             }
         });
 
@@ -551,6 +556,11 @@ function initializePage() {
             }
         });
     }
+
+    // --- CYBERNETIC EASTER EGGS SUITE ---
+    initKonamiCode();
+    initLogoOverclock();
+    initFooterMascot();
 }
 
 let arcadeSignalInterval: any = null;

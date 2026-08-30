@@ -606,7 +606,7 @@ export class RoadRunRuntime {
 
         // 5. Update Traffic, Items, Roadside
         this.updateTraffic(dt);
-        this.updateRoadside(dt, deltaMeters);
+        this.updateRoadside(deltaMeters);
         this.updateRoadItems(dt, deltaMeters);
 
         // 6. Collision & Near-Miss Checks
@@ -663,7 +663,7 @@ export class RoadRunRuntime {
         }
     }
 
-    private updateRoadside(dt: number, deltaMeters: number) {
+    private updateRoadside(deltaMeters: number) {
         const stage = STAGES[this.currentStageIndex];
         for (let i = this.roadside.length - 1; i >= 0; i--) {
             const obj = this.roadside[i];

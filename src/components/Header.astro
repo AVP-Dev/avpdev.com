@@ -140,10 +140,10 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
             </div>
         </li>
         <li><a href={getRelativeLocaleUrl(lang, 'project')}>{t("nav_portfolio")}</a></li>
-<li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
-<li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
-<li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services') + '#faq'}>{t("nav_faq")}</a></li>
-<li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
+        <li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
+        <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
+        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services') + '#faq'}>{t("nav_faq")}</a></li>
+        <li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
     </ul>
     <div class="mobile-controls">
         <div class="mobile-mode-row">
@@ -161,6 +161,15 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
             </button>
         </div>
         <div class="mobile-tools-row">
+            <button
+                type="button"
+                class="control-btn terminal-trigger"
+                data-open-terminal
+                aria-label="Open Cyber Terminal"
+                title={lang === 'ru' ? 'Открыть Терминал CLI [ ~ ]' : 'Open CLI Terminal [ ~ ]'}
+            >
+                <i class="fa-solid fa-terminal" aria-hidden="true"></i>
+            </button>
             <button
                 class="control-btn theme-switcher"
                 aria-label={t("aria_theme_switcher")}

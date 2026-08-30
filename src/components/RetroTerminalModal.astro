@@ -127,6 +127,19 @@ const t = useTranslations(lang);
   Email:    <a href="mailto:hello@avpdev.com" class="t-link">hello@avpdev.com</a>
   Brief:    <a href="/ru/brief/" class="t-link">/brief/ (Online Project Estimator)</a>
         `,
+        'coffee': `
+<span class="hl">HTTP 418: I'M A TEAPOT ☕</span>
+  [||||||||||||||||||||] 100% Brewed
+  Origin: High-Altitude Artisan Arabica
+  Purpose: Fuel for late-night bug-free deployments & zero-latency code.
+        `,
+        'doom': `
+<span class="hl-head">💀 DOOM 1993 PROTOCOL:</span>
+   [======]
+  /  ..  \\  IDKFA: ALL WEAPONS & KEYS LOADED!
+ |   ==   | IDDQD: DEGREELESSNESS MODE ENGAGED.
+  \\______/  RIP AND TEAR UNTIL IT IS DONE.
+        `,
         'sudo': `<span class="t-err">ACCESS DENIED: AVP-DEV IS SUPERUSER. NICE TRY, MR. FALKEN.</span>`
     };
 
@@ -180,6 +193,37 @@ const t = useTranslations(lang);
             closeTerminal();
             const cheatChip = document.querySelector('.retro-hero-chip.secret-hint') as HTMLElement | null;
             if (cheatChip) cheatChip.click();
+            return;
+        }
+
+        if (cmd === 'idkfa' || cmd === 'iddqd' || cmd === 'doom') {
+            printToTerminal(COMMANDS['doom']);
+            retroAudio.playCarBoost();
+            return;
+        }
+
+        if (cmd === 'dance') {
+            printToTerminal('<span class="hl-head">♪┏(・o･)┛♪ ┗( ･o･)┓♪ ┏(･o･)┛♪ DANCE PARTY!</span>');
+            retroAudio.play1Up();
+            return;
+        }
+
+        if (cmd === 'flip' || cmd === 'barrelroll') {
+            printToTerminal('<span class="hl">🌀 PERFORMING BARREL ROLL...</span>');
+            document.body.style.transition = 'transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
+            document.body.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                document.body.style.transform = '';
+                setTimeout(() => { document.body.style.transition = ''; }, 1200);
+            }, 1200);
+            return;
+        }
+
+        if (cmd === 'turbo' || cmd === 'overclock') {
+            printToTerminal('<span class="hl-head">⚡ 200% OVERCLOCK MODE ENGAGED! ⚡</span>');
+            document.body.classList.add('overclock-active');
+            retroAudio.playCarBoost();
+            setTimeout(() => document.body.classList.remove('overclock-active'), 10000);
             return;
         }
 
@@ -257,8 +301,18 @@ const t = useTranslations(lang);
         (window as any).__terminalDelegationReady = true;
 
         document.addEventListener('keydown', (e) => {
-            // Tilde ~ or Backquote `
-            if (e.key === '`' || e.key === '~' || e.key === 'ё' || e.key === 'Ё') {
+            // Tilde ~ or Backquote ` across any layout (EN, RU, Mac, PC)
+            const isTilde = e.code === 'Backquote' || 
+                            e.keyCode === 192 || 
+                            (e as any).which === 192 || 
+                            e.key === '`' || 
+                            e.key === '~' || 
+                            e.key === 'ё' || 
+                            e.key === 'Ё' || 
+                            e.key === '§' || 
+                            e.key === 'Dead';
+
+            if (isTilde) {
                 const active = document.activeElement;
                 if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA') && active.id !== 'terminal-input') {
                     return;
