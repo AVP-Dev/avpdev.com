@@ -13,9 +13,15 @@ const t = useTranslations(lang);
             <div class="arcade-title-block">
                 <span class="arcade-led-dot"></span>
                 <span class="arcade-cabinet-title">{t("retro_arcade_title")}</span>
-                <span class="arcade-version-badge">v1.984</span>
+                <span class="arcade-version-badge">AVP-ARCADE 2.0</span>
             </div>
             <div class="arcade-top-actions">
+                <button type="button" id="arcade-hub-btn" class="arcade-mini-btn nav-btn" title={lang === 'ru' ? 'Выбор игр' : 'Games Menu'}>
+                    <i class="fa-solid fa-gamepad"></i> <span>{lang === 'ru' ? 'ИГРЫ' : 'GAMES'}</span>
+                </button>
+                <button type="button" id="arcade-hall-btn" class="arcade-mini-btn nav-btn" title={lang === 'ru' ? 'Зал славы' : 'High Scores'}>
+                    <i class="fa-solid fa-trophy"></i> <span>{lang === 'ru' ? 'ТОП' : 'TOP'}</span>
+                </button>
                 <button type="button" id="arcade-pause-btn" class="arcade-mini-btn" title={t("retro_arcade_pause")}>
                     <i class="fa-solid fa-pause"></i>
                 </button>
@@ -27,7 +33,106 @@ const t = useTranslations(lang);
 
         <!-- Canvas Screen Wrapper with CRT Scanline & Glass curvature -->
         <div class="arcade-screen-viewport">
-            <canvas id="retro-arcade-canvas"></canvas>
+            <!-- 1. Selection Hub Screen -->
+            <div id="arcade-hub-view" class="arcade-view-panel active">
+                <div class="hub-header">
+                    <div class="hub-subtitle">{lang === 'ru' ? 'ВЫБЕРИТЕ КАРТРИДЖ ДЛЯ ЗАПУСКА' : 'SELECT CARTRIDGE TO PLAY'}</div>
+                    <div class="hub-coins-badge">● FREE PLAY ● 99 CREDITS</div>
+                </div>
+
+                <div class="arcade-games-grid">
+                    <!-- Game 1: Space Defender 1984 -->
+                    <div class="arcade-game-card" data-launch-game="space">
+                        <div class="card-badge hot">★ POPULAR</div>
+                        <div class="card-icon">🚀</div>
+                        <div class="card-info">
+                            <div class="card-title">SPACE DEFENDER 1984</div>
+                            <div class="card-genre">SHMUP • 5 LEVELS • BOSSES</div>
+                            <div class="card-desc">
+                                {lang === 'ru' 
+                                    ? 'Космический шутер с парирующим щитом, стелс-волнами и EMP-взрывом.' 
+                                    : 'Arcade Space shooter with Parry Shield, stealth waves, and EMP blast.'}
+                            </div>
+                        </div>
+                        <button type="button" class="card-play-btn">
+                            <i class="fa-solid fa-play"></i> {lang === 'ru' ? 'ЗАПУСТИТЬ' : 'PLAY'}
+                        </button>
+                    </div>
+
+                    <!-- Game 2: Neon Cyber Bricks -->
+                    <div class="arcade-game-card" data-launch-game="bricks">
+                        <div class="card-badge new">★ NEW</div>
+                        <div class="card-icon">🧱</div>
+                        <div class="card-info">
+                            <div class="card-title">NEON CYBER BRICKS</div>
+                            <div class="card-genre">BREAKOUT • MULTIBALL • LASERS</div>
+                            <div class="card-desc">
+                                {lang === 'ru' 
+                                    ? 'Скоростной неоновый арканоид с мульти-мячами, бонусами и искрами.' 
+                                    : 'High-speed breakout with multiballs, powerups, and laser drops.'}
+                            </div>
+                        </div>
+                        <button type="button" class="card-play-btn">
+                            <i class="fa-solid fa-play"></i> {lang === 'ru' ? 'ЗАПУСТИТЬ' : 'PLAY'}
+                        </button>
+                    </div>
+
+                    <!-- Game 3: Cyber Outrunner (Coming Soon) -->
+                    <div class="arcade-game-card coming-soon">
+                        <div class="card-badge soon">★ SOON</div>
+                        <div class="card-icon">🏎️</div>
+                        <div class="card-info">
+                            <div class="card-title">CYBER RACER 2084</div>
+                            <div class="card-genre">SYNTHWAVE 3D HIGHWAY</div>
+                            <div class="card-desc">
+                                {lang === 'ru' 
+                                    ? 'Скоростная гонка по неоновому шоссе сквозь трафик.' 
+                                    : 'High-speed synthwave highway racing through neon traffic.'}
+                            </div>
+                        </div>
+                        <button type="button" class="card-play-btn disabled" disabled>
+                            <i class="fa-solid fa-lock"></i> {lang === 'ru' ? 'В РАЗРАБОТКЕ' : 'IN DEV'}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hub-footer">
+                    <button type="button" id="hub-open-leaderboard" class="hub-action-btn">
+                        <i class="fa-solid fa-trophy"></i> {lang === 'ru' ? 'ТАБЛИЦА РЕКОРДОВ (HALL OF FAME)' : 'VIEW HALL OF FAME'}
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Hall of Fame / Leaderboard View -->
+            <div id="arcade-hall-view" class="arcade-view-panel">
+                <div class="hall-header">
+                    <div class="hall-title">🏆 HALL OF FAME 🏆</div>
+                    <div class="hall-subtitle">{lang === 'ru' ? 'ЛУЧШИЕ РЕЗУЛЬТАТЫ АРКАДЫ' : 'ALL-TIME HIGH SCORES'}</div>
+                </div>
+                <div class="hall-scores-table">
+                    <div class="table-head">
+                        <span>RANK</span>
+                        <span>PILOT</span>
+                        <span>GAME</span>
+                        <span>SCORE</span>
+                    </div>
+                    <div id="hall-score-rows" class="table-body">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <div class="hall-footer">
+                    <button type="button" id="hall-back-hub-btn" class="hub-action-btn">
+                        <i class="fa-solid fa-arrow-left"></i> {lang === 'ru' ? 'ВЫБОР ИГР' : 'GAMES MENU'}
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. Active Game Canvas Screen View -->
+            <div id="arcade-game-view" class="arcade-view-panel">
+                <canvas id="retro-arcade-canvas"></canvas>
+            </div>
+
+            <!-- CRT scanlines overlay -->
             <div class="arcade-crt-scanlines"></div>
             <div class="arcade-crt-glow"></div>
         </div>
@@ -40,6 +145,7 @@ const t = useTranslations(lang);
                 <div class="hint-item"><span class="k-tag">SPACE / W</span> {t("retro_arcade_hint_fire")}</div>
                 <div class="hint-item"><span class="k-tag">SHIFT</span> {t("retro_arcade_hint_parry")}</div>
                 <div class="hint-item"><span class="k-tag">Q</span> {t("retro_arcade_hint_emp")}</div>
+                <div class="hint-item"><span class="k-tag">ESC</span> {lang === 'ru' ? 'Меню' : 'Menu'}</div>
             </div>
 
             <!-- Virtual Touch Gamepad for Mobile Devices -->
@@ -69,9 +175,81 @@ const t = useTranslations(lang);
 </div>
 
 <script>
+    import { retroAudio } from '../scripts/retroAudio';
+
+    let currentGameType: 'space' | 'bricks' | null = null;
     let runtimeInstance: any = null;
 
-    async function launchArcadeGame() {
+    const DEFAULT_SCORES = [
+        { rank: 1, pilot: 'AVP', game: 'SPACE DEFENDER', score: 12500 },
+        { rank: 2, pilot: 'NEO', game: 'SPACE DEFENDER', score: 9800 },
+        { rank: 3, pilot: 'CYB', game: 'CYBER BRICKS', score: 8400 },
+        { rank: 4, pilot: 'TRN', game: 'SPACE DEFENDER', score: 7200 },
+        { rank: 5, pilot: 'MAX', game: 'CYBER BRICKS', score: 6100 },
+        { rank: 6, pilot: 'ACE', game: 'SPACE DEFENDER', score: 5300 },
+        { rank: 7, pilot: 'VIP', game: 'CYBER BRICKS', score: 4800 },
+        { rank: 8, pilot: 'ZOD', game: 'SPACE DEFENDER', score: 3900 }
+    ];
+
+    function getHighScores() {
+        try {
+            const raw = localStorage.getItem('avp_arcade_leaderboard');
+            if (raw) return JSON.parse(raw);
+        } catch (e) {}
+        return DEFAULT_SCORES;
+    }
+
+    function saveHighScore(pilot: string, gameName: string, score: number) {
+        let list = getHighScores();
+        list.push({ rank: 0, pilot: pilot.toUpperCase().slice(0, 3), game: gameName, score });
+        list.sort((a: any, b: any) => b.score - a.score);
+        list = list.slice(0, 10);
+        list.forEach((item: any, idx: number) => { item.rank = idx + 1; });
+        try {
+            localStorage.setItem('avp_arcade_leaderboard', JSON.stringify(list));
+        } catch (e) {}
+    }
+
+    function renderLeaderboardTable() {
+        const container = document.getElementById('hall-score-rows');
+        if (!container) return;
+
+        const scores = getHighScores();
+        container.innerHTML = scores.map((s: any) => `
+            <div class="table-row ${s.rank === 1 ? 'gold' : s.rank === 2 ? 'silver' : s.rank === 3 ? 'bronze' : ''}">
+                <span class="r-rank">#${s.rank}</span>
+                <span class="r-pilot">${s.pilot}</span>
+                <span class="r-game">${s.game}</span>
+                <span class="r-score">${s.score.toLocaleString()}</span>
+            </div>
+        `).join('');
+    }
+
+    function switchView(viewName: 'hub' | 'hall' | 'game') {
+        const hubView = document.getElementById('arcade-hub-view');
+        const hallView = document.getElementById('arcade-hall-view');
+        const gameView = document.getElementById('arcade-game-view');
+        const pauseBtn = document.getElementById('arcade-pause-btn');
+
+        if (hubView) hubView.classList.toggle('active', viewName === 'hub');
+        if (hallView) hallView.classList.toggle('active', viewName === 'hall');
+        if (gameView) gameView.classList.toggle('active', viewName === 'game');
+
+        if (pauseBtn) {
+            pauseBtn.style.display = viewName === 'game' ? 'inline-flex' : 'none';
+        }
+
+        if (viewName === 'hall') {
+            renderLeaderboardTable();
+        }
+
+        if (viewName !== 'game' && runtimeInstance) {
+            runtimeInstance.stop();
+            runtimeInstance = null;
+        }
+    }
+
+    async function launchSelectedGame(gameType: 'space' | 'bricks') {
         const modal = document.getElementById('retro-arcade-modal');
         const canvas = document.getElementById('retro-arcade-canvas') as HTMLCanvasElement | null;
         if (!modal || !canvas) return;
@@ -80,22 +258,79 @@ const t = useTranslations(lang);
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
 
-        if (!runtimeInstance) {
-            // Lazy load the game engine runtime
+        if (runtimeInstance) {
+            runtimeInstance.stop();
+            runtimeInstance = null;
+        }
+
+        switchView('game');
+        currentGameType = gameType;
+
+        const docLang = (document.documentElement.lang === 'en' ? 'en' : 'ru');
+
+        if (gameType === 'space') {
             const { RetroArcadeRuntime } = await import('../scripts/arcade/retroGameRuntime');
-            const docLang = (document.documentElement.lang === 'en' ? 'en' : 'ru');
             runtimeInstance = new RetroArcadeRuntime({
                 canvas,
                 lang: docLang,
-                onClose: closeArcadeGame
+                onClose: closeArcadeModal,
+                onGameOver: (score: number) => {
+                    handleGameOverScore(score, 'SPACE DEFENDER');
+                }
             });
-            setupVirtualPadListeners();
+        } else if (gameType === 'bricks') {
+            const { NeonBricksRuntime } = await import('../scripts/arcade/neonBricksRuntime');
+            runtimeInstance = new NeonBricksRuntime({
+                canvas,
+                lang: docLang,
+                onClose: closeArcadeModal,
+                onGameOver: (score: number) => {
+                    handleGameOverScore(score, 'CYBER BRICKS');
+                }
+            });
         }
 
+        setupVirtualPadListeners();
         runtimeInstance.start();
     }
 
-    function closeArcadeGame() {
+    function handleGameOverScore(score: number, gameName: string) {
+        if (score <= 0) return;
+        const currentHighs = getHighScores();
+        const qualifies = currentHighs.length < 10 || score > currentHighs[currentHighs.length - 1].score;
+
+        if (qualifies) {
+            setTimeout(() => {
+                const pilot = prompt(
+                    document.documentElement.lang === 'en' 
+                        ? `★ NEW HIGH SCORE: ${score}! Enter 3-letter Pilot Name:` 
+                        : `★ НОВЫЙ РЕКОРД: ${score}! Введите 3 буквы пилота:`, 
+                    'AVP'
+                );
+                if (pilot) {
+                    saveHighScore(pilot, gameName, score);
+                    switchView('hall');
+                }
+            }, 600);
+        }
+    }
+
+    function openArcadeModal(initialView: 'hub' | 'space' | 'bricks' = 'hub') {
+        const modal = document.getElementById('retro-arcade-modal');
+        if (!modal) return;
+
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        if (initialView === 'space' || initialView === 'bricks') {
+            launchSelectedGame(initialView);
+        } else {
+            switchView('hub');
+        }
+    }
+
+    function closeArcadeModal() {
         const modal = document.getElementById('retro-arcade-modal');
         if (!modal) return;
 
@@ -142,7 +377,7 @@ const t = useTranslations(lang);
         bindTouch('vpad-emp', 'emp');
     }
 
-    // Global Event Listeners (Delegated)
+    // Global Delegated Listeners
     if (!(window as any).__arcadeDelegationReady) {
         (window as any).__arcadeDelegationReady = true;
 
@@ -150,21 +385,44 @@ const t = useTranslations(lang);
             const target = e.target as HTMLElement;
             if (!target) return;
 
-            // Trigger button click
+            // Trigger modal open
             if (target.closest('[data-open-arcade]')) {
                 e.preventDefault();
-                launchArcadeGame();
+                openArcadeModal('hub');
                 return;
             }
 
-            // Close button click
+            // Launch specific game card
+            const card = target.closest('[data-launch-game]') as HTMLElement | null;
+            if (card) {
+                e.preventDefault();
+                const gType = card.getAttribute('data-launch-game') as 'space' | 'bricks';
+                if (gType) launchSelectedGame(gType);
+                return;
+            }
+
+            // Hub button in top bar
+            if (target.closest('#arcade-hub-btn') || target.closest('#hall-back-hub-btn')) {
+                e.preventDefault();
+                switchView('hub');
+                return;
+            }
+
+            // Hall of Fame button
+            if (target.closest('#arcade-hall-btn') || target.closest('#hub-open-leaderboard')) {
+                e.preventDefault();
+                switchView('hall');
+                return;
+            }
+
+            // Close button
             if (target.closest('#arcade-close-btn')) {
                 e.preventDefault();
-                closeArcadeGame();
+                closeArcadeModal();
                 return;
             }
 
-            // Pause button click
+            // Pause button
             if (target.closest('#arcade-pause-btn')) {
                 e.preventDefault();
                 if (runtimeInstance) runtimeInstance.togglePause();
@@ -172,8 +430,71 @@ const t = useTranslations(lang);
             }
         });
 
+        // Esc key closes modal or returns to Hub
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('retro-arcade-modal');
+            if (modal?.classList.contains('open') && e.key === 'Escape') {
+                const gameView = document.getElementById('arcade-game-view');
+                if (gameView?.classList.contains('active')) {
+                    switchView('hub');
+                } else {
+                    closeArcadeModal();
+                }
+            }
+        });
+
+        // Konami Code Global Easter Egg: ↑ ↑ ↓ ↓ ← → ← → B A
+        const KONAMI_SEQUENCE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            const expected = KONAMI_SEQUENCE[konamiIndex];
+            const isMatch = e.code === expected || (expected === 'KeyB' && (e.key === 'b' || e.key === 'B' || e.key === 'и' || e.key === 'И')) ||
+                            (expected === 'KeyA' && (e.key === 'a' || e.key === 'A' || e.key === 'ф' || e.key === 'Ф'));
+
+            if (isMatch) {
+                konamiIndex++;
+                if (konamiIndex === KONAMI_SEQUENCE.length) {
+                    konamiIndex = 0;
+                    triggerKonamiEasterEgg();
+                }
+            } else {
+                konamiIndex = (e.code === 'ArrowUp') ? 1 : 0;
+            }
+        });
+
+        function triggerKonamiEasterEgg() {
+            retroAudio.playVictory();
+            document.documentElement.classList.add('crt-mode-transition');
+            setTimeout(() => document.documentElement.classList.remove('crt-mode-transition'), 400);
+
+            // Show flash banner
+            const banner = document.createElement('div');
+            banner.className = 'retro-godmode-banner';
+            banner.innerHTML = `
+                <div class="godmode-box">
+                    <div class="godmode-stars">⭐ 👾 ⭐</div>
+                    <div class="godmode-title">KONAMI CHEAT UNLOCKED!</div>
+                    <div class="godmode-desc">
+                        ${document.documentElement.lang === 'en' 
+                            ? '+30 EXTRA LIVES & GOLDEN SHIP EQUIPPED!' 
+                            : '+30 ЖИЗНЕЙ И ЗОЛОТОЙ ДВУСТВОЛЬНЫЙ КОРАБЛЬ АКТИВИРОВАНЫ!'}
+                    </div>
+                    <div class="godmode-badge">GOD MODE: ACTIVE</div>
+                </div>
+            `;
+            document.body.appendChild(banner);
+
+            setTimeout(() => {
+                banner.classList.add('fade-out');
+                setTimeout(() => banner.remove(), 600);
+                openArcadeModal('space');
+            }, 1800);
+        }
+
         document.addEventListener('open-retro-arcade', () => {
-            launchArcadeGame();
+            openArcadeModal('hub');
         });
     }
 </script>
+

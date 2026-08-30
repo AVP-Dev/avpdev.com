@@ -2284,6 +2284,301 @@ html.retro-mode .retro-dock-player {
 }
 
 /* --------------------------------------------------------------------------
+   ARCADE HUB & HALL OF FAME LEADERBOARD PANELS
+   -------------------------------------------------------------------------- */
+.arcade-mini-btn.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  padding: 4px 7px;
+}
+
+.arcade-view-panel {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.arcade-view-panel.active {
+  display: flex;
+  flex-direction: column;
+}
+
+#arcade-hub-view,
+#arcade-hall-view {
+  min-height: 380px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 1.2rem 1.4rem;
+  background: radial-gradient(circle at 50% 30%, rgba(18, 12, 38, 0.98), #05030a);
+  scrollbar-width: thin;
+  scrollbar-color: #00f0ff #0a0614;
+}
+
+.hub-header {
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.hub-subtitle {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: #00f0ff;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+
+.hub-coins-badge {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: #ffe600;
+  letter-spacing: 0.08em;
+  animation: retro-pulse 1.2s infinite alternate;
+}
+
+.arcade-games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.arcade-game-card {
+  position: relative;
+  background: rgba(14, 10, 28, 0.85);
+  border: 1.5px solid rgba(0, 240, 255, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.arcade-game-card:hover:not(.coming-soon) {
+  border-color: #00f0ff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5), inset 0 0 15px rgba(0, 240, 255, 0.1);
+  transform: translateY(-3px);
+}
+
+.arcade-game-card.coming-soon {
+  opacity: 0.65;
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+.card-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.card-badge.hot {
+  background: rgba(255, 0, 127, 0.2);
+  color: #ff007f;
+  border: 1px solid #ff007f;
+}
+
+.card-badge.new {
+  background: rgba(0, 255, 102, 0.2);
+  color: #00ff66;
+  border: 1px solid #00ff66;
+}
+
+.card-badge.soon {
+  background: rgba(255, 230, 0, 0.2);
+  color: #ffe600;
+  border: 1px solid #ffe600;
+}
+
+.card-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
+}
+
+.card-title {
+  font-family: var(--font-pixel);
+  font-size: 0.72rem;
+  color: #ffe600;
+  text-shadow: 0 0 8px rgba(255, 230, 0, 0.6);
+  margin-bottom: 0.35rem;
+}
+
+.card-genre {
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  color: #ff007f;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.card-desc {
+  font-family: var(--font-retro);
+  font-size: 0.75rem;
+  color: #a4bed9;
+  line-height: 1.4;
+  margin-bottom: 0.85rem;
+  flex-grow: 1;
+}
+
+.card-play-btn {
+  width: 100%;
+  padding: 0.45rem 0.8rem;
+  background: rgba(0, 240, 255, 0.15);
+  border: 1.5px solid #00f0ff;
+  color: #00f0ff;
+  border-radius: 5px;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.arcade-game-card:hover .card-play-btn:not(.disabled) {
+  background: #00f0ff;
+  color: #040308;
+  box-shadow: 0 0 15px #00f0ff;
+}
+
+.card-play-btn.disabled {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #666;
+  cursor: not-allowed;
+}
+
+.hub-footer,
+.hall-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.hub-action-btn {
+  background: rgba(255, 230, 0, 0.12);
+  border: 1.5px solid #ffe600;
+  color: #ffe600;
+  border-radius: 6px;
+  padding: 0.55rem 1.2rem;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(255, 230, 0, 0.25);
+}
+
+.hub-action-btn:hover {
+  background: #ffe600;
+  color: #040308;
+  box-shadow: 0 0 20px #ffe600;
+  transform: translateY(-2px);
+}
+
+/* Hall of Fame Scores Table */
+.hall-header {
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.hall-title {
+  font-family: var(--font-pixel);
+  font-size: 1rem;
+  color: #ffe600;
+  text-shadow: 0 0 12px #ffe600;
+  margin-bottom: 0.35rem;
+}
+
+.hall-subtitle {
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  color: #00f0ff;
+}
+
+.hall-scores-table {
+  background: rgba(10, 7, 20, 0.9);
+  border: 1.5px solid rgba(0, 240, 255, 0.4);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+}
+
+.table-head {
+  display: grid;
+  grid-template-columns: 50px 70px 1fr 100px;
+  padding: 0.5rem 0.8rem;
+  background: rgba(0, 240, 255, 0.15);
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  color: #00f0ff;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 50px 70px 1fr 100px;
+  padding: 0.55rem 0.8rem;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: #c0d8f0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table-row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.table-row.gold {
+  color: #ffe600;
+  text-shadow: 0 0 8px #ffe600;
+}
+
+.table-row.silver {
+  color: #00f0ff;
+  text-shadow: 0 0 8px #00f0ff;
+}
+
+.table-row.bronze {
+  color: #ff007f;
+  text-shadow: 0 0 8px #ff007f;
+}
+
+.r-rank {
+  font-weight: bold;
+}
+
+.r-pilot {
+  letter-spacing: 0.1em;
+}
+
+.r-score {
+  text-align: right;
+  font-weight: bold;
+}
+
+/* --------------------------------------------------------------------------
    17. REDUCED MOTION (A11y compliance)
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {

@@ -4,6 +4,7 @@ export interface GameOptions {
     canvas: HTMLCanvasElement;
     lang?: 'ru' | 'en';
     onClose?: () => void;
+    onGameOver?: (score: number) => void;
 }
 
 interface Bullet {
@@ -60,6 +61,7 @@ export class RetroArcadeRuntime {
     private ctx: CanvasRenderingContext2D;
     private lang: 'ru' | 'en';
     private onClose?: () => void;
+    private onGameOver?: (score: number) => void;
 
     private isRunning: boolean = false;
     private isPaused: boolean = false;
@@ -120,6 +122,7 @@ export class RetroArcadeRuntime {
         this.ctx = context;
         this.lang = options.lang || (typeof document !== 'undefined' && document.documentElement.lang === 'en' ? 'en' : 'ru');
         this.onClose = options.onClose;
+        this.onGameOver = options.onGameOver;
 
         this.highScore = parseInt(localStorage.getItem('retro_arcade_hi_score') || '0', 10);
         this.isGodMode = localStorage.getItem('retro_konami_unlocked') === 'true';
@@ -657,11 +660,17 @@ export class RetroArcadeRuntime {
     private triggerGameOver() {
         this.isGameOver = true;
         retroAudio.playGameOver();
+        if (this.onGameOver) {
+            this.onGameOver(this.score);
+        }
     }
 
     private triggerVictory() {
         this.isVictory = true;
         retroAudio.playVictory();
+        if (this.onGameOver) {
+            this.onGameOver(this.score);
+        }
     }
 
     // --- RENDER PIPELINE ---
