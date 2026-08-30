@@ -2808,7 +2808,179 @@ html.retro-mode .retro-dock-player {
 }
 
 /* --------------------------------------------------------------------------
-   19. REDUCED MOTION (A11y compliance)
+   20. RETRO CYBER-QUEST BRIEF CONFIGURATOR (/brief/)
+   -------------------------------------------------------------------------- */
+html.retro-mode .brief-progress {
+  background: rgba(10, 8, 22, 0.95);
+  border-bottom: 2px solid #00f0ff;
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.35);
+}
+
+html.retro-mode .brief-progress__fill {
+  background: linear-gradient(90deg, #ff007f 0%, #ffe600 50%, #00f0ff 100%) !important;
+  box-shadow: 0 0 15px #00f0ff;
+}
+
+html.retro-mode .brief-progress__text {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: #ffe600;
+  letter-spacing: 0.05em;
+}
+
+html.retro-mode .form-block {
+  background: rgba(14, 12, 28, 0.88) !important;
+  border: 1.5px solid rgba(0, 240, 255, 0.5) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.15), inset 0 0 20px rgba(255, 0, 127, 0.08) !important;
+  padding: 2rem !important;
+  margin-bottom: 2.5rem !important;
+  backdrop-filter: blur(16px);
+}
+
+html.retro-mode .form-block legend {
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  color: #ff007f;
+  background: #080612;
+  border: 1px solid #ff007f;
+  padding: 6px 14px;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.4);
+  letter-spacing: 0.06em;
+}
+
+html.retro-mode .form-group label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #00f0ff;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+}
+
+html.retro-mode .form-control {
+  background: rgba(6, 4, 14, 0.9) !important;
+  border: 1.5px solid rgba(0, 240, 255, 0.35) !important;
+  color: #00ff66 !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.95rem !important;
+  border-radius: 4px !important;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+  transition: all 0.25s ease !important;
+}
+
+html.retro-mode .form-control:focus {
+  border-color: #00f0ff !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.6), inset 0 0 10px rgba(0, 240, 255, 0.2) !important;
+  outline: none !important;
+}
+
+html.retro-mode .radio-group label,
+html.retro-mode .checkbox-group label {
+  background: rgba(10, 8, 22, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 4px;
+  padding: 0.65rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #c9e6ff;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+html.retro-mode .radio-group label:hover,
+html.retro-mode .checkbox-group label:hover {
+  border-color: #ff007f;
+  color: #ffffff;
+  background: rgba(255, 0, 127, 0.15);
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.4);
+}
+
+html.retro-mode .radio-group input:checked + span,
+html.retro-mode .checkbox-group input:checked + span {
+  color: #00ff66;
+  font-weight: bold;
+  text-shadow: 0 0 8px #00ff66;
+}
+
+html.retro-mode .brief-form button[type="submit"] {
+  font-family: var(--font-pixel) !important;
+  font-size: 0.85rem !important;
+  padding: 1.2rem 2.5rem !important;
+  background: linear-gradient(135deg, #ff007f 0%, #ff5500 50%, #ffe600 100%) !important;
+  color: #ffffff !important;
+  border: 2px solid #ffe600 !important;
+  box-shadow: 0 0 25px rgba(255, 0, 127, 0.8), 0 0 50px rgba(255, 85, 0, 0.4) !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+  border-radius: 4px !important;
+  letter-spacing: 0.08em !important;
+}
+
+html.retro-mode .brief-form button[type="submit"]:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.9), 0 0 60px rgba(255, 0, 127, 0.7) !important;
+}
+
+/* --------------------------------------------------------------------------
+   21. RETRO MISSION BADGES & HUD MARKERS (Portfolio, Services, Contact)
+   -------------------------------------------------------------------------- */
+html.retro-mode .portfolio-card {
+  position: relative;
+}
+
+html.retro-mode .portfolio-card::after {
+  content: "MISSION CLEARED";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  color: #00ff66;
+  background: rgba(0, 255, 102, 0.12);
+  border: 1px solid #00ff66;
+  padding: 3px 8px;
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.35);
+  letter-spacing: 0.06em;
+  pointer-events: none;
+  z-index: 5;
+}
+
+html.retro-mode .portfolio-filters button {
+  font-family: var(--font-pixel);
+  font-size: 0.62rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #00f0ff;
+  background: rgba(14, 12, 28, 0.85);
+  transition: all 0.2s ease;
+}
+
+html.retro-mode .portfolio-filters button.active,
+html.retro-mode .portfolio-filters button:hover {
+  background: #00f0ff;
+  color: #040308;
+  border-color: #00f0ff;
+  box-shadow: 0 0 18px #00f0ff;
+}
+
+html.retro-mode #contact .contact-form-card {
+  position: relative;
+}
+
+html.retro-mode #contact .contact-form-card::before {
+  content: "● SECURE UPLINK // 256-BIT ENCRYPTION";
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: #00f0ff;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.08em;
+}
+
+/* --------------------------------------------------------------------------
+   22. REDUCED MOTION (A11y compliance)
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html.retro-mode .retro-grid-plane {
