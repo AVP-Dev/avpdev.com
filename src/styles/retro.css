@@ -849,7 +849,7 @@ html.retro-mode .retro-hero-hud {
   align-items: center !important;
   justify-content: center !important;
   gap: 10px !important;
-  margin-top: 0.25rem !important;
+  margin-top: 0.5rem;
   margin-bottom: 1.5rem !important;
   flex-wrap: wrap !important;
   position: relative !important;
@@ -1307,6 +1307,26 @@ html.retro-mode .nav-dropdown .dropdown-item:hover {
   color: #ffe600 !important;
   box-shadow: 0 0 10px rgba(0, 240, 255, 0.3) !important;
   transform: translateX(4px) !important;
+}
+
+/* Page top spacing in Retro Mode to account for docked audio player */
+html.retro-mode .blog-page,
+html.retro-mode .blog-post-article,
+html.retro-mode .legal-page-content,
+html.retro-mode .geo-page-content,
+html.retro-mode .case-study-page,
+html.retro-mode .case-study-header,
+html.retro-mode .brief-section,
+html.retro-mode #brief-form-section,
+html.retro-mode main > #about:first-child,
+html.retro-mode .about-page,
+html.retro-mode .hub-intro,
+html.retro-mode .not-found-page {
+  padding-top: 170px !important;
+}
+
+html.retro-mode .brief-progress {
+  top: 125px !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -1796,14 +1816,49 @@ html.retro-mode .retro-dock-player {
 /* --------------------------------------------------------------------------
    15. MOBILE RETRO MODE OPTIMIZATIONS
    -------------------------------------------------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   html.retro-mode .site-header {
     padding: 0.6rem 0;
   }
 
-  /* Increased: pill header (~70px) + top-gap (20px) + player ribbon (~200px) + safe gap (70px) */
-  html.retro-mode .hero {
-    padding-top: 360px;
+  /* Target both #hero and .hero-section specifically for the homepage hero */
+  html.retro-mode #hero,
+  html.retro-mode .hero-section {
+    min-height: auto !important;
+    align-items: flex-start !important;
+    padding-top: 170px !important;
+  }
+
+  html.retro-mode #hero .hero-content,
+  html.retro-mode .hero-section .hero-content {
+    padding-top: 0 !important;
+    width: 100%;
+  }
+
+  html.retro-mode .retro-hero-hud {
+    gap: 8px !important;
+    margin-top: 2.2rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Subpages padding on mobile in Retro Mode */
+  html.retro-mode .blog-page,
+  html.retro-mode .blog-post-article,
+  html.retro-mode .legal-page-content,
+  html.retro-mode .geo-page-content,
+  html.retro-mode .case-study-page,
+  html.retro-mode .case-study-header,
+  html.retro-mode .brief-section,
+  html.retro-mode #brief-form-section,
+  html.retro-mode main > #about:first-child,
+  html.retro-mode .about-page,
+  html.retro-mode .hub-intro,
+  html.retro-mode .not-found-page {
+    padding-top: 210px !important;
+  }
+
+  html.retro-mode .brief-progress {
+    top: 155px !important;
   }
 
   html.retro-mode .retro-dock-player {

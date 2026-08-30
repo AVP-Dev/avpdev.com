@@ -183,7 +183,7 @@
 /* --- Адаптивные стили для мобильных устройств --- */
 @media (max-width: 768px) {
     .case-study-header {
-        padding-top: clamp(100px, 12vh, 140px);
+        padding-top: clamp(130px, 16vh, 180px);
         padding-bottom: 30px;
     }
 

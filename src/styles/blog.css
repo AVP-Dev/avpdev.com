@@ -2,6 +2,7 @@
 
 /* === Blog List Page === */
 .blog-page {
+  padding-top: clamp(110px, 14vh, 150px);
   padding-bottom: 120px;
 }
 
