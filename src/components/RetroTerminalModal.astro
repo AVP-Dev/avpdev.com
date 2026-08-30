@@ -495,6 +495,25 @@ const lang = getLangFromUrl(Astro.url);
                 input.value = '';
                 executeCommand(val);
             });
+
+            // Focus input when clicking anywhere on viewport
+            const viewport = document.querySelector('.terminal-viewport') as HTMLElement | null;
+            if (viewport) {
+                viewport.addEventListener('click', (e) => {
+                    const target = e.target as HTMLElement;
+                    if (!target.closest('.t-cmd-chip') && !target.closest('a') && !target.closest('button')) {
+                        input.focus();
+                    }
+                });
+            }
+
+            // Keep output scrolled to bottom on input focus (virtual keyboard popup)
+            input.addEventListener('focus', () => {
+                setTimeout(() => {
+                    const out = document.getElementById('terminal-output');
+                    if (out) out.scrollTop = out.scrollHeight;
+                }, 200);
+            });
         }
     }
 </script>
