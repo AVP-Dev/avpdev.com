@@ -1,0 +1,35 @@
+---
+// src/components/RetroAchievementsToast.astro
+// Container for popping Retro Mode Achievement notifications
+---
+
+<div id="retro-achievement-container" class="retro-achievement-container" aria-live="polite" aria-atomic="true"></div>
+
+<script>
+    import { retroAchievements } from '../scripts/retroAchievements';
+
+    function initAchievements() {
+        // Expose instance globally for components to trigger
+        (window as any).__retroAchievements = retroAchievements;
+
+        // If currently in retro mode, unlock retro pilot
+        if (document.documentElement.classList.contains('retro-mode')) {
+            retroAchievements.unlock('retro_pilot');
+        }
+
+        // If on brief page, unlock quest accepted
+        if (window.location.pathname.includes('/brief')) {
+            retroAchievements.unlock('quest_accepted');
+        }
+    }
+
+    // Check on page load & client transitions
+    initAchievements();
+    document.addEventListener('astro:page-load', initAchievements);
+
+    document.addEventListener('theme:mode-changed', (e: any) => {
+        if (e.detail?.isRetro) {
+            retroAchievements.unlock('retro_pilot');
+        }
+    });
+</script>

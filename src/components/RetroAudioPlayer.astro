@@ -95,6 +95,18 @@ const t = useTranslations(lang);
             <i class="fa-solid fa-volume-high vol-icon"></i>
         </div>
 
+        <!-- CRT & SFX Mode Quick Settings -->
+        <div class="panel-settings-row">
+            <button type="button" id="player-crt-toggle" class="panel-setting-btn" title="Cycle CRT scanline filter (Full / Subtle / Off)">
+                <i class="fa-solid fa-tv"></i>
+                <span id="crt-mode-label">CRT: FULL</span>
+            </button>
+            <button type="button" id="player-sfx-toggle" class="panel-setting-btn" title="Toggle UI Hover and Click sound effects">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span id="sfx-mode-label">SFX: ON</span>
+            </button>
+        </div>
+
         <!-- Full Interactive 20-Track Playlist -->
         <div class="panel-playlist-section">
             <div class="playlist-header">
@@ -245,6 +257,35 @@ const t = useTranslations(lang);
                 return;
             }
 
+            // CRT Mode Toggle (Full / Subtle / Off)
+            if (target.closest('#player-crt-toggle')) {
+                e.preventDefault();
+                e.stopPropagation();
+                const modes = ['full', 'subtle', 'off'];
+                const cur = localStorage.getItem('retro_crt_mode') || 'full';
+                const next = modes[(modes.indexOf(cur) + 1) % modes.length];
+                localStorage.setItem('retro_crt_mode', next);
+                document.documentElement.classList.remove('crt-subtle', 'crt-off');
+                if (next === 'subtle') document.documentElement.classList.add('crt-subtle');
+                if (next === 'off') document.documentElement.classList.add('crt-off');
+                const label = document.getElementById('crt-mode-label');
+                if (label) label.textContent = `CRT: ${next.toUpperCase()}`;
+                retroAudio.playClick();
+                return;
+            }
+
+            // SFX Mute Toggle (ON / OFF)
+            if (target.closest('#player-sfx-toggle')) {
+                e.preventDefault();
+                e.stopPropagation();
+                retroAudio.toggleSfxMute();
+                const isMuted = retroAudio.isSfxMutedState();
+                const label = document.getElementById('sfx-mode-label');
+                if (label) label.textContent = isMuted ? 'SFX: OFF' : 'SFX: ON';
+                if (!isMuted) retroAudio.playClick();
+                return;
+            }
+
             // Playlist track selection
             const playlistItem = target.closest('.playlist-item') as HTMLElement | null;
             if (playlistItem) {
@@ -360,6 +401,15 @@ const t = useTranslations(lang);
             if (volumeSlider && !volumeSlider.matches(':active')) {
                 volumeSlider.value = Math.round(state.volume * 100).toString();
             }
+
+            // Sync CRT and SFX labels
+            const curCrt = localStorage.getItem('retro_crt_mode') || 'full';
+            const crtLabel = document.getElementById('crt-mode-label');
+            if (crtLabel) crtLabel.textContent = `CRT: ${curCrt.toUpperCase()}`;
+
+            const isSfxMuted = retroAudio.isSfxMutedState();
+            const sfxLabel = document.getElementById('sfx-mode-label');
+            if (sfxLabel) sfxLabel.textContent = isSfxMuted ? 'SFX: OFF' : 'SFX: ON';
         });
     }
 

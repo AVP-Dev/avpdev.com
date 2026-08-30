@@ -24,10 +24,31 @@ const t = useTranslations(lang);
                         : 'Hyperspace coordinates corrupted. Insert coin or teleport back to home base.'}
                 </p>
 
-                <!-- Arcade Countdown Box -->
-                <div class="arcade-countdown-box">
-                    <span class="cd-label">{lang === 'ru' ? 'АВТО-ТЕЛЕПОРТАЦИЯ:' : 'AUTO-RESPAWN IN:'}</span>
-                    <span id="retro-404-timer" class="cd-digits">15</span>
+                <!-- Arcade Countdown & Coin Box -->
+                <div class="arcade-status-panel">
+                    <div class="arcade-countdown-box">
+                        <span class="cd-label">{lang === 'ru' ? 'АВТО-ТЕЛЕПОРТАЦИЯ:' : 'AUTO-RESPAWN IN:'}</span>
+                        <span id="retro-404-timer" class="cd-digits">15</span>
+                    </div>
+
+                    <button type="button" id="retro-insert-coin-btn" class="retro-insert-coin-btn">
+                        <span class="coin-icon">🪙</span>
+                        <span>{lang === 'ru' ? 'ВСТАВИТЬ МОНЕТКУ [INSERT COIN]' : 'INSERT COIN [CONTINUE]'}</span>
+                    </button>
+                </div>
+
+                <!-- Hidden Secret Promo Bonus Card -->
+                <div id="retro-404-bonus-card" class="retro-404-bonus-card" style="display: none;">
+                    <div class="bonus-tag">★ SECRET CHEAT CODE UNLOCKED ★</div>
+                    <div class="bonus-code">PROMO CODE: <span>RETRO404</span></div>
+                    <p class="bonus-desc">
+                        {lang === 'ru' 
+                            ? '10% скидка на архитектурный проект и разработку при заказе через бриф!' 
+                            : '10% discount on software architecture & design in project brief!'}
+                    </p>
+                    <a href={`/${lang}/brief/`} class="bonus-brief-link">
+                        {lang === 'ru' ? '⚡ АКТИВИРОВАТЬ В БРИФЕ ▶' : '⚡ ACTIVATE IN BRIEF ▶'}
+                    </a>
                 </div>
 
                 <!-- Action Buttons -->
@@ -49,18 +70,35 @@ const t = useTranslations(lang);
 
 <script>
     import { retroAudio } from '../scripts/retroAudio';
+    import { retroAchievements } from '../scripts/retroAchievements';
 
     let countdown = 15;
     const timerEl = document.getElementById('retro-404-timer');
+    const insertCoinBtn = document.getElementById('retro-insert-coin-btn');
+    const bonusCard = document.getElementById('retro-404-bonus-card');
     const lang = document.documentElement.lang === 'en' ? 'en' : 'ru';
+
+    if (insertCoinBtn) {
+        insertCoinBtn.addEventListener('click', () => {
+            countdown = 99;
+            if (timerEl) timerEl.textContent = '99';
+            retroAudio.playCoinInsert();
+            retroAchievements.unlock('insert_coin');
+            insertCoinBtn.classList.add('inserted');
+            insertCoinBtn.innerHTML = `<span>🪙 ${lang === 'ru' ? 'МОНЕТКА ПРИНЯТА (+99 SEC)' : 'CREDIT ACCEPTED (+99 SEC)'}</span>`;
+            if (bonusCard) {
+                bonusCard.style.display = 'block';
+            }
+        });
+    }
 
     if (timerEl) {
         const interval = setInterval(() => {
             countdown--;
             if (countdown >= 0) {
                 timerEl.textContent = countdown < 10 ? `0${countdown}` : `${countdown}`;
-                if (document.documentElement.classList.contains('retro-mode')) {
-                    retroAudio.playExplosion();
+                if (document.documentElement.classList.contains('retro-mode') && countdown <= 10 && countdown > 0) {
+                    retroAudio.playClick();
                 }
             }
             if (countdown <= 0) {
@@ -135,6 +173,15 @@ const t = useTranslations(lang);
     margin-bottom: 1.8rem;
 }
 
+.arcade-status-panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 2rem;
+}
+
 .arcade-countdown-box {
     display: inline-flex;
     align-items: center;
@@ -143,7 +190,6 @@ const t = useTranslations(lang);
     border: 1.5px solid #ffe600;
     padding: 0.5rem 1.2rem;
     border-radius: 6px;
-    margin-bottom: 2rem;
     box-shadow: 0 0 15px rgba(255, 230, 0, 0.3);
 }
 
@@ -160,6 +206,87 @@ const t = useTranslations(lang);
     color: #00ff66;
     text-shadow: 0 0 10px #00ff66;
     font-weight: bold;
+}
+
+.retro-insert-coin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 230, 0, 0.15);
+    border: 1.5px solid #ffe600;
+    color: #ffe600;
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.62rem;
+    padding: 0.65rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 230, 0, 0.4);
+    animation: retro-pulse 1.5s infinite alternate;
+    transition: all 0.2s ease;
+}
+
+.retro-insert-coin-btn:hover {
+    background: #ffe600;
+    color: #080612;
+    box-shadow: 0 0 25px #ffe600;
+    transform: scale(1.05);
+}
+
+.retro-insert-coin-btn.inserted {
+    background: rgba(0, 255, 102, 0.2);
+    border-color: #00ff66;
+    color: #00ff66;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+    animation: none;
+    pointer-events: none;
+}
+
+.retro-404-bonus-card {
+    background: rgba(6, 4, 18, 0.95);
+    border: 1.5px dashed #00ff66;
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.3);
+    animation: retro-pulse 2s infinite alternate;
+}
+
+.bonus-tag {
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.55rem;
+    color: #00ff66;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.08em;
+}
+
+.bonus-code {
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.95rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.bonus-code span {
+    color: #ffe600;
+    text-shadow: 0 0 10px #ffe600;
+    background: rgba(255, 230, 0, 0.15);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.bonus-desc {
+    font-size: 0.85rem;
+    color: #9eb7d6;
+    margin-bottom: 0.85rem;
+}
+
+.bonus-brief-link {
+    display: inline-block;
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.62rem;
+    color: #00f0ff;
+    text-decoration: underline;
+    text-shadow: 0 0 8px #00f0ff;
 }
 
 .error-actions {

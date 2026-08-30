@@ -9,6 +9,7 @@ import ChatWidget from '../components/ChatWidget.astro';
 import RetroArcadeModal from '../components/RetroArcadeModal.astro';
 import RetroTerminalModal from '../components/RetroTerminalModal.astro';
 import RetroBackground from '../components/RetroBackground.astro';
+import RetroAchievementsToast from '../components/RetroAchievementsToast.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { ui } from '../i18n/ui';
 import { locations } from '../data/locations';
@@ -322,8 +323,13 @@ const globalOrganizationSchema = {
                 document.documentElement.classList.add('retro-mode', 'dark-theme');
                 document.documentElement.classList.remove('light-theme');
                 document.documentElement.style.colorScheme = 'dark';
+
+                const crtMode = typeof localStorage !== 'undefined' ? (localStorage.getItem('retro_crt_mode') || 'full') : 'full';
+                document.documentElement.classList.remove('crt-subtle', 'crt-off');
+                if (crtMode === 'subtle') document.documentElement.classList.add('crt-subtle');
+                if (crtMode === 'off') document.documentElement.classList.add('crt-off');
             } else {
-                document.documentElement.classList.remove('retro-mode');
+                document.documentElement.classList.remove('retro-mode', 'crt-subtle', 'crt-off');
                 if (theme === 'dark-theme') {
                     document.documentElement.classList.add('dark-theme');
                     document.documentElement.classList.remove('light-theme');
@@ -552,6 +558,7 @@ const globalOrganizationSchema = {
     <ChatWidget />
     <RetroArcadeModal />
     <RetroTerminalModal />
+    <RetroAchievementsToast />
     </>
 )}
 

@@ -306,6 +306,11 @@ const t = useTranslations(lang);
 
     function handleGameOverScore(score: number, gameName: string) {
         if (score <= 0) return;
+        if (score >= 3000) {
+            try {
+                (window as any).__retroAchievements?.unlock?.('space_ace');
+            } catch (e) {}
+        }
         const currentHighs = getHighScores();
         const qualifies = currentHighs.length < 10 || score > currentHighs[currentHighs.length - 1].score;
 

@@ -610,6 +610,7 @@ class RetroAudioEngine {
     private masterGain: GainNode | null = null;
     private isPlaying: boolean = false;
     private isMuted: boolean = false;
+    private isSfxMuted: boolean = false;
     private volume: number = 0.65;
     private currentTrackIndex: number = 0;
     private stepIndex: number = 0;
@@ -626,6 +627,7 @@ class RetroAudioEngine {
                 }
             }
             this.isMuted = localStorage.getItem('retro_audio_muted') === 'true';
+            this.isSfxMuted = localStorage.getItem('retro_sfx_muted') === 'true';
             const savedVol = localStorage.getItem('retro_audio_volume');
             if (savedVol) {
                 const v = parseFloat(savedVol);
@@ -1264,6 +1266,9 @@ class RetroAudioEngine {
         this.stepIndex = 0;
         this.loopCount = 0;
         this.notifyState();
+        try {
+            (window as any).__retroAchievements?.trackTrackPlayed?.(this.currentTrackIndex);
+        } catch (e) {}
         if (this.isPlaying) {
             if (this.timerId) {
                 clearTimeout(this.timerId);
@@ -1279,6 +1284,9 @@ class RetroAudioEngine {
         this.stepIndex = 0;
         this.loopCount = 0;
         this.notifyState();
+        try {
+            (window as any).__retroAchievements?.trackTrackPlayed?.(this.currentTrackIndex);
+        } catch (e) {}
         if (this.isPlaying) {
             if (this.timerId) {
                 clearTimeout(this.timerId);
@@ -1295,6 +1303,9 @@ class RetroAudioEngine {
             this.stepIndex = 0;
             this.loopCount = 0;
             this.notifyState();
+            try {
+                (window as any).__retroAchievements?.trackTrackPlayed?.(this.currentTrackIndex);
+            } catch (e) {}
             if (this.isPlaying) {
                 if (this.timerId) {
                     clearTimeout(this.timerId);
@@ -1320,6 +1331,18 @@ class RetroAudioEngine {
         localStorage.setItem('retro_audio_muted', this.isMuted.toString());
         this.updateGain();
         this.notifyState();
+    }
+
+    public isSfxMutedState(): boolean {
+        return this.isSfxMuted;
+    }
+
+    public toggleSfxMute() {
+        this.isSfxMuted = !this.isSfxMuted;
+        localStorage.setItem('retro_sfx_muted', this.isSfxMuted.toString());
+        if (typeof document !== 'undefined') {
+            document.dispatchEvent(new CustomEvent('retro:sfx-mute-changed', { detail: { isSfxMuted: this.isSfxMuted } }));
+        }
     }
 
     public isRetroModeActive(): boolean {
@@ -1362,6 +1385,9 @@ class RetroAudioEngine {
 
 // Global Singleton
 export const retroAudio = new RetroAudioEngine();
+if (typeof window !== 'undefined') {
+    (window as any).__retroAudioInstance = retroAudio;
+}
 
 // Universal Retro Mode UI Click & Navigation Sound Effects
 if (typeof document !== 'undefined') {
@@ -1404,7 +1430,7 @@ if (typeof document !== 'undefined') {
 
             lastHoverEl = target;
             lastHoverTime = Date.now();
-            retroAudio.playClick();
+            retroAudio.playHover();
         }, { passive: true });
     }
 
@@ -1485,6 +1511,9 @@ if (typeof document !== 'undefined') {
 
         function triggerGodMode() {
             retroAudio.play1Up();
+            try {
+                (window as any).__retroAchievements?.unlock?.('god_mode');
+            } catch (e) {}
 
             // Remove existing banner if any
             document.getElementById('retro-godmode-banner')?.remove();
