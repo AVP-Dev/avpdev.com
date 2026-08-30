@@ -50,10 +50,20 @@ const t = useTranslations(lang);
                 {title ? (
                   <h1 set:html={title}></h1>
                 ) : (
-                  <h1 set:html={t("hero_h1")} />
+                  <>
+                    <h1 class="hero-h1-default" set:html={t("hero_h1")} />
+                    <h1 class="hero-h1-retro" set:html={t("hero_h1_retro")} />
+                  </>
                 )}
                 
-                <p>{subtitle || t("hero_subtitle")}</p>
+                {subtitle ? (
+                  <p>{subtitle}</p>
+                ) : (
+                  <>
+                    <p class="hero-sub-default">{t("hero_subtitle")}</p>
+                    <p class="hero-sub-retro">{t("hero_subtitle_retro")}</p>
+                  </>
+                )}
                 
                 <div class="cta-group">
                     <a href={`/${lang}/#contact`} class="cta-button">

@@ -615,6 +615,25 @@ html.retro-mode .hero-text h1 {
 
 
 
+/* Hero Title & Subtitle Dual-Mode Switching */
+.hero-h1-retro,
+.hero-sub-retro {
+  display: none;
+}
+
+html.retro-mode .hero-h1-default,
+html.retro-mode .hero-sub-default {
+  display: none;
+}
+
+html.retro-mode .hero-h1-retro {
+  display: block;
+}
+
+html.retro-mode .hero-sub-retro {
+  display: block;
+}
+
 html.retro-mode .hero-content {
   padding-top: clamp(40px, 6vh, 65px);
 }
