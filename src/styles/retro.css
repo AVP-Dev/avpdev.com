@@ -3531,3 +3531,22 @@ html.retro-mode .feedback-modal-icon.success {
   }
 }
 
+/* --------------------------------------------------------------------------
+   25. PRINT STYLES (Clean PDF/Print export)
+   -------------------------------------------------------------------------- */
+@media print {
+  .crt-overlay,
+  .retro-synthwave-grid,
+  .retro-dock-player,
+  .retro-arcade-modal,
+  .retro-terminal-modal,
+  .custom-cursor,
+  .mobile-retro-fab,
+  .retro-hero-hud {
+    display: none !important;
+  }
+  html.retro-mode {
+    cursor: auto !important;
+  }
+}
+

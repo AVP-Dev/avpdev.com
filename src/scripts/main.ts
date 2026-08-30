@@ -1,6 +1,17 @@
 import { initPortfolio } from './portfolio';
 import { retroAudio } from './retroAudio';
 
+// Developer Console Easter Egg Welcome Banner (immediate execution on script load)
+if (typeof window !== 'undefined' && !(window as any).__consoleBannerPrinted) {
+    (window as any).__consoleBannerPrinted = true;
+    console.log(
+        "%c  ___ _   _____  ____  _______    __   ___ ___ _  _ \n /   \\ \\ / / _ \\/  _ \\/ __/\\ \\  / /  / _ \\ _ ) || |\n/ /_\\ \\ V / ___/  / // _\\   \\ \\/ /  | // / _ \\_  _|\n/_/   \\_\\_/_/   \\____/___/    \\__/    \\___|___/ |_| \n\n%c🕹️ AVP-DEV CYBERNETIC WEB & AI SYSTEMS // 198X\n%c⚡ Press [ ~ ] or click CLI button to open interactive Terminal.\n⭐ Try commands: hire, quote, matrix, godmode, skills",
+        "color: #ff007f; font-weight: bold; font-family: monospace; font-size: 11px;",
+        "color: #00f0ff; font-weight: bold; font-size: 12px;",
+        "color: #ffe600; font-family: monospace; font-size: 11px;"
+    );
+}
+
 // Делегирование событий мобильного меню.
 // Вешаем один раз на document — работает при View Transitions (DOM пересоздаётся),
 // а повторные вызовы initializePage() не создают дубликатов обработчиков.
@@ -238,12 +249,27 @@ function initializePage() {
             localStorage.setItem('theme_mode', targetRetro ? 'retro' : 'modern');
             applyThemeClasses(savedTheme, targetRetro);
             updateRetroTitle(targetRetro);
+            updateRetroFavicon(targetRetro);
             document.dispatchEvent(new CustomEvent('theme:mode-changed', { detail: { isRetro: targetRetro } }));
 
             setTimeout(() => {
                 document.documentElement.classList.remove('crt-mode-transition');
             }, 350);
         });
+
+        // Dynamic 8-Bit Pixel Favicon Switcher
+        const defaultFavicon = document.querySelector("link[rel~='icon']")?.getAttribute('href') || '/favicon.svg';
+        const retroFavicon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23080612' rx='3'/%3E%3Cpath fill='%23ff007f' d='M3 2h2v2H3zm8 0h2v2h-2zM4 4h8v2H4zM2 6h12v4H2zm2 4h2v2H4zm6 0h2v2h-2zM3 12h3v2H3zm7 0h3v2h-3z'/%3E%3Cpath fill='%2300f0ff' d='M5 7h2v2H5zm4 0h2v2H9z'/%3E%3C/svg%3E";
+
+        function updateRetroFavicon(isRetro: boolean) {
+            let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.head.appendChild(link);
+            }
+            link.href = isRetro ? retroFavicon : defaultFavicon;
+        }
 
         // Dynamic Retro Browser Tab Title Ticker
         let titleInterval: number | null = null;
@@ -293,9 +319,44 @@ function initializePage() {
             }, 2600);
         }
 
+        // Developer Console Easter Egg Welcome Banner
+        function printConsoleBanner() {
+            if ((window as any).__consoleBannerPrinted) return;
+            (window as any).__consoleBannerPrinted = true;
+            console.log(
+                "%c  ___ _   _____  ____  _______    __   ___ ___ _  _ \n /   \\ \\ / / _ \\/  _ \\/ __/\\ \\  / /  / _ \\ _ ) || |\n/ /_\\ \\ V / ___/  / // _\\   \\ \\/ /  | // / _ \\_  _|\n/_/   \\_\\_/_/   \\____/___/    \\__/    \\___|___/ |_| \n\n%c🕹️ AVP-DEV CYBERNETIC WEB & AI SYSTEMS // 198X\n%c⚡ Press [ ~ ] or click CLI button to open interactive Terminal.\n⭐ Try commands: hire, quote, matrix, godmode, skills",
+                "color: #ff007f; font-weight: bold; font-family: monospace; font-size: 11px;",
+                "color: #00f0ff; font-weight: bold; font-size: 12px;",
+                "color: #ffe600; font-family: monospace; font-size: 11px;"
+            );
+        }
+        printConsoleBanner();
+
+        // Hotkey: `~` (Tilde / Backquote) to open/toggle Retro Terminal Modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '`' || e.key === '~' || e.key === 'ё' || e.key === 'Ё') {
+                const target = e.target as HTMLElement;
+                if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+                    return;
+                }
+                e.preventDefault();
+                const terminalModal = document.getElementById('retro-terminal-modal');
+                if (terminalModal) {
+                    const isVisible = terminalModal.classList.contains('visible');
+                    if (isVisible) {
+                        terminalModal.classList.remove('visible');
+                        document.body.classList.remove('modal-open');
+                    } else {
+                        document.dispatchEvent(new CustomEvent('modal:open', { detail: { modalId: 'retro-terminal-modal' } }));
+                    }
+                }
+            }
+        });
+
         // Initialize on start if already in retro mode
         if (currentMode === 'retro') {
             updateRetroTitle(true);
+            updateRetroFavicon(true);
         }
 
         document.addEventListener('visibilitychange', () => {
