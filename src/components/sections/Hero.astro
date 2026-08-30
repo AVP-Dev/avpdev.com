@@ -30,10 +30,17 @@ const t = useTranslations(lang);
     <div class="container hero-container">
         <div class="hero-content">
             <div class={`hero-text fade-in ${variant === 'services' ? 'services-text' : ''}`}>
-                <div class="retro-hero-hud" aria-hidden="true">
-                    <span class="retro-hero-chip p1">{t("retro_hud_p1")}</span>
+                <div class="retro-hero-hud" aria-label="Retro HUD Status">
+                    <button type="button" class="retro-hero-chip p1" title="Tap 5x or press ↑↑↓↓←→←→BA for God Mode">
+                        <span class="hud-dot"></span>
+                        <span>{t("retro_hud_p1")}</span>
+                    </button>
                     <span class="retro-hero-chip mode">{t("retro_hud_sys")}</span>
                     <span class="retro-hero-chip credits">{t("retro_hud_credits")}</span>
+                    <button type="button" class="retro-hero-chip secret-hint" title="Cheat Code: Tap or press ↑↑↓↓←→←→BA">
+                        <i class="fa-solid fa-gamepad text-cyan"></i>
+                        <span>{lang === 'ru' ? 'ЧИТ: ↑↑↓↓←→←→BA' : 'CHEAT: ↑↑↓↓←→←→BA'}</span>
+                    </button>
                 </div>
 
                 {title ? (

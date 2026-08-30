@@ -91,22 +91,26 @@ const t = useTranslations(lang);
             <i class="fa-solid fa-volume-high vol-icon"></i>
         </div>
 
-        <!-- Full Interactive 16-Track Playlist -->
+        <!-- Full Interactive 20-Track Playlist -->
         <div class="panel-playlist-section">
             <div class="playlist-header">
                 <span>{t("retro_player_select_track")} [{RETRO_TRACKS.length}]:</span>
             </div>
             <div class="playlist-list custom-retro-scroll">
-                {RETRO_TRACKS.map((t, idx) => (
-                    <button type="button" class="playlist-item" data-track-index={idx}>
-                        <span class="p-num">{(t.id < 10 ? '0' : '') + t.id}</span>
-                        <div class="p-meta">
-                            <span class="p-title">{t.title}</span>
-                            <span class="p-style">{t.style}</span>
-                        </div>
-                        <span class="p-play-badge"><i class="fa-solid fa-play"></i></span>
-                    </button>
-                ))}
+                {RETRO_TRACKS.map((item, idx) => {
+                    const itemTitle = lang === 'en' ? item.titleEn : item.titleRu;
+                    const itemStyle = lang === 'en' ? item.styleEn : item.styleRu;
+                    return (
+                        <button type="button" class="playlist-item" data-track-index={idx}>
+                            <span class="p-num">{(item.id < 10 ? '0' : '') + item.id}</span>
+                            <div class="p-meta">
+                                <span class="p-title">{itemTitle}</span>
+                                <span class="p-style">{itemStyle}</span>
+                            </div>
+                            <span class="p-play-badge"><i class="fa-solid fa-play"></i></span>
+                        </button>
+                    );
+                })}
             </div>
         </div>
     </div>
@@ -124,15 +128,13 @@ const t = useTranslations(lang);
         }
 
         if (document.documentElement.classList.contains('retro-mode')) {
-            const isUserPaused = localStorage.getItem('retro_audio_user_paused') === 'true';
-            if (isUserPaused) {
-                return; // Respect user pause permanently
+            if (retroAudio.isUserPaused()) {
+                return; // Respect user pause permanently across all mode switches and page loads
             }
 
             autoplayTimer = window.setTimeout(() => {
                 if (document.documentElement.classList.contains('retro-mode')) {
-                    const isPaused = localStorage.getItem('retro_audio_user_paused') === 'true';
-                    if (!isPaused) {
+                    if (!retroAudio.isUserPaused()) {
                         const state = retroAudio.getState();
                         if (!state.isPlaying) {
                             retroAudio.play(false);
@@ -274,9 +276,11 @@ const t = useTranslations(lang);
         // Global theme mode switch event listener
         document.addEventListener('theme:mode-changed', (e: any) => {
             if (e.detail?.isRetro) {
+                // Explicit switch to Retro Mode activates playback
+                localStorage.setItem('retro_audio_user_paused', 'false');
                 startAutoPlayTimer();
             } else {
-                retroAudio.pause();
+                retroAudio.pause(false); // Mode switch pause stops audio
                 closeRetroPanel();
             }
         });
@@ -284,7 +288,10 @@ const t = useTranslations(lang);
         // Global subscriber for state syncing
         retroAudio.subscribe((state) => {
             const trackNum = (state.currentTrack.id < 10 ? '0' : '') + state.currentTrack.id;
-            const fullTitle = `${trackNum}: ${state.currentTrack.title}`;
+            const docLang = document.documentElement.lang || 'ru';
+            const trackTitle = retroAudio.getTrackTitle(state.currentTrack, docLang);
+            const trackStyle = retroAudio.getTrackStyle(state.currentTrack, docLang);
+            const fullTitle = `${trackNum}: ${trackTitle}`;
             
             const ribbonTitle = document.getElementById('ribbon-track-title');
             const panelTitle = document.getElementById('player-track-title');
@@ -299,7 +306,7 @@ const t = useTranslations(lang);
 
             if (ribbonTitle) ribbonTitle.textContent = fullTitle;
             if (panelTitle) panelTitle.textContent = fullTitle;
-            if (panelStyle) panelStyle.textContent = state.currentTrack.style;
+            if (panelStyle) panelStyle.textContent = trackStyle;
 
             // Sync Play/Pause Icons
             const playClass = state.isPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play';

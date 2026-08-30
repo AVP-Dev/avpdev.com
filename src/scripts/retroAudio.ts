@@ -4,7 +4,11 @@
 export interface Track {
     id: number;
     title: string;
+    titleEn: string;
+    titleRu: string;
     style: string;
+    styleEn: string;
+    styleRu: string;
     bpm: number;
     lead: number[];
     bass: number[];
@@ -28,12 +32,16 @@ for (let octave = 1; octave <= 7; octave++) {
     }
 }
 
-// 10 Note-accurate, full multi-bar arrangements of legendary 80s/90s game & movie themes
+// 20 Note-accurate, full multi-bar arrangements of legendary 80s/90s game & movie themes
 export const RETRO_TRACKS: Track[] = [
     {
         id: 1,
         title: "SUPER MARIO BROS (1985)",
+        titleEn: "SUPER MARIO BROS (1985)",
+        titleRu: "СУПЕР МАРИО (1985)",
         style: "NES 8-BIT OVERWORLD",
+        styleEn: "NES 8-BIT OVERWORLD",
+        styleRu: "NES 8-БИТ КЛАССИКА",
         bpm: 180,
         lead: [
             // Bar 1-2: Iconic opening fanfare
@@ -59,7 +67,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 2,
         title: "TETRIS (KOROBEINIKI 1989)",
+        titleEn: "TETRIS - KOROBEINIKI (1989)",
+        titleRu: "ТЕТРИС — КОРОБЕЙНИКИ (1989)",
         style: "GAME BOY 8-BIT RUSSIAN FOLK",
+        styleEn: "GAME BOY 8-BIT FOLK",
+        styleRu: "GAME BOY 8-БИТ ФОЛК",
         bpm: 144,
         lead: [
             // Bar 1-2: Main theme (Part A)
@@ -87,7 +99,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 3,
         title: "AXEL F (BEVERLY HILLS COP 1984)",
+        titleEn: "AXEL F - BEVERLY HILLS COP (1984)",
+        titleRu: "АКСЕЛЬ Ф — ПОЛИЦЕЙСКИЙ ИЗ БЕВЕРЛИ-ХИЛЛЗ (1984)",
         style: "80s SYNTHWAVE ANTHEM",
+        styleEn: "80s SYNTHWAVE ANTHEM",
+        styleRu: "СИНТВЕЙВ 80-Х ХИТ",
         bpm: 120,
         lead: [
             // Bar 1-2: Famous Faltermeyer Lead
@@ -107,7 +123,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 4,
         title: "MORTAL KOMBAT (TECHNO 1993)",
+        titleEn: "MORTAL KOMBAT (1993)",
+        titleRu: "МОРТАЛ КОМБАТ (1993)",
         style: "16-BIT ARCADE RAVE",
+        styleEn: "16-BIT ARCADE RAVE",
+        styleRu: "АРКАДА 16-БИТ РЕЙВ",
         bpm: 136,
         lead: [
             // Bar 1-2: Main hook in A minor
@@ -127,7 +147,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 5,
         title: "THE TERMINATOR (1984)",
+        titleEn: "THE TERMINATOR (1984)",
+        titleRu: "ТЕРМИНАТОР (1984)",
         style: "CINEMATIC DARK SCI-FI",
+        styleEn: "CINEMATIC DARK SCI-FI",
+        styleRu: "СИНЕМАТИК САЙ-ФАЙ 8-БИТ",
         bpm: 116,
         lead: [
             // Bar 1-2: Opening haunting melody
@@ -148,7 +172,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 6,
         title: "ZELDA (OVERWORLD THEME 1986)",
+        titleEn: "THE LEGEND OF ZELDA (1986)",
+        titleRu: "ЛЕГЕНДА О ЗЕЛЬДЕ (1986)",
         style: "NES 8-BIT HEROIC MARCH",
+        styleEn: "NES 8-BIT HEROIC MARCH",
+        styleRu: "NES 8-БИТ ГЕРОИЧЕСКИЙ МАРШ",
         bpm: 150,
         lead: [
             // Bar 1-2: Triumphant Fanfare
@@ -168,7 +196,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 7,
         title: "SONIC (GREEN HILL ZONE 1991)",
+        titleEn: "SONIC THE HEDGEHOG (1991)",
+        titleRu: "ЁЖИК СОНИК (1991)",
         style: "SEGA GENESIS 16-BIT CLASSIC",
+        styleEn: "SEGA GENESIS 16-BIT CLASSIC",
+        styleRu: "SEGA 16-БИТ КЛАССИКА",
         bpm: 132,
         lead: [
             // Bar 1-2: Breezy tropical melody
@@ -188,7 +220,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 8,
         title: "DOOM (E1M1 AT DOOM'S GATE 1993)",
+        titleEn: "DOOM - AT DOOM'S GATE (1993)",
+        titleRu: "ДУМ — AT DOOM'S GATE (1993)",
         style: "16-BIT CHIPTUNE METAL RIFF",
+        styleEn: "16-BIT METAL CHIPTUNE",
+        styleRu: "16-БИТ МЕТАЛ ЧИПТЮН",
         bpm: 165,
         lead: [
             // Bar 1-2: Master riff in E minor
@@ -208,7 +244,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 9,
         title: "PAC-MAN & ARCADE (1980)",
+        titleEn: "PAC-MAN & ARCADE (1980)",
+        titleRu: "ПАК-МАН & АРКАДА (1980)",
         style: "VINTAGE 8-BIT ARCADE",
+        styleEn: "VINTAGE 8-BIT ARCADE",
+        styleRu: "ВИНТАЖНАЯ 8-БИТ АРКАДА",
         bpm: 172,
         lead: [
             // Bar 1-2: Classic opening maze intro
@@ -228,7 +268,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 10,
         title: "STREET FIGHTER II (GUILE 1991)",
+        titleEn: "STREET FIGHTER II - GUILE (1991)",
+        titleRu: "УЛИЧНЫЙ БОЕЦ II — ГАЙЛ (1991)",
         style: "ARCADE HEROIC FIGHTER",
+        styleEn: "CAPCOM 16-BIT CPS-1",
+        styleRu: "CAPCOM 16-БИТ CPS-1",
         bpm: 134,
         lead: [
             // Bar 1-2: Guile's legendary theme
@@ -248,7 +292,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 11,
         title: "METAL GEAR SOLID (1998)",
+        titleEn: "METAL GEAR SOLID (1998)",
+        titleRu: "МЕТАЛ ГИР СОЛИД (1998)",
         style: "PS1 TACTICAL ESPIONAGE",
+        styleEn: "TACTICAL ESPIONAGE CHIPTUNE",
+        styleRu: "ШПИОНСКИЙ ЧИПТЮН 16-БИТ",
         bpm: 138,
         lead: [
             N.E4, N.G4, N.A4, N.B4, N.C5, N.B4, N.A4, N.G4, N.E4, N.G4, N.A4, N.G4, N.E4, N.D4, N.E4, N.REST,
@@ -266,7 +314,11 @@ export const RETRO_TRACKS: Track[] = [
     {
         id: 12,
         title: "HOTLINE MIAMI (HYDROGEN)",
+        titleEn: "HOTLINE MIAMI - HYDROGEN",
+        titleRu: "ХОТЛАЙН МАЙАМИ — HYDROGEN",
         style: "NEON SYNTHWAVE ACTION",
+        styleEn: "NEON SYNTHWAVE ACTION",
+        styleRu: "НЕОНОВЫЙ СИНТВЕЙВ ЭКШЕН",
         bpm: 140,
         lead: [
             N.F4, N.Ab4, N.C5, N.Eb5, N.F5, N.Eb5, N.C5, N.Ab4, N.F4, N.Ab4, N.C5, N.Eb5, N.Db5, N.C5, N.Bb4, N.Ab4,
@@ -283,8 +335,12 @@ export const RETRO_TRACKS: Track[] = [
     },
     {
         id: 13,
-        title: "BATTLE CITY / ТАНЧИКИ (1985)",
+        title: "BATTLE CITY (1985)",
+        titleEn: "BATTLE CITY (1985)",
+        titleRu: "ТАНЧИКИ / BATTLE CITY (1985)",
         style: "NES 8-BIT TANK MARCH",
+        styleEn: "NES 8-BIT TANK MARCH",
+        styleRu: "NES 8-БИТ ТАНКОВЫЙ МАРШ",
         bpm: 160,
         lead: [
             N.C4, N.E4, N.G4, N.C5, N.G4, N.E4, N.C4, N.REST, N.G3, N.B3, N.D4, N.G4, N.D4, N.B3, N.G3, N.REST,
@@ -301,8 +357,12 @@ export const RETRO_TRACKS: Track[] = [
     },
     {
         id: 14,
-        title: "TMNT / ЧЕРЕПАШКИ НИНДЗЯ (1989)",
+        title: "TMNT (1989)",
+        titleEn: "TMNT - NINJA TURTLES (1989)",
+        titleRu: "ЧЕРЕПАШКИ-НИНДЗЯ (1989)",
         style: "NES 8-BIT HEROES",
+        styleEn: "NES 8-BIT HEROES",
+        styleRu: "NES 8-БИТ ГЕРОИ В ПАНЦИРЕ",
         bpm: 165,
         lead: [
             N.D4, N.D4, N.F4, N.G4, N.Ab4, N.G4, N.F4, N.D4, N.C4, N.D4, N.F4, N.D4, N.C4, N.A3, N.C4, N.REST,
@@ -319,8 +379,12 @@ export const RETRO_TRACKS: Track[] = [
     },
     {
         id: 15,
-        title: "DARKWING DUCK / ЧЁРНЫЙ ПЛАЩ (1992)",
+        title: "DARKWING DUCK (1992)",
+        titleEn: "DARKWING DUCK (1992)",
+        titleRu: "ЧЁРНЫЙ ПЛАЩ (1992)",
         style: "CAPCOM 8-BIT FUNK",
+        styleEn: "CAPCOM 8-BIT FUNK",
+        styleRu: "CAPCOM 8-БИТ ФАНК",
         bpm: 145,
         lead: [
             N.E4, N.REST, N.G4, N.A4, N.Bb4, N.B4, N.REST, N.D5, N.E5, N.REST, N.B4, N.A4, N.G4, N.E4, N.D4, N.REST,
@@ -337,8 +401,12 @@ export const RETRO_TRACKS: Track[] = [
     },
     {
         id: 16,
-        title: "BATTLETOADS / BATTLE TURTLES (1991)",
+        title: "BATTLETOADS (1991)",
+        titleEn: "BATTLETOADS (1991)",
+        titleRu: "БОЕВЫЕ ЖАБЫ / BATTLETOADS (1991)",
         style: "RARE 8-BIT GROOVE",
+        styleEn: "RARE 8-BIT GROOVE",
+        styleRu: "RARE 8-БИТ ДРАЙВ",
         bpm: 140,
         lead: [
             N.A4, N.C5, N.D5, N.Ds5, N.E5, N.REST, N.G5, N.E5, N.D5, N.C5, N.A4, N.REST, N.G4, N.A4, N.C5, N.REST,
@@ -351,6 +419,94 @@ export const RETRO_TRACKS: Track[] = [
         drums: [
             1, 0, 2, 0, 1, 2, 2, 0, 1, 0, 2, 0, 1, 2, 2, 0,
             1, 0, 2, 0, 1, 2, 2, 0, 1, 1, 2, 2, 1, 1, 2, 2
+        ]
+    },
+    {
+        id: 17,
+        title: "DUCKTALES (THE MOON THEME 1989)",
+        titleEn: "DUCKTALES - THE MOON (1989)",
+        titleRu: "УТИНЫЕ ИСТОРИИ — ТЕМА ЛУНЫ (1989)",
+        style: "CAPCOM 8-BIT MASTERPIECE",
+        styleEn: "CAPCOM 8-BIT MASTERPIECE",
+        styleRu: "CAPCOM 8-БИТ ШЕДЕВР",
+        bpm: 150,
+        lead: [
+            N.A4, N.C5, N.E5, N.B4, N.D5, N.Fs5, N.C5, N.E5, N.G5, N.D5, N.Fs5, N.A5, N.E5, N.G5, N.B5, N.REST,
+            N.A5, N.G5, N.Fs5, N.E5, N.D5, N.C5, N.B4, N.A4, N.B4, N.C5, N.D5, N.E5, N.Fs5, N.REST, N.REST, N.REST
+        ],
+        bass: [
+            N.A2, N.E3, N.A2, N.B2, N.Fs3, N.B2, N.C3, N.G3, N.C3, N.D3, N.A3, N.D3, N.E3, N.B3, N.E3, N.REST,
+            N.A2, N.E3, N.A2, N.B2, N.Fs3, N.B2, N.C3, N.G3, N.C3, N.D3, N.A3, N.D3, N.E3, N.REST, N.REST, N.REST
+        ],
+        drums: [
+            1, 0, 2, 0, 1, 0, 2, 0, 1, 0, 2, 0, 1, 0, 2, 1,
+            1, 0, 2, 0, 1, 0, 2, 0, 1, 0, 2, 0, 1, 1, 2, 2
+        ]
+    },
+    {
+        id: 18,
+        title: "CHIP 'N DALE (RESCUE RANGERS 1990)",
+        titleEn: "CHIP 'N DALE - RESCUE RANGERS (1990)",
+        titleRu: "ЧИП И ДЕЙЛ СПЕШАТ НА ПОМОЩЬ (1990)",
+        style: "CAPCOM 8-BIT CARTOON FUNK",
+        styleEn: "CAPCOM 8-BIT CARTOON FUNK",
+        styleRu: "CAPCOM 8-БИТ МУЛЬТ-ФАНК",
+        bpm: 160,
+        lead: [
+            N.C5, N.REST, N.C5, N.D5, N.E5, N.REST, N.G5, N.E5, N.D5, N.C5, N.A4, N.REST, N.A4, N.C5, N.D5, N.REST,
+            N.C5, N.REST, N.C5, N.D5, N.E5, N.REST, N.G5, N.A5, N.G5, N.E5, N.D5, N.C5, N.C5, N.REST, N.REST, N.REST
+        ],
+        bass: [
+            N.C3, N.G2, N.C3, N.D3, N.E3, N.B2, N.E3, N.G3, N.F3, N.C3, N.F3, N.REST, N.F2, N.A2, N.G2, N.REST,
+            N.C3, N.G2, N.C3, N.D3, N.E3, N.B2, N.E3, N.G3, N.G2, N.D3, N.G2, N.B2, N.C3, N.REST, N.REST, N.REST
+        ],
+        drums: [
+            1, 0, 2, 1, 1, 0, 2, 0, 1, 0, 2, 1, 1, 0, 2, 0,
+            1, 0, 2, 1, 1, 0, 2, 0, 1, 1, 2, 2, 1, 1, 2, 2
+        ]
+    },
+    {
+        id: 19,
+        title: "CONTRA (JUNGLE STAGE 1987)",
+        titleEn: "CONTRA - JUNGLE STAGE (1987)",
+        titleRu: "КОНТРА — ДЖУНГЛИ (1987)",
+        style: "KONAMI 8-BIT MILITARY HEAVY",
+        styleEn: "KONAMI 8-BIT MILITARY HEAVY",
+        styleRu: "KONAMI 8-БИТ БОЕВИК",
+        bpm: 152,
+        lead: [
+            N.D4, N.F4, N.G4, N.Ab4, N.G4, N.F4, N.D4, N.REST, N.D4, N.F4, N.G4, N.Ab4, N.A4, N.Ab4, N.G4, N.F4,
+            N.D4, N.F4, N.G4, N.Ab4, N.A4, N.C5, N.D5, N.REST, N.D5, N.C5, N.A4, N.F4, N.D4, N.REST, N.REST, N.REST
+        ],
+        bass: [
+            N.D2, N.D2, N.D2, N.D2, N.F2, N.F2, N.G2, N.REST, N.D2, N.D2, N.D2, N.D2, N.A2, N.A2, N.G2, N.F2,
+            N.D2, N.D2, N.D2, N.D2, N.F2, N.F2, N.G2, N.REST, N.D2, N.C2, N.A1, N.F1, N.D2, N.REST, N.REST, N.REST
+        ],
+        drums: [
+            1, 2, 1, 2, 1, 2, 2, 1, 1, 2, 1, 2, 1, 1, 2, 2,
+            1, 2, 1, 2, 1, 2, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2
+        ]
+    },
+    {
+        id: 20,
+        title: "MEGA MAN 2 (DR. WILY STAGE 1 1988)",
+        titleEn: "MEGA MAN 2 - DR. WILY (1988)",
+        titleRu: "МЕГА МЭН 2 — ЗАМОК ВАЙЛИ (1988)",
+        style: "CAPCOM 8-BIT SPEED METAL",
+        styleEn: "CAPCOM 8-BIT SPEED METAL",
+        styleRu: "CAPCOM 8-БИТ СПИД-МЕТАЛ",
+        bpm: 172,
+        lead: [
+            N.D4, N.E4, N.F4, N.G4, N.A4, N.D5, N.C5, N.Bb4, N.A4, N.F4, N.G4, N.A4, N.Bb4, N.A4, N.G4, N.E4,
+            N.F4, N.G4, N.A4, N.Bb4, N.C5, N.F5, N.E5, N.D5, N.C5, N.A4, N.Bb4, N.C5, N.D5, N.REST, N.REST, N.REST
+        ],
+        bass: [
+            N.D2, N.D2, N.D3, N.D2, N.D2, N.D3, N.D2, N.D2, N.Bb2, N.Bb2, N.Bb3, N.Bb2, N.C3, N.C3, N.C4, N.C3,
+            N.F2, N.F2, N.F3, N.F2, N.A2, N.A2, N.A3, N.A2, N.Bb2, N.Bb2, N.C3, N.C3, N.D3, N.REST, N.REST, N.REST
+        ],
+        drums: [
+            1, 0, 2, 0, 1, 0, 2, 1, 1, 0, 2, 0, 1, 1, 2, 2,
+            1, 0, 2, 0, 1, 0, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2
         ]
     }
 ];
@@ -525,6 +681,33 @@ class RetroAudioEngine {
         });
     }
 
+    public play1Up() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+
+        const now = this.ctx.currentTime;
+        // Classic 1-UP arpeggio: E5 -> G5 -> E6 -> C6 -> D6 -> G6
+        const notes = [659.25, 783.99, 1318.51, 1046.50, 1174.66, 1567.98];
+        notes.forEach((freq, idx) => {
+            if (!this.ctx || !this.masterGain) return;
+            const noteTime = now + idx * 0.075;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(freq, noteTime);
+
+            gain.gain.setValueAtTime(0.18 * (this.volume || 0.8), noteTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.12);
+
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+
+            osc.start(noteTime);
+            osc.stop(noteTime + 0.12);
+        });
+    }
+
     private loopCount: number = 0;
 
     // --- CHIPTUNE SEQUENCER ---
@@ -628,7 +811,14 @@ class RetroAudioEngine {
     }
 
     // --- CONTROLS ---
+    public isUserPaused(): boolean {
+        return typeof window !== 'undefined' && localStorage.getItem('retro_audio_user_paused') === 'true';
+    }
+
     public play(userInitiated: boolean = true) {
+        if (!userInitiated && this.isUserPaused()) {
+            return; // Strict guard: will NEVER resume if user paused it
+        }
         this.initContext();
         if (userInitiated) {
             localStorage.setItem('retro_audio_user_paused', 'false');
@@ -727,6 +917,16 @@ class RetroAudioEngine {
         return typeof document !== 'undefined' && document.documentElement.classList.contains('retro-mode');
     }
 
+    public getTrackTitle(track: Track, lang?: string): string {
+        const currentLang = lang || (typeof document !== 'undefined' ? document.documentElement.lang : 'ru');
+        return currentLang === 'en' ? (track.titleEn || track.title) : (track.titleRu || track.title);
+    }
+
+    public getTrackStyle(track: Track, lang?: string): string {
+        const currentLang = lang || (typeof document !== 'undefined' ? document.documentElement.lang : 'ru');
+        return currentLang === 'en' ? (track.styleEn || track.style) : (track.styleRu || track.style);
+    }
+
     public getState() {
         return {
             isPlaying: this.isPlaying,
@@ -779,5 +979,120 @@ if (typeof document !== 'undefined') {
                 }
             }
         }, { passive: true, capture: true });
+    }
+
+    // Konami Code Easter Egg (↑ ↑ ↓ ↓ ← → ← → B A) & Mobile 5-Tap / Click Trigger
+    if (!(window as any).__retroKonamiListenerReady) {
+        (window as any).__retroKonamiListenerReady = true;
+
+        const KONAMI_SEQUENCE = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+        let konamiIndex = 0;
+        let tapCount = 0;
+        let tapTimer: number | null = null;
+
+        // 1. Keyboard sequence detector
+        document.addEventListener('keydown', (e) => {
+            if (!document.documentElement.classList.contains('retro-mode')) return;
+
+            // Don't trigger if user is typing in form inputs
+            const activeTag = document.activeElement?.tagName?.toLowerCase();
+            if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') {
+                return;
+            }
+
+            const code = e.code;
+            const key = e.key.toLowerCase();
+            const expectedCode = KONAMI_SEQUENCE[konamiIndex];
+
+            const isUp = (expectedCode === 'ArrowUp' && (code === 'ArrowUp' || key === 'arrowup'));
+            const isDown = (expectedCode === 'ArrowDown' && (code === 'ArrowDown' || key === 'arrowdown'));
+            const isLeft = (expectedCode === 'ArrowLeft' && (code === 'ArrowLeft' || key === 'arrowleft'));
+            const isRight = (expectedCode === 'ArrowRight' && (code === 'ArrowRight' || key === 'arrowright'));
+            const isB = (expectedCode === 'KeyB' && (code === 'KeyB' || key === 'b' || key === 'и'));
+            const isA = (expectedCode === 'KeyA' && (code === 'KeyA' || key === 'a' || key === 'ф'));
+
+            if (isUp || isDown || isLeft || isRight || isB || isA) {
+                konamiIndex++;
+                if (konamiIndex === KONAMI_SEQUENCE.length) {
+                    konamiIndex = 0;
+                    triggerGodMode();
+                }
+            } else {
+                konamiIndex = (isUp) ? 1 : 0;
+            }
+        }, { capture: true });
+
+        // 2. Mobile 5-Tap gesture on [ 1P: READY ] and Direct Tap on [ ЧИТ / CHEAT ]
+        document.addEventListener('click', (e) => {
+            if (!document.documentElement.classList.contains('retro-mode')) return;
+            const target = e.target as HTMLElement;
+            if (!target) return;
+
+            // Direct tap on Cheat Chip
+            const cheatChip = target.closest('.retro-hero-chip.secret-hint');
+            if (cheatChip) {
+                e.preventDefault();
+                triggerGodMode();
+                return;
+            }
+
+            // 5-Tap gesture on 1P Chip
+            const p1Chip = target.closest('.retro-hero-chip.p1');
+            if (p1Chip) {
+                tapCount++;
+                if (tapTimer) clearTimeout(tapTimer);
+                tapTimer = window.setTimeout(() => {
+                    tapCount = 0;
+                }, 2000);
+
+                if (tapCount >= 5) {
+                    tapCount = 0;
+                    triggerGodMode();
+                }
+            }
+        }, { capture: true });
+
+        function triggerGodMode() {
+            retroAudio.play1Up();
+
+            // Remove existing banner if any
+            document.getElementById('retro-godmode-banner')?.remove();
+
+            const isRu = document.documentElement.lang === 'ru';
+            const banner = document.createElement('div');
+            banner.id = 'retro-godmode-banner';
+            banner.className = 'retro-godmode-banner';
+            banner.innerHTML = `
+                <div class="godmode-box">
+                    <div class="godmode-stars">⭐ ⭐ ⭐</div>
+                    <div class="godmode-title">KONAMI CODE UNLOCKED!</div>
+                    <div class="godmode-desc">${isRu ? 'РЕЖИМ БОГА АКТИВИРОВАН: 99 ЖИЗНЕЙ И БЕСКОНЕЧНЫЕ КРЕДИТЫ' : 'GOD MODE ACTIVATED: 99 LIVES & INFINITE CREDITS'}</div>
+                    <div class="godmode-badge">⚡ 30 EXTRA LIVES • RETRO OVERDRIVE ⚡</div>
+                </div>
+            `;
+            document.body.appendChild(banner);
+
+            // Update Hero HUD chips
+            const p1Chip = document.querySelector('.retro-hero-chip.p1');
+            if (p1Chip) {
+                p1Chip.innerHTML = `<span class="hud-dot godmode"></span> <span>1P: GOD MODE (99)</span>`;
+                p1Chip.classList.add('godmode-active');
+            }
+
+            const creditsChip = document.querySelector('.retro-hero-chip.credits');
+            if (creditsChip) {
+                creditsChip.innerHTML = `<span>CREDITS: 999999</span>`;
+                creditsChip.classList.add('godmode-active');
+            }
+
+            setTimeout(() => {
+                banner.classList.add('fade-out');
+                setTimeout(() => banner.remove(), 600);
+            }, 4500);
+        }
     }
 }
