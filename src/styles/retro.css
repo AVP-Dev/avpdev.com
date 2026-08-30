@@ -1,0 +1,1506 @@
+/* ==========================================================================
+   AVPDEV RETRO DESIGN SYSTEM (Retro Mode)
+   Arcade / 16-Bit / Synthwave / Cyberpunk Visual Architecture
+   Fully isolated under html.retro-mode
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. RETRO DESIGN TOKENS
+   -------------------------------------------------------------------------- */
+html.retro-mode {
+  --retro-bg: #06050b;
+  --retro-bg-alt: #0a0815;
+  --retro-surface: #0f0d1e;
+  --retro-surface-hover: #17142e;
+  --retro-surface-glass: rgba(15, 13, 30, 0.88);
+  
+  --retro-cyan: #00f0ff;
+  --retro-cyan-rgb: 0, 240, 255;
+  --retro-pink: #ff007f;
+  --retro-pink-rgb: 255, 0, 127;
+  --retro-yellow: #ffe600;
+  --retro-yellow-rgb: 255, 230, 0;
+  --retro-purple: #9d00ff;
+  --retro-purple-rgb: 157, 0, 255;
+  --retro-green: #00ff66;
+  --retro-green-rgb: 0, 255, 102;
+  --retro-orange: #ff5500;
+  --retro-orange-rgb: 255, 85, 0;
+  
+  /* Overwrite global tokens in retro mode */
+  --bg-color: #06050b;
+  --bg-color-rgb: 6, 5, 11;
+  --primary-color: #0f0d1e;
+  --primary-color-rgb: 15, 13, 30;
+  --text-color: #eef8ff;
+  --text-secondary-color: #92a4c4;
+  --accent-color: #00f0ff;
+  --accent-color-start: #ff007f;
+  --accent-color-start-rgb: 255, 0, 127;
+  --accent-color-end: #00f0ff;
+  --accent-gradient: linear-gradient(135deg, #ff007f 0%, #ffe600 45%, #00f0ff 100%);
+  --border-color: rgba(0, 240, 255, 0.28);
+  --glass-bg: rgba(14, 12, 28, 0.88);
+  --glass-border: rgba(0, 240, 255, 0.4);
+  --card-shadow: 0 0 25px rgba(0, 240, 255, 0.12), inset 0 0 15px rgba(255, 0, 127, 0.06);
+  --tag-bg: rgba(0, 240, 255, 0.12);
+  --tag-text: #00f0ff;
+
+  --font-display-retro: 'Orbitron', 'Sora Variable', sans-serif;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* --------------------------------------------------------------------------
+   2. CRT SCANLINES & AMBIENT SCREEN EFFECTS
+   -------------------------------------------------------------------------- */
+.crt-overlay {
+  display: none;
+}
+
+html.retro-mode .crt-overlay {
+  display: block;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+  background: 
+    radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.55) 100%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.22),
+      rgba(0, 0, 0, 0.22) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  opacity: 0.85;
+}
+
+/* Subtle retro grid pattern over background */
+html.retro-mode body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* --------------------------------------------------------------------------
+   3. RETRO TYPOGRAPHY & HEADINGS
+   -------------------------------------------------------------------------- */
+html.retro-mode h1,
+html.retro-mode h2,
+html.retro-mode .section-title,
+html.retro-mode .hero-text h1,
+html.retro-mode .logo-text {
+  font-family: var(--font-display-retro);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+html.retro-mode .section-title {
+  text-shadow: 
+    0 0 10px rgba(0, 240, 255, 0.6),
+    0 0 25px rgba(255, 0, 127, 0.35);
+  position: relative;
+}
+
+html.retro-mode .section-title::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 3px;
+  margin: 1rem auto 0;
+  background: linear-gradient(90deg, transparent, #00f0ff, #ff007f, transparent);
+  box-shadow: 0 0 12px #00f0ff;
+}
+
+html.retro-mode .gradient-text {
+  background: linear-gradient(135deg, #ff007f 0%, #ffe600 50%, #00f0ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.45));
+}
+
+html.retro-mode .section-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  color: #9eb7d6;
+}
+
+/* --------------------------------------------------------------------------
+   4. HEADER & RETRO HUD NAVIGATION
+   -------------------------------------------------------------------------- */
+html.retro-mode header.site-header {
+  background: rgba(14, 12, 28, 0.92);
+  border: 1px solid rgba(0, 240, 255, 0.5);
+  box-shadow: 
+    0 0 20px rgba(0, 240, 255, 0.25),
+    inset 0 0 15px rgba(255, 0, 127, 0.15);
+  border-radius: 6px;
+  backdrop-filter: blur(20px);
+}
+
+html.retro-mode .logo-text {
+  color: #00f0ff;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+}
+
+html.retro-mode .nav-links {
+  background: rgba(8, 6, 18, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 4px;
+}
+
+html.retro-mode .nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #c9e6ff;
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+html.retro-mode .nav-links a:hover {
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.18);
+  text-shadow: 0 0 8px #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+}
+
+/* HUD System indicators in Header */
+.retro-hud-badge {
+  display: none;
+}
+
+html.retro-mode .retro-hud-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: #00ff66;
+  background: rgba(0, 255, 102, 0.1);
+  border: 1px solid rgba(0, 255, 102, 0.4);
+  padding: 4px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 6px #00ff66;
+  white-space: nowrap;
+}
+
+html.retro-mode .retro-hud-badge .hud-dot {
+  width: 6px;
+  height: 6px;
+  background: #00ff66;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00ff66;
+  animation: retro-pulse 1.5s infinite ease-in-out;
+}
+
+/* Retro Toggle Button */
+.retro-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.45rem 0.85rem;
+  background: rgba(255, 0, 127, 0.12);
+  border: 1px solid #ff007f;
+  color: #ff007f;
+  border-radius: 4px;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.4, 1);
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
+  text-decoration: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.retro-mode-toggle:hover {
+  background: #ff007f;
+  color: #06050b;
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.7);
+  transform: translateY(-1px);
+}
+
+.retro-mode-toggle:active {
+  transform: translateY(1px);
+}
+
+html.retro-mode .retro-mode-toggle {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+html.retro-mode .retro-mode-toggle:hover {
+  background: #00f0ff;
+  color: #06050b;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+}
+
+/* In Retro Mode, light theme is disabled */
+html.retro-mode .theme-switcher {
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: grayscale(1);
+  box-shadow: none !important;
+}
+
+/* Mobile Retro Menu */
+html.retro-mode .mobile-nav {
+  background: rgba(10, 8, 22, 0.98);
+  border-left: 2px solid #00f0ff;
+  box-shadow: -10px 0 30px rgba(0, 240, 255, 0.3);
+}
+
+html.retro-mode .mobile-menu-list a,
+html.retro-mode .mobile-accordion-trigger {
+  font-family: var(--font-mono);
+  color: #c9e6ff;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+html.retro-mode .mobile-menu-list a:hover {
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.1);
+  padding-left: 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   5. HERO SECTION & SYNTHWAVE PERSPECTIVE GRID
+   -------------------------------------------------------------------------- */
+.retro-synthwave-grid {
+  display: none;
+}
+
+html.retro-mode .retro-synthwave-grid {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+  perspective: 450px;
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 40%, transparent 100%);
+}
+
+html.retro-mode .retro-grid-plane {
+  position: absolute;
+  inset: -100% -50% 0 -50%;
+  transform-origin: 50% 100%;
+  transform: rotateX(65deg);
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 0, 127, 0.35) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: retro-grid-move 4s linear infinite;
+}
+
+html.retro-mode .hero-text h1 {
+  font-size: clamp(2.5rem, 8vw, 4.8rem);
+  line-height: 1.1;
+  text-shadow: 
+    0 0 15px rgba(0, 240, 255, 0.6),
+    0 0 35px rgba(255, 0, 127, 0.4);
+}
+
+html.retro-mode .hero-section {
+  padding-top: clamp(140px, 20vh, 220px);
+}
+
+/* Arcade HUD chips row in Hero */
+.retro-hero-hud {
+  display: none;
+}
+
+html.retro-mode .retro-hero-hud {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+html.retro-mode .retro-hero-chip {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  padding: 6px 12px;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
+html.retro-mode .retro-hero-chip.p1 {
+  background: rgba(0, 255, 102, 0.12);
+  color: #00ff66;
+  border: 1px solid #00ff66;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+
+html.retro-mode .retro-hero-chip.mode {
+  background: rgba(0, 240, 255, 0.12);
+  color: #00f0ff;
+  border: 1px solid #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+html.retro-mode .retro-hero-chip.credits {
+  background: rgba(255, 230, 0, 0.12);
+  color: #ffe600;
+  border: 1px solid #ffe600;
+  box-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
+}
+
+/* Arcade CTA Buttons */
+html.retro-mode .cta-button {
+  font-family: var(--font-pixel);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1.1rem 2.2rem;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #ff007f 0%, #ff5500 100%);
+  color: #ffffff;
+  border: 2px solid #ffe600;
+  box-shadow: 
+    0 0 15px rgba(255, 0, 127, 0.6),
+    0 0 30px rgba(255, 85, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.4, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+html.retro-mode .cta-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 0 25px rgba(255, 0, 127, 0.9),
+    0 0 50px rgba(0, 240, 255, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border-color: #00f0ff;
+}
+
+html.retro-mode .cta-button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+html.retro-mode .cta-button.secondary {
+  background: rgba(14, 12, 28, 0.9);
+  border: 2px solid #00f0ff;
+  color: #00f0ff;
+  box-shadow: 
+    0 0 15px rgba(0, 240, 255, 0.4),
+    inset 0 0 15px rgba(0, 240, 255, 0.15);
+  text-shadow: 0 0 8px #00f0ff;
+}
+
+html.retro-mode .cta-button.secondary:hover {
+  background: #00f0ff;
+  color: #06050b;
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.8);
+  text-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   6. SERVICES SECTION (ARCADE MISSIONS)
+   -------------------------------------------------------------------------- */
+html.retro-mode #services .card {
+  background: rgba(14, 12, 28, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  border-radius: 6px;
+  box-shadow: 
+    0 0 20px rgba(0, 240, 255, 0.12),
+    inset 0 0 15px rgba(255, 0, 127, 0.06);
+  padding: 2.2rem 2rem;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.4, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top arcade corner bracket */
+html.retro-mode #services .card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff007f, #00f0ff);
+  box-shadow: 0 0 8px #00f0ff;
+}
+
+html.retro-mode #services .card:hover {
+  transform: translateY(-8px);
+  border-color: #00f0ff;
+  background: rgba(22, 19, 44, 0.92);
+  box-shadow: 
+    0 0 35px rgba(0, 240, 255, 0.35),
+    0 0 50px rgba(255, 0, 127, 0.2),
+    inset 0 0 20px rgba(0, 240, 255, 0.15);
+}
+
+html.retro-mode #services .card-icon {
+  color: #00f0ff;
+  filter: drop-shadow(0 0 10px #00f0ff);
+  font-size: 2.2rem;
+}
+
+html.retro-mode #services .card h3 {
+  font-family: var(--font-display-retro);
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  margin-top: 1rem;
+}
+
+html.retro-mode #services .card p {
+  color: #9eb7d6;
+  font-size: 0.95rem;
+}
+
+html.retro-mode #services .learn-more {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #00f0ff;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   7. PORTFOLIO & PROJECTS (PROJECT SELECT)
+   -------------------------------------------------------------------------- */
+html.retro-mode .portfolio-card {
+  background: rgba(14, 12, 28, 0.88);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+html.retro-mode .portfolio-card:hover {
+  transform: translateY(-8px);
+  border-color: #00f0ff;
+  box-shadow: 
+    0 0 35px rgba(0, 240, 255, 0.35),
+    0 0 50px rgba(255, 0, 127, 0.2);
+}
+
+html.retro-mode .portfolio-info h3 {
+  font-family: var(--font-display-retro);
+  font-size: 1.15rem;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+}
+
+html.retro-mode .tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: rgba(0, 240, 255, 0.12);
+  color: #00f0ff;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 2px;
+  padding: 3px 8px;
+}
+
+html.retro-mode .case-link-btn {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  background: #ff007f;
+  color: #ffffff;
+  border: 1px solid #ffe600;
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.8);
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   8. BLOG SECTION (DATA FILES & SYSTEM LOGS)
+   -------------------------------------------------------------------------- */
+html.retro-mode .blog-card-date {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #00ff66;
+  text-shadow: 0 0 6px rgba(0, 255, 102, 0.5);
+}
+
+html.retro-mode .blog-card-title {
+  font-family: var(--font-display-retro);
+  color: #ffffff;
+}
+
+html.retro-mode .blog-card-desc {
+  color: #9eb7d6;
+}
+
+/* --------------------------------------------------------------------------
+   9. CONTACT SECTION & FORMS (STAGE CLEAR / DISPATCH)
+   -------------------------------------------------------------------------- */
+html.retro-mode .contact-form-card {
+  background: rgba(14, 12, 28, 0.92);
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  border-radius: 6px;
+  box-shadow: 
+    0 0 35px rgba(0, 240, 255, 0.15),
+    inset 0 0 20px rgba(255, 0, 127, 0.08);
+}
+
+html.retro-mode .form-control {
+  background: rgba(8, 6, 18, 0.9);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: #00f0ff;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+}
+
+html.retro-mode .form-control:focus {
+  border-color: #00f0ff;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+  outline: none;
+}
+
+html.retro-mode .form-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #c9e6ff;
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   10. FOOTER
+   -------------------------------------------------------------------------- */
+html.retro-mode .footer-root {
+  background: #040308;
+  border-top: 2px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 -10px 30px rgba(0, 240, 255, 0.1);
+}
+
+html.retro-mode .footer-title {
+  font-family: var(--font-display-retro);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: #00f0ff;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+html.retro-mode .footer-logo {
+  font-family: var(--font-display-retro);
+  color: #00f0ff;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+}
+
+html.retro-mode .footer-nav a {
+  font-family: var(--font-mono);
+  color: #92a4c4;
+}
+
+html.retro-mode .footer-nav a:hover {
+  color: #00f0ff;
+  text-shadow: 0 0 8px #00f0ff;
+}
+
+html.retro-mode .social-links a {
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  background: rgba(0, 240, 255, 0.08);
+  color: #00f0ff;
+  border-radius: 4px;
+}
+
+html.retro-mode .social-links a:hover {
+  background: #00f0ff;
+  color: #06050b;
+  box-shadow: 0 0 15px #00f0ff;
+}
+
+/* --------------------------------------------------------------------------
+   11. QUICK NAV & MISCELLANEOUS SECTIONS
+   -------------------------------------------------------------------------- */
+html.retro-mode .quicknav-card {
+  background: rgba(14, 12, 28, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+}
+
+html.retro-mode .quicknav-card:hover {
+  border-color: #00f0ff;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+}
+
+html.retro-mode .proof-card,
+html.retro-mode .proof-stat-item {
+  border-color: rgba(0, 240, 255, 0.25);
+  background: rgba(14, 12, 28, 0.6);
+}
+
+html.retro-mode .stat-number {
+  font-family: var(--font-display-retro);
+  color: #00f0ff;
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   12. CRT TRANSITION FLASH EFFECT (When toggling modes)
+   -------------------------------------------------------------------------- */
+.crt-mode-transition {
+  animation: crt-mode-glitch 0.35s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+}
+
+@keyframes crt-mode-glitch {
+  0% {
+    filter: brightness(1) contrast(1);
+    transform: scale(1);
+  }
+  30% {
+    filter: brightness(2.5) contrast(2) hue-rotate(90deg);
+    transform: scale(1.008);
+  }
+  60% {
+    filter: brightness(0.6) contrast(1.5) hue-rotate(-60deg);
+    transform: scale(0.995);
+  }
+  100% {
+    filter: brightness(1) contrast(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes retro-grid-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 50px;
+  }
+}
+
+@keyframes retro-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. RETRO CHIPTUNE PLAYER DOCKED UNDER HEADER
+   -------------------------------------------------------------------------- */
+.retro-dock-player {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: max(1rem, calc((100vw - 1280px) / 2 + 1.25rem));
+  z-index: 2200;
+}
+
+html.retro-mode .retro-dock-player {
+  display: block;
+}
+
+/* Dock Ribbon Bar */
+.retro-dock-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.35rem 0.65rem;
+  background: rgba(10, 8, 20, 0.96);
+  border: 1.5px solid #00f0ff;
+  border-radius: 8px;
+  margin-top: 6px;
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.35), inset 0 0 10px rgba(0, 240, 255, 0.1);
+  backdrop-filter: blur(14px);
+}
+
+.ribbon-info {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  user-select: none;
+}
+
+.audio-pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: #ff007f;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ff007f;
+}
+
+.is-playing .audio-pulse-dot {
+  background: #00ff66;
+  box-shadow: 0 0 8px #00ff66;
+  animation: retro-pulse 1.2s infinite ease-in-out;
+}
+
+.ribbon-track-title {
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  color: #00f0ff;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ribbon-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ribbon-btn {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #c9e6ff;
+  border-radius: 3px;
+  padding: 0.25rem 0.45rem;
+  font-size: 0.65rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.ribbon-btn:hover {
+  background: rgba(0, 240, 255, 0.3);
+  border-color: #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+.ribbon-btn.play-btn {
+  background: rgba(255, 0, 127, 0.25);
+  border-color: #ff007f;
+  color: #ff007f;
+}
+
+.ribbon-btn.play-btn:hover {
+  background: #ff007f;
+  color: #06050b;
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.8);
+}
+
+.ribbon-btn.expand-btn {
+  font-family: var(--font-pixel);
+  font-size: 0.46rem;
+  color: #ffe600;
+  border-color: rgba(255, 230, 0, 0.5);
+  background: rgba(255, 230, 0, 0.1);
+  padding: 0.25rem 0.55rem;
+  margin-left: 2px;
+}
+
+.ribbon-btn.expand-btn:hover,
+.ribbon-btn.expand-btn.active {
+  background: rgba(255, 230, 0, 0.25);
+  border-color: #ffe600;
+  box-shadow: 0 0 10px rgba(255, 230, 0, 0.5);
+}
+
+.ribbon-btn.expand-btn .toggle-arrow {
+  font-size: 0.45rem;
+  transition: transform 0.25s ease;
+}
+
+.ribbon-btn.expand-btn.active .toggle-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Soundbar Panel docked under header */
+.retro-dock-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 380px;
+  max-width: calc(100vw - 2rem);
+  background: rgba(10, 8, 22, 0.98);
+  border: 1px solid #00f0ff;
+  border-radius: 6px;
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(0, 240, 255, 0.35),
+    inset 0 0 15px rgba(255, 0, 127, 0.15);
+  backdrop-filter: blur(20px);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px) scale(0.96);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.4, 1);
+  z-index: 2500;
+}
+
+.retro-dock-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.retro-dock-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff007f, #ffe600, #00f0ff);
+  box-shadow: 0 0 8px #00f0ff;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+  padding-bottom: 0.4rem;
+}
+
+.panel-tag {
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  color: #ffe600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.panel-tag .cassette-dot {
+  width: 6px;
+  height: 6px;
+  background: #ff007f;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ff007f;
+}
+
+.is-playing .panel-tag .cassette-dot {
+  animation: retro-pulse 1s infinite ease-in-out;
+}
+
+.panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-style {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: #8da4be;
+  font-weight: 700;
+}
+
+.panel-close-btn {
+  background: rgba(255, 0, 127, 0.15);
+  border: 1px solid rgba(255, 0, 127, 0.4);
+  color: #ff007f;
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  padding: 3px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.panel-close-btn:hover {
+  background: #ff007f;
+  color: #06050b;
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
+}
+
+.panel-track-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: rgba(6, 5, 11, 0.95);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 4px;
+  padding: 0.55rem;
+}
+
+.panel-track-row .visualizer-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+  width: 22px;
+  flex-shrink: 0;
+}
+
+.panel-track-row .vis-bar {
+  flex: 1;
+  background: #00f0ff;
+  height: 4px;
+  border-radius: 1px;
+  box-shadow: 0 0 6px #00f0ff;
+  transition: height 0.15s ease;
+}
+
+.is-playing .vis-bar.bar-1 { animation: vis-jump-1 0.4s infinite alternate ease-in-out; }
+.is-playing .vis-bar.bar-2 { animation: vis-jump-2 0.35s infinite alternate ease-in-out 0.1s; }
+.is-playing .vis-bar.bar-3 { animation: vis-jump-3 0.45s infinite alternate ease-in-out 0.05s; }
+.is-playing .vis-bar.bar-4 { animation: vis-jump-4 0.38s infinite alternate ease-in-out 0.15s; }
+
+@keyframes vis-jump-1 { 0% { height: 4px; } 100% { height: 18px; background: #ff007f; box-shadow: 0 0 6px #ff007f; } }
+@keyframes vis-jump-2 { 0% { height: 6px; } 100% { height: 15px; background: #ffe600; box-shadow: 0 0 6px #ffe600; } }
+@keyframes vis-jump-3 { 0% { height: 4px; } 100% { height: 20px; background: #00ff66; box-shadow: 0 0 6px #00ff66; } }
+@keyframes vis-jump-4 { 0% { height: 5px; } 100% { height: 16px; background: #00f0ff; box-shadow: 0 0 6px #00f0ff; } }
+
+.panel-track-row .track-title-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.panel-track-row .track-title {
+  font-family: var(--font-pixel);
+  font-size: 0.58rem;
+  color: #00f0ff;
+  text-shadow: 0 0 6px rgba(0, 240, 255, 0.7);
+}
+
+.panel-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.panel-controls-row .retro-ctrl-btn {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #c9e6ff;
+  border-radius: 3px;
+  padding: 0.45rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  transition: all 0.2s ease;
+}
+
+.panel-controls-row .retro-ctrl-btn:hover {
+  background: rgba(0, 240, 255, 0.3);
+  border-color: #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
+
+.panel-controls-row .retro-ctrl-btn.play-btn {
+  background: rgba(255, 0, 127, 0.25);
+  border-color: #ff007f;
+  color: #ff007f;
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+  flex: 1.3;
+}
+
+.panel-controls-row .retro-ctrl-btn.play-btn:hover {
+  background: #ff007f;
+  color: #06050b;
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.8);
+}
+
+/* Volume Row & Slider */
+.panel-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 0.2rem;
+}
+
+.vol-icon {
+  font-size: 0.7rem;
+  color: #8da4be;
+}
+
+.retro-volume-range {
+  flex-grow: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: rgba(0, 240, 255, 0.3);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.retro-volume-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: #00f0ff;
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 8px #00f0ff;
+  cursor: pointer;
+}
+
+.retro-volume-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: #00f0ff;
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 8px #00f0ff;
+  cursor: pointer;
+}
+
+/* Playlist Section */
+.panel-playlist-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+  border-top: 1px dashed rgba(0, 240, 255, 0.25);
+  padding-top: 0.5rem;
+}
+
+.playlist-header {
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  color: #ffe600;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.playlist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 160px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 8px;
+  background: rgba(6, 5, 11, 0.7);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 3px;
+  color: #c9e6ff;
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.playlist-item:hover {
+  background: rgba(0, 240, 255, 0.2);
+  border-color: #00f0ff;
+  color: #00f0ff;
+  transform: translateX(2px);
+}
+
+.playlist-item.active {
+  background: rgba(255, 0, 127, 0.25);
+  border-color: #ff007f;
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+}
+
+.playlist-item .p-num {
+  color: #ffe600;
+  font-size: 0.46rem;
+  flex-shrink: 0;
+}
+
+.playlist-item .p-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.playlist-item .p-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.playlist-item .p-style {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: #8da4be;
+}
+
+.playlist-item .p-play-badge {
+  font-size: 0.5rem;
+  color: #00f0ff;
+  flex-shrink: 0;
+}
+
+.playlist-item.active .p-play-badge {
+  color: #ff007f;
+}
+
+/* Custom Retro Scrollbar */
+.custom-retro-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-retro-scroll::-webkit-scrollbar-track {
+  background: rgba(6, 5, 11, 0.9);
+}
+
+.custom-retro-scroll::-webkit-scrollbar-thumb {
+  background: #00f0ff;
+  border-radius: 2px;
+  box-shadow: 0 0 4px #00f0ff;
+}
+
+/* --------------------------------------------------------------------------
+   15. MOBILE RETRO MODE OPTIMIZATIONS
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  html.retro-mode .site-header {
+    padding: 0.6rem 0;
+  }
+
+  html.retro-mode .hero {
+    padding-top: 175px;
+  }
+
+  html.retro-mode .retro-dock-player {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    transform: none !important;
+    width: min(330px, calc(100vw - 1.5rem));
+  }
+
+  /* 2-Level Mobile Ribbon */
+  html.retro-mode .retro-dock-ribbon {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    gap: 6px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 6px 20px rgba(0, 240, 255, 0.35);
+  }
+
+  /* Level 1: Track title row */
+  html.retro-mode .ribbon-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    width: 100%;
+  }
+
+  html.retro-mode .ribbon-track-title {
+    max-width: 250px;
+    font-size: 0.52rem;
+    text-align: center;
+  }
+
+  /* Level 2: Controls row (Prev, Play, Next, Mute, Playlist) */
+  html.retro-mode .ribbon-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 4px;
+  }
+
+  html.retro-mode .ribbon-btn {
+    flex: 1;
+    padding: 0.35rem 0.25rem;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  html.retro-mode .ribbon-btn.play-btn {
+    flex: 1.2;
+  }
+
+  html.retro-mode .ribbon-btn.expand-btn {
+    flex: 2.2;
+    font-size: 0.48rem;
+    gap: 4px;
+  }
+
+  /* True Full-Screen Mobile Player on open */
+  html.retro-mode .retro-dock-panel.open,
+  body > .retro-dock-panel.open {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    border-radius: 0 !important;
+    border: none !important;
+    transform: none !important;
+    margin: 0 !important;
+    z-index: 999999 !important;
+    background: #080610 !important;
+    background: radial-gradient(circle at 50% 15%, #180e32 0%, #080612 100%) !important;
+    padding: 1.25rem 1rem 2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 0.9rem !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+    box-shadow: inset 0 0 50px rgba(0, 240, 255, 0.25);
+  }
+
+  html.retro-mode .retro-dock-panel.open::before,
+  body > .retro-dock-panel.open::before {
+    height: 3px;
+    background: linear-gradient(90deg, #ff007f, #ffe600, #00f0ff);
+    box-shadow: 0 0 12px #00f0ff;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-header,
+  body > .retro-dock-panel.open .panel-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding-bottom: 0.75rem !important;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.3) !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-actions,
+  body > .retro-dock-panel.open .panel-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-tag,
+  body > .retro-dock-panel.open .panel-tag {
+    font-size: 0.6rem !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-close-btn,
+  body > .retro-dock-panel.open .panel-close-btn {
+    font-size: 0.62rem !important;
+    padding: 7px 14px !important;
+    border-radius: 5px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    background: rgba(255, 0, 127, 0.25) !important;
+    border: 1px solid #ff007f !important;
+    color: #fff !important;
+    cursor: pointer !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-track-row,
+  body > .retro-dock-panel.open .panel-track-row {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0.85rem 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    background: rgba(0, 240, 255, 0.08) !important;
+    border: 1px solid #00f0ff !important;
+    border-radius: 8px !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-track-row .visualizer-container,
+  body > .retro-dock-panel.open .panel-track-row .visualizer-container {
+    height: 24px !important;
+    width: 28px !important;
+    gap: 4px !important;
+    flex-shrink: 0 !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-track-row .track-title,
+  body > .retro-dock-panel.open .panel-track-row .track-title {
+    font-size: 0.72rem !important;
+    color: #ffe600 !important;
+    line-height: 1.3 !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-controls-row,
+  body > .retro-dock-panel.open .panel-controls-row {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    justify-content: space-around !important;
+    gap: 0.6rem !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-controls-row .retro-ctrl-btn,
+  body > .retro-dock-panel.open .panel-controls-row .retro-ctrl-btn {
+    flex: 1 !important;
+    max-width: 65px !important;
+    height: 44px !important;
+    font-size: 1.15rem !important;
+    border-radius: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-volume-row,
+  body > .retro-dock-panel.open .panel-volume-row {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    padding: 0.4rem 0.75rem !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border-radius: 6px !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .panel-playlist-section,
+  body > .retro-dock-panel.open .panel-playlist-section {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .playlist-list,
+  body > .retro-dock-panel.open .playlist-list {
+    flex: 1 !important;
+    max-height: calc(100dvh - 360px) !important;
+    overflow-y: auto !important;
+    gap: 5px !important;
+    padding-right: 4px !important;
+  }
+
+  html.retro-mode .retro-dock-panel.open .playlist-item,
+  body > .retro-dock-panel.open .playlist-item {
+    padding: 9px 12px !important;
+    font-size: 0.58rem !important;
+    border-radius: 4px !important;
+  }
+
+  html.retro-mode .retro-hero-hud {
+    gap: 6px;
+    margin-top: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  html.retro-mode .retro-hero-chip {
+    font-size: 0.52rem;
+    padding: 4px 8px;
+  }
+
+  html.retro-mode .mobile-nav {
+    top: 130px;
+    max-height: calc(100svh - 150px);
+    background: rgba(8, 6, 16, 0.98);
+    border: 1px solid #00f0ff;
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.35);
+  }
+
+  html.retro-mode .mobile-controls {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 240, 255, 0.25);
+  }
+
+  html.retro-mode .mobile-mode-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  html.retro-mode .mobile-mode-row .mode-switcher {
+    width: 100%;
+    max-width: 220px;
+    justify-content: center;
+  }
+
+  html.retro-mode .mobile-tools-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  html.retro-mode .mobile-menu-list a,
+  html.retro-mode .mobile-accordion-trigger {
+    font-family: var(--font-retro);
+    letter-spacing: 0.05em;
+  }
+
+  html.retro-mode .mobile-menu-list a:hover {
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   16. REDUCED MOTION (A11y compliance)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html.retro-mode .retro-grid-plane {
+    animation: none !important;
+  }
+  .crt-mode-transition {
+    animation: none !important;
+  }
+  html.retro-mode .retro-hud-badge .hud-dot {
+    animation: none !important;
+  }
+  .vis-bar {
+    animation: none !important;
+  }
+}

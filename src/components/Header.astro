@@ -6,6 +6,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import Icon from "./Icon.astro";
+import RetroAudioPlayer from "./RetroAudioPlayer.astro";
 import { NAV_ORDER, servicePath, NAV_LABEL_KEYS } from "../data/services";
 
 interface Props {
@@ -71,6 +72,19 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
 <li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
         </ul>
         <div class="controls">
+            <div class="retro-hud-badge" aria-hidden="true">
+                <span class="hud-dot"></span>
+                <span>{t("retro_hud_p1")}</span>
+            </div>
+            <button
+                type="button"
+                class="retro-mode-toggle mode-switcher"
+                aria-label={t("aria_mode_switcher")}
+                title={t("aria_mode_switcher")}
+            >
+                <i class="fa-solid fa-gamepad" aria-hidden="true"></i>
+                <span class="mode-toggle-label">{t("mode_retro_label")}</span>
+            </button>
             <button
                 class="control-btn theme-switcher"
                 aria-label={t("aria_theme_switcher")}
@@ -85,6 +99,8 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
             <div></div>
         </button>
     </nav>
+    <!-- Retro Chiptune Docked Player attached directly to bottom edge of header -->
+    <RetroAudioPlayer />
 </header>
 
 <!-- Мобильное меню вынесено сюда же для инкапсуляции -->
@@ -111,12 +127,25 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
 <li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
     </ul>
     <div class="mobile-controls">
-        <button
-            class="control-btn theme-switcher"
-            aria-label={t("aria_theme_switcher")}
-        >
-            <i class="fas fa-sun" aria-hidden="true"></i>
-        </button>
-        <LanguageSwitcher translationSlug={translationSlug} />
+        <div class="mobile-mode-row">
+            <button
+                type="button"
+                class="retro-mode-toggle mode-switcher"
+                aria-label={t("aria_mode_switcher")}
+                title={t("aria_mode_switcher")}
+            >
+                <i class="fa-solid fa-gamepad" aria-hidden="true"></i>
+                <span class="mode-toggle-label">{t("mode_retro_label")}</span>
+            </button>
+        </div>
+        <div class="mobile-tools-row">
+            <button
+                class="control-btn theme-switcher"
+                aria-label={t("aria_theme_switcher")}
+            >
+                <i class="fas fa-sun" aria-hidden="true"></i>
+            </button>
+            <LanguageSwitcher translationSlug={translationSlug} />
+        </div>
     </div>
 </div>

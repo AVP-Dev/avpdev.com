@@ -1,4 +1,5 @@
 import { initPortfolio } from './portfolio';
+import { retroAudio } from './retroAudio';
 
 // Делегирование событий мобильного меню.
 // Вешаем один раз на document — работает при View Transitions (DOM пересоздаётся),
@@ -135,50 +136,97 @@ function initializePage() {
     if ((document as any).__avpInitDone) return;
     (document as any).__avpInitDone = true;
 
-    // --- THEME SWITCHER (делегирование — защита от двойной инициализации) ---
+    // --- THEME & RETRO MODE SWITCHER ---
     let currentTheme = localStorage.getItem('theme') || 'dark-theme';
+    let currentMode = localStorage.getItem('theme_mode') || 'modern';
 
-    function applyThemeClasses(theme: string) {
-        if (theme === 'dark-theme') {
-            document.documentElement.classList.add('dark-theme');
+    function updateModeSwitcherButtons(isRetro: boolean) {
+        const isRu = document.documentElement.lang === 'ru';
+        document.querySelectorAll('.mode-switcher').forEach(btn => {
+            const labelEl = btn.querySelector('.mode-toggle-label');
+            const iconEl = btn.querySelector('i');
+            if (labelEl) {
+                labelEl.textContent = isRetro 
+                    ? (isRu ? 'ОБЫЧНЫЙ' : 'MODERN') 
+                    : (isRu ? 'РЕТРО' : 'RETRO');
+            }
+            if (iconEl) {
+                iconEl.className = isRetro 
+                    ? 'fa-solid fa-cube' 
+                    : 'fa-solid fa-gamepad';
+            }
+        });
+    }
+
+    function applyThemeClasses(theme: string, isRetro: boolean) {
+        if (isRetro) {
+            document.documentElement.classList.add('retro-mode', 'dark-theme');
             document.documentElement.classList.remove('light-theme');
+            document.documentElement.style.colorScheme = 'dark';
         } else {
-            document.documentElement.classList.add('light-theme');
-            document.documentElement.classList.remove('dark-theme');
+            document.documentElement.classList.remove('retro-mode');
+            if (theme === 'dark-theme') {
+                document.documentElement.classList.add('dark-theme');
+                document.documentElement.classList.remove('light-theme');
+                document.documentElement.style.colorScheme = 'dark';
+            } else {
+                document.documentElement.classList.add('light-theme');
+                document.documentElement.classList.remove('dark-theme');
+                document.documentElement.style.colorScheme = 'light';
+            }
         }
 
         document.querySelectorAll('.theme-switcher').forEach(switcher => {
-            // Remove all children
             while (switcher.firstChild) {
                 switcher.removeChild(switcher.firstChild);
             }
-
-            // Create icon element safely
             const icon = document.createElement('i');
             icon.className = theme === 'dark-theme' ? 'fas fa-sun' : 'fas fa-moon';
             switcher.appendChild(icon);
         });
+
+        updateModeSwitcherButtons(isRetro);
     }
 
-    applyThemeClasses(currentTheme);
+    applyThemeClasses(currentTheme, currentMode === 'retro');
 
     if (!(document as any).__themeListenerReady) {
         (document as any).__themeListenerReady = true;
+
+        // Modern Light / Dark Theme Switcher
         document.addEventListener('click', (e) => {
             if (!(e.target as HTMLElement).closest('.theme-switcher')) return;
             const newTheme = document.documentElement.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme';
+            const isRetro = document.documentElement.classList.contains('retro-mode');
 
-            // Add class to enable transition only during manual switch
             document.body.classList.add('theme-transitioning');
-
             localStorage.setItem('theme', newTheme);
-            applyThemeClasses(newTheme);
+            applyThemeClasses(newTheme, isRetro);
             document.dispatchEvent(new CustomEvent('theme:changed', { detail: { theme: newTheme } }));
 
-            // Remove class after transition completes
             setTimeout(() => {
                 document.body.classList.remove('theme-transitioning');
             }, 400);
+        });
+
+        // Retro Mode Switcher (with CRT Glitch / Flash effect)
+        document.addEventListener('click', (e) => {
+            if (!(e.target as HTMLElement).closest('.mode-switcher')) return;
+            const isCurrentlyRetro = document.documentElement.classList.contains('retro-mode');
+            const targetRetro = !isCurrentlyRetro;
+            const savedTheme = localStorage.getItem('theme') || 'dark-theme';
+
+            // Add CRT screen glitch / flash transition & SFX
+            document.documentElement.classList.add('crt-mode-transition');
+            retroAudio.playWarp();
+
+            localStorage.setItem('theme_mode', targetRetro ? 'retro' : 'modern');
+            applyThemeClasses(savedTheme, targetRetro);
+            document.dispatchEvent(new CustomEvent('theme:mode-changed', { detail: { isRetro: targetRetro } }));
+
+            setTimeout(() => {
+                document.documentElement.classList.remove('crt-mode-transition');
+            }, 350);
         });
     }
 

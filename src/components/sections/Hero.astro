@@ -15,6 +15,9 @@ const t = useTranslations(lang);
 
 <section id="hero" class={`hero-section ${variant}`}>
     <div id="particles-js"></div>
+    <div class="retro-synthwave-grid" aria-hidden="true">
+        <div class="retro-grid-plane"></div>
+    </div>
 
     {variant === "services" && (
       <div class="services-hero-bg">
@@ -27,7 +30,12 @@ const t = useTranslations(lang);
     <div class="container hero-container">
         <div class="hero-content">
             <div class={`hero-text fade-in ${variant === 'services' ? 'services-text' : ''}`}>
-                
+                <div class="retro-hero-hud" aria-hidden="true">
+                    <span class="retro-hero-chip p1">{t("retro_hud_p1")}</span>
+                    <span class="retro-hero-chip mode">{t("retro_hud_sys")}</span>
+                    <span class="retro-hero-chip credits">{t("retro_hud_credits")}</span>
+                </div>
+
                 {title ? (
                   <h1 set:html={title}></h1>
                 ) : (

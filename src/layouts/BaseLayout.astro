@@ -16,10 +16,15 @@ import { getEntry } from 'astro:content';
 import '@fontsource-variable/sora';
 import '@fontsource-variable/plus-jakarta-sans';
 import '@fontsource/jetbrains-mono';
+import '@fontsource/orbitron/400.css';
+import '@fontsource/orbitron/700.css';
+import '@fontsource/orbitron/900.css';
+import '@fontsource/press-start-2p';
 
 import '../styles/style.css';
 import '../styles/case-study.css';
 import '../styles/blog.css';
+import '../styles/retro.css';
 
 export interface Props {
 	title: string;
@@ -293,6 +298,13 @@ const globalOrganizationSchema = {
 
     <script is:inline>
         function applyTheme() {
+            const isRetro = (() => {
+                if (typeof localStorage !== 'undefined' && localStorage.getItem('theme_mode')) {
+                    return localStorage.getItem('theme_mode') === 'retro';
+                }
+                return false;
+            })();
+
             const theme = (() => {
                 if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
                     return localStorage.getItem('theme');
@@ -303,16 +315,22 @@ const globalOrganizationSchema = {
                 return 'light-theme';
             })();
             
-            if (theme === 'dark-theme') {
-                document.documentElement.classList.add('dark-theme');
+            if (isRetro) {
+                document.documentElement.classList.add('retro-mode', 'dark-theme');
                 document.documentElement.classList.remove('light-theme');
                 document.documentElement.style.colorScheme = 'dark';
             } else {
-                document.documentElement.classList.add('light-theme');
-                document.documentElement.classList.remove('dark-theme');
-                document.documentElement.style.colorScheme = 'light';
+                document.documentElement.classList.remove('retro-mode');
+                if (theme === 'dark-theme') {
+                    document.documentElement.classList.add('dark-theme');
+                    document.documentElement.classList.remove('light-theme');
+                    document.documentElement.style.colorScheme = 'dark';
+                } else {
+                    document.documentElement.classList.add('light-theme');
+                    document.documentElement.classList.remove('dark-theme');
+                    document.documentElement.style.colorScheme = 'light';
+                }
             }
-            window.localStorage.setItem('theme', theme);
         }
 
         applyTheme();
@@ -506,6 +524,7 @@ const globalOrganizationSchema = {
 ) : (
     <>
     <Header translationSlug={translationSlug} />
+    <div class="crt-overlay" aria-hidden="true"></div>
     
     <main class="flex-grow pt-[80px]"> <!-- pt-[80px] to account for fixed header -->
       <slot />

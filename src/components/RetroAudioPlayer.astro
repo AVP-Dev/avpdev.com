@@ -1,0 +1,362 @@
+---
+// src/components/RetroAudioPlayer.astro
+// Retro Chiptune Player docked directly below the site-header
+import { RETRO_TRACKS } from '../scripts/retroAudio';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div id="retro-dock-player" class="retro-dock-player" aria-label={t("aria_mode_switcher")}>
+    <!-- Collapsed Ribbon Bar (glued to bottom edge of header with full playback controls) -->
+    <div class="retro-dock-ribbon">
+        <div class="ribbon-info" title="Current Track">
+            <span class="audio-pulse-dot"></span>
+            <i class="fa-solid fa-music text-cyan"></i>
+            <span id="ribbon-track-title" class="ribbon-track-title">01: SUPER MARIO BROS</span>
+        </div>
+
+        <!-- Inline Controls in Collapsed Bar -->
+        <div class="ribbon-controls">
+            <button type="button" id="ribbon-prev" class="ribbon-btn" aria-label={t("retro_player_prev")} title={t("retro_player_prev")}>
+                <i class="fa-solid fa-backward-step"></i>
+            </button>
+            <button type="button" id="ribbon-play" class="ribbon-btn play-btn" aria-label={t("retro_player_play")} title={t("retro_player_play")}>
+                <i class="fa-solid fa-play"></i>
+            </button>
+            <button type="button" id="ribbon-next" class="ribbon-btn" aria-label={t("retro_player_next")} title={t("retro_player_next")}>
+                <i class="fa-solid fa-forward-step"></i>
+            </button>
+            <button type="button" id="ribbon-mute" class="ribbon-btn mute-btn" aria-label={t("retro_player_mute")} title={t("retro_player_mute")}>
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+            <button type="button" id="retro-expand-btn" class="ribbon-btn expand-btn" aria-label={t("retro_player_expand_title")} title={t("retro_player_expand_title")}>
+                <span>{t("retro_player_playlist_btn")}</span>
+                <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Soundbar & Full Playlist Panel (Expandable) -->
+    <div id="retro-audio-panel" class="retro-dock-panel">
+        <!-- Panel Top Bar with Close/Collapse Button -->
+        <div class="panel-header">
+            <div class="panel-tag">
+                <span class="cassette-dot"></span>
+                <span>CHIPTUNE 16-BIT FM</span>
+            </div>
+            <div class="panel-actions">
+                <span id="player-track-style" class="panel-style">NES 8-BIT</span>
+                <button type="button" id="player-close-btn" class="panel-close-btn" aria-label={t("retro_player_collapse_title")} title={t("retro_player_collapse_title")}>
+                    <i class="fa-solid fa-chevron-up"></i>
+                    <span>{t("retro_player_collapse_btn")}</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Current Track Banner with Equalizer -->
+        <div class="panel-track-row">
+            <div class="visualizer-container" aria-hidden="true">
+                <div class="vis-bar bar-1"></div>
+                <div class="vis-bar bar-2"></div>
+                <div class="vis-bar bar-3"></div>
+                <div class="vis-bar bar-4"></div>
+            </div>
+            <div class="track-title-wrapper">
+                <span id="player-track-title" class="track-title">01: SUPER MARIO BROS (1985)</span>
+            </div>
+        </div>
+
+        <!-- Playback Controls in Panel -->
+        <div class="panel-controls-row">
+            <button type="button" id="panel-prev" class="retro-ctrl-btn" aria-label={t("retro_player_prev")} title={t("retro_player_prev")}>
+                <i class="fa-solid fa-backward-step"></i>
+            </button>
+            <button type="button" id="panel-play" class="retro-ctrl-btn play-btn" aria-label={t("retro_player_play")} title={t("retro_player_play")}>
+                <i class="fa-solid fa-play"></i>
+            </button>
+            <button type="button" id="panel-next" class="retro-ctrl-btn" aria-label={t("retro_player_next")} title={t("retro_player_next")}>
+                <i class="fa-solid fa-forward-step"></i>
+            </button>
+            <button type="button" id="panel-mute" class="retro-ctrl-btn mute-btn" aria-label={t("retro_player_mute_toggle")} title={t("retro_player_mute_toggle")}>
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+        </div>
+
+        <!-- Volume Slider -->
+        <div class="panel-volume-row">
+            <i class="fa-solid fa-volume-low vol-icon"></i>
+            <input type="range" id="player-volume-slider" class="retro-volume-range" min="0" max="100" value="80" title={t("retro_player_volume")} aria-label={t("retro_player_volume")} />
+            <i class="fa-solid fa-volume-high vol-icon"></i>
+        </div>
+
+        <!-- Full Interactive 16-Track Playlist -->
+        <div class="panel-playlist-section">
+            <div class="playlist-header">
+                <span>{t("retro_player_select_track")} [{RETRO_TRACKS.length}]:</span>
+            </div>
+            <div class="playlist-list custom-retro-scroll">
+                {RETRO_TRACKS.map((t, idx) => (
+                    <button type="button" class="playlist-item" data-track-index={idx}>
+                        <span class="p-num">{(t.id < 10 ? '0' : '') + t.id}</span>
+                        <div class="p-meta">
+                            <span class="p-title">{t.title}</span>
+                            <span class="p-style">{t.style}</span>
+                        </div>
+                        <span class="p-play-badge"><i class="fa-solid fa-play"></i></span>
+                    </button>
+                ))}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    import { retroAudio } from '../scripts/retroAudio';
+
+    let autoplayTimer: number | null = null;
+
+    function startAutoPlayTimer() {
+        if (autoplayTimer) {
+            clearTimeout(autoplayTimer);
+            autoplayTimer = null;
+        }
+
+        if (document.documentElement.classList.contains('retro-mode')) {
+            const isUserPaused = localStorage.getItem('retro_audio_user_paused') === 'true';
+            if (isUserPaused) {
+                return; // Respect user pause permanently
+            }
+
+            autoplayTimer = window.setTimeout(() => {
+                if (document.documentElement.classList.contains('retro-mode')) {
+                    const isPaused = localStorage.getItem('retro_audio_user_paused') === 'true';
+                    if (!isPaused) {
+                        const state = retroAudio.getState();
+                        if (!state.isPlaying) {
+                            retroAudio.play(false);
+                        }
+                    }
+                }
+            }, 1800);
+        }
+    }
+
+    function openRetroPanel() {
+        const panel = document.getElementById('retro-audio-panel');
+        const container = document.getElementById('retro-dock-player');
+        const expandBtn = document.getElementById('retro-expand-btn');
+        if (!panel || !container) return;
+
+        if (window.innerWidth <= 768) {
+            if (panel.parentElement !== document.body) {
+                document.body.appendChild(panel);
+            }
+            document.body.style.overflow = 'hidden';
+        }
+        panel.classList.add('open');
+        expandBtn?.classList.add('active');
+        container.classList.add('open');
+    }
+
+    function closeRetroPanel() {
+        const panel = document.getElementById('retro-audio-panel');
+        const container = document.getElementById('retro-dock-player');
+        const expandBtn = document.getElementById('retro-expand-btn');
+        if (!panel) return;
+
+        panel.classList.remove('open');
+        expandBtn?.classList.remove('active');
+        container?.classList.remove('open');
+        document.body.style.overflow = '';
+
+        if (container && panel.parentElement === document.body) {
+            container.appendChild(panel);
+        }
+    }
+
+    // Document-level delegated click handler (attached once, permanent)
+    if (!(window as any).__retroPlayerDelegationReady) {
+        (window as any).__retroPlayerDelegationReady = true;
+
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            if (!target) return;
+
+            // Expand / Collapse Playlist button
+            const expandBtn = target.closest('#retro-expand-btn');
+            if (expandBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const panel = document.getElementById('retro-audio-panel');
+                if (panel?.classList.contains('open')) {
+                    closeRetroPanel();
+                } else {
+                    openRetroPanel();
+                }
+                return;
+            }
+
+            // Close button inside panel
+            const closeBtn = target.closest('#player-close-btn');
+            if (closeBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeRetroPanel();
+                return;
+            }
+
+            // Play/Pause button
+            if (target.closest('#ribbon-play') || target.closest('#panel-play')) {
+                e.preventDefault();
+                e.stopPropagation();
+                retroAudio.togglePlay();
+                return;
+            }
+
+            // Prev button
+            if (target.closest('#ribbon-prev') || target.closest('#panel-prev')) {
+                e.preventDefault();
+                e.stopPropagation();
+                retroAudio.prevTrack();
+                return;
+            }
+
+            // Next button
+            if (target.closest('#ribbon-next') || target.closest('#panel-next')) {
+                e.preventDefault();
+                e.stopPropagation();
+                retroAudio.nextTrack();
+                return;
+            }
+
+            // Mute button
+            if (target.closest('#ribbon-mute') || target.closest('#panel-mute')) {
+                e.preventDefault();
+                e.stopPropagation();
+                retroAudio.toggleMute();
+                return;
+            }
+
+            // Playlist track selection
+            const playlistItem = target.closest('.playlist-item') as HTMLElement | null;
+            if (playlistItem) {
+                e.preventDefault();
+                e.stopPropagation();
+                const idxStr = playlistItem.dataset.trackIndex;
+                if (idxStr !== undefined) {
+                    const idx = parseInt(idxStr, 10);
+                    retroAudio.selectTrack(idx);
+                }
+                return;
+            }
+
+            // Click outside to collapse panel on desktop
+            const playerContainer = document.getElementById('retro-dock-player');
+            if (playerContainer && !playerContainer.contains(target) && window.innerWidth > 768) {
+                const panel = document.getElementById('retro-audio-panel');
+                if (panel?.classList.contains('open')) {
+                    closeRetroPanel();
+                }
+            }
+        });
+
+        // Volume slider listener delegation
+        document.addEventListener('input', (e) => {
+            const target = e.target as HTMLInputElement;
+            if (target && target.id === 'player-volume-slider') {
+                const val = parseFloat(target.value) / 100;
+                retroAudio.setVolume(val);
+            }
+        });
+
+        // Global theme mode switch event listener
+        document.addEventListener('theme:mode-changed', (e: any) => {
+            if (e.detail?.isRetro) {
+                startAutoPlayTimer();
+            } else {
+                retroAudio.pause();
+                closeRetroPanel();
+            }
+        });
+
+        // Global subscriber for state syncing
+        retroAudio.subscribe((state) => {
+            const trackNum = (state.currentTrack.id < 10 ? '0' : '') + state.currentTrack.id;
+            const fullTitle = `${trackNum}: ${state.currentTrack.title}`;
+            
+            const ribbonTitle = document.getElementById('ribbon-track-title');
+            const panelTitle = document.getElementById('player-track-title');
+            const panelStyle = document.getElementById('player-track-style');
+            const ribbonPlay = document.getElementById('ribbon-play');
+            const panelPlay = document.getElementById('panel-play');
+            const ribbonMute = document.getElementById('ribbon-mute');
+            const panelMute = document.getElementById('panel-mute');
+            const volumeSlider = document.getElementById('player-volume-slider') as HTMLInputElement | null;
+            const container = document.getElementById('retro-dock-player');
+            const playlistItems = document.querySelectorAll('.playlist-item');
+
+            if (ribbonTitle) ribbonTitle.textContent = fullTitle;
+            if (panelTitle) panelTitle.textContent = fullTitle;
+            if (panelStyle) panelStyle.textContent = state.currentTrack.style;
+
+            // Sync Play/Pause Icons
+            const playClass = state.isPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+            const rPlayIcon = ribbonPlay?.querySelector('i');
+            if (rPlayIcon) rPlayIcon.className = playClass;
+            const pPlayIcon = panelPlay?.querySelector('i');
+            if (pPlayIcon) pPlayIcon.className = playClass;
+
+            // Sync Mute Icons
+            const muteClass = state.isMuted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
+            const rMuteIcon = ribbonMute?.querySelector('i');
+            if (rMuteIcon) rMuteIcon.className = muteClass;
+            const pMuteIcon = panelMute?.querySelector('i');
+            if (pMuteIcon) pMuteIcon.className = muteClass;
+
+            // Highlight Active Item in Playlist
+            playlistItems.forEach((btn) => {
+                const idxStr = (btn as HTMLElement).dataset.trackIndex;
+                if (idxStr !== undefined) {
+                    const idx = parseInt(idxStr, 10);
+                    if (idx === state.currentTrack.id - 1) {
+                        btn.classList.add('active');
+                        const badge = btn.querySelector('.p-play-badge i');
+                        if (badge) {
+                            badge.className = state.isPlaying ? 'fa-solid fa-volume-high' : 'fa-solid fa-play';
+                        }
+                    } else {
+                        btn.classList.remove('active');
+                        const badge = btn.querySelector('.p-play-badge i');
+                        if (badge) {
+                            badge.className = 'fa-solid fa-play';
+                        }
+                    }
+                }
+            });
+
+            // Visualizer state
+            if (container) {
+                if (state.isPlaying && !state.isMuted) {
+                    container.classList.add('is-playing');
+                } else {
+                    container.classList.remove('is-playing');
+                }
+            }
+
+            // Sync Volume Slider
+            if (volumeSlider && !volumeSlider.matches(':active')) {
+                volumeSlider.value = Math.round(state.volume * 100).toString();
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startAutoPlayTimer);
+    } else {
+        startAutoPlayTimer();
+    }
+
+    document.addEventListener('astro:page-load', startAutoPlayTimer);
+</script>
