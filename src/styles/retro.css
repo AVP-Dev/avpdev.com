@@ -104,6 +104,27 @@ html.retro-mode footer {
   z-index: 1;
 }
 
+/* Universal Section Transparency in Retro Mode so TRON background shines across all pages */
+html.retro-mode main,
+html.retro-mode section,
+html.retro-mode article,
+html.retro-mode .container,
+html.retro-mode .case-study-root,
+html.retro-mode .case-study-hero,
+html.retro-mode .case-study-body,
+html.retro-mode .blog-post-page,
+html.retro-mode .archive-header,
+html.retro-mode .portfolio-filters,
+html.retro-mode .portfolio-grid,
+html.retro-mode .brief-container,
+html.retro-mode .error-page-content,
+html.retro-mode .faq-section,
+html.retro-mode .contact-section,
+html.retro-mode .services-section,
+html.retro-mode .about-section {
+  background-color: transparent !important;
+}
+
 /* Subtle retro grid pattern over background */
 html.retro-mode body::before {
   content: "";

@@ -516,7 +516,7 @@ class RetroAudioEngine {
     private masterGain: GainNode | null = null;
     private isPlaying: boolean = false;
     private isMuted: boolean = false;
-    private volume: number = 0.8;
+    private volume: number = 0.65;
     private currentTrackIndex: number = 0;
     private stepIndex: number = 0;
     private timerId: number | null = null;
@@ -538,6 +538,8 @@ class RetroAudioEngine {
                 if (!isNaN(v) && v >= 0 && v <= 1) {
                     this.volume = v;
                 }
+            } else {
+                this.volume = 0.65;
             }
         }
     }
