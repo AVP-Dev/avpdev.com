@@ -1833,7 +1833,7 @@ html.retro-mode .retro-dock-player {
 /* --------------------------------------------------------------------------
    15. MOBILE RETRO MODE OPTIMIZATIONS
    -------------------------------------------------------------------------- */
-@media (max-width: 1024px) {
+@media (max-width: 1240px) {
   html.retro-mode .site-header {
     padding: 0.6rem 0;
   }
