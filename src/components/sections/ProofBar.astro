@@ -10,17 +10,20 @@ const t = useTranslations(lang);
         <div class="proof-bar fade-in">
             <div class="proof-item">
                 <Icon name="fa-clock" class="proof-icon" aria-hidden="true" />
-                <span class="proof-stat">{t('proof_stat1')}</span>
+                <span class="proof-stat proof-stat-default">{t('proof_stat1')}</span>
+                <span class="proof-stat proof-stat-retro">{lang === 'ru' ? '[ УРОВЕНЬ 19: АРХИТЕКТОР // 19+ ЛЕТ ОПЫТА ]' : '[ LVL 19 ARCHITECT // 19+ YRS EXP ]'}</span>
             </div>
             <div class="proof-divider"></div>
             <div class="proof-item">
                 <Icon name="fa-globe" class="proof-icon" aria-hidden="true" />
-                <span class="proof-stat">{t('proof_stat2')}</span>
+                <span class="proof-stat proof-stat-default">{t('proof_stat2')}</span>
+                <span class="proof-stat proof-stat-retro">{lang === 'ru' ? '[ 5 МИРОВ // СЕТЬ КЛИЕНТОВ ]' : '[ 5 GLOBAL REALMS // CLIENTS NETWORK ]'}</span>
             </div>
             <div class="proof-divider"></div>
             <div class="proof-item">
                 <Icon name="fa-code-branch" class="proof-icon" aria-hidden="true" />
-                <span class="proof-stat">{t('proof_stat3')}</span>
+                <span class="proof-stat proof-stat-default">{t('proof_stat3')}</span>
+                <span class="proof-stat proof-stat-retro">{lang === 'ru' ? '[ OPEN SOURCE // ВКЛАД В ОТКРЫТЫЙ КОД ]' : '[ OPEN SOURCE // CORE CONTRIBUTOR ]'}</span>
             </div>
         </div>
     </div>

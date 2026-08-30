@@ -2946,6 +2946,11 @@ html.retro-mode .portfolio-card::after {
   z-index: 5;
 }
 
+html.retro-mode:lang(ru) .portfolio-card::after,
+html[lang="ru"].retro-mode .portfolio-card::after {
+  content: "МИССИЯ ВЫПОЛНЕНА";
+}
+
 html.retro-mode .portfolio-filters button {
   font-family: var(--font-pixel);
   font-size: 0.62rem;
@@ -2965,22 +2970,203 @@ html.retro-mode .portfolio-filters button:hover {
   box-shadow: 0 0 18px #00f0ff;
 }
 
-html.retro-mode #contact .contact-form-card {
-  position: relative;
+.retro-contact-uplink {
+  display: none;
 }
 
-html.retro-mode #contact .contact-form-card::before {
-  content: "● SECURE UPLINK // 256-BIT ENCRYPTION";
+html.retro-mode .retro-contact-uplink {
   display: block;
   font-family: var(--font-pixel);
   font-size: 0.55rem;
   color: #00f0ff;
   margin-bottom: 1.2rem;
   letter-spacing: 0.08em;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
 }
 
 /* --------------------------------------------------------------------------
-   22. REDUCED MOTION (A11y compliance)
+   23. GAMIFIED TEXTS, SCOREBOARDS, PERKS & LEVEL SELECT
+   -------------------------------------------------------------------------- */
+/* ProofBar HUD */
+.proof-stat-retro {
+  display: none;
+}
+
+html.retro-mode .proof-stat-default {
+  display: none;
+}
+
+html.retro-mode .proof-stat-retro {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: 0.62rem;
+  color: #00f0ff;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+  line-height: 1.4;
+}
+
+html.retro-mode .proof-section {
+  background: rgba(8, 6, 18, 0.85);
+  border-top: 1px solid rgba(0, 240, 255, 0.3);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+  backdrop-filter: blur(12px);
+}
+
+html.retro-mode .proof-item {
+  background: rgba(14, 12, 28, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  padding: 0.85rem 1.6rem;
+  border-radius: 6px;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.15), inset 0 0 10px rgba(0, 240, 255, 0.08);
+  transition: all 0.25s ease;
+}
+
+html.retro-mode .proof-item:hover {
+  border-color: #ff007f;
+  box-shadow: 0 0 25px rgba(255, 0, 127, 0.45);
+  transform: translateY(-2px);
+}
+
+html.retro-mode .proof-icon {
+  background: rgba(0, 240, 255, 0.15);
+  border: 1px solid #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+  border-radius: 6px;
+}
+
+html.retro-mode .proof-divider {
+  background: linear-gradient(180deg, transparent, #00f0ff, #ff007f, transparent);
+  box-shadow: 0 0 8px #00f0ff;
+}
+
+/* About Scoreboard & Stats */
+.retro-highscore-ribbon {
+  display: none;
+}
+
+.about-stats-title-retro {
+  display: none;
+}
+
+.about-stat-label-retro {
+  display: none;
+}
+
+.retro-perk-badge {
+  display: none;
+}
+
+html.retro-mode .retro-highscore-ribbon {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: #ffe600;
+  background: rgba(255, 230, 0, 0.12);
+  border: 1px solid #ffe600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 0 10px rgba(255, 230, 0, 0.4);
+  letter-spacing: 0.06em;
+}
+
+html.retro-mode .about-stats-title-default {
+  display: none;
+}
+
+html.retro-mode .about-stats-title-retro {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  color: #00f0ff;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+html.retro-mode .about-stat-label-default {
+  display: none;
+}
+
+html.retro-mode .about-stat-label-retro {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  color: #ff007f;
+  text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
+  letter-spacing: 0.05em;
+  margin-top: 0.35rem;
+}
+
+html.retro-mode .about-stat {
+  background: rgba(14, 12, 28, 0.85);
+  border: 1.5px solid rgba(0, 240, 255, 0.4);
+  border-radius: 6px;
+  padding: 1.2rem 1rem;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15), inset 0 0 12px rgba(255, 0, 127, 0.08);
+}
+
+html.retro-mode .about-stat-value {
+  font-family: var(--font-display-retro);
+  color: #00ff66;
+  text-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+  font-size: 1.8rem;
+}
+
+/* Approach Perks */
+html.retro-mode .retro-perk-badge {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid #00f0ff;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-bottom: 0.85rem;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+  letter-spacing: 0.05em;
+}
+
+/* Services Level Select */
+.retro-level-select-badge {
+  display: none;
+}
+
+.retro-service-class-badge {
+  display: none;
+}
+
+html.retro-mode .retro-level-select-badge {
+  display: block;
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 0.68rem;
+  color: #ffe600;
+  margin-bottom: 1rem;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 10px rgba(255, 230, 0, 0.5);
+}
+
+html.retro-mode .retro-service-class-badge {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: 0.46rem;
+  color: #ff007f;
+  background: rgba(255, 0, 127, 0.12);
+  border: 1px solid #ff007f;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+  align-self: flex-start;
+  box-shadow: 0 0 8px rgba(255, 0, 127, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   24. REDUCED MOTION (A11y compliance)
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html.retro-mode .retro-grid-plane {

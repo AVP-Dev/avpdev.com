@@ -18,6 +18,25 @@ const h2Content = cityName
 // Порядок: приоритет — автоматизация и AI, затем продукты, затем сайты
 const cardOrder = ['bots', 'ai', 'saas', 'shop', 'websites', 'tma'] as const;
 const cardSuffix = cityName ? ` ${t('services_card_city_suffix')} ${cityName}` : '';
+
+const RETRO_CLASS_MAP_RU: Record<string, string> = {
+    bots: 'КЛАСС: КИБЕР-БОТЫ И ПАРСЕРЫ',
+    ai: 'КЛАСС: НЕЙРОННОЕ ЯДРО AI',
+    saas: 'КЛАСС: КОМАНДНЫЙ ЦЕНТР SAAS',
+    shop: 'КЛАСС: ИНТЕРНЕТ-МАГАЗИНЫ',
+    websites: 'КЛАСС: ВЕБ-КРЕПОСТЬ (САЙТЫ)',
+    tma: 'КЛАСС: TG MINI-APP MATRIX',
+};
+
+const RETRO_CLASS_MAP_EN: Record<string, string> = {
+    bots: 'CLASS: CYBER BOT APPARATUS',
+    ai: 'CLASS: NEURAL CORE OVERDRIVE',
+    saas: 'CLASS: COMMAND CENTER SaaS',
+    shop: 'CLASS: E-COMMERCE GATEWAY',
+    websites: 'CLASS: WEB FORTRESS',
+    tma: 'CLASS: TG MINI-APP MATRIX',
+};
+
 const services = cardOrder.map((id, i) => ({
     id,
     icon: getService(id).section[lang as 'ru' | 'en'].icon,
@@ -25,15 +44,20 @@ const services = cardOrder.map((id, i) => ({
     h3Key: CARD_UI_KEYS[id].h3 as Parameters<typeof t>[0],
     pKey: CARD_UI_KEYS[id].p as Parameters<typeof t>[0],
     delay: (i + 1) * 100,
+    retroClass: lang === 'ru' 
+        ? (RETRO_CLASS_MAP_RU[id] || 'КЛАСС: КИБЕР-МОДУЛЬ')
+        : (RETRO_CLASS_MAP_EN[id] || 'CLASS: CYBER MODULE')
 }));
 ---
 <section id="services">
     <div class="container">
+        <div class="retro-level-select-badge">{lang === 'ru' ? '⚔️ ВЫБОР УРОВНЯ // ВЫБЕРИТЕ ОРУЖИЕ ⚔️' : '⚔️ LEVEL SELECT // CHOOSE YOUR WEAPON ⚔️'}</div>
         <h2 class="section-title fade-in" set:html={h2Content}></h2>
         <div class="services-grid">
             {services.map(s => (
             <a href={s.path} class="card fade-in" style={`transition-delay: ${s.delay}ms;`}>
                 <div class="card-glass-effect"></div>
+                <div class="retro-service-class-badge">{s.retroClass}</div>
                 <Icon name={s.icon} class="card-icon" aria-hidden="true" />
                 <h3>{t(s.h3Key)}{cardSuffix}</h3>
                 <p>{t(s.pKey)}</p>
