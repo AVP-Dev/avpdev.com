@@ -6,9 +6,9 @@ import { z } from 'zod';
  * Validates contact form submissions with either email OR phone required
  */
 export const ContactFormSchema = z.object({
-    name: z.string().trim().min(2, { message: 'Name must be at least 2 characters' }).max(100),
-    contact: z.string().trim().min(3, { message: 'Contact information is required' }).max(100),
-    message: z.string().trim().min(10, { message: 'Message must be at least 10 characters' }).max(2000),
+    name: z.string().trim().min(1, { message: 'Name is required' }).max(100),
+    contact: z.string().trim().min(1, { message: 'Contact information is required' }).max(200),
+    message: z.string().trim().min(1, { message: 'Message is required' }).max(2000),
     consent: z.coerce.boolean().refine((val) => val === true, {
         message: 'You must agree to personal data processing'
     }),
@@ -28,9 +28,9 @@ export const ContactFormSchema = z.object({
  */
 export const BriefFormSchema = z.object({
     // --- Contact Data ---
-    company_name: z.string().trim().min(1, { message: 'Company name is required' }),
-    contacts: z.string().trim().min(1, { message: 'Contact information is required' }),
-    preferred_contact: z.enum(['Telegram', 'WhatsApp', 'Email', 'Call']),
+    company_name: z.string().trim().min(1, { message: 'Company name is required' }).max(200),
+    contacts: z.string().trim().min(1, { message: 'Contact information is required' }).max(300),
+    preferred_contact: z.union([z.enum(['Telegram', 'WhatsApp', 'Email', 'Call']), z.string()]).optional().default('Telegram'),
 
     // --- About Company and Project ---
     business_sphere: z.string().trim().min(1, { message: 'Business description is required' }),
@@ -38,7 +38,7 @@ export const BriefFormSchema = z.object({
     competitors: z.string().trim().optional(),
 
     // --- Goals and Objectives ---
-    project_goal: z.string().trim().min(10, { message: 'Please describe your project goal' }),
+    project_goal: z.string().trim().min(1, { message: 'Please describe your project goal' }),
     success_metrics: z.string().trim().optional(),
 
     // --- Target Audience ---

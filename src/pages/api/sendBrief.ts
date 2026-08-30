@@ -49,7 +49,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
             Object.entries(result.data).map(([key, value]) => [key, cleanInput(value)])
         );
 
-        const { utm_source, utm_medium, utm_campaign, utm_term, utm_content, company_name, contacts } = sanitizedData;
+        const { utm_source, utm_medium, utm_campaign, utm_term, utm_content, company_name, contacts, preferred_contact, site_type, business_sphere, budget } = sanitizedData;
 
         // Build UTM block if any UTM exists
         const utms = [
@@ -61,8 +61,17 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         ].filter(Boolean);
 
         const utmBlock = utms.length > 0 ? `\n\n<b>📊 Аналитика (UTM):</b>\n${utms.join('\n')}` : '';
+        const siteTypeFormatted = Array.isArray(site_type) ? site_type.join(', ') : (site_type || '—');
 
-        const shortMessage = `<b>🔥 Новый бриф на разработку!</b>\n\n<b>От:</b> ${company_name}\n<b>Контакт:</b> ${contacts}${utmBlock}`;
+        const shortMessage = [
+            `<b>🔥 Новый бриф на разработку!</b>`,
+            `\n<b>От:</b> ${company_name}`,
+            `<b>Контакт:</b> ${contacts} (${preferred_contact || 'Telegram'})`,
+            business_sphere ? `<b>Сфера:</b> ${business_sphere}` : '',
+            `<b>Тип проекта:</b> ${siteTypeFormatted}`,
+            budget ? `<b>Бюджет:</b> ${budget}` : '',
+            utmBlock
+        ].filter(Boolean).join('\n');
 
         const jsonData = JSON.stringify(sanitizedData, null, 2);
         const jsonBlob = new Blob([jsonData], { type: 'application/json' });

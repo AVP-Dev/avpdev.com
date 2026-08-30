@@ -107,7 +107,7 @@ const t = useTranslations(lang as "en" | "ru");
                             >{t("brief_current_site")}</label
                         >
                         <input
-                            type="url"
+                            type="text"
                             id="current_site"
                             name="current_site"
                             class="form-control"
@@ -1189,24 +1189,13 @@ input[type="checkbox"]:checked+span::after {
                 isValid = false;
             }
 
-            // --- Validate contacts (email regex if contains @ else 7 digits) ---
+            // --- Validate contacts (any valid input: Telegram, Phone, Email, etc.) ---
             const contactsInput = form.querySelector<HTMLInputElement>('#contacts');
             if (contactsInput) {
                 const val = contactsInput.value.trim();
-                if (val) {
-                    if (val.includes('@')) {
-                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        if (!emailRegex.test(val)) {
-                            contactsInput.classList.add("error-field");
-                            isValid = false;
-                        }
-                    } else {
-                        const digits = val.replace(/\D/g, '');
-                        if (digits.length < 7) {
-                            contactsInput.classList.add("error-field");
-                            isValid = false;
-                        }
-                    }
+                if (val.length < 2) {
+                    contactsInput.classList.add("error-field");
+                    isValid = false;
                 }
             }
 
