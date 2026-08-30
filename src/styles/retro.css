@@ -77,7 +77,7 @@ html.retro-mode .crt-overlay {
   opacity: 0.85;
 }
 
-/* Interactive Canvas Background */
+/* Interactive Canvas Background (strictly behind all content) */
 .retro-bg-canvas {
   display: none;
   position: fixed;
@@ -85,7 +85,7 @@ html.retro-mode .crt-overlay {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 0;
+  z-index: -2;
 }
 
 html.retro-mode .retro-bg-canvas {
@@ -222,49 +222,291 @@ html.retro-mode .retro-hud-badge .hud-dot {
   animation: retro-pulse 1.5s infinite ease-in-out;
 }
 
-/* Retro Toggle Button */
+/* --------------------------------------------------------------------------
+   RETRO TOGGLE BUTTON (ARCADE ATTRACTION & INTERACTION)
+   -------------------------------------------------------------------------- */
 .retro-mode-toggle {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 0.45rem 0.85rem;
-  background: rgba(255, 0, 127, 0.12);
-  border: 1px solid #ff007f;
+  gap: 7px;
+  min-width: 104px;
+  height: 34px;
+  padding: 0 0.85rem;
+  background: rgba(255, 0, 127, 0.1);
+  border: 1.5px solid #ff007f;
   color: #ff007f;
-  border-radius: 4px;
+  border-radius: 5px;
   font-family: var(--font-pixel, monospace);
   font-size: 0.65rem;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.4, 1);
-  box-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.4, 1);
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.25);
   text-decoration: none;
   user-select: none;
   white-space: nowrap;
+  overflow: hidden;
 }
 
+.mode-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+}
+
+/* Neon Perimeter Sweep Border Layer */
+.retro-mode-toggle::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 5px;
+  padding: 1.5px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 260deg,
+    #00f0ff 320deg,
+    #ff007f 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 6.0-second Arcade Signal Pulse (When in Modern mode) */
+html:not(.retro-mode) .retro-mode-toggle {
+  animation: retro-btn-signal 6.0s infinite ease-in-out;
+}
+
+html:not(.retro-mode) .retro-mode-toggle::before {
+  animation: retro-border-sweep 6.0s infinite linear;
+}
+
+@keyframes retro-border-sweep {
+  0%, 65% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  68% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes retro-btn-signal {
+  0%, 65% {
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.25);
+    border-color: #ff007f;
+    transform: translateY(0);
+    background: rgba(255, 0, 127, 0.08);
+    color: #ff007f;
+  }
+  68%, 95% {
+    box-shadow: 0 0 22px rgba(255, 0, 127, 0.9), 0 0 40px rgba(255, 0, 127, 0.4);
+    border-color: #ff007f;
+    background: #ff007f;
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+  98%, 100% {
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.25);
+    border-color: #ff007f;
+    background: rgba(255, 0, 127, 0.08);
+    color: #ff007f;
+    transform: translateY(0);
+  }
+}
+
+/* Gamepad Icon Twitch in sync with signal */
+html:not(.retro-mode) .retro-mode-toggle i {
+  display: inline-block;
+  transition: transform 0.15s ease;
+  animation: retro-icon-twitch 6.0s infinite ease-in-out;
+}
+
+@keyframes retro-icon-twitch {
+  0%, 66% {
+    transform: rotate(0deg) scale(1);
+    color: inherit;
+  }
+  68%, 95% {
+    transform: rotate(-12deg) scale(1.2);
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  }
+  98%, 100% {
+    transform: rotate(0deg) scale(1);
+    color: inherit;
+    text-shadow: none;
+  }
+}
+
+/* Dual Label Flip (Default vs PRESS START) */
+.retro-mode-toggle .label-default {
+  display: inline-block;
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+}
+
+.retro-mode-toggle .label-arcade {
+  display: none;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+/* Synchronized CSS animation in Modern mode: Stays visible for ~1.8 seconds */
+html:not(.retro-mode) .retro-mode-toggle .label-default {
+  animation: retro-label-hide 6.0s infinite;
+}
+
+html:not(.retro-mode) .retro-mode-toggle .label-arcade {
+  animation: retro-label-show 6.0s infinite;
+}
+
+@keyframes retro-label-hide {
+  0%, 66% {
+    display: inline-block;
+    opacity: 1;
+  }
+  68%, 96% {
+    display: none;
+    opacity: 0;
+  }
+  98%, 100% {
+    display: inline-block;
+    opacity: 1;
+  }
+}
+
+@keyframes retro-label-show {
+  0%, 66% {
+    display: none;
+    opacity: 0;
+  }
+  68%, 96% {
+    display: inline-block;
+    opacity: 1;
+  }
+  98%, 100% {
+    display: none;
+    opacity: 0;
+  }
+}
+
+/* Active Arcade Signal State (Triggered periodically by JS or CSS) */
+.retro-mode-toggle.arcade-signal-active {
+  border-color: #ff007f !important;
+  color: #ffffff !important;
+  background: #ff007f !important;
+  box-shadow: 0 0 24px rgba(255, 0, 127, 0.95), 0 0 45px rgba(255, 0, 127, 0.4) !important;
+  transform: translateY(-1px) scale(1.02) !important;
+}
+
+.retro-mode-toggle.arcade-signal-active i {
+  transform: rotate(-12deg) scale(1.2) !important;
+  color: #ffffff !important;
+  text-shadow: 0 0 10px #ffffff !important;
+}
+
+.retro-mode-toggle.arcade-signal-active .label-default {
+  display: none !important;
+}
+
+.retro-mode-toggle.arcade-signal-active .label-arcade {
+  display: inline-block !important;
+  opacity: 1 !important;
+  color: #ffffff !important;
+}
+
+/* Strong Hover State */
 .retro-mode-toggle:hover {
-  background: #ff007f;
-  color: #06050b;
-  box-shadow: 0 0 20px rgba(255, 0, 127, 0.7);
-  transform: translateY(-1px);
+  background: #ff007f !important;
+  color: #040308 !important;
+  border-color: #ff007f !important;
+  box-shadow: 0 0 22px rgba(255, 0, 127, 0.9), 0 0 45px rgba(255, 0, 127, 0.4) !important;
+  transform: translateY(-1px) !important;
+  animation: none !important;
 }
 
-.retro-mode-toggle:active {
-  transform: translateY(1px);
+.retro-mode-toggle:hover i {
+  animation: none !important;
+  color: #040308 !important;
+  text-shadow: none !important;
 }
 
+.retro-mode-toggle:hover .label-default {
+  display: inline-block !important;
+  animation: none !important;
+  opacity: 1 !important;
+  color: #040308 !important;
+  text-shadow: none !important;
+}
+
+.retro-mode-toggle:hover .label-arcade {
+  display: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+.retro-mode-toggle:hover::before {
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+/* Tactile Inset Click Press (100-150ms) */
+.retro-mode-toggle:active,
+.retro-mode-toggle.is-pressed {
+  transform: scale(0.92) translateY(1px) !important;
+  background: #d6006b !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6), 0 0 25px #ff007f !important;
+  transition: transform 0.08s ease, box-shadow 0.08s ease !important;
+}
+
+/* Retro Mode Active State (Button turns into MODERN switcher) */
 html.retro-mode .retro-mode-toggle {
-  background: rgba(0, 240, 255, 0.15);
+  background: rgba(0, 240, 255, 0.12);
   border-color: #00f0ff;
   color: #00f0ff;
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+  animation: none;
+}
+
+html.retro-mode .retro-mode-toggle i {
+  animation: none;
+}
+
+html.retro-mode .retro-mode-toggle::before {
+  animation: none;
+  opacity: 0;
 }
 
 html.retro-mode .retro-mode-toggle:hover {
-  background: #00f0ff;
-  color: #06050b;
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+  background: #00f0ff !important;
+  border-color: #00f0ff !important;
+  color: #040308 !important;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.9), 0 0 50px rgba(0, 240, 255, 0.4) !important;
+}
+
+html.retro-mode .retro-mode-toggle:hover i {
+  color: #040308 !important;
 }
 
 /* In Retro Mode, light theme is disabled */

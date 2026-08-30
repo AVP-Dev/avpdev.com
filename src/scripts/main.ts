@@ -143,13 +143,19 @@ function initializePage() {
     function updateModeSwitcherButtons(isRetro: boolean) {
         const isRu = document.documentElement.lang === 'ru';
         document.querySelectorAll('.mode-switcher').forEach(btn => {
-            const labelEl = btn.querySelector('.mode-toggle-label');
+            const labelDefault = btn.querySelector('.label-default') as HTMLElement | null;
+            const labelEl = btn.querySelector('.mode-toggle-label') as HTMLElement | null;
             const iconEl = btn.querySelector('i');
-            if (labelEl) {
-                labelEl.textContent = isRetro 
-                    ? (isRu ? 'ОБЫЧНЫЙ' : 'MODERN') 
-                    : (isRu ? 'РЕТРО' : 'RETRO');
+            const targetText = isRetro 
+                ? (isRu ? 'ОБЫЧНЫЙ' : 'MODERN') 
+                : (isRu ? 'РЕТРО' : 'RETRO');
+
+            if (labelDefault) {
+                labelDefault.textContent = targetText;
+            } else if (labelEl) {
+                labelEl.textContent = targetText;
             }
+
             if (iconEl) {
                 iconEl.className = isRetro 
                     ? 'fa-solid fa-cube' 
@@ -209,12 +215,17 @@ function initializePage() {
             }, 400);
         });
 
-        // Retro Mode Switcher (with CRT Glitch / Flash effect)
+        // Retro Mode Switcher (with tactile press, CRT Glitch / Flash effect & SFX)
         document.addEventListener('click', (e) => {
-            if (!(e.target as HTMLElement).closest('.mode-switcher')) return;
+            const btn = (e.target as HTMLElement).closest('.mode-switcher') as HTMLElement | null;
+            if (!btn) return;
             const isCurrentlyRetro = document.documentElement.classList.contains('retro-mode');
             const targetRetro = !isCurrentlyRetro;
             const savedTheme = localStorage.getItem('theme') || 'dark-theme';
+
+            // Tactile Inset Press effect (120ms)
+            btn.classList.add('is-pressed');
+            setTimeout(() => btn.classList.remove('is-pressed'), 140);
 
             // Add CRT screen glitch / flash transition & SFX
             document.documentElement.classList.add('crt-mode-transition');
@@ -414,19 +425,50 @@ function initializePage() {
     }
 }
 
+let arcadeSignalInterval: any = null;
+let arcadeSignalInitialTimeout: any = null;
+
+function triggerArcadeSignal() {
+    const isRetro = document.documentElement.classList.contains('retro-mode');
+    if (isRetro || document.hidden) return;
+
+    document.querySelectorAll('.retro-mode-toggle').forEach(btn => {
+        if (btn.matches(':hover') || btn.classList.contains('is-pressed')) return;
+        btn.classList.add('arcade-signal-active');
+        setTimeout(() => {
+            btn.classList.remove('arcade-signal-active');
+        }, 1800);
+    });
+}
+
+function setupArcadeButtonSignal() {
+    if (arcadeSignalInterval) clearInterval(arcadeSignalInterval);
+    if (arcadeSignalInitialTimeout) clearTimeout(arcadeSignalInitialTimeout);
+
+    arcadeSignalInitialTimeout = setTimeout(() => {
+        triggerArcadeSignal();
+    }, 2000);
+
+    arcadeSignalInterval = setInterval(() => {
+        triggerArcadeSignal();
+    }, 6000);
+}
+
 function run() {
-    // При первом заходе DOM может быть уже готов (module-скрипт грузится асинхронно),
-    // а astro:page-load мог сработать раньше. Вызываем инициализацию в обоих случаях.
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializePage, { once: true });
+        document.addEventListener('DOMContentLoaded', () => {
+            initializePage();
+            setupArcadeButtonSignal();
+        }, { once: true });
     } else {
         initializePage();
+        setupArcadeButtonSignal();
     }
 }
 
 document.addEventListener("astro:page-load", () => {
-    // При переходах между страницами (view transitions) DOM заменяется — нужен новый observer
     (document as any).__avpInitDone = false;
     initializePage();
+    setupArcadeButtonSignal();
 });
 run();
