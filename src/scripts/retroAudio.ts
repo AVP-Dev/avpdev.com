@@ -1030,6 +1030,93 @@ class RetroAudioEngine {
         });
     }
 
+    public playCarBoost() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const vol = this.volume || 0.8;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(140, now);
+        osc.frequency.exponentialRampToValueAtTime(720, now + 0.35);
+
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.22 * vol, now + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(now);
+        osc.stop(now + 0.45);
+    }
+
+    public playCarBrake() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const vol = this.volume || 0.8;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(320, now + 0.22);
+
+        gain.gain.setValueAtTime(0.12 * vol, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(now);
+        osc.stop(now + 0.25);
+    }
+
+    public playNearMiss() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const vol = this.volume || 0.8;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1046.50, now); // C6
+        osc.frequency.setValueAtTime(1318.51, now + 0.06); // E6
+        osc.frequency.setValueAtTime(1567.98, now + 0.12); // G6
+
+        gain.gain.setValueAtTime(0.18 * vol, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(now);
+        osc.stop(now + 0.24);
+    }
+
+    public playStageClear() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const vol = this.volume || 0.8;
+        const fanfareNotes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        fanfareNotes.forEach((freq, i) => {
+            if (!this.ctx || !this.masterGain) return;
+            const t = now + i * 0.12;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(freq, t);
+            gain.gain.setValueAtTime(0.18 * vol, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + (i === 3 ? 0.6 : 0.16));
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(t);
+            osc.stop(t + (i === 3 ? 0.6 : 0.16));
+        });
+    }
+
     private loopCount: number = 0;
 
     // --- CHIPTUNE SEQUENCER ---

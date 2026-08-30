@@ -77,21 +77,21 @@ const t = useTranslations(lang);
                         </button>
                     </div>
 
-                    <!-- Game 3: Cyber Outrunner (Coming Soon) -->
-                    <div class="arcade-game-card coming-soon">
-                        <div class="card-badge soon">★ SOON</div>
+                    <!-- Game 3: AVP Road//Run 198X -->
+                    <div class="arcade-game-card" data-launch-game="roadrun">
+                        <div class="card-badge hot">★ NEW</div>
                         <div class="card-icon">🏎️</div>
                         <div class="card-info">
-                            <div class="card-title">CYBER RACER 2084</div>
-                            <div class="card-genre">SYNTHWAVE 3D HIGHWAY</div>
+                            <div class="card-title">AVP ROAD//RUN 198X</div>
+                            <div class="card-genre">SYNTHWAVE RACING • 5 STAGES • BOOST</div>
                             <div class="card-desc">
                                 {lang === 'ru' 
-                                    ? 'Скоростная гонка по неоновому шоссе сквозь трафик.' 
-                                    : 'High-speed synthwave highway racing through neon traffic.'}
+                                    ? 'Скоростная аркадная гонка по неоновому шоссе с трафиком, нитро-бустом и 5 трассами.' 
+                                    : 'High-speed synthwave highway racing with traffic, nitro boost, and 5 stages.'}
                             </div>
                         </div>
-                        <button type="button" class="card-play-btn disabled" disabled>
-                            <i class="fa-solid fa-lock"></i> {lang === 'ru' ? 'В РАЗРАБОТКЕ' : 'IN DEV'}
+                        <button type="button" class="card-play-btn">
+                            <i class="fa-solid fa-play"></i> {lang === 'ru' ? 'ЗАПУСТИТЬ' : 'PLAY'}
                         </button>
                     </div>
                 </div>
@@ -177,18 +177,18 @@ const t = useTranslations(lang);
 <script>
     import { retroAudio } from '../scripts/retroAudio';
 
-    let currentGameType: 'space' | 'bricks' | null = null;
+    let currentGameType: 'space' | 'bricks' | 'roadrun' | null = null;
     let runtimeInstance: any = null;
 
     const DEFAULT_SCORES = [
         { rank: 1, pilot: 'AVP', game: 'SPACE DEFENDER', score: 12500 },
-        { rank: 2, pilot: 'NEO', game: 'SPACE DEFENDER', score: 9800 },
-        { rank: 3, pilot: 'CYB', game: 'CYBER BRICKS', score: 8400 },
-        { rank: 4, pilot: 'TRN', game: 'SPACE DEFENDER', score: 7200 },
-        { rank: 5, pilot: 'MAX', game: 'CYBER BRICKS', score: 6100 },
-        { rank: 6, pilot: 'ACE', game: 'SPACE DEFENDER', score: 5300 },
-        { rank: 7, pilot: 'VIP', game: 'CYBER BRICKS', score: 4800 },
-        { rank: 8, pilot: 'ZOD', game: 'SPACE DEFENDER', score: 3900 }
+        { rank: 2, pilot: 'NEO', game: 'ROAD//RUN 198X', score: 11400 },
+        { rank: 3, pilot: 'CYB', game: 'CYBER BRICKS', score: 9800 },
+        { rank: 4, pilot: 'TRN', game: 'SPACE DEFENDER', score: 8200 },
+        { rank: 5, pilot: 'MAX', game: 'ROAD//RUN 198X', score: 7500 },
+        { rank: 6, pilot: 'ACE', game: 'SPACE DEFENDER', score: 6300 },
+        { rank: 7, pilot: 'VIP', game: 'CYBER BRICKS', score: 5800 },
+        { rank: 8, pilot: 'ZOD', game: 'ROAD//RUN 198X', score: 4900 }
     ];
 
     function getHighScores() {
@@ -249,7 +249,7 @@ const t = useTranslations(lang);
         }
     }
 
-    async function launchSelectedGame(gameType: 'space' | 'bricks') {
+    async function launchSelectedGame(gameType: 'space' | 'bricks' | 'roadrun') {
         const modal = document.getElementById('retro-arcade-modal');
         const canvas = document.getElementById('retro-arcade-canvas') as HTMLCanvasElement | null;
         if (!modal || !canvas) return;
@@ -288,6 +288,16 @@ const t = useTranslations(lang);
                     handleGameOverScore(score, 'CYBER BRICKS');
                 }
             });
+        } else if (gameType === 'roadrun') {
+            const { RoadRunRuntime } = await import('../scripts/arcade/roadRunRuntime');
+            runtimeInstance = new RoadRunRuntime({
+                canvas,
+                lang: docLang,
+                onClose: closeArcadeModal,
+                onGameOver: (score: number) => {
+                    handleGameOverScore(score, 'ROAD//RUN 198X');
+                }
+            });
         }
 
         setupVirtualPadListeners();
@@ -315,7 +325,7 @@ const t = useTranslations(lang);
         }
     }
 
-    function openArcadeModal(initialView: 'hub' | 'space' | 'bricks' = 'hub') {
+    function openArcadeModal(initialView: 'hub' | 'space' | 'bricks' | 'roadrun' = 'hub') {
         const modal = document.getElementById('retro-arcade-modal');
         if (!modal) return;
 
@@ -323,7 +333,7 @@ const t = useTranslations(lang);
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
 
-        if (initialView === 'space' || initialView === 'bricks') {
+        if (initialView === 'space' || initialView === 'bricks' || initialView === 'roadrun') {
             launchSelectedGame(initialView);
         } else {
             switchView('hub');
@@ -396,7 +406,7 @@ const t = useTranslations(lang);
             const card = target.closest('[data-launch-game]') as HTMLElement | null;
             if (card) {
                 e.preventDefault();
-                const gType = card.getAttribute('data-launch-game') as 'space' | 'bricks';
+                const gType = card.getAttribute('data-launch-game') as 'space' | 'bricks' | 'roadrun';
                 if (gType) launchSelectedGame(gType);
                 return;
             }
