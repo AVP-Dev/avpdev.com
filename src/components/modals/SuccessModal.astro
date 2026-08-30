@@ -19,3 +19,13 @@ const t = useTranslations(lang);
         >
     </div>
 </div>
+
+<script>
+    import { retroAudio } from "../../scripts/retroAudio";
+
+    document.addEventListener("modal:open", (e: any) => {
+        if (e.detail?.modalId === "success-modal" && document.documentElement.classList.contains("retro-mode")) {
+            retroAudio.playVictory();
+        }
+    });
+</script>

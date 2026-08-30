@@ -1278,23 +1278,59 @@ if (typeof document !== 'undefined') {
             banner.innerHTML = `
                 <div class="godmode-box">
                     <div class="godmode-stars">⭐ ⭐ ⭐</div>
-                    <div class="godmode-title">KONAMI CODE UNLOCKED!</div>
+                    <div class="godmode-title">${isRu ? 'КОНАМИ-КОД РАЗБЛОКИРОВАН!' : 'KONAMI CODE UNLOCKED!'}</div>
                     <div class="godmode-desc">${isRu ? 'РЕЖИМ БОГА АКТИВИРОВАН: 99 ЖИЗНЕЙ И БЕСКОНЕЧНЫЕ КРЕДИТЫ' : 'GOD MODE ACTIVATED: 99 LIVES & INFINITE CREDITS'}</div>
                     <div class="godmode-badge">⚡ 30 EXTRA LIVES • RETRO OVERDRIVE ⚡</div>
                 </div>
             `;
             document.body.appendChild(banner);
 
+            // Spawn neon retro particle fireworks
+            for (let i = 0; i < 40; i++) {
+                const p = document.createElement('div');
+                p.className = 'retro-godmode-spark';
+                const colors = ['#00f0ff', '#ff007f', '#ffe600', '#00ff66'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const startX = window.innerWidth / 2;
+                const startY = window.innerHeight / 2;
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 120 + Math.random() * 280;
+                const endX = startX + Math.cos(angle) * dist;
+                const endY = startY + Math.sin(angle) * dist;
+
+                p.style.cssText = `
+                    position: fixed;
+                    left: ${startX}px;
+                    top: ${startY}px;
+                    width: ${6 + Math.random() * 6}px;
+                    height: ${6 + Math.random() * 6}px;
+                    background: ${color};
+                    box-shadow: 0 0 12px ${color};
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 999999999;
+                    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+                `;
+                document.body.appendChild(p);
+
+                requestAnimationFrame(() => {
+                    p.style.transform = `translate(${endX - startX}px, ${endY - startY}px) scale(0)`;
+                    p.style.opacity = '0';
+                });
+
+                setTimeout(() => p.remove(), 900);
+            }
+
             // Update Hero HUD chips
             const p1Chip = document.querySelector('.retro-hero-chip.p1');
             if (p1Chip) {
-                p1Chip.innerHTML = `<span class="hud-dot godmode"></span> <span>1P: GOD MODE (99)</span>`;
+                p1Chip.innerHTML = `<span class="hud-dot godmode"></span> <span>${isRu ? '1P: РЕЖИМ БОГА (99)' : '1P: GOD MODE (99)'}</span>`;
                 p1Chip.classList.add('godmode-active');
             }
 
             const creditsChip = document.querySelector('.retro-hero-chip.credits');
             if (creditsChip) {
-                creditsChip.innerHTML = `<span>CREDITS: 999999</span>`;
+                creditsChip.innerHTML = `<span>${isRu ? 'КРЕДИТЫ: 999999' : 'CREDITS: 999999'}</span>`;
                 creditsChip.classList.add('godmode-active');
             }
 

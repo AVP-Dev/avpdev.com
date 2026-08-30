@@ -62,6 +62,14 @@ const t = useTranslations(lang);
     let isTerminalOpen = false;
     let matrixInterval: any = null;
 
+    const CYBER_QUOTES = [
+        "«I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion.» — Roy Batty (Blade Runner)",
+        "«The Matrix is everywhere. It is all around us. Even now, in this very room.» — Morpheus",
+        "«There is no spoon.» — The Matrix",
+        "«The sky above the port was the color of television, tuned to a dead channel.» — William Gibson (Neuromancer)",
+        "«Greetings, programs!» — Flynn (TRON)"
+    ];
+
     const COMMANDS: Record<string, string> = {
         'help': `
 <span class="hl-head">AVAILABLE COMMANDS:</span>
@@ -69,13 +77,15 @@ const t = useTranslations(lang);
   <span class="hl">skills</span>     - Interactive technology ASCII meters
   <span class="hl">projects</span>   - Featured client case studies
   <span class="hl">play</span>       - Launch Retro Arcade console (Space Defender / Bricks)
+  <span class="hl">hire</span>       - Instant Telegram uplink to discuss project with AVP-Dev
+  <span class="hl">quote</span>      - Cyberpunk & Sci-Fi quote generator
   <span class="hl">matrix</span>     - Stream falling green digital Matrix rain
+  <span class="hl">godmode</span>    - Trigger Konami code celebration
   <span class="hl">music</span>      - Next 8-bit chiptune background track
   <span class="hl">theme</span>      - Switch theme mode (retro / dark / light)
   <span class="hl">contact</span>    - Telegram, Email & contact coordinates
   <span class="hl">clear</span>      - Clear terminal screen
   <span class="hl">exit</span>       - Close terminal window
-  <span class="hl">sudo</span>       - Superuser override
         `,
         'about': `
 <span class="hl-head">AVP-DEV STUDIO DOSSIER:</span>
@@ -138,6 +148,26 @@ const t = useTranslations(lang);
 
         if (cmd === 'exit' || cmd === 'quit') {
             closeTerminal();
+            return;
+        }
+
+        if (cmd === 'quote' || cmd === 'quotes') {
+            const q = CYBER_QUOTES[Math.floor(Math.random() * CYBER_QUOTES.length)];
+            printToTerminal(`<span class="hl-head">${q}</span>`);
+            return;
+        }
+
+        if (cmd === 'hire' || cmd === 'order' || cmd === 'telegram') {
+            printToTerminal('<span class="hl">TRANSMITTING UPLINK TO TELEGRAM @AVP_Dev...</span>');
+            window.open('https://t.me/AVP_Dev', '_blank');
+            return;
+        }
+
+        if (cmd === 'godmode' || cmd === 'konami') {
+            printToTerminal('<span class="hl-head">⚡ OVERRIDE: GOD MODE ENGAGED! ⚡</span>');
+            closeTerminal();
+            const cheatChip = document.querySelector('.retro-hero-chip.secret-hint') as HTMLElement | null;
+            if (cheatChip) cheatChip.click();
             return;
         }
 
