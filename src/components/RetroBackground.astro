@@ -1,0 +1,64 @@
+---
+// Interactive Retro Digital World Canvas Background for AVPdev Retro Mode
+---
+
+<canvas id="retro-bg-canvas" class="retro-bg-canvas" aria-hidden="true"></canvas>
+
+<script>
+    import { RetroBackgroundManager } from '../scripts/retroBackground';
+
+    let bgManager: RetroBackgroundManager | null = null;
+
+    function initRetroBg() {
+        const canvas = document.getElementById('retro-bg-canvas') as HTMLCanvasElement | null;
+        if (!canvas) return;
+
+        const isRetro = document.documentElement.classList.contains('retro-mode');
+
+        if (isRetro) {
+            if (!bgManager) {
+                bgManager = new RetroBackgroundManager(canvas);
+            }
+            bgManager.start();
+        } else {
+            if (bgManager) {
+                bgManager.pause();
+            }
+        }
+    }
+
+    // Init on page load & View Transitions
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initRetroBg, { once: true });
+    } else {
+        initRetroBg();
+    }
+
+    document.addEventListener('astro:page-load', initRetroBg);
+
+    // React to theme mode toggling (Modern <-> Retro)
+    document.addEventListener('theme:mode-changed', (e: any) => {
+        const isRetro = e.detail?.isRetro ?? document.documentElement.classList.contains('retro-mode');
+        const canvas = document.getElementById('retro-bg-canvas') as HTMLCanvasElement | null;
+        if (!canvas) return;
+
+        if (isRetro) {
+            if (!bgManager) {
+                bgManager = new RetroBackgroundManager(canvas);
+            }
+            bgManager.start();
+        } else {
+            if (bgManager) {
+                bgManager.pause();
+            }
+        }
+    });
+
+    // Cleanup before Astro swaps DOM
+    document.addEventListener('astro:before-swap', () => {
+        if (bgManager) {
+            bgManager.destroy();
+            bgManager = null;
+        }
+    });
+</script>

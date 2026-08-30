@@ -7,6 +7,7 @@ import CookieBanner from '../components/CookieBanner.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
 import ChatWidget from '../components/ChatWidget.astro';
 import RetroArcadeModal from '../components/RetroArcadeModal.astro';
+import RetroBackground from '../components/RetroBackground.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import type { ui } from '../i18n/ui';
 import { locations } from '../data/locations';
@@ -526,6 +527,7 @@ const globalOrganizationSchema = {
     <>
     <Header translationSlug={translationSlug} />
     <div class="crt-overlay" aria-hidden="true"></div>
+    <RetroBackground />
     
     <main class="flex-grow pt-[80px]"> <!-- pt-[80px] to account for fixed header -->
       <slot />
