@@ -1686,6 +1686,339 @@ html.retro-mode .retro-dock-player {
 }
 
 /* --------------------------------------------------------------------------
+   16. RETRO ARCADE MODAL & CONTROLS
+   -------------------------------------------------------------------------- */
+.retro-hero-chip.play-arcade-btn {
+  background: rgba(255, 0, 127, 0.15) !important;
+  color: #ff007f !important;
+  border: 1px solid #ff007f !important;
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.4) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.retro-hero-chip.play-arcade-btn:hover {
+  background: rgba(255, 0, 127, 0.35) !important;
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.8) !important;
+  transform: translateY(-2px) scale(1.04) !important;
+}
+
+.panel-arcade-btn {
+  background: rgba(255, 0, 127, 0.2);
+  border: 1px solid #ff007f;
+  color: #ff007f;
+  border-radius: 4px;
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  padding: 3px 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+  transition: all 0.2s ease;
+}
+
+.panel-arcade-btn:hover {
+  background: #ff007f;
+  color: #080612;
+  box-shadow: 0 0 16px #ff007f;
+}
+
+/* Arcade Modal Shell */
+.retro-arcade-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+  background: rgba(4, 3, 10, 0.85);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.retro-arcade-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Arcade Cabinet Bezel */
+.arcade-cabinet-bezel {
+  width: 100%;
+  max-width: 480px;
+  background: #0d0a1a;
+  border: 2px solid #00f0ff;
+  border-radius: 14px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(0, 240, 255, 0.4),
+    inset 0 0 20px rgba(255, 0, 127, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.arcade-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.9rem;
+  background: rgba(18, 14, 34, 0.98);
+  border-bottom: 1.5px solid rgba(0, 240, 255, 0.3);
+}
+
+.arcade-title-block {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arcade-led-dot {
+  width: 8px;
+  height: 8px;
+  background: #00ff66;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00ff66;
+  animation: retro-pulse 1s infinite alternate;
+}
+
+.arcade-cabinet-title {
+  font-family: var(--font-pixel);
+  font-size: 0.62rem;
+  color: #00f0ff;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+  letter-spacing: 0.05em;
+}
+
+.arcade-version-badge {
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  color: #ffe600;
+  background: rgba(255, 230, 0, 0.15);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.arcade-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.arcade-mini-btn {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #c9e6ff;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.arcade-mini-btn:hover {
+  background: rgba(0, 240, 255, 0.3);
+  color: #00f0ff;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+}
+
+.arcade-mini-btn.close-btn:hover {
+  background: rgba(255, 0, 127, 0.3);
+  border-color: #ff007f;
+  color: #ff007f;
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.7);
+}
+
+/* CRT Screen Viewport */
+.arcade-screen-viewport {
+  position: relative;
+  width: 100%;
+  background: #040308;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#retro-arcade-canvas {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.arcade-crt-scanlines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 26, 0) 50%, 
+    rgba(0, 0, 0, 0.4) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.arcade-crt-glow {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 35px rgba(0, 240, 255, 0.25);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Control Deck */
+.arcade-control-deck {
+  padding: 0.65rem 0.9rem;
+  background: rgba(14, 11, 28, 0.98);
+  border-top: 1.5px solid rgba(0, 240, 255, 0.3);
+}
+
+.desktop-hints {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  color: #8da4be;
+}
+
+.hint-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.k-tag {
+  background: rgba(0, 240, 255, 0.15);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #00f0ff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.48rem;
+}
+
+/* Virtual Touch Gamepad (Mobile) */
+.mobile-virtual-pad {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+  padding-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .desktop-hints {
+    display: none;
+  }
+
+  .mobile-virtual-pad {
+    display: flex;
+  }
+
+  .arcade-cabinet-bezel {
+    max-width: 100vw;
+    height: 94vh;
+    border-radius: 0;
+  }
+
+  #retro-arcade-canvas {
+    max-height: 52vh;
+  }
+}
+
+.dpad-group {
+  display: flex;
+  gap: 8px;
+}
+
+.vpad-btn {
+  width: 48px;
+  height: 44px;
+  background: rgba(0, 240, 255, 0.15);
+  border: 1.5px solid #00f0ff;
+  color: #00f0ff;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.vpad-btn:active {
+  background: #00f0ff;
+  color: #06040d;
+  box-shadow: 0 0 15px #00f0ff;
+}
+
+.action-group {
+  display: flex;
+  gap: 8px;
+}
+
+.vpad-action-btn {
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  user-select: none;
+  cursor: pointer;
+}
+
+.vpad-action-btn.shield-btn {
+  width: 42px;
+  background: rgba(0, 255, 102, 0.2);
+  border: 1.5px solid #00ff66;
+  font-size: 1.1rem;
+}
+
+.vpad-action-btn.shield-btn:active {
+  background: #00ff66;
+  box-shadow: 0 0 15px #00ff66;
+}
+
+.vpad-action-btn.emp-btn {
+  width: 42px;
+  background: rgba(255, 230, 0, 0.2);
+  border: 1.5px solid #ffe600;
+  font-size: 1.1rem;
+}
+
+.vpad-action-btn.emp-btn:active {
+  background: #ffe600;
+  box-shadow: 0 0 15px #ffe600;
+}
+
+.vpad-action-btn.fire-btn {
+  width: 58px;
+  background: rgba(255, 0, 127, 0.25);
+  border: 1.5px solid #ff007f;
+  font-size: 1.2rem;
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+}
+
+.vpad-action-btn.fire-btn:active {
+  background: #ff007f;
+  box-shadow: 0 0 20px #ff007f;
+}
+
+/* --------------------------------------------------------------------------
    17. REDUCED MOTION (A11y compliance)
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
@@ -1702,3 +2035,4 @@ html.retro-mode .retro-dock-player {
     animation: none !important;
   }
 }
+

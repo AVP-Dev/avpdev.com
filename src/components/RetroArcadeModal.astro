@@ -1,0 +1,179 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<!-- Retro Arcade Modal Overlay -->
+<div id="retro-arcade-modal" class="retro-arcade-modal" aria-hidden="true" role="dialog">
+    <div class="arcade-cabinet-bezel">
+        <!-- Arcade Header Bar -->
+        <div class="arcade-top-bar">
+            <div class="arcade-title-block">
+                <span class="arcade-led-dot"></span>
+                <span class="arcade-cabinet-title">{t("retro_arcade_title")}</span>
+                <span class="arcade-version-badge">v1.984</span>
+            </div>
+            <div class="arcade-top-actions">
+                <button type="button" id="arcade-pause-btn" class="arcade-mini-btn" title={t("retro_arcade_pause")}>
+                    <i class="fa-solid fa-pause"></i>
+                </button>
+                <button type="button" id="arcade-close-btn" class="arcade-mini-btn close-btn" title={t("retro_arcade_close")}>
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Canvas Screen Wrapper with CRT Scanline & Glass curvature -->
+        <div class="arcade-screen-viewport">
+            <canvas id="retro-arcade-canvas"></canvas>
+            <div class="arcade-crt-scanlines"></div>
+            <div class="arcade-crt-glow"></div>
+        </div>
+
+        <!-- Arcade Control Panel / Instructions (Desktop & Mobile) -->
+        <div class="arcade-control-deck">
+            <!-- Desktop Key Hints -->
+            <div class="desktop-hints">
+                <div class="hint-item"><span class="k-tag">A / D / ← →</span> {t("retro_arcade_hint_move")}</div>
+                <div class="hint-item"><span class="k-tag">SPACE / W</span> {t("retro_arcade_hint_fire")}</div>
+                <div class="hint-item"><span class="k-tag">SHIFT</span> {t("retro_arcade_hint_parry")}</div>
+                <div class="hint-item"><span class="k-tag">Q</span> {t("retro_arcade_hint_emp")}</div>
+            </div>
+
+            <!-- Virtual Touch Gamepad for Mobile Devices -->
+            <div class="mobile-virtual-pad">
+                <div class="dpad-group">
+                    <button type="button" class="vpad-btn" id="vpad-left" aria-label="Left">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button type="button" class="vpad-btn" id="vpad-right" aria-label="Right">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="action-group">
+                    <button type="button" class="vpad-action-btn shield-btn" id="vpad-shield" title="Parry Shield">
+                        <span>🛡️</span>
+                    </button>
+                    <button type="button" class="vpad-action-btn emp-btn" id="vpad-emp" title="EMP Blast">
+                        <span>⚡</span>
+                    </button>
+                    <button type="button" class="vpad-action-btn fire-btn" id="vpad-fire" title="Fire">
+                        <span>🔥</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let runtimeInstance: any = null;
+
+    async function launchArcadeGame() {
+        const modal = document.getElementById('retro-arcade-modal');
+        const canvas = document.getElementById('retro-arcade-canvas') as HTMLCanvasElement | null;
+        if (!modal || !canvas) return;
+
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        if (!runtimeInstance) {
+            // Lazy load the game engine runtime
+            const { RetroArcadeRuntime } = await import('../scripts/arcade/retroGameRuntime');
+            const docLang = (document.documentElement.lang === 'en' ? 'en' : 'ru');
+            runtimeInstance = new RetroArcadeRuntime({
+                canvas,
+                lang: docLang,
+                onClose: closeArcadeGame
+            });
+            setupVirtualPadListeners();
+        }
+
+        runtimeInstance.start();
+    }
+
+    function closeArcadeGame() {
+        const modal = document.getElementById('retro-arcade-modal');
+        if (!modal) return;
+
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+
+        if (runtimeInstance) {
+            runtimeInstance.stop();
+            runtimeInstance = null;
+        }
+    }
+
+    function setupVirtualPadListeners() {
+        if (!runtimeInstance) return;
+
+        const bindTouch = (id: string, key: 'left' | 'right' | 'shoot' | 'shield' | 'emp') => {
+            const btn = document.getElementById(id);
+            if (!btn) return;
+
+            const startPress = (e: Event) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (runtimeInstance) runtimeInstance.setTouchKey(key, true);
+            };
+
+            const endPress = (e: Event) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (runtimeInstance) runtimeInstance.setTouchKey(key, false);
+            };
+
+            btn.addEventListener('touchstart', startPress, { passive: false });
+            btn.addEventListener('touchend', endPress, { passive: false });
+            btn.addEventListener('mousedown', startPress);
+            btn.addEventListener('mouseup', endPress);
+            btn.addEventListener('mouseleave', endPress);
+        };
+
+        bindTouch('vpad-left', 'left');
+        bindTouch('vpad-right', 'right');
+        bindTouch('vpad-fire', 'shoot');
+        bindTouch('vpad-shield', 'shield');
+        bindTouch('vpad-emp', 'emp');
+    }
+
+    // Global Event Listeners (Delegated)
+    if (!(window as any).__arcadeDelegationReady) {
+        (window as any).__arcadeDelegationReady = true;
+
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            if (!target) return;
+
+            // Trigger button click
+            if (target.closest('[data-open-arcade]')) {
+                e.preventDefault();
+                launchArcadeGame();
+                return;
+            }
+
+            // Close button click
+            if (target.closest('#arcade-close-btn')) {
+                e.preventDefault();
+                closeArcadeGame();
+                return;
+            }
+
+            // Pause button click
+            if (target.closest('#arcade-pause-btn')) {
+                e.preventDefault();
+                if (runtimeInstance) runtimeInstance.togglePause();
+                return;
+            }
+        });
+
+        document.addEventListener('open-retro-arcade', () => {
+            launchArcadeGame();
+        });
+    }
+</script>

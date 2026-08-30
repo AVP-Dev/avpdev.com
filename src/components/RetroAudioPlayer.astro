@@ -47,6 +47,10 @@ const t = useTranslations(lang);
                 <span>CHIPTUNE 16-BIT FM</span>
             </div>
             <div class="panel-actions">
+                <button type="button" class="panel-arcade-btn" data-open-arcade title={t("retro_arcade_play_btn")}>
+                    <i class="fa-solid fa-gamepad text-pink"></i>
+                    <span>ARCADE</span>
+                </button>
                 <span id="player-track-style" class="panel-style">NES 8-BIT</span>
                 <button type="button" id="player-close-btn" class="panel-close-btn" aria-label={t("retro_player_collapse_title")} title={t("retro_player_collapse_title")}>
                     <i class="fa-solid fa-chevron-up"></i>

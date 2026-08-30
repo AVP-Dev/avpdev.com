@@ -708,6 +708,195 @@ class RetroAudioEngine {
         });
     }
 
+    // --- ARCADE GAME SOUND EFFECTS ---
+    public playLaserShoot() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(880, now);
+        osc.frequency.exponentialRampToValueAtTime(110, now + 0.09);
+
+        gain.gain.setValueAtTime(0.12 * (this.volume || 0.8), now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(now);
+        osc.stop(now + 0.09);
+    }
+
+    public playExplosion() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+
+        // Procedural 8-bit Noise Explosion Buffer
+        const bufferSize = Math.floor(this.ctx.sampleRate * 0.18);
+        const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+            data[i] = Math.random() * 2 - 1;
+        }
+
+        const noise = this.ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = this.ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1200, now);
+        filter.frequency.exponentialRampToValueAtTime(80, now + 0.18);
+
+        const gain = this.ctx.createGain();
+        gain.gain.setValueAtTime(0.22 * (this.volume || 0.8), now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.masterGain);
+
+        noise.start(now);
+        noise.stop(now + 0.18);
+    }
+
+    public playUfoBonus() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        // 8-bit ascending chime
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.exponentialRampToValueAtTime(1318.51, now + 0.15);
+
+        gain.gain.setValueAtTime(0.18 * (this.volume || 0.8), now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(now);
+        osc.stop(now + 0.15);
+    }
+
+    public playShieldParry() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        // 8-bit metallic deflection ping
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1480, now);
+        osc.frequency.exponentialRampToValueAtTime(2600, now + 0.06);
+        osc.frequency.exponentialRampToValueAtTime(900, now + 0.14);
+
+        gain.gain.setValueAtTime(0.2 * (this.volume || 0.8), now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(now);
+        osc.stop(now + 0.14);
+    }
+
+    public playEmpBlast() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        // Sci-Fi EMP Shockwave
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(1800, now);
+        osc.frequency.exponentialRampToValueAtTime(80, now + 0.35);
+
+        gain.gain.setValueAtTime(0.25 * (this.volume || 0.8), now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(now);
+        osc.stop(now + 0.35);
+    }
+
+    public playBossHit() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(150, now);
+        osc.frequency.setValueAtTime(300, now + 0.04);
+        osc.frequency.setValueAtTime(100, now + 0.08);
+
+        gain.gain.setValueAtTime(0.2 * (this.volume || 0.8), now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(now);
+        osc.stop(now + 0.12);
+    }
+
+    public playVictory() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        // Fanfare: C5 -> E5 -> G5 -> C6
+        const fanfare = [523.25, 659.25, 783.99, 1046.50];
+        fanfare.forEach((freq, idx) => {
+            if (!this.ctx || !this.masterGain) return;
+            const noteTime = now + idx * 0.1;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(freq, noteTime);
+
+            gain.gain.setValueAtTime(0.18 * (this.volume || 0.8), noteTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, noteTime + (idx === 3 ? 0.35 : 0.09));
+
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(noteTime);
+            osc.stop(noteTime + (idx === 3 ? 0.35 : 0.09));
+        });
+    }
+
+    public playGameOver() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        // Sad NES descending tone: B4 -> G#4 -> F4 -> D4
+        const tones = [493.88, 415.30, 349.23, 293.66];
+        tones.forEach((freq, idx) => {
+            if (!this.ctx || !this.masterGain) return;
+            const noteTime = now + idx * 0.14;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(freq, noteTime);
+
+            gain.gain.setValueAtTime(0.16 * (this.volume || 0.8), noteTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.16);
+
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(noteTime);
+            osc.stop(noteTime + 0.16);
+        });
+    }
+
     private loopCount: number = 0;
 
     // --- CHIPTUNE SEQUENCER ---
