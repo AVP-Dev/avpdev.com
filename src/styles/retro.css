@@ -287,6 +287,125 @@ html.retro-mode .retro-hud-badge .hud-dot {
 /* --------------------------------------------------------------------------
    RETRO TOGGLE BUTTON (ARCADE ATTRACTION & INTERACTION)
    -------------------------------------------------------------------------- */
+/* ==========================================================================
+   MOBILE RETRO FAB — pixel arcade button (mobile only, desktop: hidden)
+   ========================================================================== */
+@keyframes fab-pulse {
+  0%, 100% { box-shadow: 0 0 6px 2px #ff007f88, 0 0 0 0 #ff007f44; }
+  50%       { box-shadow: 0 0 14px 4px #ff007fcc, 0 0 18px 8px #ff007f22; }
+}
+@keyframes fab-wiggle {
+  0%,100% { transform: rotate(0deg); }
+  25%     { transform: rotate(-8deg); }
+  75%     { transform: rotate(8deg); }
+}
+@keyframes fab-scanline {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 4px; }
+}
+
+/* ─ base: hidden on desktop ─ */
+.mobile-retro-fab {
+  position: relative;
+  overflow: hidden;
+  /* Pixel-art look */
+  font-family: var(--font-pixel, 'Press Start 2P', monospace);
+  font-size: 0.48rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  /* Sizing — compact to fit inside pill header */
+  height: 28px;
+  padding: 0 8px 0 7px;
+  gap: 5px;
+  flex-shrink: 0;
+  /* Colors — neon pink */
+  background: #120008;
+  border: 1.5px solid #ff007f;
+  color: #ff007f;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  /* Animation */
+  animation: fab-pulse 2.2s ease-in-out infinite;
+  transition: transform 0.1s, background 0.2s, color 0.2s;
+}
+
+/* CRT scanline overlay */
+.mobile-retro-fab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 1px,
+    rgba(0, 0, 0, 0.18) 2px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Inner text above scanline */
+.mobile-retro-fab i,
+.mobile-retro-fab span {
+  position: relative;
+  z-index: 2;
+}
+
+/* Gamepad icon wiggle */
+.mobile-retro-fab i {
+  font-size: 0.75rem;
+  animation: fab-wiggle 3s ease-in-out infinite;
+  line-height: 1;
+}
+
+/* Hover / tap */
+.mobile-retro-fab:hover,
+.mobile-retro-fab:focus-visible {
+  background: rgba(255, 0, 127, 0.18);
+  color: #ff66b8;
+  border-color: #ff66b8;
+  transform: scale(1.06);
+}
+.mobile-retro-fab:active {
+  transform: scale(0.93) translateY(2px);
+}
+
+/* ── Retro mode ON: swap to cyan/green ── */
+html.retro-mode .mobile-retro-fab {
+  background: #001208;
+  border-color: #00ff88;
+  color: #00ff88;
+  animation: none;
+  box-shadow: 0 0 10px 3px #00ff8877, 0 0 0 1px #00ff8844;
+}
+html.retro-mode .mobile-retro-fab i {
+  animation: none;
+  transform: scaleX(-1); /* flipped = "exit" signal */
+}
+html.retro-mode .mobile-retro-fab:hover {
+  background: rgba(0,255,136,0.15);
+  color: #66ffbb;
+  border-color: #66ffbb;
+}
+
+/* FAB label: shows RETRO when off, EXIT when retro mode is on */
+.fab-label {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 1.1em;
+  line-height: 1.1em;
+}
+.fab-label-retro { display: block; }
+.fab-label-exit  { display: none; }
+
+html.retro-mode .fab-label-retro { display: none; }
+html.retro-mode .fab-label-exit  { display: block; }
+
 .retro-mode-toggle {
   position: relative;
   display: inline-flex;
@@ -1682,17 +1801,18 @@ html.retro-mode .retro-dock-player {
     padding: 0.6rem 0;
   }
 
+  /* Increased to account for: pill header (~50px) + top offset (20px) + player ribbon (~100px) + gap */
   html.retro-mode .hero {
-    padding-top: 175px;
+    padding-top: 280px;
   }
 
   html.retro-mode .retro-dock-player {
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    transform: none !important;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) !important;
     width: min(330px, calc(100vw - 1.5rem));
+    margin-left: 0;
+    margin-right: 0;
   }
 
   /* 2-Level Mobile Ribbon */

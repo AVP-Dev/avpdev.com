@@ -508,6 +508,100 @@ export const RETRO_TRACKS: Track[] = [
             1, 0, 2, 0, 1, 0, 2, 1, 1, 0, 2, 0, 1, 1, 2, 2,
             1, 0, 2, 0, 1, 0, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2
         ]
+    },
+    {
+        id: 21,
+        title: "CASTLEVANIA (VAMPIRE KILLER 1986)",
+        titleEn: "CASTLEVANIA - VAMPIRE KILLER (1986)",
+        titleRu: "КАСТЛВАНИЯ — УБИЙЦА ВАМПИРОВ (1986)",
+        style: "KONAMI 8-BIT GOTHIC METAL",
+        styleEn: "KONAMI 8-BIT GOTHIC METAL",
+        styleRu: "KONAMI 8-БИТ ТЁМНЫЙ МЕТАЛ",
+        bpm: 160,
+        lead: [
+            // Bar 1-2: Main riff — aggressive and dark
+            N.E4, N.G4, N.A4, N.C5, N.A4, N.G4, N.E4, N.REST, N.E4, N.Fs4, N.G4, N.B4, N.G4, N.Fs4, N.E4, N.REST,
+            // Bar 3-4: High response
+            N.E4, N.G4, N.A4, N.C5, N.E5, N.D5, N.C5, N.B4, N.A4, N.G4, N.A4, N.B4, N.E4, N.REST, N.REST, N.REST
+        ],
+        bass: [
+            N.A2, N.A2, N.E3, N.A2, N.C3, N.A2, N.E3, N.REST, N.B2, N.B2, N.Fs3, N.B2, N.D3, N.B2, N.Fs3, N.REST,
+            N.A2, N.A2, N.E3, N.A2, N.C3, N.E3, N.A3, N.G3, N.F3, N.E3, N.D3, N.C3, N.A2, N.REST, N.REST, N.REST
+        ],
+        drums: [
+            1, 0, 2, 0, 1, 0, 2, 1, 1, 0, 2, 0, 1, 0, 2, 0,
+            1, 0, 2, 0, 1, 0, 2, 0, 1, 1, 2, 2, 1, 1, 2, 2
+        ]
+    },
+    {
+        id: 22,
+        title: "FINAL FANTASY (PRELUDE 1987)",
+        titleEn: "FINAL FANTASY - PRELUDE (1987)",
+        titleRu: "ФИНАЛ ФЭНТЕЗИ — ПРЕЛЮДИЯ (1987)",
+        style: "SQUARE 8-BIT CRYSTAL ARPEGGIO",
+        styleEn: "SQUARE 8-BIT CRYSTAL ARPEGGIO",
+        styleRu: "SQUARE 8-БИТ КРИСТАЛЛЬНОЕ АРПЕДЖИО",
+        bpm: 100,
+        lead: [
+            // Ascending crystal arpeggio — C major → A minor
+            N.C4, N.E4, N.G4, N.C5, N.E5, N.G5, N.E5, N.C5, N.G4, N.E4, N.C4, N.E4, N.G4, N.C5, N.E5, N.G5,
+            // A minor resolve
+            N.A4, N.C5, N.E5, N.A5, N.E5, N.C5, N.A4, N.C5, N.E5, N.A5, N.C6, N.A5, N.E5, N.C5, N.A4, N.REST
+        ],
+        bass: [
+            N.C3, N.REST, N.G3, N.REST, N.C3, N.REST, N.G3, N.REST, N.F3, N.REST, N.C3, N.REST, N.G3, N.REST, N.C3, N.REST,
+            N.A3, N.REST, N.E3, N.REST, N.A3, N.REST, N.E3, N.REST, N.A3, N.REST, N.E3, N.REST, N.A2, N.REST, N.REST, N.REST
+        ],
+        drums: [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        ]
+    },
+    {
+        id: 23,
+        title: "OUTRUN (MAGICAL SOUND SHOWER 1986)",
+        titleEn: "OUTRUN - MAGICAL SOUND SHOWER (1986)",
+        titleRu: "АУТРАН — MAGICAL SOUND SHOWER (1986)",
+        style: "SEGA ARCADE FM SYNTHWAVE",
+        styleEn: "SEGA ARCADE FM SYNTHWAVE",
+        styleRu: "SEGA АРКАДА FM СИНТВЕЙВ",
+        bpm: 130,
+        lead: [
+            // Smooth cruising jazz-funk melody
+            N.E4, N.Fs4, N.G4, N.A4, N.Cs5, N.B4, N.A4, N.Fs4, N.E4, N.Fs4, N.G4, N.B4, N.A4, N.REST, N.REST, N.REST,
+            N.E4, N.Fs4, N.G4, N.A4, N.B4, N.Cs5, N.D5, N.E5, N.Cs5, N.B4, N.A4, N.Fs4, N.E4, N.REST, N.REST, N.REST
+        ],
+        bass: [
+            N.A2, N.E3, N.Cs3, N.A3, N.A2, N.E3, N.A2, N.E3, N.G2, N.D3, N.B2, N.G3, N.Fs2, N.Cs3, N.Fs2, N.REST,
+            N.A2, N.E3, N.Cs3, N.A3, N.A2, N.E3, N.A2, N.E3, N.D3, N.A3, N.Fs3, N.D3, N.A2, N.E3, N.A2, N.REST
+        ],
+        drums: [
+            1, 0, 2, 0, 1, 0, 2, 1, 1, 0, 2, 0, 1, 0, 2, 0,
+            1, 0, 2, 0, 1, 0, 2, 1, 1, 0, 2, 0, 1, 1, 2, 2
+        ]
+    },
+    {
+        id: 24,
+        title: "PRINCE OF PERSIA (MAIN THEME 1989)",
+        titleEn: "PRINCE OF PERSIA - MAIN THEME (1989)",
+        titleRu: "ПРИНЦ ПЕРСИИ — ГЛАВНАЯ ТЕМА (1989)",
+        style: "APPLEII/DOS ARABIAN ADVENTURE",
+        styleEn: "DOS 8-BIT ARABIAN ADVENTURE",
+        styleRu: "DOS 8-БИТ АРАБСКОЕ ПРИКЛЮЧЕНИЕ",
+        bpm: 112,
+        lead: [
+            // Exotic minor descending motif — Jordandous style
+            N.A4, N.G4, N.F4, N.E4, N.D4, N.E4, N.F4, N.G4, N.A4, N.REST, N.Bb4, N.A4, N.G4, N.F4, N.E4, N.REST,
+            N.D4, N.E4, N.F4, N.G4, N.A4, N.B4, N.C5, N.D5, N.E5, N.D5, N.C5, N.B4, N.A4, N.REST, N.REST, N.REST
+        ],
+        bass: [
+            N.A2, N.E3, N.A2, N.E2, N.D3, N.A2, N.E3, N.A2, N.A2, N.REST, N.Bb2, N.A2, N.G2, N.F2, N.E2, N.REST,
+            N.D2, N.A2, N.D3, N.A2, N.A2, N.E3, N.A2, N.E2, N.A2, N.E3, N.A2, N.E3, N.A2, N.REST, N.REST, N.REST
+        ],
+        drums: [
+            1, 0, 0, 2, 1, 0, 0, 2, 1, 0, 0, 2, 1, 0, 0, 2,
+            1, 0, 0, 2, 1, 0, 0, 2, 1, 1, 0, 2, 1, 1, 2, 2
+        ]
     }
 ];
 

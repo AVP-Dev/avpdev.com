@@ -296,6 +296,14 @@ header.site-header.scrolled {
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
 }
 
+@media (max-width: 1024px) {
+  header.site-header {
+    padding: 0.35rem 0.6rem;
+    /* Pill stays round but we need uniform inner height */
+    border-radius: 100px;
+  }
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -456,6 +464,19 @@ nav {
 }
 
 /* --- Mobile Navigation --- */
+/* Mobile retro FAB: always hidden on desktop */
+.mobile-retro-fab {
+  display: none !important;
+}
+
+/* Container for FAB + burger: hidden on desktop, flex-row on mobile */
+.mobile-actions {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .burger-menu {
   display: none;
   flex-direction: column;
@@ -467,8 +488,13 @@ nav {
   cursor: pointer;
   padding: 0;
   z-index: 2001;
-  /* Above mobile nav */
   position: relative;
+  flex-shrink: 0;
+}
+
+/* When burger is inside mobile-actions wrapper, it's always visible (parent controls visibility) */
+.mobile-actions .burger-menu {
+  display: flex;
 }
 
 .burger-menu div {
@@ -1915,8 +1941,35 @@ textarea.form-control {
     display: none;
   }
 
-  .burger-menu {
+  /* Show the mobile-actions container (holds FAB + burger) */
+  .mobile-actions {
     display: flex;
+  }
+
+  /* Tighten nav: Logo on left, mobile-actions on right */
+  nav {
+    gap: 0.5rem;
+    padding: 0 0.2rem;
+    justify-content: space-between;
+  }
+
+  /* Show mobile retro FAB inside the container */
+  .mobile-retro-fab {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+}
+
+/* On very small phones hide the text label, show only the gamepad icon */
+@media (max-width: 380px) {
+  .mobile-retro-fab .fab-label {
+    display: none;
+  }
+  .mobile-retro-fab {
+    padding: 0 7px;
+    gap: 0;
   }
 }
 

@@ -96,11 +96,27 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
             </button>
             <LanguageSwitcher translationSlug={translationSlug} />
         </div>
-        <button class="burger-menu" aria-label={t("aria_open_menu")} aria-expanded="false" aria-controls="mobile-nav">
-            <div></div>
-            <div></div>
-            <div></div>
-        </button>
+        <!-- Mobile actions: FAB + burger, grouped right on mobile -->
+        <div class="mobile-actions">
+            <!-- Mobile Retro Toggle: always visible on mobile, hidden on desktop -->
+            <button
+                type="button"
+                class="retro-mode-toggle mode-switcher mobile-retro-fab"
+                aria-label={t("aria_mode_switcher")}
+                title={t("aria_mode_switcher")}
+            >
+                <i class="fa-solid fa-gamepad" aria-hidden="true"></i>
+                <span class="fab-label">
+                    <span class="fab-label-retro">{lang === 'ru' ? 'РЕТРО' : 'RETRO'}</span>
+                    <span class="fab-label-exit">{lang === 'ru' ? 'ВЫХОД' : 'EXIT'}</span>
+                </span>
+            </button>
+            <button class="burger-menu" aria-label={t("aria_open_menu")} aria-expanded="false" aria-controls="mobile-nav">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+        </div>
     </nav>
     <!-- Retro Chiptune Docked Player attached directly to bottom edge of header -->
     <RetroAudioPlayer />
