@@ -1,0 +1,267 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<!-- Retro CRT Developer CLI Terminal Modal -->
+<div id="retro-terminal-modal" class="retro-terminal-modal" aria-hidden="true" role="dialog">
+    <div class="terminal-cabinet">
+        <!-- Top Titlebar -->
+        <div class="terminal-titlebar">
+            <div class="terminal-title-left">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-system-name">AVP-OS v1.984 [TTY-1]</span>
+            </div>
+            <div class="terminal-title-right">
+                <span class="terminal-hint">KEY: [ ~ ] OR TYPE 'help'</span>
+                <button type="button" id="terminal-close-btn" class="terminal-btn close" title="Close Terminal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Terminal CRT Viewport -->
+        <div class="terminal-viewport">
+            <div class="terminal-crt-scanlines"></div>
+            <div class="terminal-crt-glow"></div>
+            <div id="terminal-output" class="terminal-output">
+                <div class="t-line t-banner">
+                    =====================================================<br />
+                    * * *  AVP-DEV CYBERNETIC TERMINAL v1.984  * * *<br />
+                    (C) 1984-2026 AVP-DEV DIGITAL SYSTEMS CORP.<br />
+                    TYPE '<span class="hl">help</span>' FOR COMMANDS • '<span class="hl">matrix</span>' FOR RAIN • '<span class="hl">play</span>' FOR ARCADE<br />
+                    =====================================================
+                </div>
+            </div>
+
+            <!-- Terminal Command Input Row -->
+            <form id="terminal-form" class="terminal-input-row" autocomplete="off">
+                <span class="terminal-prompt">avp-dev:~$</span>
+                <input 
+                    type="text" 
+                    id="terminal-input" 
+                    class="terminal-input" 
+                    autocapitalize="off" 
+                    autocorrect="off" 
+                    spellcheck="false" 
+                    placeholder="type a command..." 
+                />
+                <span class="terminal-cursor">█</span>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    import { retroAudio } from '../scripts/retroAudio';
+
+    let isTerminalOpen = false;
+    let matrixInterval: any = null;
+
+    const COMMANDS: Record<string, string> = {
+        'help': `
+<span class="hl-head">AVAILABLE COMMANDS:</span>
+  <span class="hl">about</span>      - Company mission & developer dossier
+  <span class="hl">skills</span>     - Interactive technology ASCII meters
+  <span class="hl">projects</span>   - Featured client case studies
+  <span class="hl">play</span>       - Launch Retro Arcade console (Space Defender / Bricks)
+  <span class="hl">matrix</span>     - Stream falling green digital Matrix rain
+  <span class="hl">music</span>      - Next 8-bit chiptune background track
+  <span class="hl">theme</span>      - Switch theme mode (retro / dark / light)
+  <span class="hl">contact</span>    - Telegram, Email & contact coordinates
+  <span class="hl">clear</span>      - Clear terminal screen
+  <span class="hl">exit</span>       - Close terminal window
+  <span class="hl">sudo</span>       - Superuser override
+        `,
+        'about': `
+<span class="hl-head">AVP-DEV STUDIO DOSSIER:</span>
+  Full-cycle web & mobile engineering studio.
+  Specializing in ultra-fast Astro/React web applications,
+  interactive 3D WebGL experiences, Telegram Mini Apps & bespoke CRM.
+  Performance score: <span class="hl">100/100 Lighthouse</span>.
+        `,
+        'skills': `
+<span class="hl-head">TECH CAPABILITIES:</span>
+  ASTRO / NEXT.JS    [████████████████████] 100%
+  TYPESCRIPT / REACT [████████████████████] 100%
+  WEB AUDIO & CANVAS [██████████████████░░] 92%
+  UI / UX / TAILWIND [████████████████████] 100%
+  NODE / POSTGRESQL  [██████████████████░░] 90%
+        `,
+        'projects': `
+<span class="hl-head">FEATURED CASE STUDIES:</span>
+  1. Storno Logistics - High-load ERP & routing platform
+  2. Hot-Tours Travel - Fast booking & tour aggregation
+  3. PWA Web App Suite - Native offline mobile web experience
+  (Type '<span class="hl">play</span>' to test arcade or visit /project/ page)
+        `,
+        'contact': `
+<span class="hl-head">COMMUNICATION CHANNELS:</span>
+  Telegram: <a href="https://t.me/avp_dev" target="_blank" class="t-link">@avp_dev</a>
+  Email:    <a href="mailto:hello@avpdev.com" class="t-link">hello@avpdev.com</a>
+  Brief:    <a href="/ru/brief/" class="t-link">/brief/ (Online Project Estimator)</a>
+        `,
+        'sudo': `<span class="t-err">ACCESS DENIED: AVP-DEV IS SUPERUSER. NICE TRY, MR. FALKEN.</span>`
+    };
+
+    function printToTerminal(html: string) {
+        const out = document.getElementById('terminal-output');
+        if (!out) return;
+        const line = document.createElement('div');
+        line.className = 't-line';
+        line.innerHTML = html;
+        out.appendChild(line);
+        out.scrollTop = out.scrollHeight;
+    }
+
+    function executeCommand(rawCmd: string) {
+        const cmd = rawCmd.trim().toLowerCase();
+        if (!cmd) return;
+
+        printToTerminal(`<span class="t-user-cmd">avp-dev:~$ ${rawCmd}</span>`);
+        retroAudio.playLaserShoot();
+
+        if (matrixInterval) {
+            clearInterval(matrixInterval);
+            matrixInterval = null;
+        }
+
+        if (cmd === 'clear' || cmd === 'cls') {
+            const out = document.getElementById('terminal-output');
+            if (out) out.innerHTML = '';
+            return;
+        }
+
+        if (cmd === 'exit' || cmd === 'quit') {
+            closeTerminal();
+            return;
+        }
+
+        if (cmd === 'play' || cmd === 'game' || cmd === 'arcade') {
+            printToTerminal('<span class="hl">LAUNCHING ARCADE SYSTEM...</span>');
+            closeTerminal();
+            document.dispatchEvent(new CustomEvent('open-retro-arcade'));
+            return;
+        }
+
+        if (cmd === 'music' || cmd === 'track') {
+            retroAudio.nextTrack();
+            const state = retroAudio.getState();
+            printToTerminal(`<span class="hl">NOW PLAYING: ${state.currentTrack.title}</span>`);
+            return;
+        }
+
+        if (cmd === 'theme') {
+            const isRetro = document.documentElement.classList.contains('retro-mode');
+            const targetRetro = !isRetro;
+            document.dispatchEvent(new CustomEvent('theme:mode-changed', { detail: { isRetro: targetRetro } }));
+            printToTerminal(`<span class="hl">THEME SWITCHED TO: ${targetRetro ? 'RETRO' : 'MODERN'}</span>`);
+            return;
+        }
+
+        if (cmd === 'matrix') {
+            printToTerminal('<span class="hl-head">CONNECTING TO THE MATRIX (Press any key to stop)...</span>');
+            const chars = '0123456789ABCDEF$#@%&*+=~';
+            matrixInterval = setInterval(() => {
+                let str = '';
+                for (let i = 0; i < 48; i++) {
+                    str += chars[Math.floor(Math.random() * chars.length)] + ' ';
+                }
+                printToTerminal(`<span class="t-matrix">${str}</span>`);
+            }, 60);
+            return;
+        }
+
+        if (COMMANDS[cmd]) {
+            printToTerminal(COMMANDS[cmd]);
+        } else {
+            printToTerminal(`<span class="t-err">Command not found: '${rawCmd}'. Type '<span class="hl">help</span>' for manual.</span>`);
+        }
+    }
+
+    function openTerminal() {
+        const modal = document.getElementById('retro-terminal-modal');
+        const input = document.getElementById('terminal-input') as HTMLInputElement | null;
+        if (!modal) return;
+
+        isTerminalOpen = true;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        retroAudio.playWarp();
+        if (input) {
+            setTimeout(() => input.focus(), 150);
+        }
+    }
+
+    function closeTerminal() {
+        const modal = document.getElementById('retro-terminal-modal');
+        if (!modal) return;
+
+        isTerminalOpen = false;
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        if (matrixInterval) {
+            clearInterval(matrixInterval);
+            matrixInterval = null;
+        }
+    }
+
+    // Key listeners: Tilde / Grave (~) or global delegated button
+    if (!(window as any).__terminalDelegationReady) {
+        (window as any).__terminalDelegationReady = true;
+
+        document.addEventListener('keydown', (e) => {
+            // Tilde ~ or Backquote `
+            if (e.key === '`' || e.key === '~' || e.key === 'ё' || e.key === 'Ё') {
+                const active = document.activeElement;
+                if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA') && active.id !== 'terminal-input') {
+                    return;
+                }
+                e.preventDefault();
+                if (isTerminalOpen) {
+                    closeTerminal();
+                } else {
+                    openTerminal();
+                }
+            } else if (e.key === 'Escape' && isTerminalOpen) {
+                closeTerminal();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            if (!target) return;
+
+            if (target.closest('[data-open-terminal]')) {
+                e.preventDefault();
+                openTerminal();
+                return;
+            }
+
+            if (target.closest('#terminal-close-btn')) {
+                e.preventDefault();
+                closeTerminal();
+                return;
+            }
+        });
+
+        document.addEventListener('open-retro-terminal', () => {
+            openTerminal();
+        });
+
+        const form = document.getElementById('terminal-form') as HTMLFormElement | null;
+        const input = document.getElementById('terminal-input') as HTMLInputElement | null;
+        if (form && input) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const val = input.value;
+                input.value = '';
+                executeCommand(val);
+            });
+        }
+    }
+</script>

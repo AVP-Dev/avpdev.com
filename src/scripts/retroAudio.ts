@@ -1148,26 +1148,44 @@ if (typeof document !== 'undefined') {
     if (!(window as any).__retroGlobalAudioListenerReady) {
         (window as any).__retroGlobalAudioListenerReady = true;
 
+        let lastClickSoundTime = 0;
         document.addEventListener('click', (e) => {
             if (!document.documentElement.classList.contains('retro-mode')) return;
+            if (Date.now() - lastClickSoundTime < 180) return;
+
             const target = e.target as HTMLElement;
             if (!target) return;
 
-            // Don't duplicate click beep on player's track play/pause/ribbon buttons
-            if (target.closest('#retro-dock-player') || target.closest('#retro-audio-panel')) {
+            // Don't duplicate click beep on player controls or mode switchers which have custom sounds
+            if (target.closest('#retro-dock-player') || target.closest('#retro-audio-panel') || target.closest('.mode-switcher')) {
                 return;
             }
 
             // Find clicked interactive element
             const interactive = target.closest('a, button, input, select, textarea, [role="button"], summary, label, .clickable, .card, .portfolio-card, .service-card, .faq-item, .mobile-accordion-trigger, .lang-btn');
             if (interactive) {
-                if (interactive.tagName === 'A' || interactive.classList.contains('cta-button') || interactive.classList.contains('btn') || interactive.classList.contains('mode-switcher')) {
+                lastClickSoundTime = Date.now();
+                if (interactive.tagName === 'A' || interactive.classList.contains('cta-button') || interactive.classList.contains('btn')) {
                     retroAudio.playNavClick();
                 } else {
                     retroAudio.playClick();
                 }
             }
-        }, { passive: true, capture: true });
+        }, { passive: true });
+
+        // Hover SFX: Crisp 8-bit tick on hovering over buttons, cards and navigation
+        let lastHoverEl: HTMLElement | null = null;
+        let lastHoverTime = 0;
+        document.addEventListener('mouseover', (e) => {
+            if (!document.documentElement.classList.contains('retro-mode')) return;
+            const target = (e.target as HTMLElement)?.closest('a, button, .service-card, .portfolio-card, .arcade-game-card, .retro-hero-chip, .lang-btn, .theme-switcher') as HTMLElement | null;
+            if (!target || target === lastHoverEl) return;
+            if (Date.now() - lastHoverTime < 70) return;
+
+            lastHoverEl = target;
+            lastHoverTime = Date.now();
+            retroAudio.playClick();
+        }, { passive: true });
     }
 
     // Konami Code Easter Egg (↑ ↑ ↓ ↓ ← → ← → B A) & Mobile 5-Tap / Click Trigger

@@ -123,7 +123,12 @@ const t = useTranslations(lang);
 
         <div class="footer-bottom">
             <div class="footer-bottom-content">
-                <p class="copyright" set:html={t("footer_copyright")} />
+                <div class="copyright-wrap">
+                    <p class="copyright" set:html={t("footer_copyright")} />
+                    <button type="button" class="footer-cli-trigger" data-open-terminal title="Open AVP-OS Terminal [ ~ ]">
+                        <i class="fa-solid fa-terminal"></i> <span>CLI_OS</span>
+                    </button>
+                </div>
                 <div class="footer-signature">
                     <CreatorSignature />
                 </div>

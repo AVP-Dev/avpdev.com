@@ -7,34 +7,222 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 <BaseLayout
-    title="404_title"
-    description="404_desc"
+    title={lang === 'ru' ? '404: Сектор не найден • AVP-Dev' : '404: Sector Not Found • AVP-Dev'}
+    description={lang === 'ru' ? 'Страница не найдена. Нажмите Start для возврата на главную.' : 'Page not found. Press Start to return home.'}
 >
     <main class="error-page-content">
         <div class="container error-container">
-            <h1>404</h1>
-            <p>{t('404_desc')}</p>
-            <a href={`/${lang}/`} class="cta-button">{t('back_to_home')}</a>
+            <div class="retro-404-card">
+                <div class="error-badge">● SIGNAL LOST ● CODE 404</div>
+                <div class="error-glitch-title" data-text="404">404</div>
+                <h1 class="error-heading">
+                    {lang === 'ru' ? '👾 GAME OVER: СЕКТОР НЕ НАЙДЕН 👾' : '👾 GAME OVER: SECTOR NOT FOUND 👾'}
+                </h1>
+                <p class="error-desc">
+                    {lang === 'ru' 
+                        ? 'Координаты гиперпространственного перехода повреждены. Вставьте монетку или телепортируйтесь на базу.' 
+                        : 'Hyperspace coordinates corrupted. Insert coin or teleport back to home base.'}
+                </p>
+
+                <!-- Arcade Countdown Box -->
+                <div class="arcade-countdown-box">
+                    <span class="cd-label">{lang === 'ru' ? 'АВТО-ТЕЛЕПОРТАЦИЯ:' : 'AUTO-RESPAWN IN:'}</span>
+                    <span id="retro-404-timer" class="cd-digits">15</span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="error-actions">
+                    <a href={`/${lang}/`} class="retro-action-btn primary-btn">
+                        <i class="fa-solid fa-house"></i> {lang === 'ru' ? '▶ НА ГЛАВНУЮ' : '▶ RESPAWN HOME'}
+                    </a>
+                    <button type="button" class="retro-action-btn arcade-btn" data-open-arcade>
+                        <i class="fa-solid fa-gamepad"></i> {lang === 'ru' ? '🕹️ ИГРАТЬ В АРКАДУ' : '🕹️ PLAY ARCADE'}
+                    </button>
+                    <button type="button" class="retro-action-btn terminal-btn" data-open-terminal>
+                        <i class="fa-solid fa-terminal"></i> {lang === 'ru' ? '💻 ТЕРМИНАЛ' : '💻 CLI_OS'}
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
 </BaseLayout>
+
+<script>
+    import { retroAudio } from '../scripts/retroAudio';
+
+    let countdown = 15;
+    const timerEl = document.getElementById('retro-404-timer');
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'ru';
+
+    if (timerEl) {
+        const interval = setInterval(() => {
+            countdown--;
+            if (countdown >= 0) {
+                timerEl.textContent = countdown < 10 ? `0${countdown}` : `${countdown}`;
+                if (document.documentElement.classList.contains('retro-mode')) {
+                    retroAudio.playExplosion();
+                }
+            }
+            if (countdown <= 0) {
+                clearInterval(interval);
+                window.location.href = `/${lang}/`;
+            }
+        }, 1000);
+    }
+</script>
 
 <style>
 .error-page-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
+    min-height: calc(100vh - 160px);
+    padding: 2rem 1rem;
     text-align: center;
+    position: relative;
 }
-.error-container h1 {
-    font-size: 6rem;
-    font-weight: 800;
+
+.retro-404-card {
+    max-width: 640px;
+    margin: 0 auto;
+    background: rgba(14, 10, 26, 0.85);
+    border: 2px solid #ff007f;
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 0 40px rgba(255, 0, 127, 0.35), inset 0 0 25px rgba(255, 0, 127, 0.15);
+    position: relative;
+    backdrop-filter: blur(12px);
+}
+
+.error-badge {
+    display: inline-block;
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.6rem;
+    color: #ffe600;
+    background: rgba(255, 230, 0, 0.15);
+    border: 1px dashed #ffe600;
+    padding: 4px 12px;
+    border-radius: 4px;
     margin-bottom: 1rem;
-    color: var(--accent-color-start);
+    letter-spacing: 0.08em;
 }
-.error-container p {
-    font-size: 1.5rem;
+
+.error-glitch-title {
+    font-family: var(--font-pixel, monospace);
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    font-weight: 900;
+    color: #00f0ff;
+    text-shadow: 0 0 20px #00f0ff, 0 0 40px #ff007f;
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: 0.08em;
+    animation: retro-pulse 1.2s infinite alternate;
+}
+
+.error-heading {
+    font-family: var(--font-pixel, monospace);
+    font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    color: #ff007f;
+    text-shadow: 0 0 10px #ff007f;
+    margin-bottom: 1rem;
+    letter-spacing: 0.04em;
+}
+
+.error-desc {
+    font-size: 1rem;
+    color: #a4bed9;
+    line-height: 1.6;
+    margin-bottom: 1.8rem;
+}
+
+.arcade-countdown-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1.5px solid #ffe600;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
     margin-bottom: 2rem;
+    box-shadow: 0 0 15px rgba(255, 230, 0, 0.3);
+}
+
+.cd-label {
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.6rem;
+    color: #ffe600;
+    letter-spacing: 0.05em;
+}
+
+.cd-digits {
+    font-family: var(--font-pixel, monospace);
+    font-size: 1.2rem;
+    color: #00ff66;
+    text-shadow: 0 0 10px #00ff66;
+    font-weight: bold;
+}
+
+.error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.retro-action-btn {
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.65rem;
+    padding: 0.65rem 1.2rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1.5px solid transparent;
+}
+
+.retro-action-btn.primary-btn {
+    background: #ff007f;
+    color: #ffffff;
+    border-color: #ff007f;
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
+}
+
+.retro-action-btn.primary-btn:hover {
+    background: #ffffff;
+    color: #ff007f;
+    box-shadow: 0 0 25px #ff007f;
+    transform: translateY(-2px);
+}
+
+.retro-action-btn.arcade-btn {
+    background: rgba(0, 240, 255, 0.15);
+    color: #00f0ff;
+    border-color: #00f0ff;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+}
+
+.retro-action-btn.arcade-btn:hover {
+    background: #00f0ff;
+    color: #040308;
+    box-shadow: 0 0 20px #00f0ff;
+    transform: translateY(-2px);
+}
+
+.retro-action-btn.terminal-btn {
+    background: rgba(0, 255, 102, 0.15);
+    color: #00ff66;
+    border-color: #00ff66;
+    box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
+}
+
+.retro-action-btn.terminal-btn:hover {
+    background: #00ff66;
+    color: #040308;
+    box-shadow: 0 0 20px #00ff66;
+    transform: translateY(-2px);
 }
 </style>
