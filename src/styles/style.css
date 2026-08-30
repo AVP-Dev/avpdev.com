@@ -1946,10 +1946,15 @@ textarea.form-control {
     display: flex;
   }
 
-  /* Tighten nav: Logo on left, mobile-actions on right */
+  /* Hide logo text on mobile — icon only (standard UX: Apple, Google, etc.) */
+  .logo-text {
+    display: none;
+  }
+
+  /* Tighten nav: Logo icon on left, mobile-actions on right */
   nav {
     gap: 0.5rem;
-    padding: 0 0.2rem;
+    padding: 0 0.3rem;
     justify-content: space-between;
   }
 

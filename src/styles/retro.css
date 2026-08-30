@@ -1801,9 +1801,9 @@ html.retro-mode .retro-dock-player {
     padding: 0.6rem 0;
   }
 
-  /* Increased to account for: pill header (~50px) + top offset (20px) + player ribbon (~100px) + gap */
+  /* Increased: pill header (~70px) + top-gap (20px) + player ribbon (~200px) + safe gap (70px) */
   html.retro-mode .hero {
-    padding-top: 280px;
+    padding-top: 360px;
   }
 
   html.retro-mode .retro-dock-player {
