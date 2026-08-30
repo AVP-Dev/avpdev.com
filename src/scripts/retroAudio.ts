@@ -874,6 +874,43 @@ class RetroAudioEngine {
         });
     }
 
+    public playCoinInsert() {
+        this.initContext();
+        if (!this.ctx || !this.masterGain || this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const vol = this.volume || 0.65;
+
+        // First bell tone (B5 = 987.77 Hz)
+        const osc1 = this.ctx.createOscillator();
+        const gain1 = this.ctx.createGain();
+        osc1.type = 'square';
+        osc1.frequency.setValueAtTime(987.77, now);
+
+        gain1.gain.setValueAtTime(0, now);
+        gain1.gain.linearRampToValueAtTime(0.18 * vol, now + 0.01);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+        osc1.connect(gain1);
+        gain1.connect(this.masterGain);
+        osc1.start(now);
+        osc1.stop(now + 0.35);
+
+        // Second resonant higher chime (E6 = 1318.51 Hz) - arcade classic coin chime
+        const osc2 = this.ctx.createOscillator();
+        const gain2 = this.ctx.createGain();
+        osc2.type = 'square';
+        osc2.frequency.setValueAtTime(1318.51, now + 0.08);
+
+        gain2.gain.setValueAtTime(0, now + 0.08);
+        gain2.gain.linearRampToValueAtTime(0.24 * vol, now + 0.09);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+
+        osc2.connect(gain2);
+        gain2.connect(this.masterGain);
+        osc2.start(now + 0.08);
+        osc2.stop(now + 0.55);
+    }
+
     public playGameOver() {
         this.initContext();
         if (!this.ctx || !this.masterGain || this.isMuted) return;

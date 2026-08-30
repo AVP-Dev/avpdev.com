@@ -229,15 +229,82 @@ function initializePage() {
 
             // Add CRT screen glitch / flash transition & SFX
             document.documentElement.classList.add('crt-mode-transition');
-            retroAudio.playWarp();
+            if (targetRetro) {
+                retroAudio.playCoinInsert();
+            } else {
+                retroAudio.playWarp();
+            }
 
             localStorage.setItem('theme_mode', targetRetro ? 'retro' : 'modern');
             applyThemeClasses(savedTheme, targetRetro);
+            updateRetroTitle(targetRetro);
             document.dispatchEvent(new CustomEvent('theme:mode-changed', { detail: { isRetro: targetRetro } }));
 
             setTimeout(() => {
                 document.documentElement.classList.remove('crt-mode-transition');
             }, 350);
+        });
+
+        // Dynamic Retro Browser Tab Title Ticker
+        let titleInterval: number | null = null;
+        let originalTitle = document.title;
+
+        function updateRetroTitle(isRetro: boolean) {
+            if (titleInterval) {
+                clearInterval(titleInterval);
+                titleInterval = null;
+            }
+
+            if (!isRetro) {
+                if (originalTitle) document.title = originalTitle;
+                return;
+            }
+
+            if (!originalTitle) originalTitle = document.title;
+            const isRu = document.documentElement.lang === 'ru';
+            const titles = isRu
+                ? [
+                    '🕹️ AVP-DEV // [ 1P: ГОТОВ ]',
+                    '⚡ AVP-DEV // [ 999,990 ОЧКОВ ]',
+                    '👾 AVP-DEV // [ КИБЕР-ИНЖЕНЕРИЯ ]',
+                    '🚀 AVP-DEV // [ ВСТАВЬТЕ МОНЕТУ ]'
+                ]
+                : [
+                    '🕹️ AVP-DEV // [ 1P: READY ]',
+                    '⚡ AVP-DEV // [ 999,990 PTS ]',
+                    '👾 AVP-DEV // [ CYBER ENGINEERING ]',
+                    '🚀 AVP-DEV // [ INSERT COIN ]'
+                ];
+
+            let tIndex = 0;
+            document.title = titles[0];
+            titleInterval = window.setInterval(() => {
+                if (!document.documentElement.classList.contains('retro-mode')) {
+                    if (titleInterval) clearInterval(titleInterval);
+                    document.title = originalTitle;
+                    return;
+                }
+                if (document.hidden) {
+                    document.title = isRu ? '👾 AVP-DEV // [ ВЕРНИТЕСЬ В ИГРУ ]' : '👾 AVP-DEV // [ RESUME GAME ]';
+                    return;
+                }
+                tIndex = (tIndex + 1) % titles.length;
+                document.title = titles[tIndex];
+            }, 2600);
+        }
+
+        // Initialize on start if already in retro mode
+        if (currentMode === 'retro') {
+            updateRetroTitle(true);
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.documentElement.classList.contains('retro-mode')) {
+                const isRu = document.documentElement.lang === 'ru';
+                if (document.hidden) {
+                    document.title = isRu ? '👾 AVP-DEV // [ ВЕРНИТЕСЬ В ИГРУ ]' : '👾 AVP-DEV // [ RESUME GAME ]';
+                }
+            }
         });
     }
 
