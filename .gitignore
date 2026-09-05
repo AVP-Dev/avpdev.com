@@ -1,7 +1,19 @@
-# Переменные окружения
-# Никогда не добавляйте .env файлы в Git
+# Переменные окружения и ключи
+# Никогда не добавляйте .env файлы и ключи в Git
 .env
 .env.*
+*.key.json
+gsc-*.json
+credentials*.json
+itera-*.json
+*gserviceaccount*.json
+*service-account*.json
+*service_account*.json
+*.pem
+*.key
+
+
+
 
 # Зависимости
 node_modules/

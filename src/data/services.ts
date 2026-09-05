@@ -83,8 +83,8 @@ export const services: ServicePageData[] = [
             en: { title: 'Websites That <span class="gradient-text">Bring Leads</span>', subtitle: 'Fast, responsive websites on Astro and Next.js: from ad landing pages to corporate portals with integrations.' },
         },
         section: {
-            ru: { label: 'Web Solutions', title: 'Сайт как рабочий инструмент', description: 'Мы не используем конструкторы вроде Tilda или Wix. Вы получаете чистый, оптимизированный код, который принадлежит полностью вам.', icon: 'fa-solid fa-laptop-code' },
-            en: { label: 'Web Solutions', title: 'A Website as a Working Tool', description: "We don't use builders like Tilda or Wix. You get clean, optimized code that belongs entirely to you.", icon: 'fa-solid fa-laptop-code' },
+            ru: { label: 'Web Solutions', title: 'Сайт как рабочий инструмент', description: 'Мы не зависим от конструкторов вроде Tilda или Wix: вы получаете чистый оптимизированный код без ежемесячной абонентской платы платформам, плюс удобную админку для самостоятельного редактирования текстов.', icon: 'fa-solid fa-laptop-code' },
+            en: { label: 'Web Solutions', title: 'A Website as a Working Tool', description: "We are independent of page builders like Tilda or Wix: you get clean, optimized code with zero platform subscriptions, plus a friendly CMS to update your content easily.", icon: 'fa-solid fa-laptop-code' },
         },
         features: {
             ru: [
@@ -103,7 +103,7 @@ export const services: ServicePageData[] = [
         faqs: {
             ru: [
                 { q: 'На каком стеке вы разрабатываете сайты?', a: 'Мы предпочитаем современный стек: Next.js или Astro для фронтенда (это дает топовую скорость загрузки и SEO) и Node.js для серверной части.' },
-                { q: 'Сколько времени занимает разработка?', a: 'Экспресс-лендинг под срочный запуск — за 24 часа. Типовой сайт — 5–7 дней, срок зависит от задачи: объём страниц, интеграции, готовность контента. Сложный корпоративный сайт, портал или интернет-магазин — от 3 до 6 недель.' },
+                { q: 'Сколько времени занимает разработка?', a: 'Экспресс-лендинг под срочный запуск рекламы или идеи — за 24–48 часов. Корпоративный сайт — 5–7 дней, зависит от задачи: объём страниц, интеграции, готовность контента. Сложный портал или интернет-магазин — от 3 до 6 недель.' },
                 { q: 'Будет ли сайт адаптирован под мобильные устройства?', a: 'Да. Мобильный трафик преобладает, поэтому все наши сайты делаем по принципу Mobile First: адаптивная вёрстка и корректное отображение на смартфонах, планшетах и десктопах.' },
                 { q: 'Предоставляете ли вы домен и хостинг?', a: 'Мы помогаем клиентам с выбором и регистрацией доменного имени, а также настраиваем надёжный и быстрый хостинг или VPS под ключ, чтобы вам не пришлось разбираться в технических деталях.' },
                 { q: 'Занимаетесь ли вы SEO-продвижением?', a: 'Все наши сайты разрабатываются с учетом базовой SEO-оптимизации (скорость, семантическая разметка, мета-теги). Это дает отличный старт для дальнейшего глубокого SEO-продвижения в Google и Яндекс.' },
@@ -112,7 +112,7 @@ export const services: ServicePageData[] = [
             ],
             en: [
                 { q: 'What tech stack do you use for website development?', a: 'We prefer a modern stack: Next.js or Astro for the frontend (which gives top speed and SEO) and Node.js for the backend.' },
-                { q: 'How long does development take?', a: 'Express landing page for an urgent launch: 24 hours. A typical site takes 5–7 days depending on scope: number of pages, integrations, content readiness. Complex corporate sites, portals, or stores take 3–6 weeks.' },
+                { q: 'How long does development take?', a: 'Express landing page for an urgent ad launch: 24–48 hours. A multi-page corporate website takes 5–7 days. Portals or online stores take 3–6 weeks.' },
                 { q: 'Will the site be mobile-friendly?', a: "Yes, 100% of our sites have high responsive design and pass Google Core Web Vitals tests with 'Excellent'." },
                 { q: 'Do you provide domain and hosting services?', a: "We assist clients with choosing and registering a domain name, and we configure reliable server hosting (VPS) so you don't have to deal with technical nuances." },
                 { q: 'Does your development include SEO optimization?', a: 'All of our websites are developed with baseline SEO in mind (fast load times, semantic HTML, meta tags), which gives an excellent foundation for future Google search ranking.' },
@@ -129,7 +129,7 @@ export const services: ServicePageData[] = [
                     { value: 'от $600', label: 'Сайт на Next.js', note: 'динамика, интеграции, сложная логика' },
                 ],
                 facts: [
-                    { k: 'Срок', v: 'экспресс-лендинг — 24 часа; типовой сайт — 5–7 дней' },
+                    { k: 'Срок', v: 'экспресс-лендинг — 24–48ч; типовой сайт — 5–7 дней' },
                     { k: 'SEO-база', v: 'скорость, семантика, sitemap, микроразметка' },
                     { k: 'Гарантия', v: FACTS.warranty.ru },
                 ],
@@ -212,7 +212,7 @@ export const services: ServicePageData[] = [
                     { value: 'от $600', label: 'Автоматизация и парсеры', note: 'интеграции сервисов, сбор данных, отчёты' },
                 ],
                 facts: [
-                    { k: 'Срок', v: 'бот — 7–14 дней; связка систем — 2–6 недель' },
+                    { k: 'Срок', v: 'базовый бот — 1–3 дня; сложный бот с CRM — 5–10 дней; парсинг — от 3 дней' },
                     { k: 'Гарантия', v: FACTS.warranty.ru },
                     { k: 'Передача', v: 'код и документация остаются у вас' },
                 ],
@@ -223,7 +223,7 @@ export const services: ServicePageData[] = [
                     { value: 'from $600', label: 'Automation & scrapers', note: 'service integrations, data collection, reports' },
                 ],
                 facts: [
-                    { k: 'Timeline', v: 'bot — 7–14 days; multi-system setup — 2–6 weeks' },
+                    { k: 'Timeline', v: 'basic bot — 1–3 days; complex bot with CRM — 5–10 days; scraping — from 3 days' },
                     { k: 'Warranty', v: FACTS.warranty.en },
                     { k: 'Handover', v: 'code and docs stay with you' },
                 ],
@@ -270,7 +270,7 @@ export const services: ServicePageData[] = [
             ru: [
                 { q: 'Как ИИ узнает подробности моей компании?', a: 'Мы используем технологию RAG (Retrieval-Augmented Generation). Мы создаем векторную базу данных из ваших документов, и ИИ обращается к ней перед ответом. Он не «галлюцинирует», а использует ваши факты.' },
                 { q: 'Безопасно ли передавать наши данные в OpenAI?', a: 'Да. Работаем с GPT (OpenAI), Claude (Anthropic) и Gemini (Google). Для чувствительных данных — Enterprise API или self-hosted open-source модели (Llama, Qwen, Mistral): они гарантируют, что ваши данные не будут использованы для обучения общих моделей.' },
-                { q: 'Сколько времени занимает внедрение?', a: 'Простой чат-бот суппорт — от 2 недель. Сложная RAG-система с интеграцией в CRM — от 1 месяца.' },
+                { q: 'Сколько времени занимает внедрение?', a: 'Умный AI-бот поддержки в Telegram или на сайт — от 3–5 дней. Сложная RAG-система с корпоративной базой знаний и интеграцией в CRM — от 2 до 4 недель.' },
                 { q: 'С какими мессенджерами вы работаете?', a: 'С любыми, у которых есть открытое API. Чаще всего мы интегрируем AI-ботов в Telegram, WhatsApp, Viber, Instagram Direct и виджеты на самом сайте.' },
                 { q: 'Способна ли нейросеть оформлять заказы?', a: 'Да. Искусственный интеллект не только общается, но и вызывает функции (Function Calling) — например, записывает клиента на приём, проверяет остатки товара и создаёт платёжную ссылку.' },
                 { q: 'Нужно ли мне нанимать новых сотрудников для работы с ИИ?', a: 'Наоборот! Задача наших ИИ-решений — разгрузить вашу текущую команду. Управление моделями происходит через простую панель, с которой справится любой маркетолог.' },
@@ -279,7 +279,7 @@ export const services: ServicePageData[] = [
             en: [
                 { q: 'How does AI learn about my company details?', a: "We use RAG (Retrieval-Augmented Generation). We create a vector database from your documents, which the AI consults before answering. It doesn't 'hallucinate' but uses your specific facts." },
                 { q: 'Is it safe to share our data with OpenAI?', a: 'Yes. We work with GPT (OpenAI), Claude (Anthropic), and Gemini (Google). For sensitive data, we use Enterprise APIs or self-hosted open-source models (Llama, Qwen, Mistral) to ensure your data is never used to train public models.' },
-                { q: 'How long does implementation take?', a: 'A simple support chatbot — from 2 weeks. A complex RAG system integrated with CRM — from 1 month.' },
+                { q: 'How long does implementation take?', a: 'Smart AI support bot for Telegram or your website: 3–5 days. Complex RAG system with corporate knowledge base and CRM integration: 2–4 weeks.' },
                 { q: 'Which messaging platforms do you work with?', a: 'We can integrate bots into any platform with an open API. Most commonly: Telegram, WhatsApp, Viber, Instagram Direct, and website widgets.' },
                 { q: 'Can the neural network process actual orders?', a: 'Yes. Modern AI can execute functions (Function Calling). For instance, it can book client appointments, check stock availability, and issue payment links.' },
                 { q: 'Will we need to hire data scientists?', a: 'Not at all. We build tools to reduce human load, not increase it. Everything is managed through a simple interface any marketer or manager can handle.' },
@@ -295,7 +295,7 @@ export const services: ServicePageData[] = [
                     { value: 'по объёму', label: 'RAG и AI-агенты', note: 'базы знаний, оркестрация, внутренние процессы' },
                 ],
                 facts: [
-                    { k: 'Срок', v: '2–6 недель' },
+                    { k: 'Срок', v: 'AI-бот поддержки — 3–7 дней; RAG и агенты — 2–4 недели' },
                     { k: 'Подход', v: 'пилот на ваших данных до полного внедрения' },
                     { k: 'Гарантия', v: FACTS.warranty.ru },
                 ],
@@ -306,7 +306,7 @@ export const services: ServicePageData[] = [
                     { value: 'scope-based', label: 'RAG & AI agents', note: 'knowledge bases, orchestration, internal processes' },
                 ],
                 facts: [
-                    { k: 'Timeline', v: '2–6 weeks' },
+                    { k: 'Timeline', v: 'AI support bot — 3–7 days; RAG & agents — 2–4 weeks' },
                     { k: 'Approach', v: 'a pilot on your data before full rollout' },
                     { k: 'Warranty', v: FACTS.warranty.en },
                 ],
@@ -326,16 +326,16 @@ export const services: ServicePageData[] = [
             en: 'SaaS & MVP Development for Startups | AVPdev',
         },
         seoDescription: {
-            ru: 'Быстрый запуск MVP для стартапов и масштабируемая разработка SaaS-платформ на Next.js, Node.js и Astro. MVP — как правило до 14 дней, дальше рост в полноценный продукт.',
-            en: 'Quick MVP launch for startups and scalable SaaS platform development on Next.js, Node.js, and Astro. MVPs typically launch within 14 days, then grow into a full product.',
+            ru: 'Фокусированный запуск MVP для стартапов и разработка SaaS-платформ на Next.js, Node.js и PostgreSQL. Спринт первой рабочей версии за 10–14 дней на чистой архитектуре.',
+            en: 'Focused MVP launch for startups and scalable SaaS platform development on Next.js, Node.js, and PostgreSQL. 10–14 day sprint for your first working version.',
         },
         hero: {
-            ru: { title: 'От идеи до <span class="gradient-text">работающего продукта</span> за недели', subtitle: 'MVP запускаем как правило до 14 дней — на архитектуре, которая готова к росту, а не потребует переписывания.' },
-            en: { title: 'SaaS & <span class="gradient-text">MVP Development</span>', subtitle: 'MVPs typically launch within 14 days — on architecture ready to grow with you, not demand a rewrite.' },
+            ru: { title: 'От идеи до <span class="gradient-text">работающего продукта</span> за 14 дней', subtitle: 'Фокусированный MVP-спринт за 10–14 дней: запускаем ключевой сценарий для реальных пользователей и инвесторов на масштабируемой архитектуре.' },
+            en: { title: 'From Idea to a <span class="gradient-text">Working Product</span> in 14 Days', subtitle: 'Focused 10–14 day MVP sprint: launch your core scenario for real users and investors on a scalable architecture.' },
         },
         section: {
-            ru: { label: 'Development', title: 'MVP — как правило до 14 дней', description: 'Мы помогаем стартапам и бизнесу быстро проверять гипотезы. Создаем масштабируемые MVP, которые не нужно переписывать после роста.', icon: 'fa-solid fa-rocket' },
-            en: { label: 'Development', title: 'MVP — Typically Within 14 Days', description: "We help startups and businesses test hypotheses quickly. We create scalable MVPs that don't need to be rewritten after growth.", icon: 'fa-solid fa-rocket' },
+            ru: { label: 'Development', title: 'MVP-спринт за 10–14 дней', description: 'Помогаем стартапам быстро проверять продуктовые гипотезы. Создаем масштабируемый веб-сервис (база данных, авторизация, личные кабинеты, оплаты), который не нужно переписывать после роста.', icon: 'fa-solid fa-rocket' },
+            en: { label: 'Development', title: '10–14 Day MVP Sprint', description: "We help startups validate hypotheses rapidly. Build a scalable web product (auth, database, user dashboards, billing) that doesn't need to be rewritten when you scale.", icon: 'fa-solid fa-rocket' },
         },
         features: {
             ru: [
@@ -351,7 +351,7 @@ export const services: ServicePageData[] = [
         },
         faqs: {
             ru: [
-                { q: 'Что такое MVP и зачем он нужен?', a: 'MVP (Minimum Viable Product) — это минимально жизнеспособный продукт: только ключевой функционал. Мы запускаем MVP как правило до 14 дней, чтобы вы быстро проверили спрос и получили первых пользователей или инвестиции, не тратя месяцы и огромные бюджеты.' },
+                { q: 'Что такое MVP и зачем он нужен?', a: 'MVP (Minimum Viable Product) — это минимально жизнеспособный продукт: только ключевой функционал. Мы запускаем MVP за 10–14 дней в формате сфокусированного спринта, чтобы вы быстро проверили спрос и получили первых пользователей или инвестиции, не тратя месяцы и огромные бюджеты.' },
                 { q: 'Подходит ли ваш стек для высоконагруженных SaaS?', a: 'Да. Фронтенд — Next.js с серверным рендерингом, бэкенд — Node.js/Bun или Go, база — PostgreSQL. Архитектуру выбираем под ожидаемую нагрузку: монолит для старта или микросервисы, если нагрузка уже известна и распределена.' },
                 { q: 'Можете ли вы взять проект на дальнейшую поддержку?', a: 'Да, MVP — это только начало. После релиза мы обеспечиваем SLA (соглашение об уровне сервиса), багфиксинг и постепенное наращивание новых фич (Agile/Scrum).' },
                 { q: 'Как обеспечивается безопасность данных?', a: 'Мы используем современные стандарты шифрования, токены доступа (JWT/OAuth), защиту от DDoS, а также настраиваем автоматические регулярные бэкапы баз данных.' },
@@ -360,7 +360,7 @@ export const services: ServicePageData[] = [
                 { q: 'Интегрируете ли вы платежи по подписке?', a: 'Да, у нас есть богатый опыт настройки рекуррентных платежей через Stripe, Braintree, ЮKassa и интеграции с системами управления подписками.' },
             ],
             en: [
-                { q: 'What is an MVP and why do I need it?', a: 'An MVP (Minimum Viable Product) is the smallest version of your product: core features only. We typically launch MVPs within 14 days, so you can test demand and get your first users or investment quickly — without spending months and huge budgets.' },
+                { q: 'What is an MVP and why do I need it?', a: 'An MVP (Minimum Viable Product) is the first working release of your product: core features only. We launch MVPs in a focused 10–14 day sprint so you can validate demand and onboard early users or investors without burning months of runway.' },
                 { q: 'Is your stack suitable for high-load SaaS?', a: 'Yes. Frontend is Next.js with server-side rendering, backend is Node.js/Bun or Go, database is PostgreSQL. We choose the architecture based on expected load: a monolith to start, or microservices when the load is known and distributed.' },
                 { q: 'Can you provide ongoing support?', a: 'Yes, an MVP is just the beginning. After release, we provide SLA, bug fixing, and gradual feature rollouts (Agile/Scrum).' },
                 { q: 'How do you ensure data security?', a: 'We implement modern encryption protocols, access tokens (JWT), DDoS protection, and we configure automated database backups from day one.' },
@@ -378,7 +378,7 @@ export const services: ServicePageData[] = [
                     { value: 'по объёму', label: 'SaaS-платформа', note: 'архитектура под рост нагрузки и команды' },
                 ],
                 facts: [
-                    { k: 'Срок', v: 'MVP — как правило до 14 дней; SaaS — по объёму' },
+                    { k: 'Срок', v: 'MVP-спринт — 10–14 дней; SaaS — по объёму' },
                     { k: 'Стек', v: 'Next.js · Node.js/Bun · PostgreSQL' },
                     { k: 'Передача', v: 'код, инфраструктура и документация — ваши' },
                 ],
@@ -389,7 +389,7 @@ export const services: ServicePageData[] = [
                     { value: 'scope-based', label: 'SaaS platform', note: 'architecture ready for load and team growth' },
                 ],
                 facts: [
-                    { k: 'Timeline', v: 'MVP — typically within 14 days; SaaS — scope-based' },
+                    { k: 'Timeline', v: 'MVP sprint — 10–14 days; SaaS — scope-based' },
                     { k: 'Stack', v: 'Next.js · Node.js/Bun · PostgreSQL' },
                     { k: 'Handover', v: 'code, infrastructure and docs stay with you' },
                 ],
@@ -525,7 +525,7 @@ export const services: ServicePageData[] = [
                 { q: 'Насколько безопасны такие приложения?', a: 'TMA работают под той же защитой, что и сам Telegram. Технология обеспечивает надежное шифрование данных и сессий.' },
                 { q: 'Как мне продвигать свое Mini App?', a: 'Основной инструмент продвижения — Telegram Ads, посевы в других Telegram-каналах и реферальные механики внутри самого приложения, которые обеспечивают виральный рост.' },
                 { q: 'Будет ли приложение работать на мобильном телефоне и ПК?', a: 'Да. Интерфейс адаптируется под мобильную версию Telegram, а также под планшеты и десктоп (Telegram Desktop).' },
-                { q: 'Сроки разработки Telegram WebApp?', a: 'Базовое приложение с формой заявки или каталогом-визиткой — от 1-2 недель. Полноценный магазин или сложная игра Tap2Earn — от 1-2 месяцев.' },
+                { q: 'Сроки разработки Telegram WebApp?', a: 'Базовый Mini App (визитка, каталог, анкета) — от 7 дней. Полноценный магазин внутри Telegram с корзиной и оплатой — 14–21 день. Сложные Web3-сервисы и игры — от 1 месяца.' },
             ],
             en: [
                 { q: 'What are Telegram Mini Apps (TMA)?', a: "They are full web applications that open directly inside Telegram. Users don't need to download anything; authorization is instant through their Telegram account." },
@@ -534,7 +534,7 @@ export const services: ServicePageData[] = [
                 { q: 'How secure are these applications?', a: 'TMA operates under the same security standards as Telegram itself. The technology ensures reliable encryption of data.' },
                 { q: 'How can I promote my Mini App?', a: 'The main promotion channels are Telegram Ads, advertising in large channels, and building in viral referral loops.' },
                 { q: 'Will the app work on both phones and computers?', a: 'Yes. The layout adapts to Telegram on mobile as well as tablets and Telegram Desktop.' },
-                { q: 'What is the development timeline for a TMA?', a: 'A basic lead generation app or catalog takes around 1-2 weeks. Complex stores or Tap-to-Earn games take around 1-2 months.' },
+                { q: 'What is the development timeline for a TMA?', a: 'Basic Mini App (showcase, form, booking): from 7 days. Full Telegram store with cart and payments: 14–21 days. Complex Web3 apps or games: from 1 month.' },
             ],
         },
         faqHeading: { ru: 'Вопросы и ответы', en: 'Common Questions' },
@@ -546,7 +546,7 @@ export const services: ServicePageData[] = [
                     { value: 'от $1 500', label: 'Mini App с оплатой', note: 'каталог, корзина, платёжные системы' },
                 ],
                 facts: [
-                    { k: 'Срок', v: '2–4 недели' },
+                    { k: 'Срок', v: 'Mini App — от 7 дней; магазин в TG — 14–21 день' },
                     { k: 'Платежи', v: 'ЮKassa, Stripe, CryptoPay' },
                     { k: 'Гарантия', v: FACTS.warranty.ru },
                 ],
@@ -557,7 +557,7 @@ export const services: ServicePageData[] = [
                     { value: 'from $1,500', label: 'Mini App with payments', note: 'catalog, cart, payment providers' },
                 ],
                 facts: [
-                    { k: 'Timeline', v: '2–4 weeks' },
+                    { k: 'Timeline', v: 'Mini App — from 7 days; Telegram store — 14–21 days' },
                     { k: 'Payments', v: 'Yookassa, Stripe, CryptoPay' },
                     { k: 'Warranty', v: FACTS.warranty.en },
                 ],

@@ -78,12 +78,17 @@ const homePath = `/${lang}/`;
             <slot name="content" />
 
             <div class="case-cta-section">
-                <a href={`${homePath}#contact`} class="cta-button"
-                    >{t("case_cta_discuss")}</a
-                >
+                <div class="case-cta-card">
+                    <h3>{lang === 'ru' ? 'Понравился инженерный подход?' : 'Like our engineering approach?'}</h3>
+                    <p>{lang === 'ru' ? 'Спроектируем и запустим надежную систему под задачи вашего бизнеса — от архитектуры до релиза и поддержки.' : 'We will architect and deploy a robust system for your business — from architecture to launch and support.'}</p>
+                    <div class="case-cta-actions">
+                        <a href={`/${lang}/brief/`} class="cta-button">{lang === 'ru' ? 'Заполнить бриф' : 'Fill out brief'}</a>
+                        <a href="https://t.me/AVP_Dev" target="_blank" rel="noopener noreferrer" class="cta-button tg-button"><i class="fa-brands fa-telegram"></i> {lang === 'ru' ? 'Обсудить в Telegram' : 'Chat on Telegram'}</a>
+                    </div>
+                </div>
             </div>
             <div style="display: flex; justify-content: center; width: 100%;">
-                <a href={`/${lang}/projects/`} class="back-to-main"
+                <a href={`/${lang}/project/`} class="back-to-main"
                     ><span>{t("back_to_portfolio")}</span></a
                 >
             </div>
