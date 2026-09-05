@@ -143,6 +143,8 @@ function setupMobileMenu() {
         if (!trigger) return;
         e.stopPropagation();
         const isActive = trigger.classList.toggle('active');
+        const item = trigger.closest('.mobile-accordion-item');
+        if (item) item.classList.toggle('active', isActive);
         trigger.setAttribute('aria-expanded', isActive.toString());
     });
 }

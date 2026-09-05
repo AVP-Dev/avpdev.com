@@ -12,8 +12,18 @@ function cleanInput(str: string | undefined | null): string {
     });
 }
 
-export const GET: APIRoute = async ({ redirect }) => {
-    return redirect('/ru/', 301);
+export const GET: APIRoute = async () => {
+    return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
+        status: 405,
+        headers: { 'Content-Type': 'application/json', 'Allow': 'POST' }
+    });
+};
+
+export const ALL: APIRoute = async () => {
+    return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
+        status: 405,
+        headers: { 'Content-Type': 'application/json', 'Allow': 'POST' }
+    });
 };
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
@@ -24,10 +34,19 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
             return new Response(JSON.stringify({
                 success: false,
                 message: "Too many requests. Please try again later."
-            }), { status: 429 });
+            }), { status: 429, headers: { 'Content-Type': 'application/json' } });
         }
 
-        const data = await request.json();
+        let data: unknown;
+        try {
+            data = await request.json();
+        } catch {
+            return new Response(JSON.stringify({
+                success: false,
+                message: "Invalid or empty JSON payload"
+            }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+        }
+
         const result = ContactFormSchema.safeParse(data);
 
         if (!result.success) {
@@ -36,7 +55,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
                 success: false,
                 message: "Validation Error",
                 errors: result.error.flatten().fieldErrors
-            }), { status: 400 });
+            }), { status: 400, headers: { 'Content-Type': 'application/json' } });
         }
 
         const { name, contact, message, utm_source, utm_medium, utm_campaign, utm_term, utm_content } = result.data;

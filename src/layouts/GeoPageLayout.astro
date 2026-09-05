@@ -23,7 +23,7 @@ const lang = getLangFromUrl(Astro.url);
 // Even slugs get Service-first, odd slugs get Portfolio-first
 const isEven = citySlug ? citySlug.length % 2 === 0 : true;
 ---
-<BaseLayout title={title} description={description} isTranslationKey={false}>
+<BaseLayout title={title} description={description} isTranslationKey={false} noindex={true}>
   <Fragment slot="head">
     <slot name="head" />
   </Fragment>

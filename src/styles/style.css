@@ -788,25 +788,46 @@ nav {
 /* Accordion Styles - Ultra Smooth with Grid */
 .mobile-accordion-item {
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.mobile-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  width: auto;
+  margin: 0 auto;
+}
+
+.mobile-accordion-link {
+  display: inline-block;
+  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+  font-size: 1.1rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-accordion-link:hover {
+  color: var(--accent-color-start);
 }
 
 .mobile-accordion-trigger {
-  width: auto;
+  width: 44px;
+  height: 44px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: transparent;
   border: none;
-  padding: 0.5rem 2rem;
-  font-size: 1.1rem;
-  font-family: var(--font-heading);
-  font-weight: 600;
+  font-size: 0.95rem;
   color: var(--text-color);
   cursor: pointer;
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin: 0 auto;
-  position: relative;
+  padding: 0;
 }
 
 .mobile-accordion-trigger:hover,
@@ -815,15 +836,12 @@ nav {
 }
 
 .accordion-arrow {
-  position: absolute;
-  right: 0.5rem;
   font-size: 0.9rem;
-  margin-top: 2px;
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  animation: arrow-pulse 2s infinite ease-in-out;
 }
 
-.mobile-accordion-trigger.active .accordion-arrow {
+.mobile-accordion-trigger.active .accordion-arrow,
+.mobile-accordion-item.active .accordion-arrow {
   transform: rotate(180deg);
   animation: none;
 }
@@ -835,10 +853,19 @@ nav {
   width: 100%;
 }
 
+.mobile-accordion-item.active .mobile-accordion-content,
 .mobile-accordion-trigger.active+.mobile-accordion-content {
   grid-template-rows: 1fr;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
+}
+
+.mobile-nav-link--all {
+  font-weight: 700 !important;
+  color: var(--accent-color-start) !important;
+  border-bottom: 1px dashed rgba(255, 140, 0, 0.35) !important;
+  margin-bottom: 0.35rem;
+  padding-bottom: 0.5rem;
 }
 
 .mobile-accordion-inner {
@@ -2107,4 +2134,65 @@ textarea.form-control {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Telegram Direct CTA Header & Mobile */
+.header-tg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.35rem 0.85rem;
+  background: linear-gradient(135deg, #2AABEE 0%, #229ED9 100%);
+  color: #ffffff !important;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 2px 10px rgba(42, 171, 238, 0.35);
+  flex-shrink: 0;
+}
+
+.header-tg-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(42, 171, 238, 0.55);
+  color: #ffffff !important;
+}
+
+.header-tg-btn i {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .header-tg-btn {
+    display: none !important;
+  }
+}
+
+.mobile-cta-item {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  list-style: none;
+}
+
+.mobile-tg-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  background: linear-gradient(135deg, #2AABEE 0%, #229ED9 100%);
+  color: #ffffff !important;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(42, 171, 238, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.mobile-tg-btn:active {
+  transform: scale(0.98);
 }

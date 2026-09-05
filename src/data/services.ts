@@ -71,12 +71,12 @@ export const services: ServicePageData[] = [
         id: 'websites',
         slug: 'razrabotka-saitov',
         seoTitle: {
-            ru: 'Разработка сайтов под ключ: Лендинги, Магазины, Порталы | AVPdev',
-            en: 'Custom Website Development: Landings, Shops, Portals | AVPdev',
+            ru: 'Разработка сайтов и экспресс-лендингов за 24–48ч • AVPdev',
+            en: 'Express Landing Page & Custom Website Development • AVPdev',
         },
         seoDescription: {
-            ru: 'Разрабатываем сайты на Astro, Next.js и React: от лендингов под рекламу до интернет-магазинов и корпоративных порталов.',
-            en: 'We build websites on Astro, Next.js, and React: from ad-driven landing pages to online stores and corporate portals.',
+            ru: 'Разработка быстрых сайтов и продающих лендингов на Astro и Next.js без конструкторов. Запуск под рекламу от 24 часов. Прямой контакт, гарантия и поддержка.',
+            en: 'High-speed custom websites and landing pages built with Astro & Next.js. Express turnaround from 24 hours, top Lighthouse score, direct communication and warranty.',
         },
         hero: {
             ru: { title: 'Сайты, которые <span class="gradient-text">приносят заявки</span>', subtitle: 'Быстрые адаптивные сайты на Astro и Next.js: от лендинга под рекламу до корпоративного портала с интеграциями.' },
@@ -156,12 +156,12 @@ export const services: ServicePageData[] = [
         id: 'bots',
         slug: 'razrabotka-botov-i-parserov',
         seoTitle: {
-            ru: 'Разработка ботов и парсеров | AVPdev',
-            en: 'Bot and Scraper Development | AVPdev',
+            ru: 'Разработка Telegram-ботов и парсеров под ключ • AVPdev',
+            en: 'Custom Telegram Bot & Web Scraper Development • AVPdev',
         },
         seoDescription: {
-            ru: 'Автоматизация сбора данных и создание Telegram-ботов любой сложности. Парсинг сайтов, мониторинг цен и интеграция с внешними сервисами.',
-            en: 'Automation of data collection and Telegram bot development of any complexity. Web scraping, price monitoring, and integration with external services.',
+            ru: 'Разработка Telegram-ботов любой сложности, парсинг маркетплейсов и автоматизация бизнес-процессов на Python и Node.js. Всегда на связи, гарантия и быстрый запуск.',
+            en: 'Custom Telegram bot development, marketplace web scraping, and workflow automation in Python & TypeScript. Direct developer communication, reliable guarantees.',
         },
         hero: {
             ru: { title: 'Боты и автоматизация, которые <span class="gradient-text">экономят часы</span>', subtitle: 'Заявки, отчёты, парсинг и связка CRM с мессенджерами — под ключ. Ваша команда занимается делом, а не рутиной.' },
@@ -490,12 +490,12 @@ export const services: ServicePageData[] = [
         id: 'tma',
         slug: 'telegram-mini-apps',
         seoTitle: {
-            ru: 'Разработка Telegram Mini Apps (WebApps) | AVPdev',
-            en: 'Telegram Mini Apps (WebApps) Development | AVPdev',
+            ru: 'Разработка Telegram Mini Apps под ключ для бизнеса • AVPdev',
+            en: 'Turnkey Telegram Mini Apps (TMA) Development • AVPdev',
         },
         seoDescription: {
-            ru: 'Профессиональная разработка Telegram Mini Apps (WebApps) для e-commerce, криптопроектов и бизнеса. Интеграция с TON, смарт-контрактами и платежными системами.',
-            en: 'Professional Telegram Mini Apps (WebApps) development for e-commerce, crypto projects, and business. Integration with TON, smart contracts, and payment systems.',
+            ru: 'Разработка Telegram Mini Apps и WebApps под ключ: магазины, бронирование, сервисы и CRM внутри Telegram. Мгновенная оплата, запуск от 14 дней, прямая гарантия.',
+            en: 'Custom Telegram Mini Apps & WebApps for business: e-commerce stores, booking flows, and custom CRMs inside Telegram. Turnkey delivery with full warranty.',
         },
         hero: {
             ru: { title: 'Telegram <span class="gradient-text">Mini Apps</span>', subtitle: 'Магазины, записи, крипто-приложения и CRM прямо в мессенджере — без установки приложения, с мгновенным входом через Telegram.' },

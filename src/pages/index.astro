@@ -35,10 +35,10 @@ function getPreferredLocale(request: Request): string {
 const targetLocale = `/${getPreferredLocale(Astro.request)}/`;
 
 return new Response(null, {
-  status: 301,
+  status: 307,
   headers: {
     'Location': targetLocale,
-    'Cache-Control': 'public, max-age=86400',
+    'Cache-Control': 'public, max-age=3600',
     'Vary': 'Accept-Language'
   }
 });

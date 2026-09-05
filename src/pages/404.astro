@@ -8,6 +8,7 @@ const lang = getLangFromUrl(Astro.url);
 <BaseLayout
     title={lang === 'ru' ? '404: Сектор не найден • AVP-Dev' : '404: Sector Not Found • AVP-Dev'}
     description={lang === 'ru' ? 'Страница не найдена. Нажмите Start для возврата на главную.' : 'Page not found. Press Start to return home.'}
+    noindex={true}
 >
     <main class="error-page-content">
         <div class="container error-container">

@@ -8,11 +8,22 @@ import { locations } from './src/data/locations.ts';
 
 const site = 'https://avpdev.com';
 
-// Список slug городов, у которых НЕТ русского контента (name_ru: null)
-// Эти RU-страницы делают redirect → не должны быть в sitemap
-const enOnlyCitySlugs = locations
-  .filter(loc => loc.name_ru === null)
-  .map(loc => loc.slug);
+const coreServices = new Set([
+  '/en/services/',
+  '/en/services/ai-integration/',
+  '/en/services/website-development/',
+  '/en/services/bot-and-scraper-development/',
+  '/en/services/saas-mvp/',
+  '/en/services/telegram-mini-apps/',
+  '/en/services/ecommerce-development/',
+  '/ru/uslugi/',
+  '/ru/uslugi/razrabotka-saitov/',
+  '/ru/uslugi/ai-integracii/',
+  '/ru/uslugi/razrabotka-botov-i-parserov/',
+  '/ru/uslugi/saas-mvp/',
+  '/ru/uslugi/telegram-mini-apps/',
+  '/ru/uslugi/internet-magaziny/',
+]);
 
 export default defineConfig({
   site: site,
@@ -33,9 +44,9 @@ export default defineConfig({
   integrations: [
     // 3. Интеграция Sitemap: i18n hreflang + lastmod + priority по типу страниц
     sitemap({
-      // Фильтрация: убираем корень и RU-города без русского контента (redirect-only)
+      // Фильтрация: убираем корень, 404, редиректы, локации и авто-сетку городов (thin content)
       filter: (page) => {
-        // Exclude root (301 redirect in index.astro)
+        // Exclude root (307 redirect in index.astro)
         if (page === `${site}/` || page === `${site}`) return false;
 
         // Exclude any 404 pages
@@ -47,15 +58,20 @@ export default defineConfig({
           '/en/privacy-policy/',
           '/ru/terms-of-service/',
           '/en/terms-of-service/',
-          '/ru/brief/',
         ];
         if (redirectOnlyPaths.some(r => page.endsWith(r))) return false;
 
-        // Exclude RU geo-pages for EN-only cities (they 301 redirect to EN)
-        const isRuGeo = page.includes('/ru/uslugi/');
-        if (isRuGeo) {
-          const slug = page.split('/ru/uslugi/')[1]?.replace(/\//g, '');
-          if (slug && enOnlyCitySlugs.includes(slug)) return false;
+        // Exclude locations catalog (thin content / doorway protection)
+        if (page.includes('/locations/')) return false;
+
+        // Exclude city pages: keep ONLY core service landing pages
+        if (page.includes('/services/') || page.includes('/uslugi/')) {
+          try {
+            const pathname = new URL(page).pathname;
+            if (!coreServices.has(pathname)) return false;
+          } catch (e) {
+            return false;
+          }
         }
 
         return true;
@@ -94,32 +110,13 @@ export default defineConfig({
           // Проекты
           item.priority = 0.7;
           item.changefreq = 'monthly';
-        } else if (
-          url.includes('/services/ai-integration/') ||
-          url.includes('/services/website-development/') ||
-          url.includes('/services/bot-and-scraper-development/') ||
-          url.includes('/services/saas-mvp/') ||
-          url.includes('/services/telegram-mini-apps/') ||
-          url.includes('/uslugi/razrabotka-saitov/') ||
-          url.includes('/uslugi/ai-integracii/') ||
-          url.includes('/uslugi/razrabotka-botov-i-parserov/') ||
-          url.includes('/uslugi/saas-mvp/') ||
-          url.includes('/uslugi/telegram-mini-apps/')
-        ) {
-          // Основные услуги (не города)
+        } else if (coreServices.has(new URL(url).pathname)) {
+          // Основные услуги
           item.priority = 0.9;
           item.changefreq = 'weekly';
-        } else if (url.includes('/services/') || url.includes('/uslugi/')) {
-          // Гео-страницы (города)
-          item.priority = 0.5;
-          item.changefreq = 'monthly';
         } else if (url.includes('/brief/')) {
           // Бриф
-          item.priority = 0.6;
-          item.changefreq = 'monthly';
-        } else if (url.includes('/locations/')) {
-          // Карта локаций
-          item.priority = 0.6;
+          item.priority = 0.8;
           item.changefreq = 'monthly';
         } else if (url.includes('/legal/')) {
           // Юридические страницы
