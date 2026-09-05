@@ -20,15 +20,9 @@ import { getEntry } from 'astro:content';
 import '@fontsource-variable/sora';
 import '@fontsource-variable/plus-jakarta-sans';
 import '@fontsource/jetbrains-mono';
-import '@fontsource/orbitron/400.css';
-import '@fontsource/orbitron/700.css';
-import '@fontsource/orbitron/900.css';
-import '@fontsource/press-start-2p';
 
 import '../styles/style.css';
-import '../styles/case-study.css';
-import '../styles/blog.css';
-import '../styles/retro.css';
+import retroCssUrl from '../styles/retro.css?url';
 
 export interface Props {
 	title: string;
@@ -235,7 +229,6 @@ const globalOrganizationSchema = {
         @font-face { font-family: "Font Awesome 6 Free"; font-style: normal; font-weight: 900; font-display: swap; src: url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2) format("woff2"); }
         @font-face { font-family: "Font Awesome 6 Brands"; font-style: normal; font-weight: 400; font-display: swap; src: url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-brands-400.woff2) format("woff2"); }
     </style>
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
     <noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -308,7 +301,29 @@ const globalOrganizationSchema = {
     {(!geoCitySlug || geoHasRU) && <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />}
     {geoCitySlug && !geoHasRU && <link rel="alternate" hreflang="x-default" href={enUrl} />}
 
-    <script is:inline>
+    <script define:vars={{ retroCssUrl }}>
+        window.__RETRO_CSS_URL__ = retroCssUrl;
+
+        function loadRetroAssets() {
+            if (window.__retroAssetsLoaded) return;
+            window.__retroAssetsLoaded = true;
+            if (retroCssUrl && !document.getElementById('retro-styles')) {
+                const link = document.createElement('link');
+                link.id = 'retro-styles';
+                link.rel = 'stylesheet';
+                link.href = retroCssUrl;
+                document.head.appendChild(link);
+            }
+            if (!document.getElementById('retro-fonts')) {
+                const fontLink = document.createElement('link');
+                fontLink.id = 'retro-fonts';
+                fontLink.rel = 'stylesheet';
+                fontLink.href = 'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap';
+                document.head.appendChild(fontLink);
+            }
+        }
+        window.loadRetroAssets = loadRetroAssets;
+
         function applyTheme() {
             const isRetro = (() => {
                 if (typeof localStorage !== 'undefined' && localStorage.getItem('theme_mode')) {
@@ -328,6 +343,7 @@ const globalOrganizationSchema = {
             })();
             
             if (isRetro) {
+                loadRetroAssets();
                 document.documentElement.classList.add('retro-mode', 'dark-theme');
                 document.documentElement.classList.remove('light-theme');
                 document.documentElement.style.colorScheme = 'dark';

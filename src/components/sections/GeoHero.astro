@@ -16,7 +16,7 @@ const t = useTranslations(lang);
     <div id="particles-js"></div>
     <div class="container hero-container">
         <div class="hero-content">
-            <div class="hero-text fade-in">
+            <div class="hero-text">
                 <h1 set:html={h1} />
                 <p set:html={p}></p>
                 <a href={`/${lang}/brief/`} class="cta-button">{t('blog_cta_button')}</a>
@@ -72,7 +72,6 @@ const t = useTranslations(lang);
 </style>
 
 <!-- Фоновые частицы (как на главной) -->
-<script is:inline src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
 <script>
     import '../../scripts/particles';
 </script>

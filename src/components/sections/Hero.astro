@@ -29,7 +29,7 @@ const t = useTranslations(lang);
 
     <div class="container hero-container">
         <div class="hero-content">
-            <div class={`hero-text fade-in ${variant === 'services' ? 'services-text' : ''}`}>
+            <div class={`hero-text ${variant === 'services' ? 'services-text' : ''}`}>
                 <div class="retro-hero-hud" aria-label="Retro HUD Status">
                     <button type="button" class="retro-hero-chip play-arcade-btn" data-open-arcade title={t("retro_arcade_play_btn")}>
                         <i class="fa-solid fa-ghost text-pink"></i>
@@ -164,6 +164,12 @@ const t = useTranslations(lang);
         z-index: 2;
     }
 
+    .hero-h1-retro,
+    .hero-sub-retro,
+    .retro-hero-hud {
+        display: none;
+    }
+
     .hero-text h1 {
         font-size: clamp(2.5rem, 8vw, 4.5rem);
         line-height: 1.1;
@@ -235,8 +241,7 @@ const t = useTranslations(lang);
     }
 </style>
 
-<!-- Фоновые частицы: общая инициализация -->
-<script is:inline src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+<!-- Фоновые частицы: инициализация на idle -->
 <script>
     import '../../scripts/particles';
 </script>
