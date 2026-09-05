@@ -335,16 +335,15 @@ html.retro-mode .retro-hud-badge .hud-dot {
   padding: 0 8px 0 7px;
   gap: 5px;
   flex-shrink: 0;
-  /* Colors — neon pink */
-  background: #120008;
-  border: 1.5px solid #ff007f;
-  color: #ff007f;
-  border-radius: 5px;
+  /* Colors — Deep Indigo / Violet with white text */
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  border-radius: 6px;
   cursor: pointer;
   user-select: none;
-  /* Animation */
-  animation: fab-pulse 2.2s ease-in-out infinite;
-  transition: transform 0.1s, background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 /* CRT scanline overlay */
@@ -356,8 +355,8 @@ html.retro-mode .retro-hud-badge .hud-dot {
     to bottom,
     transparent 0px,
     transparent 1px,
-    rgba(0, 0, 0, 0.18) 2px,
-    rgba(0, 0, 0, 0.18) 4px
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
   );
   pointer-events: none;
   z-index: 1;
@@ -368,25 +367,24 @@ html.retro-mode .retro-hud-badge .hud-dot {
 .mobile-retro-fab span {
   position: relative;
   z-index: 2;
+  color: #FFFFFF !important;
 }
 
-/* Gamepad icon wiggle */
+/* Gamepad icon */
 .mobile-retro-fab i {
   font-size: 0.75rem;
-  animation: fab-wiggle 3s ease-in-out infinite;
   line-height: 1;
 }
 
 /* Hover / tap */
 .mobile-retro-fab:hover,
 .mobile-retro-fab:focus-visible {
-  background: rgba(255, 0, 127, 0.18);
-  color: #ff66b8;
-  border-color: #ff66b8;
-  transform: scale(1.06);
+  filter: brightness(1.15);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.6);
+  transform: scale(1.04);
 }
 .mobile-retro-fab:active {
-  transform: scale(0.93) translateY(2px);
+  transform: scale(0.95) translateY(1px);
 }
 
 /* ── Retro mode ON: swap to cyan/green ── */
@@ -394,12 +392,14 @@ html.retro-mode .mobile-retro-fab {
   background: #001208;
   border-color: #00ff88;
   color: #00ff88;
-  animation: none;
   box-shadow: 0 0 10px 3px #00ff8877, 0 0 0 1px #00ff8844;
 }
 html.retro-mode .mobile-retro-fab i {
-  animation: none;
+  color: #00ff88 !important;
   transform: scaleX(-1); /* flipped = "exit" signal */
+}
+html.retro-mode .mobile-retro-fab span {
+  color: #00ff88 !important;
 }
 html.retro-mode .mobile-retro-fab:hover {
   background: rgba(0,255,136,0.15);
@@ -428,19 +428,20 @@ html.retro-mode .fab-label-exit  { display: block; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  min-width: 96px;
+  gap: 8px;
+  min-width: 102px;
   height: 34px;
-  padding: 0 0.85rem;
-  background: rgba(0, 240, 255, 0.06);
-  border: 1px solid rgba(0, 240, 255, 0.4);
-  color: #00f0ff;
-  border-radius: 6px;
+  padding: 0 0.95rem;
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF !important;
+  border-radius: 8px;
   font-family: var(--font-pixel, monospace);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 0 8px rgba(0, 240, 255, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.25s ease, filter 0.2s ease;
+  box-shadow: 0 2px 10px rgba(79, 70, 229, 0.35);
   text-decoration: none;
   user-select: none;
   white-space: nowrap;
@@ -455,114 +456,97 @@ html.retro-mode .fab-label-exit  { display: block; }
   line-height: 1;
 }
 
-/* Neon Perimeter Sweep Border Layer */
+/* Subtle gloss highlight on top border */
 .retro-mode-toggle::before {
   content: "";
   position: absolute;
-  inset: -1px;
-  border-radius: 6px;
-  padding: 1px;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    transparent 260deg,
-    #00f0ff 360deg
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+  opacity: 0.8;
   pointer-events: none;
-  transition: opacity 0.3s ease;
 }
 
-/* Static in Modern mode — no annoying periodic flashing */
+/* Static in Modern mode — no flashing */
 html:not(.retro-mode) .retro-mode-toggle {
-  animation: none;
-}
-
-html:not(.retro-mode) .retro-mode-toggle::before {
   animation: none;
 }
 
 html:not(.retro-mode) .retro-mode-toggle i {
   display: inline-block;
-  transition: transform 0.2s ease;
-  animation: none;
+  color: #FFFFFF !important;
+  font-size: 0.82rem;
+  transition: transform 0.25s ease;
 }
 
-/* Dual Label (Default vs PRESS START) */
+/* Dual Label */
 .retro-mode-toggle .label-default {
   display: inline-block;
   font-family: var(--font-pixel, monospace);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   letter-spacing: 0.05em;
+  color: #FFFFFF !important;
 }
 
 .retro-mode-toggle .label-arcade {
   display: none;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  white-space: nowrap;
 }
 
-/* Hover State: Clean, responsive neon cyan */
+/* Light Theme Contrast Support */
+:global(.light-theme) .retro-mode-toggle {
+  background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
+  border-color: rgba(67, 56, 202, 0.4);
+  box-shadow: 0 3px 12px rgba(79, 70, 229, 0.3);
+}
+
+/* Hover State: Vibrant Violet glow */
 .retro-mode-toggle:hover {
-  background: rgba(0, 240, 255, 0.16) !important;
-  color: #ffffff !important;
-  border-color: #00f0ff !important;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.5) !important;
-  transform: translateY(-1px) !important;
+  filter: brightness(1.15);
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.6) !important;
+  transform: translateY(-1px) scale(1.02) !important;
+  color: #FFFFFF !important;
 }
 
 .retro-mode-toggle:hover i {
-  transform: scale(1.15) rotate(-8deg);
-  color: #00f0ff !important;
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.8) !important;
+  transform: rotate(-10deg) scale(1.15);
+  color: #FFFFFF !important;
 }
 
 .retro-mode-toggle:hover .label-default {
   display: inline-block !important;
-  color: #ffffff !important;
-}
-
-.retro-mode-toggle:hover .label-arcade {
-  display: none !important;
-}
-
-.retro-mode-toggle:hover::before {
-  opacity: 1 !important;
+  color: #FFFFFF !important;
 }
 
 /* Tactile Inset Click Press (100-150ms) */
 .retro-mode-toggle:active,
 .retro-mode-toggle.is-pressed {
-  transform: scale(0.92) translateY(1px) !important;
-  background: #d6006b !important;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6), 0 0 25px #ff007f !important;
-  transition: transform 0.08s ease, box-shadow 0.08s ease !important;
+  transform: scale(0.95) translateY(1px) !important;
+  filter: brightness(0.9) !important;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* Retro Mode Active State (Button turns into MODERN switcher) */
 html.retro-mode .retro-mode-toggle {
-  background: rgba(0, 240, 255, 0.12);
-  border-color: #00f0ff;
-  color: #00f0ff;
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+  background: rgba(0, 240, 255, 0.15) !important;
+  border-color: #00f0ff !important;
+  color: #00f0ff !important;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.4) !important;
   animation: none;
 }
 
 html.retro-mode .retro-mode-toggle i {
+  color: #00f0ff !important;
   animation: none;
 }
 
+html.retro-mode .retro-mode-toggle .label-default {
+  color: #00f0ff !important;
+}
+
 html.retro-mode .retro-mode-toggle::before {
-  animation: none;
-  opacity: 0;
+  display: none;
 }
 
 html.retro-mode .retro-mode-toggle:hover {
@@ -572,7 +556,8 @@ html.retro-mode .retro-mode-toggle:hover {
   box-shadow: 0 0 25px rgba(0, 240, 255, 0.9), 0 0 50px rgba(0, 240, 255, 0.4) !important;
 }
 
-html.retro-mode .retro-mode-toggle:hover i {
+html.retro-mode .retro-mode-toggle:hover i,
+html.retro-mode .retro-mode-toggle:hover .label-default {
   color: #040308 !important;
 }
 
