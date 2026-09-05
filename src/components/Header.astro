@@ -95,16 +95,6 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
                 <Icon name="fa-sun" aria-hidden="true" />
             </button>
             <LanguageSwitcher translationSlug={translationSlug} />
-            <a
-                href="https://t.me/AVP_Dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="header-tg-btn"
-                title={lang === 'ru' ? 'Написать в Telegram' : 'Message on Telegram'}
-            >
-                <i class="fa-brands fa-telegram" aria-hidden="true"></i>
-                <span class="header-tg-text">{lang === 'ru' ? 'Telegram' : 'Telegram'}</span>
-            </a>
         </div>
         <!-- Mobile actions: FAB + burger, grouped right on mobile -->
         <div class="mobile-actions">
@@ -137,11 +127,11 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
 <div id="mobile-nav" class="mobile-nav">
     <ul class="mobile-menu-list">
         <li class="mobile-accordion-item">
-            <div class="mobile-accordion-header">
+            <div class="mobile-accordion-row">
                 <a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services')} class="mobile-accordion-link">
                     {t("nav_services")}
                 </a>
-                <button type="button" class="mobile-accordion-trigger" aria-expanded="false" aria-label={lang === 'ru' ? 'Развернуть список услуг' : 'Expand services'}>
+                <button type="button" class="mobile-accordion-toggle" aria-expanded="false" aria-label={lang === 'ru' ? 'Развернуть список услуг' : 'Expand services'}>
                     <i class="fa-solid fa-chevron-down accordion-arrow"></i>
                 </button>
             </div>
@@ -162,12 +152,6 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
         <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
         <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services') + '#faq'}>{t("nav_faq")}</a></li>
         <li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
-        <li class="mobile-cta-item">
-            <a href="https://t.me/AVP_Dev" target="_blank" rel="noopener noreferrer" class="mobile-tg-btn">
-                <i class="fa-brands fa-telegram" aria-hidden="true"></i>
-                <span>{lang === 'ru' ? 'Обсудить в Telegram' : 'Chat on Telegram'}</span>
-            </a>
-        </li>
     </ul>
     <div class="mobile-controls">
         <div class="mobile-mode-row">

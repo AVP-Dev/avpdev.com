@@ -139,13 +139,13 @@ function setupMobileMenu() {
 
     // --- MOBILE ACCORDION (делегирование) ---
     document.addEventListener('click', (e) => {
-        const trigger = (e.target as HTMLElement).closest('.mobile-accordion-trigger');
-        if (!trigger) return;
+        const toggle = (e.target as HTMLElement).closest('.mobile-accordion-toggle');
+        if (!toggle) return;
         e.stopPropagation();
-        const isActive = trigger.classList.toggle('active');
-        const item = trigger.closest('.mobile-accordion-item');
-        if (item) item.classList.toggle('active', isActive);
-        trigger.setAttribute('aria-expanded', isActive.toString());
+        e.preventDefault();
+        const item = toggle.closest('.mobile-accordion-item');
+        const isActive = item ? item.classList.toggle('active') : toggle.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', isActive.toString());
     });
 }
 

@@ -723,11 +723,16 @@ html.retro-mode .mobile-nav {
   box-shadow: -10px 0 30px rgba(0, 240, 255, 0.3);
 }
 
-html.retro-mode .mobile-menu-list a,
-html.retro-mode .mobile-accordion-trigger {
+html.retro-mode .mobile-menu-list a {
   font-family: var(--font-mono);
   color: #c9e6ff;
   border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+html.retro-mode .mobile-accordion-toggle {
+  border: none !important;
+  color: #00f0ff !important;
+  background: transparent !important;
 }
 
 html.retro-mode .mobile-menu-list a:hover {
@@ -2150,7 +2155,7 @@ html.retro-mode .retro-dock-player {
   }
 
   html.retro-mode .mobile-menu-list a,
-  html.retro-mode .mobile-accordion-trigger {
+  html.retro-mode .mobile-accordion-link {
     font-family: var(--font-retro);
     letter-spacing: 0.05em;
   }
