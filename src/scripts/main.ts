@@ -582,27 +582,18 @@ function triggerArcadeSignal() {
 }
 
 function setupArcadeButtonSignal() {
+    // Disabled periodic signal flashing in modern mode
     if (arcadeSignalInterval) clearInterval(arcadeSignalInterval);
     if (arcadeSignalInitialTimeout) clearTimeout(arcadeSignalInitialTimeout);
-
-    arcadeSignalInitialTimeout = setTimeout(() => {
-        triggerArcadeSignal();
-    }, 2000);
-
-    arcadeSignalInterval = setInterval(() => {
-        triggerArcadeSignal();
-    }, 6000);
 }
 
 function run() {
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             initializePage();
-            setupArcadeButtonSignal();
         }, { once: true });
     } else {
         initializePage();
-        setupArcadeButtonSignal();
     }
 }
 

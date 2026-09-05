@@ -429,18 +429,18 @@ html.retro-mode .fab-label-exit  { display: block; }
   align-items: center;
   justify-content: center;
   gap: 7px;
-  min-width: 104px;
+  min-width: 96px;
   height: 34px;
   padding: 0 0.85rem;
-  background: rgba(255, 0, 127, 0.1);
-  border: 1.5px solid #ff007f;
-  color: #ff007f;
-  border-radius: 5px;
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #00f0ff;
+  border-radius: 6px;
   font-family: var(--font-pixel, monospace);
   font-size: 0.65rem;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.4, 1);
-  box-shadow: 0 0 10px rgba(255, 0, 127, 0.25);
+  transition: all 0.25s ease;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.15);
   text-decoration: none;
   user-select: none;
   white-space: nowrap;
@@ -459,99 +459,39 @@ html.retro-mode .fab-label-exit  { display: block; }
 .retro-mode-toggle::before {
   content: "";
   position: absolute;
-  inset: -1.5px;
-  border-radius: 5px;
-  padding: 1.5px;
+  inset: -1px;
+  border-radius: 6px;
+  padding: 1px;
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
     transparent 260deg,
-    #00f0ff 320deg,
-    #ff007f 360deg
+    #00f0ff 360deg
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-/* 6.0-second Arcade Signal Pulse (When in Modern mode) */
+/* Static in Modern mode — no annoying periodic flashing */
 html:not(.retro-mode) .retro-mode-toggle {
-  animation: retro-btn-signal 6.0s infinite ease-in-out;
+  animation: none;
 }
 
 html:not(.retro-mode) .retro-mode-toggle::before {
-  animation: retro-border-sweep 6.0s infinite linear;
+  animation: none;
 }
 
-@keyframes retro-border-sweep {
-  0%, 65% {
-    opacity: 0;
-    transform: rotate(0deg);
-  }
-  68% {
-    opacity: 1;
-  }
-  96% {
-    opacity: 1;
-    transform: rotate(360deg);
-  }
-  100% {
-    opacity: 0;
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes retro-btn-signal {
-  0%, 65% {
-    box-shadow: 0 0 10px rgba(255, 0, 127, 0.25);
-    border-color: #ff007f;
-    transform: translateY(0);
-    background: rgba(255, 0, 127, 0.08);
-    color: #ff007f;
-  }
-  68%, 95% {
-    box-shadow: 0 0 22px rgba(255, 0, 127, 0.9), 0 0 40px rgba(255, 0, 127, 0.4);
-    border-color: #ff007f;
-    background: #ff007f;
-    color: #ffffff;
-    transform: translateY(-1px);
-  }
-  98%, 100% {
-    box-shadow: 0 0 10px rgba(255, 0, 127, 0.25);
-    border-color: #ff007f;
-    background: rgba(255, 0, 127, 0.08);
-    color: #ff007f;
-    transform: translateY(0);
-  }
-}
-
-/* Gamepad Icon Twitch in sync with signal */
 html:not(.retro-mode) .retro-mode-toggle i {
   display: inline-block;
-  transition: transform 0.15s ease;
-  animation: retro-icon-twitch 6.0s infinite ease-in-out;
+  transition: transform 0.2s ease;
+  animation: none;
 }
 
-@keyframes retro-icon-twitch {
-  0%, 66% {
-    transform: rotate(0deg) scale(1);
-    color: inherit;
-  }
-  68%, 95% {
-    transform: rotate(-12deg) scale(1.2);
-    color: #ffffff;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-  }
-  98%, 100% {
-    transform: rotate(0deg) scale(1);
-    color: inherit;
-    text-shadow: none;
-  }
-}
-
-/* Dual Label Flip (Default vs PRESS START) */
+/* Dual Label (Default vs PRESS START) */
 .retro-mode-toggle .label-default {
   display: inline-block;
   font-family: var(--font-pixel, monospace);
@@ -570,103 +510,32 @@ html:not(.retro-mode) .retro-mode-toggle i {
   white-space: nowrap;
 }
 
-/* Synchronized CSS animation in Modern mode: Stays visible for ~1.8 seconds */
-html:not(.retro-mode) .retro-mode-toggle .label-default {
-  animation: retro-label-hide 6.0s infinite;
-}
-
-html:not(.retro-mode) .retro-mode-toggle .label-arcade {
-  animation: retro-label-show 6.0s infinite;
-}
-
-@keyframes retro-label-hide {
-  0%, 66% {
-    display: inline-block;
-    opacity: 1;
-  }
-  68%, 96% {
-    display: none;
-    opacity: 0;
-  }
-  98%, 100% {
-    display: inline-block;
-    opacity: 1;
-  }
-}
-
-@keyframes retro-label-show {
-  0%, 66% {
-    display: none;
-    opacity: 0;
-  }
-  68%, 96% {
-    display: inline-block;
-    opacity: 1;
-  }
-  98%, 100% {
-    display: none;
-    opacity: 0;
-  }
-}
-
-/* Active Arcade Signal State (Triggered periodically by JS or CSS) */
-.retro-mode-toggle.arcade-signal-active {
-  border-color: #ff007f !important;
-  color: #ffffff !important;
-  background: #ff007f !important;
-  box-shadow: 0 0 24px rgba(255, 0, 127, 0.95), 0 0 45px rgba(255, 0, 127, 0.4) !important;
-  transform: translateY(-1px) scale(1.02) !important;
-}
-
-.retro-mode-toggle.arcade-signal-active i {
-  transform: rotate(-12deg) scale(1.2) !important;
-  color: #ffffff !important;
-  text-shadow: 0 0 10px #ffffff !important;
-}
-
-.retro-mode-toggle.arcade-signal-active .label-default {
-  display: none !important;
-}
-
-.retro-mode-toggle.arcade-signal-active .label-arcade {
-  display: inline-block !important;
-  opacity: 1 !important;
-  color: #ffffff !important;
-}
-
-/* Strong Hover State */
+/* Hover State: Clean, responsive neon cyan */
 .retro-mode-toggle:hover {
-  background: #ff007f !important;
-  color: #040308 !important;
-  border-color: #ff007f !important;
-  box-shadow: 0 0 22px rgba(255, 0, 127, 0.9), 0 0 45px rgba(255, 0, 127, 0.4) !important;
+  background: rgba(0, 240, 255, 0.16) !important;
+  color: #ffffff !important;
+  border-color: #00f0ff !important;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.5) !important;
   transform: translateY(-1px) !important;
-  animation: none !important;
 }
 
 .retro-mode-toggle:hover i {
-  animation: none !important;
-  color: #040308 !important;
-  text-shadow: none !important;
+  transform: scale(1.15) rotate(-8deg);
+  color: #00f0ff !important;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.8) !important;
 }
 
 .retro-mode-toggle:hover .label-default {
   display: inline-block !important;
-  animation: none !important;
-  opacity: 1 !important;
-  color: #040308 !important;
-  text-shadow: none !important;
+  color: #ffffff !important;
 }
 
 .retro-mode-toggle:hover .label-arcade {
   display: none !important;
-  animation: none !important;
-  opacity: 0 !important;
 }
 
 .retro-mode-toggle:hover::before {
-  animation: none !important;
-  opacity: 0 !important;
+  opacity: 1 !important;
 }
 
 /* Tactile Inset Click Press (100-150ms) */

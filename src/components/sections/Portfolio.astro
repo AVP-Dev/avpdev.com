@@ -7,9 +7,10 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 
 interface Props {
   all?: boolean;
+  limit?: number;
 }
 
-const { all = false } = Astro.props;
+const { all = false, limit } = Astro.props;
 const lang = getLangFromUrl(Astro.url) as "ru" | "en";
 const t = useTranslations(lang);
 
@@ -24,8 +25,9 @@ const sortedProjects = projectsCollection.sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 
-// 3. Take top 6 unless showing all
-const featuredProjects = all ? sortedProjects : sortedProjects.slice(0, 6);
+// 3. Take top projects: custom limit, or 6 by default unless all is true
+const defaultLimit = limit ?? 6;
+const featuredProjects = all ? sortedProjects : sortedProjects.slice(0, defaultLimit);
 
 const categoryMap: Record<string, "sites" | "apps"> = {
   "web-site": "sites",

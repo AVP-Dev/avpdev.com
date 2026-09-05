@@ -7,7 +7,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Hero from "../../components/sections/Hero.astro";
 import ProofBar from "../../components/sections/ProofBar.astro";
 import Services from "../../components/sections/Services.astro";
+import Portfolio from "../../components/sections/Portfolio.astro";
 import QuickNav from "../../components/sections/QuickNav.astro";
+import FAQ from "../../components/sections/FAQ.astro";
 import LatestPosts from "../../components/sections/LatestPosts.astro";
 import Contact from "../../components/sections/Contact.astro";
 import SuccessModal from "../../components/modals/SuccessModal.astro";
@@ -65,7 +67,9 @@ const schema = {
   <Hero />
   <ProofBar />
   <Services />
+  <Portfolio limit={3} />
   <QuickNav />
+  <FAQ />
   <LatestPosts posts={latestPosts} />
   <Contact />
 
