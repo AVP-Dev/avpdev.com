@@ -182,27 +182,12 @@ function initializePage() {
     }
 
     function loadRetroFonts() {
-        if (typeof (window as any).loadRetroAssets === 'function') {
-            (window as any).loadRetroAssets();
-            return;
-        }
         if ((window as any).__retroFontsLoaded) return;
         (window as any).__retroFontsLoaded = true;
-        const retroCss = (window as any).__RETRO_CSS_URL__;
-        if (retroCss && !document.getElementById('retro-styles')) {
-            const link = document.createElement('link');
-            link.id = 'retro-styles';
-            link.rel = 'stylesheet';
-            link.href = retroCss;
-            document.head.appendChild(link);
-        }
-        if (!document.getElementById('retro-fonts')) {
-            const fontLink = document.createElement('link');
-            fontLink.id = 'retro-fonts';
-            fontLink.rel = 'stylesheet';
-            fontLink.href = 'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap';
-            document.head.appendChild(fontLink);
-        }
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap';
+        document.head.appendChild(link);
     }
 
     function applyThemeClasses(theme: string, isRetro: boolean) {
