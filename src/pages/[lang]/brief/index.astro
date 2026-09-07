@@ -1057,6 +1057,7 @@ input[type="checkbox"]:checked+span::after {
     #brief-form-section {
         position: relative;
         overflow: visible;
+        padding-top: clamp(155px, 16vh, 210px);
     }
     #brief-form-section #particles-js {
         position: absolute;
@@ -1071,7 +1072,7 @@ input[type="checkbox"]:checked+span::after {
     }
     .brief-progress {
         position: fixed;
-        top: 64px;
+        top: 88px;
         left: 50%;
         transform: translateX(-50%);
         width: min(800px, calc(100% - 40px));
@@ -1089,8 +1090,11 @@ input[type="checkbox"]:checked+span::after {
     .brief-progress__fill {height:100%; width:10%; background:var(--accent-gradient); transition:width 0.3s}
     .brief-progress__text {font-size:0.85rem; color:var(--text-secondary-color); margin-top:6px; text-align:center}
     @media (max-width: 768px) {
+        #brief-form-section {
+            padding-top: clamp(140px, 18vh, 180px);
+        }
         .brief-progress {
-            top: 56px;
+            top: 80px;
             width: calc(100% - 24px);
             padding: 8px 12px;
         }
