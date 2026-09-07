@@ -35,15 +35,16 @@ The primary requirement was simple: the input process must be invisible and requ
 
 ```mermaid
 graph LR
-    A["Hold Hotkey"] --> B["Speak Thought"]
-    B --> C["Release"]
+    A["Tap Hotkey"] --> B["Speak (Hands Free)"]
+    B --> C["Smart VAD (3–15s silence) OR Tap Again"]
     C --> D["Text Drops into Focused App"]
 ```
 
 The workflow:
 1. You remain inside your active program: your code editor, terminal, chat, or browser.
-2. Hold down a global hotkey and speak at your natural pace. A minimal volume indicator appears on screen.
-3. Release the key — and within 300 to 500 milliseconds, the formatted text is pasted directly into your active cursor position.
+2. Tap a global hotkey — no need to hold it down, your hands stay completely free. Speak at your natural pace while a subtle volume indicator appears on screen.
+3. Recording finishes automatically via Smart VAD (Voice Activity Detection): once you finish speaking, it detects silence (configurable from 3 to 15 seconds) and completes the process. Alternatively, tap the hotkey again to insert the text immediately.
+4. Within 300 to 500 milliseconds, the formatted text is pasted directly into your active cursor position.
 
 Under the hood:
 * Audio capture is handled via `cpal` with a small pre-speech circular buffer so initial consonants are never clipped.
@@ -71,7 +72,7 @@ You speak a rough train of thought, and clean, properly formatted text lands dir
 I keep Nyx Vox running continuously in the background. Here are three areas where it has replaced typing for me:
 
 * **Prompts for Cursor and Claude.** Getting accurate code from an LLM on the first attempt requires rich context: files to avoid, methods to call, and error handling rules. Typing that out takes one to two minutes. Speaking it takes 15 seconds.
-* **Replies in Telegram and Slack.** You can answer a teammate directly from your IDE without switching windows or reaching for the mouse. Hold the key, dictate two sentences, release, and the message is ready.
+* **Replies in Telegram and Slack.** You can answer a teammate directly from your IDE without switching windows or reaching for the mouse. Tap the key, speak two sentences, and VAD completes the recording and pastes the reply.
 * **Notes and Documentation.** While designing a module architecture or drafting an API spec, it is often easiest to open a blank note in Obsidian and talk through the logic out loud.
 
 ---
