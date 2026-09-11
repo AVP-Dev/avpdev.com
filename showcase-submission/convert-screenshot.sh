@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Скрипт для подготовки скриншота для Astro Showcase
-# Требования Astro: WebP, ширина 1600px, имя avpdev.com.webp
+# Требования Astro: WebP, строго 1600x900px (16:9), имя avpdev.com.webp
 
 set -euo pipefail
 
@@ -11,16 +11,6 @@ if [ -z "$INPUT_IMAGE" ]; then
     exit 1
 fi
 
-if [ ! -f "$INPUT_IMAGE" ]; then
-    echo "Ошибка: Файл '$INPUT_IMAGE' не найден!"
-    exit 1
-fi
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-OUTPUT_FILE="$SCRIPT_DIR/avpdev.com.webp"
 
-echo "Конвертация и оптимизация скриншота..."
-cwebp -resize 1600 0 -q 85 "$INPUT_IMAGE" -o "$OUTPUT_FILE"
-
-echo "Готово! Создан файл: $OUTPUT_FILE"
-ls -lh "$OUTPUT_FILE"
+node "$SCRIPT_DIR/convert.mjs" "$INPUT_IMAGE"
