@@ -157,8 +157,8 @@ export default defineConfig({
     react()
   ],
 
-  // 6. Настройки путей и сервера
-  trailingSlash: 'always',
+  // 6. Настройки путей и сервера (trailingSlash: 'ignore' позволяет API-роутам работать без 301 редиректа, а страницы редиректит middleware)
+  trailingSlash: 'ignore',
   build: {
     format: 'directory',
     inlineStylesheets: 'always'
@@ -177,8 +177,8 @@ export default defineConfig({
   compressHTML: true,
 
   // 8. 301 редиректы: старые Russian-transliterated EN-slugs → правильные EN-slugs
-  // (только со слешем — при trailingSlash:'always' Astro сам обрабатывает вариант без слеша)
   redirects: {
+    '/en/blog/uroki-amsterdama':   '/en/blog/lessons-from-amsterdam/',
     '/en/blog/uroki-amsterdama/':  '/en/blog/lessons-from-amsterdam/',
   },
 

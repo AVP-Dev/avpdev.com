@@ -79,6 +79,12 @@ export const GET: APIRoute = async ({ request, url }) => {
       timestamp: new Date().toISOString(),
       node_version: process.version,
       engine: "Astro 5 (SSR Node Engine)"
+    },
+    hints: {
+      jq: "curl -s https://avpdev.com/api/connect | jq '.status'",
+      raw_status: "curl -s 'https://avpdev.com/api/connect?raw=status'",
+      ansi_banner: "curl -s 'https://avpdev.com/api/connect?banner=1'",
+      hire: "curl -s 'https://avpdev.com/api/connect?action=hire'"
     }
   };
 
@@ -156,10 +162,11 @@ export const GET: APIRoute = async ({ request, url }) => {
   }
 
   // 4. Determine response format:
-  // If ?format=json OR Accept includes application/json OR NOT curl/CLI => Return JSON
-  const wantsJson = formatQuery === 'json' || accept.includes('application/json') || (!isCli && formatQuery !== 'text');
+  // Default is JSON (vital so that `curl -s ... | jq` and REST clients always succeed without parse errors).
+  // Rich ANSI CLI card is returned when requested via ?banner, ?cli, ?format=text, or Accept: text/plain.
+  const wantsBanner = url.searchParams.has('banner') || url.searchParams.has('cli') || formatQuery === 'text' || (accept === 'text/plain');
 
-  if (wantsJson) {
+  if (!wantsBanner) {
     return new Response(JSON.stringify(profile, null, 2) + '\n', {
       status: 200,
       headers: {
@@ -192,8 +199,9 @@ ${ANSI.gray}${ANSI.dim}Uptime: ${profile.meta.server_uptime} | Node: ${profile.m
 ${ANSI.cyan}================================================================${ANSI.reset}
 ${ANSI.dim}Hints:
   • curl -s https://avpdev.com/api/connect | jq '.status'
-  • curl -s https://avpdev.com/api/connect?raw=status
-  • curl -s https://avpdev.com/api/connect?action=hire${ANSI.reset}
+  • curl -s "https://avpdev.com/api/connect?raw=status"
+  • curl -s "https://avpdev.com/api/connect?banner=1"
+  • curl -s "https://avpdev.com/api/connect?action=hire"${ANSI.reset}
 `;
 
   return new Response(banner + '\n', {
