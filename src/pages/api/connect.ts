@@ -60,7 +60,7 @@ export const GET: APIRoute = async ({ request, url }) => {
     availability: "Available for Q2/Q3 2026",
     role: "Lead AI Solutions Architect & Systems Engineer",
     author: "Aliaksei Patskevich (AVPDev)",
-    location: "Warsaw (UTC+1 / UTC+2) • Remote Worldwide",
+    location: "Minsk, Belarus (UTC+3) • Remote Worldwide",
     focus: [
       "Multi-Agent Orchestration (LangGraph / Custom Autonomous Loops / MCP)",
       "Production Vector RAG & Hybrid Retrieval (pgvector / HNSW / Cohere Rerank)",
