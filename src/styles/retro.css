@@ -125,7 +125,7 @@ html.retro-mode.crt-off .crt-overlay {
 
 /* Interactive Canvas Background */
 .retro-bg-canvas {
-  display: none !important;
+  display: none;
   position: fixed;
   inset: 0;
   width: 100vw;
@@ -135,7 +135,7 @@ html.retro-mode.crt-off .crt-overlay {
 }
 
 html.retro-mode .retro-bg-canvas {
-  display: block;
+  display: block !important;
 }
 
 html.retro-mode body {
@@ -181,7 +181,7 @@ html.retro-mode body::before {
     linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
 /* --------------------------------------------------------------------------

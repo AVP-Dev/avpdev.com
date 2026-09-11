@@ -82,22 +82,40 @@ function loadParticlesConfig(): void {
     });
 }
 
-// Инициализация при загрузке страницы с задержкой (освобождает основной поток, улучшает LCP/TTI)
-document.addEventListener('astro:page-load', () => {
+function initParticles(): void {
     if ('requestIdleCallback' in window) {
         window.requestIdleCallback(() => setTimeout(loadParticlesConfig, 500));
     } else {
-        setTimeout(loadParticlesConfig, 1500);
+        setTimeout(loadParticlesConfig, 1000);
     }
-});
+}
 
-// Пересоздание при смене темы
+// Инициализация при загрузке страницы
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initParticles, { once: true });
+} else {
+    initParticles();
+}
+document.addEventListener('astro:page-load', initParticles);
+
+// Пересоздание при смене темы (светлая/тёмная)
 document.addEventListener('theme:changed', () => {
     if (typeof particlesJS !== 'undefined') {
         const el = document.getElementById('particles-js');
         if (el) el.innerHTML = '';
     }
     loadParticlesConfig();
+});
+
+// Реакция на переключение режима (Modern <-> Retro)
+document.addEventListener('theme:mode-changed', (e: any) => {
+    const isRetro = e.detail?.isRetro ?? document.documentElement.classList.contains('retro-mode');
+    const el = document.getElementById('particles-js');
+    if (isRetro) {
+        if (el) el.innerHTML = '';
+    } else {
+        initParticles();
+    }
 });
 
 export {};
