@@ -11,7 +11,7 @@ import { Image } from 'astro:assets';
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog', ({ id }) => id.startsWith('ru/'));
+  const allPosts = await getCollection('blog', ({ id, data }) => id.startsWith('ru/') && data.draft !== true);
   return allPosts.map(post => ({
     params: { slug: post.id.replace(/^ru\//, '').replace(/\.mdx?$/, '') },
     props: { post },
@@ -35,7 +35,7 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString(lang, {
   day: 'numeric'
 });
 
-const allPostsForLang = await getCollection('blog', ({ id }) => id.startsWith(`${lang}/`) && id !== post.id);
+const allPostsForLang = await getCollection('blog', ({ id, data }) => id.startsWith(`${lang}/`) && id !== post.id && data.draft !== true);
 import { getRandomItems } from "../../../utils/random";
 const relatedPosts = getRandomItems(allPostsForLang, 2);
 
@@ -149,4 +149,23 @@ const articleSchema = {
         </div>
     </div>
   </article>
+
+  <script is:inline>
+    function setupBlogExternalLinks() {
+      const content = document.querySelector('.post-content');
+      if (!content) return;
+      const links = content.querySelectorAll('a[href^="http://"], a[href^="https://"]');
+      links.forEach(link => {
+        try {
+          const url = new URL(link.href, window.location.origin);
+          if (url.hostname !== window.location.hostname) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+          }
+        } catch (e) {}
+      });
+    }
+    setupBlogExternalLinks();
+    document.addEventListener('astro:page-load', setupBlogExternalLinks);
+  </script>
 </BaseLayout>

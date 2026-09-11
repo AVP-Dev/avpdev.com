@@ -9,19 +9,21 @@ const __dirname = dirname(__filename);
 const BLOG_EN_DIR = join(__dirname, '..', 'src', 'content', 'blog', 'en');
 const OUTPUT = join(__dirname, '..', 'public', 'llms-full.txt');
 
-function parseFrontmatter(content: string): { title: string; description: string; body: string } {
+function parseFrontmatter(content: string): { title: string; description: string; draft: boolean; body: string } {
   const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!match) return { title: '', description: '', body: content };
+  if (!match) return { title: '', description: '', draft: false, body: content };
 
   const frontmatter = match[1];
   const body = match[2].trim();
 
   const titleMatch = frontmatter.match(/title:\s*"(.*?)"/);
   const descMatch = frontmatter.match(/description:\s*"(.*?)"/);
+  const draftMatch = frontmatter.match(/draft:\s*(true|false)/);
 
   return {
     title: titleMatch ? titleMatch[1] : '',
     description: descMatch ? descMatch[1] : '',
+    draft: draftMatch ? draftMatch[1] === 'true' : false,
     body,
   };
 }
@@ -35,7 +37,8 @@ function generate(): void {
 
   for (const file of files) {
     const content = readFileSync(join(BLOG_EN_DIR, file), 'utf-8');
-    const { title, description, body } = parseFrontmatter(content);
+    const { title, description, draft, body } = parseFrontmatter(content);
+    if (draft) continue;
 
     const slug = file.replace('.md', '');
     output += `## ${title}\n\n`;

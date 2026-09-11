@@ -573,6 +573,44 @@ function initializePage() {
     initKonamiCode();
     initLogoOverclock();
     initFooterMascot();
+
+    // --- EXTERNAL LINKS: OPEN IN NEW TAB ---
+    updateExternalLinks();
+    setupExternalLinksDelegation();
+}
+
+let externalLinksDelegated = false;
+function setupExternalLinksDelegation() {
+    if (externalLinksDelegated) return;
+    externalLinksDelegated = true;
+
+    document.addEventListener('click', (e) => {
+        const target = (e.target as HTMLElement)?.closest('a');
+        if (!target) return;
+        const href = target.getAttribute('href');
+        if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+            try {
+                const url = new URL(href, window.location.origin);
+                if (url.hostname && url.hostname !== window.location.hostname) {
+                    target.setAttribute('target', '_blank');
+                    target.setAttribute('rel', 'noopener noreferrer');
+                }
+            } catch (_) {}
+        }
+    }, { capture: true });
+}
+
+function updateExternalLinks() {
+    const links = document.querySelectorAll<HTMLAnchorElement>('a[href^="http://"], a[href^="https://"]');
+    links.forEach(link => {
+        try {
+            const url = new URL(link.href, window.location.origin);
+            if (url.hostname && url.hostname !== window.location.hostname) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        } catch (_) {}
+    });
 }
 
 let arcadeSignalInterval: any = null;

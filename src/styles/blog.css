@@ -265,7 +265,7 @@
 }
 
 .blog-post-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -311,7 +311,7 @@
 
 .post-content {
   background: var(--primary-color);
-  padding: 3rem 4rem;
+  padding: clamp(2.5rem, 4vw, 3.5rem) clamp(2rem, 3.5vw, 3rem);
   border-radius: 16px;
   line-height: 1.9;
   font-size: 1.125rem;
@@ -442,6 +442,7 @@
   border-radius: 6px;
   font-size: 0.9em;
   font-family: 'Fira Code', 'Courier New', monospace;
+  white-space: nowrap;
 }
 
 .post-content pre {

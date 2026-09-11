@@ -25,13 +25,34 @@ const coreServices = new Set([
   '/ru/uslugi/internet-magaziny/',
 ]);
 
+function rehypeExternalLinks() {
+  return (tree) => {
+    function visit(node) {
+      if (node && node.type === 'element' && node.tagName === 'a') {
+        const href = node.properties?.href;
+        if (typeof href === 'string' && (href.startsWith('http://') || href.startsWith('https://'))) {
+          if (!href.startsWith('https://avpdev.com') && !href.startsWith('http://avpdev.com')) {
+            node.properties.target = '_blank';
+            node.properties.rel = 'noopener noreferrer';
+          }
+        }
+      }
+      if (node && Array.isArray(node.children)) {
+        node.children.forEach(visit);
+      }
+    }
+    visit(tree);
+  };
+}
+
 export default defineConfig({
   site: site,
 
-  // 1. Поддержка кастомных ID в заголовках Markdown
+  // 1. Поддержка кастомных ID в заголовках Markdown и открытие внешних ссылок в новой вкладке
   markdown: {
     processor: unified({
       remarkPlugins: [remarkHeadingId],
+      rehypePlugins: [rehypeExternalLinks],
     }),
   },
 

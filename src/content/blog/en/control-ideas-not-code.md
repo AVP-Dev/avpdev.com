@@ -104,7 +104,7 @@ Why?
 In 1972, computer science pioneer Edsger Dijkstra formulated a rule that sounds prophetic in 2026:  
 *“Program testing can be used to show the presence of bugs, but never to show their absence.”*
 
-If an AI generates an endpoint and all 20 unit tests turn green, that doesn't prove the code is secure. It only proves that under the author's specific happy-path scenario, it returns `200 OK`.
+If an AI generates an endpoint and all 20 unit tests turn green, that doesn't prove the code is secure. It only proves that under the author's specific happy-path scenario, it returns `200 OK`.
 
 Tests will not catch:
 1. An IDOR vulnerability leaking tenant data because a workspace scope filter was omitted.
@@ -125,7 +125,7 @@ If an architect misjudges the system design, an agent will churn out 10,000 line
 
 *Why is it that AI breaks system architecture so easily the moment a task goes beyond a script or a basic CRUD endpoint? Why does it consistently favor shortcuts that look clean today but turn into maintenance nightmares tomorrow?*
 
-We examine this in detail here: **[«AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems»](/en/blog/ai-loves-straight-roads)**.
+We will examine this in detail in the upcoming article of the series: **“AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems”** (coming soon).
 
 > **Open-Source Resource:**  
 > If you want to integrate robust architectural rails and specification templates for coding agents into your projects today, check out my open starter: **[AVP-Dev / agent-starter-kit on GitHub](https://github.com/AVP-Dev/agent-starter-kit)**.
