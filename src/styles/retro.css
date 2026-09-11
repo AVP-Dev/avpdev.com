@@ -240,6 +240,16 @@ html.retro-mode header.site-header {
     inset 0 0 15px rgba(255, 0, 127, 0.15);
   border-radius: 6px;
   backdrop-filter: blur(20px);
+  max-width: min(1320px, calc(100% - 2rem));
+}
+
+html.retro-mode .site-header nav {
+  gap: 1.25rem;
+  padding: 0 0.5rem;
+}
+
+html.retro-mode .logo {
+  flex-shrink: 0;
 }
 
 html.retro-mode .logo-text {
@@ -251,24 +261,40 @@ html.retro-mode .nav-links {
   background: rgba(8, 6, 18, 0.85);
   border: 1px solid rgba(0, 240, 255, 0.35);
   border-radius: 4px;
+  flex-shrink: 1;
 }
 
-html.retro-mode .nav-links a {
+html.retro-mode .nav-links a,
+html.retro-mode .nav-dropbtn {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: #c9e6ff;
+  padding: 0.45rem 0.75rem;
   border-radius: 2px;
   position: relative;
   transition: all 0.25s ease;
 }
 
-html.retro-mode .nav-links a:hover {
+html.retro-mode .nav-links a:hover,
+html.retro-mode .nav-dropbtn:hover {
   color: #00f0ff;
   background: rgba(0, 240, 255, 0.18);
   text-shadow: 0 0 8px #00f0ff;
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+}
+
+/* Controls container in Retro Mode */
+html.retro-mode .controls {
+  gap: 0.5rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* In Retro Mode desktop controls, hide disabled light-theme switcher to preserve layout */
+html.retro-mode .controls .theme-switcher {
+  display: none !important;
 }
 
 /* HUD System indicators in Header */
@@ -279,26 +305,71 @@ html.retro-mode .nav-links a:hover {
 html.retro-mode .retro-hud-badge {
   display: inline-flex !important;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.52rem;
   color: #00ff66;
   background: rgba(0, 255, 102, 0.1);
   border: 1px solid rgba(0, 255, 102, 0.4);
-  padding: 4px 8px;
-  border-radius: 2px;
+  padding: 4px 7px;
+  border-radius: 3px;
   letter-spacing: 0.05em;
   text-shadow: 0 0 6px #00ff66;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 html.retro-mode .retro-hud-badge .hud-dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   background: #00ff66;
   border-radius: 50%;
   box-shadow: 0 0 8px #00ff66;
   animation: retro-pulse 1.5s infinite ease-in-out;
+}
+
+/* Retro Language Switcher Styling */
+html.retro-mode .lang-switcher {
+  background: rgba(10, 8, 22, 0.9);
+  border: 1px solid rgba(0, 240, 255, 0.5);
+  border-radius: 4px;
+  padding: 2px 3px;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+html.retro-mode .lang-btn {
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.58rem;
+  letter-spacing: 0.05em;
+  padding: 4px 7px;
+  border-radius: 2px;
+  color: #92a4c4;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+html.retro-mode .lang-btn:hover:not(.active):not(.disabled) {
+  color: #00f0ff;
+  text-shadow: 0 0 6px rgba(0, 240, 255, 0.7);
+  background: rgba(0, 240, 255, 0.12);
+}
+
+html.retro-mode .lang-btn.active {
+  background: #00f0ff;
+  color: #06050b;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+  text-shadow: none;
+}
+
+html.retro-mode .lang-separator {
+  font-family: var(--font-pixel, monospace);
+  font-size: 0.52rem;
+  color: rgba(0, 240, 255, 0.4);
+  margin: 0 1px;
 }
 
 /* --------------------------------------------------------------------------
