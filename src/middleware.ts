@@ -170,8 +170,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return applySecurityHeaders(context.redirect(`${cleanPath}/`, 301));
   }
 
-  // 4.5. Enforce Trailing Slash
-  if (!path.endsWith('/') && !path.split('/').pop()?.includes('.')) {
+  // 4.5. Enforce Trailing Slash (exempt /api/ endpoints so curl without -L works directly)
+  if (!path.startsWith('/api/') && !path.endsWith('/') && !path.split('/').pop()?.includes('.')) {
     return applySecurityHeaders(context.redirect(`${path}/${url.search}`, 301));
   }
 

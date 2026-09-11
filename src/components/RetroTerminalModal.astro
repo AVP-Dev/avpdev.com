@@ -38,6 +38,7 @@ const lang = getLangFromUrl(Astro.url);
                     • <span class="hl t-cmd-chip" data-cmd="play">play</span>         - 🕹️ Launch Retro Arcade (Defender & Bricks)<br />
                     • <span class="hl t-cmd-chip" data-cmd="achievements">achievements</span> - 🏆 Trophy Room & Unlocked Badges<br />
                     • <span class="hl t-cmd-chip" data-cmd="hire">hire</span>         - 💬 Telegram Uplink to @AVP_Dev<br />
+                    • <span class="hl t-cmd-chip" data-cmd="connect">connect</span>      - 🌐 Live Server API Telemetry (curl /api/connect)<br />
                     • <span class="hl t-cmd-chip" data-cmd="skills">skills</span>       - ⚡ Tech Stack & Architecture Meters<br />
                     • <span class="hl t-cmd-chip" data-cmd="projects">projects</span>     - 🚀 Client Case Studies & Production<br />
                     • <span class="hl t-cmd-chip" data-cmd="calc">calc</span>         - 🧮 Project Price Estimator Matrix<br />
@@ -257,11 +258,33 @@ const lang = getLangFromUrl(Astro.url);
             return;
         }
 
-        if (cmd === 'hire' || cmd === 'order' || cmd === 'telegram') {
-            printToTerminal('<span class="hl">TRANSMITTING UPLINK TO TELEGRAM @AVP_Dev...</span>');
-            window.open('https://t.me/AVP_Dev', '_blank');
+        if (cmd.startsWith('curl') || cmd === 'connect' || cmd === 'status' || cmd === 'api') {
+            printToTerminal('<span class="hl">CONNECTING TO NODE TELEMETRY // GET /api/connect...</span>');
+            fetch('/api/connect?format=json')
+                .then(r => r.json())
+                .then(data => {
+                    const focusList = Array.isArray(data.focus) 
+                        ? data.focus.map((f: string) => `  ▸ <span style="color:#00ffff;">${f}</span>`).join('<br />')
+                        : '';
+                    const output = `
+<span class="hl-head">📡 LIVE ARCHITECTURE TELEMETRY // AVP-DEV NODE:</span><br />
+• Status: <span class="hl">${data.status}</span><br />
+• Architect: ${data.author}<br />
+• Role: ${data.role} (${data.location})<br />
+• Core Competencies:<br />
+${focusList}<br />
+• Server Uptime: <span class="hl">${data.meta?.server_uptime || 'Active'}</span> | Node: ${data.meta?.node_version || 'v20+'}<br />
+• Telegram: <a href="${data.contacts?.telegram}" target="_blank" class="t-link">${data.contacts?.telegram}</a> • Site: ${data.contacts?.site}
+                    `;
+                    printToTerminal(output);
+                    retroAudio.play1Up();
+                })
+                .catch(() => {
+                    printToTerminal('<span class="t-err">ERROR: FAILED TO FETCH API TELEMETRY.</span>');
+                });
             return;
         }
+
 
         if (cmd === 'godmode' || cmd === 'konami') {
             printToTerminal('<span class="hl-head">⚡ OVERRIDE: GOD MODE ENGAGED! ⚡</span>');
