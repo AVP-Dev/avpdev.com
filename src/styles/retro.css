@@ -84,7 +84,7 @@ html.retro-mode {
    2. CRT SCANLINES & AMBIENT SCREEN EFFECTS
    -------------------------------------------------------------------------- */
 .crt-overlay {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .crt-overlay {
@@ -125,7 +125,7 @@ html.retro-mode.crt-off .crt-overlay {
 
 /* Interactive Canvas Background */
 .retro-bg-canvas {
-  display: none;
+  display: none !important;
   position: fixed;
   inset: 0;
   width: 100vw;
@@ -273,11 +273,11 @@ html.retro-mode .nav-links a:hover {
 
 /* HUD System indicators in Header */
 .retro-hud-badge {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .retro-hud-badge {
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
   gap: 6px;
   font-family: var(--font-pixel);
@@ -417,11 +417,11 @@ html.retro-mode .mobile-retro-fab:hover {
   height: 1.1em;
   line-height: 1.1em;
 }
-.fab-label-retro { display: block; }
-.fab-label-exit  { display: none; }
+.fab-label-retro { display: block !important; }
+.fab-label-exit  { display: none !important; }
 
-html.retro-mode .fab-label-retro { display: none; }
-html.retro-mode .fab-label-exit  { display: block; }
+html.retro-mode .fab-label-retro { display: none !important; }
+html.retro-mode .fab-label-exit  { display: block !important; }
 
 .retro-mode-toggle {
   position: relative;
@@ -598,12 +598,13 @@ html.retro-mode .mobile-menu-list a:hover {
 /* --------------------------------------------------------------------------
    5. HERO SECTION & SYNTHWAVE PERSPECTIVE GRID
    -------------------------------------------------------------------------- */
+/* Synthwave 3D Perspective Wireframe Horizon Grid */
 .retro-synthwave-grid {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .retro-synthwave-grid {
-  display: block;
+  display: block !important;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -695,20 +696,20 @@ html.retro-mode .section-header h2:hover {
 /* Hero Title & Subtitle Dual-Mode Switching */
 .hero-h1-retro,
 .hero-sub-retro {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .hero-h1-default,
 html.retro-mode .hero-sub-default {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .hero-h1-retro {
-  display: block;
+  display: block !important;
 }
 
 html.retro-mode .hero-sub-retro {
-  display: block;
+  display: block !important;
 }
 
 html.retro-mode .hero-content {
@@ -717,7 +718,7 @@ html.retro-mode .hero-content {
 
 /* Arcade HUD chips row in Hero */
 .retro-hero-hud {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .retro-hero-hud {
@@ -1209,7 +1210,7 @@ html.retro-mode .brief-progress {
    14. RETRO CHIPTUNE PLAYER DOCKED UNDER HEADER
    -------------------------------------------------------------------------- */
 .retro-dock-player {
-  display: none;
+  display: none !important;
   position: absolute;
   top: 100%;
   left: 1.5rem;
@@ -1217,7 +1218,7 @@ html.retro-mode .brief-progress {
 }
 
 html.retro-mode .retro-dock-player {
-  display: block;
+  display: block !important;
 }
 
 /* Dock Ribbon Bar */
@@ -3271,11 +3272,11 @@ html.retro-mode .portfolio-filters button:hover {
 }
 
 .retro-contact-uplink {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .retro-contact-uplink {
-  display: block;
+  display: block !important;
   font-family: var(--font-pixel);
   font-size: 0.55rem;
   color: #00f0ff;
@@ -3289,15 +3290,15 @@ html.retro-mode .retro-contact-uplink {
    -------------------------------------------------------------------------- */
 /* ProofBar HUD */
 .proof-stat-retro {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .proof-stat-default {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .proof-stat-retro {
-  display: inline-block;
+  display: inline-block !important;
   font-family: var(--font-pixel);
   font-size: 0.62rem;
   color: #00f0ff;
@@ -3343,23 +3344,23 @@ html.retro-mode .proof-divider {
 
 /* About Scoreboard & Stats */
 .retro-highscore-ribbon {
-  display: none;
+  display: none !important;
 }
 
 .about-stats-title-retro {
-  display: none;
+  display: none !important;
 }
 
 .about-stat-label-retro {
-  display: none;
+  display: none !important;
 }
 
 .retro-perk-badge {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .retro-highscore-ribbon {
-  display: inline-block;
+  display: inline-block !important;
   font-family: var(--font-pixel);
   font-size: 0.55rem;
   color: #ffe600;
@@ -3373,11 +3374,11 @@ html.retro-mode .retro-highscore-ribbon {
 }
 
 html.retro-mode .about-stats-title-default {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .about-stats-title-retro {
-  display: block;
+  display: block !important;
   font-family: var(--font-pixel);
   font-size: 0.85rem;
   color: #00f0ff;
@@ -3387,11 +3388,11 @@ html.retro-mode .about-stats-title-retro {
 }
 
 html.retro-mode .about-stat-label-default {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .about-stat-label-retro {
-  display: block;
+  display: block !important;
   font-family: var(--font-pixel);
   font-size: 0.52rem;
   color: #ff007f;
@@ -3417,7 +3418,7 @@ html.retro-mode .about-stat-value {
 
 /* Approach Perks */
 html.retro-mode .retro-perk-badge {
-  display: inline-block;
+  display: inline-block !important;
   font-family: var(--font-pixel);
   font-size: 0.48rem;
   color: #00f0ff;
@@ -3432,15 +3433,15 @@ html.retro-mode .retro-perk-badge {
 
 /* Services Level Select */
 .retro-level-select-badge {
-  display: none;
+  display: none !important;
 }
 
 .retro-service-class-badge {
-  display: none;
+  display: none !important;
 }
 
 html.retro-mode .retro-level-select-badge {
-  display: block;
+  display: block !important;
   text-align: center;
   font-family: var(--font-pixel);
   font-size: 0.68rem;
@@ -3451,7 +3452,7 @@ html.retro-mode .retro-level-select-badge {
 }
 
 html.retro-mode .retro-service-class-badge {
-  display: inline-block;
+  display: inline-block !important;
   font-family: var(--font-pixel);
   font-size: 0.46rem;
   color: #ff007f;

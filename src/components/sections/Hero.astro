@@ -166,8 +166,27 @@ const t = useTranslations(lang);
 
     .hero-h1-retro,
     .hero-sub-retro,
-    .retro-hero-hud {
-        display: none;
+    .retro-hero-hud,
+    .retro-synthwave-grid {
+        display: none !important;
+    }
+
+    :global(html.retro-mode) .hero-h1-default,
+    :global(html.retro-mode) .hero-sub-default {
+        display: none !important;
+    }
+
+    :global(html.retro-mode) .hero-h1-retro,
+    :global(html.retro-mode) .hero-sub-retro {
+        display: block !important;
+    }
+
+    :global(html.retro-mode) .retro-hero-hud {
+        display: flex !important;
+    }
+
+    :global(html.retro-mode) .retro-synthwave-grid {
+        display: block !important;
     }
 
     .hero-text h1 {

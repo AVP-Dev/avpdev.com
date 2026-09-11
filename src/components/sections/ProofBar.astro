@@ -71,6 +71,15 @@ const t = useTranslations(lang);
         word-break: normal;
         hyphens: none;
     }
+    .proof-stat-retro {
+        display: none !important;
+    }
+    :global(html.retro-mode) .proof-stat-default {
+        display: none !important;
+    }
+    :global(html.retro-mode) .proof-stat-retro {
+        display: inline-block !important;
+    }
     .proof-divider {
         width: 1px;
         height: 60px;

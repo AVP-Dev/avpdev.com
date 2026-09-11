@@ -429,6 +429,136 @@ This establishes a powerful workflow: the AI generates high-quality code at 10x 
 
 ---
 
+## AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems
+
+> URL: https://avpdev.com/en/blog/ai-loves-straight-roads/
+> Description: Why AI degrades architecture in complex projects. Local greedy shortcuts, broken abstractions, GitClear code churn data, and the green test paradox.
+
+When Redis creator Salvatore Sanfilippo declared that code has become cheap raw material and that line-by-line review is a waste of time ([read my deep dive on that paradox](/en/blog/control-ideas-not-code)), many developers rejoiced: *“Great! We can just generate everything with agents, run automated tests, and never look inside!”*
+
+Yet as soon as you apply this approach to real production environments, an unsettling pattern begins to emerge.
+
+As long as you ask an AI to write a one-off parser, build a slick landing page animation, or script a database migration, it feels like pure sorcery. The model seems sharper than a high-salary senior engineer.
+
+The moment you unleash agents on a real enterprise backend—with distributed transactions, message queues, and a dozen interdependent services—the system begins to rot from within.
+
+Why does this happen? The answer lies in the fundamental nature of Large Language Models: **AI is a greedy, local optimizer. It loves straight roads.**
+
+---
+
+### Chesterton’s Fence and Machine Logic
+
+In classical philosophy, there is a famous principle known as **Chesterton’s Fence**:
+
+> **Context: Chesterton’s Fence**  
+> In 1929, philosopher G.K. Chesterton proposed a simple rule: if you encounter a fence across a field that seems completely useless and obstructs your path, you are not allowed to tear it down until you discover *why and for what purpose it was built*. The person who put it there had a reason, even if it isn't obvious at first glance.
+
+AI agents behave in the exact opposite manner. They identify the immediate trajectory `Point A → Point B` and bulldoze every fence in their way because a straight line is shorter.
+
+Consider a standard architecture pipeline in an enterprise CRM/ERP:
+```
+[HTTP Controller] 
+       ↓ 
+ [Input DTO / Zod Validation] 
+       ↓ 
+  [Application Service] 
+       ↓ 
+[Domain Repository Interface] 
+       ↓ 
+[PostgreSQL Database with Transaction / Audit Logging]
+```
+
+Suppose you instruct an agent: *“Add an endpoint to notify our third-party logistics partner about order status updates.”*
+
+What does an experienced human engineer do? They publish an `OrderExportRequested` domain event to a queue (RabbitMQ/Redis Stream), attach an asynchronous consumer, configure retry policies with exponential backoff, and write an entry into an audit log. Is it complex? Yes. Does it require boilerplate? Absolutely.
+
+What does the AI agent do? It inspects the controller and reasons: *“Why traverse four layers of abstraction? I can invoke `fetch('https://api.delivery.com')` inline right here in the controller and immediately return a response to the client. Task done, 50 lines saved, unit test passes in 2 milliseconds!”*
+
+Technically, the code is spotless. It compiles. It passes on your laptop.
+
+That "fence" of abstraction layers wasn't built for decoration. It existed to protect the system against:
+* Blocking the web worker process during a 10-second external network timeout.
+* Leaking PII into raw HTTP request logs.
+* Inconsistent state if the external API returns a 500 error after the local database record has already been committed.
+
+The AI shortened the path. It eliminated code. And in doing so, it compromised the architectural resilience of the entire platform.
+
+---
+
+### Accidental vs. Essential Complexity
+
+In his landmark 1986 essay *«No Silver Bullet»*, Fred Brooks divided software engineering complexity into two distinct categories:
+1. **Accidental Complexity:** syntactic boilerplate, configuration quirks, manual type mapping, build tooling. The friction engineers fought for decades.
+2. **Essential Complexity:** the inherent nature of the domain problem—idempotency across network failures, race conditions on shared balances, and business state invariants.
+
+AI is peerless at destroying *accidental* complexity. It drafts DTOs, validates schemas, and generates boilerplate faster than you can pour a cup of coffee.
+
+When confronted with *essential* complexity, however, an agent attempts to treat it as accidental—by simply erasing it.
+
+In my own work, I observed an AI attempting to refactor a real-time state synchronization pipeline based on PostgreSQL's `LISTEN/NOTIFY` and worker pools. The model enthusiastically proposed replacing the whole pipeline with a simple `setInterval` polling `SELECT * FROM table WHERE updated_at > ...`.
+
+To the model, this looked brilliant: *“Look, I eliminated 200 lines of complex event bus wiring!”* The fact that a naive polling loop would saturate the primary database under 5,000 concurrent clients simply fell outside the model's contextual horizon.
+
+---
+
+### What the Data Shows: GitClear’s 2024–2026 Longitudinal Study
+
+This isn't mere nostalgia from veteran developers. Analytics firm **GitClear** conducted an extensive study analyzing over **200 million lines of code** across open-source and commercial repositories:
+
+1. **Doubling of Code Churn:**
+   * In 2021 (prior to mass AI code assistant adoption), the baseline `churn` rate (code modified, reverted, or deleted within two weeks of authoring) stood at **3.3%**.
+   * By 2025–2026, code churn had spiked to **7.1% – 8.2%**.  
+   Developers write code significantly faster, but that code survives in production half as long.
+
+2. **A 4x Surge in Duplicate Code (Code Clones):**
+   * AI agents rarely perform structural refactoring across existing abstractions (`move / update`).
+   * Models are 4 times more likely to duplicate logic blocks into isolated helpers with minor modifications, violating DRY (Don’t Repeat Yourself).
+
+Why? Because an agent operates within its local context window. It is computationally cheaper for a model to copy-paste a modified utility than to analyze the complete dependency graph and cleanly evolve an existing shared service.
+
+---
+
+### System Degradation Under Green Tests
+
+The most treacherous quality of AI-generated code is that it **looks pristine**.
+
+When a junior developer writes subpar code, bad indentation, strange variable names, and absent tests give it away immediately.
+
+AI code, conversely, features clean indentation, strict TypeScript interfaces, polished JSDoc annotations, and a suite of passing unit tests. Yet underneath, the architecture can silently decompose into an unmaintainable monolith:
+
+```
+                    ┌─ workaround (AI-fix 1)
+                    ├─ direct fetch bypassing queue (AI-fix 2)
+[PRISTINE SYSTEM] ──┼─ duplicated helper (AI-fix 3)
+                    ├─ inline sql query (AI-fix 4)
+                    └─ special case flag (AI-fix 5)
+```
+
+Each isolated change appears reasonable in a PR diff. Each satisfies its local acceptance criteria. Taken together, however, they build what is known as **AI Technical Debt**.
+
+The system loses its conceptual integrity. Multiple diverging paths emerge across the codebase to accomplish the exact same task.
+
+---
+
+### Key Takeaway
+
+AI is not broken. It acts as an optimal mathematical solver for a local objective function. When prompted to "build feature X," it finds the shortest path to X while remaining blind to the ecosystem outside the prompt.
+
+Trying to solve this by manually reading every line of generated diff is impossible at modern generation volumes.
+
+What we need is an architectural framework that forces AI agents to **stay strictly on rails designed by human engineers**.
+
+In our next piece, we examine that practical system:  
+👉 **[«The Architect of the Future: Shifting from Line Reviews to Design Reviews»](/en/blog/architect-of-the-future)**.
+
+We explore the **Skeleton + Pluggable Modules** pattern, Salvatore Sanfilippo’s `DESIGN.md` artifact, and an actionable delegation matrix defining what to hand over to AI completely—and what to never let it touch.
+
+---
+
+*Also read: [Code Became Cheap. Engineering Thinking Did Not](/en/blog/control-ideas-not-code) | [AI-Friendly Code Architecture: 5 Essential Rules](/en/blog/ai-friendly-code-architecture)*
+
+---
+
 ## AI vs Scripts: When You Don't Need AI and Code Is More Reliable
 
 > URL: https://avpdev.com/en/blog/ai-vs-scripts/
@@ -546,6 +676,132 @@ Don't use a microscope as a hammer. Build hybrid systems where rock-solid code p
 
 ---
 
+## The Architect of the Future: From Line Reviews to Design Reviews
+
+> URL: https://avpdev.com/en/blog/architect-of-the-future/
+> Description: Skeleton + Pluggable Modules architecture, Salvatore Sanfilippo's DESIGN.md artifact, and a practical AI delegation playbook for senior engineers.
+
+We have established that [code has become cheap raw material](/en/blog/control-ideas-not-code) and that trusting AI blindly [degrades system architecture](/en/blog/ai-loves-straight-roads) through greedy local shortcuts.
+
+This brings us to the question keeping thousands of software engineers awake at night:
+
+> **“If AI writes code faster than I can, discovers libraries instantly, and completes routine tasks effortlessly—what is my actual value as an engineer?”**
+
+The answer is clear, even if uncomfortable for many: your value is no longer measured by your keystrokes per minute or your encyclopedic recall of standard library APIs.
+
+Your job is to **guarantee the conceptual integrity of the system**. You are the safeguard preventing autonomous agents from turning a production codebase into a rotting junkyard of one-off scripts.
+
+Here is the engineering framework developed from hundreds of hours managing autonomous coding agents in production environments.
+
+---
+
+### The «Skeleton + Pluggable Modules» Architectural Pattern
+
+The costliest mistake teams make is granting an AI agent unbounded freedom over an entire repository with a prompt like: *“Build our new billing subsystem.”*
+
+Thirty minutes later, you receive a sprawling 20-file PR where domain logic is coupled with HTTP controllers, SQL queries are embedded in route handlers, and errors are swallowed by empty `catch` blocks.
+
+To keep AI productive and safe, a system must be divided into an **unyielding skeleton and disposable modules**:
+
+```
+                       ┌────────────────────────────────────────┐
+                       │           HUMAN ARCHITECT              │
+                       │    Invariants, Data Schemas, Contracts │
+                       └───────────────────┬────────────────────┘
+                                           │ designs
+                                           ▼
+                       ┌────────────────────────────────────────┐
+                       │          SYSTEM SKELETON               │
+                       │  Auth Context │ Event Bus │ DB Schemas │
+                       └─────┬────────────────────────────┬─────┘
+                             │                            │
+               isolated      │                            │ isolated
+               contract      ▼                            ▼ contract
+       ┌───────────────────────────┐        ┌───────────────────────────┐
+       │     PLUGGABLE MODULE A    │        │     PLUGGABLE MODULE B    │
+       │     (Generated by AI)     │        │     (Generated by AI)     │
+       │  Fast to build /          │        │  If degraded —            │
+       │  Trivial to replace       │        │  regenerate from scratch  │
+       └───────────────────────────┘        └───────────────────────────┘
+```
+
+1. **The Human Engineer Designs the Skeleton:**
+   * Centralized schema validation boundaries (e.g., Zod or Pydantic contracts).
+   * Transactional scopes and tenant context propagation.
+   * Event bus definitions and strict cross-boundary message protocols.
+   * Standardized error handling, tracing, and audit logging.
+
+2. **The AI Agent Fills the Pluggable Modules:**
+   * Each module is strictly confined within its contract boundaries. It cannot bypass interfaces or query neighboring database tables directly.
+   * All module logic remains local.
+
+**Why is this pattern transformational?**  
+If requirements change radically six months later or a module accumulates structural noise, you **don't spend weeks refactoring legacy code**. You delete the module directory and instruct an agent to regenerate it from scratch against the unchanged contract. It takes 15 minutes.
+
+---
+
+### The Death of Pull Requests and the Rise of `DESIGN.md`
+
+Auditing a 3,000-line pull request generated by an AI is an exercise in cognitive exhaustion. Reviewers inevitably skim, rubber-stamping an empty "LGTM" and hoping automated tests will catch critical bugs.
+
+In his essay, Salvatore Sanfilippo proposed a far more durable mechanism: the **`DESIGN.md` artifact**.
+
+Before an agent writes a single line of implementation, you collaborate with the model to draft an architectural specification. This is not a bureaucratic 50-page specification; it is a concise 1–2 page markdown contract that captures:
+
+1. **System Invariants (What can NEVER happen under any circumstances):**  
+   *Example: “A user balance cannot become negative under any concurrent retry; credit deduction and subscription activation must execute in the exact same atomic transaction.”*
+2. **Data Structures and State Lifecycles:**  
+   Finite state machines: `Draft → Pending → Paid → Fulfilled`. No state transitions outside the defined state engine.
+3. **Failure Modes & Resilience:**  
+   What happens when an external payment gateway takes longer than 2,000ms? How are duplicate webhooks handled? (Idempotency keys).
+4. **Acceptance Invariants:**  
+   The exact boundary tests and chaos scenarios the implementation must pass to prove the invariants hold.
+
+Once the `DESIGN.md` is approved by the human engineer, coding becomes a deterministic exercise. In reviews, you audit the implementation against the declared invariants—not syntax trivia.
+
+---
+
+### The Delegation Matrix: What to Give to AI vs. What to Keep
+
+To avoid both paranoid micromanagement and reckless "vibe coding," I apply a strict tripartite division of responsibility:
+
+| Delegation Tier | Assigned To | Engineering Scope |
+| :--- | :--- | :--- |
+| **1. Autonomous Delegation (100% AI)** | **AI Agents** | Pure functions without side effects, DTO transformers, edge-case unit test generation, UI layout based on design tokens, parsers, and data migration scripts. |
+| **2. Contract Delegation (50 / 50)** | **Human Architect designs → AI implements** | CRUD API routes, external third-party integrations, background queue consumers, report aggregations. The engineer verifies only contracts and failure states. |
+| **3. Zero Delegation (Human Only)** | **Human Architect** | Data ownership topology, distributed transactions, authorization and permission models (RBAC/ABAC), consensus protocols, disaster recovery, and data security models. |
+
+If you delegate tier three to unguided generation, you are no longer the engineer of your platform. You are merely a passenger in a vehicle without brakes.
+
+---
+
+### Key Takeaway: The Real Role of the Engineer
+
+The software industry is undergoing a necessary and overdue maturation.
+
+For four decades, we romanticized typing code. We engaged in flame wars over tabs versus spaces, memorized compiler flags, and celebrated spending late nights hunting down a missing semicolon.
+
+That era has drawn to a close.
+
+AI can be an extraordinary, lightning-fast programmer. But it will never be the owner of the outcome.
+
+* **AI does not bear responsibility to the business** when database connections saturate during Black Friday.
+* **AI does not join midnight war rooms** when user data leaks across multi-tenant boundaries.
+* **AI does not hold the vision** for where the platform needs to stand two years from now.
+
+The human engineer owns the system.
+
+And as code generation becomes instantaneous and free, the true value of an engineer is elevated: the ability to step above the syntax, preserve the architecture, and say with authority:  
+*“We are deleting this code. We will design the system differently.”*
+
+---
+
+*Also read:*  
+* [Code Became Cheap. Engineering Thinking Did Not](/en/blog/control-ideas-not-code)  
+* [AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems](/en/blog/ai-loves-straight-roads)*
+
+---
+
 ## Case Study: How avpdev.com was Built — Architecture, SEO & Speed
 
 > URL: https://avpdev.com/en/blog/avpdev-case-study/
@@ -606,6 +862,134 @@ avpdev.com is a manifesto of my philosophy:
 [Message me](https://t.me/AVP_Dev) to discuss the architecture of your future site.
 
 *Read also: [Custom Development vs Template](/en/blog/template-vs-custom)*
+
+---
+
+## Code Became Cheap. Engineering Thinking Did Not
+
+> URL: https://avpdev.com/en/blog/control-ideas-not-code/
+> Description: Redis creator Salvatore Sanfilippo argues reading AI code is a waste of time. Why code is no longer the engineer's primary product and who owns the system.
+
+In the summer of 2026, an event shook the software engineering world that many tried to brush off as just another wave of artificial intelligence hype.
+
+**Salvatore Sanfilippo** published an essay with an unmistakable title: [«Control the ideas, not the code»](https://antirez.com/news/169).
+
+> **Who is Salvatore Sanfilippo (antirez)?**  
+> For those outside the systems realm: Salvatore is the legendary Italian engineer and creator of **Redis**. Redis is an ultra-fast in-memory key-value data store that powers performance for virtually every high-load system on earth: from session caching at Twitter and GitHub to queue processing at Netflix. Salvatore spent 15 years writing Redis in pure C, meticulously obsessing over every pointer, byte of RAM, and CPU cycle. He is someone for whom code craftsmanship and readability were a sacred craft.
+
+And now, this very engineer states: **spending time reading and line-by-line reviewing AI-generated code today is suboptimal and mostly pointless.**
+
+On X, he was immediately challenged by Matteo Collina (Node.js Technical Steering Committee member and creator of Fastify):  
+*“Wait, but didn’t you say that you check all the AI-generated code for Redis?”*
+
+Sanfilippo’s response was disarming:  
+*“Yes, I do. But only out of respect for contributors and users who open Redis files and modify code by hand. If I had my hands free, I wouldn't do it. I would spend all that time doing more QA, thinking about optimization tricks, and writing a DESIGN.md file where each data structure and idea is described in human language. Let the model write the code.”*
+
+When a junior developer says this after a two-week bootcamp, it’s naive. When the creator of Redis says it, it marks a paradigm shift.
+
+---
+
+### The Economic Reality: Code Costs Zero
+
+Over my 10+ years in commercial software development, I grew accustomed to code being a scarce, expensive resource. Writing high-quality software required immense manual labor: memorizing standard libraries, handcrafting type adapters, wrangling boilerplate, mapping DTOs, and writing tests.
+
+The traditional production formula was:
+$$\text{Idea} \longrightarrow \text{Architecture} \longrightarrow \mathbf{\text{Writing Code (80\% of effort)}} \longrightarrow \text{Code Review} \longrightarrow \text{Testing} \longrightarrow \text{Production}$$
+
+In 2026, generating 5,000 lines of syntactically valid TypeScript, Go, or Python takes 90 seconds and costs a fraction of a cent in LLM tokens.
+
+Code is no longer scarce. **It has become cheap raw material.**
+
+And here lies the paradox businesses often overlook in their race for efficiency:  
+A business never cared about the code itself. Business owners don't care whether you use NestJS or raw HTTP routers, or whether your switch statements look elegant. Business cares about one thing: **does the system solve the problem, stay resilient under load, and generate value?**
+
+If code is generated in seconds, the fundamental engineering question changes: **Who owns the result?**
+
+---
+
+### Torvalds on Compilers: The Historical Perspective
+
+When the tech sphere was flooded in early 2026 with victorious headlines claiming that "99% of code is now written by AI and programmers are obsolete," Linux and Git creator **Linus Torvalds** shut down the hype with characteristic precision:
+
+> *“Saying that 99% of code is AI-written is like saying that 100% of code is written by compilers.”*
+
+> **Background: Linus Torvalds** — creator of the Linux operating system kernel (powering 90% of global cloud infrastructure and all Android devices) and the Git version control system. He orchestrates open-source collaboration across tens of thousands of developers worldwide.
+
+Torvalds pointed out what hype-chasers miss: compilers have been translating human logic into millions of lines of machine instructions and assembly for over fifty years. Yet no one ever called a compiler the software architect.
+
+Legendary developer **John Carmack** (creator of *Doom* and *Quake*, pioneer of 3D graphics) shared the same view:  
+*“Coding was never the sacred value. Problem solving is. Code is just the tax we pay to make a computer understand our intention.”*
+
+AI simply pushed the abstraction layer one step higher. We used to translate business requirements into functions and loops. Now we translate system invariants into architectural constraints for autonomous agents.
+
+---
+
+### Shifting the Control Plane: Implementation vs. Intent
+
+Let’s be honest about traditional Code Reviews. What does a reviewer look for in a 1,500-line pull request?
+* Did someone forget a null check?
+* Is a variable poorly named?
+* Is there a typo in a database column string?
+* Should a duplicated helper be extracted?
+
+This is **implementation control**. You are auditing syntax and line mechanics.
+
+When an agent produces thousands of lines a day, reviewing every diff becomes an exhausting illusion. Attention fades after twenty files. The reviewer ends up missing the forest for the trees.
+
+Sanfilippo argues for a radical shift: **stop micromanaging lines of code and start controlling intent:**
+
+| Legacy Era (Implementation Control) | Modern Era (Intent Control) |
+| :--- | :--- |
+| Writing function bodies manually | Defining problem bounds and invariants |
+| Choosing loop structures | Designing architectural scaffolds |
+| Auditing diff lines | Verifying system behavioral changes |
+| Catching typos in Code Reviews | Conducting Design Reviews of data models & contracts |
+| Fixing bugs by hand | Designing testing systems that make bugs impossible |
+| Memorizing library APIs | Understanding system boundaries & scale limits |
+| Pride in lines of code shipped | Pride in system simplicity and resilience |
+
+---
+
+### Where Sanfilippo Is Vulnerable: The Testing Illusion
+
+The naive takeaway from antirez’s essay would be: *“Great! Stop reading code, prompt an agent, run tests, and ship it.”*
+
+This is what I call the **Naive Trust Trap**.
+
+If you stop inspecting what AI built and rely blindly on "the tests passed, so it works," you are building on quicksand.
+
+Why?  
+**Tests only verify what you anticipated to test.**
+
+In 1972, computer science pioneer Edsger Dijkstra formulated a rule that sounds prophetic in 2026:  
+*“Program testing can be used to show the presence of bugs, but never to show their absence.”*
+
+If an AI generates an endpoint and all 20 unit tests turn green, that doesn't prove the code is secure. It only proves that under the author's specific happy-path scenario, it returns `200 OK`.
+
+Tests will not catch:
+1. An IDOR vulnerability leaking tenant data because a workspace scope filter was omitted.
+2. A database deadlock triggered when 10,000 concurrent requests hit a shared record.
+3. An unnecessary bloated external dependency with license risks pulled in for a trivial task.
+
+Recent 2025–2026 security benchmarks (notably from Veracode and Stanford HAI) reveal an unsettling reality: **approximately 45% of AI-generated code samples contain OWASP Top 10 vulnerabilities**, even when the code compiles cleanly and passes functional unit tests. Models write syntax effortlessly, but they lack awareness of systemic failure modes.
+
+---
+
+### The Takeaway
+
+Salvatore Sanfilippo is fundamentally right: **the programmer is no longer a keyboard typist.** Our professional identity, long tethered to lines of code written or clever syntax tricks, must give way to rigorous architectural stewardship.
+
+Code has become cheap. But the cost of an architectural blunder has multiplied a hundredfold.
+
+If an architect misjudges the system design, an agent will churn out 10,000 lines of beautifully formatted, fully functional, yet completely wrong code in five minutes—code that will collapse the business at first scale.
+
+*Why is it that AI breaks system architecture so easily the moment a task goes beyond a script or a basic CRUD endpoint? Why does it consistently favor shortcuts that look clean today but turn into maintenance nightmares tomorrow?*
+
+We examine this in detail here: **[«AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems»](/en/blog/ai-loves-straight-roads)**.
+
+---
+
+*Also read: [Ghosts in the Machine: Traps of AI Development](/en/blog/ghost-in-the-machine) | [AI: The Most Capable and Dangerous Student](/en/blog/ai-capable-dangerous-student)*
 
 ---
 
@@ -1070,6 +1454,112 @@ I am building Nyx for myself using NestJS, Next.js, and Rust. This keeps the bar
 * 🚀 [Landing Page Nyx Vox](https://avp-dev.github.io/nyx-vox/)
 
 > **P.S.** In a world where everything is becoming "rented," owning your own tools is the only form of digital freedom.
+
+---
+
+## Nyx Vox: Why I Replaced My Keyboard with Voice and How It Works
+
+> URL: https://avpdev.com/en/blog/nyx-vox-ai-voice-interface/
+> Description: Why standard dictation fails developers, how Nyx Vox is built, and how a zero-click voice interface speeds up daily coding and AI workflows.
+
+Most people speak at roughly 130–160 words per minute, while typing speed typically tops out around 60–70. That is more than a 2x difference.
+
+Software development today involves writing a substantial amount of text: detailed context prompts for AI assistants in Cursor or Claude, architectural decision records, issue descriptions, and constant team communication. Dictating that volume of text seems like an obvious way to save time.
+
+However, developers who try standard speech-to-text usually give up quickly for two reasons:
+
+1. **It does not understand development context.** Generic STT mishandles casing, knows nothing about `camelCase`, mangles technical terminology, and turns library names into arbitrary everyday words.
+2. **Too many manual steps.** Most standalone utilities require opening a window, clicking record, waiting, clicking "Copy", switching back to the editor, and pasting. If a simple task requires five extra mouse actions, the habit never sticks.
+
+To solve both issues, I built **[Nyx Vox](https://github.com/AVP-Dev/nyx-vox)**. It is a lightweight desktop utility written in Rust and Tauri that I use every day.
+
+---
+
+### In this article:
+- [How the Pipeline Works](#how-it-works)
+- [Formatting Without Changing Meaning](#verbatim)
+- [Where It Saves Time Daily](#daily-use)
+- [Privacy and Local Mode](#privacy)
+- [Windows Support and Open Source](#open-source)
+
+---
+
+## How the Pipeline Works {#how-it-works}
+
+The primary requirement was simple: the input process must be invisible and require zero mouse clicks.
+
+```mermaid
+graph LR
+    A["Tap Hotkey"] --> B["Speak (Hands Free)"]
+    B --> C["Smart VAD (3–15s silence) OR Tap Again"]
+    C --> D["Text Drops into Focused App"]
+```
+
+The workflow:
+1. You remain inside your active program: your code editor, terminal, chat, or browser.
+2. Tap a global hotkey — no need to hold it down, your hands stay completely free. Speak at your natural pace while a subtle volume indicator appears on screen.
+3. Recording finishes automatically via Smart VAD (Voice Activity Detection): once you finish speaking, it detects silence (configurable from 3 to 15 seconds) and completes the process. Alternatively, tap the hotkey again to insert the text immediately.
+4. Within 300 to 500 milliseconds, the formatted text is pasted directly into your active cursor position.
+
+Under the hood:
+* Audio capture is handled via `cpal` with a small pre-speech circular buffer so initial consonants are never clipped.
+* The audio is sent to Whisper (cloud inference via Groq takes ~500 ms).
+* The raw transcript passes through an LLM for formatting.
+* The app simulates a native paste shortcut (`Cmd+V` on macOS or `Ctrl+V` on Windows) into whichever window was focused prior to recording.
+
+---
+
+## Formatting Without Changing Meaning {#verbatim}
+
+Standard dictation engines frequently attempt to rephrase speech or insert synonyms. For code and technical instructions, that is unacceptable.
+
+In Nyx Vox, the language model operates under strict normalization rules:
+* **The author's exact words are preserved.** The model does not summarize, invent details, or swap technical terms.
+* **Disfluencies are removed.** Pauses, filler words ("uhm", "like"), and repeated syllables are stripped out.
+* **Syntax and punctuation.** Punctuation is applied, text is structured into clean paragraphs, and technical identifiers (PostgreSQL, Docker, TypeScript, GraphQL, REST API) are formatted with correct casing.
+
+You speak a rough train of thought, and clean, properly formatted text lands directly in your editor.
+
+---
+
+## Where It Saves Time Daily {#daily-use}
+
+I keep Nyx Vox running continuously in the background. Here are three areas where it has replaced typing for me:
+
+* **Prompts for Cursor and Claude.** Getting accurate code from an LLM on the first attempt requires rich context: files to avoid, methods to call, and error handling rules. Typing that out takes one to two minutes. Speaking it takes 15 seconds.
+* **Replies in Telegram and Slack.** You can answer a teammate directly from your IDE without switching windows or reaching for the mouse. Tap the key, speak two sentences, and VAD completes the recording and pastes the reply.
+* **Notes and Documentation.** While designing a module architecture or drafting an API spec, it is often easiest to open a blank note in Obsidian and talk through the logic out loud.
+
+---
+
+## Privacy and Local Mode {#privacy}
+
+When dealing with proprietary codebases under non-disclosure agreements, sending audio to third-party endpoints is not an option. Nyx Vox supports two operating modes:
+
+1. **High-Speed (Cloud):** Speech recognition runs via Groq LPU Whisper, keeping roundtrip latency around 500 ms. For text formatting, you can bring your own API key for Gemini, DeepSeek, Qwen, or GigaChat.
+2. **Local (Offline):** Whisper runs directly on your machine. On macOS, it utilizes Metal hardware acceleration. No audio or text leaves your computer.
+
+All API keys are encrypted on-device (AES-256-GCM) and remain strictly local.
+
+---
+
+## Windows Support and Open Source {#open-source}
+
+I originally built Nyx Vox for my own Mac setup. Because the core is written in Rust with Tauri 2, OS-specific hooks are isolated, and the project now includes **Windows support** as well.
+
+The Windows build follows the identical workflow: global keyboard hooks, foreground window resolution via Win32 APIs, and input injection through `enigo`.
+
+The repository is completely open source:
+* Repository: **[github.com/AVP-Dev/nyx-vox](https://github.com/AVP-Dev/nyx-vox)**
+* Prebuilt binaries (macOS DMG, Windows installer): **[Releases](https://github.com/AVP-Dev/nyx-vox/releases)**
+
+---
+
+## Feedback {#feedback}
+
+For any open-source tool, practical feedback from real users is the most important component of development.
+
+If you write lots of prompts, communicate in dev chats, or want to reduce keyboard strain, download the build for your platform, try it for a day or two, and let me know how it works in [GitHub Issues](https://github.com/AVP-Dev/nyx-vox/issues). Any notes on latency, hotkeys, or edge cases will help make the tool better for everyone.
 
 ---
 

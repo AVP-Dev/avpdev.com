@@ -334,6 +334,35 @@ const homePath = `/${lang}/`;
         line-height: 1.35;
     }
 
+    /* Strict isolation between classic and retro modes */
+    .retro-highscore-ribbon,
+    .about-stats-title-retro,
+    .about-stat-label-retro,
+    .retro-perk-badge {
+        display: none !important;
+    }
+
+    :global(html.retro-mode) .about-stats-title-default,
+    :global(html.retro-mode) .about-stat-label-default {
+        display: none !important;
+    }
+
+    :global(html.retro-mode) .retro-highscore-ribbon {
+        display: inline-block !important;
+    }
+
+    :global(html.retro-mode) .about-stats-title-retro {
+        display: block !important;
+    }
+
+    :global(html.retro-mode) .about-stat-label-retro {
+        display: block !important;
+    }
+
+    :global(html.retro-mode) .retro-perk-badge {
+        display: inline-block !important;
+    }
+
     .about-approach-section {
         margin-bottom: 80px;
         padding-top: 60px;

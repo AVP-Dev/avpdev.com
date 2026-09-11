@@ -68,6 +68,19 @@ const services = cardOrder.map((id, i) => ({
             ))}
         </div>
 <style>
+    .retro-level-select-badge,
+    .retro-service-class-badge {
+        display: none !important;
+    }
+
+    :global(html.retro-mode) .retro-level-select-badge {
+        display: block !important;
+    }
+
+    :global(html.retro-mode) .retro-service-class-badge {
+        display: inline-block !important;
+    }
+
     .card {
         height: 100%;
         max-width: 420px;

@@ -190,6 +190,14 @@ const t = useTranslations(lang);
     max-width: 720px;
   }
 
+  .retro-contact-uplink {
+    display: none !important;
+  }
+
+  :global(html.retro-mode) .retro-contact-uplink {
+    display: block !important;
+  }
+
   .contact-form {
     background: var(--primary-color);
     padding: 2.5rem;
