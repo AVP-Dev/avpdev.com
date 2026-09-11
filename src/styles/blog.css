@@ -464,7 +464,8 @@
   border-collapse: separate;
   border-spacing: 0;
   margin: 2.5rem 0;
-  background: rgba(13, 17, 23, 0.6);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
   border-radius: 12px;
   border: 1px solid var(--border-color);
   box-shadow: var(--card-shadow);
@@ -473,7 +474,7 @@
 }
 
 .post-content thead {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--tag-bg);
 }
 
 .post-content th {
@@ -483,7 +484,7 @@
   color: var(--text-color);
   font-size: 1rem;
   letter-spacing: 0.02em;
-  border-bottom: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--accent-color-start);
 }
 
 .post-content td {
@@ -503,12 +504,80 @@
   transition: background-color 0.2s ease;
 }
 
-.post-content tbody tr:hover {
-  background: rgba(255, 255, 255, 0.03);
+.post-content tbody tr:nth-child(even) td {
+  background: rgba(125, 125, 125, 0.03);
 }
 
-.post-content tbody tr:nth-child(even) {
+.post-content tbody tr:hover td {
+  background: var(--tag-bg);
+  color: var(--text-color);
+}
+
+/* Light Theme: Clean card with crisp border and subtle zebra stripes */
+.light-theme .post-content table {
+  background: var(--primary-color);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.light-theme .post-content thead {
+  background: #F4F4F5;
+}
+
+.light-theme .post-content th {
+  color: #18181B;
+  border-bottom: 2px solid var(--accent-color-start);
+}
+
+.light-theme .post-content td {
+  color: #52525B;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.light-theme .post-content tbody tr:nth-child(even) td {
+  background: #FAFAFA;
+}
+
+.light-theme .post-content tbody tr:hover td {
+  background: #F4F4F5;
+  color: #18181B;
+}
+
+/* Dark Theme: Cyber dark card with orange accent */
+.dark-theme .post-content table {
+  background: rgba(17, 17, 26, 0.7);
+}
+
+.dark-theme .post-content thead {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.dark-theme .post-content th {
+  color: #FFFFFF;
+}
+
+.dark-theme .post-content td {
+  color: var(--text-secondary-color);
+}
+
+.dark-theme .post-content tbody tr:nth-child(even) td {
   background: rgba(255, 255, 255, 0.015);
+}
+
+.dark-theme .post-content tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.04);
+  color: #FFFFFF;
+}
+
+/* Retro Mode Theme */
+.retro-mode .post-content table {
+  background: #030305;
+  border: 1px solid var(--border-color);
+}
+
+.retro-mode .post-content th {
+  color: #00F0FF;
+  border-bottom: 2px solid #00F0FF;
 }
 
 .post-content img {
