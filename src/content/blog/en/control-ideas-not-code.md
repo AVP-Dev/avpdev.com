@@ -31,7 +31,10 @@ When a junior developer says this after a two-week bootcamp, it’s naive. When 
 Over my 10+ years in commercial software development, I grew accustomed to code being a scarce, expensive resource. Writing high-quality software required immense manual labor: memorizing standard libraries, handcrafting type adapters, wrangling boilerplate, mapping DTOs, and writing tests.
 
 The traditional production formula was:
-$$\text{Idea} \longrightarrow \text{Architecture} \longrightarrow \mathbf{\text{Writing Code (80\% of effort)}} \longrightarrow \text{Code Review} \longrightarrow \text{Testing} \longrightarrow \text{Production}$$
+
+```text
+Idea → Architecture → [Writing Code: 80% of Effort] → Code Review → Testing → Production
+```
 
 In 2026, generating 5,000 lines of syntactically valid TypeScript, Go, or Python takes 90 seconds and costs a fraction of a cent in LLM tokens.
 
@@ -123,6 +126,9 @@ If an architect misjudges the system design, an agent will churn out 10,000 line
 *Why is it that AI breaks system architecture so easily the moment a task goes beyond a script or a basic CRUD endpoint? Why does it consistently favor shortcuts that look clean today but turn into maintenance nightmares tomorrow?*
 
 We examine this in detail here: **[«AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems»](/en/blog/ai-loves-straight-roads)**.
+
+> **Open-Source Resource:**  
+> If you want to integrate robust architectural rails and specification templates for coding agents into your projects today, check out my open starter: **[AVP-Dev / agent-starter-kit on GitHub](https://github.com/AVP-Dev/agent-starter-kit)**.
 
 ---
 

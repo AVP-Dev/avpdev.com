@@ -85,6 +85,9 @@ Before an agent writes a single line of implementation, you collaborate with the
 
 Once the `DESIGN.md` is approved by the human engineer, coding becomes a deterministic exercise. In reviews, you audit the implementation against the declared invariants—not syntax trivia.
 
+> **Open-Source Tool:**  
+> Rather than re-inventing this architecture and specification structure from scratch on every project, I published a ready-to-use starter template: **[AVP-Dev / agent-starter-kit on GitHub](https://github.com/AVP-Dev/agent-starter-kit)**. It includes foundational architectural rails, `DESIGN.md` specification blueprints, coding agent rules, and modular isolation patterns you can fork directly into your workflow.
+
 ---
 
 ### The Delegation Matrix: What to Give to AI vs. What to Keep
