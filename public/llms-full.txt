@@ -487,10 +487,13 @@ The AI shortened the path. It eliminated code. And in doing so, it compromised t
 
 ### Accidental vs. Essential Complexity
 
-> **Who is Fred Brooks?**  
-> The legendary system architect behind the IBM System/360, Turing Award laureate, and author of the classic software engineering book *The Mythical Man-Month*. Brooks famously established Brooks's Law: adding manpower to a late software project only makes it later.
+To understand the exact boundary AI crosses when stripping away architectural layers, we need to revisit foundational software engineering theory.
 
-In his landmark 1986 essay *«No Silver Bullet»*, Fred Brooks divided software engineering complexity into two distinct categories:
+In his landmark 1986 essay *«No Silver Bullet»*, computer science pioneer **Fred Brooks** divided software complexity into two distinct categories:
+
+> **Who is Fred Brooks?**  
+> The legendary system architect behind the IBM System/360, Turing Award laureate, and author of the definitive software management book *The Mythical Man-Month*. Brooks famously formulated Brooks's Law: “Adding manpower to a late software project only makes it later.”
+
 1. **Accidental Complexity:** syntactic boilerplate, configuration quirks, manual type mapping, build tooling. The friction engineers fought for decades.
 2. **Essential Complexity:** the inherent nature of the domain problem—idempotency across network failures, race conditions on shared balances, and business state invariants.
 
