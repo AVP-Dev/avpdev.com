@@ -4,7 +4,6 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import { unified } from '@astrojs/markdown-remark';
 import remarkHeadingId from 'remark-heading-id';
-import { locations } from './src/data/locations.ts';
 
 const site = 'https://avpdev.com';
 
@@ -178,7 +177,6 @@ export default defineConfig({
 
   // 8. 301 редиректы: старые Russian-transliterated EN-slugs → правильные EN-slugs
   redirects: {
-    '/en/blog/uroki-amsterdama':   '/en/blog/lessons-from-amsterdam/',
     '/en/blog/uroki-amsterdama/':  '/en/blog/lessons-from-amsterdam/',
   },
 

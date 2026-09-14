@@ -71,12 +71,12 @@ export const services: ServicePageData[] = [
         id: 'websites',
         slug: 'razrabotka-saitov',
         seoTitle: {
-            ru: 'Разработка сайтов и экспресс-лендингов за 24–48ч • AVPdev',
-            en: 'Express Landing Page & Custom Website Development • AVPdev',
+            ru: 'Разработка сайтов под ключ на Astro и Next.js | AVPdev',
+            en: 'Custom Website & Landing Page Development | AVPdev',
         },
         seoDescription: {
-            ru: 'Разработка быстрых сайтов и продающих лендингов на Astro и Next.js без конструкторов. Запуск под рекламу от 24 часов. Прямой контакт, гарантия и поддержка.',
-            en: 'High-speed custom websites and landing pages built with Astro & Next.js. Express turnaround from 24 hours, top Lighthouse score, direct communication and warranty.',
+            ru: 'Разработка сайтов и лендингов на Astro и Next.js. Запуск от 24ч, цены от $400. Фиксированная смета, договор, передача кода и гарантия от 1 месяца.',
+            en: 'High-speed websites & landing pages built with Astro and Next.js. Launch from 24h, starting at $400. Fixed quote, clean code and post-launch warranty.',
         },
         hero: {
             ru: { title: 'Сайты, которые <span class="gradient-text">приносят заявки</span>', subtitle: 'Быстрые адаптивные сайты на Astro и Next.js: от лендинга под рекламу до корпоративного портала с интеграциями.' },
@@ -102,47 +102,49 @@ export const services: ServicePageData[] = [
         },
         faqs: {
             ru: [
-                { q: 'На каком стеке вы разрабатываете сайты?', a: 'Мы предпочитаем современный стек: Next.js или Astro для фронтенда (это дает топовую скорость загрузки и SEO) и Node.js для серверной части.' },
-                { q: 'Сколько времени занимает разработка?', a: 'Экспресс-лендинг под срочный запуск рекламы или идеи — за 24–48 часов. Корпоративный сайт — 5–7 дней, зависит от задачи: объём страниц, интеграции, готовность контента. Сложный портал или интернет-магазин — от 3 до 6 недель.' },
-                { q: 'Будет ли сайт адаптирован под мобильные устройства?', a: 'Да. Мобильный трафик преобладает, поэтому все наши сайты делаем по принципу Mobile First: адаптивная вёрстка и корректное отображение на смартфонах, планшетах и десктопах.' },
-                { q: 'Предоставляете ли вы домен и хостинг?', a: 'Мы помогаем клиентам с выбором и регистрацией доменного имени, а также настраиваем надёжный и быстрый хостинг или VPS под ключ, чтобы вам не пришлось разбираться в технических деталях.' },
-                { q: 'Занимаетесь ли вы SEO-продвижением?', a: 'Все наши сайты разрабатываются с учетом базовой SEO-оптимизации (скорость, семантическая разметка, мета-теги). Это дает отличный старт для дальнейшего глубокого SEO-продвижения в Google и Яндекс.' },
-                { q: 'Можно ли будет редактировать контент самостоятельно?', a: 'Да, мы интегрируем удобные и современные системы управления контентом (CMS или Headless CMS), которые позволяют вам легко менять тексты, фото и добавлять новые страницы без знания кода.' },
-                { q: 'Что происходит после запуска проекта?', a: 'Мы не бросаем проекты после релиза. Мы предлагаем техническую поддержку, гарантийное обслуживание и помощь в дальнейшем развитии функционала вашего сайта по мере роста вашего бизнеса.' },
+                { q: 'Почему вы не используете WordPress или Tilda?', a: 'Конструкторы и тяжелые CMS медленно загружаются, имеют проблемы с безопасностью и требуют постоянных платных подписок. Мы пишем сайты на Astro и Next.js — это дает 100 баллов в Google PageSpeed, идеальное SEO и полную независимость от сторонних платформ.' },
+                { q: 'Смогу ли я сам менять тексты и картинки на сайте?', a: 'Да. Мы подключаем удобную панель управления (CMS), в которой любой сотрудник без навыков программирования может легко редактировать контент, добавлять статьи в блог или менять цены.' },
+                { q: 'Что входит в разработку лендинга за 24–48 часов?', a: 'Мы берем ваш текст или составляем продающую структуру сами, собираем современный адаптивный дизайн, подключаем форму сбора заявок (с отправкой в Telegram и на почту) и выкатываем сайт на ваш домен.' },
+                { q: 'Как происходит оплата?', a: 'Работаем официально по договору. Стандартная схема: 50% предоплата перед стартом и 50% после утверждения готового сайта на тестовом сервере.' },
+                { q: 'Даете ли вы гарантию на сайт?', a: 'Да, минимальная гарантия — от 1 месяца после сдачи (точный срок зависит от масштаба проекта). Если за это время обнаружится любая техническая ошибка в рамках ТЗ — исправляем бесплатно и быстро.' },
+                { q: 'Поможете ли вы с покупкой домена и хостинга?', a: 'Конечно. Мы поможем подобрать и зарегистрировать домен, настроим бесплатный SSL-сертификат и развернем сайт на надежном сервере.' },
+                { q: 'Как передаются права на сайт?', a: 'После финальной оплаты вы получаете полные права на исходный код (репозиторий GitHub), доступы к серверу и панели управления. Сайт на 100% принадлежит вам.' },
             ],
             en: [
-                { q: 'What tech stack do you use for website development?', a: 'We prefer a modern stack: Next.js or Astro for the frontend (which gives top speed and SEO) and Node.js for the backend.' },
-                { q: 'How long does development take?', a: 'Express landing page for an urgent ad launch: 24–48 hours. A multi-page corporate website takes 5–7 days. Portals or online stores take 3–6 weeks.' },
-                { q: 'Will the site be mobile-friendly?', a: "Yes, 100% of our sites have high responsive design and pass Google Core Web Vitals tests with 'Excellent'." },
-                { q: 'Do you provide domain and hosting services?', a: "We assist clients with choosing and registering a domain name, and we configure reliable server hosting (VPS) so you don't have to deal with technical nuances." },
-                { q: 'Does your development include SEO optimization?', a: 'All of our websites are developed with baseline SEO in mind (fast load times, semantic HTML, meta tags), which gives an excellent foundation for future Google search ranking.' },
-                { q: 'Will I be able to edit the content myself?', a: 'Yes, we integrate modern, user-friendly Content Management Systems (CMS or Headless CMS) that allow you to easily modify texts and images without touching code.' },
-                { q: 'What happens after the project goes live?', a: 'We provide technical support, warranty maintenance, and scaling assistance so your website can grow together with your business.' },
+                { q: 'Why do you avoid WordPress or Tilda?', a: 'Heavy page builders are slow, vulnerable, and tie you to monthly fees. We write code in Astro and Next.js, hitting 100/100 in Google PageSpeed with unmatched SEO and complete platform independence.' },
+                { q: 'Can I edit text and images myself later?', a: 'Yes. We connect a lightweight, intuitive CMS so anyone on your team can edit text, upload images, or publish blog posts without touching code.' },
+                { q: 'What is included in the 24–48 hour express landing?', a: 'We structure the offer, craft a responsive UI, wire up lead-capture forms (direct to Telegram & email), and deploy the site live to your domain.' },
+                { q: 'How does payment work?', a: 'Officially under contract. Standard milestone split: 50% upfront to start, 50% after you test and approve the deliverable on a staging environment.' },
+                { q: 'Do you provide a warranty?', a: 'Yes, minimum warranty starts at 1 month after delivery (exact duration depends on scope). Any technical bugs within the agreed specs are fixed promptly and free of charge.' },
+                { q: 'Can you help with domain and hosting setup?', a: 'Absolutely. We help select and register domains, set up automated SSL certificates, and configure deployment pipelines.' },
+                { q: 'How are intellectual property rights transferred?', a: 'Upon final payment, 100% of the repository, source code, hosting credentials, and assets are handed directly to you.' },
             ],
         },
         faqHeading: { ru: 'Вопросы и ответы', en: 'Common Questions' },
-        faqSubtitle: { ru: 'О процессе разработки сайтов', en: 'About the website development process' },
+        faqSubtitle: { ru: 'О процессе разработки сайтов', en: 'About our website development process' },
         pricing: {
             ru: {
                 tiers: [
-                    { value: 'от $400', label: 'Сайт на Astro', note: 'быстрый статический сайт, блог, лендинг' },
-                    { value: 'от $600', label: 'Сайт на Next.js', note: 'динамика, интеграции, сложная логика' },
+                    { value: 'от $400', label: 'Экспресс-лендинг', note: 'Astro, 24–48ч, под рекламу' },
+                    { value: 'от $600', label: 'Корпоративный сайт', note: 'Next.js, 5–7 дней, с админкой' },
                 ],
                 facts: [
-                    { k: 'Срок', v: 'экспресс-лендинг — 24–48ч; типовой сайт — 5–7 дней' },
-                    { k: 'SEO-база', v: 'скорость, семантика, sitemap, микроразметка' },
+                    { k: 'Срок', v: 'лендинг — 24–48ч; многостраничник — 5–7 дней' },
+                    { k: 'Стек', v: 'Astro · Next.js · Tailwind CSS' },
                     { k: 'Гарантия', v: FACTS.warranty.ru },
+                    { k: 'Код', v: 'репозиторий и доступы передаются вам' },
                 ],
             },
             en: {
                 tiers: [
-                    { value: 'from $400', label: 'Astro website', note: 'fast static site, blog, landing page' },
-                    { value: 'from $600', label: 'Next.js website', note: 'dynamic content, integrations, complex logic' },
+                    { value: 'from $400', label: 'Express landing', note: 'Astro, 24–48h, ad-ready' },
+                    { value: 'from $600', label: 'Corporate website', note: 'Next.js, 5–7 days, with CMS' },
                 ],
                 facts: [
-                    { k: 'Timeline', v: 'express landing — 24h; typical site — 5–7 days' },
-                    { k: 'SEO base', v: 'speed, semantics, sitemap, structured data' },
+                    { k: 'Timeline', v: 'landing — 24–48h; multi-page — 5–7 days' },
+                    { k: 'Stack', v: 'Astro · Next.js · Tailwind CSS' },
                     { k: 'Warranty', v: FACTS.warranty.en },
+                    { k: 'Code', v: 'repository and credentials stay with you' },
                 ],
             },
         },
@@ -156,12 +158,12 @@ export const services: ServicePageData[] = [
         id: 'bots',
         slug: 'razrabotka-botov-i-parserov',
         seoTitle: {
-            ru: 'Разработка Telegram-ботов и парсеров под ключ • AVPdev',
-            en: 'Custom Telegram Bot & Web Scraper Development • AVPdev',
+            ru: 'Разработка Telegram-ботов и парсеров под ключ | AVPdev',
+            en: 'Custom Telegram Bot & Web Scraper Development | AVPdev',
         },
         seoDescription: {
-            ru: 'Разработка Telegram-ботов любой сложности, парсинг маркетплейсов и автоматизация бизнес-процессов на Python и Node.js. Всегда на связи, гарантия и быстрый запуск.',
-            en: 'Custom Telegram bot development, marketplace web scraping, and workflow automation in Python & TypeScript. Direct developer communication, reliable guarantees.',
+            ru: 'Telegram-боты и парсеры данных на Python и Node.js. Интеграция с CRM и оплатой за 1–3 дня, цены от $150. Фикс сметы, передача кода и гарантия.',
+            en: 'Custom Telegram bots, web scrapers and business automation in Python & TypeScript. CRM & payments integration in 1–3 days, from $150. Full warranty.',
         },
         hero: {
             ru: { title: 'Боты и автоматизация, которые <span class="gradient-text">экономят часы</span>', subtitle: 'Заявки, отчёты, парсинг и связка CRM с мессенджерами — под ключ. Ваша команда занимается делом, а не рутиной.' },
@@ -239,12 +241,12 @@ export const services: ServicePageData[] = [
         id: 'ai',
         slug: 'ai-integracii',
         seoTitle: {
-            ru: 'Внедрение ИИ и нейросетей в бизнес | AVPdev',
-            en: 'AI & Neural Network Integration for Business | AVPdev',
+            ru: 'Внедрение ИИ и нейросетей в бизнес под ключ | AVPdev',
+            en: 'AI & LLM Business Integration Services | AVPdev',
         },
         seoDescription: {
-            ru: 'Интеграция GPT (OpenAI), Claude (Anthropic) и Gemini (Google), а также self-hosted open-source моделей. Автоматизация поддержки, RAG-системы и генерация контента.',
-            en: 'GPT (OpenAI), Claude (Anthropic), and Gemini (Google) integration, plus self-hosted open-source models. Support automation, RAG systems, and AI-powered content generation.',
+            ru: 'Внедрение ИИ в бизнес: GPT, Claude, Gemini и локальные LLM. AI-боты поддержки и RAG базы знаний от 3 дней, цены от $600. Пилот на ваших данных.',
+            en: 'Integrate GPT, Claude, Gemini & local LLMs into business workflows. AI support bots and RAG knowledge bases from 3 days, from $600. Pilot before launch.',
         },
         hero: {
             ru: { title: 'Интеграция <span class="gradient-text">ИИ в бизнес</span>', subtitle: 'Внедряем ИИ в рабочие процессы: боты поддержки, поиск по базам знаний, автоматизация рутины — на GPT, Claude и открытых моделях.' },
@@ -322,12 +324,12 @@ export const services: ServicePageData[] = [
         id: 'saas',
         slug: 'saas-mvp',
         seoTitle: {
-            ru: 'Разработка SaaS и MVP для стартапов | AVPdev',
-            en: 'SaaS & MVP Development for Startups | AVPdev',
+            ru: 'Разработка SaaS и запуск MVP за 10–14 дней | AVPdev',
+            en: 'SaaS & Startup MVP Development in 14 Days | AVPdev',
         },
         seoDescription: {
-            ru: 'Фокусированный запуск MVP для стартапов и разработка SaaS-платформ на Next.js, Node.js и PostgreSQL. Спринт первой рабочей версии за 10–14 дней на чистой архитектуре.',
-            en: 'Focused MVP launch for startups and scalable SaaS platform development on Next.js, Node.js, and PostgreSQL. 10–14 day sprint for your first working version.',
+            ru: 'Разработка MVP для стартапов и SaaS-платформ на Next.js и PostgreSQL. Сфокусированный запуск за 10–14 дней от $1500. Масштабируемый код и гарантия.',
+            en: 'Launch your startup MVP in a focused 10–14 day sprint on Next.js and PostgreSQL. From $1500, fixed timeline, scalable architecture and full code handover.',
         },
         hero: {
             ru: { title: 'От идеи до <span class="gradient-text">работающего продукта</span> за 14 дней', subtitle: 'Фокусированный MVP-спринт за 10–14 дней: запускаем ключевой сценарий для реальных пользователей и инвесторов на масштабируемой архитектуре.' },
@@ -405,12 +407,12 @@ export const services: ServicePageData[] = [
         id: 'shop',
         slug: 'internet-magaziny',
         seoTitle: {
-            ru: 'Разработка интернет-магазинов под ключ: каталог, корзина, оплата | AVPdev',
-            en: 'E-commerce Development: Storefront, Cart, Payments | AVPdev',
+            ru: 'Разработка интернет-магазинов под ключ | AVPdev',
+            en: 'E-commerce & Online Store Development | AVPdev',
         },
         seoDescription: {
-            ru: 'Создаем быстрые интернет-магазины на Astro и Next.js: витрины, каталоги, онлайн-оплата, учет остатков и админка с автосжатием изображений. Уведомления о заказах в Telegram.',
-            en: 'We build fast online stores on Astro and Next.js: storefronts, catalogs, online payments, stock management and an admin panel with automatic image compression. Order notifications in Telegram.',
+            ru: 'Быстрые интернет-магазины на Astro и Next.js: витрины, корзина, онлайн-оплата и заказы в Telegram. Запуск от 3 недель, от $1500. Гарантия и админка.',
+            en: 'Fast online stores on Astro & Next.js: catalogs, seamless checkout, payments and Telegram order alerts. Launch from 3 weeks, from $1500. Full warranty.',
         },
         hero: {
             ru: { title: 'Интернет-магазины, которые <span class="gradient-text">продают</span>', subtitle: 'Быстрые витрины, удобная корзина, онлайн-оплата и заказы сразу в Telegram. От идеи до первой продажи.' },
@@ -490,12 +492,12 @@ export const services: ServicePageData[] = [
         id: 'tma',
         slug: 'telegram-mini-apps',
         seoTitle: {
-            ru: 'Разработка Telegram Mini Apps под ключ для бизнеса • AVPdev',
-            en: 'Turnkey Telegram Mini Apps (TMA) Development • AVPdev',
+            ru: 'Разработка Telegram Mini Apps под ключ | AVPdev',
+            en: 'Telegram Mini Apps (TMA) Development | AVPdev',
         },
         seoDescription: {
-            ru: 'Разработка Telegram Mini Apps и WebApps под ключ: магазины, бронирование, сервисы и CRM внутри Telegram. Мгновенная оплата, запуск от 14 дней, прямая гарантия.',
-            en: 'Custom Telegram Mini Apps & WebApps for business: e-commerce stores, booking flows, and custom CRMs inside Telegram. Turnkey delivery with full warranty.',
+            ru: 'Telegram Mini Apps и WebApps под ключ: магазины, сервисы, бронирование и CRM внутри мессенджера. Запуск от 14 дней, цены от $600. Гарантия на код.',
+            en: 'Custom Telegram Mini Apps & WebApps: in-app stores, booking flows and CRMs. Fast turnaround from 14 days, from $600. Direct developer warranty.',
         },
         hero: {
             ru: { title: 'Telegram <span class="gradient-text">Mini Apps</span>', subtitle: 'Магазины, записи, крипто-приложения и CRM прямо в мессенджере — без установки приложения, с мгновенным входом через Telegram.' },

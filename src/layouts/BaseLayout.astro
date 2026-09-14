@@ -148,11 +148,33 @@ const globalOrganizationSchema = {
     "@context": "https://schema.org",
     "@graph": [
         {
-            "@type": "Organization",
+            "@type": ["Organization", "ProfessionalService"],
             "@id": `${siteBase}/#organization`,
             "name": "AVPdev",
             "url": siteBase,
             "logo": `${siteBase}/og-image.webp`,
+            "priceRange": "$$",
+            "currenciesAccepted": "USD, EUR, BYN, RUB",
+            "paymentAccepted": "Bank Transfer, Credit Card, Cryptocurrency",
+            "areaServed": [
+                { "@type": "Country", "name": "Belarus" },
+                { "@type": "Country", "name": "Poland" },
+                { "@type": "Country", "name": "Lithuania" },
+                { "@type": "Country", "name": "Germany" },
+                { "@type": "Country", "name": "United States" },
+                { "@type": "AdministrativeArea", "name": "Worldwide" }
+            ],
+            "knowsAbout": [
+                "Web Development",
+                "Astro",
+                "Next.js",
+                "React",
+                "Node.js",
+                "Artificial Intelligence Integration",
+                "Large Language Models",
+                "Telegram Mini Apps",
+                "Web Scraping"
+            ],
             "sameAs": [
                 "https://github.com/AVP-Dev",
                 "https://www.linkedin.com/in/avp-dev/",

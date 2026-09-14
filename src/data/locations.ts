@@ -6,37 +6,14 @@ export interface Location {
 }
 
 export const locations: Location[] = [
-  // --- Беларусь (Приоритет - максимальный охват) ---
+  // --- Беларусь (Областные центры и столица) ---
   { slug: 'minsk', name_ru: 'Минске', name_en: 'Minsk', country: 'BY' },
   { slug: 'gomel', name_ru: 'Гомеле', name_en: 'Gomel', country: 'BY' },
   { slug: 'mogilev', name_ru: 'Могилеве', name_en: 'Mogilev', country: 'BY' },
   { slug: 'vitebsk', name_ru: 'Витебске', name_en: 'Vitebsk', country: 'BY' },
   { slug: 'grodno', name_ru: 'Гродно', name_en: 'Grodno', country: 'BY' },
   { slug: 'brest', name_ru: 'Бресте', name_en: 'Brest', country: 'BY' },
-  { slug: 'bobruisk', name_ru: 'Бобруйске', name_en: 'Bobruisk', country: 'BY' },
-  { slug: 'baranovichi', name_ru: 'Барановичах', name_en: 'Baranovichi', country: 'BY' },
-  { slug: 'borisov', name_ru: 'Борисове', name_en: 'Borisov', country: 'BY' },
-  { slug: 'pinsk', name_ru: 'Пинске', name_en: 'Pinsk', country: 'BY' },
-  { slug: 'orsha', name_ru: 'Орше', name_en: 'Orsha', country: 'BY' },
-  { slug: 'mozyr', name_ru: 'Мозыре', name_en: 'Mozyr', country: 'BY' },
-  { slug: 'lida', name_ru: 'Лиде', name_en: 'Lida', country: 'BY' },
-  { slug: 'soligorsk', name_ru: 'Солигорске', name_en: 'Soligorsk', country: 'BY' },
-  { slug: 'novopolotsk', name_ru: 'Новополоцке', name_en: 'Novopolotsk', country: 'BY' },
-  { slug: 'molodechno', name_ru: 'Молодечно', name_en: 'Molodechno', country: 'BY' },
-  { slug: 'polotsk', name_ru: 'Полоцке', name_en: 'Polotsk', country: 'BY' },
-  { slug: 'zhlobin', name_ru: 'Жлобине', name_en: 'Zhlobin', country: 'BY' },
-  { slug: 'rechitsa', name_ru: 'Речице', name_en: 'Rechitsa', country: 'BY' },
-  { slug: 'svetlogorsk', name_ru: 'Светлогорске', name_en: 'Svetlogorsk', country: 'BY' },
-  { slug: 'slutsk', name_ru: 'Слуцке', name_en: 'Slutsk', country: 'BY' },
-  { slug: 'kobrin', name_ru: 'Кобрине', name_en: 'Kobrin', country: 'BY' },
-  { slug: 'slonim', name_ru: 'Слониме', name_en: 'Slonim', country: 'BY' },
-  { slug: 'volkovysk', name_ru: 'Волковыске', name_en: 'Volkovysk', country: 'BY' },
-  { slug: 'zhodino', name_ru: 'Жодино', name_en: 'Zhodino', country: 'BY' },
-  { slug: 'smorgon', name_ru: 'Сморгони', name_en: 'Smorgon', country: 'BY' },
-  { slug: 'kalinkovichi', name_ru: 'Калинковичах', name_en: 'Kalinkovichi', country: 'BY' },
-  { slug: 'rogachev', name_ru: 'Рогачеве', name_en: 'Rogachev', country: 'BY' },
-  { slug: 'gorki', name_ru: 'Горках', name_en: 'Gorki', country: 'BY' },
-  { slug: 'osipovichi', name_ru: 'Осиповичах', name_en: 'Osipovichi', country: 'BY' },
+
 
   // --- Россия ---
   { slug: 'moscow', name_ru: 'Москве', name_en: 'Moscow', country: 'RU' },
