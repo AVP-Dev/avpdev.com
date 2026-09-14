@@ -4,7 +4,7 @@ description: "Why AI degrades architecture in complex projects. Local greedy sho
 pubDate: 2026-09-14
 heroImage: "../../../assets/images/blog/ai-loves-straight-roads.webp"
 tags: ["AI", "System Architecture", "Technical Debt", "Refactoring", "GitClear", "Engineering"]
-draft: true
+draft: false
 ---
 
 When Redis creator Salvatore Sanfilippo declared that code has become cheap raw material and that line-by-line review is a waste of time ([read my deep dive on that paradox](/en/blog/control-ideas-not-code)), many developers rejoiced: *“Great! We can just generate everything with agents, run automated tests, and never look inside!”*
@@ -59,6 +59,9 @@ The AI shortened the path. It eliminated code. And in doing so, it compromised t
 ---
 
 ### Accidental vs. Essential Complexity
+
+> **Who is Fred Brooks?**  
+> The legendary system architect behind the IBM System/360, Turing Award laureate, and author of the classic software engineering book *The Mythical Man-Month*. Brooks famously established Brooks's Law: adding manpower to a late software project only makes it later.
 
 In his landmark 1986 essay *«No Silver Bullet»*, Fred Brooks divided software engineering complexity into two distinct categories:
 1. **Accidental Complexity:** syntactic boilerplate, configuration quirks, manual type mapping, build tooling. The friction engineers fought for decades.
@@ -121,8 +124,8 @@ Trying to solve this by manually reading every line of generated diff is impossi
 
 What we need is an architectural framework that forces AI agents to **stay strictly on rails designed by human engineers**.
 
-In our next piece, we examine that practical system:  
-👉 **[«The Architect of the Future: Shifting from Line Reviews to Design Reviews»](/en/blog/architect-of-the-future)**.
+In our final piece of the series, we examine that practical system:  
+👉 **“The Architect of the Future: Shifting from Line Reviews to Design Reviews”** (coming September 16).
 
 We explore the **Skeleton + Pluggable Modules** pattern, Salvatore Sanfilippo’s `DESIGN.md` artifact, and an actionable delegation matrix defining what to hand over to AI completely—and what to never let it touch.
 

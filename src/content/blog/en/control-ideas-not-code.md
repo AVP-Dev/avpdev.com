@@ -125,7 +125,7 @@ If an architect misjudges the system design, an agent will churn out 10,000 line
 
 *Why is it that AI breaks system architecture so easily the moment a task goes beyond a script or a basic CRUD endpoint? Why does it consistently favor shortcuts that look clean today but turn into maintenance nightmares tomorrow?*
 
-We will examine this in detail in the upcoming article of the series: **“AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems”** (coming soon).
+We examine this in detail in the next article of the series: **[“AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems”](/en/blog/ai-loves-straight-roads)**.
 
 > **Open-Source Resource:**  
 > If you want to integrate robust architectural rails and specification templates for coding agents into your projects today, check out my open starter: **[AVP-Dev / agent-starter-kit on GitHub](https://github.com/AVP-Dev/agent-starter-kit)**.
