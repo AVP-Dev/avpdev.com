@@ -24,6 +24,19 @@ const coreServices = new Set([
   '/ru/uslugi/internet-magaziny/',
 ]);
 
+const serviceSlugPairs = {
+  'razrabotka-saitov': 'website-development',
+  'ai-integracii': 'ai-integration',
+  'razrabotka-botov-i-parserov': 'bot-and-scraper-development',
+  'saas-mvp': 'saas-mvp',
+  'telegram-mini-apps': 'telegram-mini-apps',
+  'internet-magaziny': 'ecommerce-development',
+};
+
+const crossLangBlogPairs = {
+  'uroki-amsterdama': 'lessons-from-amsterdam',
+};
+
 function rehypeExternalLinks() {
   return (tree) => {
     function visit(node) {
@@ -146,6 +159,40 @@ export default defineConfig({
           // Все остальные
           item.priority = 0.5;
           item.changefreq = 'monthly';
+        }
+
+        // Кастомные hreflang links для асимметричных URL (Услуги и кросс-языковые статьи)
+        const parsedUrl = new URL(url);
+        const pathname = parsedUrl.pathname;
+
+        if (pathname === '/ru/uslugi/' || pathname === '/en/services/') {
+          item.links = [
+            { lang: 'ru', url: `${site}/ru/uslugi/` },
+            { lang: 'en', url: `${site}/en/services/` },
+          ];
+        } else {
+          for (const [ruSlug, enSlug] of Object.entries(serviceSlugPairs)) {
+            const ruPath = `/ru/uslugi/${ruSlug}/`;
+            const enPath = `/en/services/${enSlug}/`;
+            if (pathname === ruPath || pathname === enPath) {
+              item.links = [
+                { lang: 'ru', url: `${site}${ruPath}` },
+                { lang: 'en', url: `${site}${enPath}` },
+              ];
+              break;
+            }
+          }
+          for (const [ruSlug, enSlug] of Object.entries(crossLangBlogPairs)) {
+            const ruPath = `/ru/blog/${ruSlug}/`;
+            const enPath = `/en/blog/${enSlug}/`;
+            if (pathname === ruPath || pathname === enPath) {
+              item.links = [
+                { lang: 'ru', url: `${site}${ruPath}` },
+                { lang: 'en', url: `${site}${enPath}` },
+              ];
+              break;
+            }
+          }
         }
 
         return item;

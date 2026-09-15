@@ -90,7 +90,7 @@ const schema = {
 };
 ---
 
-<BaseLayout title={service.seoTitle[lang]} description={service.seoDescription[lang]} schema={schema}>
+<BaseLayout title={service.seoTitle[lang]} description={service.seoDescription[lang]} isTranslationKey={false} schema={schema}>
   <Hero title={hero.title} subtitle={hero.subtitle} variant="services" />
 
   <section class="services-info">

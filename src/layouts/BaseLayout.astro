@@ -56,8 +56,12 @@ const {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const finalTitle = isTranslationKey ? t(title as any) : title;
-const finalDescription = isTranslationKey ? t(description as any) : description;
+const translatedTitle = isTranslationKey ? t(title as any) : undefined;
+const finalTitle = (translatedTitle && String(translatedTitle).trim().length > 0) ? translatedTitle : title;
+
+const translatedDescription = isTranslationKey ? t(description as any) : undefined;
+const finalDescription = (translatedDescription && String(translatedDescription).trim().length > 0) ? translatedDescription : description;
+
 
 const isAIBot = Astro.locals.isAIBot;
 
