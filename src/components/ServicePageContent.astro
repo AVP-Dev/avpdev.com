@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from './sections/Hero.astro';
 import Contact from './sections/Contact.astro';
 import ServicePricing from './sections/ServicePricing.astro';
-import { FACTS, type ServicePageData, type Lang } from '../data/services';
+import { FACTS, servicePath, type ServicePageData, type Lang } from '../data/services';
 import { useTranslations } from '../i18n/utils';
 
 export interface Props {
@@ -82,7 +82,7 @@ const schema = {
           "@type": "ListItem",
           "position": 3,
           "name": service.schema.serviceName[lang],
-          "item": `https://avpdev.com/${lang}/${lang === 'ru' ? 'uslugi' : 'services'}/${service.slug}/`
+          "item": `https://avpdev.com${servicePath(service.id, lang)}`
         }
       ]
     }
