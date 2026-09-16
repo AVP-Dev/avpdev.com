@@ -128,10 +128,15 @@ Trying to solve this by manually reading every line of generated diff is impossi
 What we need is an architectural framework that forces AI agents to **stay strictly on rails designed by human engineers**.
 
 In our final piece of the series, we examine that practical system:  
-👉 **“The Architect of the Future: Shifting from Line Reviews to Design Reviews”** (coming September 16).
+👉 **[“The Architect of the Future: From Line Reviews to Design Reviews”](/en/blog/architect-of-the-future)**.
 
 We explore the **Skeleton + Pluggable Modules** pattern, Salvatore Sanfilippo’s `DESIGN.md` artifact, and an actionable delegation matrix defining what to hand over to AI completely—and what to never let it touch.
 
 ---
 
-*Also read: [Code Became Cheap. Engineering Thinking Did Not](/en/blog/control-ideas-not-code) | [AI-Friendly Code Architecture: 5 Essential Rules](/en/blog/ai-friendly-code-architecture)*
+*Articles in this series:*  
+1. [Code Became Cheap. Engineering Thinking Did Not](/en/blog/control-ideas-not-code)  
+2. **AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems** (this article)  
+3. [The Architect of the Future: From Line Reviews to Design Reviews](/en/blog/architect-of-the-future)  
+
+*Also read: [AI-Friendly Code Architecture: 5 Essential Rules](/en/blog/ai-friendly-code-architecture)*

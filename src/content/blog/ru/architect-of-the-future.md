@@ -4,7 +4,7 @@ description: "Архитектура Skeleton + Pluggable Modules, артефа�
 pubDate: 2026-09-16
 heroImage: "../../../assets/images/blog/architect-of-the-future.webp"
 tags: ["AI", "архитектура", "DESIGN.md", "Design Review", "будущее IT", "управление разработкой"]
-draft: true
+draft: false
 ---
 
 Мы уже выяснили, что [код стал дешёвым расходником](/ru/blog/control-ideas-not-code), а слепое доверие нейросетям [быстро разрушает сложные системы](/ru/blog/ai-loves-straight-roads) из-за локальной оптимизации и срезания важных архитектурных слоев.
@@ -127,6 +127,7 @@ draft: true
 
 ---
 
-*Читайте также по теме:*  
-* [Код стал дешёвым. Инженерное мышление — нет](/ru/blog/control-ideas-not-code)  
-* [AI любит прямые дороги: почему локальная оптимизация рушит сложные системы](/ru/blog/ai-loves-straight-roads)
+*Серия статей об инженерном мышлении в эпоху AI:*  
+1. [Код стал дешёвым. Инженерное мышление — нет](/ru/blog/control-ideas-not-code)  
+2. [AI любит прямые дороги: почему локальная оптимизация рушит сложные системы](/ru/blog/ai-loves-straight-roads)  
+3. **Архитектор будущего: от построчного ревью к Design Review** (эта статья)

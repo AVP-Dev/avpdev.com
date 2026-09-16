@@ -4,7 +4,7 @@ description: "Skeleton + Pluggable Modules architecture, Salvatore Sanfilippo's 
 pubDate: 2026-09-16
 heroImage: "../../../assets/images/blog/architect-of-the-future.webp"
 tags: ["AI", "Architecture", "DESIGN.md", "Design Review", "Engineering Management", "Future of Tech"]
-draft: true
+draft: false
 ---
 
 We have established that [code has become cheap raw material](/en/blog/control-ideas-not-code) and that trusting AI blindly [degrades system architecture](/en/blog/ai-loves-straight-roads) through greedy local shortcuts.
@@ -125,6 +125,7 @@ And as code generation becomes instantaneous and free, the true value of an engi
 
 ---
 
-*Also read:*  
-* [Code Became Cheap. Engineering Thinking Did Not](/en/blog/control-ideas-not-code)  
-* [AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems](/en/blog/ai-loves-straight-roads)*
+*Articles in this series:*  
+1. [Code Became Cheap. Engineering Thinking Did Not](/en/blog/control-ideas-not-code)  
+2. [AI Loves Straight Roads: Why Local Optimization Breaks Complex Systems](/en/blog/ai-loves-straight-roads)  
+3. **The Architect of the Future: From Line Reviews to Design Reviews** (this article)
