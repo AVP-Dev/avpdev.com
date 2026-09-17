@@ -28,6 +28,11 @@ const t = useTranslations(lang);
     )}
 
     <div class="container hero-container">
+        {/* Крошки над H1 (стандарт 09.2026): часть hero-композиции,
+            отступ от фиксированной шапки даёт сам hero */}
+        <div class="hero-crumbs">
+            <slot name="crumbs" />
+        </div>
         <div class="hero-content">
             <div class={`hero-text ${variant === 'services' ? 'services-text' : ''}`}>
                 <div class="retro-hero-hud" aria-label="Retro HUD Status">
@@ -47,13 +52,15 @@ const t = useTranslations(lang);
                     </button>
                 </div>
 
+                {/* SEO 09.2026: ровно один <h1> на страницу (Google «No clear main title» + W3C).
+                    default/retro — два <span> внутри одного h1, видимость переключается CSS. */}
                 {title ? (
                   <h1 set:html={title}></h1>
                 ) : (
-                  <>
-                    <h1 class="hero-h1-default" set:html={t("hero_h1")} />
-                    <h1 class="hero-h1-retro" set:html={t("hero_h1_retro")} />
-                  </>
+                  <h1>
+                    <span class="hero-h1-default" set:html={t("hero_h1")} />
+                    <span class="hero-h1-retro" set:html={t("hero_h1_retro")} />
+                  </h1>
                 )}
                 
                 {subtitle ? (
@@ -162,6 +169,15 @@ const t = useTranslations(lang);
         width: 100%;
         position: relative;
         z-index: 2;
+    }
+
+    .hero-crumbs {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Пустой слот не занимает места (главная без крошек — без изменений) */
+    .hero-crumbs:empty {
+        display: none;
     }
 
     .hero-h1-retro,

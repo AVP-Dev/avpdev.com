@@ -123,8 +123,11 @@ export default defineConfig({
       serialize(item) {
         const url = item.url;
 
-        // lastmod — текущая дата билда
-        item.lastmod = new Date().toISOString();
+        // lastmod: НЕ ставим фейковую дату билда всем URL.
+        // SEO 09.2026 (Google binary trust): lastmod используется только если
+        // «consistently and verifiably accurate». Массовый bump сегодняшней датой
+        // приводит к потере доверия ко всему sitemap. lastmod проставляет только
+        // @astrojs/sitemap по умолчанию (если есть данные) — вручную не трогаем.
 
         // Дифференцированный priority по типу страницы
         if (url.match(/\/(ru|en)\/$/)) {
@@ -150,6 +153,10 @@ export default defineConfig({
         } else if (url.includes('/brief/')) {
           // Бриф
           item.priority = 0.8;
+          item.changefreq = 'monthly';
+        } else if (url.match(/\/(ru|en)\/(faq|reviews|contacts|guarantee|payment)\/$/)) {
+          // Трастовые страницы (09.2026): отзывы, FAQ, контакты, гарантии, оплата
+          item.priority = 0.7;
           item.changefreq = 'monthly';
         } else if (url.includes('/legal/')) {
           // Юридические страницы

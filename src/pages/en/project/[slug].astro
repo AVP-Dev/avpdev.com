@@ -42,8 +42,12 @@ const {
 } = project.data;
 
 const allProjects = await getCollection("projects", ({ id }) => id.startsWith(`${lang}/`) && id !== project.id);
-import { getRandomItems } from "../../../utils/random";
-const relatedProjects = getRandomItems(allProjects, 2);
+import { getRelatedProjects, CATEGORY_SERVICE } from "../../../utils/related";
+import { services, servicePath } from "../../../data/services";
+const relatedProjects = getRelatedProjects(project, allProjects, 2);
+// Обратная связка «кейс → услуга» (перелинковка каталога)
+const relatedServiceId = CATEGORY_SERVICE[project.data.category];
+const relatedService = services.find((s) => s.id === relatedServiceId);
 
 const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -59,7 +63,7 @@ const breadcrumbSchema = {
         {
             "@type": "ListItem",
             position: 2,
-            name: t("catalog_title"),
+            name: t("nav_portfolio"),
             item: new URL(`/${lang}/project/`, Astro.site).href,
         },
         {
@@ -101,6 +105,16 @@ const projectSchema = {
     heroImage={heroImage}
     heroImageAlt={heroImageAlt}
     schema={[breadcrumbSchema, projectSchema]}
+    breadcrumbs={[
+        { name: "Home", href: `/${lang}/` },
+        { name: t("nav_portfolio"), href: `/${lang}/project/` },
+        { name: t(titleKey as TranslationKey) },
+    ]}
+    serviceBadge={relatedService ? {
+        label: "Service",
+        name: relatedService.schema.serviceName[lang],
+        href: servicePath(relatedService.id, lang),
+    } : undefined}
 >
     <div slot="header">
         <h1

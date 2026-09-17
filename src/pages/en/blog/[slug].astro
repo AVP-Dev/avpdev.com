@@ -2,6 +2,7 @@
 // src/pages/en/blog/[slug].astro
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import Cta from '../../../components/Cta.astro';
 import BlogCard from '../../../components/BlogCard.astro';
 import type { CollectionEntry } from 'astro:content';
@@ -36,8 +37,8 @@ const formattedDate = new Date(post.data.pubDate).toLocaleDateString(lang, {
 });
 
 const allPostsForLang = await getCollection('blog', ({ id, data }) => id.startsWith(`${lang}/`) && id !== post.id && data.draft !== true);
-import { getRandomItems } from "../../../utils/random";
-const relatedPosts = getRandomItems(allPostsForLang, 2);
+import { getRelatedPosts } from "../../../utils/related";
+const relatedPosts = getRelatedPosts(post, allPostsForLang, 2);
 
 const backLink = `/${lang}/blog/`;
 
@@ -95,6 +96,13 @@ const articleSchema = {
   translationSlug={post.data.translationSlug}
 >
   <article class="blog-post-article">
+    <div class="blog-post-container">
+        <Breadcrumbs lead items={[
+            { name: t("breadcrumb_home"), href: `/${lang}/` },
+            { name: t("breadcrumb_blog"), href: `/${lang}/blog/` },
+            { name: post.data.title },
+        ]} />
+    </div>
     <header class="blog-post-hero">
         {post.data.heroImage && (
             <div class="hero-image-container">

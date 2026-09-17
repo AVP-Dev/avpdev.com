@@ -72,8 +72,8 @@ const PROJECTS_DATA: Project[] = filteredProjects.map((project, index) => ({
     tags: project.data.stack,
 }));
 
-// Setup Metadata
-const pageTitle = `${t("catalog_title")} | AVPdev.com`;
+// Setup Metadata (catalog_title уже содержит бренд «| AVPdev» — суффикс не дублируем)
+const pageTitle = t("catalog_title");
 const pageDesc = t("catalog_subtitle");
 
 // Schema.org
@@ -91,7 +91,7 @@ const breadcrumbSchema = {
         {
             "@type": "ListItem",
             position: 2,
-            name: t("catalog_title"),
+            name: t("nav_portfolio"),
             item: new URL(Astro.url.pathname, Astro.site).href,
         },
     ],

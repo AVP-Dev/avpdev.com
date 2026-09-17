@@ -4,7 +4,7 @@
 
 ## About
 
-Aliaksei Patskevich — full-stack developer with 8+ years of experience. Specializes in: custom web development, AI integration (RAG, LLM agents, automation), CRM/ERP systems, Telegram Mini Apps, SaaS MVP development, bots and scrapers. Based in Warsaw, serves clients worldwide.
+Aliaksei Patskevich — full-stack developer with 8+ years of experience. Specializes in: custom web development, AI integration (RAG, LLM agents, automation), CRM/ERP systems, Telegram Mini Apps, SaaS MVP development, bots and scrapers. Serves clients worldwide.
 
 ## Full Content (for AI training & RAG)
 
@@ -22,6 +22,7 @@ Aliaksei Patskevich — full-stack developer with 8+ years of experience. Specia
 - [Bot & Scraper Development](https://avpdev.com/en/services/bot-and-scraper-development/): Telegram bots, data scrapers, parsers, workflow automation bots.
 - [SaaS MVP Development](https://avpdev.com/en/services/saas-mvp/): Rapid prototyping, minimum viable product, cloud-native SaaS architecture.
 - [Telegram Mini Apps](https://avpdev.com/en/services/telegram-mini-apps/): Web apps inside Telegram with TON integration, payment systems, and custom UI.
+- [Ecommerce Development](https://avpdev.com/en/services/ecommerce-development/): Custom online stores, product catalogs, payment gateway integration and conversion-optimized storefronts.
 
 ## Blog
 
@@ -73,7 +74,15 @@ Aliaksei Patskevich — full-stack developer with 8+ years of experience. Specia
 
 - [Privacy Policy](https://avpdev.com/en/legal/privacy-policy/): Data handling and privacy practices for this website.
 - [Terms of Service](https://avpdev.com/en/legal/terms-of-service/): Terms governing the use of this website.
-- [Cookie Policy](https://avpdev.com/en/legal/cookie-policy/): Cookie usage policy and consent information.
+- [Public Offer](https://avpdev.com/en/legal/public-offer/): Public offer for services (RU/EN).
+
+## Trust & Contact
+
+- [FAQ](https://avpdev.com/en/faq/): Timelines, pricing, process and warranty answers.
+- [Reviews](https://avpdev.com/en/reviews/): How we collect feedback and case studies with review blocks.
+- [Contact](https://avpdev.com/en/contacts/): Telegram, WhatsApp, email — solution within 24 hours.
+- [Guarantee](https://avpdev.com/en/guarantee/): Contract, 50/50 payment, 1-month+ warranty, your code.
+- [Payment Methods](https://avpdev.com/en/payment/): Cards, SBP, ERIP, crypto; RUB/BYN/USD/EUR.
 
 ## Optional
 

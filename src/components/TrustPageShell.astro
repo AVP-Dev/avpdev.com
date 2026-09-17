@@ -1,0 +1,44 @@
+---
+// src/components/TrustPageShell.astro
+// Единая оболочка трастовых страниц: SEO-мета + крошки + H1 + слот + форма связи.
+// RU/EN-паритет: весь текст приходит из src/data/trust-pages.ts по lang.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import Hero from './sections/Hero.astro';
+import Contact from './sections/Contact.astro';
+import type { TrustPageMeta } from '../data/trust-pages';
+import type { Lang } from '../data/services';
+
+export interface Props {
+	meta: TrustPageMeta;
+	lang: Lang;
+	schema?: Record<string, any> | Record<string, any>[];
+	/** На /contacts/ форма уже есть в контенте — не дублировать */
+	hideContact?: boolean;
+}
+
+const { meta, lang, schema, hideContact = false } = Astro.props;
+---
+
+<BaseLayout
+	title={meta.seoTitle[lang]}
+	description={meta.seoDescription[lang]}
+	isTranslationKey={false}
+	schema={schema}
+>
+	<Hero title={meta.h1[lang]} subtitle={meta.intro[lang]} variant="services">
+		<Breadcrumbs
+			slot="crumbs"
+			items={[
+				{ name: lang === 'ru' ? 'Главная' : 'Home', href: `/${lang}/` },
+				{ name: meta.crumb[lang] },
+			]}
+		/>
+	</Hero>
+	<div class="trust-body">
+		<div class="container trust-narrow">
+			<slot />
+		</div>
+	</div>
+	{!hideContact && <Contact />}
+</BaseLayout>

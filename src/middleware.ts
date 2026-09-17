@@ -1,11 +1,15 @@
 import { defineMiddleware } from 'astro:middleware';
 
-// AI bot User-Agent detection patterns
+// AI bot User-Agent detection patterns — ONLY LLM/training bots.
+// NOTE (SEO 09.2026, Google Spam Policies «Cloaking»): search/social crawlers
+// (Googlebot, Applebot, FacebookBot) MUST receive the full page. Serving them
+// a stripped layout = cloaking risk + loss of internal links. They are
+// intentionally NOT in this list.
 const AI_BOT_PATTERNS = [
   'GPTBot', 'ChatGPT-User', 'Claude-Web', 'ClaudeBot', 'Claude-SearchBot',
-  'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Googlebot',
+  'PerplexityBot', 'Perplexity-User', 'Google-Extended',
   'Gemini', 'Gemini-User', 'CCBot', 'anthropic-ai', 'Bytespider',
-  'cohere-ai', 'FacebookBot', 'Meta-ExternalAgent', 'Applebot',
+  'cohere-ai', 'Meta-ExternalAgent',
   'Amazonbot', 'OAI-SearchBot', 'coze',
 ];
 
@@ -170,8 +174,16 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return applySecurityHeaders(context.redirect(`${cleanPath}/`, 301));
   }
 
-  // 4.5. Enforce Trailing Slash (exempt /api/ endpoints so curl without -L works directly)
-  if (!path.startsWith('/api/') && !path.endsWith('/') && !path.split('/').pop()?.includes('.')) {
+  // 4.5. Enforce Trailing Slash (exempt /api/ endpoints so curl without -L works directly,
+  // plus Astro internal endpoints: /_image (dev image pipeline), /_actions, /_server-islands.
+  // Redirecting those breaks images/actions (301 hop, mangled query).
+  const isExemptPath =
+    path.startsWith('/api/') ||
+    path === '/_image' ||
+    path.startsWith('/_image/') ||
+    path.startsWith('/_actions') ||
+    path.startsWith('/_server-islands');
+  if (!isExemptPath && !path.endsWith('/') && !path.split('/').pop()?.includes('.')) {
     return applySecurityHeaders(context.redirect(`${path}/${url.search}`, 301));
   }
 

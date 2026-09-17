@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import TrustPageShell from '../../components/TrustPageShell.astro';
+import { TRUST_PAGES } from '../../data/trust-pages';
+import type { Lang } from '../../data/services';
+import { useTranslations } from '../../i18n/utils';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+	return [{ params: { lang: 'ru' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang === 'en' ? 'en' : 'ru') as Lang;
+const meta = TRUST_PAGES.reviews;
+const t = useTranslations(currentLang);
+
+// Кейсы, где есть блоки отзывов (подписи — из i18n проектов, тексты не выдуманы)
+const reviewCases = [
+	{ slug: 'project-cars', captionKey: 'gallery_caption_cars_testimonials' },
+	{ slug: 'project-tow-truck', captionKey: 'gallery_caption_tow_testimonials' },
+	{ slug: 'project-travel', captionKey: 'gallery_caption_travel_reviews' },
+] as const;
+
+const allProjects = await getCollection('projects', ({ id }) => id.startsWith(`${currentLang}/`));
+const cases = reviewCases.flatMap((c) => {
+	const entry = allProjects.find((p) => p.id === `${currentLang}/${c.slug}.md`);
+	return entry ? [{ entry, caption: t(c.captionKey as any) }] : [];
+});
+
+const siteBase = 'https://avpdev.com';
+const schema = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'ItemList',
+		inLanguage: currentLang === 'ru' ? 'ru-RU' : 'en-US',
+		name: meta.h1[currentLang],
+		itemListElement: cases.map((c, i) => ({
+			'@type': 'ListItem',
+			position: i + 1,
+			url: `${siteBase}/${currentLang}/project/${c.entry.id.replace(/^(ru|en)\//, '').replace(/\.mdx?$/, '')}/`,
+		})),
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{
+				'@type': 'ListItem',
+				position: 1,
+				name: currentLang === 'ru' ? 'Главная' : 'Home',
+				item: `${siteBase}/${currentLang}/`,
+			},
+			{
+				'@type': 'ListItem',
+				position: 2,
+				name: meta.crumb[currentLang],
+				item: `${siteBase}/${currentLang}/reviews/`,
+			},
+		],
+	},
+];
+---
+
+<TrustPageShell meta={meta} lang={currentLang} schema={schema}>
+	{/*
+	  Честно: текстовых отзывов клиентов в открытом виде у нас пока нет,
+	  поэтому здесь нет AggregateRating/звёзд (выдуманный рейтинг = спам по
+	  правилам Google). Страница ведёт на проверяемые кейсы + форму.
+	*/}
+	<h2 class="trust-h2">
+		{currentLang === 'ru' ? 'Где проверить нашу работу' : 'Where to verify our work'}
+	</h2>
+	<ul class="trust-case-links">
+		{cases.map((c) => (
+			<li>
+				<a
+					href={`/${currentLang}/project/${c.entry.id.replace(/^(ru|en)\//, '').replace(/\.mdx?$/, '')}/`}
+				>
+					<strong>{t(c.entry.data.titleKey as any)}</strong>
+					<span>{c.caption}</span>
+				</a>
+			</li>
+		))}
+	</ul>
+
+	<h2 class="trust-h2">
+		{currentLang === 'ru' ? 'Как оставить отзыв' : 'How to leave a review'}
+	</h2>
+	<p class="trust-p">
+		{currentLang === 'ru'
+			? 'Работали с нами? Напишите через форму ниже или в Telegram — опубликуем ваш отзыв с ссылкой на проект.'
+			: 'Worked with us? Write via the form below or on Telegram — we will publish your review with a link to the project.'}
+	</p>
+</TrustPageShell>

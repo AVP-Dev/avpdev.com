@@ -2,10 +2,15 @@
 // src/components/ServicePageContent.astro
 // Единый рендер страницы услуги: данные берёт из src/data/services.ts.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import AccordionItem from './AccordionItem.astro';
 import Hero from './sections/Hero.astro';
 import Contact from './sections/Contact.astro';
 import ServicePricing from './sections/ServicePricing.astro';
+import PortfolioCard from './PortfolioCard.astro';
 import { FACTS, servicePath, type ServicePageData, type Lang } from '../data/services';
+import { getServiceProjects } from '../utils/related';
+import { getCollection } from 'astro:content';
 import { useTranslations } from '../i18n/utils';
 
 export interface Props {
@@ -26,6 +31,26 @@ const pricing = service.pricing[lang];
 
 const providerName = t('author_name');
 
+// Связка «услуга → кейсы» (перелинковка каталога, детерминированная)
+const allProjects = await getCollection('projects', ({ id }) => id.startsWith(`${lang}/`));
+const serviceCases = getServiceProjects(service.id, allProjects, 2);
+
+// Offer с ценой: парсим число из tier.value («от $400» → 400 USD).
+// Фактично — дословно соответствует отображаемым ценам на странице.
+const tierOffers = pricing.tiers.flatMap((tier) => {
+  const digits = tier.value.replace(/[^0-9]/g, '');
+  const base: Record<string, unknown> = {
+    "@type": "Offer",
+    name: tier.label,
+    description: tier.note ? `${tier.value}. ${tier.note}` : tier.value,
+  };
+  if (digits) {
+    base.price = digits;
+    base.priceCurrency = 'USD';
+  }
+  return [base];
+});
+
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -39,6 +64,7 @@ const schema = {
       },
       "inLanguage": lang === 'ru' ? 'ru-RU' : 'en-US',
       "areaServed": "Worldwide",
+      "offers": tierOffers,
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": service.schema.catalogName[lang],
@@ -91,7 +117,13 @@ const schema = {
 ---
 
 <BaseLayout title={service.seoTitle[lang]} description={service.seoDescription[lang]} isTranslationKey={false} schema={schema}>
-  <Hero title={hero.title} subtitle={hero.subtitle} variant="services" />
+  <Hero title={hero.title} subtitle={hero.subtitle} variant="services">
+    <Breadcrumbs slot="crumbs" items={[
+      { name: t('breadcrumb_home'), href: `/${lang}/` },
+      { name: lang === 'ru' ? 'Услуги' : 'Services', href: `/${lang}/${lang === 'ru' ? 'uslugi' : 'services'}/` },
+      { name: service.schema.serviceName[lang] },
+    ]} />
+  </Hero>
 
   <section class="services-info">
     <div class="container">
@@ -127,23 +159,36 @@ const schema = {
 
   <ServicePricing title={t('pricing_title')} tiers={pricing.tiers} facts={pricing.facts} note={FACTS.pricingNote[lang]} />
 
+  {serviceCases.length > 0 && (
+    <section class="service-cases">
+      <div class="container">
+        <h2 class="section-title">{lang === 'ru' ? 'Кейсы по услуге' : 'Related case studies'}</h2>
+        <div class="service-cases-grid">
+          {serviceCases.map((p) => (
+            <PortfolioCard
+              id={0 as any}
+              tags={p.data.stack as any}
+              img={p.data.heroImage}
+              titleKey={p.data.titleKey as any}
+              link={`/${lang}/project/${p.id.replace(/^ru\/|^en\//, '').replace(/\.mdx?$/, '')}/`}
+              techStack={p.data.content.techStack}
+              category={p.data.category as any}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">
         <h2 class="section-title">{faqHeading}</h2>
         <p class="section-subtitle">{faqSubtitle}</p>
       </div>
-      <div class="faq-container">
+      <div class="acc-list" data-accordion>
         {faqs.map((faq) => (
-          <details class="faq-item">
-            <summary class="faq-question">
-              {faq.q}
-              <div class="faq-plus"></div>
-            </summary>
-            <div class="faq-answer">
-              <p>{faq.a}</p>
-            </div>
-          </details>
+          <AccordionItem q={faq.q} a={faq.a} />
         ))}
       </div>
     </div>
@@ -282,83 +327,6 @@ const schema = {
 
   .faq-header {
     margin-bottom: 5rem;
-  }
-
-  .faq-container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .faq-item {
-    background: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 24px;
-    margin-bottom: 1.25rem;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .faq-item:hover {
-    border-color: rgba(var(--accent-color-start-rgb), 0.4);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  }
-
-  .faq-question {
-    padding: 2rem;
-    font-weight: 700;
-    font-size: 1.2rem;
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text-color);
-    position: relative;
-  }
-
-  .faq-question::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq-plus {
-    width: 24px;
-    height: 24px;
-    position: relative;
-    transition: transform 0.4s ease;
-  }
-
-  .faq-plus::before, .faq-plus::after {
-    content: '';
-    position: absolute;
-    background: var(--accent-color);
-    border-radius: 2px;
-  }
-
-  .faq-plus::before {
-    width: 100%;
-    height: 2px;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-  }
-
-  .faq-plus::after {
-    width: 2px;
-    height: 100%;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .faq-item[open] .faq-plus {
-    transform: rotate(45deg);
-  }
-
-  .faq-answer {
-    padding: 0 2rem 2.5rem;
-    color: var(--text-secondary-color);
-    line-height: 1.8;
-    font-size: 1.1rem;
   }
 
   @media (max-width: 1200px) {

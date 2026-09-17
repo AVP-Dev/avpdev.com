@@ -1,0 +1,48 @@
+---
+// src/components/AccordionItem.astro
+// ЕДИНЫЙ аккордеон сайта: секции FAQ, страницы услуг, гео-города, страница /faq/.
+// Один визуал везде (карточка + иконка-плюс с поворотом), single-open в пределах
+// группы [data-accordion]. Стили — глобально в src/styles/trust.css (не scoped,
+// чтобы работали одинаково при клиентской навигации и в обеих локалях).
+import Icon from './Icon.astro';
+
+export interface Props {
+	q: string;
+	a: string;
+}
+
+const { q, a } = Astro.props;
+---
+
+<details class="acc-item">
+	<summary class="acc-q">
+		<span class="acc-q-text">{q}</span>
+		<span class="acc-icon" aria-hidden="true">
+			<Icon name="fa-plus" />
+		</span>
+	</summary>
+	<div class="acc-a-wrap">
+		<p class="acc-a">{a}</p>
+	</div>
+</details>
+
+<script>
+	if (!(window as any).__accInit) {
+		(window as any).__accInit = true;
+		// Single-open: в пределах одной группы открыт только текущий пункт
+		document.addEventListener(
+			'toggle',
+			function (e) {
+				var d = e.target;
+				if (!(d instanceof HTMLDetailsElement) || !d.open || !d.classList.contains('acc-item'))
+					return;
+				var g = d.closest('[data-accordion]');
+				if (!g) return;
+				g.querySelectorAll('details.acc-item[open]').forEach(function (o) {
+					if (o !== d) o.removeAttribute('open');
+				});
+			},
+			true,
+		);
+	}
+</script>

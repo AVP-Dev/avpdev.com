@@ -1,6 +1,7 @@
 ---
 // src/layouts/CaseStudyLayout.astro
 import BaseLayout from "./BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
@@ -15,6 +16,8 @@ export interface Props {
     heroImage: ImageMetadata;
     heroImageAlt: string;
     schema?: Record<string, any>;
+    breadcrumbs?: Array<{ name: string; href?: string }>;
+    serviceBadge?: { label: string; name: string; href: string };
 }
 
 const {
@@ -27,6 +30,8 @@ const {
     heroImage,
     heroImageAlt,
     schema,
+    breadcrumbs,
+    serviceBadge,
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -43,6 +48,7 @@ const homePath = `/${lang}/`;
 >
     <section class="case-study-header">
         <div class="container">
+            {breadcrumbs && breadcrumbs.length > 1 && <Breadcrumbs items={breadcrumbs} />}
             <!-- Заголовок и описание будут переданы из конкретной страницы кейса -->
             <slot name="header" />
             <div class="project-details">
@@ -54,6 +60,12 @@ const homePath = `/${lang}/`;
                     <h4>{t("case_services")}</h4>
                     <p>{t(servicesKey)}</p>
                 </div>
+                {serviceBadge && (
+                    <div class="detail-item">
+                        <h4>{serviceBadge.label}</h4>
+                        <p><a href={serviceBadge.href} class="service-badge-link">{serviceBadge.name}</a></p>
+                    </div>
+                )}
 
             </div>
         </div>

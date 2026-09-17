@@ -6,7 +6,7 @@ import { getLangFromUrl } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 ---
 <BaseLayout
-    title={lang === 'ru' ? '404: Сектор не найден • AVP-Dev' : '404: Sector Not Found • AVP-Dev'}
+    title={lang === 'ru' ? '404: Сектор не найден | AVPdev' : '404: Sector Not Found | AVPdev'}
     description={lang === 'ru' ? 'Страница не найдена. Нажмите Start для возврата на главную.' : 'Page not found. Press Start to return home.'}
     isTranslationKey={false}
     noindex={true}

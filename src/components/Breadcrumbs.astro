@@ -1,0 +1,41 @@
+---
+// src/components/Breadcrumbs.astro
+// Визуальные хлебные крошки (UI-пара к BreadcrumbList JSON-LD).
+// SEO 09.2026: видимая навигация усиливает перелинковку и совпадает со schema.
+export interface BreadcrumbItem {
+  name: string;
+  href?: string;
+}
+
+export interface Props {
+  items: BreadcrumbItem[];
+  label?: string;
+  /**
+   * Крошки первым блоком страницы (над hero с bleed-изображением, напр. статьи):
+   * собственный отступ от фиксированной шапки. Внутри hero/case-шапки не нужен.
+   */
+  lead?: boolean;
+}
+
+const { items, label, lead = false } = Astro.props as Props;
+const ariaLabel = label ?? 'Breadcrumb';
+---
+
+{items.length > 1 && (
+  <nav class:list={['breadcrumb-nav', lead && 'breadcrumb-lead']} aria-label={ariaLabel}>
+    <ol class="breadcrumb-list">
+      {items.map((item, i) => {
+        const isLast = i === items.length - 1;
+        return (
+          <li class="breadcrumb-item" aria-current={isLast ? 'page' : undefined}>
+            {!isLast && item.href ? (
+              <a href={item.href} class="breadcrumb-link">{item.name}</a>
+            ) : (
+              <span class="breadcrumb-current">{item.name}</span>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </nav>
+)}

@@ -68,7 +68,7 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
             <li><a href={getRelativeLocaleUrl(lang, 'project')}>{t("nav_portfolio")}</a></li>
 <li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
 <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
-<li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services') + '#faq'}>{t("nav_faq")}</a></li>
+        <li><a href={`/${lang}/faq/`}>{t("nav_faq")}</a></li>
 <li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
         </ul>
         <div class="controls">
@@ -150,7 +150,7 @@ const navServiceLinks = NAV_ORDER.map((id) => ({
         <li><a href={getRelativeLocaleUrl(lang, 'project')}>{t("nav_portfolio")}</a></li>
         <li><a href={`/${lang}/brief/`}>{t("nav_brief")}</a></li>
         <li><a href={`/${lang}/blog/`}>{t("nav_blog")}</a></li>
-        <li><a href={getRelativeLocaleUrl(lang, lang === 'ru' ? 'uslugi' : 'services') + '#faq'}>{t("nav_faq")}</a></li>
+<li><a href={`/${lang}/faq/`}>{t("nav_faq")}</a></li>
         <li><a href={getRelativeLocaleUrl(lang, 'about')}>{t("nav_about")}</a></li>
     </ul>
     <div class="mobile-controls">

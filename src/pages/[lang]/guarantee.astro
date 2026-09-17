@@ -1,0 +1,110 @@
+---
+import TrustPageShell from '../../components/TrustPageShell.astro';
+import { TRUST_PAGES } from '../../data/trust-pages';
+import { FACTS, type Lang } from '../../data/services';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+	return [{ params: { lang: 'ru' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang === 'en' ? 'en' : 'ru') as Lang;
+const meta = TRUST_PAGES.guarantee;
+
+// Факты — из единого источника services.ts и i18n (договор 50/50, гарантия, передача кода).
+const blocks =
+	currentLang === 'ru'
+		? [
+				{
+					icon: 'fa-solid fa-file-contract',
+					title: 'Договор',
+					desc: 'Работаем официально по договору: объём, сроки и стоимость фиксируются до старта. Есть публичная оферта и политика конфиденциальности.',
+				},
+				{
+					icon: 'fa-solid fa-scale-balanced',
+					title: 'Оплата по этапам',
+					desc: 'Обычно 50% предоплата и 50% после приёмки, но точная схема обсуждается в зависимости от проекта и фиксируется в договоре.',
+				},
+				{
+					icon: 'fa-solid fa-shield-halved',
+					title: `Гарантия ${FACTS.warranty.ru}`,
+					desc: 'Если в рамках ТЗ обнаружится техническая ошибка — исправляем бесплатно и быстро. Дальше — поддержка и развитие по мере роста бизнеса.',
+				},
+				{
+					icon: 'fa-solid fa-key',
+					title: 'Код и права — ваши',
+					desc: 'После финальной оплаты: репозиторий GitHub, исходный код, доступы к серверу и админке. Проект на 100% принадлежит вам, без привязки к платформам.',
+				},
+			]
+		: [
+				{
+					icon: 'fa-solid fa-file-contract',
+					title: 'Contract',
+					desc: 'Official contract-based work: scope, timeline and price are fixed before the start. Public offer and privacy policy included.',
+				},
+				{
+					icon: 'fa-solid fa-scale-balanced',
+					title: 'Milestone payments',
+					desc: 'Usually 50% upfront and 50% on acceptance, but the exact schedule is agreed depending on the project and fixed in the contract.',
+				},
+				{
+					icon: 'fa-solid fa-shield-halved',
+					title: `Warranty ${FACTS.warranty.en}`,
+					desc: 'Any technical bug within the agreed specs is fixed promptly and free of charge. Then — support and growth as your business scales.',
+				},
+				{
+					icon: 'fa-solid fa-key',
+					title: 'Code and rights are yours',
+					desc: 'After final payment: GitHub repository, source code, server and CMS credentials. The project is 100% yours, with zero platform lock-in.',
+				},
+			];
+
+const siteBase = 'https://avpdev.com';
+const schema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{
+			'@type': 'ListItem',
+			position: 1,
+			name: currentLang === 'ru' ? 'Главная' : 'Home',
+			item: `${siteBase}/${currentLang}/`,
+		},
+		{
+			'@type': 'ListItem',
+			position: 2,
+			name: meta.crumb[currentLang],
+			item: `${siteBase}/${currentLang}/guarantee/`,
+		},
+	],
+};
+---
+
+<TrustPageShell meta={meta} lang={currentLang} schema={schema}>
+	<div class="guarantee-grid">
+		{blocks.map((b) => (
+			<div class="guarantee-card">
+				<i class={b.icon} aria-hidden="true"></i>
+				<h2>{b.title}</h2>
+				<p>{b.desc}</p>
+			</div>
+		))}
+	</div>
+	<p class="trust-p">
+		{currentLang === 'ru' ? (
+			<>
+				Детали по направлениям — на страницах услуг и в{' '}
+				<a href={`/${currentLang}/legal/public-offer/`}>публичной оферте</a>. Готовы обсудить
+				проект? <a href={`/${currentLang}/brief/`}>Заполните бриф</a> — вернёмся со сметой за 24 часа.
+			</>
+		) : (
+			<>
+				Details per service — on the service pages and in the{' '}
+				<a href={`/${currentLang}/legal/public-offer/`}>public offer</a>. Ready to talk?{' '}
+				<a href={`/${currentLang}/brief/`}>Fill out the brief</a> — fixed quote within 24 hours.
+			</>
+		)}
+	</p>
+</TrustPageShell>

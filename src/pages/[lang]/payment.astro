@@ -1,0 +1,89 @@
+---
+import TrustPageShell from '../../components/TrustPageShell.astro';
+import PaymentMethods from '../../components/PaymentMethods.astro';
+import { TRUST_PAGES } from '../../data/trust-pages';
+import type { Lang } from '../../data/services';
+import { useTranslations } from '../../i18n/utils';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+	return [{ params: { lang: 'ru' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params;
+const currentLang = (lang === 'en' ? 'en' : 'ru') as Lang;
+const meta = TRUST_PAGES.payment;
+const t = useTranslations(currentLang);
+
+const facts =
+	currentLang === 'ru'
+		? [
+				'Схема оплаты обсуждается в зависимости от проекта и фиксируется в договоре.',
+				'Валюты: RUB, BYN, USD, EUR.',
+				'Карты, быстрые платежи и крипта — выбирайте удобный способ.',
+			]
+		: [
+				'Payment schedule is agreed depending on the project and fixed in the contract.',
+				'Currencies: RUB, BYN, USD, EUR.',
+				'Cards, fast payments and crypto — pick what suits you.',
+			];
+
+const siteBase = 'https://avpdev.com';
+const schema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{
+			'@type': 'ListItem',
+			position: 1,
+			name: currentLang === 'ru' ? 'Главная' : 'Home',
+			item: `${siteBase}/${currentLang}/`,
+		},
+		{
+			'@type': 'ListItem',
+			position: 2,
+			name: meta.crumb[currentLang],
+			item: `${siteBase}/${currentLang}/payment/`,
+		},
+	],
+};
+---
+
+<TrustPageShell meta={meta} lang={currentLang} schema={schema}>
+	<PaymentMethods />
+	<ul class="trust-facts">
+		{facts.map((f) => (
+			<li>{f}</li>
+		))}
+		<li>{t('payment_hub_processing')}</li>
+	</ul>
+	<p class="trust-p">
+		{currentLang === 'ru' ? (
+			<>
+				Вопросы про этапы и документы — в <a href={`/${currentLang}/guarantee/`}>гарантиях</a> и{' '}
+				<a href={`/${currentLang}/legal/public-offer/`}>публичной оферте</a>.
+			</>
+		) : (
+			<>
+				Milestones and paperwork — see <a href={`/${currentLang}/guarantee/`}>guarantee</a> and the{' '}
+				<a href={`/${currentLang}/legal/public-offer/`}>public offer</a>.
+			</>
+		)}
+	</p>
+	<div class="trust-cta">
+		<p class="trust-cta-text">
+			{currentLang === 'ru'
+				? 'Не нашли свой способ? Напишите — обсудим и зафиксируем удобный вариант в договоре.'
+				: 'Missing your method? Write to us — we will agree on a convenient option and fix it in the contract.'}
+		</p>
+		<div class="trust-cta-actions">
+			<a href={`/${currentLang}/brief/`} class="cta-button">
+				{currentLang === 'ru' ? 'Заполнить бриф' : 'Fill out the brief'}
+			</a>
+			<a href={`/${currentLang}/contacts/`} class="cta-button secondary">
+				{currentLang === 'ru' ? 'Связаться' : 'Contact us'}
+			</a>
+		</div>
+	</div>
+</TrustPageShell>
