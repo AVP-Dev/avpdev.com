@@ -76,7 +76,20 @@ const redirectMap: Record<string, string> = {
   '/project/project-tow-truck/': '/ru/project/project-tow-truck/',
   '/project-3d-modeling.html': '/ru/project/project-3d-modeling/',
   '/project/project-3d-modeling/': '/ru/project/project-3d-modeling/',
+
+  // Renamed slugs — legacy URL must point to the surviving page, not its dead twin
+  '/uslugi/razrabotka-saytov/': '/ru/uslugi/razrabotka-botov-i-parserov/',
+  '/ru/uslugi/razrabotka-saytov/': '/ru/uslugi/razrabotka-botov-i-parserov/',
+  '/en/services/razrabotka-saytov/': '/en/services/bot-and-scraper-development/',
 };
+
+// 1.1. Pre-restructure legacy sections. The site moved under /ru/ and /en/
+// prefixes, so every pre-restructure URL now 404s. Handled as a prefix rule so
+// the whole legacy space is covered, not only paths listed in redirectMap.
+const RU_LEGACY_SECTIONS = [
+  'about', 'blog', 'brief', 'contacts', 'faq', 'guarantee',
+  'legal', 'payment', 'project', 'reviews', 'uslugi',
+];
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const url = new URL(context.request.url);
@@ -164,8 +177,20 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // 2. Folder Mapping: /en/uslugi/ -> /en/services/
   if (path.startsWith('/en/uslugi/')) {
     const remainder = path.replace('/en/uslugi/', '');
+    if (!remainder) {
+      return applySecurityHeaders(context.redirect('/en/services/', 301));
+    }
     const newPath = `/en/services/${remainder.endsWith('/') ? remainder : remainder + '/'}`;
     return applySecurityHeaders(context.redirect(newPath, 301));
+  }
+
+  // 2.5. Legacy pre-restructure: /<section>/... -> /ru/<section>/...
+  // Must run after redirectMap and the /en/uslugi/ mapping so those keep priority.
+  const legacyMatch = path.match(/^\/([a-z-]+)(\/.*)?$/);
+  if (legacyMatch && RU_LEGACY_SECTIONS.includes(legacyMatch[1])) {
+    const section = legacyMatch[1];
+    const rest = legacyMatch[2] || '/';
+    return applySecurityHeaders(context.redirect(`/ru/${section}${rest}`, 301));
   }
 
   // 4. Remove .html extension

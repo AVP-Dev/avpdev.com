@@ -36,6 +36,13 @@ partytown-*-served.*
 # Исключаем secrets
 .env
 .env.*
+*.pem
+*.key
+*service_account*.json
+credentials*.json
+client_secret*.json
+token*.json
+itera-*.json
 
 # Generated files
 public/~partytown
