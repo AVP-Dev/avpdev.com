@@ -50,6 +50,7 @@ export interface ServicePricingData {
 export interface ServicePageData {
     id: 'websites' | 'shop' | 'tma' | 'ai' | 'bots' | 'saas';
     slug: string;
+    ogImage?: string;
     seoTitle: Record<Lang, string>;
     seoDescription: Record<Lang, string>;
     hero: Record<Lang, { title: string; subtitle: string }>;
@@ -70,6 +71,7 @@ export const services: ServicePageData[] = [
     {
         id: 'websites',
         slug: 'razrabotka-saitov',
+        ogImage: '/og-web.webp',
         seoTitle: {
             ru: 'Разработка сайтов под ключ на Astro и Next.js | AVPdev',
             en: 'Custom Website & Landing Page Development | AVPdev',
@@ -157,6 +159,7 @@ export const services: ServicePageData[] = [
     {
         id: 'bots',
         slug: 'razrabotka-botov-i-parserov',
+        ogImage: '/og-schematics.webp',
         seoTitle: {
             ru: 'Разработка Telegram-ботов и парсеров под ключ | AVPdev',
             en: 'Custom Telegram Bot & Web Scraper Development | AVPdev',
@@ -240,6 +243,7 @@ export const services: ServicePageData[] = [
     {
         id: 'ai',
         slug: 'ai-integracii',
+        ogImage: '/og-schematics.webp',
         seoTitle: {
             ru: 'Внедрение ИИ и нейросетей в бизнес под ключ | AVPdev',
             en: 'AI & LLM Business Integration Services | AVPdev',
@@ -323,6 +327,7 @@ export const services: ServicePageData[] = [
     {
         id: 'saas',
         slug: 'saas-mvp',
+        ogImage: '/og-web.webp',
         seoTitle: {
             ru: 'Разработка SaaS и запуск MVP за 10–14 дней | AVPdev',
             en: 'SaaS & Startup MVP Development in 14 Days | AVPdev',
@@ -406,6 +411,7 @@ export const services: ServicePageData[] = [
     {
         id: 'shop',
         slug: 'internet-magaziny',
+        ogImage: '/og-web.webp',
         seoTitle: {
             ru: 'Разработка интернет-магазинов под ключ | AVPdev',
             en: 'E-commerce & Online Store Development | AVPdev',
@@ -491,6 +497,7 @@ export const services: ServicePageData[] = [
     {
         id: 'tma',
         slug: 'telegram-mini-apps',
+        ogImage: '/og-telegram.webp',
         seoTitle: {
             ru: 'Разработка Telegram Mini Apps под ключ | AVPdev',
             en: 'Telegram Mini Apps (TMA) Development | AVPdev',

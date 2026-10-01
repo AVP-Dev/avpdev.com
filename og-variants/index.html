@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Варианты Open Graph баннеров — AVPdev</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #090a0f;
+            color: #f0f0f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFC837, #FF8C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        p.subtitle {
+            color: #8e95a5;
+            font-size: 16px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
+            gap: 32px;
+        }
+        @media (max-width: 640px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+        .card {
+            background: #12141c;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #FF8C00;
+        }
+        .img-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            overflow: hidden;
+        }
+        .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .card-body {
+            padding: 20px 24px;
+        }
+        .card-tag {
+            display: inline-block;
+            background: rgba(255, 140, 0, 0.15);
+            color: #FFC837;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .card-tag.recommended {
+            background: linear-gradient(135deg, #FFC837, #FF8C00);
+            color: #000;
+            font-weight: 700;
+        }
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        .card-desc {
+            font-size: 14px;
+            color: #9aa1b2;
+            line-height: 1.5;
+        }
+        .actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            text-decoration: none;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Оставшиеся технологические концепции Open Graph</h1>
+            <p class="subtitle">Портреты удалены. Выберите основной баннер для сайта и варианты для услуг</p>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <div class="img-wrap">
+                    <img src="./6-linear-minimal.jpg" alt="Вариант 6: Linear-стиль Минимализм">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag recommended">Топ-выбор для главной</span>
+                    <h3 class="card-title">Вариант 6: Ультра-минимализм (Linear / Apple style)</h3>
+                    <p class="card-desc">Граненое матовое стекло с монограммой AV, золотистый светящийся горизонт, строгая типографика и глубокий чёрный фон. Выглядит дорого, солидно и никогда не устареет.</p>
+                    <div class="actions">
+                        <a href="./6-linear-minimal.jpg" target="_blank" class="btn">Открыть оригинал</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img-wrap">
+                    <img src="./3-brand-glassmorphism.jpg" alt="Вариант 3: 3D Glassmorphism & AI">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Яркий брендовый</span>
+                    <h3 class="card-title">Вариант 3: 3D Glassmorphism & AI</h3>
+                    <p class="card-desc">Стеклянные объемные карточки веб-интерфейсов, светящиеся нейросетевые связи, янтарное сияние и дескриптор Premium Web Development & Software Solutions.</p>
+                    <div class="actions">
+                        <a href="./3-brand-glassmorphism.jpg" target="_blank" class="btn">Открыть оригинал</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img-wrap">
+                    <img src="./5-telegram-apps.jpg" alt="Вариант 5: Telegram Mini Apps 3D">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag recommended">Идеально для услуги Telegram Apps</span>
+                    <h3 class="card-title">Вариант 5: Telegram Mini Apps & Web3</h3>
+                    <p class="card-desc">3D-смартфон с дашбордом mini app, неоновый самолётик Telegram, AI-боты и теги Telegram Mini Apps • Web • AI Bots. Отличная целевая карточка для расшаривания страницы Telegram Mini Apps.</p>
+                    <div class="actions">
+                        <a href="./5-telegram-apps.jpg" target="_blank" class="btn">Открыть оригинал</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img-wrap">
+                    <img src="./4-tech-schematics.jpg" alt="Вариант 4: Схемотехника и направления">
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Технологичный стек</span>
+                    <h3 class="card-title">Вариант 4: Схемотехника, Терминал & Направления</h3>
+                    <p class="card-desc">Консоль с кодом, светящиеся дорожки печатной платы, смартфон с макетом и чёткие бейджи WEB DEV, AI INTEGRATION, TG APPS.</p>
+                    <div class="actions">
+                        <a href="./4-tech-schematics.jpg" target="_blank" class="btn">Открыть оригинал</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

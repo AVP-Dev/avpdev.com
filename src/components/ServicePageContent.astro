@@ -116,7 +116,13 @@ const schema = {
 };
 ---
 
-<BaseLayout title={service.seoTitle[lang]} description={service.seoDescription[lang]} isTranslationKey={false} schema={schema}>
+<BaseLayout
+  title={service.seoTitle[lang]}
+  description={service.seoDescription[lang]}
+  ogImage={service.ogImage || '/og-image.webp'}
+  isTranslationKey={false}
+  schema={schema}
+>
   <Hero title={hero.title} subtitle={hero.subtitle} variant="services">
     <Breadcrumbs slot="crumbs" items={[
       { name: t('breadcrumb_home'), href: `/${lang}/` },
