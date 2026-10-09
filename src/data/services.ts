@@ -529,18 +529,18 @@ export const services: ServicePageData[] = [
         faqs: {
             ru: [
                 { q: 'Что такое Telegram Mini Apps (TMA)?', a: 'Это полноценные веб-приложения, которые открываются прямо внутри Telegram. Пользователю не нужно ничего скачивать, авторизация происходит моментально через его Telegram-аккаунт.' },
-                { q: 'Можно ли принимать платежи в TMA?', a: 'Да. Мы интегрируем как фиатные платежи (Stars, Stripe, ЮKassa), так и крипту (TON Connect, USDT).' },
+                { q: 'Можно ли принимать платежи в TMA?', a: 'Да. Для цифровых товаров и подписок подключаем Telegram Stars (XTR), для физических товаров и офлайн-услуг — сторонние платежные шлюзы (ЮKassa, Stripe), а также Web3-оплату (TON Connect, USDT).' },
                 { q: 'Можете ли вы сделать крипто-игру (Tap to Earn)?', a: 'Да, мы разрабатываем высоконагруженные Clicker/Tap2Earn механики с защитой от ботов и интеграцией с блокчейном TON.' },
-                { q: 'Насколько безопасны такие приложения?', a: 'TMA работают под той же защитой, что и сам Telegram. Технология обеспечивает надежное шифрование данных и сессий.' },
+                { q: 'Насколько безопасны такие приложения?', a: 'Авторизация через Telegram передаёт криптографически подписанные initData. Мы валидируем подпись (HMAC-SHA256) на бэкенде с проверкой auth_date, поэтому подделать сессию или баланс невозможно.' },
                 { q: 'Как мне продвигать свое Mini App?', a: 'Основной инструмент продвижения — Telegram Ads, посевы в других Telegram-каналах и реферальные механики внутри самого приложения, которые обеспечивают виральный рост.' },
                 { q: 'Будет ли приложение работать на мобильном телефоне и ПК?', a: 'Да. Интерфейс адаптируется под мобильную версию Telegram, а также под планшеты и десктоп (Telegram Desktop).' },
                 { q: 'Сроки разработки Telegram WebApp?', a: 'Базовый Mini App (визитка, каталог, анкета) — от 7 дней. Полноценный магазин внутри Telegram с корзиной и оплатой — 14–21 день. Сложные Web3-сервисы и игры — от 1 месяца.' },
             ],
             en: [
                 { q: 'What are Telegram Mini Apps (TMA)?', a: "They are full web applications that open directly inside Telegram. Users don't need to download anything; authorization is instant through their Telegram account." },
-                { q: 'Can I accept payments in TMA?', a: 'Yes. We integrate fiat payments (Stars, Stripe) as well as crypto (TON Connect, USDT).' },
+                { q: 'Can I accept payments in TMA?', a: 'Yes. For digital goods and subscriptions, we integrate Telegram Stars (XTR). For physical goods and services, we integrate direct gateways (Stripe, localized providers) as well as crypto (TON Connect, USDT).' },
                 { q: 'Can you build a crypto game (Tap to Earn)?', a: 'Yes, we develop high-load Clicker/Tap2Earn mechanics with anti-bot protection and TON blockchain integration.' },
-                { q: 'How secure are these applications?', a: 'TMA operates under the same security standards as Telegram itself. The technology ensures reliable encryption of data.' },
+                { q: 'How secure are these applications?', a: 'Telegram authentication provides cryptographically signed initData. We validate the HMAC-SHA256 signature and auth_date on the backend, making user and session spoofing impossible.' },
                 { q: 'How can I promote my Mini App?', a: 'The main promotion channels are Telegram Ads, advertising in large channels, and building in viral referral loops.' },
                 { q: 'Will the app work on both phones and computers?', a: 'Yes. The layout adapts to Telegram on mobile as well as tablets and Telegram Desktop.' },
                 { q: 'What is the development timeline for a TMA?', a: 'Basic Mini App (showcase, form, booking): from 7 days. Full Telegram store with cart and payments: 14–21 days. Complex Web3 apps or games: from 1 month.' },

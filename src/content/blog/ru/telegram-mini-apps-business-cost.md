@@ -74,6 +74,12 @@ export function verifyTelegramInitData(initDataString: string, botToken: string)
   if (!hash) return false;
 
   urlParams.delete('hash');
+
+  // Reject stale sessions: auth_date must be within 24 hours.
+  const authDate = Number(urlParams.get('auth_date'));
+  if (!Number.isFinite(authDate) || authDate <= 0) return false;
+  if (Date.now() / 1000 - authDate > 86400) return false;
+
   const params: string[] = [];
   for (const [key, value] of urlParams.entries()) {
     params.push(`${key}=${value}`);
@@ -121,7 +127,7 @@ export function verifyTelegramInitData(initDataString: string, botToken: string)
 * **Задачи:** полноценный магазин внутри Telegram, каталог с фильтрацией, корзина, оформление заказов и прием платежей.
 * **Что входит:** интеграция эквайринга (Telegram Stars / ЮKassa / Stripe), личный кабинет покупателя с историей покупок, модуль управления остатками, вебхуки с уведомлениями о статусе доставки.
 
-### Сложные кастомные системы и Web3 (от $2 500, срок от 1 месяца)
+### Кастомные экосистемы и Web3 (индивидуальный расчёт, срок от 1 месяца)
 * **Задачи:** корпоративные CRM внутри мессенджера для курьеров/мастеров, Web3-сервисы с подключением кошельков (TON Connect), высоконагруженные механики.
 * **Что входит:** сложный бэкенд, ролевой доступ, интеграция со складским учётом (1С, МойСклад), мониторинг 24/7.
 

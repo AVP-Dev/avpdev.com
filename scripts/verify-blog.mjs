@@ -47,7 +47,10 @@ function getArticles(dir, lang) {
 
 const ruArticles = getArticles(RU_DIR, 'ru');
 const enArticles = getArticles(EN_DIR, 'en');
-const allArticles = new Map([...ruArticles, ...enArticles]);
+const allArticles = new Map([
+  ...Array.from(ruArticles.entries()).map(([slug, item]) => [`ru/${slug}`, item]),
+  ...Array.from(enArticles.entries()).map(([slug, item]) => [`en/${slug}`, item]),
+]);
 
 let errors = 0;
 let totalCheckedLinks = 0;
