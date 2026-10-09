@@ -43,8 +43,8 @@ AI has blurred the line between Junior and Middle. It seems that architecture is
 
 We are no longer programmers. We are conductors of an orchestra of a thousand instruments. And if the conductor doesn't hear a false note in the third row just because \"overall the music is loud\"—the orchestra is doomed.
 
-Don't let AI turn your project into a landfill of working junk. Be the architect who sees the system 10 moves ahead.
+Don't let AI turn your project into a landfill of working junk. Be the [architect of the future](/en/blog/architect-of-the-future) who focuses on [controlling ideas, not just syntax](/en/blog/control-ideas-not-code).
 
 ---
 
-*Read also: [Templates vs. Custom Build: What to choose?](/en/blog/template-vs-custom)*
+*Read also: [Templates vs. Custom Build: What to choose?](/en/blog/template-vs-custom) | [The Architect of the Future: System Design over Coding](/en/blog/architect-of-the-future)*

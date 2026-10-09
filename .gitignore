@@ -59,6 +59,7 @@ playwright-report
 test-results
 # CommandCode local config (per-user, not for repo)
 .commandcode/
+.pair/
 
 # Local personal docs & scripts
 docs/LOCAL_SEO_GUIDE.md

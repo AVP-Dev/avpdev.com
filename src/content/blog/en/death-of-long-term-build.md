@@ -33,11 +33,11 @@ With the advent of advanced models, I stopped writing code "by hand" in the trad
 
 The main insight from this experience: AI didn't replace me; it scaled me.
 
-I used to spend 90% of my time on implementation and 10% on design. Now it's the other way around. I spend my time thinking through business logic, the connections between modules, and UX, and I "feed" the implementation to assistants. My ERP went from a collection of disjointed scripts to a monolithic system that actually works and manages my tasks.
+I used to spend 90% of my time on implementation and 10% on design. Now it's the other way around. I spend my time thinking through business logic, the connections between modules, and UX, and I "feed" the implementation to assistants. AI excels when given clean, explicit constraints — as explored in [AI Loves Straight Roads: Architecture Without Hidden Context](/en/blog/ai-loves-straight-roads). My ERP went from a collection of disjointed scripts to a monolithic system that actually works and manages my tasks.
 
 A project that had been gathering dust for years got off the ground when I stopped trying to be a "one-man band" and let technology handle the grunt work.
 
 If you have a project sitting on GitHub that you'll "finish someday"—now is the best time to blow the dust off it. You're no longer alone. You have the fastest development team in the world. Use it.
 
 ---
-*Read also: [Choosing a Tech Stack for a Custom CRM](/en/blog/custom-crm-tech-stack) | [Ghosts in the Machine: The AI Development Trap](/en/blog/ghost-in-the-machine)*
+*Read also: [Choosing a Tech Stack for a Custom CRM](/en/blog/custom-crm-tech-stack) | [Code Is Cheap. Engineering Thinking Is Not](/en/blog/control-ideas-not-code) | [Ghosts in the Machine: The AI Development Trap](/en/blog/ghost-in-the-machine)*

@@ -44,7 +44,7 @@ The tool analyzes a link, extracts content and images while preserving the struc
 
 ## Nyx Flow: Autonomy and PWA Power {#nyx-flow}
 
-My organizer should be in my phone, not inside someone else's messenger. I consciously rejected Telegram Mini Apps in favor of a full-fledged PWA application. My organizer is my space, not a chat room.
+My organizer should be in my phone, not inside someone else's messenger. I consciously rejected [Telegram Mini Apps](/en/blog/telegram-mini-apps-business-cost) in favor of a full-fledged PWA application (even though for customer-facing businesses and e-commerce, [Telegram Mini Apps](/en/blog/telegram-mini-apps-business-cost) offer frictionless conversion). My organizer is my space, not a chat room.
 
 - **Native-like experience:** The app installs directly onto the device, runs lightning fast, and has access to push notifications.
 - **Beyond App Store control:** No moderation, censorship, or restrictions from Apple and Google.
@@ -54,7 +54,7 @@ My organizer should be in my phone, not inside someone else's messenger. I consc
 
 ## Conclusion
 
-I am building Nyx for myself using NestJS, Next.js, and Rust. This keeps the barrier to entry low and the results professional. We often search the internet for the perfect app, forgetting that the best tool is the one you forge for your own hand.
+I am building Nyx for myself using NestJS, Next.js, and Rust. This keeps the barrier to entry low and the results professional. We often search the internet for the perfect app, forgetting that the best tool is the one you forge for your own hand. Building enduring software requires focusing on core architecture rather than disposable syntax — as analyzed in [Code Is Cheap. Engineering Thinking Is Not](/en/blog/control-ideas-not-code).
 
 **Links:**
 * 💡 [GitHub Nyx Vox](https://github.com/avp-dev/nyx-vox)

@@ -28,6 +28,10 @@ Aliaksei Patskevich — full-stack developer with 8+ years of experience. Specia
 
 - [AI for Business: 5 Integration Scenarios That Pay Off in 2026](https://avpdev.com/en/blog/ai-business-integration/): Practical AI use cases delivering real ROI — from RAG search to secure two-contour systems and conversion optimization.
 - [AI-Friendly Code Architecture](https://avpdev.com/en/blog/ai-friendly-code-architecture/): 5 software design rules for codebases that LLMs can easily understand and co-author without accumulating technical debt.
+- [AI Loves Straight Roads: Architectures Without Hidden Context](https://avpdev.com/en/blog/ai-loves-straight-roads/): Why modern AI coding agents require linear, explicit architectures over dynamic magic abstractions.
+- [AI Agents vs. Traditional Automation Scripts](https://avpdev.com/en/blog/ai-vs-scripts/): When to use deterministic Bash/Python scripts versus autonomous LLM agents in production.
+- [The Architect of the Future: System Design over Coding](https://avpdev.com/en/blog/architect-of-the-future/): How the software engineer's role transitions from writing syntax to designing boundaries and invariants.
+- [Code Is Cheap. Engineering Thinking Is Not](https://avpdev.com/en/blog/control-ideas-not-code/): Salvatore Sanfilippo (Redis creator) on why ideas and architectural design documents matter more than raw generated code.
 - [Custom Development vs Template: Which to Choose?](https://avpdev.com/en/blog/template-vs-custom/): Comparison of template-based websites (Tilda, WordPress) vs custom development for business needs.
 - [5 Website Development Principles That Save Business Budget](https://avpdev.com/en/blog/5-principles-of-development/): Fundamental principles: from strategy and prototyping to launch and long-term maintenance.
 - [7 Website Elements That Convert](https://avpdev.com/en/blog/7-website-elements-that-convert/): Key conversion-focused design and content elements for business websites.
@@ -39,9 +43,11 @@ Aliaksei Patskevich — full-stack developer with 8+ years of experience. Specia
 - [Custom CRM Tech Stack: Key Components and Architecture](https://avpdev.com/en/blog/custom-crm-tech-stack/): Technology choices and architectural decisions for building custom CRM systems.
 - [The Death of Long-Term Build in Web Development](https://avpdev.com/en/blog/death-of-long-term-build/): Why modern web development is shifting from monolithic builds to iterative, component-based approaches.
 - [Nyx Building: Digital Environment for Architecture Studio](https://avpdev.com/en/blog/nyx-building-digital-environment/): Case study of building a comprehensive digital ecosystem for an architecture studio.
+- [Nyx Vox: AI Voice Interface for Desktop](https://avpdev.com/en/blog/nyx-vox-ai-voice-interface/): Engineering a local voice-first AI assistant with sub-second response times on desktop.
 - [Lessons from Amsterdam](https://avpdev.com/en/blog/lessons-from-amsterdam/): Urban planning and digital experience lessons from Amsterdam's approach to city design.
 - [Website Post-Launch: Next Steps and Maintenance Guide](https://avpdev.com/en/blog/site-post-launch/): What to do after launching a website — monitoring, maintenance, and growth strategies.
 - [AI: Your Most Capable and Most Dangerous Student](https://avpdev.com/en/blog/ai-capable-dangerous-student/): Understanding AI as a powerful tool that requires careful guidance and oversight.
+- [Telegram Mini Apps for Business: Architecture, Costs, and Timelines](https://avpdev.com/en/blog/telegram-mini-apps-business-cost/): A practical engineering and cost breakdown for Telegram Mini Apps development from $600.
 - [All Blog Posts (EN)](https://avpdev.com/en/blog/): Full index of all English articles.
 - [Все статьи блога (RU)](https://avpdev.com/ru/blog/): Полный список статей на русском языке.
 
