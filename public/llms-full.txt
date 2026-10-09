@@ -1725,6 +1725,12 @@ export function verifyTelegramInitData(initDataString: string, botToken: string)
   if (!hash) return false;
 
   urlParams.delete('hash');
+
+  // Reject stale sessions: auth_date must be within 24 hours.
+  const authDate = Number(urlParams.get('auth_date'));
+  if (!Number.isFinite(authDate) || authDate <= 0) return false;
+  if (Date.now() / 1000 - authDate > 86400) return false;
+
   const params: string[] = [];
   for (const [key, value] of urlParams.entries()) {
     params.push(`${key}=${value}`);
@@ -1772,7 +1778,7 @@ On our [Telegram Mini Apps development service page](/en/services/telegram-mini-
 * **Scope:** full-featured store inside Telegram, categorized catalog, cart flow, and payment processing.
 * **Included:** payment gateway integration (Telegram Stars / Stripe), buyer profile with order history, inventory syncing, and webhook fulfillment alerts.
 
-### Complex Custom Systems & Web3 (from $2,500, 1+ months)
+### Custom Ecosystems & Web3 (custom quote, 1+ months)
 * **Scope:** internal field-worker CRMs, wallet integrations (TON Connect), and high-throughput transaction backends.
 * **Included:** custom backend architecture, role-based access control, ERP sync, and 24/7 uptime monitoring.
 
