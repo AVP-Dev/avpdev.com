@@ -60,6 +60,7 @@ test-results
 # CommandCode local config (per-user, not for repo)
 .commandcode/
 .pair/
+.session/
 
 # Local personal docs & scripts
 docs/LOCAL_SEO_GUIDE.md
