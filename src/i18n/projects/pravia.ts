@@ -1,0 +1,32 @@
+export const praviaTranslations = {
+    ru: {
+        case_pravia_title: 'Pravia — B2B-платформа AI-сотрудников на корпоративных знаниях',
+        case_pravia_h1: 'Pravia: B2B-платформа AI-сотрудников на корпоративных знаниях',
+        case_pravia_desc: 'Высоконагруженная multi-tenant RAG-платформа с локальными эмбеддингами (ONNX) и оптимизацией задержки p95 с 19.7 с до 164 мс под нагрузкой 1 000 VU.',
+        case_pravia_client: 'Собственный продукт / B2B SaaS',
+        case_pravia_services: 'Multi-Tenant RAG, pgvector (HNSW), Local ONNX Embeddings, k6 Optimization',
+        case_pravia_task_p: 'Большинство коробочных RAG-решений страдают от сетевого оверхеда внешних API для вычисления эмбеддингов, деградации скорости при одновременных запросах и слабой изоляции данных между разными компаниями. Цель проекта: разработать независимую мультитенантную платформу для создания AI-сотрудников, способных мгновенно отвечать на вопросы клиентов и сотрудников строго по загруженным регламентам, документам и веб-страницам, выдерживая высокие нагрузки без деградации скорости.',
+        case_pravia_solution_p: 'Архитектура Pravia построена на Bun и PostgreSQL с pgvector. Поисковые запросы векторизуются локально на CPU через ONNX Runtime с моделью EmbeddingGemma-300M, что полностью устраняет задержки сетевых вызовов в сторонние облака и снижает инфраструктурные затраты до 90%. Для векторного поиска задействован HNSW-индекс, обеспечивающий субмиллисекундную выборку среди сотен тысяч чанков. Ответы генерируются в потоковом режиме через SSE (Server-Sent Events) для мгновенного Time to First Token (TTFT).',
+        case_pravia_feat_1: '<strong>Zero-Cloud Embeddings:</strong> Локальный расчет эмбеддингов на CPU через ONNX Runtime (EmbeddingGemma-300M) без передачи текстов во внешние API.',
+        case_pravia_feat_2: '<strong>pgvector + HNSW:</strong> Индексация векторных представлений по алгоритму HNSW с тонким тюнингом параметров ef_search и m для субмиллисекундного поиска.',
+        case_pravia_feat_3: '<strong>Multi-Tenancy & RBAC:</strong> Полная криптографическая и логическая изоляция баз знаний, сессий и ролей между разными компаниями.',
+        case_pravia_feat_4: '<strong>Мультиформатный импорт:</strong> Автоматический парсинг и индексация веб-сайтов по Sitemap XML, документов PDF, DOCX, Markdown и сырого текста.',
+        case_pravia_feat_5: '<strong>Умный виджет и лидогенерация:</strong> Встраивание виджета на любой сайт одной строкой кода, Telegram-бот и автоматическая передача квалифицированных лидов в CRM через Webhooks.',
+        case_pravia_deployment_text: 'При первоначальных стресс-тестах задержка p95 достигала 19.7 с из-за блокировок пула соединений БД при синхронной записи аналитики. После десериализации транзакций, выноса логов в асинхронный батчинг и изоляции воркер-пула ONNX под нагрузкой 300 одновременных пользователей задержка p95 снизилась до 164 мс (0% ошибок), а в пиковом тесте на 1 000 VU система стабильно выдержала 46 req/s с 99.98% успешных ответов на одном стандартном VPS.',
+    },
+    en: {
+        case_pravia_title: 'Pravia — Enterprise B2B AI Knowledge & Employee Platform',
+        case_pravia_h1: 'Pravia: Enterprise B2B AI Knowledge & Employee Platform',
+        case_pravia_desc: 'High-throughput multi-tenant RAG platform powered by on-device ONNX embeddings and pgvector (HNSW), slashing p95 latency from 19.7s to 164ms under 1,000 VU stress.',
+        case_pravia_client: 'Proprietary Product / B2B SaaS',
+        case_pravia_services: 'Multi-Tenant RAG Architecture, Vector Search, Local Embeddings, k6 Load Testing',
+        case_pravia_task_p: 'Most turnkey RAG solutions suffer from high latency and token costs caused by external embedding APIs, throughput collapse under concurrent traffic, and insufficient data isolation across enterprise clients. The objective was to engineer an autonomous, multi-tenant B2B platform capable of deploying AI employees that resolve customer inquiries and support staff based strictly on uploaded SOPs, manuals, and websites with sub-second response times under heavy production load.',
+        case_pravia_solution_p: 'The Pravia architecture is built on Bun and PostgreSQL with pgvector. Query vectorization runs locally on CPU via ONNX Runtime using EmbeddingGemma-300M, removing external API network roundtrips and cutting compute overhead by up to 90%. Vector lookups leverage PostgreSQL with HNSW graph indexing, ensuring sub-millisecond retrieval across dense enterprise document collections. Responses stream progressively via SSE (Server-Sent Events) for near-instantaneous Time to First Token (TTFT).',
+        case_pravia_feat_1: '<strong>Zero-Cloud Embeddings:</strong> On-device query vectorization via ONNX Runtime (EmbeddingGemma-300M) without sending sensitive context to external APIs.',
+        case_pravia_feat_2: '<strong>pgvector + HNSW Indexing:</strong> Fine-tuned HNSW parameters (ef_search, m) deliver sub-millisecond vector retrieval across hundreds of thousands of document chunks.',
+        case_pravia_feat_3: '<strong>Multi-Tenancy & RBAC:</strong> Strict cryptographic session scoping and tenant isolation guarantee zero cross-organization data leakage.',
+        case_pravia_feat_4: '<strong>Multi-Format Ingestion:</strong> Automated parsing and indexing of websites via Sitemap XML, along with PDF, DOCX, Markdown, and raw text.',
+        case_pravia_feat_5: '<strong>Embeddable Widget & Lead Webhooks:</strong> One-line JavaScript embed for websites, real-time Telegram bot gateway, and instant qualified lead dispatch to CRM systems.',
+        case_pravia_deployment_text: 'Initial stress benchmarks showed p95 latency of 19.7s due to connection pool locks during synchronous logging. Following transaction de-serialization, asynchronous analytics batching, and a dedicated ONNX worker pool, p95 latency settled at 164ms with 0% errors at 300 concurrent users. Under peak load of 1,000 VU, the platform sustained 46 req/s with a 99.98% success rate on a single standard VPS.',
+    }
+} as const;

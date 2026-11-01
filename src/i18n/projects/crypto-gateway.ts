@@ -1,0 +1,32 @@
+export const cryptoGatewayTranslations = {
+    ru: {
+        case_cryptogateway_title: 'Crypto Gateway — Автономный платёжный шлюз и чекаут USDT TRC20',
+        case_cryptogateway_h1: 'Crypto Gateway: Автономный платёжный шлюз и чекаут USDT TRC20',
+        case_cryptogateway_desc: 'Self-hosted платёжная инфраструктура: генерация HD-кошельков, мониторинг блокчейна TRON в реальном времени, валидация и мгновенная активация заказов.',
+        case_cryptogateway_client: 'SaaS & Digital Products',
+        case_cryptogateway_services: 'Decentralized Payment Processing, Blockchain Event Monitoring, Order Fulfillment, Cryptographic Verification',
+        case_cryptogateway_task_p: 'При продаже цифровых продуктов и подписок традиционные платёжные агрегаторы удерживают от 5% до 12% комиссий, замораживают средства на недели и несут риски внезапных блокировок мерчант-аккаунтов. Приём платежей на общий кошелек вручную требует поиска транзакций в блокчейн-эксплорерах и отнимает часы времени саппорта. Цель проекта: разработать полностью автономный self-hosted шлюз для приёма USDT TRC20 с генерацией уникальных адресов под каждый заказ, автоматическим распознаванием входящих транзакций в блокчейне и мгновенной активацией услуг через вебхуки.',
+        case_cryptogateway_solution_p: 'Шлюз построен на базе Astro, React и Node.js с прямым подключением к JSON-RPC нодам сети TRON. Под каждую сессию чекаута детерминированно генерируется индивидуальный депозитный адрес на основе HD-дерева (BIP-44). Фоновый блокчейн-монитор непрерывно отслеживает смарт-контрактные события Transfer токена USDT. После финализации транзакции (19+ блоков сети TRON DPoS) шлюз формирует криптографически подписанный HMAC-SHA256 вебхук во внутреннюю CRM/биллинг с механизмом повторов Exponential Backoff.',
+        case_cryptogateway_feat_1: '<strong>0% комиссии посредников:</strong> Прямой процессинг в блокчейне без сторонних агрегаторов, холдов и рисков блокировки.',
+        case_cryptogateway_feat_2: '<strong>HD-кошельки под каждый заказ (BIP-44):</strong> Уникальный адрес для каждого чекаута исключает путаницу и ручную отправку TXID.',
+        case_cryptogateway_feat_3: '<strong>TRON Watchdog в реальном времени:</strong> Асинхронное отслеживание смарт-контракта USDT с финализацией за 15–30 секунд.',
+        case_cryptogateway_feat_4: '<strong>Криптографическая защита и HMAC:</strong> Подписанные вебхуки с гарантией идемпотентности и защитой от повторных начислений.',
+        case_cryptogateway_feat_5: '<strong>Изоляция приватных ключей:</strong> Хранение мастер-ключа в защищенном контуре и вывод средств с подтверждением мультиподписью.',
+        case_cryptogateway_deployment_text: 'Платёжный шлюз развернут в изолированной инфраструктуре заказчика. Время зачисления оплаты и открытия доступа к продукту составляет менее 30 секунд при 100% надежности доставки вебхуков даже при кратковременных сбоях сети.',
+    },
+    en: {
+        case_cryptogateway_title: 'Crypto Gateway — Autonomous Payment Infrastructure & USDT TRC20 Checkout',
+        case_cryptogateway_h1: 'Crypto Gateway: Autonomous Payment Infrastructure & USDT TRC20 Checkout',
+        case_cryptogateway_desc: 'Self-hosted payment infrastructure: dynamic HD-wallet generation, real-time TRON blockchain monitoring, cryptographic validation, and instant order fulfillment.',
+        case_cryptogateway_client: 'SaaS & Digital Products',
+        case_cryptogateway_services: 'Decentralized Payment Processing, Blockchain Event Monitoring, Order Fulfillment, Cryptographic Verification',
+        case_cryptogateway_task_p: 'Selling digital goods and SaaS subscriptions through standard merchant processors imposes 5–12% processing fees, rolling reserves, and arbitrary account freezes. Manual transfers to a shared wallet require support staff to painstakingly verify TXID hashes. The objective was to engineer a self-hosted, autonomous payment gateway for USDT TRC20 featuring dynamic per-order wallet addresses, real-time blockchain monitoring, and instant automated order fulfillment via webhooks.',
+        case_cryptogateway_solution_p: 'Built on Astro, React, and Node.js interfacing directly with TRON JSON-RPC full nodes. Each checkout session generates a distinct hierarchical deterministic deposit address (BIP-44). An asynchronous TRON watchdog process monitors smart contract Transfer events for USDT. Following 19-block DPoS confirmation, the gateway signs a cryptographically verified HMAC-SHA256 webhook to the billing system with exponential backoff retries.',
+        case_cryptogateway_feat_1: '<strong>Zero Intermediary Fees:</strong> Direct on-chain settlement without third-party aggregator margins or account freeze risks.',
+        case_cryptogateway_feat_2: '<strong>Dynamic Per-Order HD Wallets (BIP-44):</strong> Unique deposit addresses eliminate payment mismatches and manual TXID submission.',
+        case_cryptogateway_feat_3: '<strong>Real-Time TRON Watchdog:</strong> Direct event subscription confirming USDT smart contract transfers within 15–30 seconds.',
+        case_cryptogateway_feat_4: '<strong>HMAC Cryptographic Signatures:</strong> Signed webhook payloads guaranteeing idempotent order delivery and double-spend defense.',
+        case_cryptogateway_feat_5: '<strong>Cold-Key Master Isolation:</strong> Private seed keys isolated from internet-exposed nodes with multi-signature withdrawal vaults.',
+        case_cryptogateway_deployment_text: 'Deployed within an air-gapped container environment. Median payment confirmation and service activation completes under 30 seconds with 100% idempotency, completely liberating the business from external payment processor restrictions.',
+    }
+} as const;

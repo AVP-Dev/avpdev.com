@@ -1,0 +1,32 @@
+export const postgresQueueTranslations = {
+    ru: {
+        case_postgresqueue_title: 'Postgres Queue — Отказоустойчивая lean-очередь задач без брокеров',
+        case_postgresqueue_h1: 'Postgres Queue: Отказоустойчивая lean-очередь задач без Redis и брокеров',
+        case_postgresqueue_desc: 'Легковесная асинхронная архитектура очередей на базе PostgreSQL (FOR UPDATE SKIP LOCKED) с экспоненциальным backoff, идемпотентностью и нулевым оверхедом.',
+        case_postgresqueue_client: 'Внутренняя архитектура / Инфраструктура',
+        case_postgresqueue_services: 'Lean Backend Architecture, Database Concurrency & Lock-Free Queuing, Idempotent Workers, Resource Minimization',
+        case_postgresqueue_task_p: 'В веб-сервисах для асинхронных фоновых задач (отправка писем, индексация документов, вызовы LLM, генерация отчетов) стандартом считается подключение внешних брокеров: Redis + BullMQ, RabbitMQ или Kafka. Для малых и средних B2B-систем это создает лишнюю сложность: затраты на поддержку отдельных серверов, проблему согласованности Dual-Write между БД и брокером и риски потери сообщений при рестартах. Цель проекта: спроектировать минималистичную и надежную очередь задач прямо в существующем экземпляре PostgreSQL без сторонних брокеров с гарантией строгой атомарности.',
+        case_postgresqueue_solution_p: 'Очередь реализована на механизме конкурентных блокировок PostgreSQL FOR UPDATE SKIP LOCKED. Воркеры атомарно забирают непересекающиеся пачки задач без взаимных блокировок и ожидания (deadlocks). Создание задачи и изменение бизнес-сущностей происходят в единой ACID-транзакции (Transactional Outbox), что математически исключает рассинхронизацию. Механизм повторов с экспоненциальной задержкой (Exponential Backoff + Jitter) сглаживает пики при сбоях внешних API, а исчерпавшие попытки задачи изолируются в Dead-Letter Queue (DLQ).',
+        case_postgresqueue_feat_1: '<strong>Блокировки без ожидания (SKIP LOCKED):</strong> Параллельные потоки воркеров бесконфликтно извлекают задачи из общей очереди с нулевым временем простоя.',
+        case_postgresqueue_feat_2: '<strong>Транзакционная атомарность (Transactional Outbox):</strong> Бизнес-логика и постановка в очередь выполняются в единой ACID-транзакции.',
+        case_postgresqueue_feat_3: '<strong>Exponential Backoff + Jitter:</strong> Умные повторы с прогрессивной задержкой и случайным разбросом предотвращают лавинообразные перегрузки.',
+        case_postgresqueue_feat_4: '<strong>Идемпотентность и Dead-Letter Queue:</strong> Детерминированные ключи исключают повторное выполнение, сбойные задачи изолируются в DLQ для анализа.',
+        case_postgresqueue_feat_5: '<strong>Нулевой инфраструктурный оверхед:</strong> Минус один сервис, минус один порт в Docker Compose и сокращение потребления RAM на 70%.',
+        case_postgresqueue_deployment_text: 'Lean-архитектура очередей успешно внедрена в продакшене для фоновой обработки документов и уведомлений. Система гарантирует 100% сохранность задач благодаря журналированию WAL и полной защищенности общим планом бэкапов PostgreSQL.',
+    },
+    en: {
+        case_postgresqueue_title: 'Postgres Queue — Resilient Lean Task Queue Engine Without Redis or Brokers',
+        case_postgresqueue_h1: 'Postgres Queue: Resilient Lean Task Queue Engine Without Redis or Brokers',
+        case_postgresqueue_desc: 'Lightweight asynchronous task queue architecture built directly on PostgreSQL (FOR UPDATE SKIP LOCKED) with exponential backoff and zero infrastructure bloat.',
+        case_postgresqueue_client: 'Internal Architecture & Core Infrastructure',
+        case_postgresqueue_services: 'Lean Backend Architecture, Database Concurrency & Lock-Free Queuing, Idempotent Workers, Resource Minimization',
+        case_postgresqueue_task_p: 'Handling background jobs (email dispatches, document chunking, LLM inference, PDF generation) typically demands dedicated brokers: Redis + BullMQ, RabbitMQ, or Kafka. For small-to-medium B2B systems, this introduces operational overhead: server upkeep, memory consumption, persistent state management, and the notorious Dual-Write problem between transactional databases and external queues. The objective was to design a lean, zero-dependency task queue directly in PostgreSQL ensuring strict ACID atomicity.',
+        case_postgresqueue_solution_p: 'Leverages PostgreSQL FOR UPDATE SKIP LOCKED concurrency semantics. Multiple worker threads dequeue discrete batches in lock-free atomic passes without deadlocks or contention. Task scheduling and business mutations execute inside a unified ACID transaction (Transactional Outbox), eliminating state mismatches. Exponential backoff with random jitter smooths API retry spikes, while permanently exhausted jobs automatically route to a Dead-Letter Queue (DLQ).',
+        case_postgresqueue_feat_1: '<strong>Lock-Free Concurrency (SKIP LOCKED):</strong> Concurrent worker pools process isolated tasks without blocking or deadlocks.',
+        case_postgresqueue_feat_2: '<strong>ACID Transactional Outbox:</strong> Task enqueueing shares the business entity transaction—eliminating dual-write inconsistencies.',
+        case_postgresqueue_feat_3: '<strong>Exponential Backoff + Jitter:</strong> Algorithmic retry delays smooth out downstream third-party service outages.',
+        case_postgresqueue_feat_4: '<strong>Strict Idempotency & DLQ:</strong> Deterministic task hashing prevents duplicate execution; failed tasks route to DLQ for diagnostic review.',
+        case_postgresqueue_feat_5: '<strong>Zero Extra Infrastructure:</strong> Eliminates separate Redis/RabbitMQ containers, slashing baseline memory overhead by 70%.',
+        case_postgresqueue_deployment_text: 'Deployed in production powering background vector ingestion, notification dispatches, and third-party webhook deliveries. Every task inherits PostgreSQL WAL persistence and automated failover backups with zero operational friction.',
+    }
+} as const;

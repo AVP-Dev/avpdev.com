@@ -30,11 +30,19 @@ const projectsCollection = defineCollection({
 			servicesKey: z.string(),
 			year: z.number(),
 			featured: z.boolean().default(false),
-			category: z.enum(['web-site', 'app', 'crm-erp', 'tg-mini-app']),
+			category: z.enum(['web-site', 'app', 'crm-erp', 'tg-mini-app', 'ai']),
 			stack: z.array(z.string()),
 			publishDate: z.date(),
 			heroImage: image(),
 			heroImageAlt: z.string(),
+			metrics: z
+				.array(
+					z.object({
+						label: z.string(),
+						value: z.string(),
+					})
+				)
+				.optional(),
 			header: z.object({
 				titleKey: z.string(),
 				descriptionKey: z.string(),

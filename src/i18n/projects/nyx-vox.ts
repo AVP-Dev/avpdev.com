@@ -1,0 +1,32 @@
+export const nyxVoxTranslations = {
+    ru: {
+        case_nyxvox_title: 'NYX Vox — Нативный голосовой AI-интерфейс (< 500 мс)',
+        case_nyxvox_h1: 'NYX Vox: Нативный голосовой AI-интерфейс с задержкой < 500 мс',
+        case_nyxvox_desc: 'Кроссплатформенное приложение на Rust и Tauri 2: речь в структурированный текст за 500 мс с verbatim-форматированием и автоматической вставкой в активное окно.',
+        case_nyxvox_client: 'Open Source / Собственный продукт',
+        case_nyxvox_services: 'Systems Programming (Rust / Tauri 2), Low-Latency Audio DSP, Multi-Engine STT, OS HID Injection',
+        case_nyxvox_task_p: 'Большинство существующих инструментов голосового ввода на десктопе создают трение в работе инженеров и авторов: задержка в 3–5 секунд сбивает поток мыслей, в тексте остается обилие слов-паразитов и отсутствует пунктуация, а диктовать приходится в отдельное окно с последующим ручным копированием. Цель проекта: разработать легковесный нативный инструмент для macOS и Windows с субсекундной транскрипцией по глобальному хоткею, бережным verbatim-форматированием без перефразирования и мгновенной прямой вставкой в активное приложение.',
+        case_nyxvox_solution_p: 'NYX Vox спроектирован на связке Rust 2021 (Tauri 2) и Next.js 16 / React 19. Захват микрофона ведется через cpal в отдельном системном потоке с минимальным буфером. Умный VAD, Noise Gate и 300ms Pre-Speech FIFO отсекают тишину без потери первых звуков речи. Облачный контур транскрипции на Groq Whisper Turbo выдает результат до 500 мс, а при отсутствии сети система мгновенно переключается на локальный Whisper с аппаратным ускорением Metal / Core ML. Форматирующая LLM аккуратно расставляет пунктуацию и код, после чего текст вставляется напрямую в курсор через Accessibility API (macOS) или SendInput (Windows).',
+        case_nyxvox_feat_1: '<strong>Низколатентный аудио-конвейер (Rust / cpal):</strong> Захват звука в нативном системном потоке с буфером 300ms Pre-Speech FIFO и умным шумоподавлением Noise Gate.',
+        case_nyxvox_feat_2: '<strong>Многоуровневый Resilient Fallback:</strong> Каскадный шлюз STT (Groq Whisper Turbo ~500 мс → Deepgram Nova → Local Whisper на Metal/Core ML для 100% приватности и офлайна).',
+        case_nyxvox_feat_3: '<strong>100% Verbatim AI Refinement:</strong> Интеллектуальный промптинг LLM (DeepSeek, Qwen, Gemini, GigaChat) сохраняет точные формулировки и терминологию без перефразирования.',
+        case_nyxvox_feat_4: '<strong>Прямая системная вставка (HID Injection):</strong> Мгновенная печать текста в активное окно любого приложения через macOS Accessibility API и Windows SendInput.',
+        case_nyxvox_feat_5: '<strong>Аппаратный сейф ключей:</strong> Хранение API-ключей локально на устройстве с шифрованием AES-256-GCM с привязкой к аппаратным идентификаторам устройства.',
+        case_nyxvox_deployment_text: 'Архитектура на базе Tauri 2 позволила сократить потребление оперативной памяти до минимума по сравнению с тяжелыми Electron-аналогами. Сквозной пайплайн от нажатия хоткея до появления готового отредактированного текста в окне редактора кода занимает менее 500 мс в облачном режиме и 1.2–2.0 с в полностью автономном локальном режиме.',
+    },
+    en: {
+        case_nyxvox_title: 'NYX Vox — Native Desktop AI Voice Interface (< 500ms)',
+        case_nyxvox_h1: 'NYX Vox: Native Desktop AI Voice Interface (< 500ms)',
+        case_nyxvox_desc: 'Cross-platform desktop application built on Rust and Tauri 2: speech to structured text in under 500ms with verbatim AI formatting and instant auto-paste into active applications.',
+        case_nyxvox_client: 'Open Source / Proprietary Product',
+        case_nyxvox_services: 'Systems Programming (Rust / Tauri 2), Low-Latency Audio DSP, Multi-Engine STT, OS HID Injection',
+        case_nyxvox_task_p: 'Conventional desktop speech-to-text tools create friction for engineers and technical writers: 3–5 second turnaround times interrupt thought flow, transcripts lack punctuation and structure, and users must dictate into a dedicated window before manually copying back. The objective was to engineer a lightweight native desktop tool for macOS and Windows with sub-second turnaround, verbatim formatting without hallucinated edits, and direct caret injection into the active window.',
+        case_nyxvox_solution_p: 'NYX Vox combines Rust 2021 (Tauri 2) systems architecture with a Next.js 16 / React 19 interface. Audio capture runs on an isolated native thread via cpal with minimal buffer allocations. Smart VAD and a calibrated Noise Gate backed by a 300ms pre-speech FIFO buffer eliminate clipping. Ultra-low latency cloud LPUs (Groq Whisper Turbo ~500ms) provide instant transcription, backed by on-device local Whisper with Metal / Core ML acceleration for complete offline privacy. LLMs format punctuation while preserving exact vocabulary, and text is injected via macOS Accessibility APIs or Windows SendInput.',
+        case_nyxvox_feat_1: '<strong>Rust Audio DSP Pipeline (cpal):</strong> Native system thread capture with a 300ms pre-speech FIFO ring buffer and calibrated smart noise gate.',
+        case_nyxvox_feat_2: '<strong>Multi-Tier Resilient Fallback:</strong> Cascading STT tier (Groq Whisper Turbo ~500ms → Deepgram Nova → on-device Local Whisper via Metal/Core ML for 100% offline privacy).',
+        case_nyxvox_feat_3: '<strong>100% Verbatim AI Refinement:</strong> Calibrated LLM formatting (DeepSeek, Qwen, Gemini, GigaChat) strictly preserves exact vocabulary and code syntax without paraphrasing.',
+        case_nyxvox_feat_4: '<strong>Direct HID Injection:</strong> Immediate text insertion directly into the active application caret using macOS Accessibility APIs and Windows SendInput.',
+        case_nyxvox_feat_5: '<strong>Hardware-Bound Vault:</strong> API credentials stored locally using AES-256-GCM encryption tied to physical machine hardware signatures.',
+        case_nyxvox_deployment_text: 'The Tauri 2 architecture reduces memory overhead by over 80% compared to typical Electron alternatives. The full lifecycle from releasing the global hotkey to rendered, punctuated text appearing in IDEs completes in under 500ms via cloud LPU and 1.2–2.0s in completely offline local mode.',
+    }
+} as const;

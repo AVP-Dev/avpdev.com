@@ -1,0 +1,32 @@
+export const nyxSystemTranslations = {
+    ru: {
+        case_nyxsystem_title: 'NYX System — Мультитенантная платформа ERP / CRM / MES для промышленности',
+        case_nyxsystem_h1: 'NYX System: Мультитенантная промышленная ERP / CRM / MES платформа',
+        case_nyxsystem_desc: 'Масштабируемый промышленный бэкенд на Go и PostgreSQL: неизменяемый учет (Immutability), изоляция данных тенантов и сквозная автоматизация цехов.',
+        case_nyxsystem_client: 'Производственный холдинг / B2B Enterprise',
+        case_nyxsystem_services: 'Solution Architecture & Clean Architecture (Go), Multi-Tenant Data Isolation, Contract-First API, MES Logistics',
+        case_nyxsystem_task_p: 'Промышленные производственные предприятия часто сталкиваются с разрывом между офисным учетом и цехом: фиксация выпуска на бумажных бланках и в Excel приводит к пересортице, возможность прямого удаления или перезаписи строк исключает надежный финансовый аудит, а открытый доступ операторов к именам клиентов создает прямую угрозу хищения клиентской базы. Цель проекта: спроектировать и развернуть модульную мультитенантную ERP/MES-систему на Go и PostgreSQL, связывающую заказы, склад, цех и финансовую отчетность в реальном времени с параноидальной защитой данных.',
+        case_nyxsystem_solution_p: 'Бэкенд спроектирован по принципам Clean Architecture на языке Go с подходом Contract-First: спецификация OpenAPI служит единым источником правды, автоматически генерируя строго типизированный код. В системе реализован принцип бухгалтерской неизменяемости (Immutability): прямое удаление данных заблокировано на уровне БД, а любая корректировка оформляется зеркальной записью («Сторно»). Изоляция тенантов гарантирует физическую безопасность данных, а в цеховых PWA-терминалах внедрен режим Privacy, при котором рабочие видят только обезличенные коды нарядов (#ORD-2026-404) без доступа к именам заказчиков.',
+        case_nyxsystem_feat_1: '<strong>Clean Architecture на Go:</strong> Высокопроизводительный контрактный бэкенд (OpenAPI Contract-First) с задержкой отклика до 0.1 с между офисом и цехом.',
+        case_nyxsystem_feat_2: '<strong>Immutable Accounting (Сторно):</strong> Невозможность прямого удаления записей; аудит всех корректировок для полного искоренения пересортицы и хищений.',
+        case_nyxsystem_feat_3: '<strong>Режим Privacy для цеховых планшетов:</strong> Обезличенные производственные коды заказов исключают утечку коммерческой информации и клиентской базы.',
+        case_nyxsystem_feat_4: '<strong>Гибкие схемы на JSONB:</strong> Поддержка кастомных технологических карт и номенклатурных свойств без постоянных DDL-миграций базовых таблиц.',
+        case_nyxsystem_feat_5: '<strong>Shop-Floor PWA:</strong> Адаптивный тач-интерфейс для планшетов в цеху, оптимизированный под работу в производственных перчатках.',
+        case_nyxsystem_deployment_text: 'Архитектура поставляется в модульных Docker-контейнерах с изоляцией сетей. Платформа успешно объединила 100% производственных циклов завода РТИ: от поступления сырья на склад и контроля рецептур до выпуска готовой продукции и автоматического формирования отгрузочных документов.',
+    },
+    en: {
+        case_nyxsystem_title: 'NYX System — Multi-Tenant Industrial ERP / CRM / MES Platform',
+        case_nyxsystem_h1: 'NYX System: Multi-Tenant Industrial ERP / CRM / MES Platform',
+        case_nyxsystem_desc: 'Scalable industrial backend built on Go and PostgreSQL: immutable ledger accounting, multi-tenant isolation, and real-time shop-floor automation.',
+        case_nyxsystem_client: 'Industrial Manufacturing Enterprise',
+        case_nyxsystem_services: 'Solution Architecture & Clean Architecture (Go), Multi-Tenant Data Isolation, Contract-First API, MES Logistics',
+        case_nyxsystem_task_p: 'Industrial manufacturing facilities often suffer from friction between administrative offices and shop floors: manual paper logs cause inventory mismatches, editable databases undermine financial auditability, and exposed customer details risk trade secret theft. The objective was to architect and deploy a modular, multi-tenant ERP/MES platform on Go and PostgreSQL uniting sales orders, inventory, floor machinery, and fiscal accounting in real time with paranoid security.',
+        case_nyxsystem_solution_p: 'The backend adheres to Clean Architecture in Go, utilizing a Contract-First methodology where OpenAPI schemas serve as the single source of truth for typed handlers. The system enforces strict ledger immutability: direct deletions are blocked at the database engine level, requiring reverse corrective ledger entries ("Storno") with explicit audit stamps. Multi-tenant partitioning guarantees customer isolation, while factory floor PWA tablets operate in Privacy Mode with anonymized order tags (#ORD-2026-404) to prevent customer list theft.',
+        case_nyxsystem_feat_1: '<strong>Go Clean Architecture:</strong> High-throughput Contract-First backend maintaining sub-0.1s response latency between office and shop floor.',
+        case_nyxsystem_feat_2: '<strong>Immutable Accounting (Storno):</strong> Direct data deletion prohibited; complete audit trail of corrective adjustments eliminates inventory fraud.',
+        case_nyxsystem_feat_3: '<strong>Privacy Mode:</strong> Anonymized work order identifiers on floor devices shield client names and financial pricing from floor staff.',
+        case_nyxsystem_feat_4: '<strong>JSONB Schema Extensions:</strong> Dynamic routing and BOM (Bill of Materials) customization without triggering schema migrations.',
+        case_nyxsystem_feat_5: '<strong>Shop-Floor PWA:</strong> Resilient touchscreen interface designed for factory floor tablets and gloved industrial operations.',
+        case_nyxsystem_deployment_text: 'Packaged into isolated Docker containers with segmented networking. The deployment fully integrated warehouse raw materials ingestion, compounding recipe validation, vulcanization machinery telemetry, and automated dispatch documentation.',
+    }
+} as const;

@@ -1,0 +1,32 @@
+export const enterpriseRagTranslations = {
+    ru: {
+        case_enterpriserag_title: 'Enterprise RAG — База знаний на 65 000+ чанков с AI Gateway',
+        case_enterpriserag_h1: 'Enterprise RAG: Высоконагруженная база знаний на 65 000+ чанков с AI Gateway',
+        case_enterpriserag_desc: 'Корпоративная RAG-система на PostgreSQL (pgvector HNSW) с локальными эмбеддингами, точностью Recall@5 88% и отказоустойчивым AI Gateway.',
+        case_enterpriserag_client: 'Международный консалтинговый холдинг',
+        case_enterpriserag_services: 'Enterprise RAG & Hybrid Retrieval, pgvector HNSW + Reranking, Multi-Provider AI Gateway, Token Metering',
+        case_enterpriserag_task_p: 'В крупном холдинге накопилось более 2 300 внутренних регламентов, юридических документов и аналитических отчетов. Информация была разрознена между внутренними сервисами, а штатные специалисты тратили до 40% рабочего времени на поиск ответов в документах. Использование стандартных облачных LLM-чатов приводило к галлюцинациям, утечке конфиденциальных данных и рискам отказа из-за блокировок или лимитов отдельных AI-провайдеров. Цель проекта: построить корпоративный RAG-контур с локальным векторным поиском и отказоустойчивым AI-шлюзом, гарантирующим точные ответы со ссылками на первоисточники за секунды.',
+        case_enterpriserag_solution_p: 'Система объединена в монорепозиторий на Turborepo и Bun. Документы проходят структурированный парсинг, очистку и чанкинг (2 393 документа / 65 798 чанков). Локальные эмбеддинги вычисляются на CPU через ONNX Runtime без передачи текстов во внешние облака. Двухэтапный пайплайн поиска (HNSW-индекс в pgvector + кросс-энкодер Reranker) обеспечивает скорость поиска 3 мс (p95 — 4 мс) и точность Recall@5 = 88%. Отказоустойчивый AI Gateway объединяет API Anthropic, OpenAI, Google и DeepSeek: при сбоях или превышении лимитов запрос прозрачно перенаправляется на резервного провайдера.',
+        case_enterpriserag_feat_1: '<strong>Высокоточный RAG (65 000+ чанков):</strong> Двухэтапная гибридная выборка (pgvector HNSW + Reranker) с показателем Recall@5 88% и Precision@5 85%.',
+        case_enterpriserag_feat_2: '<strong>Отказоустойчивый AI Gateway:</strong> Автоматический failover между Anthropic, OpenAI, Google и DeepSeek при ошибках 429/500/503.',
+        case_enterpriserag_feat_3: '<strong>Субмиллисекундный поиск:</strong> Средняя задержка выборки контекста составляет 3 мс (p95 — 4 мс), общий ответ LLM с потоковым выводом — 1.9 с.',
+        case_enterpriserag_feat_4: '<strong>Очередь задач на PostgreSQL (SKIP LOCKED):</strong> Фоновая асинхронная индексация документов прямо в PostgreSQL без необходимости в Redis или RabbitMQ.',
+        case_enterpriserag_feat_5: '<strong>Учет токенов и цитирование:</strong> Детальный биллинг затрат по отделам компании и строгая постраничная атрибуция ссылок на первоисточники.',
+        case_enterpriserag_deployment_text: 'Архитектура развернута в защищенном частном контуре компании. Система ежедневно обслуживает тысячи обращений сотрудников, сократив время поиска регламентной информации с десятков минут до 2 секунд с нулевым риском утечки коммерческой тайны.',
+    },
+    en: {
+        case_enterpriserag_title: 'Enterprise RAG — High-Load 65k+ Chunk Knowledge Engine & AI Gateway',
+        case_enterpriserag_h1: 'Enterprise RAG: High-Load 65k+ Chunk Knowledge Engine & AI Gateway',
+        case_enterpriserag_desc: 'Enterprise RAG platform built on PostgreSQL (pgvector HNSW) with on-device embeddings, 88% Recall@5, and a resilient multi-provider AI Gateway.',
+        case_enterpriserag_client: 'Global Consulting Enterprise',
+        case_enterpriserag_services: 'Enterprise RAG & Hybrid Retrieval, pgvector HNSW + Reranking, Multi-Provider AI Gateway, Token Metering',
+        case_enterpriserag_task_p: 'An international enterprise possessed over 2,300 proprietary compliance standards, legal briefs, and audit reports fragmented across legacy file shares. Staff spent up to 40% of their workday searching for policies. Off-the-shelf consumer LLMs produced hallucinations and leaked data, while single-provider APIs frequently throttled requests. The objective was to construct an autonomous enterprise RAG engine with local vector search and a resilient multi-provider AI Gateway providing verified answers with exact citations.',
+        case_enterpriserag_solution_p: 'Built as a unified Turborepo/Bun monorepo. Documents are parsed and indexed (2,393 documents / 65,798 chunks) with local CPU embeddings via ONNX Runtime to ensure data privacy. A two-stage retrieval pipeline (pgvector HNSW graph search plus a Cross-Encoder Reranker) delivers 3ms retrieval latency (p95 of 4ms) and Recall@5 of 88%. The AI Gateway orchestrates Anthropic, OpenAI, Google, and DeepSeek with circuit-breaker failover: if rate limits or 5xx errors occur, requests route seamlessly to backup providers.',
+        case_enterpriserag_feat_1: '<strong>High-Precision RAG (65k+ Chunks):</strong> Two-stage hybrid retrieval (pgvector HNSW + Reranker) achieving 88% Recall@5 and 85% Precision@5.',
+        case_enterpriserag_feat_2: '<strong>Multi-Provider AI Gateway:</strong> Resilient circuit breaker orchestrating Anthropic, OpenAI, Google, and DeepSeek with zero-downtime failover.',
+        case_enterpriserag_feat_3: '<strong>Sub-Millisecond Vector Retrieval:</strong> Average vector search latency of 3ms (4ms p95), end-to-end streamed response in 1.9s.',
+        case_enterpriserag_feat_4: '<strong>PostgreSQL Lean Queue (SKIP LOCKED):</strong> Background document ingestion and chunking handled directly in PostgreSQL without Redis or message brokers.',
+        case_enterpriserag_feat_5: '<strong>Token Accounting & Strict Citations:</strong> Granular department-level cost tracking and verbatim paragraph-level source attribution.',
+        case_enterpriserag_deployment_text: 'Deployed in an on-premises enterprise environment. The system handles thousands of queries daily, slashing knowledge discovery time from minutes to 2 seconds while completely safeguarding confidential corporate intelligence.',
+    }
+} as const;

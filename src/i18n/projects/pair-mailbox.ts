@@ -1,0 +1,32 @@
+export const pairMailboxTranslations = {
+    ru: {
+        case_pairmailbox_title: 'Pair Mailbox — Автономный протокол парного кодинга для AI-CLI',
+        case_pairmailbox_h1: 'Pair Mailbox: Автономный протокол парного кодинга для AI-агентов',
+        case_pairmailbox_desc: 'Оркестрация независимых AI-CLI (Claude Code, Codex, OpenCode) в тандем «Писатель — Ревьюер» с доведением задачи до проверенного Pull Request без участия человека.',
+        case_pairmailbox_client: 'Open Source / Собственная разработка',
+        case_pairmailbox_services: 'Multi-Agent System Orchestration, Deterministic Protocols, CLI Agent Supervision, Automated Code Review',
+        case_pairmailbox_task_p: 'Автономные кодинг-агенты в терминале (Claude Code, OpenAI Codex, OpenCode) при решении комплексных задач сталкиваются с контекстным дрейфом: одиночная модель постепенно теряет системные инварианты, уходя в бесконечные правки синтаксиса и накапливая скрытые регрессии. При этом разработчику приходится вручную пересылать код между моделью-генератором и моделью-ревьюером. Цель проекта: разработать протокол оркестрации и легковесный локальный сервер без внешних зависимостей, объединяющий два независимых процесса кодинг-CLI в детерминированную пару («один пишет код, второй независимо ревьюит архитектуру и проверяет тесты») до выпуска проверенного Pull Request.',
+        case_pairmailbox_solution_p: 'Pair Mailbox реализует строгий детерминированный протокол взаимодействия поверх локального IPC и файловых замков. В основе лежит принцип Single-Writer Lock: проект имеет право изменять исключительно агент-«Писатель», тогда как агент-«Ревьюер» работает в режиме строгого чтения (Read-Only) и передает замечания через структурированные патч-пакеты. Межагентные сообщения и диффы фиксируются в неизменяемом журнале аудита. Встроенный супервизор отслеживает жизненный цикл процессов CLI, перезапускает упавшие агенты и мгновенно блокирует попытки несанкционированного изменения окружения.',
+        case_pairmailbox_feat_1: '<strong>Замок единственного писателя (Single-Writer Rule):</strong> Строгое разделение ролей исключает гонки состояний и гарантирует целостность кодовой базы.',
+        case_pairmailbox_feat_2: '<strong>Неизменяемый журнал аудита (Audit Mailbox):</strong> Полная фиксация всех предложенных изменений, прогонов тестов и замечаний ревьюера.',
+        case_pairmailbox_feat_3: '<strong>Гранулярные уровни автономности:</strong> Поддержка режимов observe (ручное подтверждение), semi (пауза перед деплоем/миграциями) и auto (сквозной автономный цикл до PR).',
+        case_pairmailbox_feat_4: '<strong>Супервизор процессов и аварийные стопоры:</strong> Фоновый мониторинг процессов, предотвращающий зацикливание и защищающий критические файлы окружения.',
+        case_pairmailbox_feat_5: '<strong>Zero External Dependencies:</strong> Ядро реализовано на стандартных библиотеках среды Node.js/TypeScript без сторонних фреймворков и облачных зависимостей.',
+        case_pairmailbox_deployment_text: 'Парный протокол продемонстрировал 100% автономность выполнения инженерных задач — от чтения тикета в трекере до прогона тестов, устранения архитектурных замечаний ревьюера и открытия готового Pull Request в GitHub без вмешательства человека.',
+    },
+    en: {
+        case_pairmailbox_title: 'Pair Mailbox — Autonomous Multi-Agent Coding Protocol',
+        case_pairmailbox_h1: 'Pair Mailbox: Autonomous Multi-Agent Coding Protocol for AI-CLI',
+        case_pairmailbox_desc: 'Orchestration of independent AI-CLI instances (Claude Code, Codex, OpenCode) into a deterministic "Writer — Reviewer" tandem that delivers verified Pull Requests without human intervention.',
+        case_pairmailbox_client: 'Open Source / Proprietary Engineering',
+        case_pairmailbox_services: 'Multi-Agent System Orchestration, Deterministic Protocols, CLI Agent Supervision, Automated Code Review',
+        case_pairmailbox_task_p: 'Terminal-based coding agents (Claude Code, OpenAI Codex, OpenCode) suffer from context drift when tackling complex tasks: a lone model gradually loses system invariants, spinning into endless syntax fixes while accumulating hidden regressions. Developers are forced to manually ferry diffs between generator and reviewer models. The objective was to engineer an orchestration protocol and lightweight local server with zero external dependencies, uniting two independent CLI processes into a deterministic pair to reach a verified Pull Request.',
+        case_pairmailbox_solution_p: 'Pair Mailbox establishes a strict deterministic protocol via local IPC and file locking. The core Single-Writer Rule permits only the "Writer" agent to modify workspace files, while the "Reviewer" operates in strict Read-Only mode, submitting structured patch advisories. Every inter-agent message, diff, and test run is recorded into an append-only audit log. A dedicated supervisor monitors CLI process lifecycles, re-spawning hung agents and immediately halting the pipeline if sensitive environment files are touched.',
+        case_pairmailbox_feat_1: '<strong>Single-Writer Rule:</strong> Rigid role segregation eliminates state races, ensuring absolute workspace integrity.',
+        case_pairmailbox_feat_2: '<strong>Append-Only Audit Mailbox:</strong> Immutable logging of all proposed diffs, test executions, and reviewer critique packets.',
+        case_pairmailbox_feat_3: '<strong>Granular Autonomy Levels:</strong> Support for observe (human gates), semi (pause before migrations/secrets), and auto (end-to-end task-to-PR cycle).',
+        case_pairmailbox_feat_4: '<strong>Process Supervision & Circuit Breakers:</strong> Background watchdog that re-spawns failed CLIs and prevents infinite model repair loops.',
+        case_pairmailbox_feat_5: '<strong>Zero External Dependencies:</strong> Built exclusively on standard Node.js/TypeScript runtime primitives without external frameworks.',
+        case_pairmailbox_deployment_text: 'The pairing protocol demonstrated 100% autonomous delivery of engineering tickets: parsing requirements, implementing isolated modules, satisfying independent architectural reviews, passing test suites, and opening clean, structured Pull Requests in GitHub.',
+    }
+} as const;

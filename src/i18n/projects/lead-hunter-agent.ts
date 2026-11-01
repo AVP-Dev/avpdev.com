@@ -1,0 +1,32 @@
+export const leadHunterAgentTranslations = {
+    ru: {
+        case_leadhunter_title: 'Lead Hunter AI — Мультиканальный агент лидогенерации по 30+ каналам',
+        case_leadhunter_h1: 'Lead Hunter AI: Мультиканальный агент лидогенерации и скоринга',
+        case_leadhunter_desc: 'Автономный комплекс AI-агентов: мониторинг 30+ источников в реальном времени, скоринг по чек-листу, сопоставление с RAG и мгновенная отправка в CRM.',
+        case_leadhunter_client: 'B2B Консалтинг и Сервисы',
+        case_leadhunter_services: 'Autonomous Lead Generation Agents, Multichannel Monitoring, LLM Rubric Scoring, CRM Integration',
+        case_leadhunter_task_p: 'В сфере B2B-консалтинга и проектных услуг скорость первого контакта с потенциальным клиентом является решающим фактором конверсии: менеджеры вручную просматривали десятки тематических чатов и форумов, пропуская до 70% горячих заявок из-за человеческого фактора, а отсутствие мгновенной сверки запроса с актуальной базой компетенций приводило к долгим согласованиям. Цель проекта: разработать комплекс автономных агентов, способных непрерывно сканировать 30+ внешних каналов, классифицировать запросы клиентов, отсекать спам и готовить персонализированные драфты ответов прямо в CRM.',
+        case_leadhunter_solution_p: 'Система построена на связке TypeScript и Python. Сеть фоновых сборщиков агрегирует сообщения из 30+ публичных и профильных площадок. Каждое сообщение оценивается LLM по матрице критериев (0–100 баллов) со встроенным фильтром рисков и спама. Агент сверяет детали запроса с корпоративной RAG-базой знаний, подбирая релевантные кейсы и прайсы. В режиме Shadow Mode система формирует карточку сделки и готовый драфт ответа, который менеджер отправляет в один клик через Telegram или CRM-вебхук.',
+        case_leadhunter_feat_1: '<strong>Мультиканальный мониторинг (30+ площадок):</strong> Непрерывный сбор входящих запросов в реальном времени с защитой от блокировок.',
+        case_leadhunter_feat_2: '<strong>Умный LLM-скоринг и Safety Guard:</strong> Автоматическая квалификация лидов по шкале от 0 до 100 с фильтрацией 85% спама и шума.',
+        case_leadhunter_feat_3: '<strong>RAG-верификация компетенций:</strong> Сопоставление потребностей клиента с реальным портфолио и актуальными тарифами компании.',
+        case_leadhunter_feat_4: '<strong>Режим Shadow Mode:</strong> Подготовка драфтов персонализированных ответов и отправка в один клик.',
+        case_leadhunter_feat_5: '<strong>Прямая интеграция с CRM:</strong> Автоматическое создание лида, карточки контакта и саммари через Webhooks.',
+        case_leadhunter_deployment_text: 'Внедрение агентской системы сократило время реакции на горячие входящие запросы с 15 минут до 2 секунд, обеспечив рост конверсии первого контакта в 3.2 раза и высвободив десятки часов рабочего времени сейлз-команды.',
+    },
+    en: {
+        case_leadhunter_title: 'Lead Hunter AI — Autonomous Multichannel Lead-Gen & Scoring Agent',
+        case_leadhunter_h1: 'Lead Hunter AI: Autonomous Multichannel Lead-Gen & Scoring Agent',
+        case_leadhunter_desc: 'Autonomous AI agent system: 30+ real-time source monitoring, rubric-based qualification, RAG capability verification, and instant CRM dispatch.',
+        case_leadhunter_client: 'B2B Professional Services & Consulting',
+        case_leadhunter_services: 'Autonomous Lead Generation Agents, Multichannel Monitoring, LLM Rubric Scoring, CRM Integration',
+        case_leadhunter_task_p: 'In high-ticket B2B consulting, turnaround speed on incoming requirements dictates conversion. Sales teams manually scanned dozens of industry chat groups and forums, missing up to 70% of high-intent inquiries while struggling to immediately cross-reference capabilities and pricing. The objective was to build an autonomous agent suite continuously parsing 30+ external channels, evaluating buyer intent, filtering spam, and drafting contextual proposals directly into the CRM.',
+        case_leadhunter_solution_p: 'Engineered in TypeScript and Python. Background collectors ingest messages across 30+ channels with rate-limit compliance. An LLM scoring rubric assesses intent from 0 to 100 while safety guardrails filter irrelevant noise. The agent consults an internal RAG knowledge base to align the prospect’s needs with verified case studies and rates. In Shadow Mode, the system pre-populates CRM deal cards with customized reply drafts for one-click human approval.',
+        case_leadhunter_feat_1: '<strong>Multichannel Stream (30+ Channels):</strong> Real-time aggregation across public forums, professional communities, and chats.',
+        case_leadhunter_feat_2: '<strong>LLM Rubric Scoring & Safety Guard:</strong> Algorithmic buyer qualification scoring (0–100) discarding 85% of irrelevant chatter.',
+        case_leadhunter_feat_3: '<strong>RAG Grounding:</strong> Instant cross-referencing with company portfolio proofs and accurate pricing tiers.',
+        case_leadhunter_feat_4: '<strong>Shadow Mode Validation:</strong> Pre-generated contextual reply drafts enabling one-click human review and dispatch.',
+        case_leadhunter_feat_5: '<strong>Automated CRM Pipelines:</strong> Enriched lead creation with structured summaries via secure webhooks.',
+        case_leadhunter_deployment_text: 'The autonomous lead engine reduced median response time from 15 minutes down to 2 seconds, producing a 3.2x increase in initial contact conversion and saving dozens of weekly manual sales hours.',
+    }
+} as const;

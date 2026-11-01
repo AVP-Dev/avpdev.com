@@ -1,0 +1,32 @@
+export const edgeCaptchaSolverTranslations = {
+    ru: {
+        case_edgecaptcha_title: 'Edge ML Captcha Solver — Замена Vision-LLM локальной нейросетью ResNet-18',
+        case_edgecaptcha_h1: 'Edge ML Captcha Solver: Замена Vision-LLM локальной ResNet-18',
+        case_edgecaptcha_desc: 'Оптимизация компьютерного зрения: ускорение распознавания капчи в 800 раз на CPU (3.5 мс вместо 3 с), рост точности с 30.2% до 75.0% и нулевая стоимость.',
+        case_edgecaptcha_client: 'Data Extraction & Automation / B2B',
+        case_edgecaptcha_services: 'Computer Vision & Edge ML Inference, Architecture Optimization (ResNet-18 + SE), ONNX Runtime CPU, Browser Automation',
+        case_edgecaptcha_task_p: 'В процессах автоматизации сбора открытых рыночных данных ключевым препятствием выступали графические капчи (сетка 3×3 с сегментацией объектов). Базовое решение использовало мультимодальные Vision-LLM через облачные API, что создавало три критические проблемы: низкая точность (всего 30.2%), высокая задержка (~3 секунды на запрос) и непрерывные затраты на оплату API-токенов. Цель проекта: заменить тяжелую облачную LLM легковесной специализированной сверточной нейросетью, способной работать локально на CPU без GPU за доли миллисекунд.',
+        case_edgecaptcha_solution_p: 'Собрана и размечена выборка из 5 011 реальных изображений с балансировкой классов и аугментацией. В качестве архитектуры выбрана ResNet-18 с блоками Squeeze-and-Excitation (SE), усиливающими внимание к ключевым признакам на зашумленных фрагментах. Модель обучена в PyTorch, квантована и экспортирована в формат ONNX под процессорные инструкции AVX2/AVX-512. Развернут микросервис на FastAPI со временем отклика 3.5 мс на ячейку и подготовлено расширение Chrome для автоматического решения капчи.',
+        case_edgecaptcha_feat_1: '<strong>Ускорение инференса в 800 раз:</strong> 3.5–4.0 мс на распознавание фрагмента капчи вместо 3 000 мс у Vision-LLM.',
+        case_edgecaptcha_feat_2: '<strong>Рост точности в 2.5 раза:</strong> Достигнуто 75.0% точности Exact Match на тестовой выборке по сравнению с 30.2% у базовой модели.',
+        case_edgecaptcha_feat_3: '<strong>Архитектура ResNet-18 + SE:</strong> Внимание к каналам признаков позволяет безошибочно классифицировать низкокачественные изображения.',
+        case_edgecaptcha_feat_4: '<strong>Оптимизация под CPU (ONNX Runtime):</strong> Полноценная работа на стандартных серверах без закупки дорогих видеокарт (GPU).',
+        case_edgecaptcha_feat_5: '<strong>Нулевая стоимость API:</strong> Полная автономность решения исключает расходы на сторонние сервисы распознавания.',
+        case_edgecaptcha_deployment_text: 'Микросервис упакован в компактный Docker-образ и интегрирован в автоматизированный кластер сборщиков данных. Решение обеспечивает бесперебойную работу пайплайнов без сетевых задержек и экономит сотни долларов ежемесячно на облачных вызовах.',
+    },
+    en: {
+        case_edgecaptcha_title: 'Edge ML Captcha Solver — Replacing Vision-LLM with Local ResNet-18',
+        case_edgecaptcha_h1: 'Edge ML Captcha Solver: Replacing Vision-LLM with Local ResNet-18',
+        case_edgecaptcha_desc: 'Computer vision optimization: accelerating captcha solving 800x on CPU (3.5ms vs 3s), improving accuracy from 30.2% to 75.0% with zero cloud API costs.',
+        case_edgecaptcha_client: 'Data Extraction & Automation / B2B',
+        case_edgecaptcha_services: 'Computer Vision & Edge ML Inference, Architecture Optimization (ResNet-18 + SE), ONNX Runtime CPU, Browser Automation',
+        case_edgecaptcha_task_p: 'In high-throughput market data extraction workflows, 3x3 grid object segmentations created major bottlenecks. Relying on cloud multimodal Vision-LLMs suffered from three critical flaws: low accuracy (30.2%), excessive latency (~3 seconds), and compounding token costs. The objective was to replace the external LLM with a specialized, lightweight convolutional neural network running on standard CPUs in sub-millisecond time without GPU hardware.',
+        case_edgecaptcha_solution_p: 'Curated and annotated a domain dataset of 5,011 real-world captures with balanced augmentation. Implemented a ResNet-18 backbone enhanced with Squeeze-and-Excitation (SE) attention blocks to dynamically re-calibrate channel feature maps under visual noise. Trained in PyTorch, quantized, and exported to ONNX Runtime utilizing CPU AVX2/AVX-512 vectorization. Packaged into a high-performance FastAPI service yielding 3.5ms inference times and paired with a Chrome automation extension.',
+        case_edgecaptcha_feat_1: '<strong>800x Inference Acceleration:</strong> 3.5–4.0ms per tile vs ~3,000ms turnaround for multimodal cloud Vision-LLMs.',
+        case_edgecaptcha_feat_2: '<strong>2.5x Accuracy Increase:</strong> Test set Exact Match accuracy jumped from 30.2% to 75.0% on tough visual edge cases.',
+        case_edgecaptcha_feat_3: '<strong>ResNet-18 + SE Attention:</strong> Channel-wise attention recalibration filters noise and highlights diagnostic textures.',
+        case_edgecaptcha_feat_4: '<strong>CPU-Optimized ONNX Runtime:</strong> Blazing-fast inference on commoditized CPU cores with zero GPU dependency.',
+        case_edgecaptcha_feat_5: '<strong>Zero Cloud API Cost:</strong> Eliminates continuous third-party token and captcha solving service fees.',
+        case_edgecaptcha_deployment_text: 'Packaged into a minimal Docker container and integrated into the customer’s autonomous extraction workers. The system processes thousands of challenges daily with zero cloud dependencies and immediate sub-second throughput.',
+    }
+} as const;

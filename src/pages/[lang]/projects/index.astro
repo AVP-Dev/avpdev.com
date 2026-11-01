@@ -60,6 +60,7 @@ const categoryMap: Record<string, "sites" | "apps"> = {
     app: "apps",
     "crm-erp": "apps",
     "tg-mini-app": "apps",
+    ai: "apps",
 };
 
 const PROJECTS_DATA: Project[] = filteredProjects.map((project, index) => ({
@@ -112,10 +113,11 @@ const itemListSchema = {
 
 // Filters Data for UI
 const categories = [
-    { value: "web-site", label: t("filter_sites") },
+    { value: "ai", label: t("filter_ai") },
     { value: "app", label: t("filter_apps") },
     { value: "crm-erp", label: t("filter_crm_erp") },
     { value: "tg-mini-app", label: t("filter_tg_mini_app") },
+    { value: "web-site", label: t("filter_sites") },
 ];
 ---
 

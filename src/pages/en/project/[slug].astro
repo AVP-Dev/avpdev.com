@@ -125,7 +125,19 @@ const projectSchema = {
     </div>
 
     <div slot="content">
-        <Content />
+        {
+            project.data.metrics && project.data.metrics.length > 0 && (
+                <div class="case-metrics-grid">
+                    {project.data.metrics.map((metric) => (
+                        <div class="case-metric-card">
+                            <div class="case-metric-value">{metric.value}</div>
+                            <div class="case-metric-label">{metric.label}</div>
+                        </div>
+                    ))}
+                </div>
+            )
+        }
+
         <h2 set:html={t(content.task.titleKey as TranslationKey)} />
         <p set:html={t(content.task.pKey as TranslationKey)} />
 
@@ -141,6 +153,8 @@ const projectSchema = {
                 </>
             )
         }
+
+        <Content />
 
         <h2 set:html={t(content.keyFeatures.titleKey as TranslationKey)} />
         {

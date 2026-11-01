@@ -277,3 +277,107 @@
         font-size: 2rem;
     }
 }
+
+/* --- Инженерные метрики кейса --- */
+.case-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin: 1rem 0 3rem;
+}
+
+.case-metric-card {
+    background: var(--tag-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.case-metric-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color-start);
+    box-shadow: 0 8px 24px rgba(var(--accent-color-start-rgb), 0.15);
+}
+
+.case-metric-value {
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-weight: 800;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+}
+
+.case-metric-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary-color);
+    font-weight: 500;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --- Схемы архитектуры и таблицы бенчмарков в контенте --- */
+.project-content pre {
+    background: #0b0f19;
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #e2e8f0;
+    margin: 2rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.project-content code:not(pre code) {
+    background: var(--tag-bg);
+    color: var(--accent-color-start);
+    padding: 0.2rem 0.45rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em;
+    border: 1px solid var(--glass-border);
+}
+
+.project-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+}
+
+.project-content th,
+.project-content td {
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--glass-border);
+    text-align: left;
+}
+
+.project-content th {
+    background: var(--tag-bg);
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.project-content td {
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.project-content blockquote {
+    border-left: 4px solid var(--accent-color-start);
+    margin: 1.75rem 0;
+    padding: 0.75rem 1.25rem;
+    background: var(--tag-bg);
+    border-radius: 0 12px 12px 0;
+    color: var(--text-color);
+    font-style: italic;
+}

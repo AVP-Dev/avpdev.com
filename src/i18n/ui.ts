@@ -15,6 +15,15 @@ import { lederWerkTranslations } from './projects/leder-werk';
 import { pureTrustTranslations } from './projects/pure-trust';
 import { rozhkovaTranslations } from './projects/rozhkova';
 import { techmetalTranslations } from './projects/techmetal';
+import { praviaTranslations } from './projects/pravia';
+import { nyxVoxTranslations } from './projects/nyx-vox';
+import { pairMailboxTranslations } from './projects/pair-mailbox';
+import { nyxSystemTranslations } from './projects/nyx-system';
+import { enterpriseRagTranslations } from './projects/enterprise-rag';
+import { edgeCaptchaSolverTranslations } from './projects/edge-captcha-solver';
+import { leadHunterAgentTranslations } from './projects/lead-hunter-agent';
+import { cryptoGatewayTranslations } from './projects/crypto-gateway';
+import { postgresQueueTranslations } from './projects/postgres-queue';
 
 export const ui = {
     ru: {
@@ -190,6 +199,7 @@ faq_q1: 'Сколько времени занимает разработка?',
         form_error_message_short: 'Сообщение должно быть не менее 10 символов',
         form_consent_err: 'Необходимо согласие',
         filter_all: 'Все',
+        filter_ai: 'AI и Автоматизация',
         filter_sites: 'Сайты',
         filter_apps: 'Веб-приложения',
         filter_crm_erp: 'CRM/ERP',
@@ -431,6 +441,15 @@ faq_q1: 'Сколько времени занимает разработка?',
         ...pureTrustTranslations.ru,
         ...rozhkovaTranslations.ru,
         ...techmetalTranslations.ru,
+        ...praviaTranslations.ru,
+        ...nyxVoxTranslations.ru,
+        ...pairMailboxTranslations.ru,
+        ...nyxSystemTranslations.ru,
+        ...enterpriseRagTranslations.ru,
+        ...edgeCaptchaSolverTranslations.ru,
+        ...leadHunterAgentTranslations.ru,
+        ...cryptoGatewayTranslations.ru,
+        ...postgresQueueTranslations.ru,
     },
     en: {
         // Geo Links
@@ -616,6 +635,7 @@ faq_q3: 'Do you work with international clients?',
         form_error_message_short: 'Message must be at least 10 characters long',
         form_consent_err: 'Agreement is required',
         filter_all: 'All',
+        filter_ai: 'AI & Automation',
         filter_sites: 'Websites',
         filter_apps: 'Web Apps',
         filter_crm_erp: 'CRM/ERP',
@@ -847,5 +867,14 @@ faq_q3: 'Do you work with international clients?',
         ...pureTrustTranslations.en,
         ...rozhkovaTranslations.en,
         ...techmetalTranslations.en,
+        ...praviaTranslations.en,
+        ...nyxVoxTranslations.en,
+        ...pairMailboxTranslations.en,
+        ...nyxSystemTranslations.en,
+        ...enterpriseRagTranslations.en,
+        ...edgeCaptchaSolverTranslations.en,
+        ...leadHunterAgentTranslations.en,
+        ...cryptoGatewayTranslations.en,
+        ...postgresQueueTranslations.en,
     }
 } as const;

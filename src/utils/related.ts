@@ -30,9 +30,9 @@ export const SERVICE_PROJECT_CATEGORIES: Record<string, string[]> = {
 	websites: ['web-site'],
 	shop: ['web-site'],
 	tma: ['tg-mini-app'],
-	ai: ['crm-erp', 'app'],
-	bots: ['app', 'tg-mini-app'],
-	saas: ['app', 'crm-erp'],
+	ai: ['ai', 'crm-erp', 'app'],
+	bots: ['ai', 'app', 'tg-mini-app'],
+	saas: ['ai', 'app', 'crm-erp'],
 };
 
 /** Категория кейса → ближайшая услуга (обратная ссылка «Услуга» на странице кейса). */
@@ -41,6 +41,7 @@ export const CATEGORY_SERVICE: Record<string, string> = {
 	'tg-mini-app': 'tma',
 	'crm-erp': 'ai',
 	app: 'saas',
+	ai: 'ai',
 };
 
 /** Кейсы по услуге: сначала featured, затем новые. */
