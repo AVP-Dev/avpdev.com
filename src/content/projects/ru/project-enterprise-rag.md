@@ -9,7 +9,7 @@ featured: true
 category: 'ai'
 stack: ['Turborepo', 'Bun', 'PostgreSQL 16 / pgvector (HNSW)', 'ONNX Runtime', 'Multi-Provider AI Gateway', 'Postgres SKIP LOCKED Queue']
 publishDate: 2026-10-28
-heroImage: '../../../assets/images/projects/enterprise-rag/hero.jpeg'
+heroImage: '../../../assets/images/projects/enterprise-rag/hero.webp'
 heroImageAlt: 'Enterprise RAG — База знаний на 65 000+ чанков с AI Gateway'
 metrics:
   - label: 'Точность выборки'

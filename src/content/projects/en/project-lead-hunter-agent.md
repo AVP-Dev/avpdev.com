@@ -9,7 +9,7 @@ featured: true
 category: 'ai'
 stack: ['TypeScript', 'Python', 'Telegram Bot API', 'RAG Knowledge Base', 'PostgreSQL', 'CRM Webhooks']
 publishDate: 2026-10-26
-heroImage: '../../../assets/images/projects/lead-hunter-agent/hero.jpeg'
+heroImage: '../../../assets/images/projects/lead-hunter-agent/hero.webp'
 heroImageAlt: 'Lead Hunter AI — Autonomous Multichannel Lead-Gen & Scoring Agent'
 metrics:
   - label: 'Turnaround Time'

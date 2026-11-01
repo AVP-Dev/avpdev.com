@@ -9,7 +9,7 @@ featured: true
 category: 'ai'
 stack: ['TypeScript', 'Node.js', 'Claude Code CLI', 'Codex', 'OpenCode', 'Local IPC & Locking', 'Git / GitHub Actions']
 publishDate: 2026-10-30
-heroImage: '../../../assets/images/projects/pair-mailbox/hero.jpeg'
+heroImage: '../../../assets/images/projects/pair-mailbox/hero.webp'
 heroImageAlt: 'Pair Mailbox — Autonomous Multi-Agent Coding Protocol'
 metrics:
   - label: 'Autonomous Pipeline'

@@ -9,7 +9,7 @@ featured: true
 category: 'ai'
 stack: ['Python', 'PyTorch', 'ResNet-18 + Squeeze-and-Excitation', 'ONNX Runtime (CPU)', 'FastAPI', 'Chrome Extension / Playwright']
 publishDate: 2026-10-27
-heroImage: '../../../assets/images/projects/edge-captcha-solver/hero.jpeg'
+heroImage: '../../../assets/images/projects/edge-captcha-solver/hero.webp'
 heroImageAlt: 'Edge ML Captcha Solver — Замена Vision-LLM локальной нейросетью ResNet-18'
 metrics:
   - label: 'Ускорение инференса'

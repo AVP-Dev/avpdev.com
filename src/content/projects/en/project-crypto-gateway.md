@@ -9,7 +9,7 @@ featured: true
 category: 'app'
 stack: ['Astro', 'React', 'Node.js', 'TRON JSON-RPC / Full Node API', 'PostgreSQL', 'HMAC Webhooks']
 publishDate: 2026-10-25
-heroImage: '../../../assets/images/projects/crypto-gateway/hero.jpeg'
+heroImage: '../../../assets/images/projects/crypto-gateway/hero.webp'
 heroImageAlt: 'Crypto Gateway — Autonomous Payment Infrastructure & USDT TRC20 Checkout'
 metrics:
   - label: 'Intermediary Fees'

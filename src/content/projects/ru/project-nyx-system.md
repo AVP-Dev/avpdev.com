@@ -9,7 +9,7 @@ featured: true
 category: 'crm-erp'
 stack: ['Go', 'PostgreSQL 16', 'OpenAPI / Swagger', 'JSONB Schema Extensions', 'Docker', 'Linux']
 publishDate: 2026-10-29
-heroImage: '../../../assets/images/projects/nyx-system/hero.jpeg'
+heroImage: '../../../assets/images/projects/nyx-system/hero.webp'
 heroImageAlt: 'NYX System — Мультитенантная платформа ERP / CRM / MES для промышленности'
 metrics:
   - label: 'Скорость отклика'

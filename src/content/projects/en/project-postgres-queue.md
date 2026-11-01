@@ -9,7 +9,7 @@ featured: true
 category: 'app'
 stack: ['PostgreSQL 16', 'SQL / PL-pgSQL', 'Bun / Node.js', 'Drizzle ORM', 'Docker']
 publishDate: 2026-10-24
-heroImage: '../../../assets/images/projects/postgres-queue/hero.jpeg'
+heroImage: '../../../assets/images/projects/postgres-queue/hero.webp'
 heroImageAlt: 'Postgres Queue — Resilient Lean Task Queue Engine Without Redis or Brokers'
 metrics:
   - label: 'Broker Overhead'

@@ -9,7 +9,7 @@ featured: true
 category: 'ai'
 stack: ['TypeScript', 'Bun', 'PostgreSQL', 'pgvector (HNSW)', 'EmbeddingGemma-300M (ONNX)', 'Drizzle ORM', 'k6']
 publishDate: 2026-11-01
-heroImage: '../../../assets/images/projects/pravia/hero.png'
+heroImage: '../../../assets/images/projects/pravia/hero.webp'
 heroImageAlt: 'Pravia — Enterprise B2B AI Knowledge & Employee Platform'
 metrics:
   - label: 'p95 Latency Reduction'

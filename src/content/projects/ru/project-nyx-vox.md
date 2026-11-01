@@ -9,7 +9,7 @@ featured: true
 category: 'ai'
 stack: ['Rust 2021', 'Tauri 2.10', 'Next.js 16 / React 19', 'cpal (Audio DSP)', 'Groq Whisper Turbo', 'Deepgram Nova', 'Local Whisper (Metal / Core ML)', 'AES-256-GCM']
 publishDate: 2026-10-31
-heroImage: '../../../assets/images/projects/nyx-vox/hero.jpeg'
+heroImage: '../../../assets/images/projects/nyx-vox/hero.webp'
 heroImageAlt: 'NYX Vox — Нативный голосовой AI-интерфейс (< 500 мс)'
 metrics:
   - label: 'Скорость распознавания'
