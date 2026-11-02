@@ -9,7 +9,7 @@ draft: false
 
 We have already explored why [code has become cheap raw material](/en/blog/control-ideas-not-code), how neural networks [degrade system architecture through greedy shortcuts](/en/blog/ai-loves-straight-roads), and why the senior engineer's core role [has shifted toward Design Reviews](/en/blog/architect-of-the-future).
 
-Yet if you are actively working with modern terminal-based autonomous coding agents—such as Claude Code, OpenAI Codex, OpenCode, or Antigravity CLI—you have likely experienced the exact same frustrating scenario.
+If you are actively working with modern terminal-based autonomous coding agents—such as Claude Code, Codex CLI, OpenCode, Pi, OMP, or Antigravity CLI—you have likely experienced the exact same frustrating scenario.
 
 You assign the agent a non-trivial refactoring or multi-file feature. You step away to brew coffee. Twenty minutes later, you return expecting clean, production-ready code, greeted by a cheerful terminal message: *“All tasks completed, tests passed!”*.
 
@@ -23,45 +23,48 @@ A solitary agent inevitably falls into **Context Drift**, spinning into self-aff
 
 To break this loop, I engineered and open-sourced [**pair-mailbox**](/en/project/project-pair-mailbox)—a deterministic, multi-agent pair programming protocol for independent CLI coding agents.
 
-Here is an architectural breakdown of why pairing two independent agents under strict system invariants drastically outperforms a single "omnipotent" LLM, and how I designed this system under the hood.
+Here is an architectural breakdown of why pairing two independent agents under strict system invariants drastically outperforms a single "omnipotent" LLM, and how this system functions under the hood.
 
 ---
 
 ### In this article:
-- [The Polite Consensus Trap: Why a Solo Agent Is Blind to Its Own Bugs](#consensus-trap)
+- [The Polite Consensus Trap and the Anatomy of Context Drift](#consensus-trap)
 - [The 'Human Relay' Anti-Pattern and Multi-Agent Chaos](#human-relay)
 - [The pair-mailbox Architecture: Separation of Powers & Single-Writer](#architecture)
 - [Sealed Patches: The Cryptographic Quality Gate](#sealed-patches)
-- [Safety Gates & Background Supervisor: Preventing Disasters](#safety-supervisor)
+- [Token Economics & Background Supervisor: Preventing Budget and Production Disasters](#safety-supervisor)
 - [Dual Modes: Repair (`fix`) vs. Scrutiny (`audit`)](#modes)
 - [Takeaways: The Future Belongs to Deterministic Protocols](#takeaways)
 
 ---
 
-## 1. The Polite Consensus Trap: Why a Solo Agent Is Blind to Its Own Bugs {#consensus-trap}
+## 1. The Polite Consensus Trap and the Anatomy of Context Drift {#consensus-trap}
 
-In traditional engineering, no senior developer would merge complex production code without independent peer review. The engineer who wrote the implementation is naturally anchored by their own assumptions: they verify the code against the scenarios they anticipated and remain blind to unconsidered edge cases.
+Multi-megatoken context windows have become standard across the industry. Yet in practice, massive context windows have not solved code quality—they have simply introduced new systemic pathologies in Context Engineering:
 
-Leaving a solitary LLM alone with your repository triggers an identical failure mode:
-1. **Probabilistic Confirmation Bias:** Language models readily validate their own prior reasoning within the context window.
-2. **Aggressive Shortcutting:** When a unit test fails, the path of least resistance for an LLM is rarely a rigorous architectural refactor; it is tweaking the test assertion to fit the flawed implementation.
-3. **Context Pollution:** By step 15 or 20 of a complex session, the model loses sight of global invariants, spiraling into endless micro-fixes of syntax.
+1. **Attention Dilution:** As an agent's working memory fills up with verbose tool logs, diffs, and compiler outputs, its ability to retain foundational architectural constraints degrades. The signal drowns in noise.
+2. **Constraint Amnesia:** By step 20 of a complex session, a solo agent frequently forgets non-functional constraints and design choices established during initial scoping.
+3. **Compounding Drift:** A subtle misinterpretation on step 3 becomes an unquestioned axiom by step 30, steering the entire codebase off-course.
+4. **Shortcutting:** When a unit test fails, the path of least resistance for a probabilistic model is rarely a comprehensive redesign; it is relaxing the test assertions.
+
+In traditional engineering, no senior developer would merge complex production code without peer review. The author of an implementation is naturally biased toward their own assumptions. Why expect flawless objectivity from a probabilistic model?
 
 > **The First Law of Autonomous AI Coding:**  
 > *“Two agents politely agreeing is worth nothing. What matters is a specific bug found or a fact verified. Silent consensus in code is not a victory; it is a ticking time bomb.”*
 
-Achieving resilient autonomy demands **two isolated contexts**, ideally powered by two distinct frontier model families (such as Claude Code on Claude 3.7 Sonnet paired with OpenCode or Codex on o3/GPT-4o), examining the same repository from adversarial standpoints.
+Achieving resilient autonomy demands **two isolated processes with separate context windows** and contrasting analytical mandates. The specific models under the hood matter far less than the dynamic: one process builds, while the other continuously attempts to break the implementation.
 
 ---
 
 ## 2. The 'Human Relay' Anti-Pattern and Multi-Agent Chaos {#human-relay}
 
-The intuitive workaround seems obvious: open two terminal windows, running a generator model in pane 1 and a reviewer model in pane 2.
+The intuitive workaround seems obvious: open two terminal windows, running a generator agent in pane 1 and a reviewer agent in pane 2.
 
 In practice, this immediately runs into severe architectural pitfalls:
 * **The 'Human Relay' Anti-Pattern (RFC 1149):** You spend hours manually copying diffs from one terminal into the other, then ferrying review critique back, effectively acting as an overpaid human network cable.
+* **The Telephone Game:** Exchanging unstructured natural language between agents degrades semantic precision with every conversational hop.
 * **State Races:** Granting multiple CLI agents concurrent write access to the working directory results in immediate corruption: agents overwrite each other's edits, conflict on disk saves, and scramble git tracking.
-* **Cloud Overengineering:** Typical multi-agent frameworks introduce heavy Docker containers, cloud brokers, external databases, and expensive SaaS subscriptions. When an API or proxy hiccups, your local development grinds to a halt.
+* **Cloud Overengineering:** Typical multi-agent frameworks introduce heavy Docker containers, cloud brokers, external databases, and expensive SaaS subscriptions. When an API or proxy hiccups, local development grinds to a halt.
 
 I built pair-mailbox with the inverse philosophy: autonomous orchestration must be **local, lightweight, zero-dependency, and strictly deterministic**.
 
@@ -71,10 +74,12 @@ I built pair-mailbox with the inverse philosophy: autonomous orchestration must 
 
 The core engine of [pair-mailbox](https://github.com/AVP-Dev/pair-mailbox) is built upon classical separation of powers, requiring zero runtime pip packages (`Zero External Dependencies`—pure Python 3 standard library, `tmux`, and `git`).
 
+It seamlessly coordinates heterogeneous pairings across any supported CLI profile (`opencode`, `agy`, `codex`, `claude`, `pi`, `omp`):
+
 ```text
  ┌──────────────────────────────────────┐        ┌──────────────────────────────────────┐
  │             AGENT: WRITER            │        │             AGENT: CRITIC            │
- │     (OpenCode / Antigravity CLI)     │        │       (Claude Code / Codex CLI)      │
+ │       (Any Supported CLI Agent)      │        │     (Any Alternative CLI Agent)      │
  │  • Exclusive file modification       │        │  • Strict Read-Only Mode             │
  │  • Holds Single-Writer Lock          │        │  • Hunts defects & edge cases        │
  └──────────────────┬───────────────────┘        └──────────────────┬───────────────────┘
@@ -101,13 +106,17 @@ At any given moment, **exactly one agent holds write authority**.
 * The unseated agent automatically assumes the role of **Critic (Reviewer / Auditor)**.
 
 ### Strict Read-Only Enforcement for the Critic
-The Critic cannot accidentally or maliciously modify working files. The server strictly forbids patch reservation tools for writers and rejects file edits from non-writers, recording every violation attempt into the immutable audit transcript. The Critic's role is restricted to inspecting diffs, running test runners, and hunting regressions from the outside.
+The Critic cannot accidentally or maliciously modify working files. The server strictly forbids patch reservation tools for writers and rejects file edits from non-writers, recording every violation attempt into an immutable audit transcript. The Critic's role is restricted to inspecting diffs, running test runners, and hunting regressions from the outside.
 
-### Atomic Mailbox IPC Over Sockets and Cloud
+### Atomic Mailbox IPC Over Freeform Chat
 Communication flows through atomically written, monotonically sequenced JSON envelopes in `.pair/mailbox/`:
+* No unstructured chat: schema-validated envelopes eliminate "telephone game" degradation.
 * Messages are ordered chronologically (`000001-<timestamp>-<role>-<token>.json`).
 * Operating system advisory locks (`fcntl.flock`) prevent write collisions between parallel processes.
-* An agent concludes its execution turn with a bounded blocking read `pair_read(wait_seconds=N)`—it is never left idling with unread correspondence. Active delivery (`pair_deliver`) via the `tmux` composer immediately hands off execution to the peer.
+* An agent concludes its execution turn with a bounded blocking read `pair_read(wait_seconds=N)`—it is never left idling. Active delivery (`pair_deliver`) via the `tmux` composer immediately hands off execution to the peer.
+
+### Git Worktree Isolation (`pairup --worktree <branch>`)
+Letting autonomous agents operate directly inside your primary checkout is an unnecessary liability. The protocol natively supports isolated Git worktrees (`-w`), ensuring the main repository remains completely untainted until the verified Pull Request is ready.
 
 ---
 
@@ -124,29 +133,33 @@ The Critic is prohibited from editing files directly. Instead, the protocol enfo
 
 ---
 
-## 5. Safety Gates & Background Supervisor: Preventing Disasters {#safety-supervisor}
+## 5. Token Economics & Background Supervisor: Preventing Budget and Production Disasters {#safety-supervisor}
 
-The greatest hesitation developers harbor regarding autonomous agents is catastrophic damage: dropping production databases, leaking `.env` secrets, or force-pushing broken trees to `main`.
+The primary real-world hazards of autonomous agent execution are runaway token consumption (Token Budget Bleed) and catastrophic damage to production environments.
 
-In `pair-mailbox`, security is enforced across two complementary layers: **Autonomy Levels** and the background watchdog **`pairpilot`**.
+In `pair-mailbox`, security is enforced across multi-layered architectural guardrails:
 
-### Three Autonomy Levels (`bin/pairctl autonomy <level>`)
-* **`auto` (Default):** The tandem independently executes the entire lifecycle: scoping &rarr; planning &rarr; implementation &rarr; sealed review &rarr; test verification &rarr; PR delivery. Human intervention is summoned only upon unrecoverable blocks.
-* **`semi`:** The agents handle all heavy lifting, but pause prior to issuing the PR and closing the round, requiring a single human checkpoint: `bin/pairctl ok`.
-* **`observe`:** Read-heavy supervision mode for sensitive legacy refactoring.
+### Context & Token Budget Safeguards
+* **Machine Budget Ceilings (`budget ceiling`):** Hard caps on messages, phase advances, process restarts, and execution time per round. If agents enter an unproductive cycle, the server blocks further progress, preventing token burn.
+* **Orientation Digest (`pair_digest`):** Instead of repeatedly reprocessing 50,000 tokens of conversational history, agents query a lightweight digest: active phase, pending obligations, and current test statuses.
+* **Tail-Capped Note Reading (`pair_note_read`):** Note queries are truncated at 400 lines strictly at record boundaries, preventing massive reviewer verdicts from consuming working memory.
+* **Proactive `/compact`:** The background supervisor `pairpilot` automatically issues compaction commands to CLI agents that support it natively (`pi`, `omp`, `opencode`).
 
 ### Command Allowlisting vs. Blind Approval
 CLI agents regularly halt on interactive terminal queries: `Allow command execution? [y/N]`. Naive scripts blindly inject `yes` to every prompt. The `pairpilot` supervisor inspects interactive queries against an explicit security allowlist:
 
-* **Auto-approved operations:** `git status`, `git diff`, `npm test`, `pytest`, compiler checks, and read/write actions strictly constrained within the repository directory.
+* **Auto-approved operations:** `git status`, `git diff`, `npm test`, `pytest`, build executions, and read/write actions strictly constrained within the repository directory.
 * **Strictly refused operations (Immediate hard stop):**
   * Any access to `.env`, credentials, certificates, or environment secrets;
-  * Shell pipe executions like `curl ... | bash` or arbitrary command substitutions;
+  * Shell pipe executions like `curl ... | bash` (guarding against prompt-injected supply chain attacks);
   * Dangerous filesystem utilities (`rm -rf`, `dd`, `mkfs`);
   * Destructive git commands (`push --force`, `reset --hard`, direct pushes to `main` or `master`);
-  * Database migration runs targeting production instances.
+  * Database migration runs targeting live instances.
 
-Whenever an operation matches a forbidden pattern, the prompt is refused, recorded to `.pair/transcript.jsonl`, and left waiting for explicit human review.
+### Three Autonomy Levels (`bin/pairctl autonomy <level>`)
+* **`auto` (Default):** The tandem independently executes the entire lifecycle: scoping &rarr; planning &rarr; implementation &rarr; sealed review &rarr; test verification &rarr; PR delivery. Human intervention is summoned only upon safety trips.
+* **`semi`:** The agents handle all heavy lifting, but pause prior to closing the round, requiring human confirmation: `bin/pairctl ok`.
+* **`observe`:** Full human-in-the-loop oversight mode for high-stakes refactoring.
 
 ---
 
@@ -155,7 +168,7 @@ Whenever an operation matches a forbidden pattern, the prompt is refused, record
 The system can toggle its operational focus at runtime:
 
 ### `fix` Mode (Active Engineering Delivery)
-The standard workflow: the Writer implements features, the Critic challenges implementation hypotheses, tests verify invariants before and after edits, and the cycle concludes with a clean GitHub Pull Request.
+The standard workflow: the Writer implements features, the Critic challenges implementation hypotheses, tests verify invariants before and after edits, and the cycle concludes with a clean GitHub Pull Request documented in `RECEIPT-<round>.md`.
 
 ### `audit` Mode (Zero-Code Vulnerability Hunting)
 A specialized operational mode where **all workspace code modifications are 100% blocked by the server**:
@@ -169,7 +182,7 @@ A specialized operational mode where **all workspace code modifications are 100%
 
 Autonomous AI quality is not dictated by raw context window size or leaderboard benchmark rankings. Output quality is dictated by the **architecture of constraints** governing model execution.
 
-1. **A solo agent is an unchecked liability.** It naturally falls in love with its own outputs and conceals its own oversights.
+1. **A solo agent is an unchecked liability.** It naturally falls in love with its own outputs and conceals its own oversights through shortcuts.
 2. **Two unconstrained agents create chaos.** Without an authoritative arbitrator, they corrupt repository states and exhaust context budgets.
 3. **Two role-segregated agents (Writer + Critic) orchestrated by a deterministic server form a robust, self-verifying engineering unit.**
 
