@@ -28,71 +28,36 @@ export const CreatorSignature = () => {
                     lineHeight: 1.4,
                 }}
             >
-                <div style={{ marginBottom: '6px' }}>
-                    <a
-                        href="https://avpdev.com/"
-                        style={{
-                            fontWeight: 700,
-                            fontSize: '0.85rem',
-                            color: 'var(--sig-primary)',
-                            opacity: 0.95,
-                            textDecoration: 'none',
-                            transition: 'color 0.3s ease',
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--sig-accent)'}
-                        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--sig-primary)'}
-                    >
-                        Aliaksei Patskevich (AVPDev)
-                    </a>
-                </div>
                 <div
                     style={{
                         display: 'flex',
+                        flexWrap: 'wrap',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        gap: '10px',
-                        fontSize: '0.7rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
+                        gap: '8px',
+                        fontSize: '0.78rem',
+                        letterSpacing: '0.02em',
                         color: 'var(--sig-secondary)',
                     }}
                 >
-                    <span style={{ opacity: 0.9 }}>AI Solutions Architect</span>
-                    <span style={{ color: 'var(--sig-secondary)', opacity: 0.4 }}>•</span>
+                    <span style={{ fontWeight: 700, color: 'var(--sig-primary)', opacity: 0.95 }}>
+                        AVPdev
+                    </span>
+                    <span style={{ color: 'var(--sig-secondary)', opacity: 0.45 }}>·</span>
+                    <span style={{ opacity: 0.9 }}>Software Development &amp; Automation</span>
+                    <span style={{ color: 'var(--sig-secondary)', opacity: 0.45 }}>·</span>
                     <a
-                        href="https://github.com/AVP-Dev"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="https://avpdev.com/"
                         style={{
-                            fontSize: '0.7rem',
-                            textTransform: 'none',
-                            letterSpacing: '0',
                             color: 'var(--sig-dim)',
                             textDecoration: 'none',
                             fontWeight: 500,
+                            transition: 'color 0.3s ease',
                         }}
                         onMouseEnter={(e) => e.currentTarget.style.color = 'var(--sig-accent)'}
                         onMouseLeave={(e) => e.currentTarget.style.color = 'var(--sig-dim)'}
                     >
-                        GitHub
-                    </a>
-                    <span style={{ color: 'var(--sig-secondary)', opacity: 0.4 }}>•</span>
-                    <a
-                        href="https://t.me/AVP_Dev"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                            fontSize: '0.7rem',
-                            textTransform: 'none',
-                            letterSpacing: '0',
-                            color: 'var(--sig-dim)',
-                            textDecoration: 'none',
-                            fontWeight: 500,
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--sig-accent)'}
-                        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--sig-dim)'}
-                    >
-                        Telegram
+                        avpdev.com
                     </a>
                 </div>
             </div>

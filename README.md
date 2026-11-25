@@ -39,17 +39,9 @@ Distributed under the MIT License. This repository is fully open-source as an ed
 ---
 
 <br />
-<p align="center">
-  <a href="https://avpdev.com/en/"><b>Alexios Odos</b></a>
-  &nbsp;|&nbsp;
-  <a href="https://avpdev.com/ru/"><b>Aliaksei Patskevich</b></a>
-  <br />
-  <sub>
-    <b>Software Engineer</b> • Code, Design & AI
-    <br />
-    <a href="https://github.com/AVP-Dev">GitHub</a> &bull; <a href="https://t.me/AVP_Dev">Telegram</a>
-  </sub>
-</p>
+<div align="center">
+<sub>AVPdev · Software Development &amp; Automation · <a href="https://avpdev.com/">avpdev.com</a></sub>
+</div>
 
 <p align="center">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
