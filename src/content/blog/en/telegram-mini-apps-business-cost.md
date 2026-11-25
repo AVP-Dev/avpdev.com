@@ -1,6 +1,6 @@
 ---
 title: "Telegram Mini Apps, PWA or Native: Where Convenience Ends and Platform Dependency Begins"
-description: "When Telegram Mini Apps make sense for businesses, and when a PWA or native app is a better choice. Architecture, initData security, payments and development costs."
+description: "When to choose Telegram Mini Apps, PWA or native apps: architecture, initData security, payments, platform dependencies and development costs."
 pubDate: 2026-10-10
 heroImage: "../../../assets/images/blog/telegram-mini-apps.webp"
 tags: ["Telegram Mini Apps", "WebApps", "architecture", "development cost", "business"]
