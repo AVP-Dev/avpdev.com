@@ -3,7 +3,7 @@ title: "Nyx: Why I Build My Digital Environment from Scratch"
 description: "The Nyx ecosystem is my personal digital exoskeleton, built to escape the limits of generic productivity apps and evolving into a network of AI tools."
 pubDate: 2026-03-12
 heroImage: "../../../assets/images/blog/nyx-ecosystem-hologram.webp"
-tags: ["nyx ecosystem", "development", "productivity", "ai", "rust", "typescript"]
+tags: ["nyx ecosystem", "development", "productivity", "ai", "rust", "typescript", "go"]
 draft: false
 ---
 
@@ -54,7 +54,7 @@ My organizer should be in my phone, not inside someone else's messenger. I consc
 
 ## Conclusion
 
-I am building Nyx for myself using NestJS, Next.js, and Rust. This keeps the barrier to entry low and the results professional. We often search the internet for the perfect app, forgetting that the best tool is the one you forge for your own hand. Building enduring software requires focusing on core architecture rather than disposable syntax — as analyzed in [Code Is Cheap. Engineering Thinking Is Not](/en/blog/control-ideas-not-code).
+I build Nyx for myself, choosing technology to fit the task: Go for business system cores, Next.js for web interfaces, and Rust for specialized tools. NestJS was part of earlier solutions and remains a useful choice where a TypeScript backend makes sense. We often search the internet for the perfect app, forgetting that the best tool is the one you forge for your own hand. Building enduring software requires focusing on core architecture rather than disposable syntax — as analyzed in [Code Is Cheap. Engineering Thinking Is Not](/en/blog/control-ideas-not-code).
 
 **Links:**
 * 💡 [GitHub Nyx Vox](https://github.com/avp-dev/nyx-vox)

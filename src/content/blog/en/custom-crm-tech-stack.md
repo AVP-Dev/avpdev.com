@@ -1,61 +1,63 @@
 ---
-title: "CRM Tech Stack: Why We Choose NestJS and Python"
-description: "A technical breakdown of modern CRM architecture. Comparing Node.js vs. Python, using Docker and PostgreSQL for reliable business systems."
+title: "Modern CRM and ERP Architecture: Go, Next.js, and Pragmatic Technology Choices"
+description: "Choosing a stack for CRM and ERP: Go for business logic, Next.js for the interface, Python for specialized tasks, PostgreSQL, and Docker."
 pubDate: 2026-01-29
 heroImage: "../../../assets/images/blog/crm-tech-stack.webp"
-tags: ["tech stack", "NestJS", "Python", "CRM architecture", "backend"]
+tags: ["tech stack", "Go", "Next.js", "Python", "CRM architecture", "backend"]
 ---
 
-In the previous article, we analyzed the [economics of owning a CRM](/en/blog/custom-crm-roi-2025). Today, we’re opening the hood to look at the engineering decisions that allow us to build systems without "lag" or errors as the load grows.
+In the previous article, we analyzed the [economics of owning a CRM](/en/blog/custom-crm-roi-2025). Today, we’re opening the hood to look at the engineering decisions that allow us to build systems that behave predictably as the load grows.
 
-Building a reliable CRM requires choosing the right tools for specific tasks. We use **Next.js** on the frontend and a combination of **NestJS** + **Python** on the backend.
+Building a reliable CRM requires choosing the right tools for specific tasks. For CRM, ERP, and MES with substantial business logic, I prefer **Go** on the backend and **Next.js** on the frontend. I use Python and Node.js where the task justifies them.
 
 ---
 
 ### In this article:
-- [NestJS: When Strict Business Logic is Key](#nestjs)
+- [Go: When Strict Business Logic Is Key](#nestjs)
 - [Python: Implementing AI and Data Analytics](#python)
 - [Infrastructure: Docker, PostgreSQL, and Redis](#infra)
 - [Architectural Flexibility: Growing with Your Business](#growth)
 
 ---
 
-## 1. NestJS: The Framework for Reliable Business {#nestjs}
+## 1. Go: The Foundation of Reliable Business Systems {#nestjs}
 
-For 90% of CRM tasks where speed and data integrity are vital, **we choose NestJS** (Node.js).
+Systems handling inventory, orders, documents, and financial operations need more than fast APIs: they need data integrity, transactions, and predictable operations. **Go** is a practical fit for this backend core.
 
-* **TypeScript:** Eliminates errors during development, which is critical for handling financial data.
-* **Modular Structure:** Allows the system to grow for years without turning into "spaghetti code."
-* **Performance:** Handles thousands of requests per second with minimal latency.
+* **Explicit Logic:** Static typing and explicit error handling help catch some defects, but do not replace business invariant checks and tests.
+* **Modular Monolith:** Clear domain boundaries without premature microservices simplify maintenance and transactions.
+* **Operations:** Compiled applications, relatively modest resource usage, and a convenient concurrency model benefit APIs, integrations, and background jobs. Actual performance must be verified with load tests.
+
+**Next.js** handles interfaces, forms, tables, and PWA functionality when needed. Critical business rules and authorization stay on the server. Node.js (including NestJS) or Bun remains a sensible choice for SaaS, MVPs, and projects where a unified TypeScript stack accelerates development.
 
 ## 2. Python: When You Need "Superpowers" {#python}
 
-Python is brought in when the CRM stops being just a table and becomes a smart assistant:
+Python is useful where its ecosystem provides a practical advantage:
 * **AI Assistants:** Automatic lead classification and call analysis.
 * **Complex Analytics:** Predictive sales models (revenue forecasting based on historical data).
-* **Integrations:** Fast scripting for data exchange with specialized third-party software.
+* **Data Processing:** Specialized libraries, experiments, and scripts. Routine API integrations and LLM calls do not require a separate Python service if the main backend can handle them more simply.
 
 ## 3. Infrastructure and Stability {#infra}
 
 A CRM is the heart of a company. We build it on principles of isolation and security:
-1. **Docker:** Ensures stable operation on any server (a $10 VPS or office hardware).
-2. **PostgreSQL:** The industry standard for data storage quality.
-3. **Redis:** Caching so the interface "flies" even with a massive volume of deals.
+1. **Docker:** Provides reproducible environments and simplifies deployment on compatible infrastructure.
+2. **PostgreSQL:** Transactions, integrity constraints, indexes, and reliable business data storage.
+3. **Redis:** An optional cache or queue when measurements and requirements justify additional infrastructure.
 
-> **Developer Insight:** We describe the entire network using Infrastructure as Code (Terraform). This allows us to deploy a full copy of your system in a new location in just 15 minutes in case of an emergency.
+> **Developer Insight:** Reproducible configuration, deployment automation, and tested backups simplify recovery. Recovery time depends on data volume, infrastructure, and agreed requirements.
 
 ## 4. Scalability {#growth}
 
-Custom development is not a "closed box." Today we launch a base on NestJS, and tomorrow we connect a Python module for competitor price analysis. The system adapts to you, not vice versa. This is one of our [key development principles](/en/blog/5-principles-of-development).
+Custom development is not a "closed box." We can start with a modular Go monolith and add a specialized Python component for analytics when a real need emerges. The system adapts to you, not vice versa. This is one of our [key development principles](/en/blog/5-principles-of-development).
 
 ---
 
 ## Summary
 
-The right tech stack is 70% of a project's success. We choose tools that balance development speed with operational reliability.
+A tech stack is a means, not an end. We select tools based on business processes, reliability requirements, and maintenance costs, avoiding unnecessary services and dependencies.
 
 ---
 **Looking for a technical partner for CRM development?**
 [Message me on Telegram](https://t.me/AVP_Dev)—we'll discuss the architecture and select the optimal stack for your business processes.
 
-*Read also: [CRM Security: Why Your Own Server is Better](/en/blog/custom-crm-security-backups)*
+*Read also: [CRM Security: Data Control and Backups](/en/blog/custom-crm-security-backups)*
