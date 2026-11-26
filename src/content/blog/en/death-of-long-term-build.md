@@ -3,7 +3,7 @@ title: "The Death of Vaporware: How AI Became My Development Team"
 description: "How transitioning from a solo developer to an AI neural network conductor helped revive an abandoned ERP system project."
 pubDate: 2026-03-06
 heroImage: "../../../assets/images/blog/ai-orchestra.webp"
-tags: ["AI", "ERP", "NestJS", "Next.js", "Drizzle ORM"]
+tags: ["AI", "ERP", "NestJS", "Next.js", "Drizzle ORM", "Go", "PostgreSQL"]
 ---
 
 Every developer has their "ghost project." For me, it was a custom ERP system to manage processes. I'd been building it for years: starting, shelving it, rewriting the architecture, and abandoning it again. Sound familiar? You get stuck at 80% completion because the remaining 20% is boring, routine work that you just don't have the energy for after your day job.
@@ -34,6 +34,8 @@ With the advent of advanced models, I stopped writing code "by hand" in the trad
 The main insight from this experience: AI didn't replace me; it scaled me.
 
 I used to spend 90% of my time on implementation and 10% on design. Now it's the other way around. I spend my time thinking through business logic, the connections between modules, and UX, and I "feed" the implementation to assistants. AI excels when given clean, explicit constraints — as explored in [AI Loves Straight Roads: Architecture Without Hidden Context](/en/blog/ai-loves-straight-roads). My ERP went from a collection of disjointed scripts to a monolithic system that actually works and manages my tasks.
+
+The ERP architecture also evolved: I chose Go for the backend core, keeping PostgreSQL and Next.js. The underlying principle remained the same: a modular monolith without premature complexity. For new projects, I choose the interface independently of the backend stack: Go with HTML templates and HTMX is sufficient for straightforward admin panels, while React or Next.js suits complex interactive interfaces. Complex business logic does not inherently require a complex frontend.
 
 A project that had been gathering dust for years got off the ground when I stopped trying to be a "one-man band" and let technology handle the grunt work.
 

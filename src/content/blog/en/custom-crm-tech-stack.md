@@ -1,14 +1,14 @@
 ---
 title: "Modern CRM and ERP Architecture: Go, Next.js, and Pragmatic Technology Choices"
-description: "Choosing a stack for CRM and ERP: Go for business logic, Next.js for the interface, Python for specialized tasks, PostgreSQL, and Docker."
+description: "Choosing a stack for CRM and ERP: Go for business logic, HTMX or React/Next.js for the interface, Python for specialized tasks, PostgreSQL, and Docker."
 pubDate: 2026-01-29
 heroImage: "../../../assets/images/blog/crm-tech-stack.webp"
-tags: ["tech stack", "Go", "Next.js", "Python", "CRM architecture", "backend"]
+tags: ["tech stack", "Go", "Next.js", "React", "HTMX", "Python", "CRM architecture", "backend"]
 ---
 
 In the previous article, we analyzed the [economics of owning a CRM](/en/blog/custom-crm-roi-2025). Today, we’re opening the hood to look at the engineering decisions that allow us to build systems that behave predictably as the load grows.
 
-Building a reliable CRM requires choosing the right tools for specific tasks. For CRM, ERP, and MES with substantial business logic, I prefer **Go** on the backend and **Next.js** on the frontend. I use Python and Node.js where the task justifies them.
+Building a reliable CRM requires choosing the right tools for specific tasks. For CRM, ERP, and MES with substantial business logic, I prefer **Go** on the backend, choosing the frontend based on interface complexity: from server-rendered HTML templates with HTMX to React and Next.js. I use Python and Node.js where the task justifies them.
 
 ---
 
@@ -28,7 +28,7 @@ Systems handling inventory, orders, documents, and financial operations need mor
 * **Modular Monolith:** Clear domain boundaries without premature microservices simplify maintenance and transactions.
 * **Operations:** Compiled applications, relatively modest resource usage, and a convenient concurrency model benefit APIs, integrations, and background jobs. Actual performance must be verified with load tests.
 
-**Next.js** handles interfaces, forms, tables, and PWA functionality when needed. Critical business rules and authorization stay on the server. Node.js (including NestJS) or Bun remains a sensible choice for SaaS, MVPs, and projects where a unified TypeScript stack accelerates development.
+For straightforward admin panels, internal tools, forms, and tables, Go's server-rendered HTML templates and **HTMX** are often sufficient: the server returns HTML fragments, and the browser updates the relevant part of the page. This avoids a separate SPA and reduces client-side code. For interfaces with complex client-side state, interactive workspaces, or offline-first scenarios, I choose **React**, and **Next.js** when its additional capabilities are needed. Business logic complexity does not determine frontend complexity. Critical business rules and authorization remain on the server in either case. Node.js (including NestJS) or Bun remains a sensible choice for SaaS, MVPs, and projects where a unified TypeScript stack accelerates development.
 
 ## 2. Python: When You Need "Superpowers" {#python}
 
